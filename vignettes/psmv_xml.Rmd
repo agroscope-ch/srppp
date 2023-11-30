@@ -1,0 +1,173 @@
+---
+title: Building data objects from XML versions of the PSMV
+author: Johannes Ranke
+date: Last change 30 November 2023 (rebuilt `r Sys.Date()`)
+output:
+  rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Building data objects from XML versions of the PSMV}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = TRUE, message = FALSE}
+knitr::opts_chunk$set(tidy = FALSE, cache = TRUE)
+options(knitr.kable.NA = '')
+library(fgpsm)
+library(psmv)
+library(xml2)
+library(dplyr, warn.conflicts = FALSE)
+library(tidyr)
+library(dbplyr)
+library(DBI)
+library(knitr)
+library(dm)
+con_PSMV <- SQL_PSMV_DB()
+```
+
+## Background
+
+In the process of creating the first version of the PSMV SQL database,
+some information got lost when exporting content from the Access
+versions of the PSMV received from Agridea. Neither the W-Numbers
+nor the XML ids were exported, instead of that a new `id_Uniqueproduct`
+was created, which is not really unique.
+
+Therefore, in this document an attempt is documented to
+import from the available XML dumps published at the BLW
+website into the SQL server, while keeping referential
+integrity.
+
+# Get product information from XML
+
+```{r}
+date <- "2020-11-02"
+x <- psmv_xml_get(date)
+
+ns <- xml_ns(x)
+
+# Get W-Numbers from product information node
+get_wNbr <- function(product_information_node) {
+  xml_attr(xml_parent(xml_parent(product_information_node)), "wNbr")
+}
+
+# Get descriptions from a product information node
+get_descriptions <- function(node, code = FALSE) {
+  pk <- xml_attr(node, "primaryKey")
+  desc <- sapply(xml_children(node), xml_attr, "value")
+  if (code) {
+    code <- xml_attr(xml_child(xml_child(node)), "value")
+    ret <- c(pk, code, desc)
+    names(ret) <- c("pk", "code", "de", "fr", "it", "en")
+  } else {
+    ret <- c(pk, desc)
+    names(ret) <- c("pk", "de", "fr", "it", "en")
+  }
+  return(ret)
+}
+
+# Get product information with descriptions from ProductInformation section
+product_information_descriptions <- function(xml_doc, tag_name, code = FALSE) {
+
+  # Find nodes and apply the function
+  ret <- xml_doc |>
+    xml_find_all(paste0("MetaData[@name='", tag_name, "']/Detail")) |>
+    sapply(get_descriptions, code = code) |> t() |>
+    as_tibble() |> mutate(pk = as.integer(pk)) |> arrange(pk)
+
+  return(ret)
+}
+
+product_information_table <- function(xml_doc, tag_name, code = FALSE) {
+  descriptions <- product_information_descriptions(xml_doc, tag_name,
+    code = code)
+
+  product_information_nodes <- xml_find_all(xml_doc,
+    paste0("Products/Product/ProductInformation/", tag_name))
+
+  ret <- tibble(
+    wNbr = sapply(product_information_nodes, get_wNbr),
+    pk = as.integer(xml_attr(product_information_nodes, "primaryKey"))) |>
+      left_join(descriptions, by = "pk") |>
+      arrange(wNbr)
+
+  return(ret)
+}
+
+# Collect attributes of Product elements
+product_nodeset <- xml_find_all(x, "Products/Product")
+
+pNbr <- integer()
+wNbr <- character()
+n_products <- length(product_nodeset)
+products <- data.frame(
+  pNbr = integer(),
+  wNbr = character(),
+  name = character(),
+  exhaustionDeadline = character(),
+  soldoutDeadline = character(),
+  isSalePermission = character(),
+  terminationReason = character())
+
+for (i_product in 1:n_products) {
+  product <- product_nodeset[[i_product]]
+  prod_attrs <- xml_attrs(product_nodeset[[i_product]])
+  id <- as.integer(prod_attrs[1])
+  if (id >= 38) {
+    pNbr <- id
+  }
+  products[i_product, 1] <- pNbr
+  products[i_product, 2:7] <- prod_attrs[2:7]
+
+}
+
+product_categories <- product_information_table(x, "ProductCategory")
+formulation_codes <- product_information_table(x, "FormulationCode")
+danger_symbols <- product_information_table(x, "DangerSymbol", code = TRUE)
+signal_words <- product_information_table(x, "SignalWords")
+CodeS <- product_information_table(x, "CodeS")
+CodeR <- product_information_table(x, "CodeR")
+# Permission holder was skipped, as we will probably not need this information
+
+
+```
+
+# Arrange tables in a dm object to facilitate working with them
+
+```{r}
+substances <- psmv_xml_get_substances(x)
+print(substances)
+
+ingredients <- psmv_xml_get_ingredients(x, cores = 8)
+print(ingredients)
+
+psmv_dm <- dm(
+  products, product_categories, formulation_codes, danger_symbols, CodeS, CodeR,
+  substances, ingredients) |>
+  dm_add_pk(products, wNbr) |>
+  dm_add_pk(substances, pk) |>
+  dm_add_fk(product_categories, wNbr, products) |>
+  dm_add_fk(formulation_codes, wNbr, products) |>
+  dm_add_fk(danger_symbols, wNbr, products) |>
+  dm_add_fk(CodeS, wNbr, products) |>
+  dm_add_fk(CodeR, wNbr, products) |>
+  dm_add_fk(ingredients, wNbr, products) |>
+  dm_add_fk(ingredients, pk, substances)
+
+dm_examine_constraints(psmv_dm)
+```
+
+```{r}
+dm_draw(psmv_dm)
+```
+
+```{r}
+dm_flatten_to_tbl(psmv_dm, ingredients)
+```
+
+```{r}
+odbc::dbClose(con_PSMV)
+SQL_XY_DB
+```
+
+

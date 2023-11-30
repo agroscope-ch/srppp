@@ -1,0 +1,17 @@
+template:
+  bootstrap: 5
+
+reference:
+  - title: Data objects for working with XML versions of the PSMV
+    contents:
+      - psmv_xml_idir
+      - psmv_xml_dates
+      - psmv_xml_zip_files
+      - psmv_xml_url
+  - title: Function to work with XML versions of the PSMV
+    contents:
+      - psmv_xml_get
+      - psmv_xml_get_products
+      - psmv_xml_get_substances
+      - psmv_xml_get_ingredients
+      - psmv_xml_clean_product_names
