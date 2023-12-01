@@ -1,33 +1,37 @@
 globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "add_txt_pk"))
+
 #' Read an XML version of the PSMV
 #'
-#' @param date The date of the publication in the format YYYY-MM-DD
-#' @importFrom xml2 read_xml
-#' @importFrom utils unzip
+#' @param date A number giving a year starting from 2011 up to the current year
+#' or the date of the publication as a length one character vector in the
+#' format YYYY-MM-DD
 #' @return An object inheriting from 'psmv_xml', 'xml_document', 'xml_node'
 #' @export
 #' @examples
+#' psmv_2015 <- psmv_xml_get(2015)
+#' print(psmv_2015)
+#' class(psmv_2015)
+#'
+#' # The current PSMV
 #' psmv_xml <- psmv_xml_get()
-#' print(psmv_xml)
-#' class(psmv_xml)
-#' psmv_xml_get("2023-04-04")
-psmv_xml_get <- function(date = dplyr::last(names(psmv::psmv_xml_zip_files)))
+psmv_xml_get <- function(date = last(names(psmv::psmv_xml_zip_files)))
 {
+  if (is.numeric(date)) {
+    if (date < 2011) stop("PSMV XML files are only available starting from 2011")
+    date <- min(grep(paste0("^", date), psmv_xml_dates, value = TRUE))
+  }
   path <- file.path(psmv::psmv_xml_idir, psmv::psmv_xml_zip_files[date])
-  zip_contents <- unzip(path, list = TRUE)
+  zip_contents <- utils::unzip(path, list = TRUE)
   xml_filename <- grep("PublicationData_20.._.._...xml",
     zip_contents$Name, value = TRUE)
   xml_con <- unz(path, xml_filename)
-  ret <- read_xml(xml_con)
+  ret <- xml2::read_xml(xml_con)
   class(ret) <- c("psmv_xml", "xml_document", "xml_node")
   return(ret)
 }
 
 #' Get Products from an XML version of the PSMV
 #'
-#' @importFrom xml2 xml_find_all xml_attr
-#' @importFrom tibble tibble as_tibble
-#' @importFrom tidyr fill
 #' @param psmv_xml An object as returned by 'psmv_xml_get'
 #' @param verbose Should we give some feedback?
 #' @return A tibble with a row for each product section
@@ -36,33 +40,39 @@ psmv_xml_get <- function(date = dplyr::last(names(psmv::psmv_xml_zip_files)))
 #' or NULL.
 #' @export
 #' @examples
+#' library(psmv)
+#' # The first PSMV from 2015 (2015-01-06) has a duplicate W-Number
+#' products_2015 <- psmv_xml_get(2015) |>
+#'   psmv_xml_get_products(verbose = TRUE)
+#'
+#' # Get the current list of products
 #' psmv_xml_get_products()
 psmv_xml_get_products <- function(psmv_xml = psmv_xml_get(), verbose = TRUE) {
   product_nodeset <- xml_find_all(psmv_xml, "Products/Product")
-  product_attributes <- names(xml_attrs(product_nodeset[[1]]))
+  product_attribute_names <- names(xml_attrs(product_nodeset[[1]]))
   products <- product_nodeset |>
     xml_attrs() |>
     unlist() |>
     matrix(ncol = 7, byrow = TRUE,
-      dimnames = list(NULL, product_attributes)) |>
-    as_tibble() |>
-    dplyr::mutate(wGrp = as.integer(gsub("-.*$", "", wNbr)),
+      dimnames = list(NULL, product_attribute_names)) |>
+    tibble::as_tibble() |>
+    mutate(wGrp = as.integer(gsub("-.*$", "", wNbr)),
       .before = wNbr) |>
-    dplyr::group_by(wGrp) |>
-    dplyr::mutate(id = as.integer(id)) |>
-    dplyr::mutate(pNbr = if_else(id < 38, NA, id),
+    group_by(wGrp) |>
+    mutate(id = as.integer(id)) |>
+    mutate(pNbr = if_else(id < 38, NA, id),
       .after = id) |>
     tidyr::fill(pNbr) |>
-    dplyr::ungroup() |>
-    dplyr::group_by(pNbr) |>
-    dplyr::arrange(wNbr, .by_group = TRUE) |>
+    ungroup() |>
+    group_by(pNbr) |>
+    arrange(wNbr, .by_group = TRUE) |>
     select(pNbr, wNbr, name, exhaustionDeadline, soldoutDeadline,
       isSalePermission, terminationReason)
   if (anyDuplicated(products$wNbr)) {
     dup_index <- which(duplicated(products$wNbr))
     dup_wNbrs <- products[dup_index, ]$wNbr
-    if (verbose) message("Duplicated W-Numbers", dup_wNbrs)
-    dup_wattr(products, "duplicated_wNbrs") <- dup_wNbrs
+    if (verbose) message("Duplicated W-Numbers: ", paste(dup_wNbrs, collapse = ", "))
+    attr(products, "duplicated_wNbrs") <- dup_wNbrs
   } else {
     attr(products, "duplicated_wNbrs") = NULL
     if (verbose) message("No duplicated W-Numbers")
@@ -73,8 +83,6 @@ psmv_xml_get_products <- function(psmv_xml = psmv_xml_get(), verbose = TRUE) {
 
 #' Get Substances from an XML version of the PSMV
 #'
-#' @importFrom xml2 xml_find_all xml_attr xml_attrs xml_children
-#' @importFrom tibble tibble as_tibble
 #' @param psmv_xml An object as returned by 'psmv_xml_get'
 #' @export
 #' @examples
