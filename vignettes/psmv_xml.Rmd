@@ -34,15 +34,16 @@ integrity.
 Creating a set of tables from a PSMV XML file is as easy as
 
 ```{r psmv_dm}
-psmv_dm <- psmv_dm()
+psmv_current <- psmv_dm()
 ```
 
 ```{r}
-dm_draw(psmv_dm)
+dm_draw(psmv_current)
 ```
 
 ```{r}
-dm_flatten_to_tbl(psmv_dm, ingredients)
+dm_flatten_to_tbl(psmv_current, ingredients) |> 
+  select(wNbr, name, de, percent, g_per_L)
 ```
 
 
