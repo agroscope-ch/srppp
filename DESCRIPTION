@@ -2,7 +2,7 @@ Package: psmv
 Type: Package
 Title: The Swiss Register of Plant Protection Products as an R package
 Version: 0.1.0
-Date: 2023-11-30
+Date: 2023-12-01
 Authors@R: c(
   person("Marcel", "Mathis", role = "ctb", email = "marcel.mathis@agroscope.admin.ch"),
   person("Johannes", "Ranke", role = c("aut", "cre"),
@@ -14,7 +14,7 @@ Description: This package provides access to data objects extracted from
   'PSMV'.
 Depends: R (>= 3.5.0)
 Imports: xml2, tibble, stringr, dplyr, dm, tidyr
-Suggests: knitr, rmarkdown, here, dbplyr, vctrs,
+Suggests: knitr, rmarkdown, here, dbplyr, vctrs, DiagrammeR,
     testthat (>= 3.0.0), fledge
 BugReports: https://gitlab.agsad.admin.ch/psmwb/gpsmv/issues
 License: GPL

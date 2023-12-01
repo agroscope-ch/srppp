@@ -42,7 +42,7 @@ dm_draw(psmv_dm)
 ```
 
 ```{r}
-#dm_flatten_to_tbl(psmv_dm, ingredients)
+dm_flatten_to_tbl(psmv_dm, ingredients)
 ```
 
 

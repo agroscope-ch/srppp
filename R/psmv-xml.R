@@ -1,4 +1,6 @@
-globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "add_txt_pk"))
+globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "pNbr", "add_txt_pk", 
+    "de", "fr", "it", "en", "exhaustionDeadline", "soldoutDeadline",
+    "isSalePermission", "terminationReason"))
 
 #' Read an XML version of the PSMV
 #'
@@ -18,14 +20,14 @@ psmv_xml_get <- function(date = last(names(psmv::psmv_xml_zip_files)))
 {
   if (is.numeric(date)) {
     if (date < 2011) stop("PSMV XML files are only available starting from 2011")
-    date <- min(grep(paste0("^", date), psmv_xml_dates, value = TRUE))
+    date <- min(grep(paste0("^", date), psmv::psmv_xml_dates, value = TRUE))
   }
   path <- file.path(psmv::psmv_xml_idir, psmv::psmv_xml_zip_files[date])
   zip_contents <- utils::unzip(path, list = TRUE)
   xml_filename <- grep("PublicationData_20.._.._...xml",
     zip_contents$Name, value = TRUE)
   xml_con <- unz(path, xml_filename)
-  ret <- xml2::read_xml(xml_con)
+  ret <- read_xml(xml_con)
   class(ret) <- c("psmv_xml", "xml_document", "xml_node")
   return(ret)
 }
@@ -81,6 +83,71 @@ psmv_xml_get_products <- function(psmv_xml = psmv_xml_get(), verbose = TRUE) {
   return(products)
 }
 
+#' Get substances from an XML version of the PSMV
+#'
+#' @param psmv_xml An object as returned by 'psmv_xml_get'
+#' @export
+#' @examples
+#' psmv_xml_get_substances()
+psmv_xml_get_substances <- function(psmv_xml = psmv_xml_get()) {
+  substance_nodeset <- xml_find_all(psmv_xml, "MetaData[@name='Substance']/Detail")
+
+  sub_desc <- t(sapply(substance_nodeset, function(sub_node) {
+    c(xml_attr(sub_node, "primaryKey"),
+      xml_attr(sub_node, "iupacName"),
+      xml_attr(xml_children(sub_node), "value")
+    )
+  }))
+
+  colnames(sub_desc) <- c("pk", "iupac", "de", "fr", "it", "en", "lt")
+  ret <- tibble::as_tibble(sub_desc) |>
+    dplyr::mutate(pk = as.integer(pk)) |>
+    dplyr::arrange(pk)
+
+  return(ret)
+}
+
+#' Get ingredients for all products described in an XML version of the PSMV
+#'
+#' @param psmv_xml An object as returned by 'psmv_xml_get'
+#' @export
+#' @examples
+#' psmv_xml_get_ingredients()
+psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get()) {
+  ingredient_nodeset <- xml_find_all(psmv_xml, "Products/Product/ProductInformation/Ingredient")
+
+  get_ingredient_map <- function(ingredient_node) {
+    wNbr <- xml_attr(xml_parent(xml_parent(ingredient_node)), "wNbr")
+    pk <- xml_attr(xml_child(ingredient_node, search = 2), "primaryKey")
+    type <- xml_text(xml_child(ingredient_node, search = 1))
+    attributes <- xml_attrs(ingredient_node)
+    ret <- c(wNbr, pk, type, attributes)
+    names(ret) <- c("wNbr", "pk", "type", "percent", "g_per_L", "add_txt_pk")
+    return(ret)
+  }
+
+  ingredients <- t(sapply(ingredient_nodeset, get_ingredient_map)) |>
+    tibble::as_tibble() |>
+    mutate(add_txt_pk = as.integer(add_txt_pk)) |>
+    mutate(pk = as.integer(pk))
+
+  ingredient_descriptions <- psmv_xml |>
+    xml_find_all(paste0("MetaData[@name='IngredientAdditionalText']/Detail")) |>
+    sapply(get_descriptions, code = FALSE) |> t() |>
+    tibble::as_tibble() |>
+    rename(ingredient_de = de, ingredient_fr = fr) |>
+    rename(ingredient_it = it, ingredient_en = en) |>
+    mutate(pk = as.integer(pk)) |>
+    arrange(pk)
+
+  ret <- ingredients |>
+    left_join(ingredient_descriptions, by = c(add_txt_pk = "pk")) |>
+    select(-add_txt_pk) |>
+    arrange(wNbr, pk)
+
+  return(ret)
+}
+
 #' Create a dm object from an XML version of the PSMV
 #'
 #' @inheritParams psmv_xml_get
@@ -105,21 +172,6 @@ psmv_dm <- function(date = last(names(psmv::psmv_xml_zip_files))) {
     xml_attr(xml_parent(xml_parent(product_information_node)), "wNbr")
   }
 
-  # Get descriptions from a product information node
-  get_descriptions <- function(node, code = FALSE) {
-    pk <- xml_attr(node, "primaryKey")
-    desc <- sapply(xml_children(node), xml_attr, "value")
-    if (code) {
-      code <- xml_attr(xml_child(xml_child(node)), "value")
-      ret <- c(pk, code, desc)
-      names(ret) <- c("pk", "code", "de", "fr", "it", "en")
-    } else {
-      ret <- c(pk, desc)
-      names(ret) <- c("pk", "de", "fr", "it", "en")
-    }
-    return(ret)
-  }
-
   # Get product information with descriptions from ProductInformation section
   product_information_descriptions <- function(xml_doc, tag_name, code = FALSE) {
 
@@ -127,7 +179,7 @@ psmv_dm <- function(date = last(names(psmv::psmv_xml_zip_files))) {
     ret <- xml_doc |>
       xml_find_all(paste0("MetaData[@name='", tag_name, "']/Detail")) |>
       sapply(get_descriptions, code = code) |> t() |>
-      as_tibble() |> mutate(pk = as.integer(pk)) |> arrange(pk)
+      tibble::as_tibble() |> mutate(pk = as.integer(pk)) |> arrange(pk)
 
     return(ret)
   }
@@ -156,89 +208,27 @@ psmv_dm <- function(date = last(names(psmv::psmv_xml_zip_files))) {
   CodeR <- product_information_table(psmv_xml, "CodeR")
   # Permission holder was skipped, as we will probably not need this information
 
+  substances <- psmv_xml_get_substances(psmv_xml)
+
+  ingredients <- psmv_xml_get_ingredients(psmv_xml)
+
   psmv_dm <- dm(products,
-    product_categories, formulation_codes, danger_symbols, CodeS, CodeR) |>
+    product_categories, formulation_codes, danger_symbols, CodeS, CodeR,
+    substances, ingredients) |>
     dm_add_pk(products, wNbr) |>
-#    dm_add_pk(substances, pk) |>
+    dm_add_pk(substances, pk) |>
     dm_add_fk(product_categories, wNbr, products) |>
     dm_add_fk(formulation_codes, wNbr, products) |>
     dm_add_fk(danger_symbols, wNbr, products) |>
     dm_add_fk(CodeS, wNbr, products) |>
-    dm_add_fk(CodeR, wNbr, products)
-#    dm_add_fk(ingredients, wNbr, products) |>
-#    dm_add_fk(ingredients, pk, substances)
+    dm_add_fk(CodeR, wNbr, products) |>
+    dm_add_fk(ingredients, wNbr, products) |>
+    dm_add_fk(ingredients, pk, substances)
 
     return(psmv_dm)
 }
 
-
-#' Get Substances from an XML version of the PSMV
-#'
-#' @param psmv_xml An object as returned by 'psmv_xml_get'
-#' @export
-#' @examples
-#' psmv_xml_get_substances()
-psmv_xml_get_substances <- function(psmv_xml = psmv_xml_get()) {
-  substance_nodeset <- xml_find_all(psmv_xml, "MetaData[@name='Substance']/Detail")
-
-  sub_desc <- t(sapply(substance_nodeset, function(sub_node) {
-    c(xml_attr(sub_node, "primaryKey"),
-      xml_attr(sub_node, "iupacName"),
-      xml_attr(xml_children(sub_node), "value")
-    )
-  }))
-
-  colnames(sub_desc) <- c("pk", "iupac", "de", "fr", "it", "en", "lt")
-  as_tibble(sub_desc) |>
-    dplyr::mutate(pk = as.integer(pk)) |>
-    dplyr::arrange(pk)
-}
-
-#' Get ingredients for all products described in an XML version of the PSMV
-#'
-#' This function takes a while for execution, as it extracts the
-#' information from a few thousands of products.
-#'
-#' @importFrom xml2 xml_find_all xml_attrs xml_child xml_text
-#' @importFrom tibble tibble as_tibble
-#' @importFrom dplyr mutate
-#' @param psmv_xml An object as returned by 'psmv_xml_get'
-#' @param cores The number of cores to use in mclapply
-#' @export
-psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get(), cores = 1) {
-  product_nodeset <- xml_find_all(psmv_xml, "Products/Product")
-  names(product_nodeset) <- xml_attr(product_nodeset, "wNbr")
-
-  get_ingredient <- function(ingredient_node) {
-    pk <- xml_attr(xml_child(ingredient_node, search = 2), "primaryKey")
-    type <- xml_text(xml_child(ingredient_node, search = 1))
-    attributes <- xml_attrs(ingredient_node)
-    ret <- c(pk, type, attributes)
-    names(ret) <- c("pk", "type", "percent", "g_per_L", "add_txt_pk")
-    return(ret)
-  }
-
-  get_ingredient_table <- function(product_node) {
-    ingredient_nodeset <- xml_find_all(product_node, "ProductInformation/Ingredient")
-    t(sapply(ingredient_nodeset, get_ingredient))
-  }
-
-  ingredient_table_list <- parallel::mclapply(product_nodeset,
-    get_ingredient_table,
-    mc.cores = cores)
-
-  ingredients <- vctrs::vec_rbind(!!!ingredient_table_list,
-    .names_to = "wNbr") |>
-    as_tibble() |>
-    mutate(add_txt_pk = as.integer(add_txt_pk)) |>
-    mutate(pk = as.integer(pk))
-
-  return(ingredients)
-}
-
 #' Clean product names
-#'
-#' This function is used in the data generation script for [psmv_xml_product_names].
 #'
 #' @param names The product names that should be cleaned from comments
 #' @export
@@ -258,4 +248,21 @@ psmv_xml_clean_product_names <- function(names) {
     stringr::str_remove(" \\[Ausverkaufs.*frist.*\\]$") |>
     stringr::str_remove(" \\[Aufbrauch.*frist.*\\]$") |>
     stringr::str_remove(" \\[Wegen h.ngigem.*\\]$")
+}
+
+#' Get descriptions from a node with childrent that hold descriptions
+#' @param node The node to look at
+#' @param code Do the description nodes have a child holding a code?
+get_descriptions <- function(node, code = FALSE) {
+  pk <- xml_attr(node, "primaryKey")
+  desc <- sapply(xml_children(node), xml_attr, "value")
+  if (code) {
+    code <- xml_attr(xml_child(xml_child(node)), "value")
+    ret <- c(pk, code, desc)
+    names(ret) <- c("pk", "code", "de", "fr", "it", "en")
+  } else {
+    ret <- c(pk, desc)
+    names(ret) <- c("pk", "de", "fr", "it", "en")
+  }
+  return(ret)
 }
