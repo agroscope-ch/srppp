@@ -1,0 +1,11 @@
+pages:
+  script:
+  - mv docs public
+  - >
+    find public -type f -regex '.*\.\(htm\|html\|txt\|text\|js\|css\|ico\)$'
+    -exec gzip -f -k {} \;
+  artifacts:
+    paths:
+    - public
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "main"
