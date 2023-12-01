@@ -4,10 +4,12 @@
 \alias{psmv_xml_get}
 \title{Read an XML version of the PSMV}
 \usage{
-psmv_xml_get(date = dplyr::last(names(fgpsm::psmv_xml_zip_files)))
+psmv_xml_get(date = last(names(psmv::psmv_xml_zip_files)))
 }
 \arguments{
-\item{date}{The date of the publication in the format YYYY-MM-DD}
+\item{date}{A number giving a year starting from 2011 up to the current year
+or the date of the publication as a length one character vector in the
+format YYYY-MM-DD}
 }
 \value{
 An object inheriting from 'psmv_xml', 'xml_document', 'xml_node'
@@ -16,8 +18,10 @@ An object inheriting from 'psmv_xml', 'xml_document', 'xml_node'
 Read an XML version of the PSMV
 }
 \examples{
+psmv_2015 <- psmv_xml_get(2015)
+print(psmv_2015)
+class(psmv_2015)
+
+# The current PSMV
 psmv_xml <- psmv_xml_get()
-print(psmv_xml)
-class(psmv_xml)
-psmv_xml_get("2023-04-04")
 }

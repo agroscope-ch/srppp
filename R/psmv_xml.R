@@ -81,6 +81,97 @@ psmv_xml_get_products <- function(psmv_xml = psmv_xml_get(), verbose = TRUE) {
   return(products)
 }
 
+#' Create a dm object from an XML version of the PSMV
+#'
+#' @inheritParams psmv_xml_get
+#' @return A [dm] object with tables linked by foreign keys
+#' pointing to primary keys, i.e. with referential integrity.
+#' @export
+#' @examples
+#' library(psmv)
+#' library(dm)
+#' psmv_2017 <- psmv_dm(2017)
+#' dm_examine_constraints(psmv_2017)
+#' dm_nrow(psmv_2017)
+#' # Show some information for products named 'Boxer'
+#' psmv_2017 |>
+#'   dm_filter(products = (name == "Boxer")) |>
+#'   dm_nrow()
+psmv_dm <- function(date = last(names(psmv::psmv_xml_zip_files))) {
+  psmv_xml <- psmv_xml_get(date)
+  products <- psmv_xml_get_products(psmv_xml)
+  # Get W-Numbers from product information node
+  get_wNbr <- function(product_information_node) {
+    xml_attr(xml_parent(xml_parent(product_information_node)), "wNbr")
+  }
+
+  # Get descriptions from a product information node
+  get_descriptions <- function(node, code = FALSE) {
+    pk <- xml_attr(node, "primaryKey")
+    desc <- sapply(xml_children(node), xml_attr, "value")
+    if (code) {
+      code <- xml_attr(xml_child(xml_child(node)), "value")
+      ret <- c(pk, code, desc)
+      names(ret) <- c("pk", "code", "de", "fr", "it", "en")
+    } else {
+      ret <- c(pk, desc)
+      names(ret) <- c("pk", "de", "fr", "it", "en")
+    }
+    return(ret)
+  }
+
+  # Get product information with descriptions from ProductInformation section
+  product_information_descriptions <- function(xml_doc, tag_name, code = FALSE) {
+
+    # Find nodes and apply the function
+    ret <- xml_doc |>
+      xml_find_all(paste0("MetaData[@name='", tag_name, "']/Detail")) |>
+      sapply(get_descriptions, code = code) |> t() |>
+      as_tibble() |> mutate(pk = as.integer(pk)) |> arrange(pk)
+
+    return(ret)
+  }
+
+  product_information_table <- function(xml_doc, tag_name, code = FALSE) {
+    descriptions <- product_information_descriptions(xml_doc, tag_name,
+      code = code)
+
+    product_information_nodes <- xml_find_all(xml_doc,
+      paste0("Products/Product/ProductInformation/", tag_name))
+
+    ret <- tibble::tibble(
+      wNbr = sapply(product_information_nodes, get_wNbr),
+      pk = as.integer(xml_attr(product_information_nodes, "primaryKey"))) |>
+        left_join(descriptions, by = "pk") |>
+        arrange(wNbr)
+
+    return(ret)
+  }
+
+  product_categories <- product_information_table(psmv_xml, "ProductCategory")
+  formulation_codes <- product_information_table(psmv_xml, "FormulationCode")
+  danger_symbols <- product_information_table(psmv_xml, "DangerSymbol", code = TRUE)
+  signal_words <- product_information_table(psmv_xml, "SignalWords")
+  CodeS <- product_information_table(psmv_xml, "CodeS")
+  CodeR <- product_information_table(psmv_xml, "CodeR")
+  # Permission holder was skipped, as we will probably not need this information
+
+  psmv_dm <- dm(products,
+    product_categories, formulation_codes, danger_symbols, CodeS, CodeR) |>
+    dm_add_pk(products, wNbr) |>
+#    dm_add_pk(substances, pk) |>
+    dm_add_fk(product_categories, wNbr, products) |>
+    dm_add_fk(formulation_codes, wNbr, products) |>
+    dm_add_fk(danger_symbols, wNbr, products) |>
+    dm_add_fk(CodeS, wNbr, products) |>
+    dm_add_fk(CodeR, wNbr, products)
+#    dm_add_fk(ingredients, wNbr, products) |>
+#    dm_add_fk(ingredients, pk, substances)
+
+    return(psmv_dm)
+}
+
+
 #' Get Substances from an XML version of the PSMV
 #'
 #' @param psmv_xml An object as returned by 'psmv_xml_get'
