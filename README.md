@@ -1,11 +1,11 @@
-# fgpsm - R package with utility functions of the Research Group Plant Protection Products - Impact and Assessment
+# psmv - R package to deal with PSMV data obtained from XML dumps
 
 ## Installation
 
 You can clone the project via ssh using the URL
 
 ```
-git@gitlab.agsad.admin.ch:f80868656/fgpsm.git
+git@gitlab.agsad.admin.ch:f80868656/psmv.git
 ```
 
 Within RStudio, you can then install the package using the menu 'Build' and 
@@ -13,4 +13,4 @@ the submenu item 'Install Package'.
 
 ## Documentation
 
-Please visit the [Documentation page](https://f80868656.pages.agsad.admin.ch/fgpsm/)!
+Please visit the [Documentation page](https://psmwb.pages.agsad.admin.ch/psmv/)!
