@@ -251,6 +251,7 @@ psmv_xml_clean_product_names <- function(names) {
 }
 
 #' Get descriptions from a node with childrent that hold descriptions
+#' @keywords internal
 #' @param node The node to look at
 #' @param code Do the description nodes have a child holding a code?
 get_descriptions <- function(node, code = FALSE) {

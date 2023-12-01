@@ -14,3 +14,4 @@ get_descriptions(node, code = FALSE)
 \description{
 Get descriptions from a node with childrent that hold descriptions
 }
+\keyword{internal}

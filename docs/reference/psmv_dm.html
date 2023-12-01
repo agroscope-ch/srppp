@@ -44,7 +44,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Create a dm object from an XML version of the PSMV</h1>
-      <small class="dont-index">Source: <a href="https://gitlab.agsad.admin.ch/psmwb/gpsmv/blob/HEAD/R/psmv_xml.R" class="external-link"><code>R/psmv_xml.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://gitlab.agsad.admin.ch/psmwb/gpsmv/blob/HEAD/R/psmv-xml.R" class="external-link"><code>R/psmv-xml.R</code></a></small>
       <div class="d-none name"><code>psmv_dm.Rd</code></div>
     </div>
 
@@ -90,16 +90,16 @@ pointing to primary keys, i.e. with referential integrity.</p>
 <span class="r-in"><span><span class="fu"><a href="https://dm.cynkra.com/reference/dm_nrow.html" class="external-link">dm_nrow</a></span><span class="op">(</span><span class="va">psmv_2017</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           products product_categories  formulation_codes     danger_symbols </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               2269               4976               2269               3400 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              CodeS              CodeR </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              10051               6659 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              CodeS              CodeR         substances        ingredients </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              10051               6659                534               3618 </span>
 <span class="r-in"><span><span class="co"># Show some information for products named 'Boxer'</span></span></span>
 <span class="r-in"><span><span class="va">psmv_2017</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dm.cynkra.com/reference/dm_filter.html" class="external-link">dm_filter</a></span><span class="op">(</span>products <span class="op">=</span> <span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"Boxer"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dm.cynkra.com/reference/dm_nrow.html" class="external-link">dm_nrow</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           products product_categories  formulation_codes     danger_symbols </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  2                  4                  2                  4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              CodeS              CodeR </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  4                  8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              CodeS              CodeR         substances        ingredients </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  4                  8                  1                  2 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
