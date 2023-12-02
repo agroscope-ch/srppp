@@ -1,4 +1,4 @@
-globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "pNbr", "add_txt_pk", 
+globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "pNbr", "add_txt_pk",
     "de", "fr", "it", "en", "exhaustionDeadline", "soldoutDeadline",
     "isSalePermission", "terminationReason"))
 
@@ -148,6 +148,45 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get()) {
   return(ret)
 }
 
+#' Get uses ('indications') for all products described in an XML version of the PSMV
+#'
+#' @param psmv_xml An object as returned by 'psmv_xml_get'
+#' @export
+#' @examples
+#' psmv_xml_get_uses()
+psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
+  use_nodeset <- xml_find_all(psmv_xml, "Products/Product/ProductInformation/Indication")
+
+  get_use <- function(node) {
+    wNbr <- xml_attr(xml_parent(xml_parent(node)), "wNbr")
+    attributes <- xml_attrs(node)
+    units_pk <- xml_attr(xml_child(node, search = 1), "primaryKey")
+    ret <- c(wNbr, attributes, units_pk)
+    names(ret) <- c("wNbr", "min_dosage", "max_dosage", "waiting_period", "min_rate", "max_rate", "units_pk")
+    return(ret)
+  }
+
+  uses <- t(sapply(use_nodeset, get_use)) |>
+    tibble::as_tibble() |>
+    mutate_at(c("min_dosage", "max_dosage", "min_rate", "max_rate"), as.numeric) |>
+    mutate_at(c("waiting_period", "units_pk"), as.integer)
+
+  rate_unit_descriptions <- psmv_xml |>
+    xml_find_all(paste0("MetaData[@name='Measure']/Detail")) |>
+    sapply(get_descriptions, code = FALSE) |> t() |>
+    tibble::as_tibble() |>
+    rename(units_de = de, units_fr = fr) |>
+    rename(units_it = it, units_en = en) |>
+    mutate(pk = as.integer(pk)) |>
+    arrange(pk)
+
+  ret <- uses |>
+    left_join(rate_unit_descriptions, by = c(units_pk = "pk")) |>
+    select(-units_pk)
+
+  return(ret)
+}
+
 #' Create a dm object from an XML version of the PSMV
 #'
 #' @inheritParams psmv_xml_get
@@ -212,9 +251,12 @@ psmv_dm <- function(date = last(names(psmv::psmv_xml_zip_files))) {
 
   ingredients <- psmv_xml_get_ingredients(psmv_xml)
 
+  uses <- psmv_xml_get_uses(psmv_xml)
+
   psmv_dm <- dm(products,
     product_categories, formulation_codes, danger_symbols, CodeS, CodeR,
-    substances, ingredients) |>
+    substances, ingredients,
+    uses) |>
     dm_add_pk(products, wNbr) |>
     dm_add_pk(substances, pk) |>
     dm_add_fk(product_categories, wNbr, products) |>
@@ -223,7 +265,8 @@ psmv_dm <- function(date = last(names(psmv::psmv_xml_zip_files))) {
     dm_add_fk(CodeS, wNbr, products) |>
     dm_add_fk(CodeR, wNbr, products) |>
     dm_add_fk(ingredients, wNbr, products) |>
-    dm_add_fk(ingredients, pk, substances)
+    dm_add_fk(ingredients, pk, substances) |>
+    dm_add_fk(uses, wNbr, products)
 
     return(psmv_dm)
 }
