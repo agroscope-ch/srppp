@@ -9,6 +9,7 @@
 #' @importFrom dplyr if_else
 #' @importFrom dplyr left_join
 #' @importFrom dplyr mutate 
+#' @importFrom dplyr mutate_at
 #' @importFrom dplyr rename
 #' @importFrom dplyr group_by
 #' @importFrom dplyr last
