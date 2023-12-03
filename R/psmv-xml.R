@@ -168,6 +168,8 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
 
   uses <- t(sapply(use_nodeset, get_use)) |>
     tibble::as_tibble() |>
+    group_by(wNbr) |>
+    mutate(use_nr = sequence(rle(wNbr)$length), .after = wNbr) |> # https://stackoverflow.com/a/46613159
     mutate_at(c("min_dosage", "max_dosage", "min_rate", "max_rate"), as.numeric) |>
     mutate_at(c("waiting_period", "units_pk"), as.integer)
 
