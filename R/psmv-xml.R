@@ -148,6 +148,8 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get()) {
   return(ret)
 }
 
+#' Define use identification numbers in a PSMV read in from an XML file
+#'
 #' @param psmv_xml An object as returned by 'psmv_xml_get'
 #' @return An psmv_xml object with use_nr added as an attribute of 'Indication' nodes.
 #' @export
@@ -181,11 +183,18 @@ psmv_xml_define_uses <- function(psmv_xml = psmv_xml_get()) {
 psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
   psmv_xml <- psmv_xml_define_uses(psmv_xml)
   use_nodeset <- xml_find_all(psmv_xml, "Products/Product/ProductInformation/Indication")
+  use_nodeset
 
   get_use <- function(node) {
     wNbr <- xml_attr(xml_parent(xml_parent(node)), "wNbr")
     attributes <- xml_attrs(node)
     units_pk <- xml_attr(xml_child(node, search = 1), "primaryKey")
+    
+    # Searching for a child nodes with time units by name is too slow
+    #time_units_pk <- xml_attr(xml_child(node, search = "TimeMeasure"), "primaryKey")
+    #ret <- c(wNbr, attributes, units_pk, time_units_pk)
+    #names(ret) <- c("wNbr", "min_dosage", "max_dosage", "waiting_period", "min_rate", "max_rate", "use_nr", "units_pk", "time_units_pk")
+    
     ret <- c(wNbr, attributes, units_pk)
     names(ret) <- c("wNbr", "min_dosage", "max_dosage", "waiting_period", "min_rate", "max_rate", "use_nr", "units_pk")
     return(ret)
@@ -206,8 +215,19 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
     mutate(pk = as.integer(pk)) |>
     arrange(pk)
 
+  # Not used as finding the time unit primary keys is very slow
+  # time_unit_descriptions <- psmv_xml |>
+  #   xml_find_all(paste0("MetaData[@name='TimeMeasure']/Detail")) |>
+  #   sapply(get_descriptions, code = FALSE) |> t() |>
+  #   tibble::as_tibble() |>
+  #   rename(time_units_de = de, time_units_fr = fr) |>
+  #   rename(time_units_it = it, time_units_en = en) |>
+  #   mutate(pk = as.integer(pk)) |>
+  #   arrange(pk)
+
   ret <- uses |>
     left_join(rate_unit_descriptions, by = c(units_pk = "pk")) |>
+    #left_join(time_unit_descriptions, by = c(time_units_pk = "pk")) |>
     select(-units_pk)
 
   return(ret)
