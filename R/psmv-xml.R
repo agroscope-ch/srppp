@@ -148,13 +148,38 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get()) {
   return(ret)
 }
 
+#' @param psmv_xml An object as returned by 'psmv_xml_get'
+#' @return An psmv_xml object with use_nr added as an attribute of 'Indication' nodes.
+#' @export
+#' @examples
+#' psmv_xml_define_uses()
+psmv_xml_define_uses <- function(psmv_xml = psmv_xml_get()) {
+  use_nodeset <- xml_find_all(psmv_xml, "Products/Product/ProductInformation/Indication")
+
+  # We need to use sapply, as xml_attr returns unique attributes only
+  get_wNbr <- function(node) {
+    wNbr <- xml_attr(xml_parent(xml_parent(node)), "wNbr")
+    return(wNbr)
+  }
+
+  uses <- tibble(wNbr = sapply(use_nodeset, get_wNbr)) |>
+    group_by(wNbr) |>
+    mutate(use_nr = sequence(rle(wNbr)$length)) # https://stackoverflow.com/a/46613159
+
+  xml_attr(use_nodeset, "use_no") <- uses$use_nr
+
+  return(psmv_xml)
+}
+
 #' Get uses ('indications') for all products described in an XML version of the PSMV
 #'
 #' @param psmv_xml An object as returned by 'psmv_xml_get'
 #' @export
 #' @examples
-#' psmv_xml_get_uses()
+#' psmv_xml <- psmv_xml_get()
+#' psmv_xml_get_uses(psmv_xml)
 psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
+  psmv_xml <- psmv_xml_define_uses(psmv_xml)
   use_nodeset <- xml_find_all(psmv_xml, "Products/Product/ProductInformation/Indication")
 
   get_use <- function(node) {
@@ -162,16 +187,15 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
     attributes <- xml_attrs(node)
     units_pk <- xml_attr(xml_child(node, search = 1), "primaryKey")
     ret <- c(wNbr, attributes, units_pk)
-    names(ret) <- c("wNbr", "min_dosage", "max_dosage", "waiting_period", "min_rate", "max_rate", "units_pk")
+    names(ret) <- c("wNbr", "min_dosage", "max_dosage", "waiting_period", "min_rate", "max_rate", "use_nr", "units_pk")
     return(ret)
   }
 
   uses <- t(sapply(use_nodeset, get_use)) |>
     tibble::as_tibble() |>
-    group_by(wNbr) |>
-    mutate(use_nr = sequence(rle(wNbr)$length), .after = wNbr) |> # https://stackoverflow.com/a/46613159
     mutate_at(c("min_dosage", "max_dosage", "min_rate", "max_rate"), as.numeric) |>
-    mutate_at(c("waiting_period", "units_pk"), as.integer)
+    mutate_at(c("waiting_period", "use_nr", "units_pk"), as.integer) |>
+    select(wNbr, use_nr, min_dosage, max_dosage, waiting_period, min_rate, max_rate, units_pk)
 
   rate_unit_descriptions <- psmv_xml |>
     xml_find_all(paste0("MetaData[@name='Measure']/Detail")) |>
