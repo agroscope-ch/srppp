@@ -154,21 +154,15 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get()) {
 #' @return An psmv_xml object with use_nr added as an attribute of 'Indication' nodes.
 #' @export
 #' @examples
-#' psmv_xml_define_uses()
-psmv_xml_define_uses <- function(psmv_xml = psmv_xml_get()) {
+#' psmv_xml_define_use_numbers()
+psmv_xml_define_use_numbers <- function(psmv_xml = psmv_xml_get()) {
   use_nodeset <- xml_find_all(psmv_xml, "Products/Product/ProductInformation/Indication")
 
-  # We need to use sapply, as xml_attr returns unique attributes only
-  get_wNbr <- function(node) {
-    wNbr <- xml_attr(xml_parent(xml_parent(node)), "wNbr")
-    return(wNbr)
-  }
-
-  uses <- tibble(wNbr = sapply(use_nodeset, get_wNbr)) |>
+  uses <- tibble(wNbr = sapply(use_nodeset, get_wNbr, n = 2)) |>
     group_by(wNbr) |>
     mutate(use_nr = sequence(rle(wNbr)$length)) # https://stackoverflow.com/a/46613159
 
-  xml_attr(use_nodeset, "use_no") <- uses$use_nr
+  xml_attr(use_nodeset, "use_nr") <- uses$use_nr
 
   return(psmv_xml)
 }
@@ -181,7 +175,7 @@ psmv_xml_define_uses <- function(psmv_xml = psmv_xml_get()) {
 #' psmv_xml <- psmv_xml_get()
 #' psmv_xml_get_uses(psmv_xml)
 psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
-  psmv_xml <- psmv_xml_define_uses(psmv_xml)
+  psmv_xml <- psmv_xml_define_use_numbers(psmv_xml)
   use_nodeset <- xml_find_all(psmv_xml, "Products/Product/ProductInformation/Indication")
 
   get_use <- function(node) {
@@ -196,11 +190,8 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
     names(ret) <- c("wNbr", "min_dosage", "max_dosage", "waiting_period", "min_rate", "max_rate", "use_nr", "units_pk")
     return(ret)
   }
-
-  rate_unit_descriptions <- psmv_xml |>
-    xml_find_all(paste0("MetaData[@name='Measure']/Detail")) |>
-    sapply(get_descriptions, code = FALSE) |> t() |>
-    tibble::as_tibble() |>
+  
+  rate_unit_descriptions <- description_table(psmv_xml, "Measure") |> 
     rename(units_de = de, units_fr = fr) |>
     rename(units_it = it, units_en = en) |>
     mutate(pk = as.integer(pk)) |>
@@ -209,9 +200,9 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
   time_units_nodeset <- xml_find_all(psmv_xml, "Products/Product/ProductInformation/Indication/TimeMeasure")
   get_time_units <- function(node) {
     wNbr <- xml_attr(xml_parent(xml_parent(xml_parent((node)))), "wNbr")
-    use_no <- xml_attr(xml_parent(node), "use_no")   
+    use_nr <- xml_attr(xml_parent(node), "use_nr")   
     time_units_pk <- xml_attr(node, "primaryKey")
-    ret <- (c(wNbr, use_no, time_units_pk))
+    ret <- (c(wNbr, use_nr, time_units_pk))
     names(ret) <- c("wNbr", "use_nr", "time_units_pk")
     return(ret)
   }
@@ -262,28 +253,11 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
 psmv_dm <- function(date = last(names(psmv::psmv_xml_zip_files))) {
   psmv_xml <- psmv_xml_get(date)
   products <- psmv_xml_get_products(psmv_xml)
-  # Get W-Numbers from product information node
-  get_wNbr <- function(product_information_node) {
-    xml_attr(xml_parent(xml_parent(product_information_node)), "wNbr")
-  }
+  
+  product_information_table <- function(psmv_xml, tag_name, code = FALSE) {
+    descriptions <- description_table(psmv_xml, tag_name, code = code)
 
-  # Get product information with descriptions from ProductInformation section
-  product_information_descriptions <- function(xml_doc, tag_name, code = FALSE) {
-
-    # Find nodes and apply the function
-    ret <- xml_doc |>
-      xml_find_all(paste0("MetaData[@name='", tag_name, "']/Detail")) |>
-      sapply(get_descriptions, code = code) |> t() |>
-      tibble::as_tibble() |> mutate(pk = as.integer(pk)) |> arrange(pk)
-
-    return(ret)
-  }
-
-  product_information_table <- function(xml_doc, tag_name, code = FALSE) {
-    descriptions <- product_information_descriptions(xml_doc, tag_name,
-      code = code)
-
-    product_information_nodes <- xml_find_all(xml_doc,
+    product_information_nodes <- xml_find_all(psmv_xml,
       paste0("Products/Product/ProductInformation/", tag_name))
 
     ret <- tibble::tibble(
@@ -308,13 +282,43 @@ psmv_dm <- function(date = last(names(psmv::psmv_xml_zip_files))) {
   ingredients <- psmv_xml_get_ingredients(psmv_xml)
 
   uses <- psmv_xml_get_uses(psmv_xml)
+  psmv_xml <- psmv_xml_define_use_numbers(psmv_xml)
+  
+  indication_information_table <- function(psmv_xml, tag_name) {
+    
+    indication_information_nodes <- xml_find_all(psmv_xml,
+      paste0("Products/Product/ProductInformation/Indication/", tag_name))
+
+    ret <- tibble::tibble(
+      wNbr = sapply(indication_information_nodes, get_wNbr, n = 3),
+      use_nr = sapply(indication_information_nodes, get_use_nr),
+      pk = as.integer(xml_attr(indication_information_nodes, "primaryKey"))) |>
+        arrange(wNbr)
+
+    return(ret)
+  }
+  
+  application_area_descriptons <- description_table(psmv_xml, "ApplicationArea")
+  application_areas <- indication_information_table(psmv_xml, "ApplicationArea") |> 
+    left_join(application_area_descriptions, by = join_by(pk)) |> 
+    rename(application_area_de = de, application_area_fr = fr) |>
+    rename(application_area_it = it, application_area_en = en) |>
+    mutate(use_nr = as.integer(use_nr)) |> 
+    select(-pk)
+    
+  application_comment_descriptions <- description_table(psmv_xml, "ApplicationComment")
+  # In the culture descriptions, links to parent cultures are filtered out
+  culture_descriptions <- description_table(psmv_xml, "Culture")
+  pest_descriptions <- description_table(psmv_xml, "Pest", latin = TRUE)
+  obligation_descriptions <- description_table(psmv_xml, "Obligation", code = TRUE)
 
   psmv_dm <- dm(products,
     product_categories, formulation_codes, danger_symbols, CodeS, CodeR,
     substances, ingredients,
-    uses) |>
+    uses, application_areas) |>
     dm_add_pk(products, wNbr) |>
     dm_add_pk(substances, pk) |>
+    dm_add_pk(uses, c(wNbr, use_nr)) |>
     dm_add_fk(product_categories, wNbr, products) |>
     dm_add_fk(formulation_codes, wNbr, products) |>
     dm_add_fk(danger_symbols, wNbr, products) |>
@@ -322,7 +326,8 @@ psmv_dm <- function(date = last(names(psmv::psmv_xml_zip_files))) {
     dm_add_fk(CodeR, wNbr, products) |>
     dm_add_fk(ingredients, wNbr, products) |>
     dm_add_fk(ingredients, pk, substances) |>
-    dm_add_fk(uses, wNbr, products)
+    dm_add_fk(uses, wNbr, products) |> 
+    dm_add_fk(application_areas, c(wNbr, use_nr), uses)
 
     return(psmv_dm)
 }
@@ -349,20 +354,69 @@ psmv_xml_clean_product_names <- function(names) {
     stringr::str_remove(" \\[Wegen h.ngigem.*\\]$")
 }
 
-#' Get descriptions from a node with childrent that hold descriptions
+#' Get W-Numbers from parent or grandparent node
+#' @keywords internal
+get_wNbr <- function(node, n = 1) {
+  wNbr <- case_when(
+    n == 1 ~ xml_attr(xml_parent(node), "wNbr"),
+    n == 2 ~ xml_attr(xml_parent(xml_parent(node)), "wNbr"),
+    n == 3 ~ xml_attr(xml_parent(xml_parent(xml_parent(node))), "wNbr"))
+  
+  return(wNbr)
+}
+
+#' Get use number from parent node (indication information node)
+#' @keywords internal
+get_use_nr <- function(node) {
+  xml_attr(xml_parent(node), "use_nr")
+}
+
+#' Get a table of descriptions for a certain Meta Information Tag
+#' @keywords internal
+description_table <- function(psmv_xml, tag_name, code = FALSE, latin = FALSE) {
+  
+  # Find nodes and apply the function
+  ret <- psmv_xml |>
+    xml_find_all(paste0("MetaData[@name='", tag_name, "']/Detail")) |>
+    sapply(get_descriptions, code = code, latin = latin) |> t() |> 
+    tibble::as_tibble() |> mutate(pk = as.integer(pk)) |> arrange(pk)
+
+  return(ret)
+}
+
+#' Get descriptions from a node with children that hold descriptions
 #' @keywords internal
 #' @param node The node to look at
 #' @param code Do the description nodes have a child holding a code?
-get_descriptions <- function(node, code = FALSE) {
+#' @param latin Are there latin descriptions (e.g. for pest descriptions)
+#' @examples
+#' psmv_xml <- psmv_xml_get()
+#' culture_detail_nodeset <- xml_find_all(psmv_xml, 
+#'   "MetaData[@name='Culture']/Detail")
+#' get_descriptions(culture_detail_nodeset[[1]])
+#' get_descriptions(culture_detail_nodeset[[5]])
+#' obligation_detail_nodeset <- xml_find_all(psmv_xml, 
+#'   "MetaData[@name='Obligation']/Detail")
+#' get_descriptions(obligation_detail_nodeset[[5]], code = TRUE)
+get_descriptions <- function(node, code = FALSE, latin = FALSE) {
   pk <- xml_attr(node, "primaryKey")
   desc <- sapply(xml_children(node), xml_attr, "value")
   if (code) {
-    code <- xml_attr(xml_child(xml_child(node)), "value")
+    if (xml_length(xml_child(node)) == 1) {
+      code <- xml_attr(xml_child(xml_child(node)), "value")
+    } else {
+      code <- NA
+    }
     ret <- c(pk, code, desc)
     names(ret) <- c("pk", "code", "de", "fr", "it", "en")
   } else {
+    desc <- desc[!is.na(desc)] # Remove results from <Parent> nodes without "value"
     ret <- c(pk, desc)
-    names(ret) <- c("pk", "de", "fr", "it", "en")
+    if (latin) {
+      names(ret) <- c("pk", "de", "fr", "it", "en", "lt")
+    } else {
+      names(ret) <- c("pk", "de", "fr", "it", "en")
+    }
   }
   return(ret)
 }
