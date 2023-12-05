@@ -183,7 +183,6 @@ psmv_xml_define_uses <- function(psmv_xml = psmv_xml_get()) {
 psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
   psmv_xml <- psmv_xml_define_uses(psmv_xml)
   use_nodeset <- xml_find_all(psmv_xml, "Products/Product/ProductInformation/Indication")
-  use_nodeset
 
   get_use <- function(node) {
     wNbr <- xml_attr(xml_parent(xml_parent(node)), "wNbr")
@@ -192,19 +191,11 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
     
     # Searching for a child nodes with time units by name is too slow
     #time_units_pk <- xml_attr(xml_child(node, search = "TimeMeasure"), "primaryKey")
-    #ret <- c(wNbr, attributes, units_pk, time_units_pk)
-    #names(ret) <- c("wNbr", "min_dosage", "max_dosage", "waiting_period", "min_rate", "max_rate", "use_nr", "units_pk", "time_units_pk")
     
     ret <- c(wNbr, attributes, units_pk)
     names(ret) <- c("wNbr", "min_dosage", "max_dosage", "waiting_period", "min_rate", "max_rate", "use_nr", "units_pk")
     return(ret)
   }
-
-  uses <- t(sapply(use_nodeset, get_use)) |>
-    tibble::as_tibble() |>
-    mutate_at(c("min_dosage", "max_dosage", "min_rate", "max_rate"), as.numeric) |>
-    mutate_at(c("waiting_period", "use_nr", "units_pk"), as.integer) |>
-    select(wNbr, use_nr, min_dosage, max_dosage, waiting_period, min_rate, max_rate, units_pk)
 
   rate_unit_descriptions <- psmv_xml |>
     xml_find_all(paste0("MetaData[@name='Measure']/Detail")) |>
@@ -215,20 +206,39 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
     mutate(pk = as.integer(pk)) |>
     arrange(pk)
 
-  # Not used as finding the time unit primary keys is very slow
-  # time_unit_descriptions <- psmv_xml |>
-  #   xml_find_all(paste0("MetaData[@name='TimeMeasure']/Detail")) |>
-  #   sapply(get_descriptions, code = FALSE) |> t() |>
-  #   tibble::as_tibble() |>
-  #   rename(time_units_de = de, time_units_fr = fr) |>
-  #   rename(time_units_it = it, time_units_en = en) |>
-  #   mutate(pk = as.integer(pk)) |>
-  #   arrange(pk)
+  time_units_nodeset <- xml_find_all(psmv_xml, "Products/Product/ProductInformation/Indication/TimeMeasure")
+  get_time_units <- function(node) {
+    wNbr <- xml_attr(xml_parent(xml_parent(xml_parent((node)))), "wNbr")
+    use_no <- xml_attr(xml_parent(node), "use_no")   
+    time_units_pk <- xml_attr(node, "primaryKey")
+    ret <- (c(wNbr, use_no, time_units_pk))
+    names(ret) <- c("wNbr", "use_nr", "time_units_pk")
+    return(ret)
+  }
+  time_units <- t(sapply(time_units_nodeset, get_time_units)) |> 
+    as_tibble() |> 
+    mutate_at(c("use_nr", "time_units_pk"), as.integer)
+  
+  time_unit_descriptions <- psmv_xml |>
+    xml_find_all(paste0("MetaData[@name='TimeMeasure']/Detail")) |>
+    sapply(get_descriptions, code = FALSE) |> t() |>
+    tibble::as_tibble() |>
+    rename(time_units_de = de, time_units_fr = fr) |>
+    rename(time_units_it = it, time_units_en = en) |>
+    mutate(pk = as.integer(pk)) |>
+    arrange(pk)
+  
+  uses <- t(sapply(use_nodeset, get_use)) |>
+    tibble::as_tibble() |>
+    mutate_at(c("min_dosage", "max_dosage", "min_rate", "max_rate"), as.numeric) |>
+    mutate_at(c("waiting_period", "use_nr", "units_pk"), as.integer) |>
+    select(wNbr, use_nr, min_dosage, max_dosage, waiting_period, min_rate, max_rate, units_pk) |> 
+    left_join(time_units, by = join_by(wNbr, use_nr)) 
 
   ret <- uses |>
     left_join(rate_unit_descriptions, by = c(units_pk = "pk")) |>
-    #left_join(time_unit_descriptions, by = c(time_units_pk = "pk")) |>
-    select(-units_pk)
+    left_join(time_unit_descriptions, by = c(time_units_pk = "pk")) |>
+    select(-units_pk, -time_units_pk)
 
   return(ret)
 }
