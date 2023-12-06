@@ -16,7 +16,16 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/description_table.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_descriptions.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_use_nr.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_wNbr.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
@@ -32,6 +41,9 @@
   </url>
   <url>
     <loc>/reference/psmv_xml_dates.html</loc>
+  </url>
+  <url>
+    <loc>/reference/psmv_xml_define_use_numbers.html</loc>
   </url>
   <url>
     <loc>/reference/psmv_xml_get.html</loc>

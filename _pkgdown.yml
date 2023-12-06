@@ -18,4 +18,5 @@ reference:
       - psmv_xml_get_substances
       - psmv_xml_get_ingredients
       - psmv_xml_get_uses
+      - psmv_xml_define_use_numbers
       - psmv_xml_clean_product_names
