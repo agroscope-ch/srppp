@@ -22,10 +22,16 @@
     <loc>/reference/get_descriptions.html</loc>
   </url>
   <url>
-    <loc>/reference/get_use_nr.html</loc>
+    <loc>/reference/get_grandparent_wNbr.html</loc>
   </url>
   <url>
-    <loc>/reference/get_wNbr.html</loc>
+    <loc>/reference/get_great_grandparent_wNbr.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_parent_wNbr.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_use_nr.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>

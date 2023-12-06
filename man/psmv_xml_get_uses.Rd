@@ -7,12 +7,14 @@
 psmv_xml_get_uses(psmv_xml = psmv_xml_get())
 }
 \arguments{
-\item{psmv_xml}{An object as returned by 'psmv_xml_get'}
+\item{psmv_xml}{An object as returned by \link{psmv_xml_get} with use numbers
+defined by \link{psmv_xml_define_use_numbers}}
 }
 \description{
 Get uses ('indications') for all products described in an XML version of the PSMV
 }
 \examples{
 psmv_xml <- psmv_xml_get()
+psmv_xml <- psmv_xml_define_use_numbers(psmv_xml)
 psmv_xml_get_uses(psmv_xml)
 }

@@ -60,13 +60,15 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>psmv_xml</dt>
-<dd><p>An object as returned by 'psmv_xml_get'</p></dd>
+<dd><p>An object as returned by <a href="psmv_xml_get.html">psmv_xml_get</a> with use numbers
+defined by <a href="psmv_xml_define_use_numbers.html">psmv_xml_define_use_numbers</a></p></dd>
 
 </dl></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">psmv_xml</span> <span class="op">&lt;-</span> <span class="fu"><a href="psmv_xml_get.html">psmv_xml_get</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">psmv_xml</span> <span class="op">&lt;-</span> <span class="fu"><a href="psmv_xml_define_use_numbers.html">psmv_xml_define_use_numbers</a></span><span class="op">(</span><span class="va">psmv_xml</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">psmv_xml_get_uses</span><span class="op">(</span><span class="va">psmv_xml</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 14,011 × 15</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    wNbr  use_nr min_dosage max_dosage waiting_period min_rate max_rate units_de</span>
