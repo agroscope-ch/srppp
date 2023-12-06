@@ -1,5 +1,7 @@
 # These libraries are needed when debugging psmv functions
-library(psmv)
-library(dm)
-library(dplyr)
-library(xml2)
+if (interactive()) {
+  suppressMessages(require(psmv))
+  suppressMessages(require(dm))
+  suppressMessages(require(dplyr))
+  suppressMessages(require(xml2))
+}
