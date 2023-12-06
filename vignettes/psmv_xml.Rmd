@@ -40,7 +40,7 @@ time <- system.time(
   }
 )
 ```
-But it takes around a minute to complete:
+But it takes a couple of seconds to complete.
 
 ```{r dependson = "psmv-current"}
 print(time)

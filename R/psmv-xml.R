@@ -160,7 +160,7 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get()) {
 psmv_xml_define_use_numbers <- function(psmv_xml = psmv_xml_get()) {
   use_nodeset <- xml_find_all(psmv_xml, "Products/Product/ProductInformation/Indication")
 
-  uses <- tibble::tibble(wNbr = sapply(use_nodeset, get_wNbr, n = 2)) |>
+  uses <- tibble::tibble(wNbr = sapply(use_nodeset, get_grandparent_wNbr)) |>
     group_by(wNbr) |>
     mutate(use_nr = sequence(rle(wNbr)$length)) # https://stackoverflow.com/a/46613159
 
@@ -171,14 +171,19 @@ psmv_xml_define_use_numbers <- function(psmv_xml = psmv_xml_get()) {
 
 #' Get uses ('indications') for all products described in an XML version of the PSMV
 #'
-#' @param psmv_xml An object as returned by 'psmv_xml_get'
+#' @param psmv_xml An object as returned by [psmv_xml_get] with use numbers
+#' defined by [psmv_xml_define_use_numbers]
 #' @export
 #' @examples
 #' psmv_xml <- psmv_xml_get()
+#' psmv_xml <- psmv_xml_define_use_numbers(psmv_xml)
 #' psmv_xml_get_uses(psmv_xml)
 psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
-  psmv_xml <- psmv_xml_define_use_numbers(psmv_xml)
   use_nodeset <- xml_find_all(psmv_xml, "Products/Product/ProductInformation/Indication")
+
+  if (is.na(xml_attr(use_nodeset[[1]], "use_nr"))) {
+    stop("You need to add use numbers with psmv_xml_use_numbers() first")
+  }
 
   get_use <- function(node) {
     wNbr <- xml_attr(xml_parent(xml_parent(node)), "wNbr")
@@ -264,7 +269,7 @@ psmv_dm <- function(date = last(names(psmv::psmv_xml_zip_files))) {
       paste0("Products/Product/ProductInformation/", tag_name))
 
     ret <- tibble::tibble(
-      wNbr = sapply(product_information_nodes, get_wNbr, n = 2),
+      wNbr = sapply(product_information_nodes, get_grandparent_wNbr),
       pk = as.integer(xml_attr(product_information_nodes, "primaryKey"))) |>
         left_join(descriptions, by = "pk") |>
         arrange(wNbr)
@@ -298,7 +303,7 @@ psmv_dm <- function(date = last(names(psmv::psmv_xml_zip_files))) {
       paste0("Products/Product/ProductInformation/Indication/", tag_name))
 
     ret <- tibble::tibble(
-      wNbr = sapply(indication_information_nodes, get_wNbr, n = 3),
+      wNbr = sapply(indication_information_nodes, get_great_grandparent_wNbr),
       use_nr = sapply(indication_information_nodes, get_use_nr),
       pk = xml_attr(indication_information_nodes, "primaryKey")) |>
         mutate_at(c("use_nr", "pk"), as.integer) |>
@@ -414,15 +419,22 @@ psmv_xml_clean_product_names <- function(names) {
     stringr::str_remove(" \\[Wegen h.ngigem.*\\]$")
 }
 
-#' Get W-Numbers from parent or grandparent node
+#' Get W-Number from parent node
 #' @keywords internal
-get_wNbr <- function(node, n = 1) {
-  wNbr <- case_when(
-    n == 1 ~ xml_attr(xml_parent(node), "wNbr"),
-    n == 2 ~ xml_attr(xml_parent(xml_parent(node)), "wNbr"),
-    n == 3 ~ xml_attr(xml_parent(xml_parent(xml_parent(node))), "wNbr"))
+get_parent_wNbr <- function(node) {
+  xml_attr(xml_parent(node), "wNbr")
+}
 
-  return(wNbr)
+#' Get W-Number from grandparent node
+#' @keywords internal
+get_grandparent_wNbr <- function(node) {
+  xml_attr(xml_parent(xml_parent(node)), "wNbr")
+}
+
+#' Get W-Number from grandparent node
+#' @keywords internal
+get_great_grandparent_wNbr <- function(node) {
+  xml_attr(xml_parent(xml_parent(xml_parent(node))), "wNbr")
 }
 
 #' Get use number from parent node (indication information node)
