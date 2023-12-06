@@ -18,7 +18,7 @@ utils::globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "pNbr", "use_nr",
 #'
 #' # The current PSMV
 #' psmv_xml <- psmv_xml_get()
-psmv_xml_get <- function(date = last(names(psmv::psmv_xml_zip_files)))
+psmv_xml_get <- function(date = last(psmv::psmv_xml_dates))
 {
   if (is.numeric(date)) {
     if (date < 2011) stop("PSMV XML files are only available starting from 2011")

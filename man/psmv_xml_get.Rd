@@ -4,7 +4,7 @@
 \alias{psmv_xml_get}
 \title{Read an XML version of the PSMV}
 \usage{
-psmv_xml_get(date = last(names(psmv::psmv_xml_zip_files)))
+psmv_xml_get(date = last(psmv::psmv_xml_dates))
 }
 \arguments{
 \item{date}{A number giving a year starting from 2011 up to the current year
