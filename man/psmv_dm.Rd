@@ -4,7 +4,7 @@
 \alias{psmv_dm}
 \title{Create a dm object from an XML version of the PSMV}
 \usage{
-psmv_dm(date = last(names(psmv::psmv_xml_zip_files)))
+psmv_dm(date = last(psmv::psmv_xml_dates))
 }
 \arguments{
 \item{date}{A number giving a year starting from 2011 up to the current year

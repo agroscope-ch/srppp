@@ -256,7 +256,7 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
 #' psmv_2017 |>
 #'   dm_filter(products = (name == "Boxer")) |>
 #'   dm_nrow()
-psmv_dm <- function(date = last(names(psmv::psmv_xml_zip_files))) {
+psmv_dm <- function(date = last(psmv::psmv_xml_dates)) {
   psmv_xml <- psmv_xml_get(date)
 
   # Tables of products and associated information
