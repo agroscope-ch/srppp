@@ -2,16 +2,18 @@
 % Please edit documentation in R/psmv-xml.R
 \name{get_descriptions}
 \alias{get_descriptions}
-\title{Get descriptions from a node with childrent that hold descriptions}
+\title{Get descriptions from a node with children that hold descriptions}
 \usage{
-get_descriptions(node, code = FALSE)
+get_descriptions(node, code = FALSE, latin = FALSE)
 }
 \arguments{
 \item{node}{The node to look at}
 
 \item{code}{Do the description nodes have a child holding a code?}
+
+\item{latin}{Are there latin descriptions (e.g. for pest descriptions)}
 }
 \description{
-Get descriptions from a node with childrent that hold descriptions
+Get descriptions from a node with children that hold descriptions
 }
 \keyword{internal}

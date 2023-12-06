@@ -19,7 +19,6 @@ pointing to primary keys, i.e. with referential integrity.
 Create a dm object from an XML version of the PSMV
 }
 \examples{
-library(psmv)
 library(dm)
 psmv_2017 <- psmv_dm(2017)
 dm_examine_constraints(psmv_2017)

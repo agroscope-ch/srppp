@@ -12,7 +12,7 @@ psmv_xml_get_products(psmv_xml = psmv_xml_get(), verbose = TRUE)
 \item{verbose}{Should we give some feedback?}
 }
 \value{
-A tibble with a row for each product section
+A \link{tibble} with a row for each product section
 in the XML file. An attribute 'duplicated_wNbrs' is
 also returned, containing duplicated W-Numbers, if applicable,
 or NULL.

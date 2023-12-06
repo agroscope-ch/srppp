@@ -13,5 +13,6 @@ psmv_xml_get_uses(psmv_xml = psmv_xml_get())
 Get uses ('indications') for all products described in an XML version of the PSMV
 }
 \examples{
-psmv_xml_get_uses()
+psmv_xml <- psmv_xml_get()
+psmv_xml_get_uses(psmv_xml)
 }
