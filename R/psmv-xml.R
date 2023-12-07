@@ -75,11 +75,11 @@ psmv_xml_get_products <- function(psmv_xml = psmv_xml_get(), verbose = TRUE) {
   if (anyDuplicated(products$wNbr)) {
     dup_index <- which(duplicated(products$wNbr))
     dup_wNbrs <- products[dup_index, ]$wNbr
-    if (verbose) message("Duplicated W-Numbers: ", paste(dup_wNbrs, collapse = ", "))
+    if (verbose) cli::cli_alert_warning("Duplicated W-Numbers: ", paste(dup_wNbrs, collapse = ", "))
     attr(products, "duplicated_wNbrs") <- dup_wNbrs
   } else {
     attr(products, "duplicated_wNbrs") = NULL
-    if (verbose) message("No duplicated W-Numbers")
+    if (verbose) cli::cli_alert_success("No duplicated W-Numbers")
   }
 
   return(products)
@@ -265,14 +265,18 @@ psmv_dm <- function(date = last(psmv::psmv_xml_dates)) {
   product_information_table <- function(psmv_xml, tag_name, code = FALSE) {
     descriptions <- description_table(psmv_xml, tag_name, code = code)
 
-    product_information_nodes <- xml_find_all(psmv_xml,
-      paste0("Products/Product/ProductInformation/", tag_name))
+    if (identical(descriptions, NA)) {
+      ret <- tibble::tibble(wNbr = character(0))
+    } else {
+      product_information_nodes <- xml_find_all(psmv_xml,
+        paste0("Products/Product/ProductInformation/", tag_name))
 
-    ret <- tibble::tibble(
-      wNbr = sapply(product_information_nodes, get_grandparent_wNbr),
-      pk = as.integer(xml_attr(product_information_nodes, "primaryKey"))) |>
-        left_join(descriptions, by = "pk") |>
-        arrange(wNbr)
+      ret <- tibble::tibble(
+        wNbr = sapply(product_information_nodes, get_grandparent_wNbr),
+        pk = as.integer(xml_attr(product_information_nodes, "primaryKey"))) |>
+          left_join(descriptions, by = "pk") |>
+          arrange(wNbr)
+    }
 
     return(ret)
   }
@@ -448,10 +452,18 @@ get_use_nr <- function(node) {
 description_table <- function(psmv_xml, tag_name, code = FALSE, latin = FALSE) {
 
   # Find nodes and apply the function
-  ret <- psmv_xml |>
-    xml_find_all(paste0("MetaData[@name='", tag_name, "']/Detail")) |>
-    sapply(get_descriptions, code = code, latin = latin) |> t() |>
-    tibble::as_tibble() |> mutate(pk = as.integer(pk)) |> arrange(pk)
+  nodes <- psmv_xml |>
+    xml_find_all(paste0("MetaData[@name='", tag_name, "']/Detail"))
+
+  if (length(nodes) > 0) {
+    ret <- nodes |>
+      sapply(get_descriptions, code = code, latin = latin) |> t() |>
+      tibble::as_tibble() |>
+      mutate(pk = as.integer(pk)) |>
+      arrange(pk)
+  } else {
+    ret <- NA
+  }
 
   return(ret)
 }

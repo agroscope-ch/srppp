@@ -13,7 +13,7 @@ Description: This package provides access to data objects extracted from
   the XML version of the Swiss Register of Plant Protection Products
   'PSMV'.
 Depends: R (>= 3.5.0)
-Imports: xml2, tibble, stringr, dplyr, dm, tidyr
+Imports: xml2, tibble, stringr, dplyr, dm, tidyr, cli
 Suggests: knitr, rmarkdown, here, dbplyr, vctrs, DiagrammeR,
     testthat (>= 3.0.0), fledge
 BugReports: https://gitlab.agsad.admin.ch/psmwb/gpsmv/issues

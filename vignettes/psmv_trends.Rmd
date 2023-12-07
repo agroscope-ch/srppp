@@ -1,0 +1,93 @@
+---
+title: Trends of data contained in XML dumps of the PSMV
+author: Johannes Ranke
+date: Last change 7 December 2023 (rebuilt `r Sys.Date()`)
+output:
+  rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Trends of data contained in XML dumps of the PSMV}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = TRUE, message = FALSE}
+knitr::opts_chunk$set(tidy = FALSE, cache = FALSE)
+options(knitr.kable.NA = '')
+library(psmv)
+library(dm)
+library(dplyr)
+library(knitr)
+library(ggplot2)
+```
+
+## Trends of numbers of active substances
+
+```{r psmv, cache = TRUE}
+#time <- system.time({
+#  psmv <- lapply(2012:2023, psmv_dm)
+#})
+#save(psmv, file = here::here("psmv.rda"))
+load(here::here("psmv.rda")) # 425 MB
+```
+
+```{r}
+names(psmv) <- 2012:2023
+actives_by_category <- sapply(psmv, function(dm) {
+  actives_categories <- dm$products |> 
+    ungroup() |> 
+    left_join(dm$product_categories, by = join_by(wNbr)) |> 
+    select(wNbr, category = de) |> 
+    unique() |> 
+    left_join(dm$ingredients, by = join_by(wNbr), relationship = "many-to-many") |> 
+    dplyr::filter(type == "ACTIVE_INGREDIENT") |> 
+    left_join(dm$substances, by = join_by(pk)) |> 
+    select(pk, category, de) |> 
+    unique() |> 
+    arrange(pk, de, category)
+  
+  n_actives <- actives_categories |> 
+    select(pk) |> 
+    unique() |> 
+    nrow()
+    
+  actives_categories |> 
+    group_by(category) |> 
+    summarise(n = n()) |> 
+    arrange(desc(n))
+  
+  n_tibble <- actives_categories |> 
+    mutate(category = case_when(
+      grepl("Herbizid", category) ~ "Herbizid",
+      grepl("Fungizid", category) ~ "Fungizid",
+      grepl("Insektizid", category) ~ "Insektizid",
+      grepl("Saatbeizmittel", category) ~ "Saatbeizmittel",
+      grepl("Regulator", category) ~ "PGR",
+      grepl("Lebende Organismen", category) ~ "Organismen",
+      grepl("Akarizid", category) ~ "Akarizid",
+      .default = "Sonstige"
+    )) |> 
+    group_by(category) |> 
+    summarise(n = n()) |> 
+    arrange(desc(n))
+  
+  n <- n_tibble$n
+  names(n) <- n_tibble$category
+  n <- c(Total = n_actives, n)
+  return(n)
+})
+kable(actives_by_category)
+```
+
+```{r}
+actives_by_category_long <- actives_by_category |>
+  tibble::as_tibble(rownames = "Kategorie") |> 
+  tidyr::pivot_longer(cols = where(is.numeric), names_to = "Jahr", values_to = "Anzahl") |> 
+  ungroup() |> 
+  group_by(Kategorie)
+
+actives_by_category_long |> 
+  ggplot(aes(Jahr, Anzahl, group = Kategorie, color = Kategorie)) +
+  geom_point() +
+  geom_line()
+```
+
