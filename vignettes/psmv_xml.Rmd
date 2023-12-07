@@ -52,7 +52,7 @@ dm_draw(psmv_current)
 
 ```{r dependson = "psmv-current"}
 dm_flatten_to_tbl(psmv_current, ingredients) |> 
-  select(wNbr, name, de, percent, g_per_L)
+  select(wNbr, name, substance_de, percent, g_per_L)
 ```
 
 

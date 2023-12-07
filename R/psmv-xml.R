@@ -25,6 +25,7 @@ psmv_xml_get <- function(date = last(psmv::psmv_xml_dates))
     date <- min(grep(paste0("^", date), psmv::psmv_xml_dates, value = TRUE))
   }
   path <- file.path(psmv::psmv_xml_idir, psmv::psmv_xml_zip_files[date])
+  cli::cli_alert_info(paste("Reading XML for", date))
   zip_contents <- utils::unzip(path, list = TRUE)
   xml_filename <- grep("PublicationData_20.._.._...xml",
     zip_contents$Name, value = TRUE)
@@ -101,7 +102,7 @@ psmv_xml_get_substances <- function(psmv_xml = psmv_xml_get()) {
     )
   }))
 
-  colnames(sub_desc) <- c("pk", "iupac", "de", "fr", "it", "en", "lt")
+  colnames(sub_desc) <- c("pk", "iupac", "substance_de", "substance_fr", "substance_it", "substance_en", "substance_lt")
   ret <- tibble::as_tibble(sub_desc) |>
     dplyr::mutate(pk = as.integer(pk)) |>
     dplyr::arrange(pk)
@@ -262,7 +263,7 @@ psmv_dm <- function(date = last(psmv::psmv_xml_dates)) {
   # Tables of products and associated information
   products <- psmv_xml_get_products(psmv_xml)
 
-  product_information_table <- function(psmv_xml, tag_name, code = FALSE) {
+  product_information_table <- function(psmv_xml, tag_name, prefix = tag_name, code = FALSE) {
     descriptions <- description_table(psmv_xml, tag_name, code = code)
 
     if (identical(descriptions, NA)) {
@@ -272,19 +273,22 @@ psmv_dm <- function(date = last(psmv::psmv_xml_dates)) {
         paste0("Products/Product/ProductInformation/", tag_name))
 
       ret <- tibble::tibble(
-        wNbr = sapply(product_information_nodes, get_grandparent_wNbr),
-        pk = as.integer(xml_attr(product_information_nodes, "primaryKey"))) |>
-          left_join(descriptions, by = "pk") |>
-          arrange(wNbr)
+          wNbr = sapply(product_information_nodes, get_grandparent_wNbr),
+          pk = as.integer(xml_attr(product_information_nodes, "primaryKey"))
+        ) |>
+        left_join(descriptions, by = "pk") |>
+        rename_with(function(colname) paste(prefix, colname, sep = "_"),
+          .cols = c(de, fr, it, en)) |>
+        arrange(wNbr)
     }
 
     return(ret)
   }
 
-  product_categories <- product_information_table(psmv_xml, "ProductCategory")
-  formulation_codes <- product_information_table(psmv_xml, "FormulationCode")
+  product_categories <- product_information_table(psmv_xml, "ProductCategory", prefix = "category")
+  formulation_codes <- product_information_table(psmv_xml, "FormulationCode", prefix = "formulation")
   danger_symbols <- product_information_table(psmv_xml, "DangerSymbol", code = TRUE)
-  signal_words <- product_information_table(psmv_xml, "SignalWords")
+  signal_words <- product_information_table(psmv_xml, "SignalWords", prefix = "signal")
   CodeS <- product_information_table(psmv_xml, "CodeS")
   CodeR <- product_information_table(psmv_xml, "CodeR")
   # Permission holder was skipped, as we will probably not need this information

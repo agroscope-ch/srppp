@@ -22,40 +22,40 @@ library(ggplot2)
 
 ## Trends of numbers of active substances
 
-```{r psmv, cache = TRUE}
-#time <- system.time({
-#  psmv <- lapply(2012:2023, psmv_dm)
-#})
-#save(psmv, file = here::here("psmv.rda"))
-load(here::here("psmv.rda")) # 425 MB
+```{r psmv, cache = TRUE, message = FALSE}
+years <- 2012:2023
+time <- system.time({
+  psmv <- lapply(years, psmv_dm)
+  names(psmv) <- years
+})
+print(time)
 ```
 
-```{r}
-names(psmv) <- 2012:2023
+```{r dependson = "psmv", warning = FALSE}
 actives_by_category <- sapply(psmv, function(dm) {
-  actives_categories <- dm$products |> 
-    ungroup() |> 
-    left_join(dm$product_categories, by = join_by(wNbr)) |> 
-    select(wNbr, category = de) |> 
-    unique() |> 
-    left_join(dm$ingredients, by = join_by(wNbr), relationship = "many-to-many") |> 
-    dplyr::filter(type == "ACTIVE_INGREDIENT") |> 
-    left_join(dm$substances, by = join_by(pk)) |> 
-    select(pk, category, de) |> 
-    unique() |> 
-    arrange(pk, de, category)
-  
-  n_actives <- actives_categories |> 
-    select(pk) |> 
-    unique() |> 
+  actives_categories <- dm$products |>
+    ungroup() |>
+    left_join(dm$product_categories, by = join_by(wNbr)) |>
+    select(wNbr, category = category_de) |>
+    unique() |>
+    left_join(dm$ingredients, by = join_by(wNbr), relationship = "many-to-many") |>
+    dplyr::filter(type == "ACTIVE_INGREDIENT") |>
+    left_join(dm$substances, by = join_by(pk)) |>
+    select(pk, category, substance_de) |>
+    unique() |>
+    arrange(pk, substance_de, category)
+
+  n_actives <- actives_categories |>
+    select(pk) |>
+    unique() |>
     nrow()
-    
-  actives_categories |> 
-    group_by(category) |> 
-    summarise(n = n()) |> 
+
+  actives_categories |>
+    group_by(category) |>
+    summarise(n = n()) |>
     arrange(desc(n))
-  
-  n_tibble <- actives_categories |> 
+
+  n_tibble <- actives_categories |>
     mutate(category = case_when(
       grepl("Herbizid", category) ~ "Herbizid",
       grepl("Fungizid", category) ~ "Fungizid",
@@ -65,11 +65,11 @@ actives_by_category <- sapply(psmv, function(dm) {
       grepl("Lebende Organismen", category) ~ "Organismen",
       grepl("Akarizid", category) ~ "Akarizid",
       .default = "Sonstige"
-    )) |> 
-    group_by(category) |> 
-    summarise(n = n()) |> 
+    )) |>
+    group_by(category) |>
+    summarise(n = n()) |>
     arrange(desc(n))
-  
+
   n <- n_tibble$n
   names(n) <- n_tibble$category
   n <- c(Total = n_actives, n)
@@ -80,12 +80,12 @@ kable(actives_by_category)
 
 ```{r}
 actives_by_category_long <- actives_by_category |>
-  tibble::as_tibble(rownames = "Kategorie") |> 
-  tidyr::pivot_longer(cols = where(is.numeric), names_to = "Jahr", values_to = "Anzahl") |> 
-  ungroup() |> 
+  tibble::as_tibble(rownames = "Kategorie") |>
+  tidyr::pivot_longer(cols = where(is.numeric), names_to = "Jahr", values_to = "Anzahl") |>
+  ungroup() |>
   group_by(Kategorie)
 
-actives_by_category_long |> 
+actives_by_category_long |>
   ggplot(aes(Jahr, Anzahl, group = Kategorie, color = Kategorie)) +
   geom_point() +
   geom_line()
