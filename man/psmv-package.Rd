@@ -11,7 +11,7 @@ This package provides access to data objects extracted from the XML version of t
 \seealso{
 Useful links:
 \itemize{
-  \item Report bugs at \url{https://gitlab.agsad.admin.ch/psmwb/gpsmv/issues}
+  \item Report bugs at \url{https://gitlab.agsad.admin.ch/psmwb/psmv/issues}
 }
 
 }

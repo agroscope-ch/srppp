@@ -16,7 +16,7 @@ Depends: R (>= 3.5.0)
 Imports: xml2, tibble, stringr, dplyr, dm, tidyr, cli
 Suggests: knitr, rmarkdown, here, dbplyr, vctrs, DiagrammeR,
   ggplot2, testthat (>= 3.0.0), fledge
-BugReports: https://gitlab.agsad.admin.ch/psmwb/gpsmv/issues
+BugReports: https://gitlab.agsad.admin.ch/psmwb/psmv/issues
 License: GPL
 LazyData: yes
 LazyDataCompression: xz
