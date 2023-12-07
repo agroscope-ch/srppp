@@ -15,7 +15,7 @@ Description: This package provides access to data objects extracted from
 Depends: R (>= 3.5.0)
 Imports: xml2, tibble, stringr, dplyr, dm, tidyr, cli
 Suggests: knitr, rmarkdown, here, dbplyr, vctrs, DiagrammeR,
-  ggplot2, testthat (>= 3.0.0), fledge
+  ggplot2, testthat (>= 3.0.0), fledge, parallel
 BugReports: https://gitlab.agsad.admin.ch/psmwb/psmv/issues
 License: GPL
 LazyData: yes
