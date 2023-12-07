@@ -78,7 +78,7 @@ actives_by_category <- sapply(psmv, function(dm) {
 kable(actives_by_category)
 ```
 
-```{r}
+```{r fig.width = 7, fig.height = 5}
 actives_by_category_long <- actives_by_category |>
   tibble::as_tibble(rownames = "Kategorie") |>
   tidyr::pivot_longer(cols = where(is.numeric), names_to = "Jahr", values_to = "Anzahl") |>
