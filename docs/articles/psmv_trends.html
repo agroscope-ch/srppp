@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">psmv</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,7 @@
 Ranke</h4>
             
             <h4 data-toc-skip class="date">Last change 7 December 2023
-(rebuilt 2023-12-07)</h4>
+(rebuilt 2023-12-11)</h4>
       
       <small class="dont-index">Source: <a href="https://gitlab.agsad.admin.ch/psmwb/psmv/blob/HEAD/vignettes/psmv_trends.Rmd" class="external-link"><code>vignettes/psmv_trends.Rmd</code></a></small>
       <div class="d-none name"><code>psmv_trends.Rmd</code></div>
@@ -96,12 +96,12 @@ Ranke</h4>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">years</span> <span class="op">&lt;-</span> <span class="fl">2012</span><span class="op">:</span><span class="fl">2023</span></span>
 <span><span class="va">time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="va">psmv</span> <span class="op">&lt;-</span> <span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/mclapply.html" class="external-link">mclapply</a></span><span class="op">(</span><span class="va">years</span>, <span class="va">psmv_dm</span>, mc.cores <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span>  <span class="va">psmv</span> <span class="op">&lt;-</span> <span class="fu">parallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/parallel/mclapply.html" class="external-link">mclapply</a></span><span class="op">(</span><span class="va">years</span>, <span class="va">psmv_dm</span>, mc.cores <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">psmv</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">years</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">time</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    user  system elapsed </span></span>
-<span><span class="co">## 105.974   4.024  41.841</span></span></code></pre>
+<span><span class="co">##  72.617   2.890  92.587</span></span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">actives_by_category</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">psmv</span>, <span class="kw">function</span><span class="op">(</span><span class="va">dm</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">actives_categories</span> <span class="op">&lt;-</span> <span class="va">dm</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
