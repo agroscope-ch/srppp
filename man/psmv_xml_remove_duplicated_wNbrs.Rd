@@ -22,5 +22,5 @@ An 'psmv_xml' object with only product sections that have unique W-Numbers
 Remove product sections with duplicated W-Numbers
 }
 \examples{
-psmv_xml_remove_duplicated_wNbrs()
+psmv_2015 <- psmv_xml_remove_duplicated_wNbrs(psmv_xml_get(2015))
 }

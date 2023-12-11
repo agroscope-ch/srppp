@@ -167,7 +167,7 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get()) {
 #' @return An 'psmv_xml' object with only product sections that have unique W-Numbers
 #' @export
 #' @examples
-#' psmv_xml_remove_duplicated_wNbrs()
+#' psmv_2015 <- psmv_xml_remove_duplicated_wNbrs(psmv_xml_get(2015))
 psmv_xml_remove_duplicated_wNbrs <- function(psmv_xml = psmv_xml_get(),
   keep = c("last", "first")) {
   product_nodeset <- xml_find_all(psmv_xml, "Products/Product")
