@@ -25,6 +25,7 @@
 #' @importFrom xml2 xml_children
 #' @importFrom xml2 xml_find_all
 #' @importFrom xml2 xml_parent
+#' @importFrom xml2 xml_remove
 #' @importFrom xml2 xml_text
 #' @importFrom xml2 xml_length
 NULL

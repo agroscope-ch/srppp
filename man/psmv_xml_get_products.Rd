@@ -4,12 +4,21 @@
 \alias{psmv_xml_get_products}
 \title{Get Products from an XML version of the PSMV}
 \usage{
-psmv_xml_get_products(psmv_xml = psmv_xml_get(), verbose = TRUE)
+psmv_xml_get_products(
+  psmv_xml = psmv_xml_get(),
+  verbose = TRUE,
+  remove_duplicates = TRUE,
+  keep = c("last", "first")
+)
 }
 \arguments{
 \item{psmv_xml}{An object as returned by 'psmv_xml_get'}
 
 \item{verbose}{Should we give some feedback?}
+
+\item{remove_duplicates}{Should duplicates based on wNbrs be removed?}
+
+\item{keep}{Passed to \link{psmv_xml_remove_duplicated_wNbrs}}
 }
 \value{
 A \link{tibble} with a row for each product section
@@ -26,6 +35,6 @@ library(psmv)
 products_2015 <- psmv_xml_get(2015) |>
   psmv_xml_get_products(verbose = TRUE)
 
-# Get the current list of products
+# Get current list of products
 psmv_xml_get_products()
 }

@@ -6,7 +6,7 @@
 \alias{psmv-package}
 \title{psmv: The Swiss Register of Plant Protection Products as an R package}
 \description{
-This package provides access to data objects extracted from the XML version of the Swiss Register of Plant Protection Products 'PSMV'.
+This package provides access to data objects extracted from XML versions of the Swiss Register of Plant Protection Products 'PSMV'. Please note that this is not an official source of information on authorisations. The official register can be accessed at \url{https://www.psm.admin.ch/de/produkte}.
 }
 \seealso{
 Useful links:

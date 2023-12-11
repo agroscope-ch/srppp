@@ -39,6 +39,8 @@ psmv_xml_get <- function(date = last(psmv::psmv_xml_dates))
 #'
 #' @param psmv_xml An object as returned by 'psmv_xml_get'
 #' @param verbose Should we give some feedback?
+#' @param remove_duplicates Should duplicates based on wNbrs be removed?
+#' @param keep Passed to [psmv_xml_remove_duplicated_wNbrs]
 #' @return A [tibble] with a row for each product section
 #' in the XML file. An attribute 'duplicated_wNbrs' is
 #' also returned, containing duplicated W-Numbers, if applicable,
@@ -50,9 +52,15 @@ psmv_xml_get <- function(date = last(psmv::psmv_xml_dates))
 #' products_2015 <- psmv_xml_get(2015) |>
 #'   psmv_xml_get_products(verbose = TRUE)
 #'
-#' # Get the current list of products
+#' # Get current list of products
 #' psmv_xml_get_products()
-psmv_xml_get_products <- function(psmv_xml = psmv_xml_get(), verbose = TRUE) {
+psmv_xml_get_products <- function(psmv_xml = psmv_xml_get(), verbose = TRUE,
+  remove_duplicates = TRUE, keep = c("last", "first"))
+{
+  keep <- match.arg(keep)
+  if (remove_duplicates) {
+    psmv_xml <- psmv_xml_remove_duplicated_wNbrs(psmv_xml, keep = keep)
+  }
   product_nodeset <- xml_find_all(psmv_xml, "Products/Product")
   product_attribute_names <- names(xml_attrs(product_nodeset[[1]]))
   products <- product_nodeset |>
@@ -151,6 +159,37 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get()) {
   return(ret)
 }
 
+#' Remove product sections with duplicated W-Numbers
+#'
+#' @param psmv_xml An object as returned by [psmv_xml_get]
+#' @param keep How should we deal with product sections with identical W-Numbers?
+#' The default strategy 'keep' only keeps the last of such sets of product sections.
+#' @return An 'psmv_xml' object with only product sections that have unique W-Numbers
+#' @export
+#' @examples
+#' psmv_xml_remove_duplicated_wNbrs()
+psmv_xml_remove_duplicated_wNbrs <- function(psmv_xml = psmv_xml_get(),
+  keep = c("last", "first")) {
+  product_nodeset <- xml_find_all(psmv_xml, "Products/Product")
+
+  keep <- match.arg(keep)
+  wNbrs <- xml_attr(product_nodeset, "wNbr")
+
+  dup_index <- case_when(
+    keep == "first" ~ which(duplicated(wNbrs)),
+    keep == "last" ~ which(duplicated(wNbrs, fromLast = TRUE)))
+
+  if (length(dup_index) > 0) {
+    cli::cli_alert_warning(
+      paste("Removed product section(s) with duplicated W-Number(s)",
+        paste(wNbrs[dup_index], collapse = ", ")))
+
+    xml_remove(product_nodeset[dup_index])
+  }
+
+  return(psmv_xml)
+}
+
 #' Define use identification numbers in a PSMV read in from an XML file
 #'
 #' @param psmv_xml An object as returned by 'psmv_xml_get'
@@ -245,6 +284,8 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
 #' Create a dm object from an XML version of the PSMV
 #'
 #' @inheritParams psmv_xml_get
+#' @inheritParams psmv_xml_remove_duplicated_wNbrs
+#' @param remove_duplicates Should duplicates based on wNbrs be removed?
 #' @return A [dm] object with tables linked by foreign keys
 #' pointing to primary keys, i.e. with referential integrity.
 #' @export
@@ -257,11 +298,19 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
 #' psmv_2017 |>
 #'   dm_filter(products = (name == "Boxer")) |>
 #'   dm_nrow()
-psmv_dm <- function(date = last(psmv::psmv_xml_dates)) {
+psmv_dm <- function(date = last(psmv::psmv_xml_dates),
+  remove_duplicates = TRUE, keep = c("last", "first"))
+{
   psmv_xml <- psmv_xml_get(date)
 
+  keep <- match.arg(keep)
+  if (remove_duplicates) {
+    psmv_xml <- psmv_xml_remove_duplicated_wNbrs(psmv_xml)
+  }
+
   # Tables of products and associated information
-  products <- psmv_xml_get_products(psmv_xml)
+  # Duplicates were already removed from the XML, if requested
+  products <- psmv_xml_get_products(psmv_xml, remove_duplicates = FALSE)
 
   product_information_table <- function(psmv_xml, tag_name, prefix = tag_name, code = FALSE) {
     descriptions <- description_table(psmv_xml, tag_name, code = code)

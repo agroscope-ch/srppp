@@ -4,12 +4,21 @@
 \alias{psmv_dm}
 \title{Create a dm object from an XML version of the PSMV}
 \usage{
-psmv_dm(date = last(psmv::psmv_xml_dates))
+psmv_dm(
+  date = last(psmv::psmv_xml_dates),
+  remove_duplicates = TRUE,
+  keep = c("last", "first")
+)
 }
 \arguments{
 \item{date}{A number giving a year starting from 2011 up to the current year
 or the date of the publication as a length one character vector in the
 format YYYY-MM-DD}
+
+\item{remove_duplicates}{Should duplicates based on wNbrs be removed?}
+
+\item{keep}{How should we deal with product sections with identical W-Numbers?
+The default strategy 'keep' only keeps the last of such sets of product sections.}
 }
 \value{
 A \link{dm} object with tables linked by foreign keys
