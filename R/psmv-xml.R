@@ -76,7 +76,7 @@ psmv_xml_get_products <- function(psmv_xml = psmv_xml_get(), verbose = TRUE) {
   if (anyDuplicated(products$wNbr)) {
     dup_index <- which(duplicated(products$wNbr))
     dup_wNbrs <- products[dup_index, ]$wNbr
-    if (verbose) cli::cli_alert_warning("Duplicated W-Numbers: ", paste(dup_wNbrs, collapse = ", "))
+    if (verbose) cli::cli_alert_warning(paste("Duplicated W-Number(s):", paste(dup_wNbrs, collapse = ", ")))
     attr(products, "duplicated_wNbrs") <- dup_wNbrs
   } else {
     attr(products, "duplicated_wNbrs") = NULL
