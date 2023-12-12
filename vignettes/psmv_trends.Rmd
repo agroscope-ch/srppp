@@ -1,7 +1,7 @@
 ---
 title: Trends of data contained in XML dumps of the PSMV
 author: Johannes Ranke
-date: Last change 7 December 2023 (rebuilt `r Sys.Date()`)
+date: Last change 12 December 2023 (rebuilt `r Sys.Date()`)
 output:
   rmarkdown::html_vignette
 vignette: >
@@ -22,17 +22,8 @@ library(ggplot2)
 
 ## Trends of numbers of active substances
 
-```{r psmv, cache = TRUE, message = FALSE}
-years <- 2012:2023
-time <- system.time({
-  psmv <- parallel::mclapply(years, psmv_dm, mc.cores = 2)
-  names(psmv) <- years
-})
-print(time)
-```
-
-```{r dependson = "psmv", warning = FALSE}
-actives_by_category <- sapply(psmv, function(dm) {
+```{r warning = FALSE}
+actives_by_category <- sapply(psmv_list, function(dm) {
   actives_categories <- dm$products |>
     ungroup() |>
     left_join(dm$product_categories, by = join_by(wNbr)) |>

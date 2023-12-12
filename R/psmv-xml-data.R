@@ -38,3 +38,14 @@
 #' print(psmv_xml_url)
 "psmv_xml_url"
 
+#' List of 'psmv_dm' objects for all years starting 2012
+#'
+#' For each year, the first XML dump published by FOAG is used.
+#'
+#' @name psmv_list
+#' @docType data
+#' @format list A list of PSMV versions created with [psmv_dm], named with a
+#' character vector of the respective years
+#' @examples
+#' names(psmv_list)
+"psmv_list"

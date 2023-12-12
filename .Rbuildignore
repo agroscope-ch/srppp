@@ -8,5 +8,6 @@
 ^Functions.R$
 ^data_generation
 ^docs
+^log
 ^Makefile$
 ^psmv.rda$

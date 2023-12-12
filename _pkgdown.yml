@@ -4,6 +4,7 @@ template:
 reference:
   - title: Data objects for working with XML versions of the PSMV
     contents:
+      - psmv_list
       - psmv_xml_idir
       - psmv_xml_dates
       - psmv_xml_zip_files

@@ -1,0 +1,120 @@
+══ Documenting ═════════════════════════════════════════════════════════════════
+ℹ Updating psmv documentation
+ℹ Loading psmv
+
+══ Building ════════════════════════════════════════════════════════════════════
+Setting env vars:
+• CFLAGS    : -Wall -pedantic
+• CXXFLAGS  : -Wall -pedantic
+• CXX11FLAGS: -Wall -pedantic
+• CXX14FLAGS: -Wall -pedantic
+• CXX17FLAGS: -Wall -pedantic
+• CXX20FLAGS: -Wall -pedantic
+── R CMD build ─────────────────────────────────────────────────────────────────
+     checking for file ‘/home/agsad.admin.ch/f80868656/projects/psmv/DESCRIPTION’ ...  ✔  checking for file ‘/home/agsad.admin.ch/f80868656/projects/psmv/DESCRIPTION’
+  ─  preparing ‘psmv’: (488ms)
+   checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
+  ─  installing the package to build vignettes
+     creating vignettes ...  ✔  creating vignettes (1m 11s)
+  ─  checking for LF line-endings in source and make files and shell scripts
+  ─  checking for empty or unneeded directories
+─  building ‘psmv_0.1.1.tar.gz’
+  Warning:     Warning: invalid uid value replaced by that for user 'nobody'
+  Warning:     Warning: invalid gid value replaced by that for user 'nobody'
+     
+══ Checking ════════════════════════════════════════════════════════════════════
+Setting env vars:
+• _R_CHECK_CRAN_INCOMING_REMOTE_               : FALSE
+• _R_CHECK_CRAN_INCOMING_                      : FALSE
+• _R_CHECK_FORCE_SUGGESTS_                     : FALSE
+• _R_CHECK_PACKAGES_USED_IGNORE_UNUSED_IMPORTS_: FALSE
+• NOT_CRAN                                     : true
+── R CMD check ─────────────────────────────────────────────────────────────────
+  ─  using log directory ‘/tmp/RtmpY6ZRkx/file79dbf5054b21b/psmv.Rcheck’
+─  using R version 4.3.2 (2023-10-31)
+─  using platform: x86_64-pc-linux-gnu (64-bit)
+─  R was compiled by
+       gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+       GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
+  ─  running under: Ubuntu 22.04.3 LTS
+─  using session charset: UTF-8
+  ─  using options ‘--no-manual --as-cran’
+  ✔  checking for file ‘psmv/DESCRIPTION’
+─  checking extension type ... Package
+─  this is package ‘psmv’ version ‘0.1.1’
+─  package encoding: UTF-8
+   checking package namespace information ...  ✔  checking package namespace information
+   checking package dependencies ...  ✔  checking package dependencies (2.9s)
+   checking if this is a source package ...  ✔  checking if this is a source package
+✔  checking if there is a namespace
+   checking for executable files ...  ✔  checking for executable files
+   checking for hidden files and directories ...  ✔  checking for hidden files and directories
+✔  checking for portable file names
+✔  checking for sufficient/correct file permissions
+     checking whether package ‘psmv’ can be installed ...     checking whether package ‘psmv’ can be installed ... [51s/52s]  ─  checking whether package ‘psmv’ can be installed ... [51s/52s] OK (51.6s)
+   checking installed package size ...  N  checking installed package size
+     installed size is 12.3Mb
+     sub-directories of 1Mb or more:
+       data  10.0Mb
+       doc    2.2Mb
+  ✔  checking package directory
+   checking for future file timestamps ...  ✔  checking for future file timestamps
+✔  checking ‘build’ directory
+   checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
+✔  checking top-level files
+   checking for left-over files ...  ✔  checking for left-over files
+   checking index information ...  ✔  checking index information
+   checking package subdirectories ...  ✔  checking package subdirectories
+   checking R files for non-ASCII characters ...  ✔  checking R files for non-ASCII characters
+   checking R files for syntax errors ...  ✔  checking R files for syntax errors
+   checking whether the package can be loaded ...  ✔  checking whether the package can be loaded (1.2s)
+   checking whether the package can be loaded with stated dependencies ...  ✔  checking whether the package can be loaded with stated dependencies (1.1s)
+   checking whether the package can be unloaded cleanly ...  ✔  checking whether the package can be unloaded cleanly (1.1s)
+   checking whether the namespace can be loaded with stated dependencies ...  ✔  checking whether the namespace can be loaded with stated dependencies (1s)
+     checking whether the namespace can be unloaded cleanly ...  ✔  checking whether the namespace can be unloaded cleanly (1.1s)
+     checking loading without being on the library search path ...  ✔  checking loading without being on the library search path (699ms)
+     checking dependencies in R code ...  ✔  checking dependencies in R code (2.1s)
+   checking S3 generic/method consistency ...  ✔  checking S3 generic/method consistency (1s)
+   checking replacement functions ...  ✔  checking replacement functions (1.1s)
+   checking foreign function calls ...  ✔  checking foreign function calls (892ms)
+   checking R code for possible problems ...  ✔  checking R code for possible problems (5.8s)
+   checking Rd files ...  ✔  checking Rd files
+   checking Rd metadata ...  ✔  checking Rd metadata
+     checking Rd line widths ...  ✔  checking Rd line widths
+   checking Rd cross-references ...  ✔  checking Rd cross-references
+   checking for missing documentation entries ...  ✔  checking for missing documentation entries (4.2s)
+   checking for code/documentation mismatches ...  ✔  checking for code/documentation mismatches (6.2s)
+   checking Rd \usage sections ...  ✔  checking Rd \usage sections (1.1s)
+   checking Rd contents ...  ✔  checking Rd contents
+   checking for unstated dependencies in examples ...  ✔  checking for unstated dependencies in examples
+     checking contents of ‘data’ directory ...  ✔  checking contents of ‘data’ directory (4.6s)
+   checking data for non-ASCII characters ...  ✔  checking data for non-ASCII characters (5.7s)
+  ✔  checking LazyData
+   checking data for ASCII and uncompressed saves ...  ✔  checking data for ASCII and uncompressed saves
+     checking installed files from ‘inst/doc’ ...  ✔  checking installed files from ‘inst/doc’
+  ✔  checking files in ‘vignettes’
+   checking examples ...     checking examples ... [32s/34s]  ─  checking examples ... [32s/34s] OK (34s)
+     Examples with CPU (user + system) or elapsed time > 5s
+               user system elapsed
+   psmv_dm 16.175  0.535  16.973
+     checking for unstated dependencies in vignettes ...  ✔  checking for unstated dependencies in vignettes
+     checking package vignettes in ‘inst/doc’ ...  ✔  checking package vignettes in ‘inst/doc’
+     checking re-building of vignette outputs ...     checking re-building of vignette outputs ... [20s/21s]  ─  checking re-building of vignette outputs ... [20s/21s] OK (20.5s)
+   checking for non-standard things in the check directory ...  ✔  checking for non-standard things in the check directory
+✔  checking for detritus in the temp directory
+   
+   See
+     ‘/tmp/RtmpY6ZRkx/file79dbf5054b21b/psmv.Rcheck/00check.log’
+   for details.
+   
+   
+── R CMD check results ───────────────────────────────────────── psmv 0.1.1 ────
+Duration: 2m 39s
+
+❯ checking installed package size ... NOTE
+    installed size is 12.3Mb
+    sub-directories of 1Mb or more:
+      data  10.0Mb
+      doc    2.2Mb
+
+0 errors ✔ | 0 warnings ✔ | 1 note ✖

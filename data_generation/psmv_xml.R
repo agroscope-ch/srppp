@@ -19,9 +19,6 @@ psmv_xml_dates <- gsub(
   psmv_xml_zip_files)
 names(psmv_xml_zip_files) <- psmv_xml_dates
 
-# The current PSMV as dm object
-
-
 save(
   list = c(
     "psmv_xml_url",
@@ -31,3 +28,13 @@ save(
   ),
   file = here("data/psmv_xml.rda"),
   compress = "xz")
+
+# One PSMV for each year
+years <- 2012:2023
+time <- system.time({
+  psmv_list <- parallel::mclapply(years, psmv_dm, mc.cores = 4)
+  names(psmv_list) <- years
+})
+
+save("psmv_list", file = here("data/psmv_list.rda"), compress = "xz")
+
