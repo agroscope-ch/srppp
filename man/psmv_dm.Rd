@@ -2,6 +2,7 @@
 % Please edit documentation in R/psmv-xml.R
 \name{psmv_dm}
 \alias{psmv_dm}
+\alias{print.psmv_dm}
 \title{Create a dm object from an XML version of the PSMV}
 \usage{
 psmv_dm(
@@ -9,6 +10,8 @@ psmv_dm(
   remove_duplicates = TRUE,
   keep = c("last", "first")
 )
+
+\method{print}{psmv_dm}(x, ...)
 }
 \arguments{
 \item{date}{A number giving a year starting from 2011 up to the current year
@@ -19,6 +22,10 @@ format YYYY-MM-DD}
 
 \item{keep}{How should we deal with product sections with identical W-Numbers?
 The default strategy 'keep' only keeps the last of such sets of product sections.}
+
+\item{x}{A \link{psmv_dm} object}
+
+\item{\dots}{Not used}
 }
 \value{
 A \link{dm} object with tables linked by foreign keys
@@ -30,8 +37,8 @@ Create a dm object from an XML version of the PSMV
 \examples{
 library(dm)
 psmv_2017 <- psmv_dm(2017)
+print(psmv_2017)
 dm_examine_constraints(psmv_2017)
-dm_nrow(psmv_2017)
 # Show some information for products named 'Boxer'
 psmv_2017 |>
   dm_filter(products = (name == "Boxer")) |>

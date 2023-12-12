@@ -38,7 +38,7 @@
 #' print(psmv_xml_url)
 "psmv_xml_url"
 
-#' List of 'psmv_dm' objects for all years starting 2012
+#' List of 'psmv_dm' objects for all years starting 2011
 #'
 #' For each year, the first XML dump published by FOAG is used.
 #'

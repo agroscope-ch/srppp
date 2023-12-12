@@ -21,7 +21,7 @@ utils::globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "pNbr", "use_nr",
 psmv_xml_get <- function(date = last(psmv::psmv_xml_dates))
 {
   if (is.numeric(date)) {
-    if (date < 2011) stop("PSMV XML files are only available starting from 2011")
+    if (date < 2011) stop("Suitable PSMV XML files are only available starting from 2011")
     date <- min(grep(paste0("^", date), psmv::psmv_xml_dates, value = TRUE))
   }
   path <- file.path(psmv::psmv_xml_idir, psmv::psmv_xml_zip_files[date])
@@ -32,6 +32,7 @@ psmv_xml_get <- function(date = last(psmv::psmv_xml_dates))
   xml_con <- unz(path, xml_filename)
   ret <- read_xml(xml_con)
   class(ret) <- c("psmv_xml", "xml_document", "xml_node")
+  attr(ret, "date") <- date
   return(ret)
 }
 
@@ -292,8 +293,8 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
 #' @examples
 #' library(dm)
 #' psmv_2017 <- psmv_dm(2017)
+#' print(psmv_2017)
 #' dm_examine_constraints(psmv_2017)
-#' dm_nrow(psmv_2017)
 #' # Show some information for products named 'Boxer'
 #' psmv_2017 |>
 #'   dm_filter(products = (name == "Boxer")) |>
@@ -451,7 +452,18 @@ psmv_dm <- function(date = last(psmv::psmv_xml_dates),
     dm_add_fk(pests, c(wNbr, use_nr), uses) |>
     dm_add_fk(obligations, c(wNbr, use_nr), uses)
 
+    attr(psmv_dm, "date") <- attr(psmv_xml, "date")
+    class(psmv_dm) <- c("psmv_dm", "dm")
     return(psmv_dm)
+}
+
+#' @rdname psmv_dm
+#' @param x A [psmv_dm] object
+#' @param \dots Not used
+#' @export
+print.psmv_dm <- function(x, ...) {
+  cat("<psmv_dm> object for date:", attr(x, "date"), "\n")
+  dm::dm_nrow(x)
 }
 
 #' Clean product names

@@ -30,11 +30,10 @@ save(
   compress = "xz")
 
 # One PSMV for each year
-years <- 2012:2023
+years <- 2011:2023
 time <- system.time({
   psmv_list <- parallel::mclapply(years, psmv_dm, mc.cores = 4)
   names(psmv_list) <- years
 })
 
 save("psmv_list", file = here("data/psmv_list.rda"), compress = "xz")
-

@@ -3,7 +3,7 @@
 \docType{data}
 \name{psmv_list}
 \alias{psmv_list}
-\title{List of 'psmv_dm' objects for all years starting 2012}
+\title{List of 'psmv_dm' objects for all years starting 2011}
 \format{
 list A list of PSMV versions created with \link{psmv_dm}, named with a
 character vector of the respective years
