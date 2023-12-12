@@ -43,4 +43,5 @@ dm_examine_constraints(psmv_2017)
 psmv_2017 |>
   dm_filter(products = (name == "Boxer")) |>
   dm_nrow()
+dm_draw(psmv_2017)
 }

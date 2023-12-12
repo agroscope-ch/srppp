@@ -299,6 +299,7 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
 #' psmv_2017 |>
 #'   dm_filter(products = (name == "Boxer")) |>
 #'   dm_nrow()
+#' dm_draw(psmv_2017)
 psmv_dm <- function(date = last(psmv::psmv_xml_dates),
   remove_duplicates = TRUE, keep = c("last", "first"))
 {

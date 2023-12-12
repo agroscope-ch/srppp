@@ -2,6 +2,9 @@ template:
   bootstrap: 5
 
 reference:
+  - title: A simple entity relationship model for a PSMV
+    contents:
+      - psmv_dm
   - title: Data objects for working with XML versions of the PSMV
     contents:
       - psmv_list
@@ -9,9 +12,6 @@ reference:
       - psmv_xml_dates
       - psmv_xml_zip_files
       - psmv_xml_url
-  - title: Function to work with XML versions of the PSMV
-    contents:
-      - psmv_dm
   - title: Helper functions mainly used internally
     contents:
       - psmv_xml_get
