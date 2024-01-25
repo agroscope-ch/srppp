@@ -4,5 +4,5 @@
 .Ruserdata
 TMP.R
 psmv.rda
-vignettes/*_files/
-vignettes/*.html
+inst/doc
+*.tar.gz

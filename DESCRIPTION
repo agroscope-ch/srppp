@@ -1,6 +1,6 @@
 Package: psmv
 Type: Package
-Title: The Swiss Register of Plant Protection Products as an R package
+Title: The Swiss Register of Plant Protection Products as an R Package
 Version: 0.1.2
 Date: 2024-01-25
 Authors@R: c(
@@ -9,9 +9,9 @@ Authors@R: c(
     email = "johannes.ranke@agroscope.admin.ch",
     comment = c(ORCID = "0000-0003-4371-6538")),
   person("Agroscope", role = "cph"))
-Description: This package provides access to data objects extracted from
-  XML versions of the Swiss Register of Plant Protection Products
-  'PSMV'. Please note that this is not an official source of information
+Description: Data objects extracted from XML versions of the Swiss Register of
+  Plant Protection Products 'PSMV' and function to obtain such objects. Please
+  note that this is not an official source of information
   on authorisations. The official register can be accessed at
   <https://www.psm.admin.ch/de/produkte>.
 Depends: R (>= 3.5.0)
