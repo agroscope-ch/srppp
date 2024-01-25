@@ -10,3 +10,5 @@
 ^log
 ^Makefile$
 ^psmv.rda$
+^vignettes/*.html
+^vignettes/*_files/

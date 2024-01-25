@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">psmv</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,8 +73,8 @@
                         <h4 data-toc-skip class="author">Johannes
 Ranke</h4>
             
-            <h4 data-toc-skip class="date">Last change 12 December 2023
-(rebuilt 2023-12-12)</h4>
+            <h4 data-toc-skip class="date">Last change 25 January 2024
+(rebuilt 2024-01-25)</h4>
       
       <small class="dont-index">Source: <a href="https://gitlab.agsad.admin.ch/psmwb/psmv/blob/HEAD/vignettes/psmv_trends.Rmd" class="external-link"><code>vignettes/psmv_trends.Rmd</code></a></small>
       <div class="d-none name"><code>psmv_trends.Rmd</code></div>
@@ -124,6 +124,7 @@ Ranke</h4>
 <span>      <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"Insektizid"</span>, <span class="va">category</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Insektizid"</span>,</span>
 <span>      <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"Saatbeizmittel"</span>, <span class="va">category</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Saatbeizmittel"</span>,</span>
 <span>      <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"Regulator"</span>, <span class="va">category</span><span class="op">)</span> <span class="op">~</span> <span class="st">"PGR"</span>,</span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"Phytoregulator"</span>, <span class="va">category</span><span class="op">)</span> <span class="op">~</span> <span class="st">"PGR"</span>, <span class="co"># new in 2024</span></span>
 <span>      <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"Lebende Organismen"</span>, <span class="va">category</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Organismen"</span>,</span>
 <span>      <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"Akarizid"</span>, <span class="va">category</span><span class="op">)</span> <span class="op">~</span> <span class="st">"Akarizid"</span>,</span>
 <span>      .default <span class="op">=</span> <span class="st">"Sonstige"</span></span>
@@ -138,24 +139,27 @@ Ranke</h4>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">actives_by_category</span><span class="op">)</span></span></code></pre></div>
-<table style="width:100%;" class="table">
+<table class="table">
 <colgroup>
-<col width="20%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
-<col width="6%">
+<col width="17%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
 </colgroup>
 <thead><tr class="header">
 <th align="left"></th>
+<th align="right">2011</th>
 <th align="right">2012</th>
 <th align="right">2013</th>
 <th align="right">2014</th>
@@ -168,10 +172,12 @@ Ranke</h4>
 <th align="right">2021</th>
 <th align="right">2022</th>
 <th align="right">2023</th>
+<th align="right">2024</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="left">Total</td>
+<td align="right">522</td>
 <td align="right">455</td>
 <td align="right">440</td>
 <td align="right">421</td>
@@ -184,9 +190,11 @@ Ranke</h4>
 <td align="right">361</td>
 <td align="right">354</td>
 <td align="right">335</td>
+<td align="right">332</td>
 </tr>
 <tr class="even">
 <td align="left">Herbizid</td>
+<td align="right">138</td>
 <td align="right">121</td>
 <td align="right">113</td>
 <td align="right">108</td>
@@ -199,9 +207,11 @@ Ranke</h4>
 <td align="right">89</td>
 <td align="right">85</td>
 <td align="right">79</td>
+<td align="right">78</td>
 </tr>
 <tr class="odd">
 <td align="left">Insektizid</td>
+<td align="right">124</td>
 <td align="right">105</td>
 <td align="right">104</td>
 <td align="right">98</td>
@@ -214,9 +224,11 @@ Ranke</h4>
 <td align="right">87</td>
 <td align="right">85</td>
 <td align="right">79</td>
+<td align="right">76</td>
 </tr>
 <tr class="even">
 <td align="left">Fungizid</td>
+<td align="right">120</td>
 <td align="right">100</td>
 <td align="right">96</td>
 <td align="right">90</td>
@@ -229,9 +241,11 @@ Ranke</h4>
 <td align="right">75</td>
 <td align="right">74</td>
 <td align="right">67</td>
+<td align="right">71</td>
 </tr>
 <tr class="odd">
 <td align="left">Sonstige</td>
+<td align="right">113</td>
 <td align="right">85</td>
 <td align="right">83</td>
 <td align="right">81</td>
@@ -244,9 +258,11 @@ Ranke</h4>
 <td align="right">64</td>
 <td align="right">64</td>
 <td align="right">65</td>
+<td align="right">66</td>
 </tr>
 <tr class="even">
 <td align="left">Organismen</td>
+<td align="right">57</td>
 <td align="right">55</td>
 <td align="right">56</td>
 <td align="right">59</td>
@@ -259,9 +275,11 @@ Ranke</h4>
 <td align="right">59</td>
 <td align="right">59</td>
 <td align="right">62</td>
+<td align="right">64</td>
 </tr>
 <tr class="odd">
 <td align="left">Saatbeizmittel</td>
+<td align="right">38</td>
 <td align="right">37</td>
 <td align="right">39</td>
 <td align="right">39</td>
@@ -274,9 +292,11 @@ Ranke</h4>
 <td align="right">27</td>
 <td align="right">26</td>
 <td align="right">26</td>
+<td align="right">26</td>
 </tr>
 <tr class="even">
-<td align="left">PGR</td>
+<td align="left">Akarizid</td>
+<td align="right">24</td>
 <td align="right">23</td>
 <td align="right">26</td>
 <td align="right">26</td>
@@ -289,9 +309,11 @@ Ranke</h4>
 <td align="right">26</td>
 <td align="right">25</td>
 <td align="right">23</td>
+<td align="right">20</td>
 </tr>
 <tr class="odd">
-<td align="left">Akarizid</td>
+<td align="left">PGR</td>
+<td align="right">24</td>
 <td align="right">22</td>
 <td align="right">20</td>
 <td align="right">17</td>
@@ -304,6 +326,7 @@ Ranke</h4>
 <td align="right">16</td>
 <td align="right">16</td>
 <td align="right">15</td>
+<td align="right">14</td>
 </tr>
 </tbody>
 </table>
