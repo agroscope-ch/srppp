@@ -1,7 +1,7 @@
 ---
 title: Building data objects from XML versions of the PSMV
 author: Johannes Ranke
-date: Last change 6 December 2023 (rebuilt `r Sys.Date()`)
+date: Last change 25 January 2025 (rebuilt `r Sys.Date()`)
 output:
   rmarkdown::html_vignette
 vignette: >
@@ -25,13 +25,14 @@ versions of the PSMV received from Agridea. Neither the W-Numbers
 nor the XML ids were exported, instead of that a new `id_Uniqueproduct`
 was created, which is not really unique.
 
-Therefore, this package attempts to import relevant data from the available XML
-dumps published at the BLW website into an R package, while keeping referential
-integrity.
+Therefore, this package attempts to import relevant data from XML dumps
+as published at the BLW website and collected at Agroscope into an R package,
+while keeping referential integrity.
 
 ## Usage
 
-Creating a set of tables from a PSMV XML file is as easy as
+When using this package on the Agroscope RStudio server, creating a set of
+tables from a PSMV XML file is as easy as
 
 ```{r psmv-current, cache = TRUE}
 time <- system.time(
@@ -54,5 +55,3 @@ dm_draw(psmv_current)
 dm_flatten_to_tbl(psmv_current, ingredients) |> 
   select(wNbr, name, substance_de, percent, g_per_L)
 ```
-
-
