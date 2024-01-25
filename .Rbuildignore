@@ -6,7 +6,6 @@
 ^README.rmd$
 ^TMP.R$
 ^Functions.R$
-^data_generation
 ^docs
 ^log
 ^Makefile$

@@ -2,6 +2,7 @@
 # of the PSMV
 library(here) # For writing to the right directory from an RStudio project
 library(dplyr)
+library(psmv)
 
 # The URL of the current version published by BLV
 psmv_xml_url <- paste0("https://www.blv.admin.ch/dam/blv/de/dokumente/",
@@ -29,8 +30,11 @@ save(
   file = here("data/psmv_xml.rda"),
   compress = "xz")
 
+# Install the package to make these objects known to psmv_dm,
+# or source psmv_dm with these objects present
+
 # One PSMV for each year
-years <- 2011:2023
+years <- 2011:2024
 time <- system.time({
   psmv_list <- parallel::mclapply(years, psmv_dm, mc.cores = 4)
   names(psmv_list) <- years
