@@ -33,7 +33,6 @@ psmv_xml_get <- function(from = last(psmv::psmv_xml_dates))
     path <- file.path(psmv::psmv_xml_idir, psmv::psmv_xml_zip_files[date])
     cli::cli_alert_info(paste("Reading XML for", date))
   } else {
-    cli::cli_alert_info(paste("Trying to read XML from", from))
     path <- tempfile(fileext = "zip")
     download.file(from, path)
   }
