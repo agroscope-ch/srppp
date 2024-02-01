@@ -1,0 +1,38 @@
+---
+title: Find alternative products for all products containing a certain active substance
+author: Marcel Mathis and Johannes Ranke
+date: Last change 1 February 2024 (rebuilt `r Sys.Date()`)
+output:
+  rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Find alternative products for certain active substances}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = TRUE, message = FALSE}
+knitr::opts_chunk$set(tidy = FALSE, cache = FALSE)
+options(knitr.kable.NA = '')
+library(psmv)
+library(fgpsm)
+library(dm)
+library(dplyr)
+library(knitr)
+```
+
+```{r psmv_current}
+psmv_current <- psmv_dm(psmv_xml_url)
+class(psmv_current) <- "dm" # Temporary hack to make dm work with our object
+```
+
+# Find all indications for an active substance
+
+## Lambda-cyhalothrin
+
+```{r warning = FALSE}
+dm_filter(psmv_current, ingredients = (ingredient_de == "Lambda-cyhalothrin"))
+
+
+
+```
+
