@@ -6,9 +6,9 @@ utils::globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "pNbr", "use_nr",
 
 #' Read an XML version of the PSMV
 #'
-#' @param date A number giving a year starting from 2011 up to the current year
-#' or the date of the publication as a length one character vector in the
-#' format YYYY-MM-DD
+#' @param from A number giving a year starting from 2011 up to the current year, or
+#' one of the dates in [psmv::psmv_xml_dates] as a length one character vector
+#' in the format YYYY-MM-DD, or an URL from where to download
 #' @return An object inheriting from 'psmv_xml', 'xml_document', 'xml_node'
 #' @export
 #' @examples
@@ -16,16 +16,28 @@ utils::globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "pNbr", "use_nr",
 #' print(psmv_2015)
 #' class(psmv_2015)
 #'
-#' # The current PSMV
+#' # The latest PSMV stored on the Agroscope drive
 #' psmv_xml <- psmv_xml_get()
-psmv_xml_get <- function(date = last(psmv::psmv_xml_dates))
+#'
+#' # The current PSMV as available from the FOAG website
+#' psmv_cur <- psmv_xml_get(psmv_xml_url)
+psmv_xml_get <- function(from = last(psmv::psmv_xml_dates))
 {
+  date <- from
   if (is.numeric(date)) {
     if (date < 2011) stop("Suitable PSMV XML files are only available starting from 2011")
     date <- min(grep(paste0("^", date), psmv::psmv_xml_dates, value = TRUE))
+  } 
+
+  if (date %in% psmv::psmv_xml_dates) {
+    path <- file.path(psmv::psmv_xml_idir, psmv::psmv_xml_zip_files[date])
+    cli::cli_alert_info(paste("Reading XML for", date))
+  } else {
+    cli::cli_alert_info(paste("Trying to read XML from", from))
+    path <- tempfile(fileext = "zip")
+    download.file(from, path)
   }
-  path <- file.path(psmv::psmv_xml_idir, psmv::psmv_xml_zip_files[date])
-  cli::cli_alert_info(paste("Reading XML for", date))
+
   zip_contents <- utils::unzip(path, list = TRUE)
   xml_filename <- grep("PublicationData_20.._.._...xml",
     zip_contents$Name, value = TRUE)
@@ -300,10 +312,12 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
 #'   dm_filter(products = (name == "Boxer")) |>
 #'   dm_nrow()
 #' dm_draw(psmv_2017)
-psmv_dm <- function(date = last(psmv::psmv_xml_dates),
+#' 
+#' psmv_dm_cur <- psmv_dm(psmv_xml_url)
+psmv_dm <- function(from = last(psmv::psmv_xml_dates),
   remove_duplicates = TRUE, keep = c("last", "first"))
 {
-  psmv_xml <- psmv_xml_get(date)
+  psmv_xml <- psmv_xml_get(from)
 
   keep <- match.arg(keep)
   if (remove_duplicates) {

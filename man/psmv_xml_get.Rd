@@ -4,12 +4,12 @@
 \alias{psmv_xml_get}
 \title{Read an XML version of the PSMV}
 \usage{
-psmv_xml_get(date = last(psmv::psmv_xml_dates))
+psmv_xml_get(from = last(psmv::psmv_xml_dates))
 }
 \arguments{
-\item{date}{A number giving a year starting from 2011 up to the current year
-or the date of the publication as a length one character vector in the
-format YYYY-MM-DD}
+\item{from}{A number giving a year starting from 2011 up to the current year, or
+one of the dates in \link{psmv_xml_dates} as a length one character vector
+in the format YYYY-MM-DD, or an URL from where to download}
 }
 \value{
 An object inheriting from 'psmv_xml', 'xml_document', 'xml_node'
@@ -22,6 +22,9 @@ psmv_2015 <- psmv_xml_get(2015)
 print(psmv_2015)
 class(psmv_2015)
 
-# The current PSMV
+# The latest PSMV stored on the Agroscope drive
 psmv_xml <- psmv_xml_get()
+
+# The current PSMV as available from the FOAG website
+psmv_cur <- psmv_xml_get(psmv_xml_url)
 }

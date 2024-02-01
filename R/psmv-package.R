@@ -17,6 +17,7 @@
 #' @importFrom dplyr last
 #' @importFrom dplyr select
 #' @importFrom dplyr ungroup
+#' @importFrom utils download.file
 #' @importFrom xml2 read_xml
 #' @importFrom xml2 xml_attr
 #' @importFrom xml2 xml_attr<-

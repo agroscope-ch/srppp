@@ -4,5 +4,6 @@
 .Ruserdata
 TMP.R
 psmv.rda
+psmv.Rcheck
 inst/doc
 *.tar.gz
