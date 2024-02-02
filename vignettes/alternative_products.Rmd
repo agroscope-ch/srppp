@@ -1,7 +1,7 @@
 ---
 title: Find alternative products for all products containing a certain active substance
 author: Marcel Mathis and Johannes Ranke
-date: Last change 1 February 2024 (rebuilt `r Sys.Date()`)
+date: Last change 2 February 2024 (rebuilt `r Sys.Date()`)
 output:
   rmarkdown::html_vignette
 vignette: >
@@ -20,19 +20,52 @@ library(dplyr)
 library(knitr)
 ```
 
+The current PSMV published at the FOAG website is retrieved, and the tables
+relevant for the analysis are selected.
+
 ```{r psmv_current}
-psmv_current <- psmv_dm(psmv_xml_url)
-class(psmv_current) <- "dm" # Temporary hack to make dm work with our object
+psmv <- psmv_dm(psmv_xml_url) |>
+  dm_select_tbl(products, substances, ingredients, uses, cultures, pests)
 ```
 
 # Find all indications for an active substance
 
 ## Lambda-cyhalothrin
 
-```{r warning = FALSE}
-dm_filter(psmv_current, ingredients = (ingredient_de == "Lambda-cyhalothrin"))
+The contents of the PSMV are filtered, and only information
+related to products containing lambda-cyhalothrin are kept.
 
+```{r}
+psmv_lambda <- dm_filter(psmv, 
+  substances = (substance_de == "Lambda-Cyhalothrin"))
+```
 
+Currently there are 14 products, with 440 uses on 998 cultures
+and 1617 pests in the PSMV:
 
+```{r}
+dm_nrow(psmv_lambda)
+```
+
+As each use can be in more than one culture, and for more than one pest,
+we have a lot more use definitions when considering these separately.
+
+```{r}
+lambda_uses <- psmv_lambda$uses |>
+  left_join(psmv$cultures, by = join_by(wNbr, use_nr)) |>
+  left_join(psmv$pests, by = join_by(wNbr, use_nr))
+print(lambda_uses)
+```
+
+Here, we are only interested in unique combinations of cultures and pest 
+organisms. For the moment, we do not consider the culture form (e.g. greenhouse)
+in this analysis.
+
+```{r}
+lambda_pests_x_cultures <- lambda_uses |>
+  select(culture_de, pest_de) |>
+  unique() |>
+  arrange(culture_de, pest_de)
+print(lambda_pests_x_cultures)
 ```
 
