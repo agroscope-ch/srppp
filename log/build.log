@@ -2,8 +2,27 @@
 * preparing ‘psmv’:
 * checking DESCRIPTION meta-information ... OK
 * installing the package to build vignettes
-* creating vignettes ... OK
-* checking for LF line-endings in source and make files and shell scripts
-* checking for empty or unneeded directories
-* building ‘psmv_0.1.2.tar.gz’
+* creating vignettes ... ERROR
+--- re-building ‘alternative_products.Rmd’ using rmarkdown
+trying URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip'
+Content type 'application/x-zip-compressed' length 2416871 bytes (2.3 MB)
+==================================================
+downloaded 2.3 MB
 
+
+Quitting from lines 32-42 [unnamed-chunk-1] (alternative_products.Rmd)
+Error: processing vignette 'alternative_products.Rmd' failed with diagnostics:
+object 'psmv_current' not found
+--- failed re-building ‘alternative_products.Rmd’
+
+--- re-building ‘psmv_trends.Rmd’ using rmarkdown
+--- finished re-building ‘psmv_trends.Rmd’
+
+--- re-building ‘psmv_xml.Rmd’ using rmarkdown
+--- finished re-building ‘psmv_xml.Rmd’
+
+SUMMARY: processing the following file failed:
+  ‘alternative_products.Rmd’
+
+Error: Vignette re-building failed.
+Execution halted
