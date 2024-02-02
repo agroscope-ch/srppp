@@ -466,7 +466,7 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
     dm_add_fk(pests, c(wNbr, use_nr), uses) |>
     dm_add_fk(obligations, c(wNbr, use_nr), uses)
 
-    attr(psmv_dm, "date") <- attr(psmv_xml, "date")
+    attr(psmv_dm, "from") <- attr(psmv_xml, "from")
     class(psmv_dm) <- c("psmv_dm", "dm")
     return(psmv_dm)
 }
@@ -476,7 +476,7 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
 #' @param \dots Not used
 #' @export
 print.psmv_dm <- function(x, ...) {
-  cat("<psmv_dm> object for date:", attr(x, "date"), "\n")
+  cat("<psmv_dm> object from:", attr(x, "from"), "\n")
   dm::dm_nrow(x)
 }
 
