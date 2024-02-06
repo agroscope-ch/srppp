@@ -10,3 +10,6 @@
 ^log
 ^Makefile$
 ^psmv.rda$
+^psmv_.*\.tar\.gz
+^psmv.Rcheck
+^vignettes/.*_cache$

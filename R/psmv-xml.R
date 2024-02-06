@@ -43,7 +43,7 @@ psmv_xml_get <- function(from = last(psmv::psmv_xml_dates))
   xml_con <- unz(path, xml_filename)
   ret <- read_xml(xml_con)
   class(ret) <- c("psmv_xml", "xml_document", "xml_node")
-  attr(ret, "date") <- date
+  attr(ret, "from") <- date
   return(ret)
 }
 
@@ -407,6 +407,14 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
     rename(application_comment_it = it, application_comment_en = en) |>
     select(-pk)
 
+  # Sometimes we have one or more specific culture form(s) in the use definition
+  culture_form_descriptions <- description_table(psmv_xml, "CultureForm")
+  culture_forms <- indication_information_table(psmv_xml, "CultureForm") |>
+    left_join(culture_form_descriptions, by = join_by(pk)) |>
+    rename(culture_form_de = de, culture_form_fr = fr) |>
+    rename(culture_form_it = it, culture_form_en = en) |>
+    select(-pk)
+
   # In the culture descriptions, links to parent cultures are filtered out
   culture_descriptions <- description_table(psmv_xml, "Culture")
   culture_additional_texts <- description_table(psmv_xml, "CultureAdditionalText")
@@ -447,6 +455,7 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
     substances, ingredients,
     uses,
     application_areas, application_comments,
+    culture_forms, 
     cultures, pests, obligations) |>
     dm_add_pk(products, wNbr) |>
     dm_add_pk(substances, pk) |>
@@ -462,6 +471,7 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
     dm_add_fk(uses, wNbr, products) |>
     dm_add_fk(application_areas, c(wNbr, use_nr), uses) |>
     dm_add_fk(application_comments, c(wNbr, use_nr), uses) |>
+    dm_add_fk(culture_forms, c(wNbr, use_nr), uses) |>
     dm_add_fk(cultures, c(wNbr, use_nr), uses) |>
     dm_add_fk(pests, c(wNbr, use_nr), uses) |>
     dm_add_fk(obligations, c(wNbr, use_nr), uses)
