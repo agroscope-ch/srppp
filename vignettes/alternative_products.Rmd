@@ -1,7 +1,7 @@
 ---
 title: Find alternative products for all products containing a certain active substance
 author: Marcel Mathis and Johannes Ranke
-date: Last change 2 February 2024 (rebuilt `r Sys.Date()`)
+date: Last change 6 February 2024 (rebuilt `r Sys.Date()`)
 output:
   rmarkdown::html_vignette
 vignette: >
@@ -24,8 +24,7 @@ The current PSMV published at the FOAG website is retrieved, and the tables
 relevant for the analysis are selected.
 
 ```{r psmv_current}
-psmv <- psmv_dm(psmv_xml_url) |>
-  dm_select_tbl(products, substances, ingredients, uses, cultures, pests)
+psmv <- psmv_dm(psmv_xml_url)
 ```
 
 # Find all indications for an active substance
@@ -52,20 +51,20 @@ we have a lot more use definitions when considering these separately.
 
 ```{r}
 lambda_uses <- psmv_lambda$uses |>
-  left_join(psmv$cultures, by = join_by(wNbr, use_nr)) |>
-  left_join(psmv$pests, by = join_by(wNbr, use_nr))
+  left_join(psmv$cultures, by = join_by(wNbr, use_nr), relationship = "many-to-many") |>
+  left_join(psmv$pests, by = join_by(wNbr, use_nr), relationship = "many-to-many") |>
+  left_join(psmv$application_areas, by = join_by(wNbr, use_nr), relationship = "many-to-many")
 print(lambda_uses)
 ```
 
 Here, we are only interested in unique combinations of cultures and pest 
-organisms. For the moment, we do not consider the culture form (e.g. greenhouse)
-in this analysis.
+organisms. 
 
 ```{r}
-lambda_pests_x_cultures <- lambda_uses |>
-  select(culture_de, pest_de) |>
+lambda_pests_x_cultures_x_application_areas <- lambda_uses |>
+  select(culture_de, pest_de, application_area_de) |>
   unique() |>
-  arrange(culture_de, pest_de)
-print(lambda_pests_x_cultures)
+  arrange(culture_de, pest_de, application_area_de)
+print(lambda_pests_x_cultures_x_application_areas)
 ```
 
