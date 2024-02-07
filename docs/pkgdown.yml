@@ -2,8 +2,7 @@ pandoc: 3.1.1
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  alternative_products: alternative_products.html
   psmv_trends: psmv_trends.html
   psmv_xml: psmv_xml.html
-last_built: 2024-02-01T16:07Z
+last_built: 2024-02-07T11:01Z
 

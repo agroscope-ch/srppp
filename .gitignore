@@ -7,3 +7,4 @@ psmv.rda
 psmv.Rcheck
 inst/doc
 *.tar.gz
+vignettes/*_cache/*

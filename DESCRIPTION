@@ -1,8 +1,8 @@
 Package: psmv
 Type: Package
 Title: The Swiss Register of Plant Protection Products as an R Package
-Version: 0.1.2
-Date: 2024-01-25
+Version: 0.1.3
+Date: 2024-02-06
 Authors@R: c(
   person("Marcel", "Mathis", role = "ctb", email = "marcel.mathis@agroscope.admin.ch"),
   person("Johannes", "Ranke", role = c("aut", "cre"),
@@ -14,7 +14,7 @@ Description: Data objects extracted from XML versions of the Swiss Register of
   note that this is not an official source of information
   on authorisations. The official register can be accessed at
   <https://www.psm.admin.ch/de/produkte>.
-Depends: R (>= 3.5.0)
+Depends: R (>= 4.1.0)
 Imports: xml2, tibble, stringr, dplyr, dm, tidyr, cli
 Suggests: knitr, rmarkdown, here, dbplyr, vctrs, DiagrammeR,
   ggplot2, testthat (>= 3.0.0), fledge, parallel
@@ -22,7 +22,7 @@ BugReports: https://gitlab.agsad.admin.ch/psmwb/psmv/issues
 License: GPL
 LazyData: yes
 LazyDataCompression: xz
-RoxygenNote: 7.2.3
+RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
 Encoding: UTF-8
