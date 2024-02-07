@@ -8,7 +8,7 @@
 ^Functions.R$
 ^docs
 ^log
-^Makefile$
+^GNUmakefile$
 ^psmv.rda$
 ^psmv_.*\.tar\.gz
 ^psmv.Rcheck
