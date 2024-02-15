@@ -52,6 +52,9 @@
     <loc>/reference/psmv_list.html</loc>
   </url>
   <url>
+    <loc>/reference/psmv_xml_application_rate_g_per_ha.html</loc>
+  </url>
+  <url>
     <loc>/reference/psmv_xml_clean_product_names.html</loc>
   </url>
   <url>
@@ -80,6 +83,9 @@
   </url>
   <url>
     <loc>/reference/psmv_xml_remove_duplicated_wNbrs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/psmv_xml_units_convertible_to_g_per_ha.html</loc>
   </url>
   <url>
     <loc>/reference/psmv_xml_url.html</loc>
