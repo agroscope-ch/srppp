@@ -349,7 +349,8 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
     return(ret)
   }
 
-  product_categories <- product_information_table(psmv_xml, "ProductCategory", prefix = "category")
+  product_categories <- unique( # ProductCategory tags are notoriously duplicated in the XML files
+    product_information_table(psmv_xml, "ProductCategory", prefix = "category"))
   formulation_codes <- product_information_table(psmv_xml, "FormulationCode", prefix = "formulation")
   danger_symbols <- product_information_table(psmv_xml, "DangerSymbol", code = TRUE)
   signal_words <- product_information_table(psmv_xml, "SignalWords", prefix = "signal")
