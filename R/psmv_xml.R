@@ -349,7 +349,7 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
     return(ret)
   }
 
-  product_categories <- unique( # ProductCategory tags are notoriously duplicated in the XML files
+  product_categories <- unique( # ProductCategory tags are often duplicated in the XML files
     product_information_table(psmv_xml, "ProductCategory", prefix = "category"))
   formulation_codes <- product_information_table(psmv_xml, "FormulationCode", prefix = "formulation")
   danger_symbols <- product_information_table(psmv_xml, "DangerSymbol", code = TRUE)
@@ -364,9 +364,6 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
 
   # Define use IDs (attribute 'use_nr' in the XML tree)
   psmv_xml <- psmv_xml_define_use_numbers(psmv_xml)
-
-  # Table of uses ('indications') and associated information tables
-  uses <- psmv_xml_get_uses(psmv_xml)
 
   indication_information_table <- function(psmv_xml,
     tag_name, additional_text = FALSE, type = FALSE)
@@ -400,6 +397,22 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
     rename(application_area_de = de, application_area_fr = fr) |>
     rename(application_area_it = it, application_area_en = en) |>
     select(-pk)
+
+  # Table of uses ('indications') and associated information tables
+  uses <- psmv_xml_get_uses(psmv_xml) 
+
+  uses <- psmv_xml_get_uses(psmv_xml) |>
+    left_join(application_areas, by = join_by(wNbr, use_nr))
+
+  # Check that we have exactly one application area per use
+  problem_uses <- uses |>
+    group_by(wNbr, use_nr) |> 
+    summarise(n = n(), .groups = "drop_last") |> 
+    filter(n != 1)
+
+  if (nrow(problem_uses) > 0) {
+    cli::cli_abort("Assumption of 1 application area per use is violated")
+  }
 
   application_comment_descriptions <- description_table(psmv_xml, "ApplicationComment")
   application_comments <- indication_information_table(psmv_xml, "ApplicationComment") |>
@@ -455,7 +468,7 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
     danger_symbols, CodeS, CodeR, signal_words,
     substances, ingredients,
     uses,
-    application_areas, application_comments,
+    application_comments,
     culture_forms, 
     cultures, pests, obligations) |>
     dm_add_pk(products, wNbr) |>
@@ -470,7 +483,6 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
     dm_add_fk(ingredients, wNbr, products) |>
     dm_add_fk(ingredients, pk, substances) |>
     dm_add_fk(uses, wNbr, products) |>
-    dm_add_fk(application_areas, c(wNbr, use_nr), uses) |>
     dm_add_fk(application_comments, c(wNbr, use_nr), uses) |>
     dm_add_fk(culture_forms, c(wNbr, use_nr), uses) |>
     dm_add_fk(cultures, c(wNbr, use_nr), uses) |>
@@ -585,3 +597,4 @@ get_descriptions <- function(node, code = FALSE, latin = FALSE) {
   }
   return(ret)
 }
+
