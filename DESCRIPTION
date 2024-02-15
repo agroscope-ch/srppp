@@ -22,7 +22,7 @@ BugReports: https://gitlab.agsad.admin.ch/psmwb/psmv/issues
 License: GPL
 LazyData: yes
 LazyDataCompression: xz
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.1.9000
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
 Encoding: UTF-8
