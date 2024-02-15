@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">psmv</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Create a dm object from an XML version of the PSMV</h1>
-      <small class="dont-index">Source: <a href="https://gitlab.agsad.admin.ch/psmwb/psmv/blob/HEAD/R/psmv-xml.R" class="external-link"><code>R/psmv-xml.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://gitlab.agsad.admin.ch/psmwb/psmv/blob/HEAD/R/psmv_xml.R" class="external-link"><code>R/psmv_xml.R</code></a></small>
       <div class="d-none name"><code>psmv_dm.Rd</code></div>
     </div>
 
@@ -112,7 +112,7 @@ pointing to primary keys, i.e. with referential integrity.</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">psmv_2017</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;psmv_dm&gt; object from: 2017-01-13 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             products   product_categories    formulation_codes </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 2269                 4976                 2269 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 2269                 2488                 2269 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       danger_symbols                CodeS                CodeR </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                 3400                10051                 6659 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         signal_words           substances          ingredients </span>
@@ -131,7 +131,7 @@ pointing to primary keys, i.e. with referential integrity.</p>
 <span class="r-in"><span>  <span class="fu"><a href="https://dm.cynkra.com/reference/dm_filter.html" class="external-link">dm_filter</a></span><span class="op">(</span>products <span class="op">=</span> <span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"Boxer"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dm.cynkra.com/reference/dm_nrow.html" class="external-link">dm_nrow</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             products   product_categories    formulation_codes </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    2                    4                    2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    2                    2                    2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       danger_symbols                CodeS                CodeR </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    4                    4                    8 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         signal_words           substances          ingredients </span>
