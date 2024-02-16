@@ -2,29 +2,58 @@
 % Please edit documentation in R/psmv-alternatives.R
 \name{alternative_products}
 \alias{alternative_products}
-\title{Find alternative products for all products containing a certain active substance in PSM-V}
+\title{Find alternative products for all products containing a certain active substance}
 \usage{
-alternative_products(name_active_ingredient)
+alternative_products(
+  psmv,
+  active_ingredients,
+  details = FALSE,
+  missing = FALSE,
+  list = FALSE,
+  lang = "de"
+)
+}
+\arguments{
+\item{psmv}{A \link{psmv_dm} object.}
+
+\item{active_ingredients}{Character vector of active ingredient names that will be
+matched against the column 'substances_de' in the psmv table 'substances'.}
+
+\item{details}{Should a table of alternative uses with 'wNbr' 'use_nr' be returned?}
+
+\item{missing}{If this is set to TRUE, uses without alternative product registrations
+are listed.}
+
+\item{list}{If TRUE, a list of three tables is returned, a table of uses
+without alternative products, a table with the number of alternative
+products, if they are available, and a detailed table of all the alternative
+uses. This argument overrides the arguments 'details' and 'missing'.}
+
+\item{lang}{The language used for the active ingredient names and the returned
+tables. Unfortunately, it is not trivial to generalise the implementation
+to support the other languages, so for now only Germn ('de') is supported.}
 }
 \description{
-This function creates two overview tables
-\enumerate{
-\item tbl_overview_culture_pest:
-Indicates for the active ingredient(s) searched for, in which crops and against which pathogens
-products with the active ingredient searched for are authorised.
-In addition, the column "number_alternative_products" indicates how many
-authorised alternative products (without the active substances searched for)
-are authorised for the crop-pathogen combination. The following columns show
-the number of authorised products (based on the W number) with the active substance(s) searched for.
-\item tbl_alternative_products:
-This table contains a list of alternative products for the combination culture/pest organism
-that can replace products with the active substance(s) you are looking for.
+This function searches for uses of a given list of active substances and reports
+either the number of available alternative products, or a detailed list of the
+alternative product uses.
 }
+\details{
+If the parameter 'details' is set to FALSE (default), the table contains a
+list of combinations of crops ('cultures') and pathogens ('pests') with the
+number of authorised products, not containing any of the specified active
+ingredients.
+
+Otherwise, if 'details' is set to TRUE, the full list of alternative
+products for the identified uses is returned.
 }
 \examples{
-name_active_ingredient <- c("Cypermethrin", "Lambda-Cyhalothrin","Etofenprox", "Deltamethrin")
+psmv <- psmv_dm() # Read the latest XML locally accessible
 
+actives <- c("Lambda-Cyhalothrin", "Deltamethrin")
 
-alternative_products(name_active_ingredient)
-print(list_alternative_product)
+alternative_products(psmv, actives, missing = TRUE)
+alternative_products(psmv, actives)
+alternative_products(psmv, actives, details = TRUE)
+alternative_products(psmv, actives, list = TRUE)
 }

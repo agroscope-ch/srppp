@@ -1,137 +1,104 @@
-#' Find alternative products for all products containing a certain active substance in PSM-V
+#' Find alternative products for all products containing a certain active substance
 #'
-#'This function creates two overview tables
-#'1) tbl_overview_culture_pest:
-#'Indicates for the active ingredient(s) searched for, in which crops and against which pathogens
-#'products with the active ingredient searched for are authorised.
-#'In addition, the column "number_alternative_products" indicates how many
-#'authorised alternative products (without the active substances searched for)
-#'are authorised for the crop-pathogen combination. The following columns show
-#'the number of authorised products (based on the W number) with the active substance(s) searched for.
-#'2) tbl_alternative_products:
-#'This table contains a list of alternative products for the combination culture/pest organism
-#'that can replace products with the active substance(s) you are looking for.
+#' This function searches for uses of a given list of active substances and reports
+#' either the number of available alternative products, or a detailed list of the 
+#' alternative product uses. 
+#' 
+#' If the parameter 'details' is set to FALSE (default), the table contains a
+#' list of combinations of crops ('cultures') and pathogens ('pests') with the
+#' number of authorised products, not containing any of the specified active
+#' ingredients. 
+#' 
+#' Otherwise, if 'details' is set to TRUE, the full list of alternative 
+#' products for the identified uses is returned.
 #'
+#' @param psmv A [psmv_dm] object.
+#' @param active_ingredients Character vector of active ingredient names that will be
+#' matched against the column 'substances_de' in the psmv table 'substances'.
+#' @param details Should a table of alternative uses with 'wNbr' 'use_nr' be returned?
+#' @param missing If this is set to TRUE, uses without alternative product registrations
+#' are listed. 
+#' @param list If TRUE, a list of three tables is returned, a table of uses
+#' without alternative products, a table with the number of alternative
+#' products, if they are available, and a detailed table of all the alternative
+#' uses. This argument overrides the arguments 'details' and 'missing'.
+#' @param lang The language used for the active ingredient names and the returned
+#' tables. Unfortunately, it is not trivial to generalise the implementation
+#' to support the other languages, so for now only German ('de') is supported.
+#' @export
 #' @examples
-#' name_active_ingredient <- c("Cypermethrin", "Lambda-Cyhalothrin","Etofenprox", "Deltamethrin")
+#' psmv <- psmv_dm() # Read the latest XML locally accessible
 #'
+#' actives <- c("Lambda-Cyhalothrin", "Deltamethrin")
 #'
-#' alternative_products(name_active_ingredient)
-#' print(list_alternative_product)
+#' alternative_products(psmv, actives, missing = TRUE)
+#' alternative_products(psmv, actives)
+#' alternative_products(psmv, actives, details = TRUE)
+#' alternative_products(psmv, actives, list = TRUE)
+alternative_products <- function(psmv, active_ingredients,
+  details = FALSE, missing = FALSE, list = FALSE, lang = "de")
+{
+  if (lang[1] != "de") stop("Only German is currently implemented")
 
-
-
-
-alternative_products <- function(name_active_ingredient) {
-
-  list_alternative_product <- list()
-
-   # The URL of the current version published by BLV
-  psmv_xml_url <- paste0("https://www.blv.admin.ch/dam/blv/de/dokumente/",
-                         "zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/",
-                         "daten-pflanzenschutzmittelverzeichnis.zip.download.zip/",
-                         "Daten%20Pflanzenschutzmittelverzeichnis.zip")
-
-  psmv <- psmv_dm(psmv_xml_url)
-
-  #Select entries from the PSM-V with the WS
+  # Select entries from the PSM-V with the active substance
   psmv_ai <- dm_filter(psmv,
-                       substances = (substance_de %in% name_active_ingredient))
+     substances = (substance_de %in% active_ingredients))
 
+  uses_x_pests_x_cultures <- psmv_ai$uses |>
+    left_join(psmv$cultures, by = join_by(wNbr, use_nr), relationship = "many-to-many") |>
+    left_join(psmv$pests, by = join_by(wNbr, use_nr), relationship = "many-to-many")
 
-  ai_uses <- psmv_ai$uses |>
+  pests_x_cultures <- uses_x_pests_x_cultures |>
+    select(application_area_de, culture_de, pest_de) |>
+    unique() |>
+    arrange(application_area_de, culture_de, pest_de)
+
+  alternative_products_all_uses <- psmv$products |>
+    filter(!wNbr %in% psmv_ai$products$wNbr) |>
+    left_join(psmv$uses, by = join_by(wNbr), relationship = "many-to-many") |>
     left_join(psmv$cultures, by = join_by(wNbr, use_nr), relationship = "many-to-many") |>
     left_join(psmv$pests, by = join_by(wNbr, use_nr), relationship = "many-to-many") |>
-    left_join(psmv$application_areas, by = join_by(wNbr, use_nr), relationship = "many-to-many")
+    select(pNbr, wNbr, use_nr, application_area_de, culture_de, pest_de) |>
+    arrange(pNbr, wNbr, use_nr, application_area_de, culture_de, pest_de)
 
+  alternative_uses <- pests_x_cultures |>
+    left_join(alternative_products_all_uses,
+      by = join_by(application_area_de, culture_de, pest_de))
 
+  uses_without_alternatives <- alternative_uses |>
+    filter(is.na(wNbr))
+  
+  n_alternatives <- alternative_uses |>
+      group_by(application_area_de, culture_de, pest_de) |>
+      summarise(n = n(), .groups = "drop_last") |>
+      arrange(application_area_de, culture_de, pest_de)
 
-  ai_pests_x_cultures_x_application_areas <- ai_uses |>
-    select(culture_de, pest_de, application_area_de) |>
-    unique() |>
-    arrange(culture_de, pest_de, application_area_de)
-
-  # psmv_alternative_products
-  dm_comb_pesticide_cultur <-  dm_filter(psmv,
-                                         cultures = (culture_de %in% ai_pests_x_cultures_x_application_areas$culture_de),
-                                         pests= (pest_de %in% ai_pests_x_cultures_x_application_areas$pest_de),
-                                         application_areas = (application_area_de %in% ai_pests_x_cultures_x_application_areas$application_area_de) )
-
-
-
-  tbl.comb_pesticide_cultur <- dm_comb_pesticide_cultur$uses |>
-    left_join(dm_comb_pesticide_cultur$cultures, by = join_by(wNbr, use_nr), relationship = "many-to-many") |>
-    left_join(dm_comb_pesticide_cultur$pests, by = join_by(wNbr, use_nr), relationship = "many-to-many") |>
-    left_join(dm_comb_pesticide_cultur$application_areas, by = join_by(wNbr, use_nr), relationship = "many-to-many")|>
-    left_join(dm_comb_pesticide_cultur$products, by = join_by(wNbr), relationship = "many-to-many") |>
-    left_join(dm_comb_pesticide_cultur$ingredients, by = join_by(wNbr), relationship = "many-to-many")|>
-    left_join(dm_comb_pesticide_cultur$substances, by = join_by(pk), relationship = "many-to-many")|>
-    dplyr::select(  wNbr, use_nr ,min_dosage ,max_dosage, waiting_period, min_rate, max_rate, units_de, culture_de, pest_de,
-                    application_area_de,pNbr,  name, pk,percent, g_per_L,type.y ,substance_de)
-
-  #remove all product names with active ingredients d_ai[1]
-  tbl.psmv_alternative_products <- tbl.comb_pesticide_cultur |>
-    dplyr::filter(!name %in% tbl.comb_pesticide_cultur[tbl.comb_pesticide_cultur$substance_de %in% name_active_ingredient,]$name)
-
-
-
-  alt_comb <- unique(tbl.psmv_alternative_products[,c("wNbr","culture_de","pest_de","application_area_de")])
-
-
-
-  alt_comb_count <- alt_comb %>%
-    group_by(culture_de, pest_de, application_area_de) %>%
-    summarize(number_alternative_products = n())
-
-  #### Tables with all searched indications of this active substance (culture-pathogen combination) ####
-  alt_comb_count_1 <- left_join(ai_pests_x_cultures_x_application_areas,alt_comb_count,by=c( "culture_de",   "pest_de",   "application_area_de"))
-
-  alt_comb_count_1[is.na(alt_comb_count_1$number_alternative_products),]$number_alternative_products <- 0
-  tbl_overview_culture_pest <- alt_comb_count_1
-
-
-  ##### Append column for number of products with the active ingredient for which alternative products are sought #####
-  for(i_ws_name in name_active_ingredient){
-
-    tbl.comb_pesticide_cultur_comb <- tbl.comb_pesticide_cultur[tbl.comb_pesticide_cultur$substance_de %in% i_ws_name,]
-
-
-    tbl.comb_pesticide_cultur_comb <- unique(tbl.comb_pesticide_cultur_comb[,c("wNbr","culture_de","pest_de","application_area_de")])
-
-
-    count_product_per_indications <- tbl.comb_pesticide_cultur_comb %>%
-      group_by( culture_de, pest_de,application_area_de ) %>%
-      summarise(count = n(), .groups = "drop")
-
-
-    tbl_overview_culture_pest <- left_join(tbl_overview_culture_pest,
-                                           count_product_per_indications[,c("culture_de", "pest_de", "application_area_de","count")], by = c("culture_de", "pest_de", "application_area_de"))
-
-    names(tbl_overview_culture_pest)[which(names(tbl_overview_culture_pest)  == "count") ] <- paste0("PSM_mit_",i_ws_name)
-
-
+  if (list) {
+      ret <- list(
+        uses_without_alternatives,
+        n_alternatives,
+        alternative_uses)
+      names(ret) <- c(
+        "No alternative", 
+        "Number of alternatives", 
+        "Alternative uses")
+      return(ret)
+  } else {
+    if (details & missing) {
+      stop("You cannot get details for missing alternatives")
+    } else {
+      if (missing) {
+        return(uses_without_alternatives)
+      } else {
+        if (details) {
+          return(alternative_uses)
+        } else {
+          return(n_alternatives)
+        }
+      }
+    }
   }
-
-
-
-  # Replace NA values with 0
-  list_alternative_product[["tbl_overview_culture_pest"]] <- tbl_overview_culture_pest %>% replace(is.na(.), 0)
-
-  #### Table with alternative products ####
-  tbl_alternative_products <- left_join(ai_pests_x_cultures_x_application_areas,tbl.psmv_alternative_products,by=c( "culture_de",   "pest_de",  "application_area_de"))
-
-
-  if(length(which(is.na(tbl_alternative_products$wNbr)== T))>1){
-    print(paste0( "total of ", length(which(is.na(tbl_alternative_products$wNbr)== T)), " indication have no alternative products"))
-
-    #delete such indications
-    list_alternative_product[["tbl_alternative_products"]] <- tbl_alternative_products[-which(is.na(tbl_alternative_products$wNbr)),]
-  }
-
-  return(list_alternative_product)
-
 }
-
-
-
-
+utils::globalVariables(c("substance_de",
+  "application_area_de", "culture_de", "pest_de", 
+  "g_per_L", "percent"))

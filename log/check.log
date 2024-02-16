@@ -9,12 +9,12 @@
 * using options ‘--no-tests --as-cran’
 * checking for file ‘psmv/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘psmv’ version ‘0.1.3’
+* this is package ‘psmv’ version ‘0.1.5’
 * package encoding: UTF-8
 * checking CRAN incoming feasibility ... NOTE
 Maintainer: ‘Johannes Ranke <johannes.ranke@agroscope.admin.ch>’
 
-Size of tarball: 6921673 bytes
+Size of tarball: 6843984 bytes
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -25,17 +25,15 @@ Size of tarball: 6921673 bytes
 * checking for sufficient/correct file permissions ... OK
 * checking whether package ‘psmv’ can be installed ... [56s/56s] OK
 * checking installed package size ... NOTE
-  installed size is 14.0Mb
+  installed size is 13.9Mb
   sub-directories of 1Mb or more:
-    data  11.7Mb
+    data  11.6Mb
     doc    2.2Mb
 * checking package directory ... OK
 * checking for future file timestamps ... OK
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
-* checking top-level files ... NOTE
-Non-standard file/directory found at top level:
-  ‘GNUmakefile’
+* checking top-level files ... OK
 * checking for left-over files ... OK
 * checking index information ... OK
 * checking package subdirectories ... OK
@@ -66,16 +64,16 @@ Non-standard file/directory found at top level:
 * checking data for non-ASCII characters ... OK
 * checking LazyData ... OK
 * checking data for ASCII and uncompressed saves ... OK
-* checking include directives in Makefiles ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... [37s/39s] NOTE
+* checking examples ... [54s/57s] NOTE
 Examples with CPU (user + system) or elapsed time > 5s
-          user system elapsed
-psmv_dm 21.622  0.932  23.379
+                       user system elapsed
+psmv_dm              24.324  0.384  25.260
+alternative_products 12.937  0.460  13.646
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
-* checking re-building of vignette outputs ... [17s/18s] OK
+* checking re-building of vignette outputs ... [19s/19s] OK
 * checking PDF version of manual ... OK
 * checking HTML version of manual ... NOTE
 Skipping checking HTML validation: no command 'tidy' found
@@ -83,7 +81,7 @@ Skipping checking HTML validation: no command 'tidy' found
 * checking for detritus in the temp directory ... OK
 * DONE
 
-Status: 5 NOTEs
+Status: 4 NOTEs
 See
   ‘/home/agsad.admin.ch/f80868656/projects/psmv/psmv.Rcheck/00check.log’
 for details.

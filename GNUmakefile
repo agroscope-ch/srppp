@@ -42,6 +42,11 @@ quickinstall: build-no-vignettes
 check: roxy build
 	_R_CHECK_CRAN_INCOMING_REMOTE_=false "$(RBIN)/R" CMD check --as-cran --no-tests $(TGZ) 2>&1 | tee log/check.log
 
+quickcheck: roxy build-no-vignettes
+	mv $(TGZVNR) $(TGZ)
+	_R_CHECK_CRAN_INCOMING_REMOTE_=false "$(RBIN)/R" CMD check --no-tests --no-build-vignettes --no-vignettes $(TGZ)
+	mv $(TGZ) $(TGZVNR)
+
 pd: roxy
 	Rscript -e 'pkgdown::build_site(lazy = TRUE, run_dont_run = TRUE)'
 
