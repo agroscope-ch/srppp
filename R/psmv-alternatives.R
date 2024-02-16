@@ -1,16 +1,12 @@
-#' Find alternative products for all products containing a certain active substance
+#' Find alternative products for all products containing certain active substances
 #'
 #' This function searches for uses of a given list of active substances and reports
-#' either the number of available alternative products, or a detailed list of the 
-#' alternative product uses. 
+#' either a table of uses with the number of available alternative products for each
+#' use, a detailed table of the alternative product uses, a table of uses without
+#' alternatives, or a list containing these three tables.
 #' 
-#' If the parameter 'details' is set to FALSE (default), the table contains a
-#' list of combinations of crops ('cultures') and pathogens ('pests') with the
-#' number of authorised products, not containing any of the specified active
-#' ingredients. 
-#' 
-#' Otherwise, if 'details' is set to TRUE, the full list of alternative 
-#' products for the identified uses is returned.
+#' A use is defined as a combination of an application area, a crop
+#' ('culture') and a pathogen ('pest').
 #'
 #' @param psmv A [psmv_dm] object.
 #' @param active_ingredients Character vector of active ingredient names that will be

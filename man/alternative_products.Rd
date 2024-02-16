@@ -2,7 +2,7 @@
 % Please edit documentation in R/psmv-alternatives.R
 \name{alternative_products}
 \alias{alternative_products}
-\title{Find alternative products for all products containing a certain active substance}
+\title{Find alternative products for all products containing certain active substances}
 \usage{
 alternative_products(
   psmv,
@@ -31,21 +31,17 @@ uses. This argument overrides the arguments 'details' and 'missing'.}
 
 \item{lang}{The language used for the active ingredient names and the returned
 tables. Unfortunately, it is not trivial to generalise the implementation
-to support the other languages, so for now only Germn ('de') is supported.}
+to support the other languages, so for now only German ('de') is supported.}
 }
 \description{
 This function searches for uses of a given list of active substances and reports
-either the number of available alternative products, or a detailed list of the
-alternative product uses.
+either a table of uses with the number of available alternative products for each
+use, a detailed table of the alternative product uses, a table of uses without
+alternatives, or a list containing these three tables.
 }
 \details{
-If the parameter 'details' is set to FALSE (default), the table contains a
-list of combinations of crops ('cultures') and pathogens ('pests') with the
-number of authorised products, not containing any of the specified active
-ingredients.
-
-Otherwise, if 'details' is set to TRUE, the full list of alternative
-products for the identified uses is returned.
+A use is defined as a combination of an application area, a crop
+('culture') and a pathogen ('pest').
 }
 \examples{
 psmv <- psmv_dm() # Read the latest XML locally accessible
