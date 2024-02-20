@@ -10,7 +10,7 @@ alternative_products(
   details = FALSE,
   missing = FALSE,
   list = FALSE,
-  lang = "de"
+  lang = c("de", "fr", "it")
 )
 }
 \arguments{
@@ -30,8 +30,7 @@ products, if they are available, and a detailed table of all the alternative
 uses. This argument overrides the arguments 'details' and 'missing'.}
 
 \item{lang}{The language used for the active ingredient names and the returned
-tables. Unfortunately, it is not trivial to generalise the implementation
-to support the other languages, so for now only German ('de') is supported.}
+tables.}
 }
 \description{
 This function searches for uses of a given list of active substances and reports

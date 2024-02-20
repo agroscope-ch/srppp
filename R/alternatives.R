@@ -19,8 +19,7 @@
 #' products, if they are available, and a detailed table of all the alternative
 #' uses. This argument overrides the arguments 'details' and 'missing'.
 #' @param lang The language used for the active ingredient names and the returned
-#' tables. Unfortunately, it is not trivial to generalise the implementation
-#' to support the other languages, so for now only German ('de') is supported.
+#' tables. 
 #' @export
 #' @examples
 #' psmv <- psmv_list[["2024"]]
@@ -36,8 +35,9 @@
 #' actives_it <- c("Lambda-Cialotrina", "Deltametrina")
 #' alternative_products(psmv, actives_it, lang = "it")
 alternative_products <- function(psmv, active_ingredients,
-  details = FALSE, missing = FALSE, list = FALSE, lang = "de")
+  details = FALSE, missing = FALSE, list = FALSE, lang = c("de", "fr", "it"))
 {
+  lang = match.arg(lang)
   substance_column <- paste("substance", lang, sep = "_")
   selection_criteria = paste(c("application_area", "culture", "pest"), lang, sep = "_")
 
