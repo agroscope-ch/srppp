@@ -52,3 +52,5 @@ pd_all:
 test: 
 	Rscript -e 'devtools::test()' 2>&1 | tee log/test.log
 	sed -i -e "s/.*\r.*\r//" log/test.log
+
+.PHONY: roxy build install quickinstall check quickcheck pd pd_all test
