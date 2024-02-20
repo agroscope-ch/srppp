@@ -117,9 +117,24 @@ to support the other languages, so for now only German ('de') is supported.</p><
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">psmv</span> <span class="op">&lt;-</span> <span class="va">psmv_list</span><span class="op">[[</span><span class="st">"2024"</span><span class="op">]</span><span class="op">]</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">actives</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Lambda-Cyhalothrin"</span>, <span class="st">"Deltamethrin"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">actives_de</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Lambda-Cyhalothrin"</span>, <span class="st">"Deltamethrin"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">psmv</span>, <span class="va">actives</span>, missing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">psmv</span>, <span class="va">actives_de</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 446 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de              pest_de             n_wNbr n_pNbr</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Beerenbau           Erdbeere                Erdbeer- oder Himb…     15      6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Beerenbau           Erdbeere                Thripse                 30     15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Beerenbau           Himbeere                Erdbeer- oder Himb…     11      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Beerenbau           Himbeere                Himbeerkäfer            11      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Feldbau             Ackerbohne              Erdraupen                4      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Feldbau             Eiweisserbse            Erbsenblattrandkäf…      1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Feldbau             Eiweisserbse            Erbsenwickler            4      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Feldbau             Eiweisserbse            Erdraupen                4      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Feldbau             Futter- und Zuckerrüben Blattläuse (Röhren…      6      2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Feldbau             Futter- und Zuckerrüben Erdraupen                4      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 436 more rows</span></span>
+<span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">psmv</span>, <span class="va">actives_de</span>, missing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 108 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de                       pest_de                 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   </span>
@@ -134,22 +149,7 @@ to support the other languages, so for now only German ('de') is supported.</p><
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Feldbau             Wintergetreide                   Virusübertragende Blatt…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Feldbau             Zuckerrübe                       Erdraupen               </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 98 more rows</span></span>
-<span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">psmv</span>, <span class="va">actives</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 446 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de              pest_de      n_uses n_wNbr n_pNbr</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Beerenbau           Erdbeere                Erdbeer- od…     15     15      6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Beerenbau           Erdbeere                Thripse          30     30     15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Beerenbau           Himbeere                Erdbeer- od…     11     11      3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Beerenbau           Himbeere                Himbeerkäfer     11     11      3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Feldbau             Ackerbohne              Erdraupen         4      4      3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Feldbau             Eiweisserbse            Erbsenblatt…      1      1      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Feldbau             Eiweisserbse            Erbsenwickl…      4      4      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Feldbau             Eiweisserbse            Erdraupen         4      4      3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Feldbau             Futter- und Zuckerrüben Blattläuse …      6      6      2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Feldbau             Futter- und Zuckerrüben Erdraupen         4      4      3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 436 more rows</span></span>
-<span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">psmv</span>, <span class="va">actives</span>, details <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">psmv</span>, <span class="va">actives_de</span>, details <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5,595 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de pest_de                      pNbr wNbr  use_nr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
@@ -164,7 +164,7 @@ to support the other languages, so for now only German ('de') is supported.</p><
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Beerenbau           Erdbeere   Erdbeer- oder Himbeerblüte…  <span style="text-decoration: underline;">8</span>464 7133…      7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Beerenbau           Erdbeere   Erdbeer- oder Himbeerblüte…  <span style="text-decoration: underline;">8</span>800 7106       8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5,585 more rows</span></span>
-<span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">psmv</span>, <span class="va">actives</span>, list <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">psmv</span>, <span class="va">actives_de</span>, list <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`No alternative`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 108 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de                       pest_de                 </span>
@@ -182,19 +182,19 @@ to support the other languages, so for now only German ('de') is supported.</p><
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 98 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`Number of alternatives`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 446 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de              pest_de      n_uses n_wNbr n_pNbr</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Beerenbau           Erdbeere                Erdbeer- od…     15     15      6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Beerenbau           Erdbeere                Thripse          30     30     15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Beerenbau           Himbeere                Erdbeer- od…     11     11      3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Beerenbau           Himbeere                Himbeerkäfer     11     11      3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Feldbau             Ackerbohne              Erdraupen         4      4      3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Feldbau             Eiweisserbse            Erbsenblatt…      1      1      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Feldbau             Eiweisserbse            Erbsenwickl…      4      4      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Feldbau             Eiweisserbse            Erdraupen         4      4      3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Feldbau             Futter- und Zuckerrüben Blattläuse …      6      6      2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Feldbau             Futter- und Zuckerrüben Erdraupen         4      4      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 446 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de              pest_de             n_wNbr n_pNbr</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Beerenbau           Erdbeere                Erdbeer- oder Himb…     15      6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Beerenbau           Erdbeere                Thripse                 30     15</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Beerenbau           Himbeere                Erdbeer- oder Himb…     11      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Beerenbau           Himbeere                Himbeerkäfer            11      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Feldbau             Ackerbohne              Erdraupen                4      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Feldbau             Eiweisserbse            Erbsenblattrandkäf…      1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Feldbau             Eiweisserbse            Erbsenwickler            4      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Feldbau             Eiweisserbse            Erdraupen                4      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Feldbau             Futter- und Zuckerrüben Blattläuse (Röhren…      6      2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Feldbau             Futter- und Zuckerrüben Erdraupen                4      3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 436 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`Alternative uses`</span>
@@ -213,6 +213,24 @@ to support the other languages, so for now only German ('de') is supported.</p><
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Beerenbau           Erdbeere   Erdbeer- oder Himbeerblüte…  <span style="text-decoration: underline;">8</span>800 7106       8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5,585 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Example in Italian</span></span></span>
+<span class="r-in"><span><span class="va">actives_it</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Lambda-Cialotrina"</span>, <span class="st">"Deltametrina"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">psmv</span>, <span class="va">actives_it</span>, lang <span class="op">=</span> <span class="st">"it"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 446 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_it culture_it                          pest_it n_wNbr n_pNbr</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Campicoltura        Barbabietola da foraggio            <span style="color: #949494;">"</span>Altic…      1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Campicoltura        Barbabietola da foraggio            <span style="color: #949494;">"</span>Nottu…      1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Campicoltura        Barbabietola da zucchero            <span style="color: #949494;">"</span>Altic…      1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Campicoltura        Barbabietola da zucchero            <span style="color: #949494;">"</span>Nottu…      1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Campicoltura        Barbabietole da foraggio e da zucc… <span style="color: #949494;">"</span>Afidi…      6      2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Campicoltura        Barbabietole da foraggio e da zucc… <span style="color: #949494;">"</span>Altic…      4      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Campicoltura        Barbabietole da foraggio e da zucc… <span style="color: #949494;">"</span>Mosca…      1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Campicoltura        Barbabietole da foraggio e da zucc… <span style="color: #949494;">"</span>Nottu…      4      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Campicoltura        Barbabietole da foraggio e da zucc… <span style="color: #949494;">"</span>tigno…      1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Campicoltura        Cartamo                             <span style="color: #949494;">"</span>Nottu…      4      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 436 more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

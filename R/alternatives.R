@@ -25,17 +25,19 @@
 #' @examples
 #' psmv <- psmv_list[["2024"]]
 #'
-#' actives <- c("Lambda-Cyhalothrin", "Deltamethrin")
+#' actives_de <- c("Lambda-Cyhalothrin", "Deltamethrin")
 #'
-#' alternative_products(psmv, actives, missing = TRUE)
-#' alternative_products(psmv, actives)
-#' alternative_products(psmv, actives, details = TRUE)
-#' alternative_products(psmv, actives, list = TRUE)
+#' alternative_products(psmv, actives_de)
+#' alternative_products(psmv, actives_de, missing = TRUE)
+#' alternative_products(psmv, actives_de, details = TRUE)
+#' alternative_products(psmv, actives_de, list = TRUE)
+#'
+#' # Example in Italian
+#' actives_it <- c("Lambda-Cialotrina", "Deltametrina")
+#' alternative_products(psmv, actives_it, lang = "it")
 alternative_products <- function(psmv, active_ingredients,
   details = FALSE, missing = FALSE, list = FALSE, lang = "de")
 {
-  if (lang[1] != "de") stop("Only German is currently implemented")
-
   substance_column <- paste("substance", lang, sep = "_")
   selection_criteria = paste(c("application_area", "culture", "pest"), lang, sep = "_")
 
@@ -79,10 +81,6 @@ alternative_products <- function(psmv, active_ingredients,
     filter(is.na(alternative_uses$wNbr)) |>
     select(all_of(selection_criteria))
 
-  n_alternative_uses <- alternative_uses |>
-    group_by(pick(all_of(selection_criteria))) |>
-    summarise(n_uses = n(), .groups = "drop")
-  
   n_alternative_products <- alternative_uses |>
     select(all_of(c("wNbr", selection_criteria))) |>
     unique() |>
@@ -95,8 +93,7 @@ alternative_products <- function(psmv, active_ingredients,
     group_by(pick(all_of(selection_criteria))) |>
     summarise(n_pNbr = n(), .groups = "drop")
 
-  n_alternatives <- n_alternative_uses |>
-    left_join(n_alternative_products, by = selection_criteria) |>
+  n_alternatives <- n_alternative_products |>
     left_join(n_alternative_product_types, by = selection_criteria) 
 
   if (list) {

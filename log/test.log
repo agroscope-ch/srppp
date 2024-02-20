@@ -2,7 +2,7 @@
 ℹ Reading XML for 2024-01-30
 ✔ No duplicated W-Numbers
 ✔ | F W  S  OK | Context
-⠏ |          0 | alternative_products                                           ⠋ |          1 | alternative_products                                           ✔ |          1 | alternative_products
+✔ |          2 | alternative_products
 
 ══ Results ═════════════════════════════════════════════════════════════════════
-[ FAIL 0 | WARN 0 | SKIP 0 | PASS 1 ]
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 2 ]

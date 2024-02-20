@@ -46,10 +46,14 @@ A use is defined as a combination of an application area, a crop
 \examples{
 psmv <- psmv_list[["2024"]]
 
-actives <- c("Lambda-Cyhalothrin", "Deltamethrin")
+actives_de <- c("Lambda-Cyhalothrin", "Deltamethrin")
 
-alternative_products(psmv, actives, missing = TRUE)
-alternative_products(psmv, actives)
-alternative_products(psmv, actives, details = TRUE)
-alternative_products(psmv, actives, list = TRUE)
+alternative_products(psmv, actives_de)
+alternative_products(psmv, actives_de, missing = TRUE)
+alternative_products(psmv, actives_de, details = TRUE)
+alternative_products(psmv, actives_de, list = TRUE)
+
+# Example in Italian
+actives_it <- c("Lambda-Cialotrina", "Deltametrina")
+alternative_products(psmv, actives_it, lang = "it")
 }
