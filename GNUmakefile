@@ -15,8 +15,6 @@ pkgfiles = \
 	R/* \
 	vignettes/*.Rmd
 
-all: build
-
 $(TGZ): $(pkgfiles)
 	"$(RBIN)/R" CMD build . 2>&1 | tee log/build.log
 
@@ -29,26 +27,27 @@ roxy:
 	# https://stackoverflow.com/a/72679175/3805440 describes how to make PhantomJS work in roxygen markdown
 	# by setting an environment variable, but this is not currently used here
 
-build: roxy $(TGZ)
+build: $(TGZ)
 
-build-no-vignettes: $(TGZVNR)
-
-install: build
+install: $(TGZ)
 	"$(RBIN)/R" CMD INSTALL $(TGZ)
 
-quickinstall: build-no-vignettes
+quickinstall: $(TGZVNR)
 	"$(RBIN)/R" CMD INSTALL $(TGZVNR)
 
-check: roxy build
+check: $(TGZ)
 	_R_CHECK_CRAN_INCOMING_REMOTE_=false "$(RBIN)/R" CMD check --as-cran --no-tests $(TGZ) 2>&1 | tee log/check.log
 
-quickcheck: roxy build-no-vignettes
+quickcheck: $(TGZVNR)
 	mv $(TGZVNR) $(TGZ)
 	_R_CHECK_CRAN_INCOMING_REMOTE_=false "$(RBIN)/R" CMD check --no-tests --no-build-vignettes --no-vignettes $(TGZ)
 	mv $(TGZ) $(TGZVNR)
 
-pd: roxy
+pd:
 	Rscript -e 'pkgdown::build_site(lazy = TRUE, run_dont_run = TRUE)'
 
-pd_all: roxy
+pd_all:
 	Rscript -e 'pkgdown::build_site(lazy = FALSE, run_dont_run = TRUE)'
+
+test: 
+	Rscript -e 'devtools::test()' 2>&1 | tee log/test.log

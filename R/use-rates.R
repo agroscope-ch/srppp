@@ -32,14 +32,14 @@
 #'     application_area_de, 
 #'     substance_de, percent, g_per_L)
 #'
-#' psmv_xml_application_rate_g_per_ha(product_uses_with_ingredients) |>
+#' application_rate_g_per_ha(product_uses_with_ingredients) |>
 #'   filter(name %in% c("Cerelex", "Pixxaro EC", "Bordeaux S")) |>
 #'   select(ai = substance_de, app_area = application_area_de,
 #'     min_d = min_dosage,  max_d = max_dosage,
 #'     min_r = min_rate, max_r = max_rate,
 #'     units_de, rate = rate_g_per_ha) |>
 #'   print(n = Inf)
-psmv_xml_application_rate_g_per_ha <- function(product_uses,
+application_rate_g_per_ha <- function(product_uses,
   aggregation = c("mean", "max", "min"))
 {
   aggregation = match.arg(aggregation)
@@ -91,17 +91,18 @@ psmv_xml_application_rate_g_per_ha <- function(product_uses,
   ret <- bind_cols(product_uses, active_rates["rate_g_per_ha"])
   return(ret)
 }
+utils::globalVariables(c("percent", "g_per_L"))
 
 #' Product application rate units convertible to grams active substance per hectare
 #'
 #' @docType data
 #' @export
-#' @seealso [psmv_xml_application_rate_g_per_ha]
+#' @seealso [application_rate_g_per_ha]
 #' @examples
 #' library(psmv)
 #' library(dplyr)
 #' # These are the convertible units
-#' psmv_xml_units_convertible_to_g_per_ha
-psmv_xml_units_convertible_to_g_per_ha <- c("l/ha", "kg/ha", "g/ha",
+#' units_convertible_to_g_per_ha
+units_convertible_to_g_per_ha <- c("l/ha", "kg/ha", "g/ha",
   "ml/m\u00B2", "ml/10m\u00B2", "ml/ha", "ml/a")
 

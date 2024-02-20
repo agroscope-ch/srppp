@@ -4,9 +4,6 @@
     <loc>/404.html</loc>
   </url>
   <url>
-    <loc>/articles/alternative_products.html</loc>
-  </url>
-  <url>
     <loc>/articles/index.html</loc>
   </url>
   <url>
@@ -16,9 +13,6 @@
     <loc>/articles/psmv_xml.html</loc>
   </url>
   <url>
-    <loc>/articles/test.html</loc>
-  </url>
-  <url>
     <loc>/authors.html</loc>
   </url>
   <url>
@@ -26,6 +20,9 @@
   </url>
   <url>
     <loc>/reference/alternative_products.html</loc>
+  </url>
+  <url>
+    <loc>/reference/application_rate_g_per_ha.html</loc>
   </url>
   <url>
     <loc>/reference/description_table.html</loc>
@@ -56,9 +53,6 @@
   </url>
   <url>
     <loc>/reference/psmv_list.html</loc>
-  </url>
-  <url>
-    <loc>/reference/psmv_xml_application_rate_g_per_ha.html</loc>
   </url>
   <url>
     <loc>/reference/psmv_xml_clean_product_names.html</loc>
@@ -98,5 +92,8 @@
   </url>
   <url>
     <loc>/reference/psmv_xml_zip_files.html</loc>
+  </url>
+  <url>
+    <loc>/reference/units_convertible_to_g_per_ha.html</loc>
   </url>
 </urlset>
