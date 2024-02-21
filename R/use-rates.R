@@ -91,7 +91,6 @@ application_rate_g_per_ha <- function(product_uses,
   ret <- bind_cols(product_uses, active_rates["rate_g_per_ha"])
   return(ret)
 }
-utils::globalVariables(c("percent", "g_per_L"))
 
 #' Product application rate units convertible to grams active substance per hectare
 #'

@@ -2,7 +2,8 @@ utils::globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "pNbr", "use_nr",
   "add_txt_pk", "de", "fr", "it", "en", "exhaustionDeadline", "soldoutDeadline",
   "isSalePermission", "terminationReason",
   "min_dosage", "max_dosage", "min_rate", "max_rate", "waiting_period",
-  "units_pk", "time_units_pk"))
+  "units_pk", "time_units_pk",
+  "type", "g_per_L", "percent"))
 
 #' Read an XML version of the PSMV
 #'
