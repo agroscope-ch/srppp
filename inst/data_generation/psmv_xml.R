@@ -40,4 +40,14 @@ time <- system.time({
   names(psmv_list) <- years
 })
 
+# Check if accidentially included confidential information is removed
+sapply(psmv_list, function(psmv) {
+  confidential <- psmv$ingredients |>
+    filter(type == "ADDITIVE_TO_DECLARE" & (percent != "" | g_per_L != ""))
+  nrow(confidential)
+})
+
+# Check referential integrity of the dm objects
+lapply(psmv_list, function(psmv) dm_examine_constraints(psmv))
+
 save("psmv_list", file = here("data/psmv_list.rda"), compress = "xz")

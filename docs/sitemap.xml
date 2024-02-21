@@ -10,9 +10,6 @@
     <loc>/articles/psmv_trends.html</loc>
   </url>
   <url>
-    <loc>/articles/psmv_xml.html</loc>
-  </url>
-  <url>
     <loc>/authors.html</loc>
   </url>
   <url>
@@ -83,9 +80,6 @@
   </url>
   <url>
     <loc>/reference/psmv_xml_remove_duplicated_wNbrs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/psmv_xml_units_convertible_to_g_per_ha.html</loc>
   </url>
   <url>
     <loc>/reference/psmv_xml_url.html</loc>

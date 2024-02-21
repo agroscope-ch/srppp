@@ -149,8 +149,14 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get()) {
     return(ret)
   }
 
+  # As the content of additives are confidential, we remove to address cases
+  # were they were accidentally included in the XML dump.
   ingredients <- t(sapply(ingredient_nodeset, get_ingredient_map)) |>
     tibble::as_tibble() |>
+    mutate(percent = if_else(
+      type == "ADDITIVE_TO_DECLARE", "", percent)) |>
+    mutate(g_per_L= if_else(
+      type == "ADDITIVE_TO_DECLARE", "", g_per_L)) |>
     mutate(add_txt_pk = as.integer(add_txt_pk)) |>
     mutate(pk = as.integer(pk))
 
