@@ -137,6 +137,8 @@ psmv_xml_get_substances <- function(psmv_xml = psmv_xml_get()) {
 #' @export
 #' @examples
 #' psmv_xml_get_ingredients()
+#' psmv_xml <- psmv_xml_get(2013)
+#' psmv_xml_get_ingredients(psmv_xml) |> filter(wNbr == 3003)
 psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get()) {
   ingredient_nodeset <- xml_find_all(psmv_xml, "Products/Product/ProductInformation/Ingredient")
 
@@ -145,7 +147,8 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get()) {
     pk <- xml_attr(xml_child(ingredient_node, search = 2), "primaryKey")
     type <- xml_text(xml_child(ingredient_node, search = 1))
     attributes <- xml_attrs(ingredient_node)
-    ret <- c(wNbr, pk, type, attributes)
+    ret <- c(wNbr, pk, type, 
+      attributes[c("inPercent", "inGrammPerLitre", "additionalTextPrimaryKey")])
     names(ret) <- c("wNbr", "pk", "type", "percent", "g_per_L", "add_txt_pk")
     return(ret)
   }
@@ -249,11 +252,16 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
     attributes <- xml_attrs(node)
     units_pk <- xml_attr(xml_child(node, search = 1), "primaryKey")
 
-    # Searching for a child nodes with time units by name is too slow
+    # Searching for a child node e.g. with time units by name is too slow
     #time_units_pk <- xml_attr(xml_child(node, search = "TimeMeasure"), "primaryKey")
 
-    ret <- c(wNbr, attributes, units_pk)
-    names(ret) <- c("wNbr", "min_dosage", "max_dosage", "waiting_period", "min_rate", "max_rate", "use_nr", "units_pk")
+    ret <- c(wNbr, 
+      attributes[c("expenditureTo", "expenditureForm", "waitingPeriod", 
+        "dosageTo", "dosageFrom", "use_nr")], 
+      units_pk)
+
+    names(ret) <- c("wNbr", 
+      "min_dosage", "max_dosage", "waiting_period", "min_rate", "max_rate", "use_nr", "units_pk")
     return(ret)
   }
 
