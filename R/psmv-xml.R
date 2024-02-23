@@ -256,12 +256,18 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
     #time_units_pk <- xml_attr(xml_child(node, search = "TimeMeasure"), "primaryKey")
 
     ret <- c(wNbr, 
-      attributes[c("expenditureForm", "expenditureTo", "waitingPeriod", 
-        "dosageFrom", "dosageTo", "use_nr")], 
+      attributes[c(
+        "dosageFrom", "dosageTo", 
+        "waitingPeriod", 
+        "expenditureForm", "expenditureTo", 
+        "use_nr")], 
       units_pk)
 
     names(ret) <- c("wNbr", 
-      "min_dosage", "max_dosage", "waiting_period", "min_rate", "max_rate", "use_nr", "units_pk")
+      "min_dosage", "max_dosage", 
+      "waiting_period", 
+      "min_rate", "max_rate", 
+      "use_nr", "units_pk")
     return(ret)
   }
 
