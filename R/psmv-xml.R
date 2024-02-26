@@ -138,7 +138,6 @@ psmv_xml_get_substances <- function(psmv_xml = psmv_xml_get()) {
 #' @examples
 #' psmv_xml_get_ingredients()
 #' psmv_xml <- psmv_xml_get(2013)
-#' psmv_xml_get_ingredients(psmv_xml) |> filter(wNbr == 3003)
 psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get()) {
   ingredient_nodeset <- xml_find_all(psmv_xml, "Products/Product/ProductInformation/Ingredient")
 

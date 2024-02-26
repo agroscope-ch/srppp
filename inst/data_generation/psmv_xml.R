@@ -40,6 +40,46 @@ time <- system.time({
   names(psmv_list) <- years
 })
 
+
+# Get all pk values of substances that are used as active ingredients in any year
+psmv_ingredients <- bind_rows(lapply(psmv_list, function(x) x$ingredients), .id = "year")
+psmv_substances <- bind_rows(lapply(psmv_list, function(x) x$substances), .id = "year")
+psmv_active_ingredient_pks <- psmv_ingredients |>
+  filter(type == "ACTIVE_INGREDIENT") |>
+  left_join(psmv_substances, by = join_by(pk, year)) |>
+  select(pk) |>
+  unique() |>
+  arrange(pk)
+
+# Manually check if pks always refer to the same substance
+if (FALSE) {
+  psmv_ai_check_dups <- psmv_substances |>
+    filter(pk %in% psmv_active_ingredient_pks$pk) |>
+    select(pk, iupac, substance_de, substance_fr, substance_it, substance_en) |>
+    unique() |>
+    arrange(pk)
+
+  dup_ai_pks <- psmv_ai_check_dups[duplicated(psmv_ai_check_dups$pk), ]$pk |>
+    unique()
+
+  tmp <- psmv_ai_check_dups |>
+    filter(pk %in% dup_ai_pks) |>
+    select(pk, substance_de)
+
+  print(tmp[1:39, ], n = Inf)
+  print(tmp[40:79, ], n = Inf)
+  print(tmp[80:120, ], n = Inf)
+}
+
+# This is the case, so we can establish a list of pk values from the last occurrence of each pk
+psmv_active_substances <- psmv_substances |>
+  group_by(pk) |>
+  summarise(year = max(year)) |>
+  left_join(psmv_substances, by = join_by(pk, year)) |>
+  rename(latest_year = year)
+
+save(psmv_active_substances, file = here("data/psmv_active_substances.rda"), compress = "xz")
+
 # Check if accidentially included confidential information is removed
 sapply(psmv_list, function(psmv) {
   confidential <- psmv$ingredients |>

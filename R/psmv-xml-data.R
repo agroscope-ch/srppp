@@ -49,3 +49,13 @@
 #' @examples
 #' names(psmv_list)
 "psmv_list"
+
+#' Table of active substance names extracted from all years starting 2011
+#'
+#' @docType data
+#' @format tibble A table, resolving the primary keys ('pk') of the active 
+#' substances to the latest entry in any of the 'substances' tables in 
+#' [psmv_list].
+#' @examples
+#' print(psmv_active_substances, n = Inf)
+"psmv_active_substances"
