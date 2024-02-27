@@ -85,13 +85,14 @@ alternative_products <- function(psmv, active_ingredients,
     select(all_of(c("wNbr", selection_criteria))) |>
     unique() |>
     group_by(pick(all_of(selection_criteria))) |>
-    summarise(n_wNbr = n(), .groups = "drop")
+    summarise(n_wNbr = sum(!is.na(wNbr)), .groups = "drop")
 
   n_alternative_product_types <- alternative_uses |>
     select(all_of(c("pNbr", selection_criteria))) |>
     unique() |>
     group_by(pick(all_of(selection_criteria))) |>
-    summarise(n_pNbr = n(), .groups = "drop")
+    summarise(n_pNbr = sum(!is.na(pNbr)), .groups = "drop")
+
 
   n_alternatives <- n_alternative_products |>
     left_join(n_alternative_product_types, by = selection_criteria)
