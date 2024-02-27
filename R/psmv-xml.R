@@ -120,7 +120,8 @@ psmv_xml_get_substances <- function(psmv_xml = psmv_xml_get()) {
     c(xml_attr(sub_node, "primaryKey"),
       xml_attr(sub_node, "iupacName"),
       xml_attr(xml_children(sub_node), "value")
-    )
+    ) |>
+    trimws()
   }))
 
   colnames(sub_desc) <- c("pk", "iupac", "substance_de", "substance_fr", "substance_it", "substance_en", "substance_lt")
