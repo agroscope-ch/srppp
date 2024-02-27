@@ -15,9 +15,10 @@
 #' @param missing If this is set to TRUE, uses without alternative product registrations
 #' are listed.
 #' @param list If TRUE, a list of three tables is returned, a table of uses
-#' without alternative products, a table of the number of alternative
-#' products, if available, and a detailed table of all the alternative
-#' uses. This argument overrides the arguments 'details' and 'missing'.
+#' without alternative products ("Lückenindikationen"), a table of the number
+#' of alternative products for each use, if any, and a detailed table of all
+#' the alternative uses. This argument overrides the arguments 'details' and
+#' 'missing'.
 #' @param lang The language used for the active ingredient names and the returned
 #' tables.
 #' @export
