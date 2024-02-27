@@ -4,7 +4,7 @@
 #' either a table of uses with the number of available alternative products for each
 #' use, a detailed table of the alternative product uses, a table of uses without
 #' alternatives, or a list containing these three tables.
-#' 
+#'
 #' A use is defined as a combination of an application area, a crop
 #' ('culture') and a pathogen ('pest').
 #'
@@ -13,13 +13,13 @@
 #' matched against the column 'substances_de' in the psmv table 'substances'.
 #' @param details Should a table of alternative uses with 'wNbr' 'use_nr' be returned?
 #' @param missing If this is set to TRUE, uses without alternative product registrations
-#' are listed. 
+#' are listed.
 #' @param list If TRUE, a list of three tables is returned, a table of uses
-#' without alternative products, a table with the number of alternative
+#' without alternative products (gab indication/uses), a table of uses with the number
 #' products, if they are available, and a detailed table of all the alternative
 #' uses. This argument overrides the arguments 'details' and 'missing'.
 #' @param lang The language used for the active ingredient names and the returned
-#' tables. 
+#' tables.
 #' @export
 #' @examples
 #' psmv <- psmv_list[["2024"]]
@@ -64,7 +64,7 @@ alternative_products <- function(psmv, active_ingredients,
   # Select products without the active ingredients in question
   alternative_product_candidates <- psmv$products |>
     ungroup() |>
-    filter(!psmv$products$wNbr %in% affected_products$wNbr) 
+    filter(!psmv$products$wNbr %in% affected_products$wNbr)
 
   alternative_product_candidate_uses <- alternative_product_candidates |>
     left_join(psmv$uses, by = "wNbr", relationship = "many-to-many") |>
@@ -94,7 +94,7 @@ alternative_products <- function(psmv, active_ingredients,
     summarise(n_pNbr = n(), .groups = "drop")
 
   n_alternatives <- n_alternative_products |>
-    left_join(n_alternative_product_types, by = selection_criteria) 
+    left_join(n_alternative_product_types, by = selection_criteria)
 
   if (list) {
       ret <- list(
@@ -102,8 +102,8 @@ alternative_products <- function(psmv, active_ingredients,
         n_alternatives,
         alternative_uses)
       names(ret) <- c(
-        "No alternative", 
-        "Number of alternatives", 
+        "No alternative",
+        "Number of alternatives",
         "Alternative uses")
       return(ret)
   } else {
