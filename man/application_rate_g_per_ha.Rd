@@ -4,7 +4,11 @@
 \alias{application_rate_g_per_ha}
 \title{Calculate application rates for active ingredients}
 \usage{
-application_rate_g_per_ha(product_uses, aggregation = c("mean", "max", "min"))
+application_rate_g_per_ha(
+  product_uses,
+  aggregation = c("mean", "max", "min"),
+  skip_l_per_ha_without_g_per_L = TRUE
+)
 }
 \arguments{
 \item{product_uses}{A tibble containing the columns 'application_area_de',
@@ -13,6 +17,10 @@ in a \link{psmv_dm} object, as well as the columns 'percent' and 'g_per_L'
 from the 'ingredients' table in a \link{psmv_dm} object.}
 
 \item{aggregation}{How to represent a range if present, e.g. "mean" or "max"}
+
+\item{skip_l_per_ha_without_g_per_L}{Per default, uses where the use rate
+has units of l/ha are skipped, if there is not product concentration
+in g/L. This was also done in the 2023 indicator project.}
 }
 \value{
 A tibble containing one additional column 'rate_g_per_ha'
@@ -34,17 +42,17 @@ library(psmv)
 library(dplyr)
 library(dm)
 psmv <- psmv_list[["2022"]]
-  
+
 product_uses_with_ingredients <- psmv |>
-  dm_filter(substances = 
+  dm_filter(substances =
     (substance_de \%in\% c("Halauxifen-methyl", "Kupfer (als Kalkpr\u00E4parat)"))) |>
   dm_flatten_to_tbl(uses, products) |>
   left_join(psmv$ingredients, by = join_by(wNbr),
     relationship = "many-to-many") |>
   left_join(psmv$substances, by = join_by(pk)) |>
-  select(wNbr, name, use_nr, 
+  select(wNbr, name, use_nr,
     min_dosage, max_dosage, min_rate, max_rate, units_de,
-    application_area_de, 
+    application_area_de,
     substance_de, percent, g_per_L)
 
 application_rate_g_per_ha(product_uses_with_ingredients) |>

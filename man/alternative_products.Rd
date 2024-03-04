@@ -25,9 +25,10 @@ matched against the column 'substances_de' in the psmv table 'substances'.}
 are listed.}
 
 \item{list}{If TRUE, a list of three tables is returned, a table of uses
-without alternative products, a table with the number of alternative
-products, if they are available, and a detailed table of all the alternative
-uses. This argument overrides the arguments 'details' and 'missing'.}
+without alternative products ("Lückenindikationen"), a table of the number
+of alternative products for each use, if any, and a detailed table of all
+the alternative uses. This argument overrides the arguments 'details' and
+'missing'.}
 
 \item{lang}{The language used for the active ingredient names and the returned
 tables.}
