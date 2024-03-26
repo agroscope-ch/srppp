@@ -15,7 +15,10 @@
 #' @param skip_l_per_ha_without_g_per_L Per default, uses where the use rate
 #' has units of l/ha are skipped, if there is not product concentration
 #' in g/L. This was also done in the 2023 indicator project.
-#'
+#' @param fix_l_per_ha_is_water_volume During the review of the 2023 indicator
+#' project calculations, a number of cases were identified where the unit
+#' l/ha specifies a water volume, and not a product volume. If TRUE (default),
+#' these cases are corrected, if FALSE, these cases are discarded.
 #' @return A tibble containing one additional column 'rate_g_per_ha'
 #' @export
 #' @examples
@@ -45,7 +48,8 @@
 #'   print(n = Inf)
 application_rate_g_per_ha <- function(product_uses,
   aggregation = c("mean", "max", "min"),
-  skip_l_per_ha_without_g_per_L = TRUE)
+  skip_l_per_ha_without_g_per_L = TRUE,
+  fix_l_per_ha_is_water_volume = TRUE))
 {
   aggregation = match.arg(aggregation)
   rates_dosages <- product_uses |> # Rates are called "Expenditures" in the XML
@@ -113,3 +117,21 @@ application_rate_g_per_ha <- function(product_uses,
 units_convertible_to_g_per_ha <- c("l/ha", "kg/ha", "g/ha",
   "ml/m\u00B2", "ml/10m\u00B2", "ml/ha", "ml/a")
 
+#' Use definitions where the rate in l/ha refers to a water volume
+#'
+#' @docType data
+#' @export
+#' @seealso [application_rate_g_per_ha]
+#' @examples
+#' library(psmv)
+#' library(dplyr)
+#' # These are the cases where the rate in l/ha refers to a water volume
+#' l_per_ha_is_water_volume
+l_per_ha_is_water_volume <- tibble::tribble(
+  ~ wNbr, ~ use_nr, ~ source, ~ url, ~ comment,
+  3066L, 1L, "EFSA conclusion on cynamide 2010, p. 17",
+  "https://doi.org/10.2903/j.efsa.2010.1873",
+  "Presumably the cyanamid content of the product Dormex is also erroneous in
+  the PSMV, the EFSA conclusion (p. 17) specifies an active substance content of
+  520 g/l in the EFSA conclusion, while we have 52% (667 g/l) in the PSMV"
+)
