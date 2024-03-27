@@ -28,7 +28,7 @@ psmv_xml_get <- function(from = last(psmv::psmv_xml_dates))
   if (is.numeric(date)) {
     if (date < 2011) stop("Suitable PSMV XML files are only available starting from 2011")
     date <- min(grep(paste0("^", date), psmv::psmv_xml_dates, value = TRUE))
-  } 
+  }
 
   if (date %in% psmv::psmv_xml_dates) {
     path <- file.path(psmv::psmv_xml_idir, psmv::psmv_xml_zip_files[date])
@@ -147,7 +147,7 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get()) {
     pk <- xml_attr(xml_child(ingredient_node, search = 2), "primaryKey")
     type <- xml_text(xml_child(ingredient_node, search = 1))
     attributes <- xml_attrs(ingredient_node)
-    ret <- c(wNbr, pk, type, 
+    ret <- c(wNbr, pk, type,
       attributes[c("inPercent", "inGrammPerLitre", "additionalTextPrimaryKey")])
     names(ret) <- c("wNbr", "pk", "type", "percent", "g_per_L", "add_txt_pk")
     return(ret)
@@ -176,6 +176,7 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get()) {
   ret <- ingredients |>
     left_join(ingredient_descriptions, by = c(add_txt_pk = "pk")) |>
     select(-add_txt_pk) |>
+    mutate(across(c(percent, g_per_L), as.numeric)) |>
     arrange(wNbr, pk)
 
   return(ret)
@@ -255,18 +256,18 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
     # Searching for a child node e.g. with time units by name is too slow
     #time_units_pk <- xml_attr(xml_child(node, search = "TimeMeasure"), "primaryKey")
 
-    ret <- c(wNbr, 
+    ret <- c(wNbr,
       attributes[c(
-        "dosageFrom", "dosageTo", 
-        "waitingPeriod", 
-        "expenditureForm", "expenditureTo", 
-        "use_nr")], 
+        "dosageFrom", "dosageTo",
+        "waitingPeriod",
+        "expenditureForm", "expenditureTo",
+        "use_nr")],
       units_pk)
 
-    names(ret) <- c("wNbr", 
-      "min_dosage", "max_dosage", 
-      "waiting_period", 
-      "min_rate", "max_rate", 
+    names(ret) <- c("wNbr",
+      "min_dosage", "max_dosage",
+      "waiting_period",
+      "min_rate", "max_rate",
       "use_nr", "units_pk")
     return(ret)
   }
@@ -332,7 +333,7 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
 #'   dm_filter(products = (name == "Boxer")) |>
 #'   dm_nrow()
 #' dm_draw(psmv_2017)
-#' 
+#'
 #' psmv_dm_cur <- psmv_dm(psmv_xml_url)
 psmv_dm <- function(from = last(psmv::psmv_xml_dates),
   remove_duplicates = TRUE, keep = c("last", "first"))
@@ -420,15 +421,15 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
     select(-pk)
 
   # Table of uses ('indications') and associated information tables
-  uses <- psmv_xml_get_uses(psmv_xml) 
+  uses <- psmv_xml_get_uses(psmv_xml)
 
   uses <- psmv_xml_get_uses(psmv_xml) |>
     left_join(application_areas, by = join_by(wNbr, use_nr))
 
   # Check that we have exactly one application area per use
   problem_uses <- uses |>
-    group_by(wNbr, use_nr) |> 
-    summarise(n = n(), .groups = "drop_last") |> 
+    group_by(wNbr, use_nr) |>
+    summarise(n = n(), .groups = "drop_last") |>
     filter(n != 1)
 
   if (nrow(problem_uses) > 0) {
@@ -490,7 +491,7 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
     substances, ingredients,
     uses,
     application_comments,
-    culture_forms, 
+    culture_forms,
     cultures, pests, obligations) |>
     dm_add_pk(products, wNbr) |>
     dm_add_pk(substances, pk) |>
