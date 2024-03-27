@@ -15,7 +15,7 @@
 #' @param skip_l_per_ha_without_g_per_L Per default, uses where the use rate
 #' has units of l/ha are skipped, if there is not product concentration
 #' in g/L. This was also done in the 2023 indicator project.
-#' @param fix_l_per_ha_is_water_volume During the review of the 2023 indicator
+#' @param fix_l_per_ha During the review of the 2023 indicator
 #' project calculations, a number of cases were identified where the unit
 #' l/ha specifies a water volume, and not a product volume. If TRUE (default),
 #' these cases are corrected, if FALSE, these cases are discarded.
@@ -49,7 +49,7 @@
 application_rate_g_per_ha <- function(product_uses,
   aggregation = c("mean", "max", "min"),
   skip_l_per_ha_without_g_per_L = TRUE,
-  fix_l_per_ha_is_water_volume = TRUE))
+  fix_l_per_ha = TRUE)
 {
   aggregation = match.arg(aggregation)
   rates_dosages <- product_uses |> # Rates are called "Expenditures" in the XML
@@ -80,18 +80,23 @@ application_rate_g_per_ha <- function(product_uses,
     )
 
   active_rates <- rates_dosages |>
-    mutate(percent = as.numeric(percent), g_per_L = as.numeric(g_per_L)) |>
     mutate(ref_volume = case_when(
       application_area_de %in% c("Feldbau", "Gem\u00FCsebau", "Beerenbau", "Zierpflanzen") ~ 1000,
       application_area_de %in% c("Weinbau", "Obstbau") ~ 1600,
       .default = NA)) |>
+    left_join(l_per_ha_is_water_volume, by = c("wNbr", "use_nr")) |>
     mutate(rate_g_per_ha = case_when(
-      units_de == "l/ha" ~ if_else(is.na(g_per_L), # For l/ha, if g_per_L is not defined,
-        if (skip_l_per_ha_without_g_per_L) NA
-        else rate * dosage * (percent/100), # Rate is assumed to be water,
-          # dosage is assumed to be g product per L. This is correct for
-          # Rhodofix 2009 (Grünbuch) and 2012 (XML)
-        rate * g_per_L),
+      units_de == "l/ha" ~ # l/ha can refer to product or water volume
+        if_else(is.na(source), # if no external source, assume l/ha is product
+          if_else(is.na(g_per_L), # if g_per_L is not defined
+            if (skip_l_per_ha_without_g_per_L) NA # as in the 2023 indicator
+            else rate * dosage * (percent/100), # assume l/ha to be water,
+            # dosage is assumed to be g product per L. This is correct for
+            # Rhodofix 2009 (Grünbuch) and 2012 (XML)
+            rate * g_per_L), # l/ha is product
+          if (fix_l_per_ha) { # Here we have an external source, l/ha is water
+            rate * dosage/100 * g_per_L
+          } else NA),
       units_de == "kg/ha" ~ rate * (percent * 10), # percent w/w means 10 g/kg
       units_de == "g/ha" ~ rate * (percent / 100), # percent w/w means 0.01 g/g
       units_de == "ml/m\u00B2" ~ (rate/1000) * (g_per_L) * 10000,
@@ -117,21 +122,30 @@ application_rate_g_per_ha <- function(product_uses,
 units_convertible_to_g_per_ha <- c("l/ha", "kg/ha", "g/ha",
   "ml/m\u00B2", "ml/10m\u00B2", "ml/ha", "ml/a")
 
-#' Use definitions where the rate in l/ha refers to a water volume
+#' Use definitions where the rate in l/ha refers to the applied volume
 #'
 #' @docType data
 #' @export
 #' @seealso [application_rate_g_per_ha]
 #' @examples
 #' library(psmv)
-#' library(dplyr)
-#' # These are the cases where the rate in l/ha refers to a water volume
 #' l_per_ha_is_water_volume
 l_per_ha_is_water_volume <- tibble::tribble(
-  ~ wNbr, ~ use_nr, ~ source, ~ url, ~ comment,
-  3066L, 1L, "EFSA conclusion on cynamide 2010, p. 17",
-  "https://doi.org/10.2903/j.efsa.2010.1873",
-  "Presumably the cyanamid content of the product Dormex is also erroneous in
-  the PSMV, the EFSA conclusion (p. 17) specifies an active substance content of
-  520 g/l in the EFSA conclusion, while we have 52% (667 g/l) in the PSMV"
+  ~ wNbr, ~ use_nr, ~ source, ~ url,
+  "3066", 1L, "EFSA conclusion on cynamide 2010, p. 17",
+  "https://doi.org/10.2903/j.efsa.2010.1873"
+)
+
+#' Active ingredient concentrations to be corrected
+#'
+#' @docType data
+#' @export
+#' @seealso [application_rate_g_per_ha]
+#' @examples
+#' library(psmv)
+#' g_per_l_corrected
+g_per_l_corrected <- tibble::tribble(
+  ~ wNbr, ~ g_per_L, ~ source, ~ url, ~ comment,
+  "3066", 520.0, "EFSA conclusion on cyanamide 2010, p. 17",
+  "https://doi.org/10.2903/j.efsa.2010.1873", ""
 )
