@@ -100,7 +100,7 @@ application_rate_g_per_ha <- function(product_uses,
       units_de == "kg/ha" ~ rate * (percent * 10), # percent w/w means 10 g/kg
       units_de == "g/ha" ~ rate * (percent / 100), # percent w/w means 0.01 g/g
       units_de == "ml/m\u00B2" ~ (rate/1000) * (g_per_L) * 10000,
-      units_de == "ml/10m\u00B2" ~ (rate/1000) * (g_per_L) * 100000,
+      units_de == "ml/10m\u00B2" ~ (rate/1000) * (g_per_L) * 1000,
       units_de == "ml/ha" ~ (rate/1000) * (g_per_L),
       units_de == "ml/a" ~ (rate/1000) * (g_per_L) * 100,
       is.na(units_de) ~ ref_volume * dosage/100 * g_per_L,
