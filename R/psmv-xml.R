@@ -107,6 +107,53 @@ psmv_xml_get_products <- function(psmv_xml = psmv_xml_get(), verbose = TRUE,
   return(products)
 }
 
+#' Get Parallel Imports from an XML version of the PSMV
+#'
+#' @inheritParams psmv_xml_get_products
+#' @return A [tibble] with a row for each parallelimport section
+#' in the XML file.
+#' @export
+#' @examples
+#' library(psmv)
+#' parallelimports_2015 <- psmv_xml_get(2015) |>
+#'   psmv_xml_get_parallelimports()
+#'
+#' # Get current list of parallelimports
+#' psmv_xml_get_parallelimports()
+psmv_xml_get_parallelimports <- function(psmv_xml = psmv_xml_get())
+{
+  pi_nodeset <- xml_find_all(psmv_xml, "Parallelimports/Parallelimport")
+  pi_attribute_names <- names(xml_attrs(pi_nodeset[[1]]))
+  pis <- pi_nodeset |>
+    xml_attrs() |>
+    unlist() |>
+    matrix(ncol = 8, byrow = TRUE,
+      dimnames = list(NULL, pi_attribute_names)) |>
+    tibble::as_tibble() |>
+    arrange(wNbr)
+
+  ph_nodes <- xml_find_all(psmv_xml,
+    "Parallelimports/Parallelimport/ProductInformation/PermissionHolderKey")
+
+  ph_keys <- t(sapply(ph_nodes, function(node) {
+    pi_id <- xml_attr(xml_parent(xml_parent(node)), "id")
+    ph_key <- xml_attr(node, "primaryKey")
+    c(pi_id, ph_key)
+  })) |>
+    as_tibble()
+  names(ph_keys) <- c("id", "permission_holder_key")
+
+  # Discard the second permission holder
+  # For example, in the XML file from 2019-03-05, the Parallelimport F-6146
+  # has two PermissionHolderKey sections, with different primaryKey attributes
+  ph_keys <- ph_keys[!duplicated(ph_keys$id), ]
+
+  ret <- pis |>
+    left_join(ph_keys, by = "id")
+
+  return(ret)
+}
+
 #' Get substances from an XML version of the PSMV
 #'
 #' @param psmv_xml An object as returned by 'psmv_xml_get'
@@ -139,8 +186,10 @@ psmv_xml_get_substances <- function(psmv_xml = psmv_xml_get()) {
 #' @examples
 #' psmv_xml_get_ingredients()
 #' psmv_xml <- psmv_xml_get(2013)
-psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get()) {
-  ingredient_nodeset <- xml_find_all(psmv_xml, "Products/Product/ProductInformation/Ingredient")
+psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get())
+{
+  ingredient_nodeset <- xml_find_all(psmv_xml,
+    "Products/Product/ProductInformation/Ingredient")
 
   get_ingredient_map <- function(ingredient_node) {
     wNbr <- xml_attr(xml_parent(xml_parent(ingredient_node)), "wNbr")
@@ -179,7 +228,14 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get()) {
     mutate(across(c(percent, g_per_L), as.numeric)) |>
     arrange(wNbr, pk)
 
-  return(ret)
+  ret_corrected <- ret |>
+  # Active substance content of Dormex (W-3066) is not 667 g/L, but 520 g/L
+  # Wädenswil archive, Johannes Ranke and Daniel Baumgartner, 2024-03-27:
+    mutate(
+      percent = if_else(wNbr == "3066", 49, percent),
+      g_per_L = if_else(wNbr == "3066", 520, g_per_L))
+
+  return(ret_corrected)
 }
 
 #' Remove product sections with duplicated W-Numbers
@@ -348,6 +404,7 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
   # Tables of products and associated information
   # Duplicates were already removed from the XML, if requested
   products <- psmv_xml_get_products(psmv_xml, remove_duplicates = FALSE)
+  parallelimports <- psmv_xml_get_parallelimports(psmv_xml)
 
   product_information_table <- function(psmv_xml, tag_name, prefix = tag_name, code = FALSE) {
     descriptions <- description_table(psmv_xml, tag_name, code = code)
@@ -487,6 +544,7 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
 
   psmv_dm <- dm(products,
     product_categories, formulation_codes,
+    parallelimports,
     danger_symbols, CodeS, CodeR, signal_words,
     substances, ingredients,
     uses,
@@ -494,6 +552,7 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
     culture_forms,
     cultures, pests, obligations) |>
     dm_add_pk(products, wNbr) |>
+    dm_add_pk(parallelimports, id) |>
     dm_add_pk(substances, pk) |>
     dm_add_pk(uses, c(wNbr, use_nr)) |>
     dm_add_fk(product_categories, wNbr, products) |>

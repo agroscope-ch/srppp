@@ -7,7 +7,8 @@
 application_rate_g_per_ha(
   product_uses,
   aggregation = c("mean", "max", "min"),
-  skip_l_per_ha_without_g_per_L = TRUE
+  skip_l_per_ha_without_g_per_L = TRUE,
+  fix_l_per_ha = TRUE
 )
 }
 \arguments{
@@ -21,6 +22,11 @@ from the 'ingredients' table in a \link{psmv_dm} object.}
 \item{skip_l_per_ha_without_g_per_L}{Per default, uses where the use rate
 has units of l/ha are skipped, if there is not product concentration
 in g/L. This was also done in the 2023 indicator project.}
+
+\item{fix_l_per_ha}{During the review of the 2023 indicator
+project calculations, a number of cases were identified where the unit
+l/ha specifies a water volume, and not a product volume. If TRUE (default),
+these cases are corrected, if FALSE, these cases are discarded.}
 }
 \value{
 A tibble containing one additional column 'rate_g_per_ha'

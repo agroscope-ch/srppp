@@ -122,7 +122,7 @@ application_rate_g_per_ha <- function(product_uses,
 units_convertible_to_g_per_ha <- c("l/ha", "kg/ha", "g/ha",
   "ml/m\u00B2", "ml/10m\u00B2", "ml/ha", "ml/a")
 
-#' Use definitions where the rate in l/ha refers to the applied volume
+#' Use definitions where the rate in l/ha refers to the volume of the spraying solution
 #'
 #' @docType data
 #' @export
@@ -134,18 +134,4 @@ l_per_ha_is_water_volume <- tibble::tribble(
   ~ wNbr, ~ use_nr, ~ source, ~ url,
   "3066", 1L, "EFSA conclusion on cynamide 2010, p. 17",
   "https://doi.org/10.2903/j.efsa.2010.1873"
-)
-
-#' Active ingredient concentrations to be corrected
-#'
-#' @docType data
-#' @export
-#' @seealso [application_rate_g_per_ha]
-#' @examples
-#' library(psmv)
-#' g_per_l_corrected
-g_per_l_corrected <- tibble::tribble(
-  ~ wNbr, ~ g_per_L, ~ source, ~ url, ~ comment,
-  "3066", 520.0, "EFSA conclusion on cyanamide 2010, p. 17",
-  "https://doi.org/10.2903/j.efsa.2010.1873", ""
 )
