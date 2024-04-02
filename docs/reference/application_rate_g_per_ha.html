@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">psmv</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +57,8 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">application_rate_g_per_ha</span><span class="op">(</span></span>
 <span>  <span class="va">product_uses</span>,</span>
 <span>  aggregation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mean"</span>, <span class="st">"max"</span>, <span class="st">"min"</span><span class="op">)</span>,</span>
-<span>  skip_l_per_ha_without_g_per_L <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  skip_l_per_ha_without_g_per_L <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  fix_l_per_ha <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -78,6 +79,13 @@ from the 'ingredients' table in a <a href="psmv_dm.html">psmv_dm</a> object.</p>
 <dd><p>Per default, uses where the use rate
 has units of l/ha are skipped, if there is not product concentration
 in g/L. This was also done in the 2023 indicator project.</p></dd>
+
+
+<dt>fix_l_per_ha</dt>
+<dd><p>During the review of the 2023 indicator
+project calculations, a number of cases were identified where the unit
+l/ha specifies a water volume, and not a product volume. If TRUE (default),
+these cases are corrected, if FALSE, these cases are discarded.</p></dd>
 
 </dl></div>
     <div class="section level2">

@@ -14,7 +14,7 @@
 * checking CRAN incoming feasibility ... NOTE
 Maintainer: ‘Johannes Ranke <johannes.ranke@agroscope.admin.ch>’
 
-Size of tarball: 6881195 bytes
+Size of tarball: 6984495 bytes
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -23,11 +23,11 @@ Size of tarball: 6881195 bytes
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘psmv’ can be installed ... [61s/61s] OK
+* checking whether package ‘psmv’ can be installed ... [55s/56s] OK
 * checking installed package size ... NOTE
-  installed size is 11.9Mb
+  installed size is 12.2Mb
   sub-directories of 1Mb or more:
-    data  11.7Mb
+    data  11.9Mb
 * checking package directory ... OK
 * checking for future file timestamps ... OK
 * checking ‘build’ directory ... OK
@@ -65,10 +65,10 @@ Size of tarball: 6881195 bytes
 * checking data for ASCII and uncompressed saves ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... [50s/52s] NOTE
+* checking examples ... [44s/47s] NOTE
 Examples with CPU (user + system) or elapsed time > 5s
           user system elapsed
-psmv_dm 28.529  0.836  30.161
+psmv_dm 24.986  0.672   26.81
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... SKIPPED
 * checking for unstated dependencies in vignettes ... OK

@@ -110,17 +110,17 @@ psmv_xml_get_products <- function(psmv_xml = psmv_xml_get(), verbose = TRUE,
 #' Get Parallel Imports from an XML version of the PSMV
 #'
 #' @inheritParams psmv_xml_get_products
-#' @return A [tibble] with a row for each parallelimport section
+#' @return A [tibble] with a row for each parallel import section
 #' in the XML file.
 #' @export
 #' @examples
 #' library(psmv)
-#' parallelimports_2015 <- psmv_xml_get(2015) |>
-#'   psmv_xml_get_parallelimports()
+#' parallel_imports_2015 <- psmv_xml_get(2015) |>
+#'   psmv_xml_get_parallel_imports()
 #'
-#' # Get current list of parallelimports
-#' psmv_xml_get_parallelimports()
-psmv_xml_get_parallelimports <- function(psmv_xml = psmv_xml_get())
+#' # Get current list of parallel_imports
+#' psmv_xml_get_parallel_imports()
+psmv_xml_get_parallel_imports <- function(psmv_xml = psmv_xml_get())
 {
   pi_nodeset <- xml_find_all(psmv_xml, "Parallelimports/Parallelimport")
   pi_attribute_names <- names(xml_attrs(pi_nodeset[[1]]))
@@ -404,7 +404,7 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
   # Tables of products and associated information
   # Duplicates were already removed from the XML, if requested
   products <- psmv_xml_get_products(psmv_xml, remove_duplicates = FALSE)
-  parallelimports <- psmv_xml_get_parallelimports(psmv_xml)
+  parallel_imports <- psmv_xml_get_parallel_imports(psmv_xml)
 
   product_information_table <- function(psmv_xml, tag_name, prefix = tag_name, code = FALSE) {
     descriptions <- description_table(psmv_xml, tag_name, code = code)
@@ -544,7 +544,7 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
 
   psmv_dm <- dm(products,
     product_categories, formulation_codes,
-    parallelimports,
+    parallel_imports,
     danger_symbols, CodeS, CodeR, signal_words,
     substances, ingredients,
     uses,
@@ -552,7 +552,7 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
     culture_forms,
     cultures, pests, obligations) |>
     dm_add_pk(products, wNbr) |>
-    dm_add_pk(parallelimports, id) |>
+    dm_add_pk(parallel_imports, id) |>
     dm_add_pk(substances, pk) |>
     dm_add_pk(uses, c(wNbr, use_nr)) |>
     dm_add_fk(product_categories, wNbr, products) |>

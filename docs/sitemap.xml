@@ -43,6 +43,9 @@
     <loc>/reference/index.html</loc>
   </url>
   <url>
+    <loc>/reference/l_per_ha_is_water_volume.html</loc>
+  </url>
+  <url>
     <loc>/reference/psmv-package.html</loc>
   </url>
   <url>
@@ -68,6 +71,9 @@
   </url>
   <url>
     <loc>/reference/psmv_xml_get_ingredients.html</loc>
+  </url>
+  <url>
+    <loc>/reference/psmv_xml_get_parallel_imports.html</loc>
   </url>
   <url>
     <loc>/reference/psmv_xml_get_products.html</loc>

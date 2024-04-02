@@ -28,5 +28,5 @@ reference:
       - psmv_xml_define_use_numbers
       - psmv_xml_clean_product_names
       - psmv_xml_remove_duplicated_wNbrs
-      - psmv_xml_get_parallelimports
+      - psmv_xml_get_parallel_imports
       - l_per_ha_is_water_volume
