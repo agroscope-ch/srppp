@@ -6,7 +6,8 @@
 \usage{
 application_rate_g_per_ha(
   product_uses,
-  aggregation = c("mean", "max", "min"),
+  aggregation = c("max", "mean", "min"),
+  dosage_units = c("percent_ww", "percent_vv", "state_of_matter"),
   skip_l_per_ha_without_g_per_L = TRUE,
   fix_l_per_ha = TRUE
 )
@@ -17,7 +18,13 @@ application_rate_g_per_ha(
 in a \link{psmv_dm} object, as well as the columns 'percent' and 'g_per_L'
 from the 'ingredients' table in a \link{psmv_dm} object.}
 
-\item{aggregation}{How to represent a range if present, e.g. "mean" or "max"}
+\item{aggregation}{How to represent a range if present, e.g. "max" (default)
+or "mean".}
+
+\item{dosage_units}{If no units are given, or units are "\%", then the applied
+amount in g/ha is calculated using a reference application volume and the
+dosage. As the dosage units are not explicitly given, we can specify our
+assumptions about these using this argument.}
 
 \item{skip_l_per_ha_without_g_per_L}{Per default, uses where the use rate
 has units of l/ha are skipped, if there is not product concentration

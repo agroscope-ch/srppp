@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">psmv</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.10</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,6 +24,7 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/psmv_products_with_MO.html">Statistics on products containing microorganisms in the latest XML dump of the PSMV</a>
     <a class="dropdown-item" href="../articles/psmv_trends.html">Trends of data contained in XML dumps of the PSMV</a>
   </div>
 </li>
@@ -56,7 +57,8 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">application_rate_g_per_ha</span><span class="op">(</span></span>
 <span>  <span class="va">product_uses</span>,</span>
-<span>  aggregation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mean"</span>, <span class="st">"max"</span>, <span class="st">"min"</span><span class="op">)</span>,</span>
+<span>  aggregation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"max"</span>, <span class="st">"mean"</span>, <span class="st">"min"</span><span class="op">)</span>,</span>
+<span>  dosage_units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"percent_ww"</span>, <span class="st">"percent_vv"</span>, <span class="st">"state_of_matter"</span><span class="op">)</span>,</span>
 <span>  skip_l_per_ha_without_g_per_L <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  fix_l_per_ha <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -72,7 +74,15 @@ from the 'ingredients' table in a <a href="psmv_dm.html">psmv_dm</a> object.</p>
 
 
 <dt>aggregation</dt>
-<dd><p>How to represent a range if present, e.g. "mean" or "max"</p></dd>
+<dd><p>How to represent a range if present, e.g. "max" (default)
+or "mean".</p></dd>
+
+
+<dt>dosage_units</dt>
+<dd><p>If no units are given, or units are "%", then the applied
+amount in g/ha is calculated using a reference application volume and the
+dosage. As the dosage units are not explicitly given, we can specify our
+assumptions about these using this argument.</p></dd>
 
 
 <dt>skip_l_per_ha_without_g_per_L</dt>
@@ -153,18 +163,18 @@ areas in Switzerland.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Kupfer (als Kalkpräparat) Gemüsebau  0.5   <span style="color: #BB0000;">NA</span>     5     <span style="color: #BB0000;">NA</span>   kg/ha    <span style="text-decoration: underline;">1</span>000   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Kupfer (als Kalkpräparat) Weinbau    0.25  <span style="color: #BB0000;">NA</span>     4     <span style="color: #BB0000;">NA</span>   kg/ha     800   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Kupfer (als Kalkpräparat) Gemüsebau <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    13     <span style="color: #BB0000;">NA</span>   kg/ha    <span style="text-decoration: underline;">2</span>600   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Kupfer (als Kalkpräparat) Beerenbau  0.25   0.75  2.5    7.5 kg/ha    <span style="text-decoration: underline;">1</span>000   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Kupfer (als Kalkpräparat) Beerenbau  0.25   0.75  2.5    7.5 kg/ha    <span style="text-decoration: underline;">1</span>500   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Kupfer (als Kalkpräparat) Gemüsebau <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     5     <span style="color: #BB0000;">NA</span>   kg/ha    <span style="text-decoration: underline;">1</span>000   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Kupfer (als Kalkpräparat) Beerenbau  0.5    1.3   5     13   kg/ha    <span style="text-decoration: underline;">1</span>800   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Kupfer (als Kalkpräparat) Gemüsebau <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    13     18   kg/ha    <span style="text-decoration: underline;">3</span>100   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> Kupfer (als Kalkpräparat) Obstbau    0.125  0.25  2      4   kg/ha     600   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> Kupfer (als Kalkpräparat) Gemüsebau <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    13     18   kg/ha    <span style="text-decoration: underline;">3</span>100   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> Kupfer (als Kalkpräparat) Obstbau    0.25   0.5   4      8   kg/ha    <span style="text-decoration: underline;">1</span>200   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Kupfer (als Kalkpräparat) Beerenbau  0.5    1.3   5     13   kg/ha    <span style="text-decoration: underline;">2</span>600   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Kupfer (als Kalkpräparat) Gemüsebau <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    13     18   kg/ha    <span style="text-decoration: underline;">3</span>600   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> Kupfer (als Kalkpräparat) Obstbau    0.125  0.25  2      4   kg/ha     800   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> Kupfer (als Kalkpräparat) Gemüsebau <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    13     18   kg/ha    <span style="text-decoration: underline;">3</span>600   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> Kupfer (als Kalkpräparat) Obstbau    0.25   0.5   4      8   kg/ha    <span style="text-decoration: underline;">1</span>600   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> Kupfer (als Kalkpräparat) Gemüsebau  0.5   <span style="color: #BB0000;">NA</span>     5     <span style="color: #BB0000;">NA</span>   kg/ha    <span style="text-decoration: underline;">1</span>000   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> Kupfer (als Kalkpräparat) Obstbau    0.5    0.75  8     12   kg/ha    <span style="text-decoration: underline;">2</span>000   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> Kupfer (als Kalkpräparat) Gemüsebau <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    13     18   kg/ha    <span style="text-decoration: underline;">3</span>100   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> Kupfer (als Kalkpräparat) Obstbau    0.5    0.75  8     12   kg/ha    <span style="text-decoration: underline;">2</span>000   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> Kupfer (als Kalkpräparat) Beerenbau  0.25   0.75  2.5    7.5 kg/ha    <span style="text-decoration: underline;">1</span>000   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> Kupfer (als Kalkpräparat) Obstbau    0.5    0.75  8     12   kg/ha    <span style="text-decoration: underline;">2</span>400   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> Kupfer (als Kalkpräparat) Gemüsebau <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    13     18   kg/ha    <span style="text-decoration: underline;">3</span>600   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> Kupfer (als Kalkpräparat) Obstbau    0.5    0.75  8     12   kg/ha    <span style="text-decoration: underline;">2</span>400   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> Kupfer (als Kalkpräparat) Beerenbau  0.25   0.75  2.5    7.5 kg/ha    <span style="text-decoration: underline;">1</span>500   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> Kupfer (als Kalkpräparat) Feldbau   <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    17.5   <span style="color: #BB0000;">NA</span>   kg/ha    <span style="text-decoration: underline;">3</span>500   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">20</span> Fluroxypyr                Feldbau   <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     0.5   <span style="color: #BB0000;">NA</span>   l/ha      140   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">21</span> Cloquintocet-mexyl        Feldbau   <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>     0.5   <span style="color: #BB0000;">NA</span>   l/ha        6   </span>

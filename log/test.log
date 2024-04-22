@@ -6,3 +6,7 @@
 
 ══ Results ═════════════════════════════════════════════════════════════════════
 [ FAIL 0 | WARN 0 | SKIP 0 | PASS 3 ]
+Warning message:
+The `x` argument of `as_tibble.matrix()` must have unique column names if
+`.name_repair` is omitted as of tibble 2.0.0.
+ℹ Using compatibility `.name_repair`. 

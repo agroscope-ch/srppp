@@ -1,0 +1,157 @@
+---
+title: Statistics on products containing microorganisms in the latest XML dump of the PSMV
+author: Johannes Ranke
+date: Last change 22 April 2024 (rebuilt `r Sys.Date()`)
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Statistics on products containing microorganisms in the latest XML dump of the PSMV}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = TRUE, message = FALSE}
+knitr::opts_chunk$set(tidy = FALSE, cache = FALSE)
+options(knitr.kable.NA = '')
+library(psmv)
+library(dplyr)
+library(knitr)
+```
+
+## Statistics on products containing microorganisms
+
+```{r psmv, cache = TRUE}
+psmv <- psmv_dm(psmv_xml_url)
+```
+
+### Products in microorganism categories
+
+The following code was used to identify product categories containing
+microorganisms.
+
+```{r warning = FALSE}
+psmv$products |>
+  left_join(psmv$product_categories, by = "wNbr") |>
+  group_by(category_de) |>
+  summarise(n = n()) |>
+  kable()
+```
+
+The resulting product categories containing microorganisms 
+were defined as follows:
+
+```{r}
+microorganism_categories = c(
+  "Lebende Organismen (Bakterien)",
+  "Lebende Organismen (Pilze)",
+  "Lebende Organismen (gegen Pilze)")
+```
+
+The following code was used to list active substances in 
+insecticides and fungicides, to establish filter criteria
+for the ones that are microorganisms.
+
+The corresponding products are found with the following code:
+
+```{r}
+products_in_microorganism_categories <- psmv$products |>
+  ungroup() |>
+  left_join(psmv$product_categories, by = "wNbr") |>
+  filter(category_de %in% microorganism_categories) |>
+  select(wNbr, name, category_de) |>
+  arrange(wNbr)
+n_in_categories <- nrow(products_in_microorganism_categories)
+kable(products_in_microorganism_categories)
+```
+
+### Insecticides and fungicides containing microorganisms
+
+The following code was used to find additional microorganisms in products
+categorized as insecticides or fungicides.
+
+```{r}
+psmv$products |>
+  left_join(psmv$product_categories, by = "wNbr") |>
+  select(-pk) |>
+  ungroup() |>
+  filter(category_de == "Insektizid") |>
+  left_join(psmv$ingredients, by = "wNbr") |>
+  left_join(psmv$substances, by = "pk") |>
+  select(substance_de) |>
+  unique() |>
+  arrange(substance_de) |>
+  kable()
+
+psmv$products |>
+  left_join(psmv$product_categories, by = "wNbr") |>
+  select(-pk) |>
+  ungroup() |>
+  filter(category_de == "Fungizid") |>
+  left_join(psmv$ingredients, by = "wNbr") |>
+  left_join(psmv$substances, by = "pk") |>
+  select(substance_de) |>
+  unique() |>
+  arrange(substance_de) |>
+  kable()
+```
+
+The resulting filter criteria that were established and the resulting list
+of active ingredients:
+
+```{r}
+microorganism_genus_names <- c(
+  "Bacillus",
+  "Beauveria",
+  "Metarhizium",
+  "Xenorhabdus",
+  "Phlebia",
+  "Pseudomonas")
+microorganism_regexp <- paste(microorganism_genus_names, collapse = "|")
+microorganism_ingredients <- psmv$substances |>
+  filter(grepl(microorganism_regexp, substance_de)) |>
+  select(pk, substance_de)
+kable(microorganism_ingredients)
+```
+
+The corresponding products:
+
+```{r}
+additional_products_containing_microorganisms <- psmv$products |>
+  ungroup() |>
+  left_join(psmv$ingredients, by = "wNbr") |>
+  filter(pk %in% microorganism_ingredients$pk) |>
+  select(-pk) |>
+  left_join(psmv$product_categories, by = "wNbr") |> 
+  select(wNbr, name, category_de) |>
+  arrange(wNbr)
+n_additional <- nrow(additional_products_containing_microorganisms)
+kable(additional_products_containing_microorganisms)
+```
+
+## Summary
+
+In summary, out of `r nrow(psmv$products)` products, there are
+`r n_in_categories` in the microorganism categories
+as shown above, and
+`r n_additional` products in the
+insecticide and fungicide categories which contain an active substance that
+has a name that contains one of the microorganism genus names listed above.
+
+```{r}
+products_containing_microorganisms <- rbind(
+  products_in_microorganism_categories, 
+  additional_products_containing_microorganisms) |>
+  arrange(wNbr, name) |>
+  unique()
+n_unique <- length(unique(products_containing_microorganisms$wNbr))
+```
+
+The consolidated ist of the `r n_unique` unique products identified in this way
+is shown below. Some of these products are listed twice, because they were 
+identified via both ways.
+
+
+```{r}
+kable(products_containing_microorganisms)
+```

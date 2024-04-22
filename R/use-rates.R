@@ -11,7 +11,12 @@
 #' 'min_dosage', 'max_dosage', 'min_rate', 'max_rate', from the 'uses' table
 #' in a [psmv_dm] object, as well as the columns 'percent' and 'g_per_L'
 #' from the 'ingredients' table in a [psmv_dm] object.
-#' @param aggregation How to represent a range if present, e.g. "mean" or "max"
+#' @param aggregation How to represent a range if present, e.g. "max" (default)
+#' or "mean".
+#' @param dosage_units If no units are given, or units are "%", then the applied
+#' amount in g/ha is calculated using a reference application volume and the
+#' dosage. As the dosage units are not explicitly given, we can specify our
+#' assumptions about these using this argument.
 #' @param skip_l_per_ha_without_g_per_L Per default, uses where the use rate
 #' has units of l/ha are skipped, if there is not product concentration
 #' in g/L. This was also done in the 2023 indicator project.
@@ -47,7 +52,8 @@
 #'     units_de, rate = rate_g_per_ha) |>
 #'   print(n = Inf)
 application_rate_g_per_ha <- function(product_uses,
-  aggregation = c("mean", "max", "min"),
+  aggregation = c("max", "mean", "min"),
+  dosage_units = c("percent_ww", "percent_vv", "state_of_matter"),
   skip_l_per_ha_without_g_per_L = TRUE,
   fix_l_per_ha = TRUE)
 {
@@ -87,14 +93,14 @@ application_rate_g_per_ha <- function(product_uses,
     left_join(l_per_ha_is_water_volume, by = c("wNbr", "use_nr")) |>
     mutate(rate_g_per_ha = case_when(
       units_de == "l/ha" ~ # l/ha can refer to product or water volume
-        if_else(is.na(source), # if no external source, assume l/ha is product
+        if_else(is.na(source), # if no external information, assume l/ha is product
           if_else(is.na(g_per_L), # if g_per_L is not defined
             if (skip_l_per_ha_without_g_per_L) NA # as in the 2023 indicator
             else rate * dosage * (percent/100), # assume l/ha to be water,
             # dosage is assumed to be g product per L. This is correct for
             # Rhodofix 2009 (Grünbuch) and 2012 (XML)
             rate * g_per_L), # l/ha is product
-          if (fix_l_per_ha) { # Here we have an external source, l/ha is water
+          if (fix_l_per_ha) { # Sometimes we have information that l/ha is water
             rate * dosage/100 * g_per_L
           } else NA),
       units_de == "kg/ha" ~ rate * (percent * 10), # percent w/w means 10 g/kg
