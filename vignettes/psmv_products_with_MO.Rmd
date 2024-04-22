@@ -149,7 +149,7 @@ products_containing_microorganisms <- rbind(
 n_unique <- length(unique(products_containing_microorganisms$wNbr))
 ```
 
-The consolidated ist of the `r n_unique` unique products identified in this way
+The consolidated list of the `r n_unique` unique products identified in this way
 is shown below. Some of these products are listed twice, because they were 
 identified via both ways.
 
