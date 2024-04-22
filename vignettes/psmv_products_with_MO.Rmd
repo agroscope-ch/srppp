@@ -20,13 +20,11 @@ library(dplyr)
 library(knitr)
 ```
 
-## Statistics on products containing microorganisms
-
 ```{r psmv, cache = TRUE}
 psmv <- psmv_dm(psmv_xml_url)
 ```
 
-### Products in microorganism categories
+## Products in microorganism categories
 
 The following list was used to identify product categories containing
 microorganisms.
@@ -63,7 +61,7 @@ n_in_categories <- nrow(products_in_microorganism_categories)
 kable(products_in_microorganism_categories)
 ```
 
-### Insecticides and fungicides containing microorganisms
+## Insecticides and fungicides containing microorganisms
 
 The following lists of active substances in insecticides and fungicides were
 used to establish filter criteria active substances that are microorganisms.
