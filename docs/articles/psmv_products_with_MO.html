@@ -89,22 +89,17 @@ Ranke</h4>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">psmv</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/psmv_dm.html">psmv_dm</a></span><span class="op">(</span><span class="va">psmv_xml_url</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># We need to suppress warnings, because he lifecycle package apparently</span></span>
+<span><span class="co"># does not work as expected in pkgdown (and knitr?)</span></span>
+<span><span class="co"># https://lifecycle.r-lib.org/reference/last_lifecycle_warnings.html</span></span>
+<span><span class="va">psmv</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="../reference/psmv_dm.html">psmv_dm</a></span><span class="op">(</span><span class="va">psmv_xml_url</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> No duplicated W-Numbers</span></span></code></pre>
-<pre><code><span><span class="co">## Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if</span></span>
-<span><span class="co">## `.name_repair` is omitted as of tibble 2.0.0.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Using compatibility `.name_repair`.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> The deprecated feature was likely used in the <span style="color: #0000BB;">psmv</span> package.</span></span>
-<span><span class="co">##   Please report the issue at <span style="color: #0000BB; font-style: italic;">&lt;https://gitlab.agsad.admin.ch/psmwb/psmv/issues&gt;</span>.</span></span>
-<span><span class="co">## <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
-<span><span class="co">## <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
-<span><span class="co">## <span style="color: #555555;">generated.</span></span></span></code></pre>
 <div class="section level2">
 <h2 id="products-in-microorganism-categories">Products in microorganism categories<a class="anchor" aria-label="anchor" href="#products-in-microorganism-categories"></a>
 </h2>
 <p>The following list was used to identify product categories containing
 microorganisms.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">psmv</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">psmv</span><span class="op">$</span><span class="va">product_categories</span>, by <span class="op">=</span> <span class="st">"wNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">category_de</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -224,7 +219,7 @@ microorganisms.</p>
 </table>
 <p>The resulting product categories containing microorganisms were
 defined as follows:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">microorganism_categories</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Lebende Organismen (Bakterien)"</span>,</span>
 <span>  <span class="st">"Lebende Organismen (Pilze)"</span>,</span>
@@ -247,7 +242,7 @@ defined as follows:</p>
 </tbody>
 </table>
 <p>The corresponding products are shown below.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">products_in_microorganism_categories</span> <span class="op">&lt;-</span> <span class="va">psmv</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">psmv</span><span class="op">$</span><span class="va">product_categories</span>, by <span class="op">=</span> <span class="st">"wNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -412,7 +407,7 @@ defined as follows:</p>
 <p>The following lists of active substances in insecticides and
 fungicides were used to establish filter criteria active substances that
 are microorganisms.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">psmv</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">psmv</span><span class="op">$</span><span class="va">product_categories</span>, by <span class="op">=</span> <span class="st">"wNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">pk</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -634,7 +629,7 @@ sulfuric acid, sodium salts</td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">psmv</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">psmv</span><span class="op">$</span><span class="va">product_categories</span>, by <span class="op">=</span> <span class="st">"wNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">pk</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1037,7 +1032,7 @@ methyl ester</td>
 </tbody>
 </table>
 <p>The following genus names were established as filtering criteria.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">microorganism_genus_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Bacillus"</span>,</span>
 <span>  <span class="st">"Beauveria"</span>,</span>
@@ -1072,7 +1067,7 @@ methyl ester</td>
 </tbody>
 </table>
 <p>This results in the following list of active ingredients.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">microorganism_regexp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">microorganism_genus_names</span>, collapse <span class="op">=</span> <span class="st">"|"</span><span class="op">)</span></span>
 <span><span class="va">microorganism_ingredients</span> <span class="op">&lt;-</span> <span class="va">psmv</span><span class="op">$</span><span class="va">substances</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="va">microorganism_regexp</span>, <span class="va">substance_de</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1139,7 +1134,7 @@ methyl ester</td>
 </tbody>
 </table>
 <p>The following products contain one of these active ingredients.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">additional_products_containing_microorganisms</span> <span class="op">&lt;-</span> <span class="va">psmv</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">psmv</span><span class="op">$</span><span class="va">ingredients</span>, by <span class="op">=</span> <span class="st">"wNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1515,7 +1510,7 @@ Buchsbaumzünsler</td>
 categories as shown above, and 68 products in the insecticide and
 fungicide categories which contain an active substance that has a name
 that contains one of the microorganism genus names listed above.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">products_containing_microorganisms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span></span>
 <span>  <span class="va">products_in_microorganism_categories</span>, </span>
 <span>  <span class="va">additional_products_containing_microorganisms</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1525,7 +1520,7 @@ that contains one of the microorganism genus names listed above.</p>
 <p>The consolidated ist of the 61 unique products identified in this way
 is shown below. Some of these products are listed twice, because they
 were identified via both ways.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">products_containing_microorganisms</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>

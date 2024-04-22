@@ -20,8 +20,11 @@ library(dplyr)
 library(knitr)
 ```
 
-```{r psmv, cache = TRUE}
-psmv <- psmv_dm(psmv_xml_url)
+```{r psmv, cache = FALSE, warnings = FALSE}
+# We need to suppress warnings, because he lifecycle package apparently
+# does not work as expected in pkgdown (and knitr?)
+# https://lifecycle.r-lib.org/reference/last_lifecycle_warnings.html
+psmv <- suppressWarnings(psmv_dm(psmv_xml_url))
 ```
 
 ## Products in microorganism categories
