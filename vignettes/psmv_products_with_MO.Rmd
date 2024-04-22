@@ -104,7 +104,7 @@ microorganism_genus_names <- c(
   "Xenorhabdus",
   "Phlebia",
   "Pseudomonas")
-kable(data.frame("Genus names" = microorganism_genus_names))
+kable(data.frame("Genus names" = microorganism_genus_names, check.names = FALSE))
 ```
 
 This results in the following list of active ingredients.
