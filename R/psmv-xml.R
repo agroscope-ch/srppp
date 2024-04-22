@@ -135,13 +135,13 @@ psmv_xml_get_parallel_imports <- function(psmv_xml = psmv_xml_get())
   ph_nodes <- xml_find_all(psmv_xml,
     "Parallelimports/Parallelimport/ProductInformation/PermissionHolderKey")
 
-  ph_keys <- t(sapply(ph_nodes, function(node) {
+  ph_key_matrix <- t(sapply(ph_nodes, function(node) {
     pi_id <- xml_attr(xml_parent(xml_parent(node)), "id")
     ph_key <- xml_attr(node, "primaryKey")
     c(pi_id, ph_key)
-  })) |>
-    as_tibble()
-  names(ph_keys) <- c("id", "permission_holder_key")
+  }))
+  colnames(ph_key_matrix) <- c("id", "permission_holder_key")
+  ph_keys <- tibble::as_tibble(ph_key_matrix)
 
   # Discard the second permission holder
   # For example, in the XML file from 2019-03-05, the Parallelimport F-6146
