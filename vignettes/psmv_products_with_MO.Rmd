@@ -5,6 +5,7 @@ date: Last change 22 April 2024 (rebuilt `r Sys.Date()`)
 output:
   rmarkdown::html_vignette:
     toc: true
+    code_folding: hide
 vignette: >
   %\VignetteIndexEntry{Statistics on products containing microorganisms in the latest XML dump of the PSMV}
   %\VignetteEngine{knitr::rmarkdown}
@@ -27,7 +28,7 @@ psmv <- psmv_dm(psmv_xml_url)
 
 ### Products in microorganism categories
 
-The following code was used to identify product categories containing
+The following list was used to identify product categories containing
 microorganisms.
 
 ```{r warning = FALSE}
@@ -46,13 +47,10 @@ microorganism_categories = c(
   "Lebende Organismen (Bakterien)",
   "Lebende Organismen (Pilze)",
   "Lebende Organismen (gegen Pilze)")
+kable(data.frame(Category = microorganism_categories))
 ```
 
-The following code was used to list active substances in 
-insecticides and fungicides, to establish filter criteria
-for the ones that are microorganisms.
-
-The corresponding products are found with the following code:
+The corresponding products are shown below.
 
 ```{r}
 products_in_microorganism_categories <- psmv$products |>
@@ -67,8 +65,8 @@ kable(products_in_microorganism_categories)
 
 ### Insecticides and fungicides containing microorganisms
 
-The following code was used to find additional microorganisms in products
-categorized as insecticides or fungicides.
+The following lists of active substances in insecticides and fungicides were
+used to establish filter criteria active substances that are microorganisms.
 
 ```{r}
 psmv$products |>
@@ -96,8 +94,7 @@ psmv$products |>
   kable()
 ```
 
-The resulting filter criteria that were established and the resulting list
-of active ingredients:
+The following genus names were established as filtering criteria.
 
 ```{r}
 microorganism_genus_names <- c(
@@ -107,14 +104,21 @@ microorganism_genus_names <- c(
   "Xenorhabdus",
   "Phlebia",
   "Pseudomonas")
+kable(data.frame("Genus names" = microorganism_genus_names))
+```
+
+This results in the following list of active ingredients.
+
+```{r}
 microorganism_regexp <- paste(microorganism_genus_names, collapse = "|")
 microorganism_ingredients <- psmv$substances |>
   filter(grepl(microorganism_regexp, substance_de)) |>
   select(pk, substance_de)
 kable(microorganism_ingredients)
+
 ```
 
-The corresponding products:
+The following products contain one of these active ingredients.
 
 ```{r}
 additional_products_containing_microorganisms <- psmv$products |>

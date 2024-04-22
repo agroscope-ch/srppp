@@ -105,7 +105,7 @@ Ranke</h4>
 <div class="section level3">
 <h3 id="products-in-microorganism-categories">Products in microorganism categories<a class="anchor" aria-label="anchor" href="#products-in-microorganism-categories"></a>
 </h3>
-<p>The following code was used to identify product categories containing
+<p>The following list was used to identify product categories containing
 microorganisms.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">psmv</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
@@ -231,11 +231,25 @@ defined as follows:</p>
 <code class="sourceCode R"><span><span class="va">microorganism_categories</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Lebende Organismen (Bakterien)"</span>,</span>
 <span>  <span class="st">"Lebende Organismen (Pilze)"</span>,</span>
-<span>  <span class="st">"Lebende Organismen (gegen Pilze)"</span><span class="op">)</span></span></code></pre></div>
-<p>The following code was used to list active substances in insecticides
-and fungicides, to establish filter criteria for the ones that are
-microorganisms.</p>
-<p>The corresponding products are found with the following code:</p>
+<span>  <span class="st">"Lebende Organismen (gegen Pilze)"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>Category <span class="op">=</span> <span class="va">microorganism_categories</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">Category</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Lebende Organismen (Bakterien)</td>
+</tr>
+<tr class="even">
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="left">Lebende Organismen (gegen Pilze)</td>
+</tr>
+</tbody>
+</table>
+<p>The corresponding products are shown below.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">products_in_microorganism_categories</span> <span class="op">&lt;-</span> <span class="va">psmv</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -398,8 +412,9 @@ microorganisms.</p>
 <div class="section level3">
 <h3 id="insecticides-and-fungicides-containing-microorganisms">Insecticides and fungicides containing microorganisms<a class="anchor" aria-label="anchor" href="#insecticides-and-fungicides-containing-microorganisms"></a>
 </h3>
-<p>The following code was used to find additional microorganisms in
-products categorized as insecticides or fungicides.</p>
+<p>The following lists of active substances in insecticides and
+fungicides were used to establish filter criteria active substances that
+are microorganisms.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">psmv</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">psmv</span><span class="op">$</span><span class="va">product_categories</span>, by <span class="op">=</span> <span class="st">"wNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1024,8 +1039,7 @@ methyl ester</td>
 </tr>
 </tbody>
 </table>
-<p>The resulting filter criteria that were established and the resulting
-list of active ingredients:</p>
+<p>The following genus names were established as filtering criteria.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">microorganism_genus_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Bacillus"</span>,</span>
@@ -1034,7 +1048,35 @@ list of active ingredients:</p>
 <span>  <span class="st">"Xenorhabdus"</span>,</span>
 <span>  <span class="st">"Phlebia"</span>,</span>
 <span>  <span class="st">"Pseudomonas"</span><span class="op">)</span></span>
-<span><span class="va">microorganism_regexp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">microorganism_genus_names</span>, collapse <span class="op">=</span> <span class="st">"|"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"Genus names"</span> <span class="op">=</span> <span class="va">microorganism_genus_names</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">Genus.names</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">Bacillus</td>
+</tr>
+<tr class="even">
+<td align="left">Beauveria</td>
+</tr>
+<tr class="odd">
+<td align="left">Metarhizium</td>
+</tr>
+<tr class="even">
+<td align="left">Xenorhabdus</td>
+</tr>
+<tr class="odd">
+<td align="left">Phlebia</td>
+</tr>
+<tr class="even">
+<td align="left">Pseudomonas</td>
+</tr>
+</tbody>
+</table>
+<p>This results in the following list of active ingredients.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">microorganism_regexp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">microorganism_genus_names</span>, collapse <span class="op">=</span> <span class="st">"|"</span><span class="op">)</span></span>
 <span><span class="va">microorganism_ingredients</span> <span class="op">&lt;-</span> <span class="va">psmv</span><span class="op">$</span><span class="va">substances</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="va">microorganism_regexp</span>, <span class="va">substance_de</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">pk</span>, <span class="va">substance_de</span><span class="op">)</span></span>
@@ -1099,8 +1141,8 @@ list of active ingredients:</p>
 </tr>
 </tbody>
 </table>
-<p>The corresponding products:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<p>The following products contain one of these active ingredients.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">additional_products_containing_microorganisms</span> <span class="op">&lt;-</span> <span class="va">psmv</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">psmv</span><span class="op">$</span><span class="va">ingredients</span>, by <span class="op">=</span> <span class="st">"wNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1477,7 +1519,7 @@ Buchsbaumzünsler</td>
 categories as shown above, and 68 products in the insecticide and
 fungicide categories which contain an active substance that has a name
 that contains one of the microorganism genus names listed above.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">products_containing_microorganisms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span></span>
 <span>  <span class="va">products_in_microorganism_categories</span>, </span>
 <span>  <span class="va">additional_products_containing_microorganisms</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1487,7 +1529,7 @@ that contains one of the microorganism genus names listed above.</p>
 <p>The consolidated ist of the 61 unique products identified in this way
 is shown below. Some of these products are listed twice, because they
 were identified via both ways.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">products_containing_microorganisms</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
