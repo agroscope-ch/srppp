@@ -9,15 +9,13 @@ Authors@R: c(
     email = "johannes.ranke@agroscope.admin.ch",
     comment = c(ORCID = "0000-0003-4371-6538")),
   person("Agroscope", role = "cph"))
-Description: Data objects extracted from XML versions of the Swiss Register of
-  Plant Protection Products 'PSMV' and function to obtain such objects. Please
-  note that this is not an official source of information
-  on authorisations. The official register can be accessed at
+Description: Functions to obtain data objects from XML versions of the Swiss Register of
+  Plant Protection Products 'PSMV'. An online version of the register can be accessed at
   <https://www.psm.admin.ch/de/produkte>.
 Depends: R (>= 4.1.0)
 Imports: xml2, tibble, stringr, dplyr, dm, tidyr, cli
-Suggests: knitr, rmarkdown, here, dbplyr, vctrs, DiagrammeR,
-  ggplot2, testthat (>= 3.0.0), fledge, parallel
+Suggests: knitr, rmarkdown, here, DiagrammeR,
+  testthat (>= 3.0.0), parallel
 BugReports: https://gitlab.agsad.admin.ch/psmwb/psmv/issues
 License: GPL
 LazyData: yes

@@ -11,11 +11,6 @@ reference:
       - application_rate_g_per_ha
   - title: Data objects for working with XML versions of the PSMV
     contents:
-      - psmv_list
-      - psmv_active_substances
-      - psmv_xml_idir
-      - psmv_xml_dates
-      - psmv_xml_zip_files
       - psmv_xml_url
       - units_convertible_to_g_per_ha
   - title: Helper functions mainly used internally

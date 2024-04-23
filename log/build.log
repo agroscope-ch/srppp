@@ -2,8 +2,16 @@
 * preparing ‘psmv’:
 * checking DESCRIPTION meta-information ... OK
 * installing the package to build vignettes
-* creating vignettes ... OK
-* checking for LF line-endings in source and make files and shell scripts
-* checking for empty or unneeded directories
-* building ‘psmv_0.2.1.tar.gz’
+* creating vignettes ... ERROR
+--- re-building ‘psmv_products_with_MO.Rmd’ using rmarkdown
 
+Quitting from lines 24-25 [psmv] (psmv_products_with_MO.Rmd)
+Error: processing vignette 'psmv_products_with_MO.Rmd' failed with diagnostics:
+'psmv_xml_dates' is not an exported object from 'namespace:psmv'
+--- failed re-building ‘psmv_products_with_MO.Rmd’
+
+SUMMARY: processing the following file failed:
+  ‘psmv_products_with_MO.Rmd’
+
+Error: Vignette re-building failed.
+Execution halted

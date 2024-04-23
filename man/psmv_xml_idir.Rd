@@ -3,12 +3,13 @@
 \docType{data}
 \name{psmv_xml_idir}
 \alias{psmv_xml_idir}
+\alias{psmv_xml_url}
 \title{Path to the directory where the published XML versions of the PSMV are stored}
 \format{
 length one character string
 }
 \usage{
-psmv_xml_idir
+psmv_xml_url
 }
 \description{
 This is a string, specifying the path to the input files, meant to be used on the RStudio server machines, where the

@@ -23,7 +23,7 @@ Size of tarball: 6400207 bytes
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘psmv’ can be installed ... [57s/57s] OK
+* checking whether package ‘psmv’ can be installed ... [60s/76s] OK
 * checking installed package size ... NOTE
   installed size is 12.2Mb
   sub-directories of 1Mb or more:
@@ -65,15 +65,15 @@ Size of tarball: 6400207 bytes
 * checking data for ASCII and uncompressed saves ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... [46s/49s] NOTE
+* checking examples ... [52s/60s] NOTE
 Examples with CPU (user + system) or elapsed time > 5s
           user system elapsed
-psmv_dm 26.635  0.736  27.955
+psmv_dm 29.192  1.395  32.458
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... SKIPPED
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
-* checking re-building of vignette outputs ... [19s/20s] OK
+* checking re-building of vignette outputs ... [22s/25s] OK
 * checking PDF version of manual ... OK
 * checking HTML version of manual ... NOTE
 Skipping checking HTML validation: no command 'tidy' found

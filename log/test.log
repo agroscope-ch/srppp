@@ -1,8 +1,28 @@
 ℹ Testing psmv
-ℹ Reading XML for 2024-01-30
-✔ No duplicated W-Numbers
-✔ | F W  S  OK | Context
-✔ |          3 | alternative_products
-
-══ Results ═════════════════════════════════════════════════════════════════════
-[ FAIL 0 | WARN 0 | SKIP 0 | PASS 3 ]
+Error in `FUN()`:
+! In path: "/home/agsad.admin.ch/f80868656/projects/psmv/tests/testthat/setup.R"
+Caused by error:
+! 'psmv_xml_dates' is not an exported object from 'namespace:psmv'
+Backtrace:
+     ▆
+  1. ├─devtools::test()
+  2. │ └─testthat::test_local(...)
+  3. │   └─testthat::test_dir(...)
+  4. │     └─testthat:::test_files(...)
+  5. │       └─testthat:::test_files_serial(...)
+  6. │         └─testthat:::test_files_setup_state(...)
+  7. │           └─testthat::source_test_setup(".", env)
+  8. │             └─testthat::source_dir(path, "^setup.*\\.[rR]$", env = env, wrap = FALSE)
+  9. │               └─base::lapply(...)
+ 10. │                 └─testthat (local) FUN(X[[i]], ...)
+ 11. │                   └─testthat::source_file(path, env = env, chdir = chdir, wrap = wrap)
+ 12. │                     ├─base::withCallingHandlers(...)
+ 13. │                     └─base::eval(exprs, env)
+ 14. │                       └─base::eval(exprs, env)
+ 15. │                         └─psmv::psmv_dm("2024-01-30") at tests/testthat/setup.R:2:1
+ 16. │                           └─psmv::psmv_xml_get(from) at psmv/R/psmv-xml.R:401:3
+ 17. │                             └─date %in% psmv::psmv_xml_dates at psmv/R/psmv-xml.R:34:3
+ 18. └─base::.handleSimpleError(...)
+ 19.   └─testthat (local) h(simpleError(msg, call))
+ 20.     └─rlang::abort(...)
+Execution halted

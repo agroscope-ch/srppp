@@ -9,7 +9,7 @@ utils::globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "pNbr", "use_nr",
 #' Read an XML version of the PSMV
 #'
 #' @param from A number giving a year starting from 2011 up to the current year, or
-#' one of the dates in [psmv::psmv_xml_dates] as a length one character vector
+#' one of the dates in [psmvdata::psmv_xml_dates] as a length one character vector
 #' in the format YYYY-MM-DD, or an URL from where to download
 #' @return An object inheriting from 'psmv_xml', 'xml_document', 'xml_node'
 #' @export
