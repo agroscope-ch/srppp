@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">psmv</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.10</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,7 +74,7 @@
 Ranke</h4>
             
             <h4 data-toc-skip class="date">Last change 22 April 2024
-(rebuilt 2024-04-22)</h4>
+(rebuilt 2024-04-23)</h4>
       
       <small class="dont-index">Source: <a href="https://gitlab.agsad.admin.ch/psmwb/psmv/blob/HEAD/vignettes/psmv_products_with_MO.Rmd" class="external-link"><code>vignettes/psmv_products_with_MO.Rmd</code></a></small>
       <div class="d-none name"><code>psmv_products_with_MO.Rmd</code></div>
@@ -407,7 +407,6 @@ are microorganisms.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">psmv</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">psmv</span><span class="op">$</span><span class="va">product_categories</span>, by <span class="op">=</span> <span class="st">"wNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">pk</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">category_de</span> <span class="op">==</span> <span class="st">"Insektizid"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">psmv</span><span class="op">$</span><span class="va">ingredients</span>, by <span class="op">=</span> <span class="st">"wNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -629,7 +628,6 @@ sulfuric acid, sodium salts</td>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">psmv</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">psmv</span><span class="op">$</span><span class="va">product_categories</span>, by <span class="op">=</span> <span class="st">"wNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">pk</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">category_de</span> <span class="op">==</span> <span class="st">"Fungizid"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">psmv</span><span class="op">$</span><span class="va">ingredients</span>, by <span class="op">=</span> <span class="st">"wNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>

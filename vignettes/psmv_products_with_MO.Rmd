@@ -69,7 +69,6 @@ used to establish filter criteria active substances that are microorganisms.
 ```{r}
 psmv$products |>
   left_join(psmv$product_categories, by = "wNbr") |>
-  select(-pk) |>
   ungroup() |>
   filter(category_de == "Insektizid") |>
   left_join(psmv$ingredients, by = "wNbr") |>
@@ -81,7 +80,6 @@ psmv$products |>
 
 psmv$products |>
   left_join(psmv$product_categories, by = "wNbr") |>
-  select(-pk) |>
   ungroup() |>
   filter(category_de == "Fungizid") |>
   left_join(psmv$ingredients, by = "wNbr") |>

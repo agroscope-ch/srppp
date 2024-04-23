@@ -2,6 +2,7 @@ utils::globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "pNbr", "use_nr",
   "add_txt_pk", "de", "fr", "it", "en", "exhaustionDeadline", "soldoutDeadline",
   "isSalePermission", "terminationReason",
   "min_dosage", "max_dosage", "min_rate", "max_rate", "waiting_period",
+  "desc_pk", "ingr_desc_pk",
   "units_pk", "time_units_pk",
   "type", "g_per_L", "percent"))
 
@@ -202,13 +203,13 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get())
     return(ret)
   }
 
-  # As the content of additives are confidential, we remove to address cases
+  # As the contents of additives are confidential, we remove them to address cases
   # were they were accidentally included in the XML dump.
   ingredients <- t(sapply(ingredient_nodeset, get_ingredient_map)) |>
     tibble::as_tibble() |>
     mutate(percent = if_else(
       type == "ADDITIVE_TO_DECLARE", "", percent)) |>
-    mutate(g_per_L= if_else(
+    mutate(g_per_L = if_else(
       type == "ADDITIVE_TO_DECLARE", "", g_per_L)) |>
     mutate(add_txt_pk = as.integer(add_txt_pk)) |>
     mutate(pk = as.integer(pk))
@@ -219,11 +220,12 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get())
     tibble::as_tibble() |>
     rename(ingredient_de = de, ingredient_fr = fr) |>
     rename(ingredient_it = it, ingredient_en = en) |>
-    mutate(pk = as.integer(pk)) |>
-    arrange(pk)
+    mutate(desc_pk = as.integer(desc_pk)) |>
+    rename(ingr_desc_pk = desc_pk) |>
+    arrange(ingr_desc_pk)
 
   ret <- ingredients |>
-    left_join(ingredient_descriptions, by = c(add_txt_pk = "pk")) |>
+    left_join(ingredient_descriptions, by = c(add_txt_pk = "ingr_desc_pk")) |>
     select(-add_txt_pk) |>
     mutate(across(c(percent, g_per_L), as.numeric)) |>
     arrange(wNbr, pk)
@@ -331,8 +333,9 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
   rate_unit_descriptions <- description_table(psmv_xml, "Measure") |>
     rename(units_de = de, units_fr = fr) |>
     rename(units_it = it, units_en = en) |>
-    mutate(pk = as.integer(pk)) |>
-    arrange(pk)
+    rename(units_pk = desc_pk) |>
+    mutate(units_pk = as.integer(units_pk)) |>
+    arrange(units_pk)
 
   time_units_nodeset <- xml_find_all(psmv_xml, "Products/Product/ProductInformation/Indication/TimeMeasure")
   get_time_units <- function(node) {
@@ -353,8 +356,9 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
     tibble::as_tibble() |>
     rename(time_units_de = de, time_units_fr = fr) |>
     rename(time_units_it = it, time_units_en = en) |>
-    mutate(pk = as.integer(pk)) |>
-    arrange(pk)
+    rename(time_units_pk = desc_pk) |>
+    mutate(time_units_pk = as.integer(time_units_pk)) |>
+    arrange(time_units_pk)
 
   uses <- t(sapply(use_nodeset, get_use)) |>
     tibble::as_tibble() |>
@@ -364,8 +368,8 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
     left_join(time_units, by = join_by(wNbr, use_nr))
 
   ret <- uses |>
-    left_join(rate_unit_descriptions, by = c(units_pk = "pk")) |>
-    left_join(time_unit_descriptions, by = c(time_units_pk = "pk")) |>
+    left_join(rate_unit_descriptions, by = "units_pk") |>
+    left_join(time_unit_descriptions, by = "time_units_pk") |>
     select(-units_pk, -time_units_pk)
 
   return(ret)
@@ -417,9 +421,9 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
 
       ret <- tibble::tibble(
           wNbr = sapply(product_information_nodes, get_grandparent_wNbr),
-          pk = as.integer(xml_attr(product_information_nodes, "primaryKey"))
+          desc_pk = as.integer(xml_attr(product_information_nodes, "primaryKey"))
         ) |>
-        left_join(descriptions, by = "pk") |>
+        left_join(descriptions, by = "desc_pk") |>
         rename_with(function(colname) paste(prefix, colname, sep = "_"),
           .cols = c(de, fr, it, en)) |>
         arrange(wNbr)
@@ -454,8 +458,8 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
     ret <- tibble::tibble(
       wNbr = sapply(indication_information_nodes, get_great_grandparent_wNbr),
       use_nr = sapply(indication_information_nodes, get_use_nr),
-      pk = xml_attr(indication_information_nodes, "primaryKey")) |>
-        mutate_at(c("use_nr", "pk"), as.integer) |>
+      desc_pk = xml_attr(indication_information_nodes, "primaryKey")) |>
+        mutate_at(c("use_nr", "desc_pk"), as.integer) |>
         arrange(wNbr)
 
     if (additional_text) {
@@ -472,10 +476,10 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
 
   application_area_descriptions <- description_table(psmv_xml, "ApplicationArea")
   application_areas <- indication_information_table(psmv_xml, "ApplicationArea") |>
-    left_join(application_area_descriptions, by = join_by(pk)) |>
+    left_join(application_area_descriptions, by = "desc_pk") |>
     rename(application_area_de = de, application_area_fr = fr) |>
     rename(application_area_it = it, application_area_en = en) |>
-    select(-pk)
+    select(-desc_pk)
 
   # Table of uses ('indications') and associated information tables
   uses <- psmv_xml_get_uses(psmv_xml)
@@ -495,51 +499,51 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
 
   application_comment_descriptions <- description_table(psmv_xml, "ApplicationComment")
   application_comments <- indication_information_table(psmv_xml, "ApplicationComment") |>
-    left_join(application_comment_descriptions, by = join_by(pk)) |>
+    left_join(application_comment_descriptions, by = "desc_pk") |>
     rename(application_comment_de = de, application_comment_fr = fr) |>
     rename(application_comment_it = it, application_comment_en = en) |>
-    select(-pk)
+    select(-desc_pk)
 
   # Sometimes we have one or more specific culture form(s) in the use definition
   culture_form_descriptions <- description_table(psmv_xml, "CultureForm")
   culture_forms <- indication_information_table(psmv_xml, "CultureForm") |>
-    left_join(culture_form_descriptions, by = join_by(pk)) |>
+    left_join(culture_form_descriptions, by = "desc_pk") |>
     rename(culture_form_de = de, culture_form_fr = fr) |>
     rename(culture_form_it = it, culture_form_en = en) |>
-    select(-pk)
+    select(-desc_pk)
 
   # In the culture descriptions, links to parent cultures are filtered out
   culture_descriptions <- description_table(psmv_xml, "Culture")
   culture_additional_texts <- description_table(psmv_xml, "CultureAdditionalText")
   cultures <- indication_information_table(psmv_xml, "Culture", additional_text = TRUE) |>
-    left_join(culture_descriptions, by = join_by(pk)) |>
+    left_join(culture_descriptions, by = "desc_pk") |>
     rename(culture_de = de, culture_fr = fr) |>
     rename(culture_it = it, culture_en = en) |>
-    left_join(culture_additional_texts, c(add_txt_pk = "pk")) |>
+    left_join(culture_additional_texts, c(add_txt_pk = "desc_pk")) |>
     rename(culture_add_txt_de = de, culture_add_txt_fr = fr) |>
     rename(culture_add_txt_it = it, culture_add_txt_en = en) |>
-    select(-pk, -add_txt_pk) |>
+    select(-desc_pk, -add_txt_pk) |>
     arrange(wNbr, use_nr)
 
   pest_descriptions <- description_table(psmv_xml, "Pest", latin = TRUE)
   pest_additional_texts <- description_table(psmv_xml, "PestAdditionalText")
   pests <- indication_information_table(psmv_xml, "Pest",
     additional_text = TRUE, type = TRUE) |>
-    left_join(pest_descriptions, by = join_by(pk)) |>
+    left_join(pest_descriptions, by = "desc_pk") |>
     rename(pest_de = de, pest_fr = fr) |>
     rename(pest_it = it, pest_en = en) |>
-    left_join(pest_additional_texts, c(add_txt_pk = "pk")) |>
+    left_join(pest_additional_texts, c(add_txt_pk = "desc_pk")) |>
     rename(pest_add_txt_de = de, pest_add_txt_fr = fr) |>
     rename(pest_add_txt_it = it, pest_add_txt_en = en) |>
-    select(-pk, -add_txt_pk) |>
+    select(-desc_pk, -add_txt_pk) |>
     arrange(wNbr, use_nr)
 
   obligation_descriptions <- description_table(psmv_xml, "Obligation", code = TRUE)
   obligations <- indication_information_table(psmv_xml, "Obligation") |>
-    left_join(obligation_descriptions, by = join_by(pk)) |>
+    left_join(obligation_descriptions, by = "desc_pk") |>
     rename(obligation_de = de, obligation_fr = fr) |>
     rename(obligation_it = it, obligation_en = en) |>
-    select(-pk) |>
+    select(-desc_pk) |>
     arrange(wNbr, use_nr)
 
   psmv_dm <- dm(products,
@@ -642,8 +646,8 @@ description_table <- function(psmv_xml, tag_name, code = FALSE, latin = FALSE) {
     ret <- nodes |>
       sapply(get_descriptions, code = code, latin = latin) |> t() |>
       tibble::as_tibble() |>
-      mutate(pk = as.integer(pk)) |>
-      arrange(pk)
+      mutate(desc_pk = as.integer(desc_pk)) |>
+      arrange(desc_pk)
   } else {
     ret <- NA
   }
@@ -657,7 +661,7 @@ description_table <- function(psmv_xml, tag_name, code = FALSE, latin = FALSE) {
 #' @param code Do the description nodes have a child holding a code?
 #' @param latin Are there latin descriptions (e.g. for pest descriptions)
 get_descriptions <- function(node, code = FALSE, latin = FALSE) {
-  pk <- xml_attr(node, "primaryKey")
+  desc_pk <- xml_attr(node, "primaryKey")
   desc <- sapply(xml_children(node), xml_attr, "value")
   if (code) {
     if (xml_length(xml_child(node)) == 1) {
@@ -665,15 +669,15 @@ get_descriptions <- function(node, code = FALSE, latin = FALSE) {
     } else {
       code <- NA
     }
-    ret <- c(pk, code, desc)
-    names(ret) <- c("pk", "code", "de", "fr", "it", "en")
+    ret <- c(desc_pk, code, desc)
+    names(ret) <- c("desc_pk", "code", "de", "fr", "it", "en")
   } else {
     desc <- desc[!is.na(desc)] # Remove results from <Parent> nodes without "value"
-    ret <- c(pk, desc)
+    ret <- c(desc_pk, desc)
     if (latin) {
-      names(ret) <- c("pk", "de", "fr", "it", "en", "lt")
+      names(ret) <- c("desc_pk", "de", "fr", "it", "en", "lt")
     } else {
-      names(ret) <- c("pk", "de", "fr", "it", "en")
+      names(ret) <- c("desc_pk", "de", "fr", "it", "en")
     }
   }
   return(ret)

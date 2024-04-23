@@ -9,12 +9,12 @@
 * using options ‘--no-tests --as-cran’
 * checking for file ‘psmv/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘psmv’ version ‘0.1.10’
+* this is package ‘psmv’ version ‘0.2.1’
 * package encoding: UTF-8
 * checking CRAN incoming feasibility ... NOTE
 Maintainer: ‘Johannes Ranke <johannes.ranke@agroscope.admin.ch>’
 
-Size of tarball: 6400230 bytes
+Size of tarball: 6400207 bytes
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -23,7 +23,7 @@ Size of tarball: 6400230 bytes
 * checking for hidden files and directories ... OK
 * checking for portable file names ... OK
 * checking for sufficient/correct file permissions ... OK
-* checking whether package ‘psmv’ can be installed ... [58s/58s] OK
+* checking whether package ‘psmv’ can be installed ... [57s/57s] OK
 * checking installed package size ... NOTE
   installed size is 12.2Mb
   sub-directories of 1Mb or more:
@@ -68,12 +68,12 @@ Size of tarball: 6400230 bytes
 * checking examples ... [46s/49s] NOTE
 Examples with CPU (user + system) or elapsed time > 5s
           user system elapsed
-psmv_dm 26.482    0.7   27.74
+psmv_dm 26.635  0.736  27.955
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... SKIPPED
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes in ‘inst/doc’ ... OK
-* checking re-building of vignette outputs ... [20s/21s] OK
+* checking re-building of vignette outputs ... [19s/20s] OK
 * checking PDF version of manual ... OK
 * checking HTML version of manual ... NOTE
 Skipping checking HTML validation: no command 'tidy' found
