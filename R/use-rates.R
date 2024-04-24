@@ -27,18 +27,19 @@
 #' @return A tibble containing one additional column 'rate_g_per_ha'
 #' @export
 #' @examples
+#' \dontrun{
 #' library(psmv)
 #' library(dplyr)
 #' library(dm)
-#' psmv <- psmv_list[["2022"]]
+#' psmv_cur <- psmv_dm()
 #'
-#' product_uses_with_ingredients <- psmv |>
+#' product_uses_with_ingredients <- psmv_cur |>
 #'   dm_filter(substances =
 #'     (substance_de %in% c("Halauxifen-methyl", "Kupfer (als Kalkpr\u00E4parat)"))) |>
 #'   dm_flatten_to_tbl(uses, products) |>
-#'   left_join(psmv$ingredients, by = join_by(wNbr),
+#'   left_join(psmv_cur$ingredients, by = join_by(wNbr),
 #'     relationship = "many-to-many") |>
-#'   left_join(psmv$substances, by = join_by(pk)) |>
+#'   left_join(psmv_cur$substances, by = join_by(pk)) |>
 #'   select(wNbr, name, use_nr,
 #'     min_dosage, max_dosage, min_rate, max_rate, units_de,
 #'     application_area_de,
@@ -51,6 +52,7 @@
 #'     min_r = min_rate, max_r = max_rate,
 #'     units_de, rate = rate_g_per_ha) |>
 #'   print(n = Inf)
+#' }
 application_rate_g_per_ha <- function(product_uses,
   aggregation = c("max", "mean", "min"),
   dosage_units = c("percent_ww", "percent_vv", "state_of_matter"),

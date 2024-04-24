@@ -6,7 +6,7 @@
 \title{Create a dm object from an XML version of the PSMV}
 \usage{
 psmv_dm(
-  from = last(psmv::psmv_xml_dates),
+  from = psmv_xml_url,
   remove_duplicates = TRUE,
   keep = c("last", "first")
 )
@@ -14,9 +14,7 @@ psmv_dm(
 \method{print}{psmv_dm}(x, ...)
 }
 \arguments{
-\item{from}{A number giving a year starting from 2011 up to the current year, or
-one of the dates in \link{psmv_xml_dates} as a length one character vector
-in the format YYYY-MM-DD, or an URL from where to download}
+\item{from}{A specification of the way to retrieve the XML}
 
 \item{remove_duplicates}{Should duplicates based on wNbrs be removed?}
 
@@ -35,15 +33,16 @@ pointing to primary keys, i.e. with referential integrity.
 Create a dm object from an XML version of the PSMV
 }
 \examples{
+\dontrun{
 library(dm)
-psmv_2017 <- psmv_dm(2017)
-print(psmv_2017)
-dm_examine_constraints(psmv_2017)
+
+psmv_cur <- psmv_dm()
+dm_examine_constraints(psmv_cur)
+dm_draw(psmv_cur)
+
 # Show some information for products named 'Boxer'
-psmv_2017 |>
+psmv_cur |>
   dm_filter(products = (name == "Boxer")) |>
   dm_nrow()
-dm_draw(psmv_2017)
-
-psmv_dm_cur <- psmv_dm(psmv_xml_url)
+}
 }

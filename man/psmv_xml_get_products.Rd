@@ -30,11 +30,6 @@ or NULL.
 Get Products from an XML version of the PSMV
 }
 \examples{
-library(psmv)
-# The first PSMV from 2015 (2015-01-06) has a duplicate W-Number
-products_2015 <- psmv_xml_get(2015) |>
-  psmv_xml_get_products(verbose = TRUE)
-
 # Get current list of products
 psmv_xml_get_products()
 }

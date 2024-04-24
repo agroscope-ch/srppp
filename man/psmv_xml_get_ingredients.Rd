@@ -14,5 +14,4 @@ Get ingredients for all products described in an XML version of the PSMV
 }
 \examples{
 psmv_xml_get_ingredients()
-psmv_xml <- psmv_xml_get(2013)
 }

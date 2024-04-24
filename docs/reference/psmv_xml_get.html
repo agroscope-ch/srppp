@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">psmv</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.10</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,7 +25,6 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/psmv_products_with_MO.html">Statistics on products containing microorganisms in the latest XML dump of the PSMV</a>
-    <a class="dropdown-item" href="../articles/psmv_trends.html">Trends of data contained in XML dumps of the PSMV</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -55,15 +54,29 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">psmv_xml_get</span><span class="op">(</span>from <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/nth.html" class="external-link">last</a></span><span class="op">(</span><span class="fu">psmv</span><span class="fu">::</span><span class="va"><a href="psmv_xml_dates.html">psmv_xml_dates</a></span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">psmv_xml_get</span><span class="op">(</span><span class="va">from</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for `NULL`</span></span>
+<span><span class="fu">psmv_xml_get</span><span class="op">(</span><span class="va">from</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for character</span></span>
+<span><span class="fu">psmv_xml_get</span><span class="op">(</span><span class="va">from</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">psmv_xml_get_from_path</span><span class="op">(</span><span class="va">path</span>, <span class="va">from</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>from</dt>
-<dd><p>A number giving a year starting from 2011 up to the current year, or
-one of the dates in <a href="psmv_xml_dates.html">psmv_xml_dates</a> as a length one character vector
-in the format YYYY-MM-DD, or an URL from where to download</p></dd>
+<dd><p>A specification of the way to retrieve the XML</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Unused argument introduced to facilitate future extensions</p></dd>
+
+
+<dt>path</dt>
+<dd><p>A path to a zipped PSMV XML file</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -75,39 +88,8 @@ in the format YYYY-MM-DD, or an URL from where to download</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">psmv_2015</span> <span class="op">&lt;-</span> <span class="fu">psmv_xml_get</span><span class="op">(</span><span class="fl">2015</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Reading XML for 2015-01-06</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">psmv_2015</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> {xml_document}</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;PublicationData&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] &lt;Products numberOfProducts="2096"&gt;\n  &lt;Product terminationReason="" isSa ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [2] &lt;Parallelimports numberOfParallelimports="1255"&gt;\n  &lt;Parallelimport pack ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [3] &lt;MetaData numberOfRows="11" name="ApplicationArea"&gt;\n  &lt;Detail primaryKe ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] &lt;MetaData numberOfRows="760" name="ApplicationComment"&gt;\n  &lt;Detail prima ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [5] &lt;MetaData numberOfRows="6" name="CultureForm"&gt;\n  &lt;Detail primaryKey="64 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [6] &lt;MetaData numberOfRows="328" name="Culture"&gt;\n  &lt;Detail primaryKey="1139 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] &lt;MetaData numberOfRows="56" name="FormulationCode"&gt;\n  &lt;Detail primaryKe ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] &lt;MetaData numberOfRows="105" name="Measure"&gt;\n  &lt;Detail primaryKey="6568 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [9] &lt;MetaData numberOfRows="1316" name="Obligation"&gt;\n  &lt;Detail primaryKey=" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [10] &lt;MetaData numberOfRows="580" name="Pest"&gt;\n  &lt;Detail primaryKey="11001"&gt; ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [11] &lt;MetaData numberOfRows="31" name="ProductCategory"&gt;\n  &lt;Detail primaryKe ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [12] &lt;MetaData numberOfRows="3" name="TimeMeasure"&gt;\n  &lt;Detail primaryKey="73 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [13] &lt;MetaData numberOfRows="495" name="Substance"&gt;\n  &lt;Detail iupacName="1-n ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [14] &lt;MetaData numberOfRows="269" name="PermissionHolder"&gt;\n  &lt;PermissionHold ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [15] &lt;MetaData numberOfRows="225" name="City"&gt;\n  &lt;Detail primaryKey="3285"&gt;\ ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [16] &lt;MetaData numberOfRows="15" name="Country"&gt;\n  &lt;Detail primaryKey="6161" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [17] &lt;MetaData numberOfRows="80" name="CodeR"&gt;\n  &lt;Detail primaryKey="5978"&gt;\ ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [18] &lt;MetaData numberOfRows="91" name="CodeS"&gt;\n  &lt;Detail primaryKey="6099"&gt;\ ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [19] &lt;MetaData numberOfRows="15" name="DangerSymbol"&gt;\n  &lt;Detail primaryKey=" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [20] &lt;MetaData numberOfRows="2" name="SignalWords"&gt;\n  &lt;Detail primaryKey="79 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ...</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">psmv_2015</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "psmv_xml"     "xml_document" "xml_node"    </span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># The latest PSMV stored on the Agroscope drive</span></span></span>
-<span class="r-in"><span><span class="va">psmv_xml</span> <span class="op">&lt;-</span> <span class="fu">psmv_xml_get</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Reading XML for 2024-02-12</span>
-<span class="r-in"><span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># The current PSMV as available from the FOAG website</span></span></span>
+<span class="r-in"><span><span class="va">psmv_cur</span> <span class="op">&lt;-</span> <span class="fu">psmv_xml_get</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># The current PSMV as available from the FOAG website</span></span></span>
 <span class="r-in"><span><span class="va">psmv_cur</span> <span class="op">&lt;-</span> <span class="fu">psmv_xml_get</span><span class="op">(</span><span class="va">psmv_xml_url</span><span class="op">)</span></span></span>
 </code></pre></div>

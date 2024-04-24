@@ -17,10 +17,6 @@ in the XML file.
 Get Parallel Imports from an XML version of the PSMV
 }
 \examples{
-library(psmv)
-parallel_imports_2015 <- psmv_xml_get(2015) |>
-  psmv_xml_get_parallel_imports()
-
 # Get current list of parallel_imports
 psmv_xml_get_parallel_imports()
 }

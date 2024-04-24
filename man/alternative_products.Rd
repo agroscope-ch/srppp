@@ -44,16 +44,18 @@ A use is defined as a combination of an application area, a crop
 ('culture') and a pathogen ('pest').
 }
 \examples{
-psmv <- psmv_list[["2024"]]
+\dontrun{
+psmv_cur <- psmv_dm()
 
 actives_de <- c("Lambda-Cyhalothrin", "Deltamethrin")
 
-alternative_products(psmv, actives_de)
-alternative_products(psmv, actives_de, missing = TRUE)
-alternative_products(psmv, actives_de, details = TRUE)
-alternative_products(psmv, actives_de, list = TRUE)
+alternative_products(psmv_cur, actives_de)
+alternative_products(psmv_cur, actives_de, missing = TRUE)
+alternative_products(psmv_cur, actives_de, details = TRUE)
+alternative_products(psmv_cur, actives_de, list = TRUE)
 
 # Example in Italian
 actives_it <- c("Lambda-Cialotrina", "Deltametrina")
-alternative_products(psmv, actives_it, lang = "it")
+alternative_products(psmv_cur, actives_it, lang = "it")
+}
 }

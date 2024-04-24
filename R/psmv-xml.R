@@ -8,44 +8,53 @@ utils::globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "pNbr", "use_nr",
 
 #' Read an XML version of the PSMV
 #'
-#' @param from A number giving a year starting from 2011 up to the current year, or
-#' one of the dates in [psmvdata::psmv_xml_dates] as a length one character vector
-#' in the format YYYY-MM-DD, or an URL from where to download
+#' @param from A specification of the way to retrieve the XML
+#' @param \dots Unused argument introduced to facilitate future extensions
 #' @return An object inheriting from 'psmv_xml', 'xml_document', 'xml_node'
 #' @export
+psmv_xml_get <- function(from, ...)
+{
+  UseMethod("psmv_xml_get")
+}
+
+#' @rdname psmv_xml_get
+#' @export
 #' @examples
-#' psmv_2015 <- psmv_xml_get(2015)
-#' print(psmv_2015)
-#' class(psmv_2015)
-#'
-#' # The latest PSMV stored on the Agroscope drive
-#' psmv_xml <- psmv_xml_get()
-#'
+#' # The current PSMV as available from the FOAG website
+#' psmv_cur <- psmv_xml_get()
+psmv_xml_get.NULL <- function(from, ...)
+{
+  from <- psmv_xml_url
+  path <- tempfile(fileext = "zip")
+  download.file(from, path)
+
+  psmv_xml_get_from_path(path, from)
+}
+
+#' @rdname psmv_xml_get
+#' @export
+#' @examples
 #' # The current PSMV as available from the FOAG website
 #' psmv_cur <- psmv_xml_get(psmv_xml_url)
-psmv_xml_get <- function(from = last(psmv::psmv_xml_dates))
+psmv_xml_get.character <- function(from, ...)
 {
-  date <- from
-  if (is.numeric(date)) {
-    if (date < 2011) stop("Suitable PSMV XML files are only available starting from 2011")
-    date <- min(grep(paste0("^", date), psmv::psmv_xml_dates, value = TRUE))
-  }
+  path <- tempfile(fileext = "zip")
+  download.file(from, path)
 
-  if (date %in% psmv::psmv_xml_dates) {
-    path <- file.path(psmv::psmv_xml_idir, psmv::psmv_xml_zip_files[date])
-    cli::cli_alert_info(paste("Reading XML for", date))
-  } else {
-    path <- tempfile(fileext = "zip")
-    download.file(from, path)
-  }
+  psmv_xml_get_from_path(path, from)
+}
 
+#' @rdname psmv_xml_get
+#' @param path A path to a zipped PSMV XML file
+#' @export
+psmv_xml_get_from_path <- function(path, from) {
   zip_contents <- utils::unzip(path, list = TRUE)
   xml_filename <- grep("PublicationData_20.._.._...xml",
     zip_contents$Name, value = TRUE)
   xml_con <- unz(path, xml_filename)
   ret <- read_xml(xml_con)
   class(ret) <- c("psmv_xml", "xml_document", "xml_node")
-  attr(ret, "from") <- date
+  attr(ret, "from") <- from
   return(ret)
 }
 
@@ -61,11 +70,6 @@ psmv_xml_get <- function(from = last(psmv::psmv_xml_dates))
 #' or NULL.
 #' @export
 #' @examples
-#' library(psmv)
-#' # The first PSMV from 2015 (2015-01-06) has a duplicate W-Number
-#' products_2015 <- psmv_xml_get(2015) |>
-#'   psmv_xml_get_products(verbose = TRUE)
-#'
 #' # Get current list of products
 #' psmv_xml_get_products()
 psmv_xml_get_products <- function(psmv_xml = psmv_xml_get(), verbose = TRUE,
@@ -115,10 +119,6 @@ psmv_xml_get_products <- function(psmv_xml = psmv_xml_get(), verbose = TRUE,
 #' in the XML file.
 #' @export
 #' @examples
-#' library(psmv)
-#' parallel_imports_2015 <- psmv_xml_get(2015) |>
-#'   psmv_xml_get_parallel_imports()
-#'
 #' # Get current list of parallel_imports
 #' psmv_xml_get_parallel_imports()
 psmv_xml_get_parallel_imports <- function(psmv_xml = psmv_xml_get())
@@ -149,10 +149,10 @@ psmv_xml_get_parallel_imports <- function(psmv_xml = psmv_xml_get())
   # has two PermissionHolderKey sections, with different primaryKey attributes
   ph_keys <- ph_keys[!duplicated(ph_keys$id), ]
 
-  ret <- pis |>
+  retval <- pis |>
     left_join(ph_keys, by = "id")
 
-  return(ret)
+  return(retval)
 }
 
 #' Get substances from an XML version of the PSMV
@@ -186,7 +186,6 @@ psmv_xml_get_substances <- function(psmv_xml = psmv_xml_get()) {
 #' @export
 #' @examples
 #' psmv_xml_get_ingredients()
-#' psmv_xml <- psmv_xml_get(2013)
 psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get())
 {
   ingredient_nodeset <- xml_find_all(psmv_xml,
@@ -247,8 +246,6 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get())
 #' The default strategy 'keep' only keeps the last of such sets of product sections.
 #' @return An 'psmv_xml' object with only product sections that have unique W-Numbers
 #' @export
-#' @examples
-#' psmv_2015 <- psmv_xml_remove_duplicated_wNbrs(psmv_xml_get(2015))
 psmv_xml_remove_duplicated_wNbrs <- function(psmv_xml = psmv_xml_get(),
   keep = c("last", "first")) {
   product_nodeset <- xml_find_all(psmv_xml, "Products/Product")
@@ -384,18 +381,19 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
 #' pointing to primary keys, i.e. with referential integrity.
 #' @export
 #' @examples
+#' \dontrun{
 #' library(dm)
-#' psmv_2017 <- psmv_dm(2017)
-#' print(psmv_2017)
-#' dm_examine_constraints(psmv_2017)
+#'
+#' psmv_cur <- psmv_dm()
+#' dm_examine_constraints(psmv_cur)
+#' dm_draw(psmv_cur)
+#'
 #' # Show some information for products named 'Boxer'
-#' psmv_2017 |>
+#' psmv_cur |>
 #'   dm_filter(products = (name == "Boxer")) |>
 #'   dm_nrow()
-#' dm_draw(psmv_2017)
-#'
-#' psmv_dm_cur <- psmv_dm(psmv_xml_url)
-psmv_dm <- function(from = last(psmv::psmv_xml_dates),
+#' }
+psmv_dm <- function(from = psmv_xml_url,
   remove_duplicates = TRUE, keep = c("last", "first"))
 {
   psmv_xml <- psmv_xml_get(from)
@@ -572,7 +570,8 @@ psmv_dm <- function(from = last(psmv::psmv_xml_dates),
     dm_add_fk(culture_forms, c(wNbr, use_nr), uses) |>
     dm_add_fk(cultures, c(wNbr, use_nr), uses) |>
     dm_add_fk(pests, c(wNbr, use_nr), uses) |>
-    dm_add_fk(obligations, c(wNbr, use_nr), uses)
+    dm_add_fk(obligations, c(wNbr, use_nr), uses) |>
+    dm_add_fk(parallel_imports, wNbr, products)
 
     attr(psmv_dm, "from") <- attr(psmv_xml, "from")
     class(psmv_dm) <- c("psmv_dm", "dm")
