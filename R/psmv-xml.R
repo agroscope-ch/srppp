@@ -123,7 +123,7 @@ psmv_xml_get_products <- function(psmv_xml = psmv_xml_get(), verbose = TRUE,
     )
     known_duplicates_take_second <- "5945"
 
-    i_products_to_remove <- integer(0)
+    i_products_to_remove <- NULL
     for (dup_wNbr in dup_wNbrs) {
       if (dup_wNbr %in% known_duplicates_expired_and_renewed) {
         which(products$wNbr == dup_wNbr)
@@ -149,7 +149,9 @@ psmv_xml_get_products <- function(psmv_xml = psmv_xml_get(), verbose = TRUE,
         }
       }
     }
-    products <- products[-i_products_to_remove, ]
+    if (!is.null(i_products_to_remove)) {
+      products <- products[-i_products_to_remove, ]
+    }
     attr(products, "duplicated_wNbrs") = NULL
   } else {
     attr(products, "duplicated_wNbrs") <- dup_wNbrs
