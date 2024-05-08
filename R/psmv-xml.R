@@ -54,7 +54,7 @@ psmv_xml_get_from_path <- function(path, from) {
   xml_con <- unz(path, xml_filename)
   ret <- read_xml(xml_con)
   class(ret) <- c("psmv_xml", "xml_document", "xml_node")
-  attr(ret, "from") <- from
+  attr(ret, "from") <- as.character(from)
   return(ret)
 }
 
@@ -62,8 +62,15 @@ psmv_xml_get_from_path <- function(path, from) {
 #'
 #' @param psmv_xml An object as returned by 'psmv_xml_get'
 #' @param verbose Should we give some feedback?
-#' @param remove_duplicates Should duplicates based on wNbrs be removed?
-#' @param keep Passed to [psmv_xml_remove_duplicated_wNbrs]
+#' @param remove_duplicates Should duplicates based on wNbrs be removed? If set
+#' to 'TRUE', one of the two entries with identical wNbrs is removed, based on
+#' an investigation of background information carried out by the package authors.
+#' In all cases except for one, one of the product sections with duplicate wNbrs
+#' has information about an expiry of the registration, and the other doesn't.
+#' In these cases the registration without expiry is kept, and the expiring
+#' registration is discarded. In the remaining case (wNbr 5945), the second
+#' entry is selected, as it contains more indications which were apparently
+#' intended to be published as well.
 #' @return A [tibble] with a row for each product section
 #' in the XML file. An attribute 'duplicated_wNbrs' is
 #' also returned, containing duplicated W-Numbers, if applicable,
@@ -73,12 +80,8 @@ psmv_xml_get_from_path <- function(path, from) {
 #' # Get current list of products
 #' psmv_xml_get_products()
 psmv_xml_get_products <- function(psmv_xml = psmv_xml_get(), verbose = TRUE,
-  remove_duplicates = TRUE, keep = c("last", "first"))
+  remove_duplicates = TRUE)
 {
-  keep <- match.arg(keep)
-  if (remove_duplicates) {
-    psmv_xml <- psmv_xml_remove_duplicated_wNbrs(psmv_xml, keep = keep)
-  }
   product_nodeset <- xml_find_all(psmv_xml, "Products/Product")
   product_attribute_names <- names(xml_attrs(product_nodeset[[1]]))
   products <- product_nodeset |>
@@ -99,14 +102,57 @@ psmv_xml_get_products <- function(psmv_xml = psmv_xml_get(), verbose = TRUE,
     arrange(wNbr, .by_group = TRUE) |>
     select(pNbr, wNbr, name, exhaustionDeadline, soldoutDeadline,
       isSalePermission, terminationReason)
-  if (anyDuplicated(products$wNbr)) {
-    dup_index <- which(duplicated(products$wNbr))
-    dup_wNbrs <- products[dup_index, ]$wNbr
-    if (verbose) cli::cli_alert_warning(paste("Duplicated W-Number(s):", paste(dup_wNbrs, collapse = ", ")))
-    attr(products, "duplicated_wNbrs") <- dup_wNbrs
-  } else {
+
+  dup_index <- which(duplicated(products$wNbr))
+  dup_wNbrs <- products[dup_index, ]$wNbr
+
+  if (remove_duplicates) {
+
+    # See documentation of argument 'remove_duplicates'
+    known_duplicates_expired_and_renewed <- as.character(
+      c(
+        6721, # Cueva
+        5807, # Maxim XL
+        6241, # Heritage
+        6274, # Ranman
+        5463, # Monitor
+        2743, # Vulkan- Wühlmauspatrone
+        4343, # Cypermethrin
+        4009  # Lentagran WP
+      )
+    )
+    known_duplicates_take_second <- "5945"
+
+    i_products_to_remove <- integer(0)
+    for (dup_wNbr in dup_wNbrs) {
+      if (dup_wNbr %in% known_duplicates_expired_and_renewed) {
+        which(products$wNbr == dup_wNbr)
+        length(products$exhaustionDeadline != "")
+        length(products$wNbr == dup_wNbr)
+
+        i_expired <- which(products$wNbr == dup_wNbr & products$exhaustionDeadline != "")
+        if (verbose) {
+          cli::cli_alert_warning(
+            paste("Removing entry with expiration date for duplicated W-Number:", dup_wNbr))
+        }
+        i_products_to_remove <- c(i_products_to_remove, i_expired)
+      } else {
+        if (dup_wNbr %in% known_duplicates_take_second) {
+          i_second <- which(products$wNbr == dup_wNbr)[2]
+          if (verbose) {
+            cli::cli_alert_warning(
+              paste("Removing second entry for duplicated W-Number:", dup_wNbr))
+          }
+          i_products_to_remove <- c(i_products_to_remove, i_second)
+        } else {
+          stop("Unknown duplicated W-Number:", dup_wNbr)
+        }
+      }
+    }
+    products <- products[-i_products_to_remove, ]
     attr(products, "duplicated_wNbrs") = NULL
-    if (verbose) cli::cli_alert_success("No duplicated W-Numbers")
+  } else {
+    attr(products, "duplicated_wNbrs") <- dup_wNbrs
   }
 
   return(products)
@@ -239,35 +285,6 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get())
   return(ret_corrected)
 }
 
-#' Remove product sections with duplicated W-Numbers
-#'
-#' @param psmv_xml An object as returned by [psmv_xml_get]
-#' @param keep How should we deal with product sections with identical W-Numbers?
-#' The default strategy 'keep' only keeps the last of such sets of product sections.
-#' @return An 'psmv_xml' object with only product sections that have unique W-Numbers
-#' @export
-psmv_xml_remove_duplicated_wNbrs <- function(psmv_xml = psmv_xml_get(),
-  keep = c("last", "first")) {
-  product_nodeset <- xml_find_all(psmv_xml, "Products/Product")
-
-  keep <- match.arg(keep)
-  wNbrs <- xml_attr(product_nodeset, "wNbr")
-
-  dup_index <- case_when(
-    keep == "first" ~ which(duplicated(wNbrs)),
-    keep == "last" ~ which(duplicated(wNbrs, fromLast = TRUE)))
-
-  if (length(dup_index) > 0) {
-    cli::cli_alert_warning(
-      paste("Removed product section(s) with duplicated W-Number(s)",
-        paste(wNbrs[dup_index], collapse = ", ")))
-
-    xml_remove(product_nodeset[dup_index])
-  }
-
-  return(psmv_xml)
-}
-
 #' Define use identification numbers in a PSMV read in from an XML file
 #'
 #' @param psmv_xml An object as returned by 'psmv_xml_get'
@@ -375,7 +392,6 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
 #' Create a dm object from an XML version of the PSMV
 #'
 #' @inheritParams psmv_xml_get
-#' @inheritParams psmv_xml_remove_duplicated_wNbrs
 #' @param remove_duplicates Should duplicates based on wNbrs be removed?
 #' @return A [dm] object with tables linked by foreign keys
 #' pointing to primary keys, i.e. with referential integrity.
@@ -393,19 +409,13 @@ psmv_xml_get_uses <- function(psmv_xml = psmv_xml_get()) {
 #'   dm_filter(products = (name == "Boxer")) |>
 #'   dm_nrow()
 #' }
-psmv_dm <- function(from = psmv_xml_url,
-  remove_duplicates = TRUE, keep = c("last", "first"))
-{
-  psmv_xml <- psmv_xml_get(from)
+psmv_dm <- function(from = psmv_xml_url, remove_duplicates = TRUE) {
 
-  keep <- match.arg(keep)
-  if (remove_duplicates) {
-    psmv_xml <- psmv_xml_remove_duplicated_wNbrs(psmv_xml)
-  }
+  psmv_xml <- psmv_xml_get(from)
 
   # Tables of products and associated information
   # Duplicates were already removed from the XML, if requested
-  products <- psmv_xml_get_products(psmv_xml, remove_duplicates = FALSE)
+  products <- psmv_xml_get_products(psmv_xml, remove_duplicates = remove_duplicates)
   parallel_imports <- psmv_xml_get_parallel_imports(psmv_xml)
 
   product_information_table <- function(psmv_xml, tag_name, prefix = tag_name, code = FALSE) {

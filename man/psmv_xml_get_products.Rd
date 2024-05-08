@@ -7,8 +7,7 @@
 psmv_xml_get_products(
   psmv_xml = psmv_xml_get(),
   verbose = TRUE,
-  remove_duplicates = TRUE,
-  keep = c("last", "first")
+  remove_duplicates = TRUE
 )
 }
 \arguments{
@@ -16,9 +15,15 @@ psmv_xml_get_products(
 
 \item{verbose}{Should we give some feedback?}
 
-\item{remove_duplicates}{Should duplicates based on wNbrs be removed?}
-
-\item{keep}{Passed to \link{psmv_xml_remove_duplicated_wNbrs}}
+\item{remove_duplicates}{Should duplicates based on wNbrs be removed? If set
+to 'TRUE', one of the two entries with identical wNbrs is removed, based on
+an investigation of background information carried out by the package authors.
+In all cases except for one, one of the product sections with duplicate wNbrs
+has information about an expiry of the registration, and the other doesn't.
+In these cases the registration without expiry is kept, and the expiring
+registration is discarded. In the remaining case (wNbr 5945), the second
+entry is selected, as it contains more indications which were apparently
+intended to be published as well.}
 }
 \value{
 A \link{tibble} with a row for each product section

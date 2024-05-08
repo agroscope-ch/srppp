@@ -5,11 +5,7 @@
 \alias{print.psmv_dm}
 \title{Create a dm object from an XML version of the PSMV}
 \usage{
-psmv_dm(
-  from = psmv_xml_url,
-  remove_duplicates = TRUE,
-  keep = c("last", "first")
-)
+psmv_dm(from = psmv_xml_url, remove_duplicates = TRUE)
 
 \method{print}{psmv_dm}(x, ...)
 }
@@ -17,9 +13,6 @@ psmv_dm(
 \item{from}{A specification of the way to retrieve the XML}
 
 \item{remove_duplicates}{Should duplicates based on wNbrs be removed?}
-
-\item{keep}{How should we deal with product sections with identical W-Numbers?
-The default strategy 'keep' only keeps the last of such sets of product sections.}
 
 \item{x}{A \link{psmv_dm} object}
 

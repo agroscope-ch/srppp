@@ -1,6 +1,6 @@
 * using log directory ‘/home/agsad.admin.ch/f80868656/projects/psmv/psmv.Rcheck’
-* using R version 4.3.3 (2024-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
+* using R version 4.4.0 (2024-04-24)
+* using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
     GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
@@ -9,7 +9,7 @@
 * using options ‘--no-tests --as-cran’
 * checking for file ‘psmv/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘psmv’ version ‘0.2.1’
+* this is package ‘psmv’ version ‘0.3.2’
 * package encoding: UTF-8
 * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers
 Maintainer: ‘Johannes Ranke <johannes.ranke@agroscope.admin.ch>’
@@ -27,11 +27,12 @@ Maintainer: ‘Johannes Ranke <johannes.ranke@agroscope.admin.ch>’
 * checking for future file timestamps ... OK
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
-* checking top-level files ... OK
+* checking top-level files ... NOTE
+Files ‘README.md’ or ‘NEWS.md’ cannot be checked without ‘pandoc’ being installed.
 * checking for left-over files ... OK
 * checking index information ... OK
 * checking package subdirectories ... OK
-* checking R files for non-ASCII characters ... OK
+* checking code files for non-ASCII characters ... OK
 * checking R files for syntax errors ... OK
 * checking whether the package can be loaded ... OK
 * checking whether the package can be loaded with stated dependencies ... OK
@@ -56,10 +57,10 @@ Maintainer: ‘Johannes Ranke <johannes.ranke@agroscope.admin.ch>’
 * checking for unstated dependencies in examples ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... [11s/17s] OK
+* checking examples ... [11s/12s] OK
 * checking for unstated dependencies in vignettes ... OK
-* checking package vignettes in ‘inst/doc’ ... OK
-* checking re-building of vignette outputs ... [16s/23s] OK
+* checking package vignettes ... OK
+* checking re-building of vignette outputs ... [16s/15s] OK
 * checking PDF version of manual ... OK
 * checking HTML version of manual ... NOTE
 Skipping checking HTML validation: no command 'tidy' found
@@ -67,9 +68,8 @@ Skipping checking HTML validation: no command 'tidy' found
 * checking for detritus in the temp directory ... OK
 * DONE
 
-Status: 1 NOTE
+Status: 2 NOTEs
 See
   ‘/home/agsad.admin.ch/f80868656/projects/psmv/psmv.Rcheck/00check.log’
 for details.
-
 
