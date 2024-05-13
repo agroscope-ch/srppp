@@ -7,10 +7,10 @@
 #' Applications to hops were excluded for calculating mean use rates in the
 #' indicator project (Korkaric 2023), arguing that it is not grown in large
 #' areas in Switzerland.
-#' @param product_uses A tibble containing the columns 'application_area_de',
-#' 'min_dosage', 'max_dosage', 'min_rate', 'max_rate', from the 'uses' table
-#' in a [psmv_dm] object, as well as the columns 'percent' and 'g_per_L'
-#' from the 'ingredients' table in a [psmv_dm] object.
+#' @param product_uses A tibble containing the columns 'wNbr', 'use_nr',
+#' 'application_area_de', 'min_dosage', 'max_dosage', 'min_rate', 'max_rate',
+#' from the 'uses' table in a [psmv_dm] object, as well as the columns
+#' 'percent' and 'g_per_L' from the 'ingredients' table in a [psmv_dm] object.
 #' @param aggregation How to represent a range if present, e.g. "max" (default)
 #' or "mean".
 #' @param dosage_units If no units are given, or units are "%", then the applied
@@ -111,7 +111,8 @@ application_rate_g_per_ha <- function(product_uses,
       units_de == "ml/10m\u00B2" ~ (rate/1000) * (g_per_L) * 1000,
       units_de == "ml/ha" ~ (rate/1000) * (g_per_L),
       units_de == "ml/a" ~ (rate/1000) * (g_per_L) * 100,
-      is.na(units_de) ~ ref_volume * dosage/100 * g_per_L,
+      is.na(units_de) ~ ref_volume * 1000 * # 1 L has a weight of ca. 1000 g
+        dosage/100 * percent/100,
       .default = NA))
   ret <- bind_cols(product_uses, active_rates["rate_g_per_ha"])
   return(ret)
@@ -140,6 +141,6 @@ units_convertible_to_g_per_ha <- c("l/ha", "kg/ha", "g/ha",
 #' l_per_ha_is_water_volume
 l_per_ha_is_water_volume <- tibble::tribble(
   ~ wNbr, ~ use_nr, ~ source, ~ url,
-  "3066", 1L, "EFSA conclusion on cynamide 2010, p. 17",
+  "3066", 1L, "EFSA conclusion on cyanamide 2010, p. 17",
   "https://doi.org/10.2903/j.efsa.2010.1873"
 )
