@@ -16,7 +16,8 @@
 #' @param dosage_units If no units are given, or units are "%", then the applied
 #' amount in g/ha is calculated using a reference application volume and the
 #' dosage. As the dosage units are not explicitly given, we can specify our
-#' assumptions about these using this argument.
+#' assumptions about these using this argument (currently not implemented, i.e.
+#' specifying the argument has no effect).
 #' @param skip_l_per_ha_without_g_per_L Per default, uses where the use rate
 #' has units of l/ha are skipped, if there is not product concentration
 #' in g/L. This was also done in the 2023 indicator project.

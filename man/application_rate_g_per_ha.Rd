@@ -13,10 +13,10 @@ application_rate_g_per_ha(
 )
 }
 \arguments{
-\item{product_uses}{A tibble containing the columns 'application_area_de',
-'min_dosage', 'max_dosage', 'min_rate', 'max_rate', from the 'uses' table
-in a \link{psmv_dm} object, as well as the columns 'percent' and 'g_per_L'
-from the 'ingredients' table in a \link{psmv_dm} object.}
+\item{product_uses}{A tibble containing the columns 'wNbr', 'use_nr',
+'application_area_de', 'min_dosage', 'max_dosage', 'min_rate', 'max_rate',
+from the 'uses' table in a \link{psmv_dm} object, as well as the columns
+'percent' and 'g_per_L' from the 'ingredients' table in a \link{psmv_dm} object.}
 
 \item{aggregation}{How to represent a range if present, e.g. "max" (default)
 or "mean".}
@@ -24,7 +24,8 @@ or "mean".}
 \item{dosage_units}{If no units are given, or units are "\%", then the applied
 amount in g/ha is calculated using a reference application volume and the
 dosage. As the dosage units are not explicitly given, we can specify our
-assumptions about these using this argument.}
+assumptions about these using this argument (currently not implemented, i.e.
+specifying the argument has no effect).}
 
 \item{skip_l_per_ha_without_g_per_L}{Per default, uses where the use rate
 has units of l/ha are skipped, if there is not product concentration

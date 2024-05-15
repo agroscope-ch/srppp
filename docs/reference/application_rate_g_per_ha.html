@@ -66,10 +66,10 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>product_uses</dt>
-<dd><p>A tibble containing the columns 'application_area_de',
-'min_dosage', 'max_dosage', 'min_rate', 'max_rate', from the 'uses' table
-in a <a href="psmv_dm.html">psmv_dm</a> object, as well as the columns 'percent' and 'g_per_L'
-from the 'ingredients' table in a <a href="psmv_dm.html">psmv_dm</a> object.</p></dd>
+<dd><p>A tibble containing the columns 'wNbr', 'use_nr',
+'application_area_de', 'min_dosage', 'max_dosage', 'min_rate', 'max_rate',
+from the 'uses' table in a <a href="psmv_dm.html">psmv_dm</a> object, as well as the columns
+'percent' and 'g_per_L' from the 'ingredients' table in a <a href="psmv_dm.html">psmv_dm</a> object.</p></dd>
 
 
 <dt>aggregation</dt>
@@ -81,7 +81,8 @@ or "mean".</p></dd>
 <dd><p>If no units are given, or units are "%", then the applied
 amount in g/ha is calculated using a reference application volume and the
 dosage. As the dosage units are not explicitly given, we can specify our
-assumptions about these using this argument.</p></dd>
+assumptions about these using this argument (currently not implemented, i.e.
+specifying the argument has no effect).</p></dd>
 
 
 <dt>skip_l_per_ha_without_g_per_L</dt>
@@ -154,9 +155,24 @@ areas in Switzerland.</p>
 <span class="r-in"><span>    min_r <span class="op">=</span> <span class="va">min_rate</span>, max_r <span class="op">=</span> <span class="va">max_rate</span>,</span></span>
 <span class="r-in"><span>    <span class="va">units_de</span>, rate <span class="op">=</span> <span class="va">rate_g_per_ha</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 variables: ai &lt;chr&gt;, app_area &lt;chr&gt;, min_d &lt;dbl&gt;, max_d &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   min_r &lt;dbl&gt;, max_r &lt;dbl&gt;, units_de &lt;chr&gt;, rate &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 15 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ai                 app_area min_d max_d min_r max_r units_de   rate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Cloquintocet-mexyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.75    <span style="color: #BB0000;">NA</span> l/ha       4.5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Florasulam         Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.75    <span style="color: #BB0000;">NA</span> l/ha       3.75</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Halauxifen-methyl  Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.75    <span style="color: #BB0000;">NA</span> l/ha       4.72</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Cloquintocet-mexyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  1       <span style="color: #BB0000;">NA</span> l/ha       6   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Florasulam         Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  1       <span style="color: #BB0000;">NA</span> l/ha       5   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Halauxifen-methyl  Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  1       <span style="color: #BB0000;">NA</span> l/ha       6.3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Cloquintocet-mexyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  1       <span style="color: #BB0000;">NA</span> l/ha       6   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Florasulam         Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  1       <span style="color: #BB0000;">NA</span> l/ha       5   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Halauxifen-methyl  Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  1       <span style="color: #BB0000;">NA</span> l/ha       6.3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Fluroxypyr         Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.5     <span style="color: #BB0000;">NA</span> l/ha     140   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> Cloquintocet-mexyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.5     <span style="color: #BB0000;">NA</span> l/ha       6   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> Halauxifen-methyl  Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.5     <span style="color: #BB0000;">NA</span> l/ha       6.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> Fluroxypyr         Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.5     <span style="color: #BB0000;">NA</span> l/ha     140   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> Cloquintocet-mexyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.5     <span style="color: #BB0000;">NA</span> l/ha       6   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> Halauxifen-methyl  Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.5     <span style="color: #BB0000;">NA</span> l/ha       6.25</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
