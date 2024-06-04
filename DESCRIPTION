@@ -1,8 +1,8 @@
 Package: psmv
 Type: Package
 Title: The Swiss Register of Plant Protection Products as an R Package
-Version: 0.3.2
-Date: 2024-05-08
+Version: 0.3.3
+Date: 2024-06-04
 Authors@R: c(
   person("Marcel", "Mathis", role = "ctb", email = "marcel.mathis@agroscope.admin.ch"),
   person("Johannes", "Ranke", role = c("aut", "cre"),

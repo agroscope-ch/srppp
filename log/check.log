@@ -9,7 +9,7 @@
 * using options ‘--no-tests --as-cran’
 * checking for file ‘psmv/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘psmv’ version ‘0.3.2’
+* this is package ‘psmv’ version ‘0.3.3’
 * package encoding: UTF-8
 * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers
 Maintainer: ‘Johannes Ranke <johannes.ranke@agroscope.admin.ch>’
@@ -57,10 +57,12 @@ Files ‘README.md’ or ‘NEWS.md’ cannot be checked without ‘pandoc’ be
 * checking for unstated dependencies in examples ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... [11s/12s] OK
+* checking examples ... [11s/13s] OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... SKIPPED
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes ... OK
-* checking re-building of vignette outputs ... [16s/15s] OK
+* checking re-building of vignette outputs ... [15s/14s] OK
 * checking PDF version of manual ... OK
 * checking HTML version of manual ... NOTE
 Skipping checking HTML validation: no command 'tidy' found

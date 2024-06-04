@@ -1,6 +1,7 @@
 utils::globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "pNbr", "use_nr",
   "add_txt_pk", "de", "fr", "it", "en", "exhaustionDeadline", "soldoutDeadline",
   "isSalePermission", "terminationReason",
+  "ingredient_de", "ingredient_fr", "ingredient_it",
   "min_dosage", "max_dosage", "min_rate", "max_rate", "waiting_period",
   "desc_pk", "ingr_desc_pk",
   "units_pk", "time_units_pk",
@@ -98,7 +99,6 @@ psmv_xml_get_products <- function(psmv_xml = psmv_xml_get(), verbose = TRUE,
       .after = id) |>
     tidyr::fill(pNbr) |>
     ungroup() |>
-    group_by(pNbr) |>
     arrange(wNbr, .by_group = TRUE) |>
     select(pNbr, wNbr, name, exhaustionDeadline, soldoutDeadline,
       isSalePermission, terminationReason)
@@ -247,6 +247,7 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get())
     ret <- c(wNbr, pk, type,
       attributes[c("inPercent", "inGrammPerLitre", "additionalTextPrimaryKey")])
     names(ret) <- c("wNbr", "pk", "type", "percent", "g_per_L", "add_txt_pk")
+
     return(ret)
   }
 
@@ -272,6 +273,7 @@ psmv_xml_get_ingredients <- function(psmv_xml = psmv_xml_get())
     arrange(ingr_desc_pk)
 
   ret <- ingredients |>
+    filter(!grepl("-", wNbr)) |>
     left_join(ingredient_descriptions, by = c(add_txt_pk = "ingr_desc_pk")) |>
     select(-add_txt_pk) |>
     mutate(across(c(percent, g_per_L), as.numeric)) |>
@@ -453,7 +455,10 @@ psmv_dm <- function(from = psmv_xml_url, remove_duplicates = TRUE) {
 
   # Tables of product ingredients and their concentrations
   substances <- psmv_xml_get_substances(psmv_xml)
-  ingredients <- psmv_xml_get_ingredients(psmv_xml)
+  ingredients_no_pNbr <- psmv_xml_get_ingredients(psmv_xml)
+  ingredients <- ingredients_no_pNbr |>
+    left_join(products[c("wNbr", "pNbr")], by = "wNbr") |>
+    select(wNbr, pNbr, pk, type, percent, g_per_L, ingredient_de, ingredient_fr, ingredient_it)
 
   # Define use IDs (attribute 'use_nr' in the XML tree)
   psmv_xml <- psmv_xml_define_use_numbers(psmv_xml)
@@ -560,7 +565,8 @@ psmv_dm <- function(from = psmv_xml_url, remove_duplicates = TRUE) {
     product_categories, formulation_codes,
     parallel_imports,
     danger_symbols, CodeS, CodeR, signal_words,
-    substances, ingredients,
+    substances, 
+    ingredients,
     uses,
     application_comments,
     culture_forms,
