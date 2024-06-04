@@ -458,7 +458,7 @@ psmv_dm <- function(from = psmv_xml_url, remove_duplicates = TRUE) {
   ingredients_no_pNbr <- psmv_xml_get_ingredients(psmv_xml)
   ingredients <- ingredients_no_pNbr |>
     left_join(products[c("wNbr", "pNbr")], by = "wNbr") |>
-    select(wNbr, pNbr, pk, type, percent, g_per_L, ingredient_de, ingredient_fr, ingredient_it)
+    select(pNbr, pk, type, percent, g_per_L, ingredient_de, ingredient_fr, ingredient_it)
 
   # Define use IDs (attribute 'use_nr' in the XML tree)
   psmv_xml <- psmv_xml_define_use_numbers(psmv_xml)
@@ -581,7 +581,7 @@ psmv_dm <- function(from = psmv_xml_url, remove_duplicates = TRUE) {
     dm_add_fk(CodeS, wNbr, products) |>
     dm_add_fk(CodeR, wNbr, products) |>
     dm_add_fk(signal_words, wNbr, products) |>
-    dm_add_fk(ingredients, wNbr, products) |>
+    dm_add_fk(ingredients, pNbr, products) |>
     dm_add_fk(ingredients, pk, substances) |>
     dm_add_fk(uses, wNbr, products) |>
     dm_add_fk(application_comments, c(wNbr, use_nr), uses) |>

@@ -1,7 +1,7 @@
 ---
 title: Statistics on products containing microorganisms in the latest XML dump of the PSMV
 author: Johannes Ranke
-date: Last change 22 April 2024 (rebuilt `r Sys.Date()`)
+date: Last change 04 June 2024 (rebuilt `r Sys.Date()`)
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -52,7 +52,6 @@ The corresponding products are shown below.
 
 ```{r}
 products_in_microorganism_categories <- psmv$products |>
-  ungroup() |>
   left_join(psmv$product_categories, by = "wNbr") |>
   filter(category_de %in% microorganism_categories) |>
   select(wNbr, name, category_de) |>
@@ -69,9 +68,8 @@ used to establish filter criteria active substances that are microorganisms.
 ```{r}
 psmv$products |>
   left_join(psmv$product_categories, by = "wNbr") |>
-  ungroup() |>
   filter(category_de == "Insektizid") |>
-  left_join(psmv$ingredients, by = "wNbr") |>
+  left_join(psmv$ingredients, by = "pNbr", relationship = "many-to-many") |>
   left_join(psmv$substances, by = "pk") |>
   select(substance_de) |>
   unique() |>
@@ -80,9 +78,8 @@ psmv$products |>
 
 psmv$products |>
   left_join(psmv$product_categories, by = "wNbr") |>
-  ungroup() |>
   filter(category_de == "Fungizid") |>
-  left_join(psmv$ingredients, by = "wNbr") |>
+  left_join(psmv$ingredients, by = "pNbr", relationship = "many-to-many") |>
   left_join(psmv$substances, by = "pk") |>
   select(substance_de) |>
   unique() |>
@@ -118,8 +115,7 @@ The following products contain one of these active ingredients.
 
 ```{r}
 additional_products_containing_microorganisms <- psmv$products |>
-  ungroup() |>
-  left_join(psmv$ingredients, by = "wNbr") |>
+  left_join(psmv$ingredients, by = "pNbr", relationship = "many-to-many") |>
   filter(pk %in% microorganism_ingredients$pk) |>
   select(-pk) |>
   left_join(psmv$product_categories, by = "wNbr") |> 
