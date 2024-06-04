@@ -47,8 +47,8 @@ alternative_products <- function(psmv, active_ingredients,
   # Select products from the PSM-V containing the active ingredients in question
   affected_products <- psmv$substances |>
     filter(psmv$substances[[substance_column]] %in% active_ingredients) |>
-    left_join(psmv$ingredients, by = "pk") |> # get the W-Numbers
-    left_join(psmv$products, by = "wNbr") |>  # get the P-Numbers
+    left_join(psmv$ingredients[c("pk", "pNbr")], by = "pk") |> # get P-Numbers
+    left_join(psmv$products, by = "pNbr") |>
     select(c("pNbr", "wNbr")) |>
     arrange(pick(all_of(c("pNbr", "wNbr"))))
 
