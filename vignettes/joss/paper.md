@@ -51,19 +51,19 @@ hindering effective use by practitioners and researchers. Our open-source
 R package `srppp` addresses this issue by providing easy and user-friendly
 access to SRPPP data, like active substance content of products, application
 areas, cultures and target organisms, as well as use restrictions. The 
-package is therefore essential for ecotoxicologists, economists and other
-stakeholders who need reliable and efficient access to information on the
-currently registered PPP, their uses and their use restrictions.
+package is therefore essential for researchers such as ecotoxicologists,
+economists and other stakeholders who need reliable and efficient access to
+information on the currently registered PPP, their uses and their use
+restrictions.
 
 In spite of the fact that the `srppp` package has just recently been 
 developed, it has already been used for answering numerous requests 
 and is actively being deployed in several projects. Projects like the National
-Risk Indicator [@korkaric2023] or the map of plant protection product risk
-potentials [@mathis2023] that have previously used the SRPPP data have suffered
-from the fact that previous approaches have partially lost information in the
-course of processing the published data. These shortcomings are avoided by
-using `srcpp` which adheres more strictly to the data structure offered by the
-XML file \autoref{fig:srppp}.
+Risk Indicator [@korkaric2023] that have previously used the SRPPP data have
+suffered from the fact that previous approaches have partially lost information
+in the course of processing the published data. These shortcomings can now be
+avoided by using `srppp` which adheres more strictly to the data structure
+offered by the XML file \autoref{fig:srppp}.
 
 ![Schematic representation of the relations between the tables\label{fig:srppp}](srppp.png)
 
@@ -88,7 +88,7 @@ relational data in R without the need for an external database engine.
 
 The Swiss Federal Office for Food Safety and Veterinary Medicine, which
 coordinates the registration of plant protection products in Switzerland, 
-has noted and agreed to the open source development of this software package
+has noted the open source development of this software package,
 but accepts no responsibility for the correctness of any functionalities
 within. Further, they will not respond to queries regarding the package. Please
 note that there is no guarantee that the data contained in or read by this
