@@ -1,5 +1,7 @@
 # srppp - R package to deal with XML dumps of the Swiss Register of Plant Protection Products
 
+[![srppp status badge](https://agroscope-ch.r-universe.dev/badges/srppp)](https://agroscope-ch.r-universe.dev/ui/#package:srppp)
+
 ## Description
 
 Functions to generate data objects from XML versions of the Swiss
