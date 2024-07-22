@@ -1,0 +1,38 @@
+Package: srppp
+Type: Package
+Title: The Swiss Register of Plant Protection Products as an R Package
+Version: 0.99.1
+Date: 2024-07-22
+Authors@R: c(
+  person("Marcel", "Mathis", role = c("ctb", "rev"),
+    email = "marcel.mathis@agroscope.admin.ch"),
+  person("Romualdus", "Kasteel", role = "rev",
+    email = "romualdus.kasteel@agroscope.admin.ch",
+    comment = "Provided feedback to version 0.3.4"),
+  person("Johannes", "Ranke", role = c("aut", "cre"),
+    email = "johannes.ranke@agroscope.admin.ch",
+    comment = c(ORCID = "0000-0003-4371-6538")),
+  person("Agroscope", role = "cph"))
+Description: Functions to generate data objects from XML versions of the Swiss
+  Register of Plant Protection Products 'SRPPP'. An online version of the
+  register can be accessed at <https://www.psm.admin.ch/de/produkte>. There is no
+  guarantee of correspondence of the data read in using this package with that
+  online version, or with the original registration documents.  Also, the
+  Federal Food Safety and Veterinary Office, coordinating the authorisation of
+  plant protection products in Switzerland, does not answer requests regarding
+  this package. 
+Depends: R (>= 4.1.0), dm
+Imports: xml2, tibble, stringr, dplyr, tidyr, cli
+Suggests: knitr, rmarkdown, here, DiagrammeR,
+  testthat (>= 3.0.0), parallel
+BugReports: https://github.com/agroscope-ch/srppp/issues
+URL: https://agroscope-ch.github.io/srppp
+License: GPL
+LazyData: yes
+LazyDataCompression: xz
+RoxygenNote: 7.3.1.9000
+Roxygen: list(markdown = TRUE)
+VignetteBuilder: knitr
+Encoding: UTF-8
+Language: en-GB
+Config/testthat/edition: 3
