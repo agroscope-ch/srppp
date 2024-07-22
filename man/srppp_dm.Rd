@@ -24,7 +24,8 @@ pointing to primary keys, i.e. with referential integrity.
 }
 \description{
 In general, the information obtained from the XML file is left unchanged.
-For exceptions, see Details.
+For exceptions, see Details. An overview of the contents of the most
+important tables is given in \code{vignette("srppp")}.
 }
 \details{
 In the following case, the product composition is

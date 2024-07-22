@@ -406,7 +406,8 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #' Create a dm object from an XML version of the Swiss Register of Plant Protection Products
 #'
 #' In general, the information obtained from the XML file is left unchanged.
-#' For exceptions, see Details.
+#' For exceptions, see Details. An overview of the contents of the most
+#' important tables is given in `vignette("srppp")`.
 #'
 #' In the following case, the product composition is
 #' corrected while reading in the data:

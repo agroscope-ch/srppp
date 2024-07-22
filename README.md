@@ -14,7 +14,8 @@ this package.
 ## Installation
 
 ```
-install.packages("srppp", repos = c("https://agroscope-ch.r-universe.dev", "https://cran.r-project.org"))
+install.packages("srppp",
+  repos = c("https://agroscope-ch.r-universe.dev", "https://cran.r-project.org"))
 ```
 
 ## Documentation
