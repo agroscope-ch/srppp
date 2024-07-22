@@ -13,3 +13,5 @@
 ^.*_.*\.tar\.gz
 ^.*.Rcheck
 ^vignettes/.*_cache$
+^\.github$
+^codecov\.yml$
