@@ -7,12 +7,13 @@ tags:
   - use restrictions
   - R
 date: 22 July 2024
-author:
+authors:
   - name: Marcel Mathis
     orcid: 0000-0001-7102-4841
     affiliation: 1
   - name: Johannes Ranke
     orcid: 0000-0003-4371-6538
+    corresponding: true
     affiliation: 1
 affiliations:
   - name: Agroscope, Switzerland
