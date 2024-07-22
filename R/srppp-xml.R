@@ -72,7 +72,7 @@ srppp_xml_get_from_path <- function(path, from) {
 #' registration is discarded. In the remaining case (wNbr 5945), the second
 #' entry is selected, as it contains more indications which were apparently
 #' intended to be published as well.
-#' @return A [tibble] with a row for each product section
+#' @return A [tibble::tibble] with a row for each product section
 #' in the XML file. An attribute 'duplicated_wNbrs' is
 #' also returned, containing duplicated W-Numbers, if applicable,
 #' or NULL.
@@ -168,7 +168,7 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
 #' Get Parallel Imports from an XML version of the Swiss Register of Plant Protection Products
 #'
 #' @inheritParams srppp_xml_get_products
-#' @return A [tibble] with a row for each parallel import section
+#' @return A [tibble::tibble] with a row for each parallel import section
 #' in the XML file.
 #' @export
 #' @examples
@@ -429,7 +429,7 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #'
 #' @inheritParams srppp_xml_get
 #' @param remove_duplicates Should duplicates based on wNbrs be removed?
-#' @return A [dm] object with tables linked by foreign keys
+#' @return A [dm::dm] object with tables linked by foreign keys
 #' pointing to primary keys, i.e. with referential integrity.
 #' @export
 #' @examples

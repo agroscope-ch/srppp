@@ -11,8 +11,8 @@ Functions to generate data objects from XML versions of the Swiss Register of Pl
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://psmwb.pages.agsad.admin.ch/srppp}
-  \item Report bugs at \url{https://gitlab.agsad.admin.ch/psmwb/srppp/issues}
+  \item \url{https://agroscope-ch.github.io/srppp}
+  \item Report bugs at \url{https://github.com/agroscope-ch/srppp/issues}
 }
 
 }

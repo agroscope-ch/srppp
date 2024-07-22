@@ -26,7 +26,7 @@ entry is selected, as it contains more indications which were apparently
 intended to be published as well.}
 }
 \value{
-A \link{tibble} with a row for each product section
+A \link[tibble:tibble]{tibble::tibble} with a row for each product section
 in the XML file. An attribute 'duplicated_wNbrs' is
 also returned, containing duplicated W-Numbers, if applicable,
 or NULL.

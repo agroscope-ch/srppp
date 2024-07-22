@@ -10,7 +10,7 @@ srppp_xml_get_parallel_imports(srppp_xml = srppp_xml_get())
 \item{srppp_xml}{An object as returned by 'srppp_xml_get'}
 }
 \value{
-A \link{tibble} with a row for each parallel import section
+A \link[tibble:tibble]{tibble::tibble} with a row for each parallel import section
 in the XML file.
 }
 \description{

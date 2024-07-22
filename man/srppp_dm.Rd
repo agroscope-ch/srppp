@@ -19,7 +19,7 @@ srppp_dm(from = srppp_xml_url, remove_duplicates = TRUE)
 \item{\dots}{Not used}
 }
 \value{
-A \link{dm} object with tables linked by foreign keys
+A \link[dm:dm]{dm::dm} object with tables linked by foreign keys
 pointing to primary keys, i.e. with referential integrity.
 }
 \description{
