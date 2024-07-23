@@ -10,7 +10,7 @@ Authors@R: c(
     email = "romualdus.kasteel@agroscope.admin.ch",
     comment = "Provided feedback to version 0.3.4"),
   person("Daniel", "Baumgartner", role = "ctb",
-    comment = "Collected XML data files, provided explanations"),
+    comment = "Provided feedback, explanations and background information"),
   person("Johannes", "Ranke", role = c("aut", "cre"),
     email = "johannes.ranke@agroscope.admin.ch",
     comment = c(ORCID = "0000-0003-4371-6538")),
