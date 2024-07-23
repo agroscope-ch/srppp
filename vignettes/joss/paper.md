@@ -31,18 +31,18 @@ Pesticides authorized for use in Switzerland are listed in the
 Swiss Register of Plant Protection Products (SRPPP). 
 The SRPPP contains information on active ingredient content of PPP, their uses
 and the associated use restrictions. These data are available on a dedicated
-website (https://www.psm.admin.ch/de/produkte). In addition, they are published 
+website (<https://www.psm.admin.ch/de/produkte>). In addition, they are published 
 in a custom format based on the Extensible Markup Language (XML). However,
 neither format is suitable for more complex types of analysis. The
 R package `srppp` greatly facilitates the access to these data, making them much
 easier to use and therefore more valuable for research in ecotoxicology,
-economics and regulatory science. Utility functions for
-searching for alternative PPP for certain uses, and for calculating
-active substance application rates from product dosage information are also
-included. 
+economics and regulatory science. The tables available in the data object
+created by `srppp` as well as their relations are shown in \autoref{fig:srppp}.
+Utility functions for searching for alternative PPP for certain uses, and for
+calculating active substance application rates from product dosage information
+are also included. 
 
-For those interested in historical data, we refer to the companion package
-'srppphist', which provides annual extracts of SRPPP data starting from 2011.
+![Schematic representation of the relations between the tables\label{fig:srppp}](srppp.png)
 
 # Statement of need
 
@@ -63,9 +63,7 @@ Risk Indicator [@korkaric2023] that have previously used the SRPPP data have
 suffered from the fact that previous approaches have partially lost information
 in the course of processing the published data. These shortcomings can now be
 avoided by using `srppp` which adheres more strictly to the data structure
-offered by the XML file \autoref{fig:srppp}.
-
-![Schematic representation of the relations between the tables\label{fig:srppp}](srppp.png)
+offered by the XML file. 
 
 # Availability
 
