@@ -92,5 +92,11 @@ within. Further, they will not respond to queries regarding the package. Please
 note that there is no guarantee that the data contained in or read by this
 package will match the online version or the original registration documents.
 
+# Acknowledgements
+
+We would like to acknowledge the helpful discussions with various members and
+previous members of group, in particular Daniel Baumgartner and Jérôme
+Schneuwly who shared their knowledge about the SRPPP data.
+
 # References
 
