@@ -1,3 +1,7 @@
+## version 0.99.2
+
+- R/srppp-xml.R: Revise the structure of the `srppp_dm` object, after verifying that the product sections of different products with the same P-Number are identical, with the exception of the permission holder. Therefore, all tables describing the products, including the use definitions, are now tied to the `pNbrs` table with the `pNbr` as the primary key, instead of the `products` table which has the `wNbr` as a primary key. Functions, example code, vignettes and tests were adapted accordingly.
+
 ## version 0.99.1
 
 - vignettes/srppp.rmd: Add an overview vignette which is displayed with the link 'Get started' in the online documentation

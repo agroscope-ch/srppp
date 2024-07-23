@@ -24,12 +24,17 @@ pointing to primary keys, i.e. with referential integrity.
 }
 \description{
 In general, the information obtained from the XML file is left unchanged.
-For exceptions, see Details. An overview of the contents of the most
-important tables is given in \code{vignette("srppp")}.
+Information on products that has been duplicated across several products
+sharing the same P-Number has been associated directly with this P-Number,
+in order to avoid duplications. While reading in the XML file, it is checked
+that the resulting deduplication does not remove any data. For the very few
+alterations of or amendments to the data, see Details.  An overview of the
+contents of the most important tables in the resulting data object is given
+in \code{vignette("srppp")}.
 }
 \details{
-In the following case, the product composition is
-corrected while reading in the data:
+In the following case, the product composition is corrected while reading in
+the data:
 
 The active substance content of Dormex (W-3066) is not 667 g/L, but 520 g/L
 This was confirmed by a visit to the Wädenswil archive by
@@ -62,15 +67,15 @@ dm_draw(sr)
 # Show ingredients for products named 'Boxer'
 sr$products |>
   filter(name == "Boxer") |>
-  left_join(sr$ingredients) |>
-  left_join(sr$substances) |>
+  left_join(sr$ingredients, by = "pNbr") |>
+  left_join(sr$substances, by = "pk") |>
   select(wNbr, name, pNbr, isSalePermission, substance_de, g_per_L)
 
 # Show authorised uses of the original product
 boxer_uses <- sr$products |>
-  filter(name == "Boxer", isSalePermission == "false") |>
-  left_join(sr$uses) |>
-  select(wNbr, name, use_nr,
+  filter(name == "Boxer", !isSalePermission) |>
+  left_join(sr$uses, by = "pNbr") |>
+  select(pNbr, use_nr,
     min_dosage, max_dosage, min_rate, max_rate, units_de,
     waiting_period, time_units_de, application_area_de)
 print(boxer_uses)
@@ -78,19 +83,19 @@ print(boxer_uses)
 # Show crop for use number 1
 boxer_uses |>
   filter(use_nr == 1) |>
-  left_join(sr$cultures, join_by(wNbr, use_nr)) |>
+  left_join(sr$cultures, join_by(pNbr, use_nr)) |>
   select(use_nr, culture_de)
 
 # Show target pests for use number 1
 boxer_uses |>
   filter(use_nr == 1) |>
-  left_join(sr$pests, join_by(wNbr, use_nr)) |>
+  left_join(sr$pests, join_by(pNbr, use_nr)) |>
   select(use_nr, pest_de)
 
 # Show obligations for use number 1
 boxer_uses |>
   filter(use_nr == 1) |>
-  left_join(sr$obligations, join_by(wNbr, use_nr)) |>
+  left_join(sr$obligations, join_by(pNbr, use_nr)) |>
   select(use_nr, sw_runoff_points, obligation_de) |>
   knitr::kable() |>
   print()
@@ -98,6 +103,6 @@ boxer_uses |>
 # Show application comments for use number 1
 boxer_uses |>
   filter(use_nr == 1) |>
-  left_join(sr$application_comments, join_by(wNbr, use_nr)) |>
+  left_join(sr$application_comments, join_by(pNbr, use_nr)) |>
   select(use_nr, application_comment_de)
 }

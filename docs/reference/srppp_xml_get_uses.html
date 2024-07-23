@@ -24,7 +24,7 @@
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://gitlab.agsad.admin.ch/psmwb/srppp/" aria-label="GitLab"><span class="fa fab fa-gitlab fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/agroscope-ch/srppp/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -34,7 +34,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Get uses ('indications') for all products described in an XML version of the Swiss Register of Plant Protection Products</h1>
-      <small class="dont-index">Source: <a href="https://gitlab.agsad.admin.ch/psmwb/srppp/blob/HEAD/R/srppp-xml.R" class="external-link"><code>R/srppp-xml.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/agroscope-ch/srppp/blob/HEAD/R/srppp-xml.R" class="external-link"><code>R/srppp-xml.R</code></a></small>
       <div class="d-none name"><code>srppp_xml_get_uses.Rd</code></div>
     </div>
 
@@ -62,23 +62,23 @@ defined by <a href="srppp_xml_define_use_numbers.html">srppp_xml_define_use_numb
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">srppp_xml</span> <span class="op">&lt;-</span> <span class="fu"><a href="srppp_xml_get.html">srppp_xml_get</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">srppp_xml</span> <span class="op">&lt;-</span> <span class="fu"><a href="srppp_xml_define_use_numbers.html">srppp_xml_define_use_numbers</a></span><span class="op">(</span><span class="va">srppp_xml</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">srppp_xml_get_uses</span><span class="op">(</span><span class="va">srppp_xml</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 14,400 × 15</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    wNbr  use_nr min_dosage max_dosage min_rate max_rate units_de units_fr</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1454       1        2           <span style="color: #BB0000;">NA</span>       32       <span style="color: #BB0000;">NA</span> l/ha     l/ha    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1454       2        2           <span style="color: #BB0000;">NA</span>       32       <span style="color: #BB0000;">NA</span> l/ha     l/ha    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1454       3        2           <span style="color: #BB0000;">NA</span>        7       <span style="color: #BB0000;">NA</span> l/ha     l/ha    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1454       4        1           <span style="color: #BB0000;">NA</span>       16       <span style="color: #BB0000;">NA</span> l/ha     l/ha    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1454       5        1           <span style="color: #BB0000;">NA</span>       16       <span style="color: #BB0000;">NA</span> l/ha     l/ha    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 1454       6        3.5         <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 1454       7        3.5         <span style="color: #BB0000;">NA</span>       56       <span style="color: #BB0000;">NA</span> l/ha     l/ha    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1454       8        3.5         <span style="color: #BB0000;">NA</span>       56       <span style="color: #BB0000;">NA</span> l/ha     l/ha    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1454       9        3.5         <span style="color: #BB0000;">NA</span>       56       <span style="color: #BB0000;">NA</span> l/ha     l/ha    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1454      10        3.5         <span style="color: #BB0000;">NA</span>       35       <span style="color: #BB0000;">NA</span> l/ha     l/ha    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 14,390 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: units_it &lt;chr&gt;, units_en &lt;chr&gt;, waiting_period &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   time_units_de &lt;chr&gt;, time_units_fr &lt;chr&gt;, time_units_it &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   time_units_en &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7,787 × 17</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    wNbr  use_nr min_dosage max_dosage min_rate max_rate units_pk units_de</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1454       1        2           <span style="color: #BB0000;">NA</span>       32       <span style="color: #BB0000;">NA</span>     <span style="text-decoration: underline;">6</span>517 l/ha    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1454       2        2           <span style="color: #BB0000;">NA</span>       32       <span style="color: #BB0000;">NA</span>     <span style="text-decoration: underline;">6</span>517 l/ha    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1454       3        2           <span style="color: #BB0000;">NA</span>        7       <span style="color: #BB0000;">NA</span>     <span style="text-decoration: underline;">6</span>517 l/ha    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1454       4        1           <span style="color: #BB0000;">NA</span>       16       <span style="color: #BB0000;">NA</span>     <span style="text-decoration: underline;">6</span>517 l/ha    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1454       5        1           <span style="color: #BB0000;">NA</span>       16       <span style="color: #BB0000;">NA</span>     <span style="text-decoration: underline;">6</span>517 l/ha    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 1454       6        3.5         <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>        1 <span style="color: #BB0000;">NA</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 1454       7        3.5         <span style="color: #BB0000;">NA</span>       56       <span style="color: #BB0000;">NA</span>     <span style="text-decoration: underline;">6</span>517 l/ha    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1454       8        3.5         <span style="color: #BB0000;">NA</span>       56       <span style="color: #BB0000;">NA</span>     <span style="text-decoration: underline;">6</span>517 l/ha    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1454       9        3.5         <span style="color: #BB0000;">NA</span>       56       <span style="color: #BB0000;">NA</span>     <span style="text-decoration: underline;">6</span>517 l/ha    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1454      10        3.5         <span style="color: #BB0000;">NA</span>       35       <span style="color: #BB0000;">NA</span>     <span style="text-decoration: underline;">6</span>517 l/ha    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7,777 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 9 more variables: units_fr &lt;chr&gt;, units_it &lt;chr&gt;, units_en &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   waiting_period &lt;int&gt;, time_units_pk &lt;int&gt;, time_units_de &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   time_units_fr &lt;chr&gt;, time_units_it &lt;chr&gt;, time_units_en &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

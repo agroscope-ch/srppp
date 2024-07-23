@@ -7,7 +7,7 @@
 #' Applications to hops were excluded for calculating mean use rates in the
 #' indicator project (Korkaric 2023), arguing that it is not grown in large
 #' areas in Switzerland.
-#' @param product_uses A tibble containing the columns 'wNbr', 'use_nr',
+#' @param product_uses A tibble containing the columns 'pNbr', 'use_nr',
 #' 'application_area_de', 'min_dosage', 'max_dosage', 'min_rate', 'max_rate',
 #' from the 'uses' table in a [srppp_dm] object, as well as the columns
 #' 'percent' and 'g_per_L' from the 'ingredients' table in a [srppp_dm] object.
@@ -32,16 +32,14 @@
 #' library(srppp)
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(dm, warn.conflicts = FALSE)
-#' srppp_cur <- srppp_dm()
+#' sr <- srppp_dm()
 #'
-#' product_uses_with_ingredients <- srppp_cur |>
-#'   dm_filter(substances =
-#'     (substance_de %in% c("Halauxifen-methyl", "Kupfer (als Kalkpr\u00E4parat)"))) |>
-#'   dm_flatten_to_tbl(uses, products) |>
-#'   left_join(srppp_cur$ingredients, by = join_by(pNbr),
-#'     relationship = "many-to-many") |>
-#'   left_join(srppp_cur$substances, by = join_by(pk)) |>
-#'   select(wNbr, name, use_nr,
+#' product_uses_with_ingredients <- sr$substances |>
+#'   filter(substance_de %in% c("Halauxifen-methyl", "Kupfer (als Kalkpr\u00E4parat)")) |>
+#'   left_join(sr$ingredients, by = "pk") |>
+#'   left_join(sr$uses, by = "pNbr") |>
+#'   left_join(sr$products, by = "pNbr") |>
+#'   select(pNbr, name, use_nr,
 #'     min_dosage, max_dosage, min_rate, max_rate, units_de,
 #'     application_area_de,
 #'     substance_de, percent, g_per_L)
@@ -93,7 +91,7 @@ application_rate_g_per_ha <- function(product_uses,
       application_area_de %in% c("Feldbau", "Gem\u00FCsebau", "Beerenbau", "Zierpflanzen") ~ 1000,
       application_area_de %in% c("Weinbau", "Obstbau") ~ 1600,
       .default = NA)) |>
-    left_join(l_per_ha_is_water_volume, by = c("wNbr", "use_nr")) |>
+    left_join(l_per_ha_is_water_volume, by = c("pNbr", "use_nr")) |>
     mutate(rate_g_per_ha = case_when(
       units_de == "l/ha" ~ # l/ha can refer to product or water volume
         if_else(is.na(source), # if no external information, assume l/ha is product
@@ -141,7 +139,7 @@ units_convertible_to_g_per_ha <- c("l/ha", "kg/ha", "g/ha",
 #' library(srppp)
 #' l_per_ha_is_water_volume
 l_per_ha_is_water_volume <- tibble::tribble(
-  ~ wNbr, ~ use_nr, ~ source, ~ url,
-  "3066", 1L, "EFSA conclusion on cyanamide 2010, p. 17",
+  ~ pNbr, ~ use_nr, ~ source, ~ url,
+  5151L, 1L, "EFSA conclusion on cyanamide 2010, p. 17",
   "https://doi.org/10.2903/j.efsa.2010.1873"
 )

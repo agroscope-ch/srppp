@@ -1,7 +1,8 @@
 utils::globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "pNbr", "use_nr",
   "add_txt_pk", "de", "fr", "it", "en", "exhaustionDeadline", "soldoutDeadline",
   "isSalePermission", "terminationReason",
-  "ingredient_de", "ingredient_fr", "ingredient_it",
+  "packageInsert", "permission_holder", "producingCountryPrimaryKey",
+  "ingredient_de", "ingredient_fr", "ingredient_it", "categories",
   "min_dosage", "max_dosage", "min_rate", "max_rate", "waiting_period",
   "desc_pk", "ingr_desc_pk",
   "units_pk", "time_units_pk",
@@ -85,7 +86,7 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
 {
   product_nodeset <- xml_find_all(srppp_xml, "Products/Product")
   product_attribute_names <- names(xml_attrs(product_nodeset[[1]]))
-  products <- product_nodeset |>
+  products_no_permission_holders <- product_nodeset |>
     xml_attrs() |>
     unlist() |>
     matrix(ncol = 7, byrow = TRUE,
@@ -99,10 +100,69 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
       .after = id) |>
     tidyr::fill(pNbr) |>
     ungroup() |>
-    arrange(wNbr, .by_group = TRUE) |>
+    mutate(isSalePermission = if_else(isSalePermission == "true", TRUE, FALSE)) |>
     select(wNbr, name, pNbr, exhaustionDeadline, soldoutDeadline,
       isSalePermission, terminationReason)
 
+  ph_nodes <- xml_find_all(srppp_xml,
+    "Products/Product/ProductInformation/PermissionHolderKey")
+
+  ph_key_matrix <- t(sapply(ph_nodes, function(node) {
+    wNbr <- xml_attr(xml_parent(xml_parent(node)), "wNbr")
+    ph_key <- xml_attr(node, "primaryKey")
+    c(wNbr, ph_key)
+  }))
+  colnames(ph_key_matrix) <- c("wNbr", "permission_holder")
+  ph_keys <- as_tibble(ph_key_matrix)
+  ph_keys$permission_holder <- as.integer(ph_keys$permission_holder)
+
+  # Discard the second permission holder
+  # The code was developed for ParallelImports, where this occurred
+  ph_keys <- ph_keys[!duplicated(ph_keys$wNbr), ]
+
+  products <- products_no_permission_holders |>
+    left_join(ph_keys, by = "wNbr")
+
+  # Check if identical P-Numbers have identical
+  # product sections except for PermissionHolderKey
+  for (pNbr in sort(unique(products$pNbr))) {
+
+    # Get node indices with the current P-Number
+    node_numbers <- which(pNbr == products$pNbr)
+
+    # Compare them if there is more than one
+    if (length(node_numbers) > 1) {
+
+      # Define the reference node (original product)
+      ref_node <- xml_child(product_nodeset[[node_numbers[1]]])
+      ref_contents <- unlist(strsplit(as.character(ref_node), "\n"))
+      ref_contents_permholder_i <- grep("PermissionHolderKey", ref_contents)
+      ref_contents_clean <- ref_contents[-ref_contents_permholder_i]
+
+      # Loop over sales permissions
+      for (i in 2:length(node_numbers)) {
+        check_node <- xml_child(product_nodeset[[node_numbers[i]]])
+        check_contents <- unlist(strsplit(as.character(check_node), "\n"))
+
+        # In certain cases (2011-10-31, P-Number 7539), there is no
+        # PermissionHolderKey for a sales permission
+        if (any(grepl("PermissionHolderKey", check_contents))) {
+          check_contents_permholder_i <- grep("PermissionHolderKey", check_contents)
+          check_contents_clean <- check_contents[-check_contents_permholder_i]
+        } else {
+          check_contents_clean <- check_contents
+        }
+
+        if (!identical(ref_contents_clean, check_contents_clean)) {
+          cli::cli_alert_warning(
+            paste0("P-Number ", pNbr, ": Differing product section for W-Number ",
+              products$wNbr[node_numbers[[i]]])
+          )
+          message(waldo::compare(ref_contents_clean, check_contents_clean))
+        }
+      }
+    }
+  }
   dup_index <- which(duplicated(products$wNbr))
   dup_wNbrs <- products[dup_index, ]$wNbr
 
@@ -159,7 +219,8 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
   products_to_return <- products |>
     select(pNbr, wNbr, name,
       exhaustionDeadline, soldoutDeadline,
-      isSalePermission, terminationReason) |>
+      isSalePermission, terminationReason,
+      permission_holder) |>
     arrange(pNbr, wNbr)
 
   return(products_to_return)
@@ -184,6 +245,8 @@ srppp_xml_get_parallel_imports <- function(srppp_xml = srppp_xml_get())
     matrix(ncol = 8, byrow = TRUE,
       dimnames = list(NULL, pi_attribute_names)) |>
     as_tibble() |>
+    rename(pNbr = packageInsert) |>
+    mutate(across(c(producingCountryPrimaryKey, pNbr), as.integer)) |>
     arrange(wNbr)
 
   ph_nodes <- xml_find_all(srppp_xml,
@@ -194,8 +257,9 @@ srppp_xml_get_parallel_imports <- function(srppp_xml = srppp_xml_get())
     ph_key <- xml_attr(node, "primaryKey")
     c(pi_id, ph_key)
   }))
-  colnames(ph_key_matrix) <- c("id", "permission_holder_key")
+  colnames(ph_key_matrix) <- c("id", "permission_holder")
   ph_keys <- as_tibble(ph_key_matrix)
+  ph_keys$permission_holder <- as.integer(ph_keys$permission_holder)
 
   # Discard the second permission holder
   # For example, in the XML file from 2019-03-05, the Parallelimport F-6146
@@ -323,7 +387,7 @@ srppp_xml_define_use_numbers <- function(srppp_xml = srppp_xml_get()) {
 #' srppp_xml <- srppp_xml_define_use_numbers(srppp_xml)
 #' srppp_xml_get_uses(srppp_xml)
 srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
-  use_nodeset <- xml_find_all(srppp_xml, "Products/Product/ProductInformation/Indication")
+  use_nodeset <- xml_find_all(srppp_xml, "Products/Product[not(contains(@wNbr, '-'))]/ProductInformation/Indication")
 
   if (is.na(xml_attr(use_nodeset[[1]], "use_nr"))) {
     stop("You need to add use numbers with srppp_xml_use_numbers() first")
@@ -350,6 +414,7 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
       "waiting_period",
       "min_rate", "max_rate",
       "use_nr", "units_pk")
+
     return(ret)
   }
 
@@ -393,7 +458,6 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
   ret <- uses |>
     left_join(rate_unit_descriptions, by = "units_pk") |>
     left_join(time_unit_descriptions, by = "time_units_pk") |>
-    select(-units_pk, -time_units_pk) |>
     select(wNbr, use_nr, ends_with("dosage"),
       ends_with("rate"), starts_with("units"),
       waiting_period, starts_with("time_units"),
@@ -406,11 +470,16 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #' Create a dm object from an XML version of the Swiss Register of Plant Protection Products
 #'
 #' In general, the information obtained from the XML file is left unchanged.
-#' For exceptions, see Details. An overview of the contents of the most
-#' important tables is given in `vignette("srppp")`.
+#' Information on products that has been duplicated across several products
+#' sharing the same P-Number has been associated directly with this P-Number,
+#' in order to avoid duplications. While reading in the XML file, it is checked
+#' that the resulting deduplication does not remove any data. For the very few
+#' alterations of or amendments to the data, see Details.  An overview of the
+#' contents of the most important tables in the resulting data object is given
+#' in `vignette("srppp")`.
 #'
-#' In the following case, the product composition is
-#' corrected while reading in the data:
+#' In the following case, the product composition is corrected while reading in
+#' the data:
 #'
 #' The active substance content of Dormex (W-3066) is not 667 g/L, but 520 g/L
 #' This was confirmed by a visit to the Wädenswil archive by
@@ -447,15 +516,15 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #' # Show ingredients for products named 'Boxer'
 #' sr$products |>
 #'   filter(name == "Boxer") |>
-#'   left_join(sr$ingredients) |>
-#'   left_join(sr$substances) |>
+#'   left_join(sr$ingredients, by = "pNbr") |>
+#'   left_join(sr$substances, by = "pk") |>
 #'   select(wNbr, name, pNbr, isSalePermission, substance_de, g_per_L)
 #'
 #' # Show authorised uses of the original product
 #' boxer_uses <- sr$products |>
-#'   filter(name == "Boxer", isSalePermission == "false") |>
-#'   left_join(sr$uses) |>
-#'   select(wNbr, name, use_nr,
+#'   filter(name == "Boxer", !isSalePermission) |>
+#'   left_join(sr$uses, by = "pNbr") |>
+#'   select(pNbr, use_nr,
 #'     min_dosage, max_dosage, min_rate, max_rate, units_de,
 #'     waiting_period, time_units_de, application_area_de)
 #' print(boxer_uses)
@@ -463,19 +532,19 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #' # Show crop for use number 1
 #' boxer_uses |>
 #'   filter(use_nr == 1) |>
-#'   left_join(sr$cultures, join_by(wNbr, use_nr)) |>
+#'   left_join(sr$cultures, join_by(pNbr, use_nr)) |>
 #'   select(use_nr, culture_de)
 #'
 #' # Show target pests for use number 1
 #' boxer_uses |>
 #'   filter(use_nr == 1) |>
-#'   left_join(sr$pests, join_by(wNbr, use_nr)) |>
+#'   left_join(sr$pests, join_by(pNbr, use_nr)) |>
 #'   select(use_nr, pest_de)
 #'
 #' # Show obligations for use number 1
 #' boxer_uses |>
 #'   filter(use_nr == 1) |>
-#'   left_join(sr$obligations, join_by(wNbr, use_nr)) |>
+#'   left_join(sr$obligations, join_by(pNbr, use_nr)) |>
 #'   select(use_nr, sw_runoff_points, obligation_de) |>
 #'   knitr::kable() |>
 #'   print()
@@ -483,7 +552,7 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #' # Show application comments for use number 1
 #' boxer_uses |>
 #'   filter(use_nr == 1) |>
-#'   left_join(sr$application_comments, join_by(wNbr, use_nr)) |>
+#'   left_join(sr$application_comments, join_by(pNbr, use_nr)) |>
 #'   select(use_nr, application_comment_de)
 srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
 
@@ -510,10 +579,13 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
           wNbr = sapply(product_information_nodes, get_grandparent_wNbr),
           desc_pk = as.integer(xml_attr(product_information_nodes, "primaryKey"))
         ) |>
+        filter(!grepl("-", wNbr)) |>
         left_join(descriptions, by = "desc_pk") |>
         rename_with(function(colname) paste(prefix, colname, sep = "_"),
           .cols = c(de, fr, it, en)) |>
-        arrange(wNbr)
+        left_join(products[c("pNbr", "wNbr")], by = "wNbr") |>
+        select(pNbr, !c(pNbr, wNbr)) |>
+        arrange(pNbr)
     }
 
     return(ret)
@@ -544,14 +616,16 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
   {
 
     indication_information_nodes <- xml_find_all(srppp_xml,
-      paste0("Products/Product/ProductInformation/Indication/", tag_name))
+      paste0("Products/Product[not(contains(@wNbr, '-'))]/ProductInformation/Indication/", tag_name))
 
     ret <- tibble(
       wNbr = sapply(indication_information_nodes, get_great_grandparent_wNbr),
       use_nr = sapply(indication_information_nodes, get_use_nr),
       desc_pk = xml_attr(indication_information_nodes, "primaryKey")) |>
         mutate_at(c("use_nr", "desc_pk"), as.integer) |>
-        arrange(wNbr)
+        left_join(products[c("wNbr", "pNbr")], by = "wNbr") |>
+        select(pNbr, !c(wNbr, pNbr)) |>
+        arrange(pNbr)
 
     if (additional_text) {
       ret$add_txt_pk <- as.integer(xml_attr(indication_information_nodes,
@@ -573,14 +647,14 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
     select(-desc_pk)
 
   # Table of uses ('indications') and associated information tables
-  uses <- srppp_xml_get_uses(srppp_xml)
-
   uses <- srppp_xml_get_uses(srppp_xml) |>
-    left_join(application_areas, by = join_by(wNbr, use_nr))
+    left_join(products[c("wNbr", "pNbr")], by = "wNbr") |>
+    left_join(application_areas, by = c("pNbr", "use_nr")) |>
+    select(pNbr, !c(pNbr, wNbr))
 
   # Check that we have exactly one application area per use
   problem_uses <- uses |>
-    group_by(wNbr, use_nr) |>
+    group_by(pNbr, use_nr) |>
     summarise(n = n(), .groups = "drop_last") |>
     filter(n != 1)
 
@@ -601,7 +675,8 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
     left_join(culture_form_descriptions, by = "desc_pk") |>
     rename(culture_form_de = de, culture_form_fr = fr) |>
     rename(culture_form_it = it, culture_form_en = en) |>
-    select(-desc_pk)
+    select(-desc_pk) |>
+    arrange(pNbr, use_nr)
 
   # In the culture descriptions, links to parent cultures are filtered out
   culture_descriptions <- description_table(srppp_xml, "Culture")
@@ -614,7 +689,7 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
     rename(culture_add_txt_de = de, culture_add_txt_fr = fr) |>
     rename(culture_add_txt_it = it, culture_add_txt_en = en) |>
     select(-desc_pk, -add_txt_pk) |>
-    arrange(wNbr, use_nr)
+    arrange(pNbr, use_nr)
 
   pest_descriptions <- description_table(srppp_xml, "Pest", latin = TRUE)
   pest_additional_texts <- description_table(srppp_xml, "PestAdditionalText")
@@ -627,7 +702,7 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
     rename(pest_add_txt_de = de, pest_add_txt_fr = fr) |>
     rename(pest_add_txt_it = it, pest_add_txt_en = en) |>
     select(-desc_pk, -add_txt_pk) |>
-    arrange(wNbr, use_nr)
+    arrange(pNbr, use_nr)
 
   obligation_descriptions <- description_table(srppp_xml, "Obligation", code = TRUE)
   obligations <- indication_information_table(srppp_xml, "Obligation") |>
@@ -636,7 +711,7 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
     rename(obligation_de = de, obligation_fr = fr) |>
     rename(obligation_it = it, obligation_en = en) |>
     select(-desc_pk) |>
-    arrange(wNbr, use_nr)
+    arrange(pNbr, use_nr)
 
   obligations_spe3 <- obligations |>
     mutate(
@@ -685,10 +760,12 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
         .default = NA)
     )
 
-  srppp_dm <- dm(products, pNbrs,
-    product_categories, formulation_codes,
-    parallel_imports,
+  srppp_dm <- dm(products,
+    pNbrs,
+    categories = product_categories, 
+    formulation_codes,
     danger_symbols, CodeS, CodeR, signal_words,
+    parallel_imports,
     substances,
     ingredients,
     uses,
@@ -700,23 +777,28 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
     dm_add_pk(pNbrs, pNbr) |>
     dm_add_pk(parallel_imports, id) |>
     dm_add_pk(substances, pk) |>
-    dm_add_pk(uses, c(wNbr, use_nr)) |>
+    dm_add_pk(uses, c(pNbr, use_nr)) |>
     dm_add_fk(products, pNbr, pNbrs) |>
-    dm_add_fk(product_categories, wNbr, products) |>
-    dm_add_fk(formulation_codes, wNbr, products) |>
-    dm_add_fk(danger_symbols, wNbr, products) |>
-    dm_add_fk(CodeS, wNbr, products) |>
-    dm_add_fk(CodeR, wNbr, products) |>
-    dm_add_fk(signal_words, wNbr, products) |>
+    dm_add_fk(categories, pNbr, pNbrs) |>
+    dm_add_fk(formulation_codes, pNbr, pNbrs) |>
+    dm_add_fk(danger_symbols, pNbr, pNbrs) |>
+    dm_add_fk(CodeS, pNbr, pNbrs) |>
+    dm_add_fk(CodeR, pNbr, pNbrs) |>
+    dm_add_fk(signal_words, pNbr, pNbrs) |>
     dm_add_fk(ingredients, pNbr, pNbrs) |>
     dm_add_fk(ingredients, pk, substances) |>
-    dm_add_fk(uses, wNbr, products) |>
-    dm_add_fk(application_comments, c(wNbr, use_nr), uses) |>
-    dm_add_fk(culture_forms, c(wNbr, use_nr), uses) |>
-    dm_add_fk(cultures, c(wNbr, use_nr), uses) |>
-    dm_add_fk(pests, c(wNbr, use_nr), uses) |>
-    dm_add_fk(obligations, c(wNbr, use_nr), uses) |>
-    dm_add_fk(parallel_imports, wNbr, products)
+    dm_add_fk(uses, pNbr, pNbrs) |>
+    dm_add_fk(application_comments, c(pNbr, use_nr), uses) |>
+    dm_add_fk(culture_forms, c(pNbr, use_nr), uses) |>
+    dm_add_fk(cultures, c(pNbr, use_nr), uses) |>
+    dm_add_fk(pests, c(pNbr, use_nr), uses) |>
+    dm_add_fk(obligations, c(pNbr, use_nr), uses) |>
+    dm_add_fk(parallel_imports, pNbr, pNbrs) |>
+    dm_set_colors(
+      darkblue = c(pNbrs:signal_words), 
+      lightblue = c(products, parallel_imports),
+      darkorange = c(ingredients, substances),
+      darkgreen = uses:obligations)
 
     attr(srppp_dm, "from") <- attr(srppp_xml, "from")
     class(srppp_dm) <- c("srppp_dm", "dm")

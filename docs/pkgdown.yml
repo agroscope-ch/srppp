@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   srppp_products_with_MO: srppp_products_with_MO.html
   srppp: srppp.html
-last_built: 2024-07-22T06:15Z
+last_built: 2024-07-25T08:25Z
 urls:
-  reference: https://psmwb.pages.agsad.admin.ch/srppp/reference
-  article: https://psmwb.pages.agsad.admin.ch/srppp/articles
+  reference: https://agroscope-ch.github.io/srppp/reference
+  article: https://agroscope-ch.github.io/srppp/articles

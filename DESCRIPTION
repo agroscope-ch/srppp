@@ -1,8 +1,8 @@
 Package: srppp
 Type: Package
 Title: The Swiss Register of Plant Protection Products as an R Package
-Version: 0.99.1
-Date: 2024-07-22
+Version: 0.99.2
+Date: 2024-07-25
 Authors@R: c(
   person("Marcel", "Mathis", role = c("ctb", "rev"),
     email = "marcel.mathis@agroscope.admin.ch"),
@@ -26,7 +26,7 @@ Description: Functions to generate data objects from XML versions of the Swiss
 Depends: R (>= 4.1.0), dm
 Imports: xml2, tibble, stringr, dplyr, tidyr, cli
 Suggests: knitr, rmarkdown, here, DiagrammeR,
-  testthat (>= 3.0.0), parallel
+  testthat (>= 3.0.0), parallel, waldo
 BugReports: https://github.com/agroscope-ch/srppp/issues
 URL: https://agroscope-ch.github.io/srppp
 License: GPL

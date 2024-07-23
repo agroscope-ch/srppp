@@ -5,6 +5,7 @@
 #' @importFrom dm dm_add_fk
 #' @importFrom dm dm_add_pk
 #' @importFrom dm dm_filter
+#' @importFrom dm dm_set_colors
 #' @importFrom dplyr across
 #' @importFrom dplyr all_of
 #' @importFrom dplyr arrange

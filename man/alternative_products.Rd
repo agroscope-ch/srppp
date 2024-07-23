@@ -45,17 +45,17 @@ A use is defined as a combination of an application area, a crop
 }
 \examples{
 \dontrun{
-srppp_cur <- srppp_dm()
+sr <- srppp_dm()
 
 actives_de <- c("Lambda-Cyhalothrin", "Deltamethrin")
 
-alternative_products(srppp_cur, actives_de)
-alternative_products(srppp_cur, actives_de, missing = TRUE)
-alternative_products(srppp_cur, actives_de, details = TRUE)
-alternative_products(srppp_cur, actives_de, list = TRUE)
+alternative_products(sr, actives_de)
+alternative_products(sr, actives_de, missing = TRUE)
+alternative_products(sr, actives_de, details = TRUE)
+alternative_products(sr, actives_de, list = TRUE)
 
 # Example in Italian
 actives_it <- c("Lambda-Cialotrina", "Deltametrina")
-alternative_products(srppp_cur, actives_it, lang = "it")
+alternative_products(sr, actives_it, lang = "it")
 }
 }

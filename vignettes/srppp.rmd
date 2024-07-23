@@ -1,7 +1,7 @@
 ---
 title: The Swiss Register of Plant Protection Products as a Relational Data Model
 author: Johannes Ranke
-date: 22 July, 2024 (rebuilt `r Sys.Date()`)
+date: 25 July, 2024 (rebuilt `r Sys.Date()`)
 bibliography: references.bib
 output:
   rmarkdown::html_vignette:
@@ -23,21 +23,20 @@ options(knitr.kable.NA = '')
 
 Since the year 2011, the [Swiss Federal Office of Agriculture
 (FOAG)](https://www.blw.admin.ch) and later the [Federal Food Safety and
-Veterinary Office](https://www.blv.admin.ch), now responsible the
-authorisation of plant protection products in Switzerland, publish the
-contents of the Swiss Register of Plant Protection Products (SRPPP) on
-their respective websites in a custom format based on the Extensible
-Markup Language (XML).
+Veterinary Office](https://www.blv.admin.ch), now responsible for the
+authorisation of plant protection products in Switzerland, publish the contents
+of the Swiss Register of Plant Protection Products (SRPPP) on their respective
+websites in a custom format based on the Extensible Markup Language (XML).
 
 In our 
 [group](https://www.agroscope.admin.ch/agroscope/de/home/ueber-uns/organisation/kompetenzbereiche-strategische-forschungsbereiche/pflanzen-pflanzliche-produkte/pflanzenschutzmittel-wirkung-bewertung.html) 
-at Agroscope, different solutions have been used to read in, process and use 
+at Agroscope, different solutions have been used to read in, process and use
 these data. This package offers a fresh approach to directly read in the data 
 into `R`.
 
-The current download location of the latest published XML version of the
-SRPPP is stored in the package as `srppp::srppp_xml_url`. Reading in the
-current data is as simple as
+The current download location of the latest published XML version of the SRPPP
+is stored in the package as `srppp::srppp_xml_url`. Reading in the current data
+is as simple as
 
 ```{r message = FALSE}
 library(srppp)
@@ -76,9 +75,9 @@ current_register$substances |>
 
 # Products
 
-There are three tables defining the products, `pNbrs`, `products` and 
-`ingredients`. The P-Numbers contained in the table `pNbrs` are identifiers
-of product compositions. Products with the same P-Number are considered
+There are three tables defining the products, `pNbrs`, `products` and
+`ingredients`. The P-Numbers contained in the table `pNbrs` are identifiers of
+product compositions. Products with the same P-Number are considered
 equivalent in terms of efficacy and risks.
 The table `pNbrs` is only there for a technical reason. It simply contains
 a column holding the P-Numbers.
@@ -208,8 +207,8 @@ each use by a combination of W-Number (`wNbr`) and use number (`use_nr`).
 
 ```{r}
 current_register$uses |> 
-  filter(wNbr %in% c("5468", "6431") & use_nr < 10) |> 
-  select(wNbr, use_nr, ends_with("dosage"), ends_with("rate"), units_de,
+  filter(pNbr %in% c(6521L, 7511L) & use_nr < 10) |> 
+  select(pNbr, use_nr, ends_with("dosage"), ends_with("rate"), units_de,
     waiting_period, time_units_en, application_area_de) |> 
   head(20) |> 
   kable()
@@ -239,12 +238,12 @@ active substances can be joined as well.
 ```{r}
 example_uses <- current_register$products |> 
   filter(wNbr == "6168") |>
-  left_join(current_register$uses, by = join_by(wNbr),
+  left_join(current_register$uses, by = join_by(pNbr),
     relationship = "many-to-many") |> 
   left_join(current_register$ingredients, by = join_by(pNbr),
     relationship = "many-to-many") |>
   left_join(current_register$substances, by = join_by(pk)) |>
-  select(wNbr, name, use_nr,
+  select(pNbr, name, use_nr,
     min_dosage, max_dosage, min_rate, max_rate, units_de,
     application_area_de,
     substance_de, percent, g_per_L) |> 
@@ -286,10 +285,10 @@ one step.
 
 ```{r}
 current_register$culture_forms |>
-  left_join(current_register$cultures, by = c("wNbr", "use_nr"),
+  left_join(current_register$cultures, by = c("pNbr", "use_nr"),
     relationship = "many-to-many") |> 
-  filter(wNbr == "6168", use_nr %in% 1:2) |> 
-  select(wNbr, use_nr, ends_with("de")) |> 
+  filter(pNbr == 7105L, use_nr %in% 1:2) |> 
+  select(pNbr, use_nr, ends_with("de")) |> 
   kable()
 ```
 
@@ -300,7 +299,7 @@ code for retrieving the target organisms for specific uses is given below.
 
 ```{r}
 current_register$pests |> 
-  filter(wNbr == "6168", use_nr %in% 1:2) |> 
+  filter(pNbr == 7105L, use_nr %in% 1:2) |> 
   select(use_nr, ends_with("de"), ends_with("fr")) |> 
   kable()
 ```
@@ -317,10 +316,10 @@ project is illustrated below.
 
 ```{r}
 culture_pest_combinations <- current_register$uses |> 
-  filter(wNbr %in% "5468") |> 
-  left_join(current_register$cultures, by = c("wNbr", "use_nr")) |> 
-  left_join(current_register$pests, by = c("wNbr", "use_nr")) |> 
-  select(wNbr, use_nr, application_area_de, culture_de, pest_de)
+  filter(pNbr == 6521L) |> 
+  left_join(current_register$cultures, by = c("pNbr", "use_nr")) |> 
+  left_join(current_register$pests, by = c("pNbr", "use_nr")) |> 
+  select(pNbr, use_nr, application_area_de, culture_de, pest_de)
 
 kable(culture_pest_combinations)
 ```
@@ -334,7 +333,7 @@ Sometimes, use specific comments can be found in the `application_comments` tabl
 
 ```{r}
 current_register$application_comments |>
-  filter(wNbr == "6168", use_nr %in% 1:2) |> 
+  filter(pNbr == 7105, use_nr %in% 1:2) |> 
   select(use_nr, ends_with("de"), ends_with("fr")) |> 
   kable()
 ```
@@ -348,7 +347,7 @@ surface water amounting to at least one point.
 
 ```{r}
 current_register$obligations |>
-  filter(wNbr == "6168", use_nr %in% 1:2) |> 
+  filter(pNbr == 7105, use_nr %in% 1:2) |> 
   select(use_nr, code, obligation_de, sw_runoff_points) |> 
   kable()
 ```

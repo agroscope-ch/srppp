@@ -6,7 +6,7 @@ tags:
   - pesticides
   - use restrictions
   - R
-date: 23 July 2024
+date: 25 July 2024
 authors:
   - name: Marcel Mathis
     orcid: 0000-0001-7102-4841
@@ -62,8 +62,8 @@ and is actively being deployed in several projects. Projects like the National
 Risk Indicator [@korkaric2023] that have previously used the SRPPP data have
 suffered from the fact that previous approaches have partially lost information
 in the course of processing the published data. These shortcomings can now be
-avoided by using `srppp` which adheres more strictly to the data structure
-offered by the XML file. 
+avoided by using `srppp` which adheres more closely to the data structure
+underlying the XML file. 
 
 # Availability
 

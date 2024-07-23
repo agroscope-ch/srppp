@@ -13,7 +13,7 @@ application_rate_g_per_ha(
 )
 }
 \arguments{
-\item{product_uses}{A tibble containing the columns 'wNbr', 'use_nr',
+\item{product_uses}{A tibble containing the columns 'pNbr', 'use_nr',
 'application_area_de', 'min_dosage', 'max_dosage', 'min_rate', 'max_rate',
 from the 'uses' table in a \link{srppp_dm} object, as well as the columns
 'percent' and 'g_per_L' from the 'ingredients' table in a \link{srppp_dm} object.}
@@ -56,16 +56,14 @@ areas in Switzerland.
 library(srppp)
 library(dplyr, warn.conflicts = FALSE)
 library(dm, warn.conflicts = FALSE)
-srppp_cur <- srppp_dm()
+sr <- srppp_dm()
 
-product_uses_with_ingredients <- srppp_cur |>
-  dm_filter(substances =
-    (substance_de \%in\% c("Halauxifen-methyl", "Kupfer (als Kalkpr\u00E4parat)"))) |>
-  dm_flatten_to_tbl(uses, products) |>
-  left_join(srppp_cur$ingredients, by = join_by(pNbr),
-    relationship = "many-to-many") |>
-  left_join(srppp_cur$substances, by = join_by(pk)) |>
-  select(wNbr, name, use_nr,
+product_uses_with_ingredients <- sr$substances |>
+  filter(substance_de \%in\% c("Halauxifen-methyl", "Kupfer (als Kalkpr\u00E4parat)")) |>
+  left_join(sr$ingredients, by = "pk") |>
+  left_join(sr$uses, by = "pNbr") |>
+  left_join(sr$products, by = "pNbr") |>
+  select(pNbr, name, use_nr,
     min_dosage, max_dosage, min_rate, max_rate, units_de,
     application_area_de,
     substance_de, percent, g_per_L)

@@ -1,7 +1,7 @@
 ---
 title: Statistics on products containing microorganisms in the latest XML dump of the SRPPP
 author: Johannes Ranke
-date: Last change 04 June 2024 (rebuilt `r Sys.Date()`)
+date: Last change 25 July 2024 (rebuilt `r Sys.Date()`)
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -30,8 +30,7 @@ The following list was used to identify product categories containing
 microorganisms.
 
 ```{r warning = FALSE}
-srppp$products |>
-  left_join(srppp$product_categories, by = "wNbr") |>
+srppp$categories |>
   group_by(category_de) |>
   summarise(n = n()) |>
   kable()
@@ -52,10 +51,11 @@ The corresponding products are shown below.
 
 ```{r}
 products_in_microorganism_categories <- srppp$products |>
-  left_join(srppp$product_categories, by = "wNbr") |>
+  filter(!isSalePermission) |>
+  left_join(srppp$categories, by = "pNbr") |>
   filter(category_de %in% microorganism_categories) |>
-  select(wNbr, name, category_de) |>
-  arrange(wNbr)
+  select(pNbr, wNbr, name, category_de) |>
+  arrange(pNbr)
 n_in_categories <- nrow(products_in_microorganism_categories)
 kable(products_in_microorganism_categories)
 ```
@@ -67,7 +67,8 @@ used to establish filter criteria active substances that are microorganisms.
 
 ```{r}
 srppp$products |>
-  left_join(srppp$product_categories, by = "wNbr") |>
+  filter(!isSalePermission) |>
+  left_join(srppp$categories, by = "pNbr") |>
   filter(category_de == "Insektizid") |>
   left_join(srppp$ingredients, by = "pNbr", relationship = "many-to-many") |>
   left_join(srppp$substances, by = "pk") |>
@@ -77,7 +78,8 @@ srppp$products |>
   kable()
 
 srppp$products |>
-  left_join(srppp$product_categories, by = "wNbr") |>
+  filter(!isSalePermission) |>
+  left_join(srppp$categories, by = "pNbr") |>
   filter(category_de == "Fungizid") |>
   left_join(srppp$ingredients, by = "pNbr", relationship = "many-to-many") |>
   left_join(srppp$substances, by = "pk") |>
@@ -115,12 +117,13 @@ The following products contain one of these active ingredients.
 
 ```{r}
 additional_products_containing_microorganisms <- srppp$products |>
+  filter(!isSalePermission) |>
   left_join(srppp$ingredients, by = "pNbr", relationship = "many-to-many") |>
   filter(pk %in% microorganism_ingredients$pk) |>
   select(-pk) |>
-  left_join(srppp$product_categories, by = "wNbr") |> 
-  select(wNbr, name, category_de) |>
-  arrange(wNbr)
+  left_join(srppp$categories, by = "pNbr") |> 
+  select(pNbr, wNbr, name, category_de) |>
+  arrange(pNbr)
 n_additional <- nrow(additional_products_containing_microorganisms)
 kable(additional_products_containing_microorganisms)
 ```
@@ -138,9 +141,9 @@ has a name that contains one of the microorganism genus names listed above.
 products_containing_microorganisms <- rbind(
   products_in_microorganism_categories, 
   additional_products_containing_microorganisms) |>
-  arrange(wNbr, name) |>
+  arrange(pNbr, category_de) |>
   unique()
-n_unique <- length(unique(products_containing_microorganisms$wNbr))
+n_unique <- length(unique(products_containing_microorganisms$pNbr))
 ```
 
 The consolidated list of the `r n_unique` unique products identified in this way

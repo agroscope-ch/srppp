@@ -43,7 +43,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://gitlab.agsad.admin.ch/psmwb/srppp/" aria-label="GitLab"><span class="fa fab fa-gitlab fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/agroscope-ch/srppp/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -61,10 +61,10 @@
                         <h4 data-toc-skip class="author">Johannes
 Ranke</h4>
             
-            <h4 data-toc-skip class="date">Last change 04 June 2024
-(rebuilt 2024-07-22)</h4>
+            <h4 data-toc-skip class="date">Last change 25 July 2024
+(rebuilt 2024-07-25)</h4>
       
-      <small class="dont-index">Source: <a href="https://gitlab.agsad.admin.ch/psmwb/srppp/blob/HEAD/vignettes/srppp_products_with_MO.rmd" class="external-link"><code>vignettes/srppp_products_with_MO.rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/agroscope-ch/srppp/blob/HEAD/vignettes/srppp_products_with_MO.rmd" class="external-link"><code>vignettes/srppp_products_with_MO.rmd</code></a></small>
       <div class="d-none name"><code>srppp_products_with_MO.rmd</code></div>
     </div>
 
@@ -73,7 +73,7 @@ Ranke</h4>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html" class="external-link">opts_chunk</a></span><span class="op">$</span><span class="fu">set</span><span class="op">(</span>tidy <span class="op">=</span> <span class="cn">FALSE</span>, cache <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>knitr.kable.NA <span class="op">=</span> <span class="st">''</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://psmwb.pages.agsad.admin.ch/srppp">srppp</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://agroscope-ch.github.io/srppp">srppp</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -84,8 +84,7 @@ Ranke</h4>
 <p>The following list was used to identify product categories containing
 microorganisms.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">srppp</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">product_categories</span>, by <span class="op">=</span> <span class="st">"wNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">srppp</span><span class="op">$</span><span class="va">categories</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">category_de</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -97,27 +96,27 @@ microorganisms.</p>
 <tbody>
 <tr class="odd">
 <td align="left">Akarizid</td>
-<td align="right">118</td>
+<td align="right">59</td>
 </tr>
 <tr class="even">
 <td align="left">Bakterizid</td>
-<td align="right">43</td>
+<td align="right">24</td>
 </tr>
 <tr class="odd">
 <td align="left">Desinfektionsmittel</td>
-<td align="right">4</td>
+<td align="right">3</td>
 </tr>
 <tr class="even">
 <td align="left">Fungizid</td>
-<td align="right">432</td>
+<td align="right">265</td>
 </tr>
 <tr class="odd">
 <td align="left">Herbizid</td>
-<td align="right">563</td>
+<td align="right">339</td>
 </tr>
 <tr class="even">
 <td align="left">Insektizid</td>
-<td align="right">255</td>
+<td align="right">134</td>
 </tr>
 <tr class="odd">
 <td align="left">Insektizid (Insektenlockstoff, Pheromon)</td>
@@ -125,7 +124,7 @@ microorganisms.</p>
 </tr>
 <tr class="even">
 <td align="left">Insektizid (Seifenpräparat)</td>
-<td align="right">25</td>
+<td align="right">7</td>
 </tr>
 <tr class="odd">
 <td align="left">Lebende Organismen (Bakterien)</td>
@@ -133,23 +132,23 @@ microorganisms.</p>
 </tr>
 <tr class="even">
 <td align="left">Lebende Organismen (Insekten)</td>
-<td align="right">117</td>
+<td align="right">113</td>
 </tr>
 <tr class="odd">
 <td align="left">Lebende Organismen (Insektenviren)</td>
-<td align="right">14</td>
+<td align="right">11</td>
 </tr>
 <tr class="even">
 <td align="left">Lebende Organismen (Milben)</td>
-<td align="right">31</td>
+<td align="right">30</td>
 </tr>
 <tr class="odd">
 <td align="left">Lebende Organismen (Nematoden)</td>
-<td align="right">34</td>
+<td align="right">21</td>
 </tr>
 <tr class="even">
 <td align="left">Lebende Organismen (Pilze)</td>
-<td align="right">16</td>
+<td align="right">12</td>
 </tr>
 <tr class="odd">
 <td align="left">Lebende Organismen (gegen Pilze)</td>
@@ -157,7 +156,7 @@ microorganisms.</p>
 </tr>
 <tr class="even">
 <td align="left">Molluskizid</td>
-<td align="right">49</td>
+<td align="right">30</td>
 </tr>
 <tr class="odd">
 <td align="left">Nematizid</td>
@@ -165,23 +164,23 @@ microorganisms.</p>
 </tr>
 <tr class="even">
 <td align="left">Netz- und Haftmittel</td>
-<td align="right">41</td>
+<td align="right">36</td>
 </tr>
 <tr class="odd">
 <td align="left">Phytoregulator</td>
-<td align="right">87</td>
+<td align="right">69</td>
 </tr>
 <tr class="even">
 <td align="left">Rodentizid</td>
-<td align="right">8</td>
+<td align="right">7</td>
 </tr>
 <tr class="odd">
 <td align="left">Saatbeizmittel</td>
-<td align="right">27</td>
+<td align="right">25</td>
 </tr>
 <tr class="even">
 <td align="left">Stimulator der natürlichen Abwehrkräfte</td>
-<td align="right">5</td>
+<td align="right">4</td>
 </tr>
 <tr class="odd">
 <td align="left">Virizid</td>
@@ -228,148 +227,152 @@ defined as follows:</p>
 <p>The corresponding products are shown below.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">products_in_microorganism_categories</span> <span class="op">&lt;-</span> <span class="va">srppp</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">product_categories</span>, by <span class="op">=</span> <span class="st">"wNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">isSalePermission</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">categories</span>, by <span class="op">=</span> <span class="st">"pNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">category_de</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">microorganism_categories</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">wNbr</span>, <span class="va">name</span>, <span class="va">category_de</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">wNbr</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">pNbr</span>, <span class="va">wNbr</span>, <span class="va">name</span>, <span class="va">category_de</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">pNbr</span><span class="op">)</span></span>
 <span><span class="va">n_in_categories</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">products_in_microorganism_categories</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">products_in_microorganism_categories</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="10%">
-<col width="42%">
-<col width="47%">
+<col width="6%">
+<col width="6%">
+<col width="40%">
+<col width="45%">
 </colgroup>
 <thead><tr class="header">
+<th align="right">pNbr</th>
 <th align="left">wNbr</th>
 <th align="left">name</th>
 <th align="left">category_de</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="right">4594</td>
 <td align="left">4574</td>
 <td align="left">Beauveria-Schweizer</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
 <tr class="even">
-<td align="left">4574-1</td>
-<td align="left">Beaupro</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="odd">
+<td align="right">7650</td>
 <td align="left">6423</td>
 <td align="left">Metarhizium Schweizer</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
-<tr class="even">
-<td align="left">6423-1</td>
-<td align="left">Metapro</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
 <tr class="odd">
-<td align="left">6847</td>
-<td align="left">Lalstop K61 WP</td>
-<td align="left">Lebende Organismen (gegen Pilze)</td>
-</tr>
-<tr class="even">
-<td align="left">6872</td>
-<td align="left">Prestop</td>
-<td align="left">Lebende Organismen (gegen Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">6881</td>
-<td align="left">BioAct WG</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="even">
-<td align="left">6912</td>
-<td align="left">Deposan</td>
-<td align="left">Lebende Organismen (Bakterien)</td>
-</tr>
-<tr class="odd">
+<td align="right">8025</td>
 <td align="left">6919</td>
 <td align="left">Botector</td>
 <td align="left">Lebende Organismen (gegen Pilze)</td>
 </tr>
 <tr class="even">
+<td align="right">8029</td>
+<td align="left">6881</td>
+<td align="left">BioAct WG</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="right">8119</td>
+<td align="left">6872</td>
+<td align="left">Prestop</td>
+<td align="left">Lebende Organismen (gegen Pilze)</td>
+</tr>
+<tr class="even">
+<td align="right">8258</td>
 <td align="left">7151</td>
 <td align="left">Amylo-X</td>
 <td align="left">Lebende Organismen (gegen Pilze)</td>
 </tr>
 <tr class="odd">
-<td align="left">7259</td>
-<td align="left">AQ 10</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="even">
-<td align="left">7316</td>
-<td align="left">Naturalis-L</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">7324</td>
-<td align="left">Rotstop</td>
+<td align="right">8309</td>
+<td align="left">6847</td>
+<td align="left">Lalstop K61 WP</td>
 <td align="left">Lebende Organismen (gegen Pilze)</td>
 </tr>
 <tr class="even">
-<td align="left">7378</td>
-<td align="left">Beauveria-Maschinenring</td>
-<td align="left">Lebende Organismen (Pilze)</td>
+<td align="right">8374</td>
+<td align="left">6912</td>
+<td align="left">Deposan</td>
+<td align="left">Lebende Organismen (Bakterien)</td>
 </tr>
 <tr class="odd">
-<td align="left">7379</td>
-<td align="left">Metarhizium-Maschinenring</td>
-<td align="left">Lebende Organismen (Pilze)</td>
+<td align="right">8926</td>
+<td align="left">7580</td>
+<td align="left">Wormox</td>
+<td align="left">Lebende Organismen (Bakterien)</td>
 </tr>
 <tr class="even">
-<td align="left">7477</td>
-<td align="left">Melocont GR</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">7478</td>
-<td align="left">GranMet GR</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="even">
-<td align="left">7498</td>
-<td align="left">Lalstop Contans WG</td>
-<td align="left">Lebende Organismen (gegen Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">7500</td>
-<td align="left">Lalguard M52 GR</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="even">
+<td align="right">8946</td>
 <td align="left">7504</td>
 <td align="left">Taegro</td>
 <td align="left">Lebende Organismen (gegen Pilze)</td>
 </tr>
 <tr class="odd">
+<td align="right">9014</td>
+<td align="left">7259</td>
+<td align="left">AQ 10</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="even">
+<td align="right">9049</td>
+<td align="left">7316</td>
+<td align="left">Naturalis-L</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="right">9052</td>
+<td align="left">7324</td>
+<td align="left">Rotstop</td>
+<td align="left">Lebende Organismen (gegen Pilze)</td>
+</tr>
+<tr class="even">
+<td align="right">9173</td>
+<td align="left">7378</td>
+<td align="left">Beauveria-Maschinenring</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="right">9174</td>
+<td align="left">7379</td>
+<td align="left">Metarhizium-Maschinenring</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="even">
+<td align="right">9384</td>
 <td align="left">7528</td>
 <td align="left">Beauveria FL-Maschinenring</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
-<tr class="even">
-<td align="left">7528-1</td>
-<td align="left">Beauveria MycoSolutions</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
 <tr class="odd">
+<td align="right">9385</td>
 <td align="left">7529</td>
 <td align="left">Metarhizium FL-Maschinenring</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
 <tr class="even">
-<td align="left">7529-1</td>
-<td align="left">Metarhizium MycoSolutions</td>
+<td align="right">9389</td>
+<td align="left">7477</td>
+<td align="left">Melocont GR</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
 <tr class="odd">
-<td align="left">7580</td>
-<td align="left">Wormox</td>
-<td align="left">Lebende Organismen (Bakterien)</td>
+<td align="right">9390</td>
+<td align="left">7478</td>
+<td align="left">GranMet GR</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="even">
+<td align="right">9479</td>
+<td align="left">7498</td>
+<td align="left">Lalstop Contans WG</td>
+<td align="left">Lebende Organismen (gegen Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="right">9481</td>
+<td align="left">7500</td>
+<td align="left">Lalguard M52 GR</td>
+<td align="left">Lebende Organismen (Pilze)</td>
 </tr>
 </tbody>
 </table>
@@ -382,7 +385,8 @@ fungicides were used to establish filter criteria active substances that
 are microorganisms.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srppp</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">product_categories</span>, by <span class="op">=</span> <span class="st">"wNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">isSalePermission</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">categories</span>, by <span class="op">=</span> <span class="st">"pNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">category_de</span> <span class="op">==</span> <span class="st">"Insektizid"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">ingredients</span>, by <span class="op">=</span> <span class="st">"pNbr"</span>, relationship <span class="op">=</span> <span class="st">"many-to-many"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">substances</span>, by <span class="op">=</span> <span class="st">"pk"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -602,7 +606,8 @@ sulfuric acid, sodium salts</td>
 </table>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srppp</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">product_categories</span>, by <span class="op">=</span> <span class="st">"wNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">isSalePermission</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">categories</span>, by <span class="op">=</span> <span class="st">"pNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">category_de</span> <span class="op">==</span> <span class="st">"Fungizid"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">ingredients</span>, by <span class="op">=</span> <span class="st">"pNbr"</span>, relationship <span class="op">=</span> <span class="st">"many-to-many"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">substances</span>, by <span class="op">=</span> <span class="st">"pk"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1111,373 +1116,316 @@ methyl ester</td>
 <p>The following products contain one of these active ingredients.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">additional_products_containing_microorganisms</span> <span class="op">&lt;-</span> <span class="va">srppp</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">isSalePermission</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">ingredients</span>, by <span class="op">=</span> <span class="st">"pNbr"</span>, relationship <span class="op">=</span> <span class="st">"many-to-many"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">pk</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">microorganism_ingredients</span><span class="op">$</span><span class="va">pk</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">pk</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">product_categories</span>, by <span class="op">=</span> <span class="st">"wNbr"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">wNbr</span>, <span class="va">name</span>, <span class="va">category_de</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">wNbr</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">categories</span>, by <span class="op">=</span> <span class="st">"pNbr"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">pNbr</span>, <span class="va">wNbr</span>, <span class="va">name</span>, <span class="va">category_de</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">pNbr</span><span class="op">)</span></span>
 <span><span class="va">n_additional</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">additional_products_containing_microorganisms</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">additional_products_containing_microorganisms</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="7%">
-<col width="60%">
-<col width="33%">
+<col width="6%">
+<col width="6%">
+<col width="40%">
+<col width="45%">
 </colgroup>
 <thead><tr class="header">
+<th align="right">pNbr</th>
 <th align="left">wNbr</th>
 <th align="left">name</th>
 <th align="left">category_de</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="right">4594</td>
 <td align="left">4574</td>
 <td align="left">Beauveria-Schweizer</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
 <tr class="even">
-<td align="left">4574-1</td>
-<td align="left">Beaupro</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="odd">
+<td align="right">6415</td>
 <td align="left">5277</td>
 <td align="left">Traunem</td>
 <td align="left">Lebende Organismen (Nematoden)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
+<td align="right">6415</td>
 <td align="left">5277</td>
 <td align="left">Traunem</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="odd">
-<td align="left">5277-1</td>
-<td align="left">Coop Oecoplan Biocontrol Nützlinge gegen
-Trauermückenlarven</td>
-<td align="left">Lebende Organismen (Nematoden)</td>
-</tr>
 <tr class="even">
-<td align="left">5277-1</td>
-<td align="left">Coop Oecoplan Biocontrol Nützlinge gegen
-Trauermückenlarven</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
+<td align="right">6427</td>
 <td align="left">5386</td>
 <td align="left">Entonem</td>
 <td align="left">Lebende Organismen (Nematoden)</td>
 </tr>
-<tr class="even">
-<td align="left">5744</td>
-<td align="left">Solbac</td>
-<td align="left">Insektizid</td>
-</tr>
 <tr class="odd">
-<td align="left">5744-1</td>
-<td align="left">Gesal Trauermücken-Stop</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">5744-2</td>
-<td align="left">Capito Anti-Trauermückenkonzentrat</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
+<td align="right">6861</td>
 <td align="left">5745</td>
 <td align="left">Solbac-Tabs</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="even">
-<td align="left">5745-2</td>
-<td align="left">Bio Garden Trauermücken-Stopp</td>
+<td align="right">6862</td>
+<td align="left">5744</td>
+<td align="left">Solbac</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="odd">
-<td align="left">5745-3</td>
-<td align="left">Coop Oecoplan Biocontrol Mücken-Tabletten</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">5745-4</td>
-<td align="left">Biorga Contra Trauermücken</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
+<td align="right">7023</td>
 <td align="left">5925</td>
 <td align="left">Novodor 3 FC</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="even">
+<td align="right">7088</td>
 <td align="left">5978</td>
 <td align="left">Nemaplus</td>
 <td align="left">Lebende Organismen (Nematoden)</td>
 </tr>
 <tr class="odd">
+<td align="right">7241</td>
 <td align="left">6081</td>
 <td align="left">Novodor 3 % FC</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="even">
-<td align="left">6423</td>
-<td align="left">Metarhizium Schweizer</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">6423-1</td>
-<td align="left">Metapro</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="even">
+<td align="right">7496</td>
 <td align="left">6449</td>
 <td align="left">Cerall</td>
 <td align="left">Saatbeizmittel</td>
 </tr>
 <tr class="odd">
-<td align="left">6472</td>
-<td align="left">FZB 24 flüssig</td>
-<td align="left">Phytoregulator</td>
-</tr>
-<tr class="even">
-<td align="left">6472</td>
-<td align="left">FZB 24 flüssig</td>
-<td align="left">Fungizid</td>
-</tr>
-<tr class="odd">
+<td align="right">7498</td>
 <td align="left">6486</td>
 <td align="left">Cedomon</td>
 <td align="left">Saatbeizmittel</td>
 </tr>
 <tr class="even">
-<td align="left">6552</td>
-<td align="left">Delfin</td>
-<td align="left">Insektizid</td>
+<td align="right">7650</td>
+<td align="left">6423</td>
+<td align="left">Metarhizium Schweizer</td>
+<td align="left">Lebende Organismen (Pilze)</td>
 </tr>
 <tr class="odd">
-<td align="left">6552-1</td>
-<td align="left">Coop Oecoplan Biocontrol Delfin gegen
-Buchsbaumzünsler</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">6552-2</td>
-<td align="left">Bio Garden Delfin gegen Buchsbaumzünsler</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
-<td align="left">6552-3</td>
-<td align="left">Biorga Contra Buchsbaumzünsler-Stop</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">6552-4</td>
-<td align="left">BIOHOP DelFIN</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
-<td align="left">6777</td>
-<td align="left">Dipel DF</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">6835</td>
-<td align="left">Dipel DF</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
+<td align="right">7766</td>
 <td align="left">6882</td>
 <td align="left">Agree WP</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="even">
+<td align="right">7773</td>
+<td align="left">6472</td>
+<td align="left">FZB 24 flüssig</td>
+<td align="left">Phytoregulator</td>
+</tr>
+<tr class="odd">
+<td align="right">7773</td>
+<td align="left">6472</td>
+<td align="left">FZB 24 flüssig</td>
+<td align="left">Fungizid</td>
+</tr>
+<tr class="even">
+<td align="right">7870</td>
+<td align="left">6552</td>
+<td align="left">Delfin</td>
+<td align="left">Insektizid</td>
+</tr>
+<tr class="odd">
+<td align="right">8007</td>
 <td align="left">6888</td>
 <td align="left">XenTari WG</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="odd">
-<td align="left">6912</td>
-<td align="left">Deposan</td>
-<td align="left">Lebende Organismen (Bakterien)</td>
-</tr>
 <tr class="even">
-<td align="left">6912</td>
-<td align="left">Deposan</td>
-<td align="left">Fungizid</td>
-</tr>
-<tr class="odd">
-<td align="left">6929</td>
-<td align="left">Proradix</td>
-<td align="left">Saatbeizmittel</td>
-</tr>
-<tr class="even">
-<td align="left">6966</td>
-<td align="left">XenTari WG</td>
+<td align="right">8040</td>
+<td align="left">6777</td>
+<td align="left">Dipel DF</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="odd">
+<td align="right">8258</td>
 <td align="left">7151</td>
 <td align="left">Amylo-X</td>
 <td align="left">Lebende Organismen (gegen Pilze)</td>
 </tr>
 <tr class="even">
+<td align="right">8296</td>
+<td align="left">6835</td>
+<td align="left">Dipel DF</td>
+<td align="left">Insektizid</td>
+</tr>
+<tr class="odd">
+<td align="right">8374</td>
+<td align="left">6912</td>
+<td align="left">Deposan</td>
+<td align="left">Lebende Organismen (Bakterien)</td>
+</tr>
+<tr class="even">
+<td align="right">8374</td>
+<td align="left">6912</td>
+<td align="left">Deposan</td>
+<td align="left">Fungizid</td>
+</tr>
+<tr class="odd">
+<td align="right">8457</td>
+<td align="left">6929</td>
+<td align="left">Proradix</td>
+<td align="left">Saatbeizmittel</td>
+</tr>
+<tr class="even">
+<td align="right">8519</td>
+<td align="left">6966</td>
+<td align="left">XenTari WG</td>
+<td align="left">Insektizid</td>
+</tr>
+<tr class="odd">
+<td align="right">8596</td>
 <td align="left">7253</td>
 <td align="left">Serenade ASO</td>
 <td align="left">Bakterizid</td>
 </tr>
-<tr class="odd">
+<tr class="even">
+<td align="right">8596</td>
 <td align="left">7253</td>
 <td align="left">Serenade ASO</td>
 <td align="left">Fungizid</td>
 </tr>
+<tr class="odd">
+<td align="right">8926</td>
+<td align="left">7580</td>
+<td align="left">Wormox</td>
+<td align="left">Lebende Organismen (Bakterien)</td>
+</tr>
 <tr class="even">
+<td align="right">8926</td>
+<td align="left">7580</td>
+<td align="left">Wormox</td>
+<td align="left">Insektizid</td>
+</tr>
+<tr class="odd">
+<td align="right">8946</td>
+<td align="left">7504</td>
+<td align="left">Taegro</td>
+<td align="left">Lebende Organismen (gegen Pilze)</td>
+</tr>
+<tr class="even">
+<td align="right">8946</td>
+<td align="left">7504</td>
+<td align="left">Taegro</td>
+<td align="left">Fungizid</td>
+</tr>
+<tr class="odd">
+<td align="right">9019</td>
 <td align="left">7272</td>
 <td align="left">Bio Buxus</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="odd">
-<td align="left">7272-1</td>
-<td align="left">Gesal Buchsbaumzünsler Stop DiPel DF</td>
-<td align="left">Insektizid</td>
-</tr>
 <tr class="even">
+<td align="right">9020</td>
 <td align="left">7273</td>
 <td align="left">Bio Raupen Stopp</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="odd">
-<td align="left">7273-1</td>
-<td align="left">Sanoplant Dipel</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">7273-2</td>
-<td align="left">MAAG Dipel</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
-<td align="left">7273-3</td>
-<td align="left">Gesal Raupen-Stop</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
+<td align="right">9049</td>
 <td align="left">7316</td>
 <td align="left">Naturalis-L</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
+<td align="right">9052</td>
 <td align="left">7324</td>
 <td align="left">Rotstop</td>
 <td align="left">Lebende Organismen (gegen Pilze)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
+<td align="right">9052</td>
 <td align="left">7324</td>
 <td align="left">Rotstop</td>
 <td align="left">Fungizid</td>
 </tr>
+<tr class="even">
+<td align="right">9139</td>
+<td align="left">7574</td>
+<td align="left">Capirel</td>
+<td align="left">Lebende Organismen (Nematoden)</td>
+</tr>
 <tr class="odd">
+<td align="right">9173</td>
 <td align="left">7378</td>
 <td align="left">Beauveria-Maschinenring</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="even">
+<td align="right">9173</td>
 <td align="left">7378</td>
 <td align="left">Beauveria-Maschinenring</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
 <tr class="odd">
+<td align="right">9174</td>
 <td align="left">7379</td>
 <td align="left">Metarhizium-Maschinenring</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="even">
+<td align="right">9174</td>
 <td align="left">7379</td>
 <td align="left">Metarhizium-Maschinenring</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
 <tr class="odd">
+<td align="right">9384</td>
+<td align="left">7528</td>
+<td align="left">Beauveria FL-Maschinenring</td>
+<td align="left">Insektizid</td>
+</tr>
+<tr class="even">
+<td align="right">9384</td>
+<td align="left">7528</td>
+<td align="left">Beauveria FL-Maschinenring</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="right">9385</td>
+<td align="left">7529</td>
+<td align="left">Metarhizium FL-Maschinenring</td>
+<td align="left">Insektizid</td>
+</tr>
+<tr class="even">
+<td align="right">9385</td>
+<td align="left">7529</td>
+<td align="left">Metarhizium FL-Maschinenring</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="right">9389</td>
 <td align="left">7477</td>
 <td align="left">Melocont GR</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
 <tr class="even">
+<td align="right">9390</td>
 <td align="left">7478</td>
 <td align="left">GranMet GR</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
 <tr class="odd">
+<td align="right">9481</td>
 <td align="left">7500</td>
 <td align="left">Lalguard M52 GR</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="even">
+<td align="right">9481</td>
 <td align="left">7500</td>
 <td align="left">Lalguard M52 GR</td>
 <td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">7504</td>
-<td align="left">Taegro</td>
-<td align="left">Lebende Organismen (gegen Pilze)</td>
-</tr>
-<tr class="even">
-<td align="left">7504</td>
-<td align="left">Taegro</td>
-<td align="left">Fungizid</td>
-</tr>
-<tr class="odd">
-<td align="left">7528</td>
-<td align="left">Beauveria FL-Maschinenring</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">7528</td>
-<td align="left">Beauveria FL-Maschinenring</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">7528-1</td>
-<td align="left">Beauveria MycoSolutions</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">7528-1</td>
-<td align="left">Beauveria MycoSolutions</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">7529</td>
-<td align="left">Metarhizium FL-Maschinenring</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">7529</td>
-<td align="left">Metarhizium FL-Maschinenring</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">7529-1</td>
-<td align="left">Metarhizium MycoSolutions</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">7529-1</td>
-<td align="left">Metarhizium MycoSolutions</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">7574</td>
-<td align="left">Capirel</td>
-<td align="left">Lebende Organismen (Nematoden)</td>
-</tr>
-<tr class="even">
-<td align="left">7580</td>
-<td align="left">Wormox</td>
-<td align="left">Lebende Organismen (Bakterien)</td>
-</tr>
-<tr class="odd">
-<td align="left">7580</td>
-<td align="left">Wormox</td>
-<td align="left">Insektizid</td>
 </tr>
 </tbody>
 </table>
@@ -1485,411 +1433,359 @@ Buchsbaumzünsler</td>
 <div class="section level2">
 <h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
-<p>In summary, out of 1702 products, there are 25 in the microorganism
-categories as shown above, and 69 products in the insecticide and
+<p>In summary, out of 1702 products, there are 21 in the microorganism
+categories as shown above, and 48 products in the insecticide and
 fungicide categories which contain an active substance that has a name
 that contains one of the microorganism genus names listed above.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">products_containing_microorganisms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span></span>
 <span>  <span class="va">products_in_microorganism_categories</span>, </span>
 <span>  <span class="va">additional_products_containing_microorganisms</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">wNbr</span>, <span class="va">name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">pNbr</span>, <span class="va">category_de</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">n_unique</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">products_containing_microorganisms</span><span class="op">$</span><span class="va">wNbr</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>The consolidated list of the 60 unique products identified in this
+<span><span class="va">n_unique</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">products_containing_microorganisms</span><span class="op">$</span><span class="va">pNbr</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>The consolidated list of the 42 unique products identified in this
 way is shown below. Some of these products are listed twice, because
 they were identified via both ways.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">products_containing_microorganisms</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="7%">
-<col width="60%">
-<col width="33%">
+<col width="6%">
+<col width="6%">
+<col width="40%">
+<col width="45%">
 </colgroup>
 <thead><tr class="header">
+<th align="right">pNbr</th>
 <th align="left">wNbr</th>
 <th align="left">name</th>
 <th align="left">category_de</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="right">4594</td>
 <td align="left">4574</td>
 <td align="left">Beauveria-Schweizer</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
 <tr class="even">
-<td align="left">4574-1</td>
-<td align="left">Beaupro</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">5277</td>
-<td align="left">Traunem</td>
-<td align="left">Lebende Organismen (Nematoden)</td>
-</tr>
-<tr class="even">
+<td align="right">6415</td>
 <td align="left">5277</td>
 <td align="left">Traunem</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="odd">
-<td align="left">5277-1</td>
-<td align="left">Coop Oecoplan Biocontrol Nützlinge gegen
-Trauermückenlarven</td>
+<td align="right">6415</td>
+<td align="left">5277</td>
+<td align="left">Traunem</td>
 <td align="left">Lebende Organismen (Nematoden)</td>
 </tr>
 <tr class="even">
-<td align="left">5277-1</td>
-<td align="left">Coop Oecoplan Biocontrol Nützlinge gegen
-Trauermückenlarven</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
+<td align="right">6427</td>
 <td align="left">5386</td>
 <td align="left">Entonem</td>
 <td align="left">Lebende Organismen (Nematoden)</td>
 </tr>
-<tr class="even">
-<td align="left">5744</td>
-<td align="left">Solbac</td>
-<td align="left">Insektizid</td>
-</tr>
 <tr class="odd">
-<td align="left">5744-1</td>
-<td align="left">Gesal Trauermücken-Stop</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">5744-2</td>
-<td align="left">Capito Anti-Trauermückenkonzentrat</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
+<td align="right">6861</td>
 <td align="left">5745</td>
 <td align="left">Solbac-Tabs</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="even">
-<td align="left">5745-2</td>
-<td align="left">Bio Garden Trauermücken-Stopp</td>
+<td align="right">6862</td>
+<td align="left">5744</td>
+<td align="left">Solbac</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="odd">
-<td align="left">5745-3</td>
-<td align="left">Coop Oecoplan Biocontrol Mücken-Tabletten</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">5745-4</td>
-<td align="left">Biorga Contra Trauermücken</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
+<td align="right">7023</td>
 <td align="left">5925</td>
 <td align="left">Novodor 3 FC</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="even">
+<td align="right">7088</td>
 <td align="left">5978</td>
 <td align="left">Nemaplus</td>
 <td align="left">Lebende Organismen (Nematoden)</td>
 </tr>
 <tr class="odd">
+<td align="right">7241</td>
 <td align="left">6081</td>
 <td align="left">Novodor 3 % FC</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="even">
-<td align="left">6423</td>
-<td align="left">Metarhizium Schweizer</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">6423-1</td>
-<td align="left">Metapro</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="even">
+<td align="right">7496</td>
 <td align="left">6449</td>
 <td align="left">Cerall</td>
 <td align="left">Saatbeizmittel</td>
 </tr>
 <tr class="odd">
-<td align="left">6472</td>
-<td align="left">FZB 24 flüssig</td>
-<td align="left">Phytoregulator</td>
-</tr>
-<tr class="even">
-<td align="left">6472</td>
-<td align="left">FZB 24 flüssig</td>
-<td align="left">Fungizid</td>
-</tr>
-<tr class="odd">
+<td align="right">7498</td>
 <td align="left">6486</td>
 <td align="left">Cedomon</td>
 <td align="left">Saatbeizmittel</td>
 </tr>
 <tr class="even">
+<td align="right">7650</td>
+<td align="left">6423</td>
+<td align="left">Metarhizium Schweizer</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="right">7766</td>
+<td align="left">6882</td>
+<td align="left">Agree WP</td>
+<td align="left">Insektizid</td>
+</tr>
+<tr class="even">
+<td align="right">7773</td>
+<td align="left">6472</td>
+<td align="left">FZB 24 flüssig</td>
+<td align="left">Fungizid</td>
+</tr>
+<tr class="odd">
+<td align="right">7773</td>
+<td align="left">6472</td>
+<td align="left">FZB 24 flüssig</td>
+<td align="left">Phytoregulator</td>
+</tr>
+<tr class="even">
+<td align="right">7870</td>
 <td align="left">6552</td>
 <td align="left">Delfin</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="odd">
-<td align="left">6552-1</td>
-<td align="left">Coop Oecoplan Biocontrol Delfin gegen
-Buchsbaumzünsler</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">6552-2</td>
-<td align="left">Bio Garden Delfin gegen Buchsbaumzünsler</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
-<td align="left">6552-3</td>
-<td align="left">Biorga Contra Buchsbaumzünsler-Stop</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">6552-4</td>
-<td align="left">BIOHOP DelFIN</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
-<td align="left">6777</td>
-<td align="left">Dipel DF</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">6835</td>
-<td align="left">Dipel DF</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
-<td align="left">6847</td>
-<td align="left">Lalstop K61 WP</td>
-<td align="left">Lebende Organismen (gegen Pilze)</td>
-</tr>
-<tr class="even">
-<td align="left">6872</td>
-<td align="left">Prestop</td>
-<td align="left">Lebende Organismen (gegen Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">6881</td>
-<td align="left">BioAct WG</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="even">
-<td align="left">6882</td>
-<td align="left">Agree WP</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
+<td align="right">8007</td>
 <td align="left">6888</td>
 <td align="left">XenTari WG</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="even">
-<td align="left">6912</td>
-<td align="left">Deposan</td>
-<td align="left">Lebende Organismen (Bakterien)</td>
-</tr>
-<tr class="odd">
-<td align="left">6912</td>
-<td align="left">Deposan</td>
-<td align="left">Fungizid</td>
-</tr>
-<tr class="even">
+<td align="right">8025</td>
 <td align="left">6919</td>
 <td align="left">Botector</td>
 <td align="left">Lebende Organismen (gegen Pilze)</td>
 </tr>
 <tr class="odd">
+<td align="right">8029</td>
+<td align="left">6881</td>
+<td align="left">BioAct WG</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="even">
+<td align="right">8040</td>
+<td align="left">6777</td>
+<td align="left">Dipel DF</td>
+<td align="left">Insektizid</td>
+</tr>
+<tr class="odd">
+<td align="right">8119</td>
+<td align="left">6872</td>
+<td align="left">Prestop</td>
+<td align="left">Lebende Organismen (gegen Pilze)</td>
+</tr>
+<tr class="even">
+<td align="right">8258</td>
+<td align="left">7151</td>
+<td align="left">Amylo-X</td>
+<td align="left">Lebende Organismen (gegen Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="right">8296</td>
+<td align="left">6835</td>
+<td align="left">Dipel DF</td>
+<td align="left">Insektizid</td>
+</tr>
+<tr class="even">
+<td align="right">8309</td>
+<td align="left">6847</td>
+<td align="left">Lalstop K61 WP</td>
+<td align="left">Lebende Organismen (gegen Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="right">8374</td>
+<td align="left">6912</td>
+<td align="left">Deposan</td>
+<td align="left">Fungizid</td>
+</tr>
+<tr class="even">
+<td align="right">8374</td>
+<td align="left">6912</td>
+<td align="left">Deposan</td>
+<td align="left">Lebende Organismen (Bakterien)</td>
+</tr>
+<tr class="odd">
+<td align="right">8457</td>
 <td align="left">6929</td>
 <td align="left">Proradix</td>
 <td align="left">Saatbeizmittel</td>
 </tr>
 <tr class="even">
+<td align="right">8519</td>
 <td align="left">6966</td>
 <td align="left">XenTari WG</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="odd">
-<td align="left">7151</td>
-<td align="left">Amylo-X</td>
-<td align="left">Lebende Organismen (gegen Pilze)</td>
-</tr>
-<tr class="even">
+<td align="right">8596</td>
 <td align="left">7253</td>
 <td align="left">Serenade ASO</td>
 <td align="left">Bakterizid</td>
 </tr>
-<tr class="odd">
+<tr class="even">
+<td align="right">8596</td>
 <td align="left">7253</td>
 <td align="left">Serenade ASO</td>
 <td align="left">Fungizid</td>
 </tr>
-<tr class="even">
-<td align="left">7259</td>
-<td align="left">AQ 10</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
 <tr class="odd">
-<td align="left">7272</td>
-<td align="left">Bio Buxus</td>
+<td align="right">8926</td>
+<td align="left">7580</td>
+<td align="left">Wormox</td>
 <td align="left">Insektizid</td>
 </tr>
 <tr class="even">
-<td align="left">7272-1</td>
-<td align="left">Gesal Buchsbaumzünsler Stop DiPel DF</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
-<td align="left">7273</td>
-<td align="left">Bio Raupen Stopp</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">7273-1</td>
-<td align="left">Sanoplant Dipel</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
-<td align="left">7273-2</td>
-<td align="left">MAAG Dipel</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">7273-3</td>
-<td align="left">Gesal Raupen-Stop</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
-<td align="left">7316</td>
-<td align="left">Naturalis-L</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="even">
-<td align="left">7324</td>
-<td align="left">Rotstop</td>
-<td align="left">Lebende Organismen (gegen Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">7324</td>
-<td align="left">Rotstop</td>
-<td align="left">Fungizid</td>
-</tr>
-<tr class="even">
-<td align="left">7378</td>
-<td align="left">Beauveria-Maschinenring</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">7378</td>
-<td align="left">Beauveria-Maschinenring</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">7379</td>
-<td align="left">Metarhizium-Maschinenring</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">7379</td>
-<td align="left">Metarhizium-Maschinenring</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
-<td align="left">7477</td>
-<td align="left">Melocont GR</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">7478</td>
-<td align="left">GranMet GR</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="even">
-<td align="left">7498</td>
-<td align="left">Lalstop Contans WG</td>
-<td align="left">Lebende Organismen (gegen Pilze)</td>
-</tr>
-<tr class="odd">
-<td align="left">7500</td>
-<td align="left">Lalguard M52 GR</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="even">
-<td align="left">7500</td>
-<td align="left">Lalguard M52 GR</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
-<td align="left">7504</td>
-<td align="left">Taegro</td>
-<td align="left">Lebende Organismen (gegen Pilze)</td>
-</tr>
-<tr class="even">
-<td align="left">7504</td>
-<td align="left">Taegro</td>
-<td align="left">Fungizid</td>
-</tr>
-<tr class="odd">
-<td align="left">7528</td>
-<td align="left">Beauveria FL-Maschinenring</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="even">
-<td align="left">7528</td>
-<td align="left">Beauveria FL-Maschinenring</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
-<td align="left">7528-1</td>
-<td align="left">Beauveria MycoSolutions</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="even">
-<td align="left">7528-1</td>
-<td align="left">Beauveria MycoSolutions</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
-<td align="left">7529</td>
-<td align="left">Metarhizium FL-Maschinenring</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="even">
-<td align="left">7529</td>
-<td align="left">Metarhizium FL-Maschinenring</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
-<td align="left">7529-1</td>
-<td align="left">Metarhizium MycoSolutions</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="even">
-<td align="left">7529-1</td>
-<td align="left">Metarhizium MycoSolutions</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="odd">
-<td align="left">7574</td>
-<td align="left">Capirel</td>
-<td align="left">Lebende Organismen (Nematoden)</td>
-</tr>
-<tr class="even">
+<td align="right">8926</td>
 <td align="left">7580</td>
 <td align="left">Wormox</td>
 <td align="left">Lebende Organismen (Bakterien)</td>
 </tr>
 <tr class="odd">
-<td align="left">7580</td>
-<td align="left">Wormox</td>
+<td align="right">8946</td>
+<td align="left">7504</td>
+<td align="left">Taegro</td>
+<td align="left">Fungizid</td>
+</tr>
+<tr class="even">
+<td align="right">8946</td>
+<td align="left">7504</td>
+<td align="left">Taegro</td>
+<td align="left">Lebende Organismen (gegen Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="right">9014</td>
+<td align="left">7259</td>
+<td align="left">AQ 10</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="even">
+<td align="right">9019</td>
+<td align="left">7272</td>
+<td align="left">Bio Buxus</td>
 <td align="left">Insektizid</td>
+</tr>
+<tr class="odd">
+<td align="right">9020</td>
+<td align="left">7273</td>
+<td align="left">Bio Raupen Stopp</td>
+<td align="left">Insektizid</td>
+</tr>
+<tr class="even">
+<td align="right">9049</td>
+<td align="left">7316</td>
+<td align="left">Naturalis-L</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="right">9052</td>
+<td align="left">7324</td>
+<td align="left">Rotstop</td>
+<td align="left">Fungizid</td>
+</tr>
+<tr class="even">
+<td align="right">9052</td>
+<td align="left">7324</td>
+<td align="left">Rotstop</td>
+<td align="left">Lebende Organismen (gegen Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="right">9139</td>
+<td align="left">7574</td>
+<td align="left">Capirel</td>
+<td align="left">Lebende Organismen (Nematoden)</td>
+</tr>
+<tr class="even">
+<td align="right">9173</td>
+<td align="left">7378</td>
+<td align="left">Beauveria-Maschinenring</td>
+<td align="left">Insektizid</td>
+</tr>
+<tr class="odd">
+<td align="right">9173</td>
+<td align="left">7378</td>
+<td align="left">Beauveria-Maschinenring</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="even">
+<td align="right">9174</td>
+<td align="left">7379</td>
+<td align="left">Metarhizium-Maschinenring</td>
+<td align="left">Insektizid</td>
+</tr>
+<tr class="odd">
+<td align="right">9174</td>
+<td align="left">7379</td>
+<td align="left">Metarhizium-Maschinenring</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="even">
+<td align="right">9384</td>
+<td align="left">7528</td>
+<td align="left">Beauveria FL-Maschinenring</td>
+<td align="left">Insektizid</td>
+</tr>
+<tr class="odd">
+<td align="right">9384</td>
+<td align="left">7528</td>
+<td align="left">Beauveria FL-Maschinenring</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="even">
+<td align="right">9385</td>
+<td align="left">7529</td>
+<td align="left">Metarhizium FL-Maschinenring</td>
+<td align="left">Insektizid</td>
+</tr>
+<tr class="odd">
+<td align="right">9385</td>
+<td align="left">7529</td>
+<td align="left">Metarhizium FL-Maschinenring</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="even">
+<td align="right">9389</td>
+<td align="left">7477</td>
+<td align="left">Melocont GR</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="right">9390</td>
+<td align="left">7478</td>
+<td align="left">GranMet GR</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="even">
+<td align="right">9479</td>
+<td align="left">7498</td>
+<td align="left">Lalstop Contans WG</td>
+<td align="left">Lebende Organismen (gegen Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="right">9481</td>
+<td align="left">7500</td>
+<td align="left">Lalguard M52 GR</td>
+<td align="left">Insektizid</td>
+</tr>
+<tr class="even">
+<td align="right">9481</td>
+<td align="left">7500</td>
+<td align="left">Lalguard M52 GR</td>
+<td align="left">Lebende Organismen (Pilze)</td>
 </tr>
 </tbody>
 </table>

@@ -24,18 +24,18 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' srppp_cur <- srppp_dm()
+#' sr <- srppp_dm()
 #'
 #' actives_de <- c("Lambda-Cyhalothrin", "Deltamethrin")
 #'
-#' alternative_products(srppp_cur, actives_de)
-#' alternative_products(srppp_cur, actives_de, missing = TRUE)
-#' alternative_products(srppp_cur, actives_de, details = TRUE)
-#' alternative_products(srppp_cur, actives_de, list = TRUE)
+#' alternative_products(sr, actives_de)
+#' alternative_products(sr, actives_de, missing = TRUE)
+#' alternative_products(sr, actives_de, details = TRUE)
+#' alternative_products(sr, actives_de, list = TRUE)
 #'
 #' # Example in Italian
 #' actives_it <- c("Lambda-Cialotrina", "Deltametrina")
-#' alternative_products(srppp_cur, actives_it, lang = "it")
+#' alternative_products(sr, actives_it, lang = "it")
 #' }
 alternative_products <- function(srppp, active_ingredients,
   details = FALSE, missing = FALSE, list = FALSE, lang = c("de", "fr", "it"))
@@ -53,11 +53,11 @@ alternative_products <- function(srppp, active_ingredients,
     arrange(pick(all_of(c("pNbr", "wNbr"))))
 
   affected_uses <- srppp$uses |>
-    filter(wNbr %in% affected_products$wNbr)
+    filter(pNbr %in% affected_products$pNbr)
 
   affected_cultures_x_pests <- affected_uses |>
-    left_join(srppp$cultures, by = c("wNbr", "use_nr"), relationship = "many-to-many") |>
-    left_join(srppp$pests, by = c("wNbr", "use_nr"), relationship = "many-to-many") |>
+    left_join(srppp$cultures, by = c("pNbr", "use_nr"), relationship = "many-to-many") |>
+    left_join(srppp$pests, by = c("pNbr", "use_nr"), relationship = "many-to-many") |>
     select(all_of(selection_criteria)) |>
     unique() |>
     arrange(pick(all_of(selection_criteria)))
@@ -70,9 +70,9 @@ alternative_products <- function(srppp, active_ingredients,
     filter(!srppp$products$wNbr %in% affected_products$wNbr)
 
   alternative_product_candidate_uses <- alternative_product_candidates |>
-    left_join(srppp$uses, by = "wNbr", relationship = "many-to-many") |>
-    left_join(srppp$cultures, by = c("wNbr", "use_nr"), relationship = "many-to-many") |>
-    left_join(srppp$pests, by = c("wNbr", "use_nr"), relationship = "many-to-many") |>
+    left_join(srppp$uses, by = "pNbr", relationship = "many-to-many") |>
+    left_join(srppp$cultures, by = c("pNbr", "use_nr"), relationship = "many-to-many") |>
+    left_join(srppp$pests, by = c("pNbr", "use_nr"), relationship = "many-to-many") |>
     select(all_of(return_columns)) |>
     arrange(pick(all_of(return_columns)))
 
@@ -81,7 +81,7 @@ alternative_products <- function(srppp, active_ingredients,
       by = selection_criteria)
 
   uses_without_alternatives <- alternative_uses |>
-    filter(is.na(alternative_uses$wNbr)) |>
+    filter(is.na(alternative_uses$pNbr)) |>
     select(all_of(selection_criteria))
 
   n_alternative_products <- alternative_uses |>
