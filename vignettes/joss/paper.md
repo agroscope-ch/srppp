@@ -6,7 +6,7 @@ tags:
   - pesticides
   - use restrictions
   - R
-date: 22 July 2024
+date: 23 July 2024
 authors:
   - name: Marcel Mathis
     orcid: 0000-0001-7102-4841
@@ -82,9 +82,9 @@ For reading in the XML file, `srppp` relies on the functions in the
 a `dm` object [@dm], which is basically a pipe friendly way to work with
 relational data in R without the need for an external database engine.
 
-# Relationship to the Federal Office for Food Safety and Veterinary Medicine
+# Relationship to the Federal Food Safety and Veterinary Office 
 
-The Swiss Federal Office for Food Safety and Veterinary Medicine, which
+The  Federal Food Safety and Veterinary Office, which
 coordinates the registration of plant protection products in Switzerland, 
 has noted the open source development of this software package,
 but accepts no responsibility for the correctness of any functionalities
