@@ -1,6 +1,9 @@
 # srppp - R package to deal with XML dumps of the Swiss Register of Plant Protection Products
 
+<!-- badges: start -->
+  [![R-CMD-check](https://github.com/agroscope-ch/srppp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/agroscope-ch/srppp/actions/workflows/R-CMD-check.yaml)
 [![srppp status badge](https://agroscope-ch.r-universe.dev/badges/srppp)](https://agroscope-ch.r-universe.dev/ui/#package:srppp)
+<!-- badges: end -->
 
 ## Description
 
@@ -23,3 +26,9 @@ install.packages("srppp",
 ## Documentation
 
 Please visit the [Documentation page](https://agroscope-ch.github.io/srppp)!
+
+## See also
+
+You may also be interested in our
+[agroscope-ch/srppp](https://github.com/agroscope-ch/srppp) package containing
+historical registration data starting from 2011.

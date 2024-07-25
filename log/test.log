@@ -1,9 +1,13 @@
 ℹ Testing srppp
+ℹ Reading XML for 2024-01-03
 ✔ | F W  S  OK | Context
-✔ |          1 | srppp_xml [12.0s]
+✔ |          3 | alternative_products
+✔ |          1 | srppp_xml [11.2s]
 ✔ |          2 | use_rates
 
 ══ Results ═════════════════════════════════════════════════════════════════════
-Duration: 12.1 s
+Duration: 11.9 s
 
-[ FAIL 0 | WARN 0 | SKIP 0 | PASS 3 ]
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 6 ]
+
+WEE - riveting code.
