@@ -569,8 +569,8 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
   product_information_table <- function(srppp_xml, tag_name, prefix = tag_name, code = FALSE) {
     descriptions <- description_table(srppp_xml, tag_name, code = code)
 
-    if (identical(descriptions, NA)) {
-      ret <- tibble(wNbr = character(0))
+    if (identical(descriptions, NA)) { # no signal words in old XML files
+      ret <- tibble(pNbr = integer(0))
     } else {
       product_information_nodes <- xml_find_all(srppp_xml,
         paste0("Products/Product/ProductInformation/", tag_name))
@@ -596,8 +596,8 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
   formulation_codes <- product_information_table(srppp_xml, "FormulationCode", prefix = "formulation")
   danger_symbols <- product_information_table(srppp_xml, "DangerSymbol", code = TRUE)
   signal_words <- product_information_table(srppp_xml, "SignalWords", prefix = "signal")
-  CodeS <- product_information_table(srppp_xml, "CodeS")
-  CodeR <- product_information_table(srppp_xml, "CodeR")
+  CodeS <- product_information_table(srppp_xml, "CodeS", code = TRUE)
+  CodeR <- product_information_table(srppp_xml, "CodeR", code = TRUE)
   # Permission holder was skipped, as we will probably not need this information
 
   # Tables of product ingredients and their concentrations
@@ -762,16 +762,13 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
 
   srppp_dm <- dm(products,
     pNbrs,
-    categories = product_categories, 
+    categories = product_categories,
     formulation_codes,
     danger_symbols, CodeS, CodeR, signal_words,
     parallel_imports,
-    substances,
-    ingredients,
-    uses,
-    application_comments,
-    culture_forms,
-    cultures, pests,
+    substances, ingredients,
+    uses, application_comments,
+    culture_forms, cultures, pests,
     obligations = obligations_spe3) |>
     dm_add_pk(products, wNbr) |>
     dm_add_pk(pNbrs, pNbr) |>
@@ -795,7 +792,7 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
     dm_add_fk(obligations, c(pNbr, use_nr), uses) |>
     dm_add_fk(parallel_imports, pNbr, pNbrs) |>
     dm_set_colors(
-      darkblue = c(pNbrs:signal_words), 
+      darkblue = c(pNbrs:signal_words),
       lightblue = c(products, parallel_imports),
       darkorange = c(ingredients, substances),
       darkgreen = uses:obligations)
