@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">srppp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,7 @@
 
 
 <dl><dt id="arg-product-uses">product_uses<a class="anchor" aria-label="anchor" href="#arg-product-uses"></a></dt>
-<dd><p>A tibble containing the columns 'wNbr', 'use_nr',
+<dd><p>A tibble containing the columns 'pNbr', 'use_nr',
 'application_area_de', 'min_dosage', 'max_dosage', 'min_rate', 'max_rate',
 from the 'uses' table in a <a href="srppp_dm.html">srppp_dm</a> object, as well as the columns
 'percent' and 'g_per_L' from the 'ingredients' table in a <a href="srppp_dm.html">srppp_dm</a> object.</p></dd>
@@ -111,16 +111,14 @@ areas in Switzerland.</p>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://agroscope-ch.github.io/srppp">srppp</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dm.cynkra.com/" class="external-link">dm</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">srppp_cur</span> <span class="op">&lt;-</span> <span class="fu"><a href="srppp_dm.html">srppp_dm</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sr</span> <span class="op">&lt;-</span> <span class="fu"><a href="srppp_dm.html">srppp_dm</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">product_uses_with_ingredients</span> <span class="op">&lt;-</span> <span class="va">srppp_cur</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://dm.cynkra.com/reference/dm_filter.html" class="external-link">dm_filter</a></span><span class="op">(</span>substances <span class="op">=</span></span></span>
-<span class="r-in"><span>    <span class="op">(</span><span class="va">substance_de</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Halauxifen-methyl"</span>, <span class="st">"Kupfer (als Kalkpr\u00E4parat)"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://dm.cynkra.com/reference/dm_flatten_to_tbl.html" class="external-link">dm_flatten_to_tbl</a></span><span class="op">(</span><span class="va">uses</span>, <span class="va">products</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp_cur</span><span class="op">$</span><span class="va">ingredients</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">pNbr</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    relationship <span class="op">=</span> <span class="st">"many-to-many"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp_cur</span><span class="op">$</span><span class="va">substances</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">pk</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">wNbr</span>, <span class="va">name</span>, <span class="va">use_nr</span>,</span></span>
+<span class="r-in"><span><span class="va">product_uses_with_ingredients</span> <span class="op">&lt;-</span> <span class="va">sr</span><span class="op">$</span><span class="va">substances</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">substance_de</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Halauxifen-methyl"</span>, <span class="st">"Kupfer (als Kalkpr\u00E4parat)"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">sr</span><span class="op">$</span><span class="va">ingredients</span>, by <span class="op">=</span> <span class="st">"pk"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">sr</span><span class="op">$</span><span class="va">uses</span>, by <span class="op">=</span> <span class="st">"pNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">sr</span><span class="op">$</span><span class="va">products</span>, by <span class="op">=</span> <span class="st">"pNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">pNbr</span>, <span class="va">name</span>, <span class="va">use_nr</span>,</span></span>
 <span class="r-in"><span>    <span class="va">min_dosage</span>, <span class="va">max_dosage</span>, <span class="va">min_rate</span>, <span class="va">max_rate</span>, <span class="va">units_de</span>,</span></span>
 <span class="r-in"><span>    <span class="va">application_area_de</span>,</span></span>
 <span class="r-in"><span>    <span class="va">substance_de</span>, <span class="va">percent</span>, <span class="va">g_per_L</span><span class="op">)</span></span></span>
