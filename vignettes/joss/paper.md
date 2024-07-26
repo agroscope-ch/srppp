@@ -42,7 +42,7 @@ Utility functions for searching for alternative PPP for certain uses, and for
 calculating active substance application rates from product dosage information
 are also included. 
 
-![Schematic representation of the relations between the tables\label{fig:srppp}](srppp.png)
+![Schematic representation of the relations between the main tables\label{fig:srppp}](srppp.png)
 
 # Statement of need
 
