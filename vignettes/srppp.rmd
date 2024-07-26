@@ -45,7 +45,13 @@ current_register <- srppp_dm()
 
 The resulting data object contains a number of related tables with
 information on the authorized products and their uses. The relation
-between those tables is shown below. 
+between those tables is shown below. The identification numbers of the evaluated
+products (`pNbrs`) and the general information associated with them are shown
+in dark blue. The tables defining their composition in terms of the most 
+important ingredients are shown in orange. Tables with information on the 
+authorized uses of the products are shown in dark green. Finally, the tables
+giving names and expiration dates of products and parallel imports as well as
+an identification number for the authorization holder are shown in light blue.
 
 ```{r}
 #| fig.height: 9
