@@ -30,5 +30,5 @@ Please visit the [Documentation page](https://agroscope-ch.github.io/srppp)!
 ## See also
 
 You may also be interested in our
-[agroscope-ch/srppp](https://github.com/agroscope-ch/srppp) package containing
+[agroscope-ch/srppphist](https://github.com/agroscope-ch/srppphist) package containing
 historical registration data starting from 2011.
