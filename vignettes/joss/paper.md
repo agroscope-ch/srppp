@@ -92,6 +92,12 @@ within. Further, they will not respond to queries regarding the package. Please
 note that there is no guarantee that the data contained in or read by this
 package will match the online version or the original registration documents.
 
+# Related work
+
+For those interested in historical data on authorized products and their uses, 
+we refer to the srppphist R-package [@srppphist], which provides annual extracts 
+of SRPPP data since 2011.
+
 # Acknowledgements
 
 We would like to acknowledge the helpful discussions with various members and
