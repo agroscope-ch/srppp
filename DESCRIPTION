@@ -29,7 +29,7 @@ Suggests: knitr, rmarkdown, here, DiagrammeR,
   testthat (>= 3.0.0), parallel, waldo
 BugReports: https://github.com/agroscope-ch/srppp/issues
 URL: https://agroscope-ch.github.io/srppp
-License: GPL
+License: GPL (>= 3)
 LazyData: yes
 LazyDataCompression: xz
 RoxygenNote: 7.3.1.9000
