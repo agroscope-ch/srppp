@@ -469,33 +469,45 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 
 #' Create a dm object from an XML version of the Swiss Register of Plant Protection Products
 #'
-#' In general, the information obtained from the XML file is left unchanged.
-#' Information on products that has been duplicated across several products
+#' While reading in the data, the information obtained from the XML file is
+#' left unchanged, with the exceptions listed in the section 'Details'.
+#' An overview of the contents of the most important tables in the resulting
+#' data object is given in `vignette("srppp")`.
+#'
+#' @details
+#'
+#' ## Corrections made to the data
+#'
+#' - In the following case, the product composition is corrected while reading in
+#' the data: The active substance content of Dormex (W-3066) is not 667 g/L,
+#' but 520 g/L This was confirmed by a visit to the Wädenswil archive by
+#' Johannes Ranke and Daniel Baumgartner, 2024-03-27.
+#'
+#' ## Removal of redundant information
+#' 
+#' - Information on products that has been duplicated across several products
 #' sharing the same P-Number has been associated directly with this P-Number,
 #' in order to avoid duplications. While reading in the XML file, it is checked
-#' that the resulting deduplication does not remove any data. For the very few
-#' alterations of or amendments to the data, see Details.  An overview of the
-#' contents of the most important tables in the resulting data object is given
-#' in `vignette("srppp")`.
+#' that the resulting deduplication does not remove any data. 
+#' - In very few cases of historical XML files, there are two `<Product>`
+#' sections sharing the same W-Number. In these cases, one of these has apparently
+#' been included in error and an informed decision is taken while reading in
+#' the data which one of these sections is discarded. The details of this
+#' procedure can be found in the source code of the function
+#' `srppp_xml_get_products`.
 #'
-#' In the following case, the product composition is corrected while reading in
-#' the data:
-#'
-#' The active substance content of Dormex (W-3066) is not 667 g/L, but 520 g/L
-#' This was confirmed by a visit to the Wädenswil archive by
-#' Johannes Ranke and Daniel Baumgartner, 2024-03-27.
+#' ## Amendments to the data
 #'
 #' In the table of obligations, the following information on mitigation
 #' measures is extracted from the ones relevant for the environment (SPe 3).
-#'
-#'  * "sw_drift_dist": Unsprayed buffer towards surface waters to mitigate
-#'    spray drift in meters
-#'  * "sw_runoff_dist": Vegetated buffer towards surface waters to mitigate
-#'    runoff in meters
-#'  * "sw_runoff_points": Required runoff mitigation points to mitigate runoff
-#'  * "biotope_drift_dist": Unsprayed buffer towards biotopes (as defined in
-#'     articles 18a and 18b of the Federal Act on the Protection of Nature and
-#'     Cultural Heritage) to mitigate spray drift in meters
+#' - "sw_drift_dist": Unsprayed buffer towards surface waters to mitigate
+#'   spray drift in meters
+#' - "sw_runoff_dist": Vegetated buffer towards surface waters to mitigate
+#'   runoff in meters
+#' - "sw_runoff_points": Required runoff mitigation points to mitigate runoff
+#' - "biotope_drift_dist": Unsprayed buffer towards biotopes (as defined in
+#'    articles 18a and 18b of the Federal Act on the Protection of Nature and
+#'    Cultural Heritage) to mitigate spray drift in meters
 #'
 #' @inheritParams srppp_xml_get
 #' @param remove_duplicates Should duplicates based on wNbrs be removed?

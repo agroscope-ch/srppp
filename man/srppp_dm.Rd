@@ -23,22 +23,37 @@ A \link[dm:dm]{dm::dm} object with tables linked by foreign keys
 pointing to primary keys, i.e. with referential integrity.
 }
 \description{
-In general, the information obtained from the XML file is left unchanged.
-Information on products that has been duplicated across several products
-sharing the same P-Number has been associated directly with this P-Number,
-in order to avoid duplications. While reading in the XML file, it is checked
-that the resulting deduplication does not remove any data. For the very few
-alterations of or amendments to the data, see Details.  An overview of the
-contents of the most important tables in the resulting data object is given
-in \code{vignette("srppp")}.
+While reading in the data, the information obtained from the XML file is
+left unchanged, with the exceptions listed in the section 'Details'.
+An overview of the contents of the most important tables in the resulting
+data object is given in \code{vignette("srppp")}.
 }
 \details{
-In the following case, the product composition is corrected while reading in
-the data:
-
-The active substance content of Dormex (W-3066) is not 667 g/L, but 520 g/L
-This was confirmed by a visit to the Wädenswil archive by
+\subsection{Corrections made to the data}{
+\itemize{
+\item In the following case, the product composition is corrected while reading in
+the data: The active substance content of Dormex (W-3066) is not 667 g/L,
+but 520 g/L This was confirmed by a visit to the Wädenswil archive by
 Johannes Ranke and Daniel Baumgartner, 2024-03-27.
+}
+}
+
+\subsection{Removal of redundant information}{
+\itemize{
+\item Information on products that has been duplicated across several products
+sharing the same P-Number has been associated directly with this P-Number,
+in order to avoid duplications. While reading in the XML file, it is checked
+that the resulting deduplication does not remove any data.
+\item In very few cases of historical XML files, there are two \verb{<Product>}
+sections sharing the same W-Number. In these cases, one of these has apparently
+been included in error and an informed decision is taken while reading in
+the data which one of these sections is discarded. The details of this
+procedure can be found in the source code of the function
+\code{srppp_xml_get_products}.
+}
+}
+
+\subsection{Amendments to the data}{
 
 In the table of obligations, the following information on mitigation
 measures is extracted from the ones relevant for the environment (SPe 3).
@@ -51,6 +66,7 @@ runoff in meters
 \item "biotope_drift_dist": Unsprayed buffer towards biotopes (as defined in
 articles 18a and 18b of the Federal Act on the Protection of Nature and
 Cultural Heritage) to mitigate spray drift in meters
+}
 }
 }
 \examples{

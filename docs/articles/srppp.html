@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">srppp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,7 @@
 Ranke</h4>
             
             <h4 data-toc-skip class="date">25 July, 2024 (rebuilt
-2024-07-25)</h4>
+2024-07-30)</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agroscope-ch/srppp/blob/HEAD/vignettes/srppp.rmd" class="external-link"><code>vignettes/srppp.rmd</code></a></small>
       <div class="d-none name"><code>srppp.rmd</code></div>
@@ -89,7 +89,14 @@ Reading in the current data is as simple as</p>
 <span><span class="va">current_register</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/srppp_dm.html">srppp_dm</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>The resulting data object contains a number of related tables with
 information on the authorized products and their uses. The relation
-between those tables is shown below.</p>
+between those tables is shown below. The identification numbers of the
+evaluated products (<code>pNbrs</code>) and the general information
+associated with them are shown in dark blue. The tables defining their
+composition in terms of the most important ingredients are shown in
+orange. Tables with information on the authorized uses of the products
+are shown in dark green. Finally, the tables giving names and expiration
+dates of products and parallel imports as well as an identification
+number for the authorization holder are shown in light blue.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rich-iannone.github.io/DiagrammeR/" class="external-link">DiagrammeR</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://dm.cynkra.com/reference/dm_draw.html" class="external-link">dm_draw</a></span><span class="op">(</span><span class="va">current_register</span><span class="op">)</span></span></code></pre></div>
