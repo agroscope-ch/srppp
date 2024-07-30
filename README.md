@@ -26,7 +26,8 @@ install.packages("srppp",
 
 ## Documentation
 
-Please visit the [Documentation page](https://agroscope-ch.github.io/srppp)!
+An online version of the documentation of the current development version of
+the package is available [on github](https://agroscope-ch.github.io/srppp).
 
 ## See also
 
