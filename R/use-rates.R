@@ -1,9 +1,20 @@
 #' Calculate application rates for active ingredients
 #'
-#' @note The reference application volume is used if there is no 'expenditure'.
+#' An application rate in g active substance/ha is calculated from information
+#' on dosage(product concentration in the application solution), application volume
+#' or directly from the product application rate. This is complicated by the fact
+#' that it a rate ("expenditure" in the XML file) with units l/ha can refer
+#' to the application solution or to the liquid product, even for different
+#' products with the same active substance.
+#'
+#' In some cases (currently one), external information was found, indicating
+#' that the "expenditure" is an application volume [l_per_ha_is_water_volume].
+#'
+#' @note A reference application volume is used if there is no 'expenditure'.
 #' It is selected only based on the product application area. This is not correct
 #' if hops ('Hopfen') is the culture, as it has a unique reference application
 #' volume of 3000 L/ha.
+#'
 #' Applications to hops were excluded for calculating mean use rates in the
 #' indicator project (Korkaric 2023), arguing that it is not grown in large
 #' areas in Switzerland.
@@ -67,7 +78,7 @@ application_rate_g_per_ha <- function(product_uses,
       max_dosage = na_if(max_dosage, 0)) |>
     mutate( # Then we make ranges, possibly with min equals max
       rate_min = min_rate, # 'expenditures' are use rates (Aufwandmengen)
-      rate_max = if_else(is.na(max_rate), # if zero, either no range or only conc
+      rate_max = if_else(is.na(max_rate), # if zero, either no range or not given
         min_rate, max_rate),
       dosage_min = min_dosage, # 'dosages' are in-use concentrations in percent
       dosage_max = if_else(is.na(max_dosage),

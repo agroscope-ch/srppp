@@ -484,11 +484,11 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #' Johannes Ranke and Daniel Baumgartner, 2024-03-27.
 #'
 #' ## Removal of redundant information
-#' 
+#'
 #' - Information on products that has been duplicated across several products
 #' sharing the same P-Number has been associated directly with this P-Number,
 #' in order to avoid duplications. While reading in the XML file, it is checked
-#' that the resulting deduplication does not remove any data. 
+#' that the resulting deduplication does not remove any data.
 #' - In very few cases of historical XML files, there are two `<Product>`
 #' sections sharing the same W-Number. In these cases, one of these has apparently
 #' been included in error and an informed decision is taken while reading in
