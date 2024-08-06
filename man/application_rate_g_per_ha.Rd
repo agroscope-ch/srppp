@@ -41,11 +41,10 @@ A tibble containing one additional column 'rate_g_per_ha'
 }
 \description{
 An application rate in g active substance/ha is calculated from information
-on dosage(product concentration in the application solution), application volume
+on dosage (product concentration in the application solution), application volume,
 or directly from the product application rate. This is complicated by the fact
-that it a rate ("expenditure" in the XML file) with units l/ha can refer
-to the application solution or to the liquid product, even for different
-products with the same active substance.
+that a rate ("expenditure" in the XML file) with units l/ha can refer
+to the application solution or to the liquid product.
 }
 \details{
 In some cases (currently one), external information was found, indicating
