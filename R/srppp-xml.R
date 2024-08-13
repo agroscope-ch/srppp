@@ -770,7 +770,10 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
             "\\1",
             obligation_de),
         .default = NA)
-    )
+    ) |>
+    mutate(across(
+      c(sw_drift_dist, sw_runoff_dist, sw_runoff_points, biotope_drift_dist),
+      as.integer))
 
   srppp_dm <- dm(products,
     pNbrs,
