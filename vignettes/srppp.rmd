@@ -1,7 +1,7 @@
 ---
 title: The Swiss Register of Plant Protection Products as a Relational Data Model
 author: Johannes Ranke
-date: 25 July, 2024 (rebuilt `r Sys.Date()`)
+date: 13 August, 2024 (rebuilt `r Sys.Date()`)
 bibliography: references.bib
 output:
   rmarkdown::html_vignette:
@@ -149,8 +149,8 @@ which does not make use of the foreign key declaration in the data object.
 
 ## Registered products (W-Numbers)
 
-The registered uses are not linked directly to the chemically defined products
-(P-Numbers), but to the so-called W-Numbers. The relation between P-Numbers
+The registered products are identified by
+the so-called W-Numbers. The relation between P-Numbers
 and W-Numbers is illustrated below by showing the first five entries in the
 `products` table.
 
@@ -205,11 +205,11 @@ current_register$products |>
 
 # Uses
 
-For each product registration (W-Number), the registered uses (tagged 
+For each product type (P-Number), the registered uses (tagged 
 as `<Indication>` in the XML file) are
 specified in the `uses` table. The use numbers in the column `use_nr`
 are generated while reading in the XML file, in order to be able to refer to 
-each use by a combination of W-Number (`wNbr`) and use number (`use_nr`).
+each use by a combination of P-Number (`pNbr`) and use number (`use_nr`).
 
 ```{r}
 current_register$uses |> 
@@ -290,10 +290,11 @@ culture form and the actual cultures can be joined to the use numbers in
 one step.
 
 ```{r}
-current_register$culture_forms |>
-  left_join(current_register$cultures, by = c("pNbr", "use_nr"),
-    relationship = "many-to-many") |> 
-  filter(pNbr == 7105L, use_nr %in% 1:2) |> 
+current_register$products |> 
+  filter(wNbr == "6168") |> 
+  left_join(current_register$uses, by = "pNbr") |> 
+  filter(use_nr %in% 1:2) |> 
+  left_join(current_register$culture_forms, by = c("pNbr", "use_nr")) |> 
   select(pNbr, use_nr, ends_with("de")) |> 
   kable()
 ```
@@ -340,7 +341,7 @@ Sometimes, use specific comments can be found in the `application_comments` tabl
 ```{r}
 current_register$application_comments |>
   filter(pNbr == 7105, use_nr %in% 1:2) |> 
-  select(use_nr, ends_with("de"), ends_with("fr")) |> 
+  select(pNbr, use_nr, ends_with("de"), ends_with("fr")) |> 
   kable()
 ```
 
@@ -354,7 +355,7 @@ surface water amounting to at least one point.
 ```{r}
 current_register$obligations |>
   filter(pNbr == 7105, use_nr %in% 1:2) |> 
-  select(use_nr, code, obligation_de, sw_runoff_points) |> 
+  select(pNbr, use_nr, code, obligation_de, sw_runoff_points) |> 
   kable()
 ```
 

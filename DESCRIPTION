@@ -32,7 +32,7 @@ URL: https://agroscope-ch.github.io/srppp
 License: GPL (>= 3)
 LazyData: yes
 LazyDataCompression: xz
-RoxygenNote: 7.3.1.9000
+RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
 Encoding: UTF-8

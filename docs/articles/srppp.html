@@ -62,8 +62,8 @@
                         <h4 data-toc-skip class="author">Johannes
 Ranke</h4>
             
-            <h4 data-toc-skip class="date">25 July, 2024 (rebuilt
-2024-07-30)</h4>
+            <h4 data-toc-skip class="date">13 August, 2024 (rebuilt
+2024-08-13)</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agroscope-ch/srppp/blob/HEAD/vignettes/srppp.rmd" class="external-link"><code>vignettes/srppp.rmd</code></a></small>
       <div class="d-none name"><code>srppp.rmd</code></div>
@@ -360,10 +360,9 @@ object.</p>
 <div class="section level3">
 <h3 id="registered-products-w-numbers">Registered products (W-Numbers)<a class="anchor" aria-label="anchor" href="#registered-products-w-numbers"></a>
 </h3>
-<p>The registered uses are not linked directly to the chemically defined
-products (P-Numbers), but to the so-called W-Numbers. The relation
-between P-Numbers and W-Numbers is illustrated below by showing the
-first five entries in the <code>products</code> table.</p>
+<p>The registered products are identified by the so-called W-Numbers.
+The relation between P-Numbers and W-Numbers is illustrated below by
+showing the first five entries in the <code>products</code> table.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">current_register</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">terminationReason</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -464,13 +463,13 @@ respective columns.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="5%">
-<col width="7%">
-<col width="13%">
-<col width="20%">
+<col width="4%">
+<col width="6%">
+<col width="21%">
+<col width="18%">
+<col width="15%">
 <col width="16%">
 <col width="17%">
-<col width="18%">
 </colgroup>
 <thead><tr class="header">
 <th align="right">pNbr</th>
@@ -528,18 +527,18 @@ respective columns.</p>
 <td align="right">10054</td>
 </tr>
 <tr class="even">
-<td align="right">6695</td>
-<td align="left">5651</td>
-<td align="left">Dual Gold</td>
-<td align="left">2025-01-01</td>
-<td align="left">2024-10-01</td>
+<td align="right">6675</td>
+<td align="left">5757</td>
+<td align="left">Cupro-Folpet Ultra SC</td>
+<td align="left">2026-07-25</td>
+<td align="left">2025-07-25</td>
 <td align="left">FALSE</td>
-<td align="right">10388</td>
+<td align="right">10079</td>
 </tr>
 </tbody>
 </table>
-<p>At the build time of this vignette, there were 1702 product
-registrations for 1117 P-Numbers in the Swiss Register of Plant
+<p>At the build time of this vignette, there were 1714 product
+registrations for 1124 P-Numbers in the Swiss Register of Plant
 Protection Products (SRPPP) as published on the website of the Federal
 Food Safety and Veterinary Office.</p>
 </div>
@@ -587,12 +586,12 @@ command like the following.</p>
 <div class="section level2">
 <h2 id="uses">Uses<a class="anchor" aria-label="anchor" href="#uses"></a>
 </h2>
-<p>For each product registration (W-Number), the registered uses (tagged
-as <code>&lt;Indication&gt;</code> in the XML file) are specified in the
+<p>For each product type (P-Number), the registered uses (tagged as
+<code>&lt;Indication&gt;</code> in the XML file) are specified in the
 <code>uses</code> table. The use numbers in the column
 <code>use_nr</code> are generated while reading in the XML file, in
-order to be able to refer to each use by a combination of W-Number
-(<code>wNbr</code>) and use number (<code>use_nr</code>).</p>
+order to be able to refer to each use by a combination of P-Number
+(<code>pNbr</code>) and use number (<code>use_nr</code>).</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">current_register</span><span class="op">$</span><span class="va">uses</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">pNbr</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6521L</span>, <span class="fl">7511L</span><span class="op">)</span> <span class="op">&amp;</span> <span class="va">use_nr</span> <span class="op">&lt;</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1213,34 +1212,46 @@ shown below. As each use is typically associated with only one culture
 form, the culture form and the actual cultures can be joined to the use
 numbers in one step.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">current_register</span><span class="op">$</span><span class="va">culture_forms</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">current_register</span><span class="op">$</span><span class="va">cultures</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pNbr"</span>, <span class="st">"use_nr"</span><span class="op">)</span>,</span>
-<span>    relationship <span class="op">=</span> <span class="st">"many-to-many"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">pNbr</span> <span class="op">==</span> <span class="fl">7105L</span>, <span class="va">use_nr</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="va">current_register</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">wNbr</span> <span class="op">==</span> <span class="st">"6168"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">current_register</span><span class="op">$</span><span class="va">uses</span>, by <span class="op">=</span> <span class="st">"pNbr"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">use_nr</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">current_register</span><span class="op">$</span><span class="va">culture_forms</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pNbr"</span>, <span class="st">"use_nr"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">pNbr</span>, <span class="va">use_nr</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">ends_with</a></span><span class="op">(</span><span class="st">"de"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
+<colgroup>
+<col width="7%">
+<col width="9%">
+<col width="12%">
+<col width="19%">
+<col width="28%">
+<col width="22%">
+</colgroup>
 <thead><tr class="header">
 <th align="right">pNbr</th>
 <th align="right">use_nr</th>
+<th align="left">units_de</th>
+<th align="left">time_units_de</th>
+<th align="left">application_area_de</th>
 <th align="left">culture_form_de</th>
-<th align="left">culture_de</th>
-<th align="left">culture_add_txt_de</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
 <td align="right">7105</td>
 <td align="right">1</td>
+<td align="left">l/ha</td>
+<td align="left">Tage</td>
+<td align="left">Gemüsebau</td>
 <td align="left">Freiland</td>
-<td align="left">Knollensellerie</td>
-<td align="left"></td>
 </tr>
 <tr class="even">
 <td align="right">7105</td>
 <td align="right">2</td>
+<td align="left">l/ha</td>
+<td align="left">Tage</td>
+<td align="left">Gemüsebau</td>
 <td align="left">Freiland</td>
-<td align="left">Stangensellerie</td>
-<td align="left"></td>
 </tr>
 </tbody>
 </table>
@@ -1525,21 +1536,24 @@ the indicator project is illustrated below.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">current_register</span><span class="op">$</span><span class="va">application_comments</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">pNbr</span> <span class="op">==</span> <span class="fl">7105</span>, <span class="va">use_nr</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">use_nr</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">ends_with</a></span><span class="op">(</span><span class="st">"de"</span><span class="op">)</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">ends_with</a></span><span class="op">(</span><span class="st">"fr"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">pNbr</span>, <span class="va">use_nr</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">ends_with</a></span><span class="op">(</span><span class="st">"de"</span><span class="op">)</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">ends_with</a></span><span class="op">(</span><span class="st">"fr"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
+<th align="right">pNbr</th>
 <th align="right">use_nr</th>
 <th align="left">application_comment_de</th>
 <th align="left">application_comment_fr</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="right">7105</td>
 <td align="right">1</td>
 <td align="left">7 Tage nach dem Pflanzen.</td>
 <td align="left">7 jours après la plantation.</td>
 </tr>
 <tr class="even">
+<td align="right">7105</td>
 <td align="right">2</td>
 <td align="left">7 Tage nach dem Pflanzen.</td>
 <td align="left">7 jours après la plantation.</td>
@@ -1558,16 +1572,18 @@ water amounting to at least one point.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">current_register</span><span class="op">$</span><span class="va">obligations</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">pNbr</span> <span class="op">==</span> <span class="fl">7105</span>, <span class="va">use_nr</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">use_nr</span>, <span class="va">code</span>, <span class="va">obligation_de</span>, <span class="va">sw_runoff_points</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">pNbr</span>, <span class="va">use_nr</span>, <span class="va">code</span>, <span class="va">obligation_de</span>, <span class="va">sw_runoff_points</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="1%">
+<col width="1%">
 <col width="9%">
-<col width="85%">
+<col width="84%">
 <col width="3%">
 </colgroup>
 <thead><tr class="header">
+<th align="right">pNbr</th>
 <th align="right">use_nr</th>
 <th align="left">code</th>
 <th align="left">obligation_de</th>
@@ -1575,12 +1591,14 @@ water amounting to at least one point.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="right">7105</td>
 <td align="right">1</td>
 <td align="left">obligation 692</td>
 <td align="left">Nachbau anderer Kulturen: 16 Wochen Wartefrist.</td>
 <td align="left"></td>
 </tr>
 <tr class="even">
+<td align="right">7105</td>
 <td align="right">1</td>
 <td align="left">N01: Profi Re-entry</td>
 <td align="left">Nachfolgearbeiten in behandelten Kulturen: bis 48
@@ -1589,12 +1607,14 @@ tragen.</td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
+<td align="right">7105</td>
 <td align="right">1</td>
 <td align="left">obligation 1928</td>
 <td align="left">Maximal 1 Behandlung pro Kultur.</td>
 <td align="left"></td>
 </tr>
 <tr class="even">
+<td align="right">7105</td>
 <td align="right">1</td>
 <td align="left">ML01_A04_T01</td>
 <td align="left">Ansetzen der Spritzbrühe: Schutzhandschuhe tragen.
@@ -1606,6 +1626,7 @@ einen vergleichbaren oder höheren Schutz bieten.</td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
+<td align="right">7105</td>
 <td align="right">1</td>
 <td align="left">Abschwemmung 1 Punkt</td>
 <td align="left">SPe 3: Zum Schutz von Gewässerorganismen muss das
@@ -1614,6 +1635,7 @@ reduziert werden.</td>
 <td align="left">1</td>
 </tr>
 <tr class="even">
+<td align="right">7105</td>
 <td align="right">1</td>
 <td align="left"></td>
 <td align="left">Splitbehandlung gemäss den Angaben der
@@ -1622,6 +1644,7 @@ entspricht total bewilligter Menge).</td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
+<td align="right">7105</td>
 <td align="right">1</td>
 <td align="left">obligation 2032</td>
 <td align="left">Phytotoxschäden bei empfindlichen Arten oder Sorten
@@ -1629,6 +1652,7 @@ möglich; vor allgemeiner Anwendung Versuchspritzung durchführen.</td>
 <td align="left"></td>
 </tr>
 <tr class="even">
+<td align="right">7105</td>
 <td align="right">1</td>
 <td align="left">Bewilligt nach Art. 35 PSMV (minor use).</td>
 <td align="left">Bewilligt als geringfügige Verwendung nach Art. 35 PSMV
@@ -1636,6 +1660,7 @@ möglich; vor allgemeiner Anwendung Versuchspritzung durchführen.</td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
+<td align="right">7105</td>
 <td align="right">2</td>
 <td align="left">Abschwemmung 1 Punkt</td>
 <td align="left">SPe 3: Zum Schutz von Gewässerorganismen muss das
@@ -1644,12 +1669,14 @@ reduziert werden.</td>
 <td align="left">1</td>
 </tr>
 <tr class="even">
+<td align="right">7105</td>
 <td align="right">2</td>
 <td align="left">obligation 692</td>
 <td align="left">Nachbau anderer Kulturen: 16 Wochen Wartefrist.</td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
+<td align="right">7105</td>
 <td align="right">2</td>
 <td align="left">N01: Profi Re-entry</td>
 <td align="left">Nachfolgearbeiten in behandelten Kulturen: bis 48
@@ -1658,6 +1685,7 @@ tragen.</td>
 <td align="left"></td>
 </tr>
 <tr class="even">
+<td align="right">7105</td>
 <td align="right">2</td>
 <td align="left">ML01_A04_T01</td>
 <td align="left">Ansetzen der Spritzbrühe: Schutzhandschuhe tragen.
@@ -1669,12 +1697,14 @@ einen vergleichbaren oder höheren Schutz bieten.</td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
+<td align="right">7105</td>
 <td align="right">2</td>
 <td align="left">obligation 1928</td>
 <td align="left">Maximal 1 Behandlung pro Kultur.</td>
 <td align="left"></td>
 </tr>
 <tr class="even">
+<td align="right">7105</td>
 <td align="right">2</td>
 <td align="left">obligation 2032</td>
 <td align="left">Phytotoxschäden bei empfindlichen Arten oder Sorten
@@ -1682,6 +1712,7 @@ möglich; vor allgemeiner Anwendung Versuchspritzung durchführen.</td>
 <td align="left"></td>
 </tr>
 <tr class="odd">
+<td align="right">7105</td>
 <td align="right">2</td>
 <td align="left"></td>
 <td align="left">Splitbehandlung gemäss den Angaben der
@@ -1690,6 +1721,7 @@ entspricht total bewilligter Menge).</td>
 <td align="left"></td>
 </tr>
 <tr class="even">
+<td align="right">7105</td>
 <td align="right">2</td>
 <td align="left">Bewilligt nach Art. 35 PSMV (minor use).</td>
 <td align="left">Bewilligt als geringfügige Verwendung nach Art. 35 PSMV
