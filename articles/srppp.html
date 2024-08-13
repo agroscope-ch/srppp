@@ -295,8 +295,8 @@ quite different.</p>
 classification and labelling of the product. All substances occurring as
 synergists or safeners are listed below.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">current_register</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dm.cynkra.com/reference/dm_flatten_to_tbl.html" class="external-link">dm_flatten_to_tbl</a></span><span class="op">(</span><span class="va">ingredients</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="va">current_register</span><span class="op">$</span><span class="va">ingredients</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">current_register</span><span class="op">$</span><span class="va">substances</span>, by <span class="op">=</span> <span class="st">"pk"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SYNERGIST"</span>, <span class="st">"SAFENER"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">type</span>, <span class="va">substance_de</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop_last"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -347,15 +347,13 @@ synergists or safeners are listed below.</p>
 </tr>
 </tbody>
 </table>
-<p>Note the use of <code><a href="https://dm.cynkra.com/reference/dm_flatten_to_tbl.html" class="external-link">dm::dm_flatten_to_tbl</a></code> to add information
-from tables lower in the table hierarchy (here <code>substances</code>)
-to the <code>ingredients</code> table. The first two lines in the code
-could also be replaced by</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">current_register</span><span class="op">$</span><span class="va">ingredients</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">current_register</span><span class="op">$</span><span class="va">substances</span>, by <span class="op">=</span> <span class="st">"pk"</span><span class="op">)</span></span></code></pre></div>
-<p>which does not make use of the foreign key declaration in the data
-object.</p>
+<p>Note that the first two lines in the code could also be replaced
+by</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>current_register <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="fu">dm_flatten_to_tbl</span>(ingredients) <span class="sc">|&gt;</span> </span></code></pre></div>
+<p>which makes use of the foreign key declaration in the data object.
+However, the more explicit version using <code>left_join</code> is
+probably easier to understand.</p>
 </div>
 <div class="section level3">
 <h3 id="registered-products-w-numbers">Registered products (W-Numbers)<a class="anchor" aria-label="anchor" href="#registered-products-w-numbers"></a>
