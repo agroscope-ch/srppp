@@ -126,8 +126,8 @@ classification and labelling of the product. All substances
 occurring as synergists or safeners are listed below.
 
 ```{r}
-current_register |> 
-  dm_flatten_to_tbl(ingredients) |> 
+current_register$ingredients |> 
+  left_join(current_register$substances, by = "pk") |>
   filter(type %in% c("SYNERGIST", "SAFENER")) |>
   group_by(type, substance_de) |> 
   summarize(n = n(), .groups = "drop_last") |> 
@@ -136,16 +136,16 @@ current_register |>
   kable()
 ```
 
-Note the use of `dm::dm_flatten_to_tbl` to add information from tables
-lower in the table hierarchy (here `substances`) to the `ingredients`
-table. The first two lines in the code could also be replaced by
+Note that the first two lines in the code could also be replaced by
 
-```{r results = "hide"}
-current_register$ingredients |> 
-  left_join(current_register$substances, by = "pk")
+```{r eval = FALSE}
+current_register |> 
+  dm_flatten_to_tbl(ingredients) |> 
 ```
 
-which does not make use of the foreign key declaration in the data object.
+which makes use of the foreign key declaration in the data object. 
+However, the more explicit version using `left_join` is probably easier
+to understand.
 
 ## Registered products (W-Numbers)
 
