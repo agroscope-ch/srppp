@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">srppp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,6 +37,10 @@
       <small>Source: <a href="https://github.com/agroscope-ch/srppp/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.99.3" id="version-0993">version 0.99.3<a class="anchor" aria-label="anchor" href="#version-0993"></a></h2>
+<ul><li>Risk mitigation measures <code>sw_drift_dist</code>, <code>sw_runoff_dist</code>, <code>sw_runoff_points</code> and <code>biotope_drift_dist</code> are now stored as integers in the <code>obligations</code> table.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.99.2" id="version-0992">version 0.99.2<a class="anchor" aria-label="anchor" href="#version-0992"></a></h2>
 <ul><li>R/srppp-xml.R: Revise the structure of the <code>srppp_dm</code> object, after verifying that the product sections of different products with the same P-Number are identical, with the exception of the permission holder. Therefore, all tables describing the products, including the use definitions, are now tied to the <code>pNbrs</code> table with the <code>pNbr</code> as the primary key, instead of the <code>products</code> table which has the <code>wNbr</code> as a primary key. Functions, example code, vignettes and tests were adapted accordingly.</li>
