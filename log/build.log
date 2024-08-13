@@ -7,5 +7,5 @@
 * checking for empty or unneeded directories
 Removed empty directory ‘srppp/inst/data_generation’
 Omitted ‘LazyData’ and ‘LazyDataCompression’ from DESCRIPTION
-* building ‘srppp_0.99.2.tar.gz’
+* building ‘srppp_0.99.3.tar.gz’
 
