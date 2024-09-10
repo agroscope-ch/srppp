@@ -3,7 +3,6 @@
 <!-- badges: start -->
   [![R-CMD-check](https://github.com/agroscope-ch/srppp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/agroscope-ch/srppp/actions/workflows/R-CMD-check.yaml)
 [![srppp status badge](https://agroscope-ch.r-universe.dev/badges/srppp)](https://agroscope-ch.r-universe.dev/ui/#package:srppp)
-[![status](https://joss.theoj.org/papers/842897b94069f2d12a1cb74e60fb0a5e/status.svg)](https://joss.theoj.org/papers/842897b94069f2d12a1cb74e60fb0a5e)
 <!-- badges: end -->
 
 ## Description
