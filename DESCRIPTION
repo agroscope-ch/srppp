@@ -25,7 +25,7 @@ Description: Functions to generate data objects from XML versions of the Swiss
   this package. 
 Depends: R (>= 4.1.0), dm
 Imports: xml2, tibble, stringr, dplyr, tidyr, cli
-Suggests: knitr, rmarkdown, here, DiagrammeR,
+Suggests: knitr, rmarkdown, here, DiagrammeR, DiagrammeRsvg,
   testthat (>= 3.0.0), parallel, waldo
 BugReports: https://github.com/agroscope-ch/srppp/issues
 URL: https://agroscope-ch.github.io/srppp
