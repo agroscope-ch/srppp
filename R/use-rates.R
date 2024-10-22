@@ -120,8 +120,10 @@ application_rate_g_per_ha <- function(product_uses,
       units_de == "ml/10m\u00B2" ~ (rate/1000) * (g_per_L) * 1000,
       units_de == "ml/ha" ~ (rate/1000) * (g_per_L),
       units_de == "ml/a" ~ (rate/1000) * (g_per_L) * 100,
-      is.na(units_de) ~ ref_volume * 1000 * # 1 L has a weight of ca. 1000 g
-        dosage/100 * percent/100,
+      is.na(units_de) & !is.na(g_per_L) ~ ref_volume * 1000 * # 1 L has a weight of ca. 1000 g
+        dosage/100 * g_per_L/100, # g_per_L present -> liquid
+      is.na(units_de) & is.na(g_per_L) ~ ref_volume * 1000 * # 1 L has a weight of ca. 1000 g
+        dosage/100 * percent/100, # only percent present -> solids
       .default = NA))
   ret <- bind_cols(product_uses, active_rates["rate_g_per_ha"])
   return(ret)
