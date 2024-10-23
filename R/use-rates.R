@@ -120,9 +120,10 @@ application_rate_g_per_ha <- function(product_uses,
       units_de == "ml/10m\u00B2" ~ (rate/1000) * (g_per_L) * 1000,
       units_de == "ml/ha" ~ (rate/1000) * (g_per_L),
       units_de == "ml/a" ~ (rate/1000) * (g_per_L) * 100,
-      is.na(units_de) & !is.na(g_per_L) ~ ref_volume * 1000 * # g_per_L available -> liquid
-        dosage/100 * g_per_L/100, # dosage assumed to be v/v
-      is.na(units_de) & is.na(g_per_L) ~ ref_volume * 1000 * # only percent available -> solid
+      is.na(units_de) & !is.na(g_per_L) ~ # g_per_L available -> liquid
+        ref_volume * dosage/100 * g_per_L, # dosage assumed to be v/v
+      is.na(units_de) & is.na(g_per_L) ~ # only percent available -> solid
+        ref_volume * 1000 * # 1 L spraying solution equivalent to 1000 g
         dosage/100 * percent/100, # dosage assumed to be w/w
       .default = NA))
   ret <- bind_cols(product_uses, active_rates["rate_g_per_ha"])
