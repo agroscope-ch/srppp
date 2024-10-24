@@ -690,8 +690,8 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
     select(-desc_pk) |>
     arrange(pNbr, use_nr)
 
-  # In the culture descriptions, links to parent cultures are filtered out
-  culture_descriptions <- description_table(srppp_xml, "Culture")
+  # In the culture descriptions, links to parent cultures are considered
+  culture_descriptions <- description_table_culture(srppp_xml)
   culture_additional_texts <- description_table(srppp_xml, "CultureAdditionalText")
   cultures <- indication_information_table(srppp_xml, "Culture", additional_text = TRUE) |>
     left_join(culture_descriptions, by = "desc_pk") |>
