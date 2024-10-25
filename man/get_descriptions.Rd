@@ -4,7 +4,7 @@
 \alias{get_descriptions}
 \title{Get descriptions from a node with children that hold descriptions}
 \usage{
-get_descriptions(node, code = FALSE, latin = FALSE)
+get_descriptions(node, code = FALSE, latin = FALSE, parent_keys = FALSE)
 }
 \arguments{
 \item{node}{The node to look at}
@@ -12,6 +12,9 @@ get_descriptions(node, code = FALSE, latin = FALSE)
 \item{code}{Do the description nodes have a child holding a code?}
 
 \item{latin}{Are there latin descriptions (e.g. for pest descriptions)}
+
+\item{parent_keys}{For culture descriptions, we also return up to two primary keys
+that link to parent cultures}
 }
 \description{
 Get descriptions from a node with children that hold descriptions

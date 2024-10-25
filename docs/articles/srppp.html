@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">srppp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.99.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,7 @@
 Ranke</h4>
             
             <h4 data-toc-skip class="date">13 August, 2024 (rebuilt
-2024-08-13)</h4>
+2024-10-25)</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agroscope-ch/srppp/blob/HEAD/vignettes/srppp.rmd" class="external-link"><code>vignettes/srppp.rmd</code></a></small>
       <div class="d-none name"><code>srppp.rmd</code></div>
@@ -108,7 +108,7 @@ number for the authorization holder are shown in light blue.</p>
 substances. For each substance, there is a primary key <code>pk</code>,
 a chemical name based on <a href="https://iupac.org/what-we-do/nomenclature/" class="external-link">IUPAC
 nomenclature</a>, and substance names in the official languages of
-Switzerland. The first four entries out of 440 are shown below.</p>
+Switzerland. The first four entries out of 446 are shown below.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span>
 <span><span class="va">current_register</span><span class="op">$</span><span class="va">substances</span> <span class="op">|&gt;</span> </span>
@@ -275,11 +275,11 @@ quite different.</p>
 <tbody>
 <tr class="odd">
 <td align="left">ACTIVE_INGREDIENT</td>
-<td align="right">335</td>
+<td align="right">337</td>
 </tr>
 <tr class="even">
 <td align="left">ADDITIVE_TO_DECLARE</td>
-<td align="right">101</td>
+<td align="right">105</td>
 </tr>
 <tr class="odd">
 <td align="left">SAFENER</td>
@@ -461,13 +461,13 @@ respective columns.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="4%">
-<col width="6%">
-<col width="21%">
-<col width="18%">
-<col width="15%">
+<col width="5%">
+<col width="7%">
+<col width="14%">
+<col width="19%">
 <col width="16%">
 <col width="17%">
+<col width="18%">
 </colgroup>
 <thead><tr class="header">
 <th align="right">pNbr</th>
@@ -516,6 +516,15 @@ respective columns.</p>
 <td align="right">10079</td>
 </tr>
 <tr class="odd">
+<td align="right">5166</td>
+<td align="left">3060</td>
+<td align="left">Etephon Médol</td>
+<td align="left">2026-06-30</td>
+<td align="left">2025-06-30</td>
+<td align="left">FALSE</td>
+<td align="right">10115</td>
+</tr>
+<tr class="even">
 <td align="right">6579</td>
 <td align="left">5530</td>
 <td align="left">Lontrel 100</td>
@@ -524,19 +533,10 @@ respective columns.</p>
 <td align="left">FALSE</td>
 <td align="right">10054</td>
 </tr>
-<tr class="even">
-<td align="right">6675</td>
-<td align="left">5757</td>
-<td align="left">Cupro-Folpet Ultra SC</td>
-<td align="left">2026-07-25</td>
-<td align="left">2025-07-25</td>
-<td align="left">FALSE</td>
-<td align="right">10079</td>
-</tr>
 </tbody>
 </table>
-<p>At the build time of this vignette, there were 1714 product
-registrations for 1124 P-Numbers in the Swiss Register of Plant
+<p>At the build time of this vignette, there were 1723 product
+registrations for 1128 P-Numbers in the Swiss Register of Plant
 Protection Products (SRPPP) as published on the website of the Federal
 Food Safety and Veterinary Office.</p>
 </div>
@@ -1585,7 +1585,7 @@ water amounting to at least one point.</p>
 <th align="right">use_nr</th>
 <th align="left">code</th>
 <th align="left">obligation_de</th>
-<th align="left">sw_runoff_points</th>
+<th align="right">sw_runoff_points</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -1593,7 +1593,7 @@ water amounting to at least one point.</p>
 <td align="right">1</td>
 <td align="left">obligation 692</td>
 <td align="left">Nachbau anderer Kulturen: 16 Wochen Wartefrist.</td>
-<td align="left"></td>
+<td align="right"></td>
 </tr>
 <tr class="even">
 <td align="right">7105</td>
@@ -1602,14 +1602,14 @@ water amounting to at least one point.</p>
 <td align="left">Nachfolgearbeiten in behandelten Kulturen: bis 48
 Stunden nach Ausbringung des Mittels Schutzhandschuhe + Schutzanzug
 tragen.</td>
-<td align="left"></td>
+<td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="right">7105</td>
 <td align="right">1</td>
 <td align="left">obligation 1928</td>
 <td align="left">Maximal 1 Behandlung pro Kultur.</td>
-<td align="left"></td>
+<td align="right"></td>
 </tr>
 <tr class="even">
 <td align="right">7105</td>
@@ -1621,7 +1621,7 @@ Kopfbedeckung tragen. Technische Schutzvorrichtungen während des
 Ausbringens (z.B. geschlossene Traktorkabine) können die vorgeschriebene
 persönliche Schutzausrüstung ersetzen, wenn gewährleistet ist, dass sie
 einen vergleichbaren oder höheren Schutz bieten.</td>
-<td align="left"></td>
+<td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="right">7105</td>
@@ -1630,7 +1630,7 @@ einen vergleichbaren oder höheren Schutz bieten.</td>
 <td align="left">SPe 3: Zum Schutz von Gewässerorganismen muss das
 Abschwemmungsrisiko gemäss den Weisungen der Zulassungsstelle um 1 Punkt
 reduziert werden.</td>
-<td align="left">1</td>
+<td align="right">1</td>
 </tr>
 <tr class="even">
 <td align="right">7105</td>
@@ -1639,7 +1639,7 @@ reduziert werden.</td>
 <td align="left">Splitbehandlung gemäss den Angaben der
 Bewilligungsinhaberin (max. 3 l/ha je Split, angegebene Aufwandmenge
 entspricht total bewilligter Menge).</td>
-<td align="left"></td>
+<td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="right">7105</td>
@@ -1647,7 +1647,7 @@ entspricht total bewilligter Menge).</td>
 <td align="left">obligation 2032</td>
 <td align="left">Phytotoxschäden bei empfindlichen Arten oder Sorten
 möglich; vor allgemeiner Anwendung Versuchspritzung durchführen.</td>
-<td align="left"></td>
+<td align="right"></td>
 </tr>
 <tr class="even">
 <td align="right">7105</td>
@@ -1655,7 +1655,7 @@ möglich; vor allgemeiner Anwendung Versuchspritzung durchführen.</td>
 <td align="left">Bewilligt nach Art. 35 PSMV (minor use).</td>
 <td align="left">Bewilligt als geringfügige Verwendung nach Art. 35 PSMV
 (minor use).</td>
-<td align="left"></td>
+<td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="right">7105</td>
@@ -1664,14 +1664,14 @@ möglich; vor allgemeiner Anwendung Versuchspritzung durchführen.</td>
 <td align="left">SPe 3: Zum Schutz von Gewässerorganismen muss das
 Abschwemmungsrisiko gemäss den Weisungen der Zulassungsstelle um 1 Punkt
 reduziert werden.</td>
-<td align="left">1</td>
+<td align="right">1</td>
 </tr>
 <tr class="even">
 <td align="right">7105</td>
 <td align="right">2</td>
 <td align="left">obligation 692</td>
 <td align="left">Nachbau anderer Kulturen: 16 Wochen Wartefrist.</td>
-<td align="left"></td>
+<td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="right">7105</td>
@@ -1680,7 +1680,7 @@ reduziert werden.</td>
 <td align="left">Nachfolgearbeiten in behandelten Kulturen: bis 48
 Stunden nach Ausbringung des Mittels Schutzhandschuhe + Schutzanzug
 tragen.</td>
-<td align="left"></td>
+<td align="right"></td>
 </tr>
 <tr class="even">
 <td align="right">7105</td>
@@ -1692,14 +1692,14 @@ Kopfbedeckung tragen. Technische Schutzvorrichtungen während des
 Ausbringens (z.B. geschlossene Traktorkabine) können die vorgeschriebene
 persönliche Schutzausrüstung ersetzen, wenn gewährleistet ist, dass sie
 einen vergleichbaren oder höheren Schutz bieten.</td>
-<td align="left"></td>
+<td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="right">7105</td>
 <td align="right">2</td>
 <td align="left">obligation 1928</td>
 <td align="left">Maximal 1 Behandlung pro Kultur.</td>
-<td align="left"></td>
+<td align="right"></td>
 </tr>
 <tr class="even">
 <td align="right">7105</td>
@@ -1707,7 +1707,7 @@ einen vergleichbaren oder höheren Schutz bieten.</td>
 <td align="left">obligation 2032</td>
 <td align="left">Phytotoxschäden bei empfindlichen Arten oder Sorten
 möglich; vor allgemeiner Anwendung Versuchspritzung durchführen.</td>
-<td align="left"></td>
+<td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="right">7105</td>
@@ -1716,7 +1716,7 @@ möglich; vor allgemeiner Anwendung Versuchspritzung durchführen.</td>
 <td align="left">Splitbehandlung gemäss den Angaben der
 Bewilligungsinhaberin (max. 3 l/ha je Split, angegebene Aufwandmenge
 entspricht total bewilligter Menge).</td>
-<td align="left"></td>
+<td align="right"></td>
 </tr>
 <tr class="even">
 <td align="right">7105</td>
@@ -1724,7 +1724,7 @@ entspricht total bewilligter Menge).</td>
 <td align="left">Bewilligt nach Art. 35 PSMV (minor use).</td>
 <td align="left">Bewilligt als geringfügige Verwendung nach Art. 35 PSMV
 (minor use).</td>
-<td align="left"></td>
+<td align="right"></td>
 </tr>
 </tbody>
 </table>

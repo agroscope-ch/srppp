@@ -1,6 +1,7 @@
 ## version 0.99.3
 
 - Risk mitigation measures `sw_drift_dist`, `sw_runoff_dist`, `sw_runoff_points` and `biotope_drift_dist` are now stored as integers in the `obligations` table.
+- In the table `cultures`, the primary keys of up to two parent cultures are now included
 
 ## version 0.99.2
 

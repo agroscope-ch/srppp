@@ -4,6 +4,7 @@ utils::globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "pNbr", "use_nr",
   "packageInsert", "permission_holder", "producingCountryPrimaryKey",
   "ingredient_de", "ingredient_fr", "ingredient_it", "categories",
   "min_dosage", "max_dosage", "min_rate", "max_rate", "waiting_period",
+  "biotope_drift_dist", "sw_drift_dist", "sw_runoff_dist", "sw_runoff_points",
   "desc_pk", "ingr_desc_pk",
   "units_pk", "time_units_pk",
   "type", "g_per_L", "percent"))
@@ -874,8 +875,6 @@ get_use_nr <- function(node) {
 
 #' Get a table of descriptions for a certain Meta Information Tag
 #' @keywords internal
-#' @examples
-#' culture_descriptions <- description_table(srppp_xml, "Culture", parent_keys = TRUE)
 description_table <- function(srppp_xml, tag_name, code = FALSE, latin = FALSE, parent_keys = FALSE) {
 
   # Find nodes and apply the function

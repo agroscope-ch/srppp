@@ -4,7 +4,13 @@
 \alias{description_table}
 \title{Get a table of descriptions for a certain Meta Information Tag}
 \usage{
-description_table(srppp_xml, tag_name, code = FALSE, latin = FALSE)
+description_table(
+  srppp_xml,
+  tag_name,
+  code = FALSE,
+  latin = FALSE,
+  parent_keys = FALSE
+)
 }
 \description{
 Get a table of descriptions for a certain Meta Information Tag

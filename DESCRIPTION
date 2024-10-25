@@ -2,7 +2,7 @@ Package: srppp
 Type: Package
 Title: The Swiss Register of Plant Protection Products as an R Package
 Version: 0.99.3
-Date: 2024-08-13
+Date: 2024-10-25
 Authors@R: c(
   person("Marcel", "Mathis", role = c("ctb", "rev"),
     email = "marcel.mathis@agroscope.admin.ch"),
@@ -32,7 +32,7 @@ URL: https://agroscope-ch.github.io/srppp
 License: GPL (>= 3)
 LazyData: yes
 LazyDataCompression: xz
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.2.9000
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
 Encoding: UTF-8
