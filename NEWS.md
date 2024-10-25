@@ -1,7 +1,8 @@
-## version 0.99.3
+## version 1.0.0
 
 - Risk mitigation measures `sw_drift_dist`, `sw_runoff_dist`, `sw_runoff_points` and `biotope_drift_dist` are now stored as integers in the `obligations` table.
-- In the table `cultures`, the primary keys of up to two parent cultures are now included
+- In the table `cultures`, the primary keys of up to two parent cultures are now included.
+- Fix the use rate calculations for liquid products for the case that only a dosage in percent is given.
 
 ## version 0.99.2
 
