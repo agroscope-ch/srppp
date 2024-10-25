@@ -3,6 +3,7 @@
 <!-- badges: start -->
 [![srppp status badge](https://agroscope-ch.r-universe.dev/badges/srppp)](https://agroscope-ch.r-universe.dev/ui/#package:srppp)
 [![R-CMD-check](https://github.com/agroscope-ch/srppp/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/agroscope-ch/srppp/actions/workflows/R-CMD-check.yaml)
+[![DOI](https://zenodo.org/badge/832080563.svg)](https://doi.org/10.5281/zenodo.13993340)
 <!-- badges: end -->
 
 ## Description
