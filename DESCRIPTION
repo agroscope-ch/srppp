@@ -1,7 +1,7 @@
 Package: srppp
 Type: Package
 Title: The Swiss Register of Plant Protection Products as an R Package
-Version: 1.0.0
+Version: 1.0.1
 Date: 2024-10-25
 Authors@R: c(
   person("Marcel", "Mathis", role = c("ctb", "rev"),

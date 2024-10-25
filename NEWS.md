@@ -1,3 +1,8 @@
+## version 1.0.1
+
+- Trim leading and trailing whitespace from descriptions that are read in using the internal function `get_descriptions()`
+- Remove html documentation built with pkgdown from the git repository, the online documentation is built using the github workflow
+
 ## version 1.0.0
 
 - Risk mitigation measures `sw_drift_dist`, `sw_runoff_dist`, `sw_runoff_points` and `biotope_drift_dist` are now stored as integers in the `obligations` table.

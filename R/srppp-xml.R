@@ -903,7 +903,7 @@ description_table <- function(srppp_xml, tag_name, code = FALSE, latin = FALSE, 
 #' that link to parent cultures
 get_descriptions <- function(node, code = FALSE, latin = FALSE, parent_keys = FALSE) {
   desc_pk <- xml_attr(node, "primaryKey")
-  desc <- sapply(xml_children(node), xml_attr, "value")
+  desc <- trimws(sapply(xml_children(node), xml_attr, "value"))
   if (code) {
     if (xml_length(xml_child(node)) == 1) {
       code <- xml_attr(xml_child(xml_child(node)), "value")
