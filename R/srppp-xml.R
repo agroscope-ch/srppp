@@ -691,7 +691,7 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
     arrange(pNbr, use_nr)
 
   # In the culture descriptions, links to parent cultures are considered
-  culture_descriptions <- description_table_culture(srppp_xml)
+  culture_descriptions <- description_table(srppp_xml, "Culture", parent_keys = TRUE)
   culture_additional_texts <- description_table(srppp_xml, "CultureAdditionalText")
   cultures <- indication_information_table(srppp_xml, "Culture", additional_text = TRUE) |>
     left_join(culture_descriptions, by = "desc_pk") |>
@@ -874,7 +874,9 @@ get_use_nr <- function(node) {
 
 #' Get a table of descriptions for a certain Meta Information Tag
 #' @keywords internal
-description_table <- function(srppp_xml, tag_name, code = FALSE, latin = FALSE) {
+#' @examples
+#' culture_descriptions <- description_table(srppp_xml, "Culture", parent_keys = TRUE)
+description_table <- function(srppp_xml, tag_name, code = FALSE, latin = FALSE, parent_keys = FALSE) {
 
   # Find nodes and apply the function
   nodes <- srppp_xml |>
@@ -882,7 +884,7 @@ description_table <- function(srppp_xml, tag_name, code = FALSE, latin = FALSE) 
 
   if (length(nodes) > 0) {
     ret <- nodes |>
-      sapply(get_descriptions, code = code, latin = latin) |> t() |>
+      sapply(get_descriptions, code = code, latin = latin, parent_keys = parent_keys) |> t() |>
       as_tibble() |>
       mutate(desc_pk = as.integer(desc_pk)) |>
       arrange(desc_pk)
@@ -898,7 +900,9 @@ description_table <- function(srppp_xml, tag_name, code = FALSE, latin = FALSE) 
 #' @param node The node to look at
 #' @param code Do the description nodes have a child holding a code?
 #' @param latin Are there latin descriptions (e.g. for pest descriptions)
-get_descriptions <- function(node, code = FALSE, latin = FALSE) {
+#' @param parent_keys For culture descriptions, we also return up to two primary keys
+#' that link to parent cultures
+get_descriptions <- function(node, code = FALSE, latin = FALSE, parent_keys = FALSE) {
   desc_pk <- xml_attr(node, "primaryKey")
   desc <- sapply(xml_children(node), xml_attr, "value")
   if (code) {
@@ -909,15 +913,31 @@ get_descriptions <- function(node, code = FALSE, latin = FALSE) {
     }
     ret <- c(desc_pk, code, desc)
     names(ret) <- c("desc_pk", "code", "de", "fr", "it", "en")
+    return(ret)
   } else {
-    desc <- desc[!is.na(desc)] # Remove results from <Parent> nodes without "value"
-    ret <- c(desc_pk, desc)
-    if (latin) {
-      names(ret) <- c("desc_pk", "de", "fr", "it", "en", "lt")
+    desc <- desc[!is.na(desc)] # Remove NA results that we get from <Parent> nodes without "value"
+    if (parent_keys) {
+      # Only children that are <Parent> nodes have attributes "primaryKey"
+      pks <- sapply(xml_children(node), xml_attr, "primaryKey")
+      pks <- pks[!is.na(pks)] # Remove NA results
+      parent_key_1 <- NA
+      parent_key_2 <- NA
+      if (length(pks) > 0) parent_key_1 <- pks[1]
+      if (length(pks) > 1) parent_key_2 <- pks[2]
+      if (length(pks) > 2) stop("Assumption of a maximum of two parent primary keys for cultures appears to be wrong")
+      ret <- c(desc_pk, desc, parent_key_1, parent_key_2)
+      names(ret) <- c("desc_pk", "de", "fr", "it", "en", "prt_1_pk", "prt_2_pk")
+      return(ret)
     } else {
-      names(ret) <- c("desc_pk", "de", "fr", "it", "en")
+      ret <- c(desc_pk, desc)
+
+      if (latin) {
+        names(ret) <- c("desc_pk", "de", "fr", "it", "en", "lt")
+      } else {
+        names(ret) <- c("desc_pk", "de", "fr", "it", "en")
+      }
+      return(ret)
     }
   }
-  return(ret)
 }
 
