@@ -30,7 +30,7 @@ Read an XML version of the Swiss Register of Plant Protection Products
 }
 \examples{
 # The current SRPPP as available from the FOAG website
+\dontrun{ # Avoid redundant downloads during checks
 srppp_cur <- srppp_xml_get()
-# The current SRPPP as available from the FOAG website
-srppp_cur <- srppp_xml_get(srppp_xml_url)
+}
 }

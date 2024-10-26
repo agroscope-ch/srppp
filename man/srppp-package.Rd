@@ -11,7 +11,7 @@ Functions to generate data objects from XML versions of the Swiss Register of Pl
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://agroscope-ch.github.io/srppp}
+  \item \url{https://agroscope-ch.github.io/srppp/}
   \item Report bugs at \url{https://github.com/agroscope-ch/srppp/issues}
 }
 
@@ -21,9 +21,10 @@ Useful links:
 
 Other contributors:
 \itemize{
-  \item Marcel Mathis \email{marcel.mathis@agroscope.admin.ch} [contributor, reviewer]
-  \item Romualdus Kasteel \email{romualdus.kasteel@agroscope.admin.ch} (Provided feedback to version 0.3.4) [reviewer]
   \item Daniel Baumgartner (Provided feedback, explanations and background information) [contributor]
+  \item Marcel Mathis \email{marcel.mathis@agroscope.admin.ch} [reviewer, contributor]
+  \item Romualdus Kasteel \email{romualdus.kasteel@agroscope.admin.ch} (Provided feedback to version 0.3.4) [reviewer]
+  \item Elisabeth Lutz \email{elisabeth.lutz@agroscope.admin.ch} [contributor]
   \item Agroscope [copyright holder]
 }
 
