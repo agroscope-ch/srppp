@@ -24,7 +24,9 @@ srppp_xml_get <- function(from, ...)
 #' @export
 #' @examples
 #' # The current SRPPP as available from the FOAG website
+#' \dontrun{ # Avoid redundant downloads during checks
 #' srppp_cur <- srppp_xml_get()
+#' }
 srppp_xml_get.NULL <- function(from, ...)
 {
   from <- srppp_xml_url
@@ -36,9 +38,6 @@ srppp_xml_get.NULL <- function(from, ...)
 
 #' @rdname srppp_xml_get
 #' @export
-#' @examples
-#' # The current SRPPP as available from the FOAG website
-#' srppp_cur <- srppp_xml_get(srppp_xml_url)
 srppp_xml_get.character <- function(from, ...)
 {
   path <- tempfile(fileext = "zip")
