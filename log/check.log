@@ -57,15 +57,15 @@ Files ‘README.md’ or ‘NEWS.md’ cannot be checked without ‘pandoc’ be
 * checking for unstated dependencies in examples ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... [22s/22s] NOTE
+* checking examples ... [20s/26s] NOTE
 Examples with CPU (user + system) or elapsed time > 5s
-          user system elapsed
-srppp_dm 9.994  0.185  10.467
+         user system elapsed
+srppp_dm 10.3  0.171  12.124
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... SKIPPED
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes ... OK
-* checking re-building of vignette outputs ... [28s/23s] OK
+* checking re-building of vignette outputs ... [26s/32s] OK
 * checking PDF version of manual ... OK
 * checking HTML version of manual ... NOTE
 Skipping checking HTML validation: no command 'tidy' found
