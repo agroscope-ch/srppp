@@ -1,6 +1,6 @@
 ## version 1.0.1
 
-- Trim leading and trailing whitespace from descriptions that are read in using the internal function `get_descriptions()`
+- Trim leading and trailing whitespace from descriptions that are read in using the internal function `get_descriptions()`, addressing in issue Elisabeth raised in srppphist
 - Remove html documentation built with pkgdown from the git repository, the online documentation is built using the github workflow
 
 ## version 1.0.0
