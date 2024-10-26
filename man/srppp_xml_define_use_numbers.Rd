@@ -16,5 +16,7 @@ An srppp_xml object with use_nr added as an attribute of 'Indication' nodes.
 Define use identification numbers in an SRPPP read in from an XML file
 }
 \examples{
+\dontrun{
 srppp_xml_define_use_numbers()
+}
 }

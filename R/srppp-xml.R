@@ -24,7 +24,7 @@ srppp_xml_get <- function(from, ...)
 #' @export
 #' @examples
 #' # The current SRPPP as available from the FOAG website
-#' \dontrun{ # Avoid redundant downloads during checks
+#' \dontrun{
 #' srppp_cur <- srppp_xml_get()
 #' }
 srppp_xml_get.NULL <- function(from, ...)
@@ -80,7 +80,9 @@ srppp_xml_get_from_path <- function(path, from) {
 #' @export
 #' @examples
 #' # Get current list of products
+#' \dontrun{
 #' srppp_xml_get_products()
+#' }
 srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
   remove_duplicates = TRUE)
 {
@@ -234,7 +236,9 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
 #' @export
 #' @examples
 #' # Get current list of parallel_imports
+#' \dontrun{
 #' srppp_xml_get_parallel_imports()
+#' }
 srppp_xml_get_parallel_imports <- function(srppp_xml = srppp_xml_get())
 {
   pi_nodeset <- xml_find_all(srppp_xml, "Parallelimports/Parallelimport")
@@ -277,7 +281,9 @@ srppp_xml_get_parallel_imports <- function(srppp_xml = srppp_xml_get())
 #' @param srppp_xml An object as returned by 'srppp_xml_get'
 #' @export
 #' @examples
+#' \dontrun{
 #' srppp_xml_get_substances()
+#' }
 srppp_xml_get_substances <- function(srppp_xml = srppp_xml_get()) {
   substance_nodeset <- xml_find_all(srppp_xml, "MetaData[@name='Substance']/Detail")
 
@@ -302,7 +308,9 @@ srppp_xml_get_substances <- function(srppp_xml = srppp_xml_get()) {
 #' @param srppp_xml An object as returned by 'srppp_xml_get'
 #' @export
 #' @examples
+#' \dontrun{
 #' srppp_xml_get_ingredients()
+#' }
 srppp_xml_get_ingredients <- function(srppp_xml = srppp_xml_get())
 {
   ingredient_nodeset <- xml_find_all(srppp_xml,
@@ -364,7 +372,9 @@ srppp_xml_get_ingredients <- function(srppp_xml = srppp_xml_get())
 #' @return An srppp_xml object with use_nr added as an attribute of 'Indication' nodes.
 #' @export
 #' @examples
+#' \dontrun{
 #' srppp_xml_define_use_numbers()
+#' }
 srppp_xml_define_use_numbers <- function(srppp_xml = srppp_xml_get()) {
   use_nodeset <- xml_find_all(srppp_xml, "Products/Product/ProductInformation/Indication")
 
@@ -383,9 +393,11 @@ srppp_xml_define_use_numbers <- function(srppp_xml = srppp_xml_get()) {
 #' defined by [srppp_xml_define_use_numbers]
 #' @export
 #' @examples
+#' \dontrun{
 #' srppp_xml <- srppp_xml_get()
 #' srppp_xml <- srppp_xml_define_use_numbers(srppp_xml)
 #' srppp_xml_get_uses(srppp_xml)
+#' }
 srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
   use_nodeset <- xml_find_all(srppp_xml, "Products/Product[not(contains(@wNbr, '-'))]/ProductInformation/Indication")
 

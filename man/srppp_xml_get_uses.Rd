@@ -14,7 +14,9 @@ defined by \link{srppp_xml_define_use_numbers}}
 Get uses ('indications') for all products described in an XML version of the Swiss Register of Plant Protection Products
 }
 \examples{
+\dontrun{
 srppp_xml <- srppp_xml_get()
 srppp_xml <- srppp_xml_define_use_numbers(srppp_xml)
 srppp_xml_get_uses(srppp_xml)
+}
 }

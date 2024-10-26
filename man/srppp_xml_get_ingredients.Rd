@@ -13,5 +13,7 @@ srppp_xml_get_ingredients(srppp_xml = srppp_xml_get())
 Get ingredients for all products described in an XML version of the Swiss Register of Plant Protection Products
 }
 \examples{
+\dontrun{
 srppp_xml_get_ingredients()
+}
 }
