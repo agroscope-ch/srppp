@@ -527,15 +527,13 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #' pointing to primary keys, i.e. with referential integrity.
 #' @export
 #' @examples
+#' \dontrun{ # Avoid NOTE on CRAN caused by checks >5s
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(dm, warn.conflicts = FALSE)
 #'
 #' sr <- srppp_dm()
 #' dm_examine_constraints(sr)
-#' \dontrun{
 #' dm_draw(sr)
-#'
-#' }
 #'
 #' # Show ingredients for products named 'Boxer'
 #' sr$products |>
@@ -578,6 +576,8 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #'   filter(use_nr == 1) |>
 #'   left_join(sr$application_comments, join_by(pNbr, use_nr)) |>
 #'   select(use_nr, application_comment_de)
+#'
+#' }
 srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
 
   srppp_xml <- srppp_xml_get(from)

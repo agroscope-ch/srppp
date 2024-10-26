@@ -70,15 +70,13 @@ Cultural Heritage) to mitigate spray drift in meters
 }
 }
 \examples{
+\dontrun{ # Avoid NOTE on CRAN caused by checks >5s
 library(dplyr, warn.conflicts = FALSE)
 library(dm, warn.conflicts = FALSE)
 
 sr <- srppp_dm()
 dm_examine_constraints(sr)
-\dontrun{
 dm_draw(sr)
-
-}
 
 # Show ingredients for products named 'Boxer'
 sr$products |>
@@ -121,4 +119,6 @@ boxer_uses |>
   filter(use_nr == 1) |>
   left_join(sr$application_comments, join_by(pNbr, use_nr)) |>
   select(use_nr, application_comment_de)
+
+}
 }

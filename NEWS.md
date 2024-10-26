@@ -2,6 +2,7 @@
 
 - Trim leading and trailing whitespace from descriptions that are read in using the internal function `get_descriptions()`, addressing in issue Elisabeth raised in srppphist
 - Remove html documentation built with pkgdown from the git repository, the online documentation is built using the github workflow
+- Wrap example code in \dontrun{} to avoid CRAN notes for checks >5s. The code is still tested in the testthat tests.
 
 ## version 1.0.0
 
