@@ -10,11 +10,14 @@ srppp_xml_get_uses(srppp_xml = srppp_xml_get())
 \item{srppp_xml}{An object as returned by \link{srppp_xml_get} with use numbers
 defined by \link{srppp_xml_define_use_numbers}}
 }
+\value{
+A \link[tibble:tibble]{tibble::tibble} of use definitions
+}
 \description{
 Get uses ('indications') for all products described in an XML version of the Swiss Register of Plant Protection Products
 }
 \examples{
-\dontrun{
+\donttest{
 srppp_xml <- srppp_xml_get()
 srppp_xml <- srppp_xml_define_use_numbers(srppp_xml)
 srppp_xml_get_uses(srppp_xml)

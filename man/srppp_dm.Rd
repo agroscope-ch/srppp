@@ -70,7 +70,7 @@ Cultural Heritage) to mitigate spray drift in meters
 }
 }
 \examples{
-\dontrun{ # Avoid NOTE on CRAN caused by checks >5s
+\donttest{ # Avoid NOTE on CRAN caused by checks >5s
 library(dplyr, warn.conflicts = FALSE)
 library(dm, warn.conflicts = FALSE)
 

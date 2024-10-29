@@ -11,6 +11,7 @@ reference:
     contents:
       - alternative_products
       - application_rate_g_per_ha
+      - srppp_xml_clean_product_names
   - title: Data objects for working with XML versions of the SRPPP
     contents:
       - srppp_xml_url
@@ -23,6 +24,5 @@ reference:
       - srppp_xml_get_ingredients
       - srppp_xml_get_uses
       - srppp_xml_define_use_numbers
-      - srppp_xml_clean_product_names
       - srppp_xml_get_parallel_imports
       - l_per_ha_is_water_volume

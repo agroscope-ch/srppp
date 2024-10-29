@@ -2,7 +2,10 @@
 
 - Trim leading and trailing whitespace from descriptions that are read in using the internal function `get_descriptions()`, addressing an issue Elisabeth raised in srppphist
 - Remove html documentation built with pkgdown from the git repository, the online documentation is built using the github workflow
-- Wrap example code in \dontrun{} to avoid CRAN notes for checks >5s. The code is still tested in the testthat tests.
+- Address issues found by the package review on CRAN as follows:
+- Rename the package to make it clear that its purpose is to read in data from the Swiss Register of Plant Protection Products
+- Wrap example code in \donttest{} to avoid CRAN notes for checks >5s. The code is still tested in the testthat tests.
+- Document return values of all exported functions
 
 ## version 1.0.0
 

@@ -24,7 +24,7 @@ srppp_xml_get <- function(from, ...)
 #' @export
 #' @examples
 #' # The current SRPPP as available from the FOAG website
-#' \dontrun{
+#' \donttest{
 #' srppp_cur <- srppp_xml_get()
 #' }
 srppp_xml_get.NULL <- function(from, ...)
@@ -80,7 +80,7 @@ srppp_xml_get_from_path <- function(path, from) {
 #' @export
 #' @examples
 #' # Get current list of products
-#' \dontrun{
+#' \donttest{
 #' srppp_xml_get_products()
 #' }
 srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
@@ -236,7 +236,7 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
 #' @export
 #' @examples
 #' # Get current list of parallel_imports
-#' \dontrun{
+#' \donttest{
 #' srppp_xml_get_parallel_imports()
 #' }
 srppp_xml_get_parallel_imports <- function(srppp_xml = srppp_xml_get())
@@ -279,9 +279,11 @@ srppp_xml_get_parallel_imports <- function(srppp_xml = srppp_xml_get())
 #' Get substances from an XML version of the Swiss Register of Plant Protection Products
 #'
 #' @param srppp_xml An object as returned by 'srppp_xml_get'
+#' @return A [tibble::tibble] containing primary keys, IUPAC names and substance names in
+#' German, French and Italian.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' srppp_xml_get_substances()
 #' }
 srppp_xml_get_substances <- function(srppp_xml = srppp_xml_get()) {
@@ -303,12 +305,14 @@ srppp_xml_get_substances <- function(srppp_xml = srppp_xml_get()) {
   return(ret)
 }
 
-#' Get ingredients for all products described in an XML version of the Swiss Register of Plant Protection Products
+#' Get ingredients for all registered products described in an XML version of the Swiss Register of Plant Protection Products
 #'
 #' @param srppp_xml An object as returned by 'srppp_xml_get'
+#' @return A [tibble::tibble] containing a line for each ingredient of each W-Number
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
+#' library(srppp)
 #' srppp_xml_get_ingredients()
 #' }
 srppp_xml_get_ingredients <- function(srppp_xml = srppp_xml_get())
@@ -368,11 +372,11 @@ srppp_xml_get_ingredients <- function(srppp_xml = srppp_xml_get())
 
 #' Define use identification numbers in an SRPPP read in from an XML file
 #'
-#' @param srppp_xml An object as returned by 'srppp_xml_get'
-#' @return An srppp_xml object with use_nr added as an attribute of 'Indication' nodes.
+#' @param srppp_xml An object as returned by [srppp_xml_get]
+#' @return An object of the same class, with 'use_nr' added as an attribute of 'Indication' nodes.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' srppp_xml_define_use_numbers()
 #' }
 srppp_xml_define_use_numbers <- function(srppp_xml = srppp_xml_get()) {
@@ -391,9 +395,10 @@ srppp_xml_define_use_numbers <- function(srppp_xml = srppp_xml_get()) {
 #'
 #' @param srppp_xml An object as returned by [srppp_xml_get] with use numbers
 #' defined by [srppp_xml_define_use_numbers]
+#' @return A [tibble::tibble] of use definitions
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' srppp_xml <- srppp_xml_get()
 #' srppp_xml <- srppp_xml_define_use_numbers(srppp_xml)
 #' srppp_xml_get_uses(srppp_xml)
@@ -527,7 +532,7 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #' pointing to primary keys, i.e. with referential integrity.
 #' @export
 #' @examples
-#' \dontrun{ # Avoid NOTE on CRAN caused by checks >5s
+#' \donttest{ # Avoid NOTE on CRAN caused by checks >5s
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(dm, warn.conflicts = FALSE)
 #'
@@ -835,12 +840,14 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
 #' @export
 print.srppp_dm <- function(x, ...) {
   cat("<srppp_dm> object from:", attr(x, "from"), "\n")
-  dm::dm_nrow(x)
+  print(dm::dm_nrow(x))
+  invisible(x)
 }
 
 #' Clean product names
 #'
-#' @param names The product names that should be cleaned from comments
+#' @param names Character vector of product names that should be cleaned from comments
+#' @return Character vector of cleaned names
 #' @export
 srppp_xml_clean_product_names <- function(names) {
   names |>

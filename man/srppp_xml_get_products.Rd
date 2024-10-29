@@ -36,7 +36,7 @@ Get Products from an XML version of the Swiss Register of Plant Protection Produ
 }
 \examples{
 # Get current list of products
-\dontrun{
+\donttest{
 srppp_xml_get_products()
 }
 }

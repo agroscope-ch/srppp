@@ -38,7 +38,7 @@
 #' @return A tibble containing one additional column 'rate_g_per_ha'
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' library(srppp)
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(dm, warn.conflicts = FALSE)

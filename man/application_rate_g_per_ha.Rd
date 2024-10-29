@@ -61,7 +61,7 @@ indicator project (Korkaric 2023), arguing that it is not grown in large
 areas in Switzerland.
 }
 \examples{
-\dontrun{
+\donttest{
 library(srppp)
 library(dplyr, warn.conflicts = FALSE)
 library(dm, warn.conflicts = FALSE)
