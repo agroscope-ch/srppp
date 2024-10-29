@@ -1,7 +1,7 @@
 Package: srppp
 Type: Package
 Title: Read the Swiss Register of Plant Protection Products
-Version: 1.0.2
+Version: 1.0.1
 Date: 2024-10-29
 Authors@R: c(
   person("Daniel", "Baumgartner", role = "ctb",
