@@ -77,7 +77,7 @@ matched against the column 'substances_de' in the srppp table 'substances'.</p><
 
 
 <dt id="arg-details">details<a class="anchor" aria-label="anchor" href="#arg-details"></a></dt>
-<dd><p>Should a table of alternative uses with 'wNbr' 'use_nr' be returned?</p></dd>
+<dd><p>Should a table of alternative uses with 'wNbr' and 'use_nr' be returned?</p></dd>
 
 
 <dt id="arg-missing">missing<a class="anchor" aria-label="anchor" href="#arg-missing"></a></dt>
@@ -99,14 +99,23 @@ tables.</p></dd>
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>A <a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble</a> containing use definitions as defined above, i.e. containing
+columns with the application area, crop and pathogen. Depending on the
+arguments, columns summarizing or listing the alternative products and/or uses
+are also contained.</p>
+    </div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>A use is defined as a combination of an application area, a crop
-('culture') and a pathogen ('pest').</p>
+    <p>A use is defined here as a combination of an application area, a crop
+('culture') and a pathogen ('pest'). This means, that for an alternative
+product to be found, there has to be an exact match of application
+area, crop an pathogen.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="va">sr</span> <span class="op">&lt;-</span> <span class="fu"><a href="srppp_dm.html">srppp_dm</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">actives_de</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Lambda-Cyhalothrin"</span>, <span class="st">"Deltamethrin"</span><span class="op">)</span></span></span>
