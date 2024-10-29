@@ -1,3 +1,7 @@
+## version 1.0.2
+
+- Remove the vignette intended for JOSS, as it was rejected there
+
 ## version 1.0.1
 
 - Trim leading and trailing whitespace from descriptions that are read in using the internal function `get_descriptions()`, addressing an issue Elisabeth raised in srppphist
