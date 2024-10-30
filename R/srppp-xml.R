@@ -4,6 +4,7 @@ utils::globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "pNbr", "use_nr",
   "packageInsert", "permission_holder", "producingCountryPrimaryKey",
   "ingredient_de", "ingredient_fr", "ingredient_it", "categories",
   "min_dosage", "max_dosage", "min_rate", "max_rate", "waiting_period",
+  "biotope_drift_dist", "sw_drift_dist", "sw_runoff_dist", "sw_runoff_points",
   "desc_pk", "ingr_desc_pk",
   "units_pk", "time_units_pk",
   "type", "g_per_L", "percent"))
@@ -23,7 +24,9 @@ srppp_xml_get <- function(from, ...)
 #' @export
 #' @examples
 #' # The current SRPPP as available from the FOAG website
+#' \donttest{
 #' srppp_cur <- srppp_xml_get()
+#' }
 srppp_xml_get.NULL <- function(from, ...)
 {
   from <- srppp_xml_url
@@ -35,9 +38,6 @@ srppp_xml_get.NULL <- function(from, ...)
 
 #' @rdname srppp_xml_get
 #' @export
-#' @examples
-#' # The current SRPPP as available from the FOAG website
-#' srppp_cur <- srppp_xml_get(srppp_xml_url)
 srppp_xml_get.character <- function(from, ...)
 {
   path <- tempfile(fileext = "zip")
@@ -80,7 +80,9 @@ srppp_xml_get_from_path <- function(path, from) {
 #' @export
 #' @examples
 #' # Get current list of products
+#' \donttest{
 #' srppp_xml_get_products()
+#' }
 srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
   remove_duplicates = TRUE)
 {
@@ -234,7 +236,9 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
 #' @export
 #' @examples
 #' # Get current list of parallel_imports
+#' \donttest{
 #' srppp_xml_get_parallel_imports()
+#' }
 srppp_xml_get_parallel_imports <- function(srppp_xml = srppp_xml_get())
 {
   pi_nodeset <- xml_find_all(srppp_xml, "Parallelimports/Parallelimport")
@@ -275,9 +279,13 @@ srppp_xml_get_parallel_imports <- function(srppp_xml = srppp_xml_get())
 #' Get substances from an XML version of the Swiss Register of Plant Protection Products
 #'
 #' @param srppp_xml An object as returned by 'srppp_xml_get'
+#' @return A [tibble::tibble] containing primary keys, IUPAC names and substance names in
+#' German, French and Italian.
 #' @export
 #' @examples
+#' \donttest{
 #' srppp_xml_get_substances()
+#' }
 srppp_xml_get_substances <- function(srppp_xml = srppp_xml_get()) {
   substance_nodeset <- xml_find_all(srppp_xml, "MetaData[@name='Substance']/Detail")
 
@@ -297,12 +305,16 @@ srppp_xml_get_substances <- function(srppp_xml = srppp_xml_get()) {
   return(ret)
 }
 
-#' Get ingredients for all products described in an XML version of the Swiss Register of Plant Protection Products
+#' Get ingredients for all registered products described in an XML version of the Swiss Register of Plant Protection Products
 #'
 #' @param srppp_xml An object as returned by 'srppp_xml_get'
+#' @return A [tibble::tibble] containing a line for each ingredient of each W-Number
 #' @export
 #' @examples
+#' \donttest{
+#' library(srppp)
 #' srppp_xml_get_ingredients()
+#' }
 srppp_xml_get_ingredients <- function(srppp_xml = srppp_xml_get())
 {
   ingredient_nodeset <- xml_find_all(srppp_xml,
@@ -360,11 +372,13 @@ srppp_xml_get_ingredients <- function(srppp_xml = srppp_xml_get())
 
 #' Define use identification numbers in an SRPPP read in from an XML file
 #'
-#' @param srppp_xml An object as returned by 'srppp_xml_get'
-#' @return An srppp_xml object with use_nr added as an attribute of 'Indication' nodes.
+#' @param srppp_xml An object as returned by [srppp_xml_get]
+#' @return An object of the same class, with 'use_nr' added as an attribute of 'Indication' nodes.
 #' @export
 #' @examples
+#' \donttest{
 #' srppp_xml_define_use_numbers()
+#' }
 srppp_xml_define_use_numbers <- function(srppp_xml = srppp_xml_get()) {
   use_nodeset <- xml_find_all(srppp_xml, "Products/Product/ProductInformation/Indication")
 
@@ -381,11 +395,14 @@ srppp_xml_define_use_numbers <- function(srppp_xml = srppp_xml_get()) {
 #'
 #' @param srppp_xml An object as returned by [srppp_xml_get] with use numbers
 #' defined by [srppp_xml_define_use_numbers]
+#' @return A [tibble::tibble] of use definitions
 #' @export
 #' @examples
+#' \donttest{
 #' srppp_xml <- srppp_xml_get()
 #' srppp_xml <- srppp_xml_define_use_numbers(srppp_xml)
 #' srppp_xml_get_uses(srppp_xml)
+#' }
 srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
   use_nodeset <- xml_find_all(srppp_xml, "Products/Product[not(contains(@wNbr, '-'))]/ProductInformation/Indication")
 
@@ -515,15 +532,13 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #' pointing to primary keys, i.e. with referential integrity.
 #' @export
 #' @examples
+#' \donttest{ # Avoid NOTE on CRAN caused by checks >5s
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(dm, warn.conflicts = FALSE)
 #'
 #' sr <- srppp_dm()
 #' dm_examine_constraints(sr)
-#' \dontrun{
 #' dm_draw(sr)
-#'
-#' }
 #'
 #' # Show ingredients for products named 'Boxer'
 #' sr$products |>
@@ -566,6 +581,8 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #'   filter(use_nr == 1) |>
 #'   left_join(sr$application_comments, join_by(pNbr, use_nr)) |>
 #'   select(use_nr, application_comment_de)
+#'
+#' }
 srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
 
   srppp_xml <- srppp_xml_get(from)
@@ -690,8 +707,8 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
     select(-desc_pk) |>
     arrange(pNbr, use_nr)
 
-  # In the culture descriptions, links to parent cultures are filtered out
-  culture_descriptions <- description_table(srppp_xml, "Culture")
+  # In the culture descriptions, links to parent cultures are considered
+  culture_descriptions <- description_table(srppp_xml, "Culture", parent_keys = TRUE)
   culture_additional_texts <- description_table(srppp_xml, "CultureAdditionalText")
   cultures <- indication_information_table(srppp_xml, "Culture", additional_text = TRUE) |>
     left_join(culture_descriptions, by = "desc_pk") |>
@@ -823,12 +840,14 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
 #' @export
 print.srppp_dm <- function(x, ...) {
   cat("<srppp_dm> object from:", attr(x, "from"), "\n")
-  dm::dm_nrow(x)
+  print(dm::dm_nrow(x))
+  invisible(x)
 }
 
 #' Clean product names
 #'
-#' @param names The product names that should be cleaned from comments
+#' @param names Character vector of product names that should be cleaned from comments
+#' @return Character vector of cleaned names
 #' @export
 srppp_xml_clean_product_names <- function(names) {
   names |>
@@ -874,7 +893,7 @@ get_use_nr <- function(node) {
 
 #' Get a table of descriptions for a certain Meta Information Tag
 #' @keywords internal
-description_table <- function(srppp_xml, tag_name, code = FALSE, latin = FALSE) {
+description_table <- function(srppp_xml, tag_name, code = FALSE, latin = FALSE, parent_keys = FALSE) {
 
   # Find nodes and apply the function
   nodes <- srppp_xml |>
@@ -882,7 +901,7 @@ description_table <- function(srppp_xml, tag_name, code = FALSE, latin = FALSE) 
 
   if (length(nodes) > 0) {
     ret <- nodes |>
-      sapply(get_descriptions, code = code, latin = latin) |> t() |>
+      sapply(get_descriptions, code = code, latin = latin, parent_keys = parent_keys) |> t() |>
       as_tibble() |>
       mutate(desc_pk = as.integer(desc_pk)) |>
       arrange(desc_pk)
@@ -898,9 +917,11 @@ description_table <- function(srppp_xml, tag_name, code = FALSE, latin = FALSE) 
 #' @param node The node to look at
 #' @param code Do the description nodes have a child holding a code?
 #' @param latin Are there latin descriptions (e.g. for pest descriptions)
-get_descriptions <- function(node, code = FALSE, latin = FALSE) {
+#' @param parent_keys For culture descriptions, we also return up to two primary keys
+#' that link to parent cultures
+get_descriptions <- function(node, code = FALSE, latin = FALSE, parent_keys = FALSE) {
   desc_pk <- xml_attr(node, "primaryKey")
-  desc <- sapply(xml_children(node), xml_attr, "value")
+  desc <- trimws(sapply(xml_children(node), xml_attr, "value"))
   if (code) {
     if (xml_length(xml_child(node)) == 1) {
       code <- xml_attr(xml_child(xml_child(node)), "value")
@@ -909,15 +930,31 @@ get_descriptions <- function(node, code = FALSE, latin = FALSE) {
     }
     ret <- c(desc_pk, code, desc)
     names(ret) <- c("desc_pk", "code", "de", "fr", "it", "en")
+    return(ret)
   } else {
-    desc <- desc[!is.na(desc)] # Remove results from <Parent> nodes without "value"
-    ret <- c(desc_pk, desc)
-    if (latin) {
-      names(ret) <- c("desc_pk", "de", "fr", "it", "en", "lt")
+    desc <- desc[!is.na(desc)] # Remove NA results that we get from <Parent> nodes without "value"
+    if (parent_keys) {
+      # Only children that are <Parent> nodes have attributes "primaryKey"
+      pks <- sapply(xml_children(node), xml_attr, "primaryKey")
+      pks <- pks[!is.na(pks)] # Remove NA results
+      parent_key_1 <- NA
+      parent_key_2 <- NA
+      if (length(pks) > 0) parent_key_1 <- pks[1]
+      if (length(pks) > 1) parent_key_2 <- pks[2]
+      if (length(pks) > 2) stop("Assumption of a maximum of two parent primary keys for cultures appears to be wrong")
+      ret <- c(desc_pk, desc, parent_key_1, parent_key_2)
+      names(ret) <- c("desc_pk", "de", "fr", "it", "en", "prt_1_pk", "prt_2_pk")
+      return(ret)
     } else {
-      names(ret) <- c("desc_pk", "de", "fr", "it", "en")
+      ret <- c(desc_pk, desc)
+
+      if (latin) {
+        names(ret) <- c("desc_pk", "de", "fr", "it", "en", "lt")
+      } else {
+        names(ret) <- c("desc_pk", "de", "fr", "it", "en")
+      }
+      return(ret)
     }
   }
-  return(ret)
 }
 

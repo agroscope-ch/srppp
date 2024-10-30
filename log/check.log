@@ -4,12 +4,12 @@
 * R was compiled by
     gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
     GNU Fortran (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
-* running under: Ubuntu 22.04.4 LTS
+* running under: Ubuntu 22.04.5 LTS
 * using session charset: UTF-8
 * using options ‘--no-tests --as-cran’
 * checking for file ‘srppp/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘srppp’ version ‘0.99.2’
+* this is package ‘srppp’ version ‘1.0.2’
 * package encoding: UTF-8
 * checking CRAN incoming feasibility ... Note_to_CRAN_maintainers
 Maintainer: ‘Johannes Ranke <johannes.ranke@agroscope.admin.ch>’
@@ -57,15 +57,13 @@ Files ‘README.md’ or ‘NEWS.md’ cannot be checked without ‘pandoc’ be
 * checking for unstated dependencies in examples ... OK
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
-* checking examples ... [22s/26s] NOTE
-Examples with CPU (user + system) or elapsed time > 5s
-           user system elapsed
-srppp_dm 10.172  0.182  10.938
+* checking examples ... OK
+* checking examples with --run-donttest ... [43s/46s] OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... SKIPPED
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes ... OK
-* checking re-building of vignette outputs ... [29s/30s] OK
+* checking re-building of vignette outputs ... [29s/24s] OK
 * checking PDF version of manual ... OK
 * checking HTML version of manual ... NOTE
 Skipping checking HTML validation: no command 'tidy' found
@@ -73,7 +71,7 @@ Skipping checking HTML validation: no command 'tidy' found
 * checking for detritus in the temp directory ... OK
 * DONE
 
-Status: 3 NOTEs
+Status: 2 NOTEs
 See
   ‘/home/agsad.admin.ch/f80868656/projects/srppp/srppp.Rcheck/00check.log’
 for details.

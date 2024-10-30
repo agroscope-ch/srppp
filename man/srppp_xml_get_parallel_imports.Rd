@@ -18,5 +18,7 @@ Get Parallel Imports from an XML version of the Swiss Register of Plant Protecti
 }
 \examples{
 # Get current list of parallel_imports
+\donttest{
 srppp_xml_get_parallel_imports()
+}
 }

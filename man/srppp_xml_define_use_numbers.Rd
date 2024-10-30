@@ -7,14 +7,16 @@
 srppp_xml_define_use_numbers(srppp_xml = srppp_xml_get())
 }
 \arguments{
-\item{srppp_xml}{An object as returned by 'srppp_xml_get'}
+\item{srppp_xml}{An object as returned by \link{srppp_xml_get}}
 }
 \value{
-An srppp_xml object with use_nr added as an attribute of 'Indication' nodes.
+An object of the same class, with 'use_nr' added as an attribute of 'Indication' nodes.
 }
 \description{
 Define use identification numbers in an SRPPP read in from an XML file
 }
 \examples{
+\donttest{
 srppp_xml_define_use_numbers()
+}
 }

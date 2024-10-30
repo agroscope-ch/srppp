@@ -9,9 +9,15 @@ srppp_xml_get_substances(srppp_xml = srppp_xml_get())
 \arguments{
 \item{srppp_xml}{An object as returned by 'srppp_xml_get'}
 }
+\value{
+A \link[tibble:tibble]{tibble::tibble} containing primary keys, IUPAC names and substance names in
+German, French and Italian.
+}
 \description{
 Get substances from an XML version of the Swiss Register of Plant Protection Products
 }
 \examples{
+\donttest{
 srppp_xml_get_substances()
+}
 }

@@ -19,7 +19,7 @@ alternative_products(
 \item{active_ingredients}{Character vector of active ingredient names that will be
 matched against the column 'substances_de' in the srppp table 'substances'.}
 
-\item{details}{Should a table of alternative uses with 'wNbr' 'use_nr' be returned?}
+\item{details}{Should a table of alternative uses with 'wNbr' and 'use_nr' be returned?}
 
 \item{missing}{If this is set to TRUE, uses without alternative product registrations
 are listed.}
@@ -33,6 +33,12 @@ the alternative uses. This argument overrides the arguments 'details' and
 \item{lang}{The language used for the active ingredient names and the returned
 tables.}
 }
+\value{
+A \link[tibble:tibble]{tibble::tibble} containing use definitions as defined above, i.e. containing
+columns with the application area, crop and pathogen. Depending on the
+arguments, columns summarizing or listing the alternative products and/or uses
+are also contained.
+}
 \description{
 This function searches for uses of a given list of active substances and reports
 either a table of uses with the number of available alternative products for each
@@ -40,11 +46,13 @@ use, a detailed table of the alternative product uses, a table of uses without
 alternatives, or a list containing these three tables.
 }
 \details{
-A use is defined as a combination of an application area, a crop
-('culture') and a pathogen ('pest').
+A use is defined here as a combination of an application area, a crop
+('culture') and a pathogen ('pest'). This means, that for an alternative
+product to be found, there has to be an exact match of application
+area, crop an pathogen.
 }
 \examples{
-\dontrun{
+\donttest{
 sr <- srppp_dm()
 
 actives_de <- c("Lambda-Cyhalothrin", "Deltamethrin")

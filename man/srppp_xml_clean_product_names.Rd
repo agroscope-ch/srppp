@@ -7,7 +7,10 @@
 srppp_xml_clean_product_names(names)
 }
 \arguments{
-\item{names}{The product names that should be cleaned from comments}
+\item{names}{Character vector of product names that should be cleaned from comments}
+}
+\value{
+Character vector of cleaned names
 }
 \description{
 Clean product names

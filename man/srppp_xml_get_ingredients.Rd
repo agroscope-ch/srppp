@@ -2,16 +2,22 @@
 % Please edit documentation in R/srppp-xml.R
 \name{srppp_xml_get_ingredients}
 \alias{srppp_xml_get_ingredients}
-\title{Get ingredients for all products described in an XML version of the Swiss Register of Plant Protection Products}
+\title{Get ingredients for all registered products described in an XML version of the Swiss Register of Plant Protection Products}
 \usage{
 srppp_xml_get_ingredients(srppp_xml = srppp_xml_get())
 }
 \arguments{
 \item{srppp_xml}{An object as returned by 'srppp_xml_get'}
 }
+\value{
+A \link[tibble:tibble]{tibble::tibble} containing a line for each ingredient of each W-Number
+}
 \description{
-Get ingredients for all products described in an XML version of the Swiss Register of Plant Protection Products
+Get ingredients for all registered products described in an XML version of the Swiss Register of Plant Protection Products
 }
 \examples{
+\donttest{
+library(srppp)
 srppp_xml_get_ingredients()
+}
 }

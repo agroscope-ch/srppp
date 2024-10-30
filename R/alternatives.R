@@ -5,13 +5,15 @@
 #' use, a detailed table of the alternative product uses, a table of uses without
 #' alternatives, or a list containing these three tables.
 #'
-#' A use is defined as a combination of an application area, a crop
-#' ('culture') and a pathogen ('pest').
+#' A use is defined here as a combination of an application area, a crop
+#' ('culture') and a pathogen ('pest'). This means, that for an alternative
+#' product to be found, there has to be an exact match of application
+#' area, crop an pathogen.
 #'
 #' @param srppp A [srppp_dm] object.
 #' @param active_ingredients Character vector of active ingredient names that will be
 #' matched against the column 'substances_de' in the srppp table 'substances'.
-#' @param details Should a table of alternative uses with 'wNbr' 'use_nr' be returned?
+#' @param details Should a table of alternative uses with 'wNbr' and 'use_nr' be returned?
 #' @param missing If this is set to TRUE, uses without alternative product registrations
 #' are listed.
 #' @param list If TRUE, a list of three tables is returned, a table of uses
@@ -21,9 +23,13 @@
 #' 'missing'.
 #' @param lang The language used for the active ingredient names and the returned
 #' tables.
+#' @return A [tibble] containing use definitions as defined above, i.e. containing
+#' columns with the application area, crop and pathogen. Depending on the 
+#' arguments, columns summarizing or listing the alternative products and/or uses
+#' are also contained.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' sr <- srppp_dm()
 #'
 #' actives_de <- c("Lambda-Cyhalothrin", "Deltamethrin")

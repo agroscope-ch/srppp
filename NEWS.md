@@ -1,6 +1,21 @@
-## version 0.99.3
+## version 1.0.2
+
+- Remove the vignette intended for JOSS, as it was rejected there
+
+## version 1.0.1
+
+- Trim leading and trailing whitespace from descriptions that are read in using the internal function `get_descriptions()`, addressing an issue Elisabeth raised in srppphist
+- Remove html documentation built with pkgdown from the git repository, the online documentation is built using the github workflow
+- Address issues found by the package review on CRAN as follows:
+- Rename the package to make it clear that its purpose is to read in data from the Swiss Register of Plant Protection Products
+- Wrap example code in \donttest{} to avoid CRAN notes for checks >5s. The code is still tested in the testthat tests.
+- Document return values of all exported functions
+
+## version 1.0.0
 
 - Risk mitigation measures `sw_drift_dist`, `sw_runoff_dist`, `sw_runoff_points` and `biotope_drift_dist` are now stored as integers in the `obligations` table.
+- In the table `cultures`, the primary keys of up to two parent cultures are now included.
+- Fix the use rate calculations for liquid products for the case that only a dosage in percent is given.
 
 ## version 0.99.2
 

@@ -4,6 +4,6 @@
 .Ruserdata
 *.rda
 *.Rcheck
-inst/doc
 *.tar.gz
+docs
 vignettes/*_cache/*
