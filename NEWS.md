@@ -2,7 +2,7 @@
 
 - Remove the vignette intended for JOSS, as it was rejected there
 
-## version 1.0.1
+## version 1.0.1 (CRAN release: 2024-11-01)
 
 - Trim leading and trailing whitespace from descriptions that are read in using the internal function `get_descriptions()`, addressing an issue Elisabeth raised in srppphist
 - Remove html documentation built with pkgdown from the git repository, the online documentation is built using the github workflow
