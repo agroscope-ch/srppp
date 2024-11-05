@@ -1,11 +1,15 @@
-#' Build a Hierarchical Culture Tree
+utils::globalVariables(c("prt_1_pk", "prt_2_pk"))
+#' Build a Culture Tree
 #'
-#' Constructs a hierarchical tree structure from a tibble, with each node representing
-#' a unique culture. Each node can have multiple parent nodes, allowing for complex
-#' cultural hierarchies and relationships.
+#' Constructs a hierarchical tree structure from a culture description table
+#' that is created within the [srppp_dm] function. As each culture can
+#' have one or two parent nodes in an srppp XML file, the nodes with
+#' two parent nodes are duplicated. The duplicated nodes retain their
+#' primary key as an attribute, so the information on their identity
+#' does not get lost.
 #'
 #' @importFrom data.tree Node
-#' @param df A tibble with the following columns:
+#' @param culture_descriptions A tibble containing culture descriptions with the following columns:
 #'   - `desc_pk`: Unique identifier for each culture node.
 #'   - `de`: Culture name in German.
 #'   - `fr`: Culture name in French.
@@ -14,44 +18,41 @@
 #'   - `prt_1_pk`: Identifier of the first parent node (can be NA if no parent).
 #'   - `prt_2_pk`: Identifier of the second parent node (can be NA if no second parent).
 #'
-#' @return A `Node` object (from the `data.tree` package) representing the root of the
+#' @return A [data.tree::Node] representing the root of the
 #' culture hierarchy. Each node in the tree has the following attributes:
-#'   - `name`: The German name of the culture (from the `de` column).
-#'   - `desc_pk`: The unique identifier of the culture as an attribute.
-#'   - `parents`: A list of parent nodes (can be empty, contain one, or two parents).
+#'   - `name_de`: The German name of the culture (from the `de` column).
+#'   - `name_fr`: The French name of the culture (from the `fr` column).
+#'   - `name_it`: The Italian name of the culture (from the `it` column).
+#'   - `culture_id`: The unique identifier of the culture
 #'
 #' @details
 #' The function builds the culture tree in two main steps:
-#' 1. Node Creation: It first creates all unique culture nodes and adds them to a lookup table.
-#'    Each node is initialized with its German name and unique identifier.
+#' 1. Node Creation: It first creates all unique culture nodes and adds them to a lookup environment.
+#'    Each node is initialized with its German name and its `culture_id`.
 #' 2. Relationship Establishment: It then establishes parent-child relationships between nodes.
-#'    If a node has multiple parents, all are linked, allowing for complex hierarchies.
-#'
-#' The function handles cases where:
-#' - A culture has no parents (it becomes a direct child of the root "Cultures" node)
-#' - A culture has one parent
-#' - A culture has two parents
-#'
-#' It prevents circular references and ensures each parent-child relationship is unique.
-#'
-#' @note
-#' - The tree structure allows for multiple parents per node, which is not standard
-#'   in typical tree implementations. This enables representation of complex culture
-#'   relationships where a culture might belong to multiple categories.
-#' - While all language versions (de, fr, it, en) are present in the input data,
-#'   the tree nodes are labeled with the German version by default.
+#'    Any node that has a second parent culture is duplicated and the duplicate
+#'    is associated with the second parent culture
 #'
 #' @keywords internal
-build_culture_tree <- function(df) {
+build_culture_tree <- function(culture_descriptions) {
+
   root <- Node$new("Cultures")
   node_lookup <- new.env(hash = TRUE)
 
-  # Create all nodes first
+  # Select columns to use
+  df <- culture_descriptions |>
+    select(desc_pk, de, fr, it, prt_1_pk, prt_2_pk) |>
+    unique()
+
+  # Create all nodes once, add culture_id and names
   for (i in 1:nrow(df)) {
     if (is.null(node_lookup[[as.character(df$desc_pk[i])]])) {
       new_node <- Node$new(df$de[i])
-      new_node$desc_pk <- df$desc_pk[i]
-      new_node$parents <- list()  # List to store multiple parents
+      new_node$name_de <- df$de[i]
+      new_node$name_fr <- df$fr[i]
+      new_node$name_it <- df$it[i]
+      new_node$culture_id <- df$desc_pk[i]
+      new_node$is_duplicate <- FALSE
       node_lookup[[as.character(df$desc_pk[i])]] <- new_node
     }
   }
@@ -60,23 +61,32 @@ build_culture_tree <- function(df) {
   for (i in 1:nrow(df)) {
     child_node <- node_lookup[[as.character(df$desc_pk[i])]]
 
-    # Function to add parent relationship
     add_parent <- function(parent_key) {
       if (!is.na(parent_key)) {
         parent_node <- node_lookup[[as.character(parent_key)]]
-        if (!is.null(parent_node) && !(parent_node$desc_pk %in% sapply(child_node$parents, function(p) p$desc_pk))) {
-          parent_node$AddChildNode(child_node)
-          child_node$parents <- c(child_node$parents, list(parent_node))
+        if (!is.null(parent_node)) {
+          if (is.null(child_node$parent)) {
+            parent_node$AddChildNode(child_node)
+          } else if (!identical(child_node$parent, parent_node)) {
+            # If the child already has a different parent,
+            # create a new child node and add names
+            dup_node <- Node$new(paste0(child_node$name, " [dup]"))
+            dup_node$is_duplicate <- TRUE
+            dup_node$culture_id <- df$desc_pk[i]
+            dup_node$name_de <- child_node$name_de
+            dup_node$name_fr <- child_node$name_fr
+            dup_node$name_it <- child_node$name_it
+            dup_node$reference_to <- child_node$culture_id
+            parent_node$AddChildNode(dup_node)
+          }
         }
       }
     }
 
-    # Add both parents
     add_parent(df$prt_1_pk[i])
     add_parent(df$prt_2_pk[i])
 
-    # If no parents, add to root
-    if (length(child_node$parents) == 0) {
+    if (is.null(child_node$parent)) {
       root$AddChildNode(child_node)
     }
   }

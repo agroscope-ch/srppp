@@ -304,8 +304,9 @@ an attribute named 'culture_tree'. The first entries from that tree
 are shown below. A complete culture tree is shown in the Appendix.
 
 ```{r}
+current_register <- srppp_dm()
 culture_tree <- attr(current_register, "culture_tree")
-print(culture_tree, limit = 30)
+print(culture_tree, limit = 30, "desc_pk")
 ```
 
 ## Target organisms
@@ -378,6 +379,5 @@ current_register$obligations |>
 ## Complete culture tree
 
 ```{r}
-culture_tree <- attr(current_register, "culture_tree")
-print(culture_tree, limit = 1e3)
+print(culture_tree, "culture_id", "name_fr", "name_it", limit = 800)
 ```

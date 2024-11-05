@@ -2,12 +2,12 @@
 % Please edit documentation in R/srppp-xml-culture-tree.R
 \name{build_culture_tree}
 \alias{build_culture_tree}
-\title{Build a Hierarchical Culture Tree}
+\title{Build a Culture Tree}
 \usage{
-build_culture_tree(df)
+build_culture_tree(culture_descriptions)
 }
 \arguments{
-\item{df}{A tibble with the following columns:
+\item{culture_descriptions}{A tibble containing culture descriptions with the following columns:
 \itemize{
 \item \code{desc_pk}: Unique identifier for each culture node.
 \item \code{de}: Culture name in German.
@@ -19,44 +19,31 @@ build_culture_tree(df)
 }}
 }
 \value{
-A \code{Node} object (from the \code{data.tree} package) representing the root of the
+A \link[data.tree:Node]{data.tree::Node} representing the root of the
 culture hierarchy. Each node in the tree has the following attributes:
 \itemize{
-\item \code{name}: The German name of the culture (from the \code{de} column).
-\item \code{desc_pk}: The unique identifier of the culture as an attribute.
-\item \code{parents}: A list of parent nodes (can be empty, contain one, or two parents).
+\item \code{name_de}: The German name of the culture (from the \code{de} column).
+\item \code{name_fr}: The French name of the culture (from the \code{fr} column).
+\item \code{name_it}: The Italian name of the culture (from the \code{it} column).
+\item \code{culture_id}: The unique identifier of the culture
 }
 }
 \description{
-Constructs a hierarchical tree structure from a tibble, with each node representing
-a unique culture. Each node can have multiple parent nodes, allowing for complex
-cultural hierarchies and relationships.
+Constructs a hierarchical tree structure from a culture description table
+that is created within the \link{srppp_dm} function. As each culture can
+have one or two parent nodes in an srppp XML file, the nodes with
+two parent nodes are duplicated. The duplicated nodes retain their
+primary key as an attribute, so the information on their identity
+does not get lost.
 }
 \details{
 The function builds the culture tree in two main steps:
 \enumerate{
-\item Node Creation: It first creates all unique culture nodes and adds them to a lookup table.
-Each node is initialized with its German name and unique identifier.
+\item Node Creation: It first creates all unique culture nodes and adds them to a lookup environment.
+Each node is initialized with its German name and its \code{culture_id}.
 \item Relationship Establishment: It then establishes parent-child relationships between nodes.
-If a node has multiple parents, all are linked, allowing for complex hierarchies.
-}
-
-The function handles cases where:
-\itemize{
-\item A culture has no parents (it becomes a direct child of the root "Cultures" node)
-\item A culture has one parent
-\item A culture has two parents
-}
-
-It prevents circular references and ensures each parent-child relationship is unique.
-}
-\note{
-\itemize{
-\item The tree structure allows for multiple parents per node, which is not standard
-in typical tree implementations. This enables representation of complex culture
-relationships where a culture might belong to multiple categories.
-\item While all language versions (de, fr, it, en) are present in the input data,
-the tree nodes are labeled with the German version by default.
+Any node that has a second parent culture is duplicated and the duplicate
+is associated with the second parent culture
 }
 }
 \keyword{internal}
