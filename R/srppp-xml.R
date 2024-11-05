@@ -530,6 +530,8 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #' @param remove_duplicates Should duplicates based on wNbrs be removed?
 #' @return A [dm::dm] object with tables linked by foreign keys
 #' pointing to primary keys, i.e. with referential integrity.
+#' Since version 1.1, the returned object has an attribute named 'culture_tree'
+#' of class [data.tree::Node].
 #' @export
 #' @examples
 #' \donttest{ # Avoid NOTE on CRAN caused by checks >5s
@@ -720,6 +722,8 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
     select(-desc_pk, -add_txt_pk) |>
     arrange(pNbr, use_nr)
 
+  culture_tree <- build_culture_tree(culture_descriptions)
+
   pest_descriptions <- description_table(srppp_xml, "Pest", latin = TRUE)
   pest_additional_texts <- description_table(srppp_xml, "PestAdditionalText")
   pests <- indication_information_table(srppp_xml, "Pest",
@@ -830,6 +834,7 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
       darkgreen = uses:obligations)
 
     attr(srppp_dm, "from") <- attr(srppp_xml, "from")
+    attr(srppp_dm, "culture_tree") <- culture_tree
     class(srppp_dm) <- c("srppp_dm", "dm")
     return(srppp_dm)
 }

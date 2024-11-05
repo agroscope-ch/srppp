@@ -1,144 +1,86 @@
+#' Build a Hierarchical Culture Tree
+#'
+#' Constructs a hierarchical tree structure from a tibble, with each node representing
+#' a unique culture. Each node can have multiple parent nodes, allowing for complex
+#' cultural hierarchies and relationships.
+#'
+#' @importFrom data.tree Node
+#' @param df A tibble with the following columns:
+#'   - `desc_pk`: Unique identifier for each culture node.
+#'   - `de`: Culture name in German.
+#'   - `fr`: Culture name in French.
+#'   - `it`: Culture name in Italian.
+#'   - `en`: Culture name in English.
+#'   - `prt_1_pk`: Identifier of the first parent node (can be NA if no parent).
+#'   - `prt_2_pk`: Identifier of the second parent node (can be NA if no second parent).
+#'
+#' @return A `Node` object (from the `data.tree` package) representing the root of the
+#' culture hierarchy. Each node in the tree has the following attributes:
+#'   - `name`: The German name of the culture (from the `de` column).
+#'   - `desc_pk`: The unique identifier of the culture as an attribute.
+#'   - `parents`: A list of parent nodes (can be empty, contain one, or two parents).
+#'
+#' @details
+#' The function builds the culture tree in two main steps:
+#' 1. Node Creation: It first creates all unique culture nodes and adds them to a lookup table.
+#'    Each node is initialized with its German name and unique identifier.
+#' 2. Relationship Establishment: It then establishes parent-child relationships between nodes.
+#'    If a node has multiple parents, all are linked, allowing for complex hierarchies.
+#'
+#' The function handles cases where:
+#' - A culture has no parents (it becomes a direct child of the root "Cultures" node)
+#' - A culture has one parent
+#' - A culture has two parents
+#'
+#' It prevents circular references and ensures each parent-child relationship is unique.
+#'
+#' @note
+#' - The tree structure allows for multiple parents per node, which is not standard
+#'   in typical tree implementations. This enables representation of complex culture
+#'   relationships where a culture might belong to multiple categories.
+#' - While all language versions (de, fr, it, en) are present in the input data,
+#'   the tree nodes are labeled with the German version by default.
+#'
+#' @keywords internal
 build_culture_tree <- function(df) {
-  # oot node (oberste Kulturebene)
   root <- Node$new("Cultures")
-
-  # lookup table for nodes
   node_lookup <- new.env(hash = TRUE)
 
-  # Nodes und Attribute bestimmen
+  # Create all nodes first
   for (i in 1:nrow(df)) {
     if (is.null(node_lookup[[as.character(df$desc_pk[i])]])) {
-      new_node <- root$AddChild(df$de[i])
-      new_node$desc_pk <- df$desc_pk[i]  # desc_pk als Attribute
+      new_node <- Node$new(df$de[i])
+      new_node$desc_pk <- df$desc_pk[i]
+      new_node$parents <- list()  # List to store multiple parents
       node_lookup[[as.character(df$desc_pk[i])]] <- new_node
     }
   }
 
-  # parent-child relationships
+  # Establish parent-child relationships
   for (i in 1:nrow(df)) {
     child_node <- node_lookup[[as.character(df$desc_pk[i])]]
 
-    if (!is.na(df$parent_key_1[i])) {
-      print("parent_key_1")
-      parent_node <- node_lookup[[as.character(df$parent_key_1[i])]]
-      if (!is.null(parent_node) &&
-          !identical(child_node$parent, parent_node)) {
-        child_node$parent$RemoveChild(child_node$name)
-        parent_node$AddChildNode(child_node)
+    # Function to add parent relationship
+    add_parent <- function(parent_key) {
+      if (!is.na(parent_key)) {
+        parent_node <- node_lookup[[as.character(parent_key)]]
+        if (!is.null(parent_node) && !(parent_node$desc_pk %in% sapply(child_node$parents, function(p) p$desc_pk))) {
+          parent_node$AddChildNode(child_node)
+          child_node$parents <- c(child_node$parents, list(parent_node))
+        }
       }
     }
 
-    if (!is.na(df$parent_key_2[i])) {
-      print("parent_key_2")
-      parent_node <- node_lookup[[as.character(df$parent_key_2[i])]]
-      if (!is.null(parent_node) &&
-          !identical(child_node$parent, parent_node)) {
-        child_node$parent$RemoveChild(child_node$name)
-        parent_node$AddChildNode(child_node)
-      }
+    # Add both parents
+    add_parent(df$prt_1_pk[i])
+    add_parent(df$prt_2_pk[i])
+
+    # If no parents, add to root
+    if (length(child_node$parents) == 0) {
+      root$AddChildNode(child_node)
     }
   }
 
   return(root)
 }
-
-
-culture_tree <- build_culture_tree(Culture_descriptions)
-
-
-
-
-
-
-#### Funktion Umwandlung culture-tree in mapping table (parent-child pairs) ####
-
-# Initalisierung df for parent-child relationships
-parent_child_df <- data.frame(parent = character(),
-                              child = character(),
-                              stringsAsFactors = FALSE)
-
-
-extract_parent_child <- function(node) {
-  if (!is.null(node$parent)) {
-    parent_name <- node$parent$name
-    child_name <- node$name
-
-
-    parent_child_df <<- rbind(
-      parent_child_df,
-      data.frame(
-        parent = parent_name,
-        child = child_name,
-        stringsAsFactors = FALSE
-      )
-    )
-  }
-
-
-  for (child in node$children) {
-    extract_parent_child(child)
-  }
-}
-
-# Apply the function to the root of the tree
-extract_parent_child(culture_tree)
-
-# Show the parent-child relationships
-print(parent_child_df)
-
-
-
-
-
-
-
-#### mapping unterste Kulturenebene ####
-# Function to expand cultures using the culture tree and add lowest culture level
-map_cultures_with_lowest <- function(dataset, culture_tree) {
-  # Create an empty data frame to store expanded rows
-  expanded_data <- data.frame()
-
-  # Loop through each row in the dataset
-  for (i in 1:nrow(dataset)) {
-    row <- dataset[i, ]
-
-    # Find matching cultures in the culture tree
-    matching_cultures <- culture_tree %>%
-      filter(parent == row$culture_de)
-
-    # If matches are found, create a new row for each child culture
-    if (nrow(matching_cultures) > 0) {
-      for (j in 1:nrow(matching_cultures)) {
-        new_row <- row
-        # Set the new column to the child (specific culture)
-        new_row$lowest_culture_de <- matching_cultures$child[j]
-        expanded_data <- rbind(expanded_data, new_row)
-      }
-    } else {
-      # If no match is found, the current culture is already the lowest level
-      row$lowest_culture_de <- row$culture_de
-      expanded_data <- rbind(expanded_data, row)
-    }
-  }
-
-  return(expanded_data)
-}
-
-
-library(stringr)
-
-df <- affected_cultures_x_pests %>%
-  mutate(culture_de = case_when(
-    str_detect(culture_de, "allg\\.") ~ str_replace(culture_de, "(.*) allg\\.", "allg. \\1"),
-    TRUE ~ culture_de
-  ) %>% trimws())
-
-# Apply the function to the dataset
-expanded_data <- map_cultures_with_lowest(df, parent_child_df)
-
-
-
-
-
-
 

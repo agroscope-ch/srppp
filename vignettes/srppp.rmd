@@ -299,6 +299,15 @@ current_register$products |>
   kable()
 ```
 
+Relations between the cultures are stored as a [data.tree::Node] object in
+an attribute named 'culture_tree'. The first entries from that tree
+are shown below. A complete culture tree is shown in the Appendix.
+
+```{r}
+culture_tree <- attr(current_register, "culture_tree")
+print(culture_tree, limit = 30)
+```
+
 ## Target organisms
 
 The target organisms for each use can be found in the table `pests`. Example
@@ -334,6 +343,7 @@ kable(culture_pest_combinations)
 In this example, there are `r nrow(culture_pest_combinations)` such "indications" 
 for the 15 uses.
 
+
 ## Application comments
 
 Sometimes, use specific comments can be found in the `application_comments` table.
@@ -360,3 +370,14 @@ current_register$obligations |>
 ```
 
 # References
+
+<div id="refs"></div>
+
+# Appendix
+
+## Complete culture tree
+
+```{r}
+culture_tree <- attr(current_register, "culture_tree")
+print(culture_tree, limit = 1e3)
+```

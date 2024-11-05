@@ -21,6 +21,8 @@ srppp_dm(from = srppp_xml_url, remove_duplicates = TRUE)
 \value{
 A \link[dm:dm]{dm::dm} object with tables linked by foreign keys
 pointing to primary keys, i.e. with referential integrity.
+Since version 1.1, the returned object has an attribute named 'culture_tree'
+of class \link[data.tree:Node]{data.tree::Node}.
 }
 \description{
 While reading in the data, the information obtained from the XML file is
