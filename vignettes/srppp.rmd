@@ -1,7 +1,7 @@
 ---
 title: The Swiss Register of Plant Protection Products as a Relational Data Model
 author: Johannes Ranke
-date: 13 August, 2024 (rebuilt `r Sys.Date()`)
+date: 6 November 2024 (rebuilt `r Sys.Date()`)
 bibliography: references.bib
 output:
   rmarkdown::html_vignette:
@@ -302,11 +302,14 @@ current_register$products |>
 Relations between the cultures are stored as a [data.tree::Node] object in
 an attribute named 'culture_tree'. The first entries from that tree
 are shown below. A complete culture tree is shown in the Appendix.
+Note that a culture can be linked to two parent cultures in the
+tree. Cultures that are additionally present in another position
+of the tree are marked by appending '[dup]' to their name.
 
 ```{r}
 current_register <- srppp_dm()
 culture_tree <- attr(current_register, "culture_tree")
-print(culture_tree, limit = 30, "desc_pk")
+print(culture_tree, limit = 30, "culture_id")
 ```
 
 ## Target organisms
@@ -377,6 +380,10 @@ current_register$obligations |>
 # Appendix
 
 ## Complete culture tree
+
+Note that a culture can be linked to two parent cultures in the
+tree. Cultures that are additionally present in another position
+of the tree are marked by appending '[dup]' to their name.
 
 ```{r}
 print(culture_tree, "culture_id", "name_fr", "name_it", limit = 800)

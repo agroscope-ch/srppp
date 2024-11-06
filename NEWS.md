@@ -1,5 +1,6 @@
-## version 1.0.2
+## version 1.1.0
 
+- Add a culture tree as a `Node` object from the `data.tree` package as attribute to `srppp_dm` objects and show it in the main vignette.
 - Remove the vignette intended for JOSS, as it was rejected there
 
 ## version 1.0.1 (CRAN release: 2024-11-01)
