@@ -62,8 +62,8 @@
                         <h4 data-toc-skip class="author">Johannes
 Ranke</h4>
             
-            <h4 data-toc-skip class="date">13 August, 2024 (rebuilt
-2024-11-05)</h4>
+            <h4 data-toc-skip class="date">6 November 2024 (rebuilt
+2024-11-06)</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agroscope-ch/srppp/blob/main/vignettes/srppp.rmd" class="external-link"><code>vignettes/srppp.rmd</code></a></small>
       <div class="d-none name"><code>srppp.rmd</code></div>
@@ -1255,45 +1255,47 @@ numbers in one step.</p>
 </table>
 <p>Relations between the cultures are stored as a [data.tree::Node]
 object in an attribute named ‘culture_tree’. The first entries from that
-tree are shown below. A complete culture tree is shown in the
-Appendix.</p>
+tree are shown below. A complete culture tree is shown in the Appendix.
+Note that a culture can be linked to two parent cultures in the tree.
+Cultures that are additionally present in another position of the tree
+are marked by appending ‘[dup]’ to their name.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">current_register</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/srppp_dm.html">srppp_dm</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">culture_tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/attr.html" class="external-link">attr</a></span><span class="op">(</span><span class="va">current_register</span>, <span class="st">"culture_tree"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">culture_tree</span>, limit <span class="op">=</span> <span class="fl">30</span>, <span class="st">"desc_pk"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##                                               levelName desc_pk</span></span>
-<span><span class="co">## 1  Cultures                                                  NA</span></span>
-<span><span class="co">## 2   ¦--Pflanzen                                              NA</span></span>
-<span><span class="co">## 3   ¦--Brache                                                NA</span></span>
-<span><span class="co">## 4   ¦--allg. Ökologische Ausgleichsflächen (gemäss DZV)      NA</span></span>
-<span><span class="co">## 5   ¦   °--Offene Ackerfläche                                NA</span></span>
-<span><span class="co">## 6   ¦--Zierpflanzen allg.                                    NA</span></span>
-<span><span class="co">## 7   ¦   ¦--Gehölze (ausserhalb Forst)                        NA</span></span>
-<span><span class="co">## 8   ¦   ¦   °--Nadelgehölze (Koniferen)                      NA</span></span>
-<span><span class="co">## 9   ¦   ¦       ¦--Blautanne                                 NA</span></span>
-<span><span class="co">## 10  ¦   ¦       ¦--Fichte                                    NA</span></span>
-<span><span class="co">## 11  ¦   ¦       °--Weihnachtsbäume                           NA</span></span>
-<span><span class="co">## 12  ¦   ¦--Zier- und Sportrasen                              NA</span></span>
-<span><span class="co">## 13  ¦   ¦--Stauden                                           NA</span></span>
-<span><span class="co">## 14  ¦   ¦--Topf- und Kontainerpflanzen                       NA</span></span>
-<span><span class="co">## 15  ¦   ¦   ¦--Begonia [dup]                                 NA</span></span>
-<span><span class="co">## 16  ¦   ¦   ¦--Cyclame [dup]                                 NA</span></span>
-<span><span class="co">## 17  ¦   ¦   ¦--Pelargonien [dup]                             NA</span></span>
-<span><span class="co">## 18  ¦   ¦   °--Primeln [dup]                                 NA</span></span>
-<span><span class="co">## 19  ¦   ¦--Blumenknollen                                     NA</span></span>
-<span><span class="co">## 20  ¦   ¦   °--Dahlien                                       NA</span></span>
-<span><span class="co">## 21  ¦   ¦--Baumschule                                        NA</span></span>
-<span><span class="co">## 22  ¦   ¦--Ziergehölze (ausserhalb Forst)                    NA</span></span>
-<span><span class="co">## 23  ¦   ¦--Rosen                                             NA</span></span>
-<span><span class="co">## 24  ¦   ¦--Ein- und zweijährige Zierpflanzen                 NA</span></span>
-<span><span class="co">## 25  ¦   ¦   °--Sommerflor                                    NA</span></span>
-<span><span class="co">## 26  ¦   ¦--Bäume und Sträucher (ausserhalb Forst)            NA</span></span>
-<span><span class="co">## 27  ¦   ¦   ¦--Rhododendron                                  NA</span></span>
-<span><span class="co">## 28  ¦   ¦   ¦   °--Azaleen                                   NA</span></span>
-<span><span class="co">## 29  ¦   ¦   ¦--Kirschlorbeer                                 NA</span></span>
-<span><span class="co">## 30  ¦   ¦   °--... 4 nodes w/ 0 sub                          NA</span></span>
-<span><span class="co">## 31  ¦   °--... 1 nodes w/ 18 sub                             NA</span></span>
-<span><span class="co">## 32  °--... 49 nodes w/ 261 sub                               NA</span></span></code></pre>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">culture_tree</span>, limit <span class="op">=</span> <span class="fl">30</span>, <span class="st">"culture_id"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##                                               levelName culture_id</span></span>
+<span><span class="co">## 1  Cultures                                                     NA</span></span>
+<span><span class="co">## 2   ¦--Pflanzen                                               9942</span></span>
+<span><span class="co">## 3   ¦--Brache                                                 9950</span></span>
+<span><span class="co">## 4   ¦--allg. Ökologische Ausgleichsflächen (gemäss DZV)      10172</span></span>
+<span><span class="co">## 5   ¦   °--Offene Ackerfläche                                10227</span></span>
+<span><span class="co">## 6   ¦--Zierpflanzen allg.                                    10190</span></span>
+<span><span class="co">## 7   ¦   ¦--Gehölze (ausserhalb Forst)                         9952</span></span>
+<span><span class="co">## 8   ¦   ¦   °--Nadelgehölze (Koniferen)                      10111</span></span>
+<span><span class="co">## 9   ¦   ¦       ¦--Blautanne                                 10110</span></span>
+<span><span class="co">## 10  ¦   ¦       ¦--Fichte                                    10157</span></span>
+<span><span class="co">## 11  ¦   ¦       °--Weihnachtsbäume                           10290</span></span>
+<span><span class="co">## 12  ¦   ¦--Zier- und Sportrasen                               9967</span></span>
+<span><span class="co">## 13  ¦   ¦--Stauden                                            9968</span></span>
+<span><span class="co">## 14  ¦   ¦--Topf- und Kontainerpflanzen                       10021</span></span>
+<span><span class="co">## 15  ¦   ¦   ¦--Begonia [dup]                                 10040</span></span>
+<span><span class="co">## 16  ¦   ¦   ¦--Cyclame [dup]                                 10050</span></span>
+<span><span class="co">## 17  ¦   ¦   ¦--Pelargonien [dup]                             10097</span></span>
+<span><span class="co">## 18  ¦   ¦   °--Primeln [dup]                                 10098</span></span>
+<span><span class="co">## 19  ¦   ¦--Blumenknollen                                     10039</span></span>
+<span><span class="co">## 20  ¦   ¦   °--Dahlien                                       10162</span></span>
+<span><span class="co">## 21  ¦   ¦--Baumschule                                        10095</span></span>
+<span><span class="co">## 22  ¦   ¦--Ziergehölze (ausserhalb Forst)                    10101</span></span>
+<span><span class="co">## 23  ¦   ¦--Rosen                                             10104</span></span>
+<span><span class="co">## 24  ¦   ¦--Ein- und zweijährige Zierpflanzen                 10176</span></span>
+<span><span class="co">## 25  ¦   ¦   °--Sommerflor                                     9969</span></span>
+<span><span class="co">## 26  ¦   ¦--Bäume und Sträucher (ausserhalb Forst)            12096</span></span>
+<span><span class="co">## 27  ¦   ¦   ¦--Rhododendron                                  10100</span></span>
+<span><span class="co">## 28  ¦   ¦   ¦   °--Azaleen                                   10099</span></span>
+<span><span class="co">## 29  ¦   ¦   ¦--Kirschlorbeer                                 10103</span></span>
+<span><span class="co">## 30  ¦   ¦   °--... 4 nodes w/ 0 sub                             NA</span></span>
+<span><span class="co">## 31  ¦   °--... 1 nodes w/ 18 sub                                NA</span></span>
+<span><span class="co">## 32  °--... 49 nodes w/ 261 sub                                  NA</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="target-organisms">Target organisms<a class="anchor" aria-label="anchor" href="#target-organisms"></a>
@@ -1795,6 +1797,9 @@ Article. <em>Agroscope Science</em>, 1–48.
 <div class="section level3">
 <h3 id="complete-culture-tree">Complete culture tree<a class="anchor" aria-label="anchor" href="#complete-culture-tree"></a>
 </h3>
+<p>Note that a culture can be linked to two parent cultures in the tree.
+Cultures that are additionally present in another position of the tree
+are marked by appending ‘[dup]’ to their name.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">culture_tree</span>, <span class="st">"culture_id"</span>, <span class="st">"name_fr"</span>, <span class="st">"name_it"</span>, limit <span class="op">=</span> <span class="fl">800</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##                                                                        levelName</span></span>
