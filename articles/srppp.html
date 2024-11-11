@@ -1215,14 +1215,23 @@ numbers in one step.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">current_register</span><span class="op">$</span><span class="va">uses</span>, by <span class="op">=</span> <span class="st">"pNbr"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">use_nr</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">current_register</span><span class="op">$</span><span class="va">culture_forms</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pNbr"</span>, <span class="st">"use_nr"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">pNbr</span>, <span class="va">use_nr</span>, <span class="va">application_area_de</span>, <span class="va">culture_form_de</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">current_register</span><span class="op">$</span><span class="va">cultures</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pNbr"</span>, <span class="st">"use_nr"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">pNbr</span>, <span class="va">use_nr</span>, <span class="va">application_area_de</span>, <span class="va">culture_form_de</span>, <span class="va">culture_de</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
+<colgroup>
+<col width="7%">
+<col width="10%">
+<col width="29%">
+<col width="23%">
+<col width="29%">
+</colgroup>
 <thead><tr class="header">
 <th align="right">pNbr</th>
 <th align="right">use_nr</th>
 <th align="left">application_area_de</th>
 <th align="left">culture_form_de</th>
+<th align="left">culture_de</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -1230,12 +1239,14 @@ numbers in one step.</p>
 <td align="right">1</td>
 <td align="left">Beerenbau</td>
 <td align="left">Freiland</td>
+<td align="left">Gemeine Felsenbirne</td>
 </tr>
 <tr class="even">
 <td align="right">4470</td>
 <td align="right">10</td>
 <td align="left">Beerenbau</td>
 <td align="left">Gewächshaus</td>
+<td align="left">Rubus Arten</td>
 </tr>
 </tbody>
 </table>
