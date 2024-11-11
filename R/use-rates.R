@@ -1,7 +1,7 @@
 #' Calculate application rates for active ingredients
 #'
 #' An application rate in g active substance/ha is calculated from information
-#' on dosage (product concentration in the application solution), application volume,
+#' on dosage (product concentration in the application solution) and application volume,
 #' or directly from the product application rate. This is complicated by the fact
 #' that a rate ("expenditure" in the XML file) with units l/ha can refer
 #' to the application solution or to the liquid product.
