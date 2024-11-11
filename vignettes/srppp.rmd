@@ -282,8 +282,8 @@ current_register$culture_forms |>
   kable()
 ```
 
-For specific uses, e.g. for uses number `1` and `2` of product "Boxer"
-with W-Number `6168`, the associated culture form and the registered
+For specific uses, e.g. for uses number `1` and `10` of product "Kumulus WG"
+with W-Number `4458`, the associated culture form and the registered
 cultures can be listed as shown below.
 As each use is typically associated with only one culture form, the
 culture form and the actual cultures can be joined to the use numbers in
@@ -291,17 +291,17 @@ one step.
 
 ```{r}
 current_register$products |> 
-  filter(wNbr == "6168") |> 
+  filter(wNbr == "4458") |> 
   left_join(current_register$uses, by = "pNbr") |> 
-  filter(use_nr %in% 1:2) |> 
+  filter(use_nr %in% c(1, 10)) |> 
   left_join(current_register$culture_forms, by = c("pNbr", "use_nr")) |> 
-  select(pNbr, use_nr, ends_with("de")) |> 
+  select(pNbr, use_nr, application_area_de, culture_form_de) |> 
   kable()
 ```
 
 Relations between the cultures are stored as a [data.tree::Node] object in
 an attribute named 'culture_tree'. The first entries from that tree
-are shown below. A complete culture tree is shown in the Appendix.
+are shown below. A complete culture tree is shown in the [Appendix](#complete-culture-tree).
 Note that a culture can be linked to two parent cultures in the
 tree. Cultures that are additionally present in another position
 of the tree are marked by appending '[dup]' to their name.
