@@ -295,7 +295,8 @@ current_register$products |>
   left_join(current_register$uses, by = "pNbr") |> 
   filter(use_nr %in% c(1, 10)) |> 
   left_join(current_register$culture_forms, by = c("pNbr", "use_nr")) |> 
-  select(pNbr, use_nr, application_area_de, culture_form_de) |> 
+  left_join(current_register$cultures, by = c("pNbr", "use_nr")) |> 
+  select(pNbr, use_nr, application_area_de, culture_form_de, culture_de) |> 
   kable()
 ```
 
