@@ -1,5 +1,8 @@
 url: https://agroscope-ch.github.io/srppp
 
+news:
+  cran_dates: false
+
 template:
   bootstrap: 5
 
