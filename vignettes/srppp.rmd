@@ -67,7 +67,7 @@ dm_draw(current_register)
 At the bottom of the table hierarchy, there is the list of substances.
 For each substance, there is a primary key `pk`, a chemical name based
 on [IUPAC nomenclature](https://iupac.org/what-we-do/nomenclature/), and
-substance names in the official languages of Switzerland. The first 
+substance names in three of the four official languages of Switzerland. The first 
 four entries out of `r nrow(current_register$substances)` are shown 
 below.
 
