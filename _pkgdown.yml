@@ -14,6 +14,7 @@ reference:
     contents:
       - alternative_products
       - application_rate_g_per_ha
+      - resolve_cultures
       - srppp_xml_clean_product_names
   - title: Data objects for working with XML versions of the SRPPP
     contents:
