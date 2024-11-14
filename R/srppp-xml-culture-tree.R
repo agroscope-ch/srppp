@@ -91,6 +91,34 @@ build_culture_tree <- function(culture_descriptions) {
     }
   }
 
+  parent_child_df <- data.frame(
+    parent = character(),
+    child = character(),
+    stringsAsFactors = FALSE)
+
+  extract_parent_child <- function(node) {
+    if (!is.null(node$parent)) {
+      parent_name <- node$parent$name
+      child_name <- node$name
+
+      parent_child_df <<- rbind(
+        parent_child_df,
+        data.frame(
+          parent = parent_name,
+          child = gsub(" [dup]$", "", child_name),
+          stringsAsFactors = FALSE
+        )
+      )
+    }
+
+    for (child in node$children) {
+      extract_parent_child(child)
+    }
+  }
+
+  extract_parent_child(root)
+  attr(root, "parent_child_df") <- parent_child_df
+
   return(root)
 }
 
