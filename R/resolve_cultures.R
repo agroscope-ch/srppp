@@ -5,13 +5,14 @@
 #' If no match is found, the function assigns `NA` to the `leaf_culture_de` column.
 #'
 #' @importFrom stringr str_detect str_replace
+#' @importFrom rlang sym :=
+#' @importFrom dplyr case_when mutate
 #' @param dataset A data frame or tibble containing the data to be processed. It
 #'   should include a column that represents the culture information to be
 #'   resolved.
-#' @param parent_child_df A dataset representing the parent-child relationships
-#'   within a hierarchical structure. This dataset is an attribute of the
-#'   `culture_tree` in the srppp package. The `culture_tree` is a hierarchical
-#'   tree structure, which itself is an attribute of the `srppp` object.
+#' @param srppp An [srppp_dm] object. From this object the parent child relations
+#'   from the culture tree are used, which are stored as attribute 'parent_child_df'
+#'   of the culture tree, which is itself stored as an attribute of the object.
 #' @param culture_column (Optional) A character string specifying the column in
 #'   the dataset that contains the culture information to be resolved. Defaults
 #'   to `"culture_de"`.
@@ -40,6 +41,7 @@
 #'    the resolved cultures at their lowest level.
 #' @export
 #' @examples
+#' \donttest{
 #' example_dataset_1 <- data.frame(
 #'   substance_de = c("Spirotetramat", "Spirotetramat", "Spirotetramat", "Spirotetramat"),
 #'   pNbr = c(7839, 7839, 7839, 7839),
@@ -68,6 +70,7 @@
 #' result3 <- resolve_cultures(example_dataset_2, current_register,
 #'   correct_culture_names = FALSE)
 #' print(result3)
+#' }
 resolve_cultures <- function(dataset, srppp,
   culture_column = "culture_de", correct_culture_names = TRUE)
 {
