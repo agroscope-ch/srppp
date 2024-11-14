@@ -1,14 +1,16 @@
-## Resolve Cultures Function
-#' The `resolve_cultures` function resolves culture levels in a dataset to their lowest hierarchical level (leaf nodes)
+#' Resolve Cultures Function
+#'
+#' Resolves culture levels in a dataset to their lowest hierarchical level (leaf nodes)
 #' using a parent-child relationship dataset derived from a culture tree.
 #' If no match is found, the function assigns `NA` to the `leaf_culture_de` column.
 #'
+#' @importFrom stringr str_detect str_replace
 #' @param dataset A data frame or tibble containing the data to be processed. It
 #'   should include a column that represents the culture information to be
 #'   resolved.
 #' @param parent_child_df A dataset representing the parent-child relationships
 #'   within a hierarchical structure. This dataset is an attribute of the
-#'   `culture_tree` in the srpppp package. The `culture_tree` is a hierarchical
+#'   `culture_tree` in the srppp package. The `culture_tree` is a hierarchical
 #'   tree structure, which itself is an attribute of the `srppp` object.
 #' @param culture_column (Optional) A character string specifying the column in
 #'   the dataset that contains the culture information to be resolved. Defaults
@@ -26,7 +28,7 @@
 #'   the resolved leaf culture levels.
 #'
 #' @details
-#' #' The `resolve_cultures` function processes the input dataset following:
+#' The `resolve_cultures` function processes the input dataset as follows
 #'
 #' **Leaf Node Resolution**: The cultures in the specified column of the dataset are resolved to their
 #'    lowest hierarchical level (leaf nodes) based on the `parent_child_df` mapping.
@@ -38,43 +40,39 @@
 #'    the resolved cultures at their lowest level.
 #' @export
 #' @examples
+#' example_dataset_1 <- data.frame(
+#'   substance_de = c("Spirotetramat", "Spirotetramat", "Spirotetramat", "Spirotetramat"),
+#'   pNbr = c(7839, 7839, 7839, 7839),
+#'   use_nr = c(5, 7, 18, 22),
+#'   application_area_de = c("Obstbau", "Obstbau", "Obstbau", "Obstbau"),
+#'   culture_de = c("Birne", "Kirsche", "Steinobst", "Kernobst"),
+#'     pest_de = c("Birnblattsauger", "Kirschenfliege", "Blattläuse (Röhrenläuse)", "Spinnmilben")
+#'     )
 #'
-#'
-#'
-#'   example_dataset_1 <- data.frame(
-#'     substance_de = c("Spirotetramat", "Spirotetramat", "Spirotetramat", "Spirotetramat"),
-#'     pNbr = c(7839, 7839, 7839, 7839),
-#'     use_nr = c(5, 7, 18, 22),
-#'     application_area_de = c("Obstbau", "Obstbau", "Obstbau", "Obstbau"),
-#'     culture_de = c("Birne", "Kirsche", "Steinobst", "Kernobst"),
-#'       pest_de = c("Birnblattsauger", "Kirschenfliege", "Blattläuse (Röhrenläuse)", "Spinnmilben")
-#'       )
-#'
-#'   example_dataset_2 <- data.frame(
-#'     substance_de = c("Spirotetramat", "Spirotetramat", "Spirotetramat", "Spirotetramat"),
-#'     pNbr = c(7839, 7839, 7839, 7839),
-#'     use_nr = c(5, 7, 18, 22),
-#'     application_area_de = c("Obstbau", "Obstbau", "Obstbau", "Obstbau"),
-#'     culture_de = c("Birnne", "Kirschen", "Steinobst", "Obstbau allg."),
-#'       pest_de = c("Birnblattsauger", "Kirschenfliege", "Blattläuse (Röhrenläuse)", "Spinnmilben")
-#'       )
-#'
-#'
+#' example_dataset_2 <- data.frame(
+#'   substance_de = c("Spirotetramat", "Spirotetramat", "Spirotetramat", "Spirotetramat"),
+#'   pNbr = c(7839, 7839, 7839, 7839),
+#'   use_nr = c(5, 7, 18, 22),
+#'   application_area_de = c("Obstbau", "Obstbau", "Obstbau", "Obstbau"),
+#'   culture_de = c("Birne", "Kirschen", "Steinobst", "Obstbau allg."),
+#'     pest_de = c("Birnblattsauger", "Kirschenfliege", "Blattläuse (Röhrenläuse)", "Spinnmilben")
+#'     )
 #'
 #' library(srppp)
 #' current_register <- srppp_dm()
-#' parent_child_df <- attr(attr(current_register, “culture_tree”), “parent_child_df”)
 #'
-#' result1 <- resolve_cultures(example_dataset_1, parent_child_df)
+#' result1 <- resolve_cultures(example_dataset_1, current_register)
 #' print(result1)
-#' result2 <- resolve_cultures(example_dataset_2,parent_child_df)
+#' result2 <- resolve_cultures(example_dataset_2, current_register)
 #' print(result2)
-#' result3 <- resolve_cultures(example_dataset_2,parent_child_df,correct_culture_names = FALSE)
+#' result3 <- resolve_cultures(example_dataset_2, current_register,
+#'   correct_culture_names = FALSE)
 #' print(result3)
+resolve_cultures <- function(dataset, srppp,
+  culture_column = "culture_de", correct_culture_names = TRUE)
+{
 
-
-resolve_cultures <- function(dataset, parent_child_df, culture_column = "culture_de", correct_culture_names = TRUE) {
-
+  parent_child_df <- attr(attr(srppp, "culture_tree"), "parent_child_df")
   corrected_cultures <- FALSE
 
   if (correct_culture_names) {
