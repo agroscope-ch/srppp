@@ -22,6 +22,9 @@
 #'   groups with "allg.". For example, both "Obstbau allg." and "allg. Obstbau"
 #'   exist. However, information about the leaf nodes is only available in the
 #'   culture groups that start with "allg. ...". This will be adjusted.
+#'@param name_dup Logical. If `TRUE` (default), keeps "[dup]" suffixes in
+#'  culture names. If `FALSE`, removes "[dup]" suffixes in the return data frame
+#'  in the `leaf_culture_de` column. See Details for more information.
 #'
 #' @return
 #' A data frame or tibble with the same structure as the input
@@ -39,6 +42,18 @@
 #'
 #'    The result is an expanded dataset that includes an additional column (`leaf_culture_de`) containing
 #'    the resolved cultures at their lowest level.
+#'
+#'**Duplicate Handling**: In the culture tree, some child cultures may have multiple parents. To distinguish
+#'    these cases, the function appends "[dup]" to the culture name when a child has more than one parent.
+#'    This helps maintain the integrity of the parent-child relationships in the resolved data.
+#'
+#'    However, the "[dup]" suffix can interfere with data processing tasks that require exact matching of
+#'    culture names. For this reason, the `name_dup` parameter is provided:
+#'    - When `name_dup = TRUE` (default), "[dup]" suffixes are kept, preserving the distinction between
+#'      cultures with multiple parents.
+#'    - When `name_dup = FALSE`, "[dup]" suffixes are removed in the return dataset in the `leaf_culture_de` column.
+#'    This can be useful for tasks that require exact matching of culture names.
+#'
 #' @export
 #' @examples
 #' \donttest{
@@ -60,6 +75,14 @@
 #'     pest_de = c("Birnblattsauger", "Kirschenfliege", "Blattläuse (Röhrenläuse)", "Spinnmilben")
 #'     )
 #'
+#' example_dataset_3 <- data.frame(
+#'   substance_de = c("Pirimicarb"),
+#'   pNbr = c(2210),
+#'   use_nr = c(3),
+#'   application_area_de = c("Feldbau"),
+#'   culture_de = c("Getreide"),
+#'     pest_de = c("Blattläuse (Röhrenläuse)")
+#'     )
 #' library(srppp)
 #' current_register <- srppp_dm()
 #'
@@ -70,9 +93,15 @@
 #' result3 <- resolve_cultures(example_dataset_2, current_register,
 #'   correct_culture_names = FALSE)
 #' print(result3)
+#'  result4 <- resolve_cultures(example_dataset_3, current_register,
+#'   correct_culture_names = FALSE,)
+#' print(result4)
+#' result5 <- resolve_cultures(example_dataset_3, current_register,
+#'   correct_culture_names = FALSE,  name_dup = FALSE)
+#' print(result5)
 #' }
 resolve_cultures <- function(dataset, srppp,
-  culture_column = "culture_de", correct_culture_names = TRUE)
+  culture_column = "culture_de", correct_culture_names = TRUE, name_dup = TRUE)
 {
 
   parent_child_df <- attr(attr(srppp, "culture_tree"), "parent_child_df")
@@ -141,6 +170,13 @@ resolve_cultures <- function(dataset, srppp,
       new_row$leaf_culture_de <- NA
       expanded_data <- rbind(expanded_data, new_row)
     }
+  }
+
+  # Remove "[dup]" if name_dup is FALSE
+  if (!name_dup) {
+    expanded_data <- expanded_data %>%
+      mutate(across(c(!!sym(culture_column), leaf_culture_de),
+                    ~str_remove(., "\\s*\\[dup\\]")))
   }
 
   return(expanded_data)
