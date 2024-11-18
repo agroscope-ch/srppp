@@ -94,7 +94,7 @@
 #'   correct_culture_names = FALSE)
 #' print(result3)
 #'  result4 <- resolve_cultures(example_dataset_3, current_register,
-#'   correct_culture_names = FALSE,)
+#'   correct_culture_names = FALSE)
 #' print(result4)
 #' result5 <- resolve_cultures(example_dataset_3, current_register,
 #'   correct_culture_names = FALSE,  name_dup = FALSE)

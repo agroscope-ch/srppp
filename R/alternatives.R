@@ -55,6 +55,14 @@
 #' alternative_products(sr, actives_de,resolve_culture = FALSE,list = TRUE)
 #' alternative_products(sr, actives_de,resolve_culture = TRUE, list = TRUE)
 #'
+#' actives_de <- c("Schalenwicklergranulose-Virus")
+#' alternative_products(sr, actives_de,resolve_culture = FALSE,list = TRUE)
+#' alternative_products(sr, actives_de,resolve_culture = TRUE, list = TRUE)
+#'
+#' actives_de <- c("Emamectinbenzoat")
+#' alternative_products(sr, actives_de,resolve_culture = FALSE,list = TRUE)
+#' alternative_products(sr, actives_de,resolve_culture = TRUE, list = TRUE)
+#'
 #'
 #' # Example in Italian
 #' actives_it <- c("Lambda-Cialotrina", "Deltametrina")
@@ -87,12 +95,16 @@ alternative_products <- function(srppp, active_ingredients,
 
   if(resolve_culture == TRUE){
     affected_cultures_x_pests <- resolve_cultures(affected_cultures_x_pests, srppp, name_dup=FALSE)
+    affected_cultures_x_pests <-
+      affected_cultures_x_pests |>
+      mutate(culture_de = leaf_culture_de) |>
+      select(-leaf_culture_de, -any_of("culture_de_corrected"))
   }
   return_columns <- c("pNbr", "wNbr", "use_nr", selection_criteria)
 
 
 
-  # Select products without the active ingredients in question
+  # Select products without the active ingredients in question for the same pest(s)
   alternative_product_candidates <- srppp$products |>
     ungroup() |>
     filter(!srppp$products$wNbr %in% affected_products$wNbr)
@@ -102,18 +114,21 @@ alternative_products <- function(srppp, active_ingredients,
     left_join(srppp$cultures, by = c("pNbr", "use_nr"), relationship = "many-to-many") |>
     left_join(srppp$pests, by = c("pNbr", "use_nr"), relationship = "many-to-many") |>
     select(all_of(return_columns)) |>
-    arrange(pick(all_of(return_columns)))
+    arrange(pick(all_of(return_columns))) |>
+    filter(pest_de %in% affected_cultures_x_pests$pest_de)
+
+  if(resolve_culture == TRUE){
+    alternative_product_candidate_uses <- resolve_cultures(alternative_product_candidate_uses, srppp, name_dup=FALSE)
+    alternative_product_candidate_uses <-
+      alternative_product_candidate_uses |>
+      mutate(culture_de = leaf_culture_de) |>
+      select(-leaf_culture_de,  -any_of("culture_de_corrected"))
+  }
+
 
   alternative_uses <- affected_cultures_x_pests |>
     left_join(alternative_product_candidate_uses,
               by = selection_criteria, relationship = "many-to-many")
-
-if(resolve_culture == TRUE){
-  alternative_uses <-
-    alternative_uses |>
-    mutate(culture_de = leaf_culture_de)
-}
-
 
 
 
