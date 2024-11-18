@@ -50,7 +50,7 @@
 #' alternative_products(sr, actives_de, details = TRUE)
 #' alternative_products(sr, actives_de, list = TRUE)
 #'
-#' # Example resolve culture
+#' # Example resolve cultures
 #' actives_de <- c("Spinetoram")
 #' alternative_products(sr, actives_de,resolve_culture = FALSE,list = TRUE)
 #' alternative_products(sr, actives_de,resolve_culture = TRUE, list = TRUE)
