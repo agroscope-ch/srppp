@@ -87,7 +87,6 @@ alternative_products <- function(srppp, active_ingredients,
 
   if(resolve_culture == TRUE){
     affected_cultures_x_pests <- resolve_cultures(affected_cultures_x_pests, srppp, name_dup=FALSE)
-    # return_columns <- c("pNbr", "wNbr", "use_nr","leaf_culture_de", selection_criteria)
   }
   return_columns <- c("pNbr", "wNbr", "use_nr", selection_criteria)
 
