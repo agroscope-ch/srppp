@@ -26,7 +26,7 @@
 #' 'missing'.
 #' @param lang The language used for the active ingredient names and the returned
 #' tables.
-#' @param resolve_culture Logical. If TRUE (default), resolves culture levels to their
+#' @param resolve_cultures Logical. If TRUE (default), resolves culture levels to their
 #' lowest hierarchical level (leaf nodes) using a parent-child relationship dataset
 #' derived from a culture tree. This allows for searching alternative products at the
 #' most specific culture level. This resolves the problem that products are sometimes
@@ -45,37 +45,37 @@
 #' actives_de <- c("Lambda-Cyhalothrin", "Deltamethrin")
 #'
 #' alternative_products(sr, actives_de)
-#' alternative_products(sr, actives_de,resolve_culture = FALSE)
+#' alternative_products(sr, actives_de, resolve_cultures = FALSE)
 #' alternative_products(sr, actives_de, missing = TRUE)
 #' alternative_products(sr, actives_de, details = TRUE)
 #' alternative_products(sr, actives_de, list = TRUE)
 #'
-#' # Example resolve cultures
+#' # Examples resolving cultures
 #' actives_de <- c("Spinetoram")
-#' alternative_products(sr, actives_de,resolve_culture = FALSE,list = TRUE)
-#' alternative_products(sr, actives_de,resolve_culture = TRUE, list = TRUE)
+#' alternative_products(sr, actives_de, resolve_cultures = FALSE, list = TRUE)
+#' alternative_products(sr, actives_de, resolve_cultures = TRUE, list = TRUE)
 #'
 #' actives_de <- c("Schalenwicklergranulose-Virus")
-#' alternative_products(sr, actives_de,resolve_culture = FALSE,list = TRUE)
-#' alternative_products(sr, actives_de,resolve_culture = TRUE, list = TRUE)
+#' alternative_products(sr, actives_de, resolve_cultures = FALSE, list = TRUE)
+#' alternative_products(sr, actives_de, resolve_cultures = TRUE, list = TRUE)
 #'
 #' actives_de <- c("Emamectinbenzoat")
-#' alternative_products(sr, actives_de,resolve_culture = FALSE,list = TRUE)
-#' alternative_products(sr, actives_de,resolve_culture = TRUE, list = TRUE)
-#'
+#' alternative_products(sr, actives_de, resolve_cultures = FALSE, list = TRUE)
+#' alternative_products(sr, actives_de, resolve_cultures = TRUE, list = TRUE)
 #'
 #' # Example in Italian
 #' actives_it <- c("Lambda-Cialotrina", "Deltametrina")
-#' alternative_products(sr, actives_it, lang = "it")
+#' alternative_products(sr, actives_it, lang = "it", resolve_cultures = FALSE)
 #' }
 alternative_products <- function(srppp, active_ingredients,
-                                 details = FALSE, missing = FALSE, list = FALSE, lang = c("de", "fr", "it"),resolve_culture = TRUE)
+  details = FALSE, missing = FALSE, list = FALSE, lang = c("de", "fr", "it"),
+  resolve_cultures = TRUE)
 {
   lang = match.arg(lang)
   substance_column <- paste("substance", lang, sep = "_")
   selection_criteria = paste(c("application_area", "culture", "pest"), lang, sep = "_")
 
-  # Select products from the PSM-V containing the active ingredients in question
+  # Select products from the srppp containing the active ingredients in question
   affected_products <- srppp$substances |>
     filter(srppp$substances[[substance_column]] %in% active_ingredients) |>
     left_join(srppp$ingredients[c("pk", "pNbr")], by = "pk") |> # get P-Numbers
@@ -93,16 +93,14 @@ alternative_products <- function(srppp, active_ingredients,
     unique() |>
     arrange(pick(all_of(selection_criteria)))
 
-  if(resolve_culture == TRUE){
-    affected_cultures_x_pests <- resolve_cultures(affected_cultures_x_pests, srppp, name_dup=FALSE)
+  if (resolve_cultures == TRUE){
+    affected_cultures_x_pests <- resolve_cultures(affected_cultures_x_pests, srppp)
     affected_cultures_x_pests <-
       affected_cultures_x_pests |>
       mutate(culture_de = leaf_culture_de) |>
       select(-leaf_culture_de, -any_of("culture_de_corrected"))
   }
   return_columns <- c("pNbr", "wNbr", "use_nr", selection_criteria)
-
-
 
   # Select products without the active ingredients in question for the same pest(s)
   alternative_product_candidates <- srppp$products |>
@@ -117,21 +115,17 @@ alternative_products <- function(srppp, active_ingredients,
     arrange(pick(all_of(return_columns))) |>
     filter(pest_de %in% affected_cultures_x_pests$pest_de)
 
-  if(resolve_culture == TRUE){
-    alternative_product_candidate_uses <- resolve_cultures(alternative_product_candidate_uses, srppp, name_dup=FALSE)
+  if (resolve_cultures == TRUE) {
+    alternative_product_candidate_uses <- resolve_cultures(alternative_product_candidate_uses, srppp)
     alternative_product_candidate_uses <-
       alternative_product_candidate_uses |>
       mutate(culture_de = leaf_culture_de) |>
       select(-leaf_culture_de,  -any_of("culture_de_corrected"))
   }
 
-
   alternative_uses <- affected_cultures_x_pests |>
     left_join(alternative_product_candidate_uses,
               by = selection_criteria, relationship = "many-to-many")
-
-
-
 
   uses_without_alternatives <- alternative_uses |>
     filter(is.na(alternative_uses$pNbr)) |>
