@@ -77,17 +77,18 @@
 #' result1 <- resolve_cultures(example_dataset_1, current_register,
 #'   correct_culture_names = FALSE)
 #' print(result1)
-#' result2 <- resolve_cultures(example_dataset_2, current_register)
+#' result2 <- resolve_cultures(example_dataset_2, current_register,
+#'  correct_culture_names = TRUE)
 #' print(result2)
 #' result3 <- resolve_cultures(example_dataset_2, current_register,
 #'   correct_culture_names = FALSE)
 #' print(result3)
 #' result4 <- resolve_cultures(example_dataset_3, current_register,
-#'   correct_culture_names = FALSE)
+#'   correct_culture_names = TRUE)
 #' print(result4)
 #' }
 resolve_cultures <- function(dataset, srppp,
-  culture_column = "culture_de", correct_culture_names = FALSE)
+  culture_column = "culture_de", correct_culture_names = TRUE)
 {
 
   culture_leaf_df <- attr(attr(srppp, "culture_tree"), "culture_leaf_df")
@@ -112,6 +113,13 @@ resolve_cultures <- function(dataset, srppp,
       dataset[[paste0(culture_column, "_corrected")]] <- dataset[[culture_column]]
       # Restore original names in the main column
       dataset[[culture_column]] <- original_cultures
+
+      dataset <-
+      dataset |>
+      mutate(!!sym(culture_column) := !!sym(paste0(culture_column, "_corrected"))) |>
+        select(-all_of(paste0(culture_column, "_corrected")))
+
+
     }
   }
 
