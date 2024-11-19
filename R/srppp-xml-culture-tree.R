@@ -105,7 +105,7 @@ build_culture_tree <- function(culture_descriptions) {
         parent_child_df,
         data.frame(
           parent = parent_name,
-          child = gsub(" [dup]$", "", child_name),
+          child = gsub(" \\[dup\\]$", "", child_name),
           stringsAsFactors = FALSE
         )
       )
