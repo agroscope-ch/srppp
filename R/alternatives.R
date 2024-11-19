@@ -12,7 +12,7 @@
 #'
 #' @importFrom stringr str_detect str_replace
 #' @importFrom rlang sym :=
-#' @importFrom dplyr case_when mutate
+#' @importFrom dplyr case_when mutate any_of
 #' @param srppp A [srppp_dm] object.
 #' @param active_ingredients Character vector of active ingredient names that
 #'   will be matched against the column 'substances_de' in the srppp table

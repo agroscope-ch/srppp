@@ -2,7 +2,7 @@
 % Please edit documentation in R/resolve_cultures.R
 \name{resolve_cultures}
 \alias{resolve_cultures}
-\title{Resolve Cultures Function}
+\title{Resolve culture specifications to their lowest hierarchical level}
 \usage{
 resolve_cultures(
   dataset,
@@ -38,8 +38,11 @@ the resolved leaf culture levels.
 }
 \description{
 Resolves culture levels in a dataset to their lowest hierarchical level (leaf nodes)
-using a parent-child relationship dataset derived from a culture tree.
+using a parent-child relationship dataset derived from a culture tree using
+the German culture names. Only German culture names are supported.
 If no match is found, the function assigns \code{NA} to the \code{leaf_culture_de} column.
+If \code{correct_culture_names} is set to \code{TRUE}, the function corrects variations in
+the naming of aggregated culture groups with "allg.".
 }
 \details{
 The \code{resolve_cultures} function processes the input dataset as follows
@@ -73,15 +76,28 @@ example_dataset_2 <- data.frame(
     pest_de = c("Birnblattsauger", "Kirschenfliege", "Blattläuse (Röhrenläuse)", "Spinnmilben")
     )
 
+example_dataset_3 <- data.frame(
+  substance_de = c("Pirimicarb"),
+  pNbr = c(2210),
+  use_nr = c(3),
+  application_area_de = c("Feldbau"),
+  culture_de = c("Getreide"),
+    pest_de = c("Blattläuse (Röhrenläuse)")
+    )
 library(srppp)
 current_register <- srppp_dm()
 
-result1 <- resolve_cultures(example_dataset_1, current_register)
+result1 <- resolve_cultures(example_dataset_1, current_register,
+  correct_culture_names = FALSE)
 print(result1)
-result2 <- resolve_cultures(example_dataset_2, current_register)
+result2 <- resolve_cultures(example_dataset_2, current_register,
+ correct_culture_names = TRUE)
 print(result2)
 result3 <- resolve_cultures(example_dataset_2, current_register,
   correct_culture_names = FALSE)
 print(result3)
+result4 <- resolve_cultures(example_dataset_3, current_register,
+  correct_culture_names = TRUE)
+print(result4)
 }
 }
