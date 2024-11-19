@@ -91,6 +91,7 @@ build_culture_tree <- function(culture_descriptions) {
     }
   }
 
+  # Lookup table for parent child relationships
   parent_child_df <- data.frame(
     parent = character(),
     child = character(),
@@ -117,7 +118,46 @@ build_culture_tree <- function(culture_descriptions) {
   }
 
   extract_parent_child(root)
-  attr(root, "parent_child_df") <- parent_child_df
+
+  # Helper function to get all descendants of a culture
+  get_all_descendants <- function(culture) {
+    descendants <- culture
+    children <- parent_child_df$child[parent_child_df$parent == culture]
+
+    while (length(children) > 0) {
+      descendants <- c(descendants, children)
+      children <- unique(unlist(lapply(children, function(x) parent_child_df$child[parent_child_df$parent == x])))
+      children <- children[!children %in% descendants]
+    }
+
+    return(unique(descendants))
+  }
+
+  # Get leaf nodes (cultures with no children)
+  leaf_nodes <- setdiff(parent_child_df$child, parent_child_df$parent)
+
+  culture_leaf_df <- data.frame(
+    culture = character(),
+    leaf_culture = character(),
+    stringsAsFactors = FALSE)
+
+  for (culture_de in df$de) {
+
+    # Get all descendants of the culture
+    all_descendants <- get_all_descendants(culture_de)
+
+    # Filter for leaf nodes among descendants
+    leaf_cultures_de <- intersect(all_descendants, leaf_nodes)
+
+    new_culture_leaf_data <- data.frame(
+      culture_de = culture_de,
+      leaf_culture_de = leaf_cultures_de,
+      stringsAsFactors = FALSE)
+
+    culture_leaf_df <- rbind(culture_leaf_df, new_culture_leaf_data)
+  }
+
+  attr(root, "culture_leaf_df") <- culture_leaf_df
 
   return(root)
 }

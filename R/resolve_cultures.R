@@ -1,8 +1,11 @@
-#' Resolve Cultures Function
+#' Resolve culture specifications to their lowest hierarchical level
 #'
 #' Resolves culture levels in a dataset to their lowest hierarchical level (leaf nodes)
-#' using a parent-child relationship dataset derived from a culture tree.
+#' using a parent-child relationship dataset derived from a culture tree using
+#' the German culture names. Only German culture names are supported.
 #' If no match is found, the function assigns `NA` to the `leaf_culture_de` column.
+#' If `correct_culture_names` is set to `TRUE`, the function corrects variations in
+#' the naming of aggregated culture groups with "allg.".
 #'
 #' @importFrom stringr str_detect str_replace
 #' @importFrom rlang sym :=
@@ -71,22 +74,23 @@
 #' library(srppp)
 #' current_register <- srppp_dm()
 #'
-#' result1 <- resolve_cultures(example_dataset_1, current_register)
+#' result1 <- resolve_cultures(example_dataset_1, current_register,
+#'   correct_culture_names = FALSE)
 #' print(result1)
 #' result2 <- resolve_cultures(example_dataset_2, current_register)
 #' print(result2)
 #' result3 <- resolve_cultures(example_dataset_2, current_register,
 #'   correct_culture_names = FALSE)
 #' print(result3)
-#'  result4 <- resolve_cultures(example_dataset_3, current_register,
+#' result4 <- resolve_cultures(example_dataset_3, current_register,
 #'   correct_culture_names = FALSE)
 #' print(result4)
 #' }
 resolve_cultures <- function(dataset, srppp,
-  culture_column = "culture_de", correct_culture_names = TRUE)
+  culture_column = "culture_de", correct_culture_names = FALSE)
 {
 
-  parent_child_df <- attr(attr(srppp, "culture_tree"), "parent_child_df")
+  culture_leaf_df <- attr(attr(srppp, "culture_tree"), "culture_leaf_df")
   corrected_cultures <- FALSE
 
   if (correct_culture_names) {
@@ -111,48 +115,11 @@ resolve_cultures <- function(dataset, srppp,
     }
   }
 
-  # Helper function to get all descendants of a culture
-  get_all_descendants <- function(culture, parent_child_df) {
-    descendants <- culture
-    children <- parent_child_df$child[parent_child_df$parent == culture]
+  join_spec <- "culture_de"
+  names(join_spec) <- culture_column
 
-    while (length(children) > 0) {
-      descendants <- c(descendants, children)
-      children <- unique(unlist(lapply(children, function(x) parent_child_df$child[parent_child_df$parent == x])))
-      children <- children[!children %in% descendants]
-    }
-
-    return(unique(descendants))
-  }
-
-  # Get leaf nodes (cultures with no children)
-  leaf_nodes <- setdiff(parent_child_df$child, parent_child_df$parent)
-
-  expanded_data <- data.frame()
-
-  for (i in 1:nrow(dataset)) {
-    row <- dataset[i, ]
-    culture <- if (corrected_cultures) row[[paste0(culture_column, "_corrected")]] else row[[culture_column]]
-
-    # Get all descendants of the culture
-    all_descendants <- get_all_descendants(culture, parent_child_df)
-
-    # Filter for leaf nodes among descendants
-    leaf_cultures <- intersect(all_descendants, leaf_nodes)
-
-    if (length(leaf_cultures) > 0) {
-      for (leaf in leaf_cultures) {
-        new_row <- row
-        new_row$leaf_culture_de <- leaf
-        expanded_data <- rbind(expanded_data, new_row)
-      }
-    } else {
-      # If no leaf cultures found, set leaf_culture_de to NA
-      new_row <- row
-      new_row$leaf_culture_de <- NA
-      expanded_data <- rbind(expanded_data, new_row)
-    }
-  }
+  expanded_data <- dataset |>
+    left_join(culture_leaf_df, by = join_spec, relationship = "many-to-many")
 
   return(expanded_data)
 }
