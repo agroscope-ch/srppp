@@ -78,9 +78,10 @@ resolved.</p></dd>
 
 
 <dt id="arg-srppp">srppp<a class="anchor" aria-label="anchor" href="#arg-srppp"></a></dt>
-<dd><p>An <a href="srppp_dm.html">srppp_dm</a> object. From this object the parent child relations
-from the culture tree are used, which are stored as attribute 'parent_child_df'
-of the culture tree, which is itself stored as an attribute of the object.</p></dd>
+<dd><p>An <a href="srppp_dm.html">srppp_dm</a> object. From this object the relations from each
+culture to the leaf cultures (lowest level in the hierarchical tree) are used,
+which are stored as attribute 'culture_leaf_df' of the culture tree, which
+is itself stored as an attribute of the object.</p></dd>
 
 
 <dt id="arg-culture-column">culture_column<a class="anchor" aria-label="anchor" href="#arg-culture-column"></a></dt>
@@ -92,7 +93,7 @@ to <code>"culture_de"</code>.</p></dd>
 <dt id="arg-correct-culture-names">correct_culture_names<a class="anchor" aria-label="anchor" href="#arg-correct-culture-names"></a></dt>
 <dd><p>If this argument is set to <code>TRUE</code>, the following
 corrections will be applied: In the <code>culture_tree</code>, and consequently in the
-<code>parent_child_df</code>, there are variations in the naming of aggregated culture
+<code>culture_leaf_df</code>, there are variations in the naming of aggregated culture
 groups with "allg.". For example, both "Obstbau allg." and "allg. Obstbau"
 exist. However, information about the leaf nodes is only available in the
 culture groups that start with "allg. ...". This will be adjusted.</p></dd>
@@ -108,10 +109,7 @@ the resolved leaf culture levels.</p>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The <code>resolve_cultures</code> function processes the input dataset as follows</p>
 <p><strong>Leaf Node Resolution</strong>: The cultures in the specified column of the dataset are resolved to their
-lowest hierarchical level (leaf nodes) based on the <code>parent_child_df</code> mapping.
-For each row in the dataset, the function searches for a match in <code>parent_child_df</code>:
-- If a match is found, new rows are generated for each corresponding leaf culture.
-- If no match is found, the <code>leaf_culture_de</code> column is set to <code>NA</code>.</p>
+lowest hierarchical level (leaf nodes) based on the <code>culture_leaf_df</code> mapping.</p>
 <p>The result is an expanded dataset that includes an additional column (<code>leaf_culture_de</code>) containing
 the resolved cultures at their lowest level.</p>
     </div>
