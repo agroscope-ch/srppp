@@ -14,36 +14,45 @@
 #' @importFrom rlang sym :=
 #' @importFrom dplyr case_when mutate
 #' @param srppp A [srppp_dm] object.
-#' @param active_ingredients Character vector of active ingredient names that will be
-#' matched against the column 'substances_de' in the srppp table 'substances'.
-#' @param details Should a table of alternative uses with 'wNbr' and 'use_nr' be returned?
-#' @param missing If this is set to TRUE, uses without alternative product registrations
-#' are listed.
+#' @param active_ingredients Character vector of active ingredient names that
+#'   will be matched against the column 'substances_de' in the srppp table
+#'   'substances'.
+#' @param details Should a table of alternative uses with 'wNbr' and 'use_nr' be
+#'   returned?
+#' @param missing If this is set to TRUE, uses without alternative product
+#'   registrations are listed.
 #' @param list If TRUE, a list of three tables is returned, a table of uses
-#' without alternative products ("Lückenindikationen"), a table of the number
-#' of alternative products for each use, if any, and a detailed table of all
-#' the alternative uses. This argument overrides the arguments 'details' and
-#' 'missing'.
-#' @param lang The language used for the active ingredient names and the returned
-#' tables.
-#' @param resolve_cultures Logical. If TRUE (default), resolves culture levels to their
-#' lowest hierarchical level (leaf nodes) using a parent-child relationship dataset
-#' derived from a culture tree. This allows for searching alternative products at the
-#' most specific culture level. This resolves the problem that products are sometimes
-#' authorised for different cultural groups. This means that actual "Lückenindikationen"
-#' can be identified. If FALSE, keeps the original culture levels without resolving
-#' to leaf nodes.
-#' @return A [tibble] containing use definitions as defined above, i.e. containing
-#' columns with the application area, crop and pathogen. Depending on the
-#' arguments, columns summarizing or listing the alternative products and/or uses
-#' are also contained.
+#'   without alternative products ("Lückenindikationen"), a table of the number
+#'   of alternative products for each use, if any, and a detailed table of all
+#'   the alternative uses. This argument overrides the arguments 'details' and
+#'   'missing'.
+#' @param lang The language used for the active ingredient names and the
+#'   returned tables.
+#' @param resolve_cultures Logical. Specifies whether to resolve culture levels
+#'   to their most specific hierarchical level (leaf nodes) using a parent-child
+#'   relationship dataset derived from a culture tree.
+#'   - If `TRUE` (default), the function maps culture levels to their corresponding
+#'   leaf nodes. This enables precise identification of alternative products at
+#'   the most specific culture level. This resolves the problem that products
+#'   are sometimes authorised for different cultural groups. This means that
+#'   actual "Lückenindikationen" can be identified.
+#'   - If `FALSE`, the function retains the original culture levels without
+#'   hierarchical resolution. This option is useful when the original structure
+#'   of the culture data needs to be preserved.
+#'   **Note**: This argument is only applicable when the language is set to
+#'   German (`de`). For other languages, the `resolve_cultures` functionality
+#'   is not implemented and must be set to `FALSE`.
+#'@return A [tibble] containing use definitions as defined above, i.e.
+#'  containing columns with the application area, crop and pathogen. Depending
+#'  on the arguments, columns summarizing or listing the alternative products
+#'  and/or uses are also contained.
 #' @export
 #' @examples
 #' \donttest{
 #' sr <- srppp_dm()
 #'
+#' # Examples with two active substances
 #' actives_de <- c("Lambda-Cyhalothrin", "Deltamethrin")
-#'
 #' alternative_products(sr, actives_de)
 #' alternative_products(sr, actives_de, resolve_cultures = FALSE)
 #' alternative_products(sr, actives_de, missing = TRUE)
@@ -66,6 +75,7 @@
 #' # Example in Italian
 #' actives_it <- c("Lambda-Cialotrina", "Deltametrina")
 #' alternative_products(sr, actives_it, lang = "it", resolve_cultures = FALSE)
+
 #' }
 alternative_products <- function(srppp, active_ingredients,
   details = FALSE, missing = FALSE, list = FALSE, lang = c("de", "fr", "it"),
@@ -74,6 +84,10 @@ alternative_products <- function(srppp, active_ingredients,
   lang = match.arg(lang)
   substance_column <- paste("substance", lang, sep = "_")
   selection_criteria = paste(c("application_area", "culture", "pest"), lang, sep = "_")
+
+  culture_column <- paste("culture", lang, sep = "_")
+  leaf_culture_column <- paste("leaf_culture", lang, sep = "_")
+  pest_column <- paste("pest", lang, sep = "_")
 
   # Select products from the srppp containing the active ingredients in question
   affected_products <- srppp$substances |>
@@ -99,8 +113,8 @@ alternative_products <- function(srppp, active_ingredients,
     affected_cultures_x_pests <- resolve_cultures(affected_cultures_x_pests, srppp)
     affected_cultures_x_pests <-
       affected_cultures_x_pests |>
-      mutate(culture_de = leaf_culture_de) |>
-      select(-leaf_culture_de, -any_of("culture_de_corrected"))
+      mutate(!!sym(culture_column) := !!sym(leaf_culture_column)) |>
+      select(-all_of(leaf_culture_column), -any_of(paste0(culture_column, "_corrected")))
   }
   return_columns <- c("pNbr", "wNbr", "use_nr", selection_criteria)
 
@@ -115,14 +129,14 @@ alternative_products <- function(srppp, active_ingredients,
     left_join(srppp$pests, by = c("pNbr", "use_nr"), relationship = "many-to-many") |>
     select(all_of(return_columns)) |>
     arrange(pick(all_of(return_columns))) |>
-    filter(pest_de %in% affected_cultures_x_pests$pest_de)
+    filter(!!sym(pest_column) %in% affected_cultures_x_pests[[pest_column]])
 
   if (resolve_cultures == TRUE) {
     alternative_product_candidate_uses <- resolve_cultures(alternative_product_candidate_uses, srppp)
     alternative_product_candidate_uses <-
       alternative_product_candidate_uses |>
-      mutate(culture_de = leaf_culture_de) |>
-      select(-leaf_culture_de,  -any_of("culture_de_corrected"))
+      mutate(!!sym(culture_column) := !!sym(leaf_culture_column)) |>  # Use dynamic leaf_culture column
+      select(-all_of(leaf_culture_column), -any_of(paste0(culture_column, "_corrected")))
   }
 
   alternative_uses <- affected_cultures_x_pests |>
