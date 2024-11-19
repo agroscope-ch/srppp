@@ -16,9 +16,10 @@ resolve_cultures(
 should include a column that represents the culture information to be
 resolved.}
 
-\item{srppp}{An \link{srppp_dm} object. From this object the parent child relations
-from the culture tree are used, which are stored as attribute 'parent_child_df'
-of the culture tree, which is itself stored as an attribute of the object.}
+\item{srppp}{An \link{srppp_dm} object. From this object the relations from each
+culture to the leaf cultures (lowest level in the hierarchical tree) are used,
+which are stored as attribute 'culture_leaf_df' of the culture tree, which
+is itself stored as an attribute of the object.}
 
 \item{culture_column}{(Optional) A character string specifying the column in
 the dataset that contains the culture information to be resolved. Defaults
@@ -26,7 +27,7 @@ to \code{"culture_de"}.}
 
 \item{correct_culture_names}{If this argument is set to \code{TRUE}, the following
 corrections will be applied: In the \code{culture_tree}, and consequently in the
-\code{parent_child_df}, there are variations in the naming of aggregated culture
+\code{culture_leaf_df}, there are variations in the naming of aggregated culture
 groups with "allg.". For example, both "Obstbau allg." and "allg. Obstbau"
 exist. However, information about the leaf nodes is only available in the
 culture groups that start with "allg. ...". This will be adjusted.}
@@ -48,10 +49,7 @@ the naming of aggregated culture groups with "allg.".
 The \code{resolve_cultures} function processes the input dataset as follows
 
 \strong{Leaf Node Resolution}: The cultures in the specified column of the dataset are resolved to their
-lowest hierarchical level (leaf nodes) based on the \code{parent_child_df} mapping.
-For each row in the dataset, the function searches for a match in \code{parent_child_df}:
-- If a match is found, new rows are generated for each corresponding leaf culture.
-- If no match is found, the \code{leaf_culture_de} column is set to \code{NA}.
+lowest hierarchical level (leaf nodes) based on the \code{culture_leaf_df} mapping.
 
 The result is an expanded dataset that includes an additional column (\code{leaf_culture_de}) containing
 the resolved cultures at their lowest level.
