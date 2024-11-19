@@ -83,9 +83,11 @@ alternative_products <- function(srppp, active_ingredients,
     select(c("pNbr", "wNbr")) |>
     arrange(pick(all_of(c("pNbr", "wNbr"))))
 
+  # Select uses of the affected products
   affected_uses <- srppp$uses |>
     filter(pNbr %in% affected_products$pNbr)
 
+  # Get unique combinations of application areas, cultures and pests for the affected uses
   affected_cultures_x_pests <- affected_uses |>
     left_join(srppp$cultures, by = c("pNbr", "use_nr"), relationship = "many-to-many") |>
     left_join(srppp$pests, by = c("pNbr", "use_nr"), relationship = "many-to-many") |>
@@ -93,7 +95,7 @@ alternative_products <- function(srppp, active_ingredients,
     unique() |>
     arrange(pick(all_of(selection_criteria)))
 
-  if (resolve_cultures == TRUE){
+  if (resolve_cultures == TRUE) {
     affected_cultures_x_pests <- resolve_cultures(affected_cultures_x_pests, srppp)
     affected_cultures_x_pests <-
       affected_cultures_x_pests |>
