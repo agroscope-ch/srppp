@@ -24,8 +24,10 @@
 #'   corrections will be applied: In the `culture_tree`, and consequently in the
 #'   `culture_leaf_df`, there are variations in the naming of aggregated culture
 #'   groups with "allg.". For example, both "Obstbau allg." and "allg. Obstbau"
-#'   exist. However, information about the leaf nodes is only available in the
-#'   culture groups that start with "allg. ...". This will be adjusted.
+#'   exist. The information about the leaf nodes is only available in one of these terms. 
+#'  Therefore, the information from the term containing the leaf nodes is transferred to 
+#'  the corresponding "allg. ..." term.
+#'
 #' @return
 #' A data frame or tibble with the same structure as the input
 #'   `dataset`, but with an additional column `"leaf_culture_de"` that contains
@@ -69,6 +71,15 @@
 #'   culture_de = c("Getreide"),
 #'     pest_de = c("Blattläuse (Röhrenläuse)")
 #'     )
+#'  
+#'  example_dataset_4 <- data.frame(
+#'   substance_de = c("Metaldehyd"),
+#'   pNbr = c(6142),
+#'   use_nr = c(1),
+#'   application_area_de = c("Zierpflanzen"),
+#'   culture_de = c("Zierpflanzen allg."),
+#'     pest_de = c("Ackerschnecken/Deroceras Arten")
+#'     )
 #' library(srppp)
 #' current_register <- srppp_dm()
 #'
@@ -84,6 +95,9 @@
 #' result4 <- resolve_cultures(example_dataset_3, current_register,
 #'   correct_culture_names = TRUE)
 #' print(result4)
+#' result5 <- resolve_cultures(example_dataset_4, current_register,
+#'   correct_culture_names = TRUE)
+#' print(result5)
 #' }
 resolve_cultures <- function(dataset, srppp,
   culture_column = "culture_de", correct_culture_names = TRUE)
@@ -93,6 +107,12 @@ resolve_cultures <- function(dataset, srppp,
   corrected_cultures <- FALSE
 
   if (correct_culture_names) {
+        culture_leaf_df <- culture_leaf_df |>
+      mutate(culture_de = case_when(
+        str_detect(culture_de, "allg\\.") ~ str_replace(culture_de, "(.*) allg\\.", "allg. \\1"),
+        TRUE ~ culture_de
+      ) |> trimws())
+    
     # Store original culture names
     original_cultures <- dataset[[culture_column]]
 
