@@ -1,4 +1,4 @@
-## version 1.1.0
+## version 1.1.0 (in development)
 
 - `R/resolve_cultures.R`: Function to expand a dataframe with culture names at the lowest level (leafs) of a culture tree constructed by `srppp_dm`.
 - Add a culture tree as a `Node` object from the `data.tree` package as attribute to `srppp_dm` objects and show it in the main vignette.
