@@ -645,14 +645,15 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
   # in the product Surflan (P-Number 4711). The entry with 48 percent is apparently
   # wrong, as in the last occurrence of the product in 2022, 40.5 percent are specified
   # That also makes sense, because 48 percent would mean a density of exactly 1 L/kg
-  # which is unlikely
+  # (the concentration is 480 g/L) which is unlikely.
   # - Product with P-Number 8755 contains an erroneous duplicated ingredient
-  # entry in 2019 and 2020
+  # entry for active ingredient 950 in 2019 and 2020, and for an unknown reason
+  # an NA entry for ingredients_de in 2024 (before it contains "50.2 g / Dose").
   # - Completely equal lines for P-Numbers 8122 and 3562
 
   ingredients <- ingredients_with_dups |>
     filter(!(pNbr == 4711 & pk == 276 & percent == 48)) |>
-    filter(!(pNbr == 8755 & pk == 950 & ingredient_de == "70.9 g / Dose")) |>
+    filter(!(pNbr == 8755 & pk == 950 & (!is.na(ingredient_de) && ingredient_de == "70.9 g / Dose"))) |>
     unique() # for P-Numbers 8122 and 3562
 
   ingredient_dups <- ingredients |>
