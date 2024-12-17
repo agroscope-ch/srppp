@@ -634,10 +634,36 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
   # Tables of product ingredients and their concentrations
   substances <- srppp_xml_get_substances(srppp_xml)
   ingredients_no_pNbr <- srppp_xml_get_ingredients(srppp_xml)
-  ingredients <- ingredients_no_pNbr |>
+  ingredients_with_dups <- ingredients_no_pNbr |>
     left_join(products[c("wNbr", "pNbr")], by = "wNbr") |>
     select(pNbr, pk, type, percent, g_per_L, ingredient_de, ingredient_fr, ingredient_it) |>
     arrange(pNbr, pk, type)
+
+  # Several duplicate entries for ingredients are removed below (see github issue #6)
+
+  # - In 2017 and 2018, there are duplicate ingredient entries for oryzalin (pk 276)
+  # in the product Surflan (P-Number 4711). The entry with 48 percent is apparently
+  # wrong, as in the last occurrence of the product in 2022, 40.5 percent are specified
+  # That also makes sense, because 48 percent would mean a density of exactly 1 L/kg
+  # which is unlikely
+  # - Product with P-Number 8755 contains an erroneous duplicated ingredient
+  # entry in 2019 and 2020
+  # - Completely equal lines for P-Numbers 8122 and 3562
+
+  ingredients <- ingredients_with_dups |>
+    filter(!(pNbr == 4711 & pk == 276 & percent == 48)) |>
+    filter(!(pNbr == 8755 & pk == 950 & ingredient_de == "70.9 g / Dose")) |>
+    unique() # for P-Numbers 8122 and 3562
+
+  ingredient_dups <- ingredients |>
+    group_by(pNbr, pk) |>
+    summarise(n = n(), .groups = "drop") |>
+    filter(n > 1)
+  if (nrow(ingredient_dups) > 0) {
+    print(ingredient_dups)
+    stop("Duplicate entries for the same ingredient in the same product")
+  }
+
 
   # Define use IDs (attribute 'use_nr' in the XML tree)
   srppp_xml <- srppp_xml_define_use_numbers(srppp_xml)

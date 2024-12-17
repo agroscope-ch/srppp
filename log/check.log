@@ -1,5 +1,5 @@
-* using log directory ‘/home/agsad.admin.ch/f80868656/projects/srppp/srppp.Rcheck’
-* using R version 4.4.1 (2024-06-14)
+* using log directory ‘/home/f80868656@agsad.admin.ch/projects/srppp/srppp.Rcheck’
+* using R version 4.4.2 (2024-10-31)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
@@ -24,11 +24,11 @@ Maintainer: ‘Johannes Ranke <johannes.ranke@agroscope.admin.ch>’
 * checking whether package ‘srppp’ can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
-* checking for future file timestamps ... OK
+* checking for future file timestamps ... NOTE
+unable to verify current time
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
-* checking top-level files ... NOTE
-Files ‘README.md’ or ‘NEWS.md’ cannot be checked without ‘pandoc’ being installed.
+* checking top-level files ... OK
 * checking for left-over files ... OK
 * checking index information ... OK
 * checking package subdirectories ... OK
@@ -45,7 +45,10 @@ Files ‘README.md’ or ‘NEWS.md’ cannot be checked without ‘pandoc’ be
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... OK
+* checking R code for possible problems ... NOTE
+srppp_dm: no visible global function definition for ‘summarize’
+Undefined global functions or variables:
+  summarize
 * checking Rd files ... OK
 * checking Rd metadata ... OK
 * checking Rd line widths ... OK
@@ -58,12 +61,12 @@ Files ‘README.md’ or ‘NEWS.md’ cannot be checked without ‘pandoc’ be
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
-* checking examples with --run-donttest ... [57s/65s] OK
+* checking examples with --run-donttest ... [50s/55s] OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... SKIPPED
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes ... OK
-* checking re-building of vignette outputs ... [40s/38s] OK
+* checking re-building of vignette outputs ... [43s/32s] OK
 * checking PDF version of manual ... OK
 * checking HTML version of manual ... NOTE
 Skipping checking HTML validation: no command 'tidy' found
@@ -71,8 +74,8 @@ Skipping checking HTML validation: no command 'tidy' found
 * checking for detritus in the temp directory ... OK
 * DONE
 
-Status: 2 NOTEs
+Status: 3 NOTEs
 See
-  ‘/home/agsad.admin.ch/f80868656/projects/srppp/srppp.Rcheck/00check.log’
+  ‘/home/f80868656@agsad.admin.ch/projects/srppp/srppp.Rcheck/00check.log’
 for details.
 

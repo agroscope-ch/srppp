@@ -3,6 +3,7 @@
 - `R/resolve_cultures.R`: Function to expand a dataframe with culture names at the lowest level (leafs) of a culture tree constructed by `srppp_dm`.
 - Add a culture tree as a `Node` object from the `data.tree` package as attribute to `srppp_dm` objects and show it in the main vignette.
 - Remove the vignette intended for JOSS, as it was rejected there
+- Remove duplicate ingredient entries for the same substance in the same product (issue #6)
 
 ## version 1.0.1 (CRAN release: 2024-11-01)
 

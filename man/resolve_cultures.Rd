@@ -29,8 +29,9 @@ to \code{"culture_de"}.}
 corrections will be applied: In the \code{culture_tree}, and consequently in the
 \code{culture_leaf_df}, there are variations in the naming of aggregated culture
 groups with "allg.". For example, both "Obstbau allg." and "allg. Obstbau"
-exist. However, information about the leaf nodes is only available in the
-culture groups that start with "allg. ...". This will be adjusted.}
+exist. The information about the leaf nodes is only available in one of these terms.
+Therefore, the information from the term containing the leaf nodes is transferred to
+the corresponding "allg. ..." term.}
 }
 \value{
 A data frame or tibble with the same structure as the input
@@ -82,6 +83,15 @@ example_dataset_3 <- data.frame(
   culture_de = c("Getreide"),
     pest_de = c("Blattläuse (Röhrenläuse)")
     )
+ 
+ example_dataset_4 <- data.frame(
+  substance_de = c("Metaldehyd"),
+  pNbr = c(6142),
+  use_nr = c(1),
+  application_area_de = c("Zierpflanzen"),
+  culture_de = c("Zierpflanzen allg."),
+    pest_de = c("Ackerschnecken/Deroceras Arten")
+    )
 library(srppp)
 current_register <- srppp_dm()
 
@@ -97,5 +107,8 @@ print(result3)
 result4 <- resolve_cultures(example_dataset_3, current_register,
   correct_culture_names = TRUE)
 print(result4)
+result5 <- resolve_cultures(example_dataset_4, current_register,
+  correct_culture_names = TRUE)
+print(result5)
 }
 }
