@@ -95,8 +95,9 @@ to <code>"culture_de"</code>.</p></dd>
 corrections will be applied: In the <code>culture_tree</code>, and consequently in the
 <code>culture_leaf_df</code>, there are variations in the naming of aggregated culture
 groups with "allg.". For example, both "Obstbau allg." and "allg. Obstbau"
-exist. However, information about the leaf nodes is only available in the
-culture groups that start with "allg. ...". This will be adjusted.</p></dd>
+exist. The information about the leaf nodes is only available in one of these terms.
+Therefore, the information from the term containing the leaf nodes is transferred to
+the corresponding "allg. ..." term.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -142,6 +143,15 @@ the resolved cultures at their lowest level.</p>
 <span class="r-in"><span>  application_area_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Feldbau"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  culture_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Getreide"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    pest_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Blattläuse (Röhrenläuse)"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span> </span></span>
+<span class="r-in"><span> <span class="va">example_dataset_4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  substance_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Metaldehyd"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  pNbr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">6142</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  use_nr <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  application_area_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Zierpflanzen"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  culture_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Zierpflanzen allg."</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    pest_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ackerschnecken/Deroceras Arten"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://agroscope-ch.github.io/srppp/">srppp</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">current_register</span> <span class="op">&lt;-</span> <span class="fu"><a href="srppp_dm.html">srppp_dm</a></span><span class="op">(</span><span class="op">)</span></span></span>
@@ -258,6 +268,67 @@ the resolved cultures at their lowest level.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8  Blattläuse (Röhrenläuse)     Sommerhafer</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9  Blattläuse (Röhrenläuse)    Sommerweizen</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10 Blattläuse (Röhrenläuse)    Winterweizen</span>
+<span class="r-in"><span><span class="va">result5</span> <span class="op">&lt;-</span> <span class="fu">resolve_cultures</span><span class="op">(</span><span class="va">example_dataset_4</span>, <span class="va">current_register</span>,</span></span>
+<span class="r-in"><span>  correct_culture_names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result5</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    substance_de pNbr use_nr application_area_de         culture_de</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2    Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3    Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6    Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7    Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8    Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9    Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                           pest_de                leaf_culture_de</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  Ackerschnecken/Deroceras Arten           Zier- und Sportrasen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  Ackerschnecken/Deroceras Arten                        Stauden</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  Ackerschnecken/Deroceras Arten                     Baumschule</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  Ackerschnecken/Deroceras Arten Ziergehölze (ausserhalb Forst)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  Ackerschnecken/Deroceras Arten                          Rosen</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  Ackerschnecken/Deroceras Arten                        Begonia</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  Ackerschnecken/Deroceras Arten                        Cyclame</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  Ackerschnecken/Deroceras Arten                    Pelargonien</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  Ackerschnecken/Deroceras Arten                        Primeln</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 Ackerschnecken/Deroceras Arten                        Dahlien</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 Ackerschnecken/Deroceras Arten                     Sommerflor</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 Ackerschnecken/Deroceras Arten                  Kirschlorbeer</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13 Ackerschnecken/Deroceras Arten                   Rosskastanie</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14 Ackerschnecken/Deroceras Arten                      Blautanne</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15 Ackerschnecken/Deroceras Arten             Buchsbäume (Buxus)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16 Ackerschnecken/Deroceras Arten                Weihnachtsbäume</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17 Ackerschnecken/Deroceras Arten                         Nelken</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18 Ackerschnecken/Deroceras Arten                           Iris</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19 Ackerschnecken/Deroceras Arten                      Hyazinthe</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20 Ackerschnecken/Deroceras Arten                       Gladiole</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21 Ackerschnecken/Deroceras Arten                   Chrysantheme</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22 Ackerschnecken/Deroceras Arten                     Blaudistel</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23 Ackerschnecken/Deroceras Arten                        Gerbera</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24 Ackerschnecken/Deroceras Arten                          Tulpe</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25 Ackerschnecken/Deroceras Arten                     Zierkürbis</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26 Ackerschnecken/Deroceras Arten  Liliengewächse (Zierpflanzen)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27 Ackerschnecken/Deroceras Arten                         Fichte</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28 Ackerschnecken/Deroceras Arten                        Azaleen</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
