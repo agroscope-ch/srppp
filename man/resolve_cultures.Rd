@@ -8,7 +8,9 @@ resolve_cultures(
   dataset,
   srppp,
   culture_column = "culture_de",
-  correct_culture_names = TRUE
+  application_area_column = "application_area_de",
+  correct_culture_names = TRUE,
+  resolve_culture_allg = TRUE
 )
 }
 \arguments{
@@ -17,21 +19,34 @@ should include a column that represents the culture information to be
 resolved.}
 
 \item{srppp}{An \link{srppp_dm} object. From this object the relations from each
-culture to the leaf cultures (lowest level in the hierarchical tree) are used,
-which are stored as attribute 'culture_leaf_df' of the culture tree, which
-is itself stored as an attribute of the object.}
+culture to the leaf cultures (lowest level in the hierarchical tree) are
+used, which are stored as attribute 'culture_leaf_df' of the culture tree,
+which is itself stored as an attribute of the object.}
 
 \item{culture_column}{(Optional) A character string specifying the column in
 the dataset that contains the culture information to be resolved. Defaults
 to \code{"culture_de"}.}
 
+\item{application_area_column}{(Optional). A character string specifing the
+name of the column in dataset containing application area information.
+Default is "application_area_de".}
+
 \item{correct_culture_names}{If this argument is set to \code{TRUE}, the following
 corrections will be applied: In the \code{culture_tree}, and consequently in the
 \code{culture_leaf_df}, there are variations in the naming of aggregated culture
 groups with "allg.". For example, both "Obstbau allg." and "allg. Obstbau"
-exist. The information about the leaf nodes is only available in one of these terms.
-Therefore, the information from the term containing the leaf nodes is transferred to
-the corresponding "allg. ..." term.}
+exist. The information about the leaf nodes is only available in one of
+these terms. Therefore, the information from the term containing the leaf
+nodes is transferred to the corresponding "allg. ..." term.}
+
+\item{resolve_culture_allg}{If this argument is set to \code{TRUE}, the culture
+"allg." is resolved to their lowest hierarchical level. The information of
+the application area is additional used to resolve the culture "allg." to
+the lowest hierarchical level. For example if the culture "allg." is used
+in the application area "Obstbau", only the leaf cultures of the culture
+"Obstbau" are used to resolve the culture "allg.". If the application area
+is not found in the culture tree, all leaf cultures are used to resolve the
+culture "allg.".}
 }
 \value{
 A data frame or tibble with the same structure as the input
@@ -39,21 +54,23 @@ A data frame or tibble with the same structure as the input
 the resolved leaf culture levels.
 }
 \description{
-Resolves culture levels in a dataset to their lowest hierarchical level (leaf nodes)
-using a parent-child relationship dataset derived from a culture tree using
-the German culture names. Only German culture names are supported.
-If no match is found, the function assigns \code{NA} to the \code{leaf_culture_de} column.
-If \code{correct_culture_names} is set to \code{TRUE}, the function corrects variations in
-the naming of aggregated culture groups with "allg.".
+Resolves culture levels in a dataset to their lowest hierarchical level (leaf
+nodes) using a parent-child relationship dataset derived from a culture tree
+using the German culture names. Only German culture names are supported. If
+no match is found, the function assigns \code{NA} to the \code{leaf_culture_de} column.
+If \code{correct_culture_names} is set to \code{TRUE}, the function corrects variations
+in the naming of aggregated culture groups with "allg.".
 }
 \details{
-The \code{resolve_cultures} function processes the input dataset as follows
+The \code{resolve_cultures} function processes the input dataset as
+follows
 
 \strong{Leaf Node Resolution}: The cultures in the specified column of the dataset are resolved to their
-lowest hierarchical level (leaf nodes) based on the \code{culture_leaf_df} mapping.
+lowest hierarchical level (leaf nodes) based on the \code{culture_leaf_df}
+mapping.
 
-The result is an expanded dataset that includes an additional column (\code{leaf_culture_de}) containing
-the resolved cultures at their lowest level.
+The result is an expanded dataset that includes an additional column
+(\code{leaf_culture_de}) containing the resolved cultures at their lowest level.
 }
 \examples{
 \donttest{
@@ -75,23 +92,23 @@ example_dataset_2 <- data.frame(
     pest_de = c("Birnblattsauger", "Kirschenfliege", "Blattläuse (Röhrenläuse)", "Spinnmilben")
     )
 
-example_dataset_3 <- data.frame(
-  substance_de = c("Pirimicarb"),
-  pNbr = c(2210),
-  use_nr = c(3),
-  application_area_de = c("Feldbau"),
-  culture_de = c("Getreide"),
-    pest_de = c("Blattläuse (Röhrenläuse)")
-    )
- 
- example_dataset_4 <- data.frame(
-  substance_de = c("Metaldehyd"),
-  pNbr = c(6142),
-  use_nr = c(1),
-  application_area_de = c("Zierpflanzen"),
-  culture_de = c("Zierpflanzen allg."),
-    pest_de = c("Ackerschnecken/Deroceras Arten")
-    )
+example_dataset_3 <- data.frame( substance_de = c("Pirimicarb"), pNbr =
+c(2210), use_nr = c(3), application_area_de = c("Feldbau"), culture_de =
+c("Getreide"), pest_de = c("Blattläuse (Röhrenläuse)") )
+
+example_dataset_4 <- data.frame( substance_de = c("Metaldehyd"), pNbr =
+c(6142), use_nr = c(1), application_area_de = c("Zierpflanzen"), culture_de =
+c("Zierpflanzen allg."), pest_de = c("Ackerschnecken/Deroceras Arten") )
+
+  example_dataset_5 <- data.frame(
+  substance_de = c("Kupfer (als Oxychlorid)","Metaldehyd","Metaldehyd","Schwefel"),
+  pNbr = c(585,1090,1090,38),
+  use_nr = c(12,4,4,1),
+  application_area_de = c("Weinbau","Obstbau","Obstrabau","Beerenbau"),
+  culture_de = c("allg.","allg.","allg.","Brombeere"),
+  pest_de = c("Graufäule (Botrytis cinerea)","Wegschnecken/Arion Arten","Wegschnecken/Arion Arten","Gallmilben") )
+
+
 library(srppp)
 current_register <- srppp_dm()
 
@@ -110,5 +127,11 @@ print(result4)
 result5 <- resolve_cultures(example_dataset_4, current_register,
   correct_culture_names = TRUE)
 print(result5)
+result6 <- resolve_cultures(example_dataset_5, current_register,
+  correct_culture_names = TRUE,resolve_culture_allg = TRUE)
+print(result6)
+result7 <- resolve_cultures(example_dataset_5, current_register,
+  correct_culture_names = TRUE,resolve_culture_allg = FALSE)
+print(result7)
 }
 }

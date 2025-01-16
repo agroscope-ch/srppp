@@ -1,4 +1,4 @@
-* using log directory ‘/home/f80868656@agsad.admin.ch/projects/srppp/srppp.Rcheck’
+* using log directory ‘/home/agsad.admin.ch/f80835237/projects/srppp_culture_tree_2_https/srppp.Rcheck’
 * using R version 4.4.2 (2024-10-31)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
@@ -45,13 +45,15 @@ unable to verify current time
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
-* checking R code for possible problems ... NOTE
-srppp_dm: no visible global function definition for ‘summarize’
-Undefined global functions or variables:
-  summarize
+* checking R code for possible problems ... OK
 * checking Rd files ... OK
 * checking Rd metadata ... OK
-* checking Rd line widths ... OK
+* checking Rd line widths ... NOTE
+Rd file 'resolve_cultures.Rd':
+  \examples lines wider than 100 characters:
+       pest_de = c("Graufäule (Botrytis cinerea)","Wegschnecken/Arion Arten","Wegschnecken/Arion Arten","Gallmilben") )
+
+These lines will be truncated in the PDF manual.
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
 * checking for code/documentation mismatches ... OK
@@ -61,12 +63,12 @@ Undefined global functions or variables:
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
-* checking examples with --run-donttest ... [50s/55s] OK
+* checking examples with --run-donttest ... [54s/59s] OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... SKIPPED
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes ... OK
-* checking re-building of vignette outputs ... [43s/32s] OK
+* checking re-building of vignette outputs ... [39s/36s] OK
 * checking PDF version of manual ... OK
 * checking HTML version of manual ... NOTE
 Skipping checking HTML validation: no command 'tidy' found
@@ -76,6 +78,6 @@ Skipping checking HTML validation: no command 'tidy' found
 
 Status: 3 NOTEs
 See
-  ‘/home/f80868656@agsad.admin.ch/projects/srppp/srppp.Rcheck/00check.log’
+  ‘/home/agsad.admin.ch/f80835237/projects/srppp_culture_tree_2_https/srppp.Rcheck/00check.log’
 for details.
 
