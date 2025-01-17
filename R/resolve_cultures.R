@@ -38,7 +38,9 @@
 #'   "Obstbau" are used to resolve the culture "allg.". If the application area
 #'   is not found in the culture tree, all leaf cultures are used to resolve the
 #'   culture "allg.".
-#' @return A data frame or tibble with the same structure as the input
+#'
+#' @return
+#' A data frame or tibble with the same structure as the input
 #' `dataset`, but with an additional column `"leaf_culture_de"` that contains
 #' the resolved leaf culture levels.
 #'
