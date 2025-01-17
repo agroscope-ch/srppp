@@ -133,11 +133,14 @@ build_culture_tree <- function(culture_descriptions) {
     return(unique(descendants))
   }
 
+
   # Get leaf nodes (cultures with no children)
   leaf_nodes <- setdiff(parent_child_df$child, parent_child_df$parent)
 
   # Remove elements containing "allg." from leaf_nodes
+  leaf_nodes_no_child_allg <- leaf_nodes[grepl("allg.", leaf_nodes, ignore.case = TRUE)]
   leaf_nodes <- leaf_nodes[!grepl("allg.", leaf_nodes, ignore.case = TRUE)]
+
 
   culture_leaf_df <- data.frame(
     culture = character(),
@@ -146,6 +149,8 @@ build_culture_tree <- function(culture_descriptions) {
 
   for (culture_de in df$de) {
 
+    # Check if the current culture is not in the excluded list
+    if (!(culture_de %in% leaf_nodes_no_child_allg)) {
     # Get all descendants of the culture
     all_descendants <- get_all_descendants(culture_de)
 
@@ -158,9 +163,12 @@ build_culture_tree <- function(culture_descriptions) {
       stringsAsFactors = FALSE)
 
     culture_leaf_df <- rbind(culture_leaf_df, new_culture_leaf_data)
+
+    }
   }
 
   attr(root, "culture_leaf_df") <- culture_leaf_df
+
 
   return(root)
 }
