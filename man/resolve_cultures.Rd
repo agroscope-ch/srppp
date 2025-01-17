@@ -80,27 +80,29 @@ example_dataset_1 <- data.frame(
   use_nr = c(5, 7, 18, 22),
   application_area_de = c("Obstbau", "Obstbau", "Obstbau", "Obstbau"),
   culture_de = c("Birne", "Kirsche", "Steinobst", "Kernobst"),
-    pest_de = c("Birnblattsauger", "Kirschenfliege", "Blattläuse (Röhrenläuse)", "Spinnmilben")
-    )
+    pest_de = c("Birnblattsauger", "Kirschenfliege", "Blattläuse (Röhrenläuse)", "Spinnmilben"))
 
 example_dataset_2 <- data.frame(
   substance_de = c("Spirotetramat", "Spirotetramat", "Spirotetramat", "Spirotetramat"),
   pNbr = c(7839, 7839, 7839, 7839),
   use_nr = c(5, 7, 18, 22),
   application_area_de = c("Obstbau", "Obstbau", "Obstbau", "Obstbau"),
-  culture_de = c("Birne", "Kirschen", "Steinobst", "Obstbau allg."),
-    pest_de = c("Birnblattsauger", "Kirschenfliege", "Blattläuse (Röhrenläuse)", "Spinnmilben")
-    )
+  culture_de = c("Birne", "Kirschen", "Steinobst", "Kernobst"),
+  pest_de = c("Birnblattsauger", "Kirschenfliege", "Blattläuse (Röhrenläuse)", "Spinnmilben"))
 
-example_dataset_3 <- data.frame( substance_de = c("Pirimicarb"), pNbr =
-c(2210), use_nr = c(3), application_area_de = c("Feldbau"), culture_de =
-c("Getreide"), pest_de = c("Blattläuse (Röhrenläuse)") )
+example_dataset_3 <- data.frame(
+  substance_de = c("Pirimicarb"),
+  pNbr = c(2210),
+  use_nr = c(3),
+  application_area_de = c("Feldbau"),
+  culture_de = c("Getreide"),
+  pest_de = c("Blattläuse (Röhrenläuse)") )
 
 example_dataset_4 <- data.frame( substance_de = c("Metaldehyd"), pNbr =
 c(6142), use_nr = c(1), application_area_de = c("Zierpflanzen"), culture_de =
 c("Zierpflanzen allg."), pest_de = c("Ackerschnecken/Deroceras Arten") )
 
-  example_dataset_5 <- data.frame(
+example_dataset_5 <- data.frame(
   substance_de = c("Kupfer (als Oxychlorid)","Metaldehyd","Metaldehyd","Schwefel"),
   pNbr = c(585,1090,1090,38),
   use_nr = c(12,4,4,1),
@@ -108,6 +110,13 @@ c("Zierpflanzen allg."), pest_de = c("Ackerschnecken/Deroceras Arten") )
   culture_de = c("allg.","allg.","allg.","Brombeere"),
   pest_de = c("Graufäule (Botrytis cinerea)","Wegschnecken/Arion Arten","Wegschnecken/Arion Arten","Gallmilben") )
 
+  example_dataset_6 <- data.frame(
+  substance_de = c("Schwefel"),
+  pNbr = c(3561),
+  use_nr = c(4),
+  application_area_de = c("Obstbau"),
+  culture_de = c("Obstbau allg."),
+  pest_de = c("Wühl- oder Schermaus") )
 
 library(srppp)
 current_register <- srppp_dm()
@@ -133,5 +142,8 @@ print(result6)
 result7 <- resolve_cultures(example_dataset_5, current_register,
   correct_culture_names = TRUE,resolve_culture_allg = FALSE)
 print(result7)
+result8 <- resolve_cultures(example_dataset_6, current_register,
+  correct_culture_names = TRUE,resolve_culture_allg = FALSE)
+print(result8)
 }
 }
