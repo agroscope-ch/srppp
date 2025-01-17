@@ -136,6 +136,9 @@ build_culture_tree <- function(culture_descriptions) {
   # Get leaf nodes (cultures with no children)
   leaf_nodes <- setdiff(parent_child_df$child, parent_child_df$parent)
 
+  # Remove elements containing "allg." from leaf_nodes
+  leaf_nodes <- leaf_nodes[!grepl("allg.", leaf_nodes, ignore.case = TRUE)]
+
   culture_leaf_df <- data.frame(
     culture = character(),
     leaf_culture = character(),
