@@ -106,11 +106,12 @@ example_dataset_5 <- data.frame(
   substance_de = c("Kupfer (als Oxychlorid)","Metaldehyd","Metaldehyd","Schwefel"),
   pNbr = c(585,1090,1090,38),
   use_nr = c(12,4,4,1),
-  application_area_de = c("Weinbau","Obstbau","Obstrabau","Beerenbau"),
+  application_area_de = c("Weinbau","Obstbau","Obstbau","Beerenbau"),
   culture_de = c("allg.","allg.","allg.","Brombeere"),
-  pest_de = c("Graufäule (Botrytis cinerea)","Wegschnecken/Arion Arten","Wegschnecken/Arion Arten","Gallmilben") )
+  pest_de = c("Graufäule (Botrytis cinerea)","Wegschnecken/Arion Arten",
+    "Wegschnecken/Arion Arten","Gallmilben") )
 
-  example_dataset_6 <- data.frame(
+example_dataset_6 <- data.frame(
   substance_de = c("Schwefel"),
   pNbr = c(3561),
   use_nr = c(4),

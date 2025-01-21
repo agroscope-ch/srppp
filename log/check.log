@@ -1,4 +1,4 @@
-* using log directory ‘/home/agsad.admin.ch/f80835237/projects/srppp_culture_tree_2_https/srppp.Rcheck’
+* using log directory ‘/home/agsad.admin.ch/f80868656/projects/srppp/srppp.Rcheck’
 * using R version 4.4.2 (2024-10-31)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
@@ -24,8 +24,7 @@ Maintainer: ‘Johannes Ranke <johannes.ranke@agroscope.admin.ch>’
 * checking whether package ‘srppp’ can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
-* checking for future file timestamps ... NOTE
-unable to verify current time
+* checking for future file timestamps ... OK
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
@@ -48,12 +47,7 @@ unable to verify current time
 * checking R code for possible problems ... OK
 * checking Rd files ... OK
 * checking Rd metadata ... OK
-* checking Rd line widths ... NOTE
-Rd file 'resolve_cultures.Rd':
-  \examples lines wider than 100 characters:
-       pest_de = c("Graufäule (Botrytis cinerea)","Wegschnecken/Arion Arten","Wegschnecken/Arion Arten","Gallmilben") )
-
-These lines will be truncated in the PDF manual.
+* checking Rd line widths ... OK
 * checking Rd cross-references ... OK
 * checking for missing documentation entries ... OK
 * checking for code/documentation mismatches ... OK
@@ -63,12 +57,12 @@ These lines will be truncated in the PDF manual.
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
-* checking examples with --run-donttest ... [57s/64s] OK
+* checking examples with --run-donttest ... [55s/64s] OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... SKIPPED
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes ... OK
-* checking re-building of vignette outputs ... [41s/37s] OK
+* checking re-building of vignette outputs ... [40s/38s] OK
 * checking PDF version of manual ... OK
 * checking HTML version of manual ... NOTE
 Skipping checking HTML validation: no command 'tidy' found
@@ -76,8 +70,8 @@ Skipping checking HTML validation: no command 'tidy' found
 * checking for detritus in the temp directory ... OK
 * DONE
 
-Status: 3 NOTEs
+Status: 1 NOTE
 See
-  ‘/home/agsad.admin.ch/f80835237/projects/srppp_culture_tree_2_https/srppp.Rcheck/00check.log’
+  ‘/home/agsad.admin.ch/f80868656/projects/srppp/srppp.Rcheck/00check.log’
 for details.
 
