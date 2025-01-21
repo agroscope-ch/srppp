@@ -5,7 +5,7 @@
 \alias{print.srppp_dm}
 \title{Create a dm object from an XML version of the Swiss Register of Plant Protection Products}
 \usage{
-srppp_dm(from = srppp_xml_url, remove_duplicates = TRUE)
+srppp_dm(from = srppp_xml_url, remove_duplicates = TRUE, verbose = TRUE)
 
 \method{print}{srppp_dm}(x, ...)
 }
@@ -14,6 +14,8 @@ srppp_dm(from = srppp_xml_url, remove_duplicates = TRUE)
 \link{srppp_xml_get}, or an object of the class 'srppp_xml'}
 
 \item{remove_duplicates}{Should duplicates based on wNbrs be removed?}
+
+\item{verbose}{Should we give some feedback?}
 
 \item{x}{A \link{srppp_dm} object}
 

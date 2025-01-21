@@ -160,7 +160,9 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
             paste0("P-Number ", pNbr, ": Differing product section for W-Number ",
               products$wNbr[node_numbers[[i]]])
           )
-          message(waldo::compare(ref_contents_clean, check_contents_clean))
+          if (verbose) {
+            message(waldo::compare(ref_contents_clean, check_contents_clean))
+          }
         }
       }
     }
@@ -529,6 +531,7 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #' @param from A specification of the way to retrieve the XML to be passed to
 #' [srppp_xml_get], or an object of the class 'srppp_xml'
 #' @param remove_duplicates Should duplicates based on wNbrs be removed?
+#' @param verbose Should we give some feedback?
 #' @return A [dm::dm] object with tables linked by foreign keys
 #' pointing to primary keys, i.e. with referential integrity.
 #' Since version 1.1, the returned object has an attribute named 'culture_tree'
@@ -586,7 +589,7 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #'   select(use_nr, application_comment_de)
 #'
 #' }
-srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
+srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE, verbose = TRUE) {
 
   if (inherits(from, "srppp_xml")) {
     srppp_xml <- from
@@ -597,7 +600,8 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
 
   # Tables of products and associated information
   # Duplicates were already removed from the XML, if requested
-  products <- srppp_xml_get_products(srppp_xml, remove_duplicates = remove_duplicates)
+  products <- srppp_xml_get_products(srppp_xml, remove_duplicates = remove_duplicates,
+    verbose = verbose)
   pNbrs <- tibble(pNbr = as.integer(unique(products$pNbr))) |>
     arrange(pNbr)
 
