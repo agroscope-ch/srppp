@@ -81,9 +81,9 @@
 #'   culture_de = c("Getreide"),
 #'   pest_de = c("Blattläuse (Röhrenläuse)") )
 #'
-#' example_dataset_4 <- data.frame( substance_de = c("Metaldehyd"), pNbr =
-#' c(6142), use_nr = c(1), application_area_de = c("Zierpflanzen"), culture_de =
-#' c("Zierpflanzen allg."), pest_de = c("Ackerschnecken/Deroceras Arten") )
+#' example_dataset_4 <- data.frame(substance_de = c("Metaldehyd"), 
+#'  pNbr = 6142, use_nr = 1, application_area_de = c("Zierpflanzen"),
+#'  culture_de = c("Zierpflanzen allg."), pest_de = c("Ackerschnecken/Deroceras Arten") )
 #'
 #' example_dataset_5 <- data.frame(
 #'   substance_de = c("Kupfer (als Oxychlorid)","Metaldehyd","Metaldehyd","Schwefel"),
