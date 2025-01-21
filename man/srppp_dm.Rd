@@ -10,7 +10,8 @@ srppp_dm(from = srppp_xml_url, remove_duplicates = TRUE)
 \method{print}{srppp_dm}(x, ...)
 }
 \arguments{
-\item{from}{A specification of the way to retrieve the XML}
+\item{from}{A specification of the way to retrieve the XML to be passed to
+\link{srppp_xml_get}, or an object of the class 'srppp_xml'}
 
 \item{remove_duplicates}{Should duplicates based on wNbrs be removed?}
 

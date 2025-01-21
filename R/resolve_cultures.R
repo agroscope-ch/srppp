@@ -31,8 +31,8 @@
 #'   name of the column in dataset containing application area information.
 #'   Default is "application_area_de".
 #' @param resolve_culture_allg If this argument is set to `TRUE`, the culture
-#'   "allg." is resolved to their lowest hierarchical level. The information of
-#'   the application area is additional used to resolve the culture "allg." to
+#'   "allg." is resolved to their lowest hierarchical level. The information on
+#'   the application area is additionally used to resolve the culture "allg." to
 #'   the lowest hierarchical level. For example if the culture "allg." is used
 #'   in the application area "Obstbau", only the leaf cultures of the culture
 #'   "Obstbau" are used to resolve the culture "allg.". If the application area
@@ -42,7 +42,8 @@
 #' @return
 #' A data frame or tibble with the same structure as the input
 #' `dataset`, but with an additional column `"leaf_culture_de"` that contains
-#' the resolved leaf culture levels.
+#' the resolved leaf culture levels. For cultures, that are not defined
+#' in the register, the leaf culture is set to `NA`.
 #'
 #' @details The `resolve_cultures` function processes the input dataset as
 #' follows
@@ -57,6 +58,9 @@
 #' @export
 #' @examples
 #' \donttest{
+#' library(srppp)
+#' current_register <- srppp_dm()
+#'
 #' example_dataset_1 <- data.frame(
 #'   substance_de = c("Spirotetramat", "Spirotetramat", "Spirotetramat", "Spirotetramat"),
 #'   pNbr = c(7839, 7839, 7839, 7839),
@@ -65,6 +69,7 @@
 #'   culture_de = c("Birne", "Kirsche", "Steinobst", "Kernobst"),
 #'     pest_de = c("Birnblattsauger", "Kirschenfliege", "Blattläuse (Röhrenläuse)", "Spinnmilben"))
 #'
+#' # Same as above, but with culture name "Kirschen" instead of "Kirsche"
 #' example_dataset_2 <- data.frame(
 #'   substance_de = c("Spirotetramat", "Spirotetramat", "Spirotetramat", "Spirotetramat"),
 #'   pNbr = c(7839, 7839, 7839, 7839),
@@ -73,6 +78,12 @@
 #'   culture_de = c("Birne", "Kirschen", "Steinobst", "Kernobst"),
 #'   pest_de = c("Birnblattsauger", "Kirschenfliege", "Blattläuse (Röhrenläuse)", "Spinnmilben"))
 #'
+#' resolve_cultures(example_dataset_1, current_register)
+#'
+#' # Here we get NA for the leaf culture of "Kirschen"
+#' resolve_cultures(example_dataset_2, current_register)
+#'
+#' # Example showing how cereals "Getreide" are resolved
 #' example_dataset_3 <- data.frame(
 #'   substance_de = c("Pirimicarb"),
 #'   pNbr = c(2210),
@@ -81,10 +92,16 @@
 #'   culture_de = c("Getreide"),
 #'   pest_de = c("Blattläuse (Röhrenläuse)") )
 #'
-#' example_dataset_4 <- data.frame(substance_de = c("Metaldehyd"), 
+#' resolve_cultures(example_dataset_3, current_register)
+#'
+#' # Example resolving ornamental plants ("Zierpflanzen")
+#' example_dataset_4 <- data.frame(substance_de = c("Metaldehyd"),
 #'  pNbr = 6142, use_nr = 1, application_area_de = c("Zierpflanzen"),
 #'  culture_de = c("Zierpflanzen allg."), pest_de = c("Ackerschnecken/Deroceras Arten") )
 #'
+#' resolve_cultures(example_dataset_4, current_register)
+#'
+#' # Illustrate the resolution of the culture "allg."
 #' example_dataset_5 <- data.frame(
 #'   substance_de = c("Kupfer (als Oxychlorid)","Metaldehyd","Metaldehyd","Schwefel"),
 #'   pNbr = c(585,1090,1090,38),
@@ -92,8 +109,14 @@
 #'   application_area_de = c("Weinbau","Obstbau","Obstbau","Beerenbau"),
 #'   culture_de = c("allg.","allg.","allg.","Brombeere"),
 #'   pest_de = c("Graufäule (Botrytis cinerea)","Wegschnecken/Arion Arten",
-#'     "Wegschnecken/Arion Arten","Gallmilben") )
+#'     "Wegschnecken/Arion Arten","Gallmilben"))
 #'
+#'  resolve_cultures(example_dataset_5, current_register, resolve_culture_allg = FALSE)
+#'  resolve_cultures(example_dataset_5, current_register)
+#'
+#' # Illustrate the resolution of "Obstbau allg.", which does not have children in
+#' # the XML files, but which should have children, because Obstbau allg. is 
+#' # not a leaf culture.
 #' example_dataset_6 <- data.frame(
 #'   substance_de = c("Schwefel"),
 #'   pNbr = c(3561),
@@ -102,36 +125,13 @@
 #'   culture_de = c("Obstbau allg."),
 #'   pest_de = c("Wühl- oder Schermaus") )
 #'
-#' library(srppp)
-#' current_register <- srppp_dm()
-#'
-#' result1 <- resolve_cultures(example_dataset_1, current_register,
-#'   correct_culture_names = FALSE)
-#' print(result1)
-#' result2 <- resolve_cultures(example_dataset_2, current_register,
-#'  correct_culture_names = TRUE)
-#' print(result2)
-#' result3 <- resolve_cultures(example_dataset_2, current_register,
-#'   correct_culture_names = FALSE)
-#' print(result3)
-#' result4 <- resolve_cultures(example_dataset_3, current_register,
-#'   correct_culture_names = TRUE)
-#' print(result4)
-#' result5 <- resolve_cultures(example_dataset_4, current_register,
-#'   correct_culture_names = TRUE)
-#' print(result5)
-#' result6 <- resolve_cultures(example_dataset_5, current_register,
-#'   correct_culture_names = TRUE,resolve_culture_allg = TRUE)
-#' print(result6)
-#' result7 <- resolve_cultures(example_dataset_5, current_register,
-#'   correct_culture_names = TRUE,resolve_culture_allg = FALSE)
-#' print(result7)
-#'result8 <- resolve_cultures(example_dataset_6, current_register,
-#'   correct_culture_names = TRUE,resolve_culture_allg = FALSE)
-#' print(result8)
+#'  resolve_cultures(example_dataset_6, current_register,
+#'    correct_culture_names = FALSE)
+#'  resolve_cultures(example_dataset_6, current_register,
+#'    correct_culture_names = TRUE)
 #' }
 resolve_cultures <- function(dataset, srppp,
-  culture_column = "culture_de", application_area_column = "application_area_de", 
+  culture_column = "culture_de", application_area_column = "application_area_de",
   correct_culture_names = TRUE, resolve_culture_allg = TRUE)
 {
 
