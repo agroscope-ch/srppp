@@ -89,11 +89,12 @@
 #'   substance_de = c("Kupfer (als Oxychlorid)","Metaldehyd","Metaldehyd","Schwefel"),
 #'   pNbr = c(585,1090,1090,38),
 #'   use_nr = c(12,4,4,1),
-#'   application_area_de = c("Weinbau","Obstbau","Obstrabau","Beerenbau"),
+#'   application_area_de = c("Weinbau","Obstbau","Obstbau","Beerenbau"),
 #'   culture_de = c("allg.","allg.","allg.","Brombeere"),
-#'   pest_de = c("Graufäule (Botrytis cinerea)","Wegschnecken/Arion Arten","Wegschnecken/Arion Arten","Gallmilben") )
+#'   pest_de = c("Graufäule (Botrytis cinerea)","Wegschnecken/Arion Arten",
+#'     "Wegschnecken/Arion Arten","Gallmilben") )
 #'
-#'   example_dataset_6 <- data.frame(
+#' example_dataset_6 <- data.frame(
 #'   substance_de = c("Schwefel"),
 #'   pNbr = c(3561),
 #'   use_nr = c(4),
@@ -130,7 +131,8 @@
 #' print(result8)
 #' }
 resolve_cultures <- function(dataset, srppp,
-  culture_column = "culture_de", application_area_column ="application_area_de" ,correct_culture_names = TRUE, resolve_culture_allg = TRUE)
+  culture_column = "culture_de", application_area_column = "application_area_de", 
+  correct_culture_names = TRUE, resolve_culture_allg = TRUE)
 {
 
   culture_leaf_df <- attr(attr(srppp, "culture_tree"), "culture_leaf_df")
@@ -162,15 +164,11 @@ resolve_cultures <- function(dataset, srppp,
       # Restore original names in the main column
       dataset[[culture_column]] <- original_cultures
 
-      dataset <-
-      dataset |>
+      dataset <- dataset |>
       mutate(!!sym(culture_column) := !!sym(paste0(culture_column, "_corrected"))) |>
         select(-all_of(paste0(culture_column, "_corrected")))
-
-
     }
   }
-
 
   if (resolve_culture_allg) {
     # Identify rows with "allg." in the culture column
