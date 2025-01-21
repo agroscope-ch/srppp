@@ -53,7 +53,7 @@ data object is given in <code><a href="../articles/srppp.html">vignette("srppp")
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">srppp_dm</span><span class="op">(</span>from <span class="op">=</span> <span class="va">srppp_xml_url</span>, remove_duplicates <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">srppp_dm</span><span class="op">(</span>from <span class="op">=</span> <span class="va">srppp_xml_url</span>, remove_duplicates <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'srppp_dm'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
@@ -70,6 +70,10 @@ data object is given in <code><a href="../articles/srppp.html">vignette("srppp")
 
 <dt id="arg-remove-duplicates">remove_duplicates<a class="anchor" aria-label="anchor" href="#arg-remove-duplicates"></a></dt>
 <dd><p>Should duplicates based on wNbrs be removed?</p></dd>
+
+
+<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
+<dd><p>Should we give some feedback?</p></dd>
 
 
 <dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
