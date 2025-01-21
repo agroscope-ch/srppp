@@ -1,9 +1,10 @@
 ℹ Testing srppp
 ✔ | F W  S  OK | Context
-✔ |          1 | srppp_xml [12.3s]
+✔ |          8 | resolve_cultures
+✔ |          2 | srppp_xml [2.0s]
 ✔ |          3 | use_rates
 
 ══ Results ═════════════════════════════════════════════════════════════════════
-Duration: 12.4 s
+Duration: 2.3 s
 
-[ FAIL 0 | WARN 0 | SKIP 0 | PASS 4 ]
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 13 ]
