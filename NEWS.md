@@ -4,6 +4,7 @@
 - Add a culture tree as a `Node` object from the `data.tree` package as attribute to `srppp_dm` objects and show it in the main vignette.
 - Remove the vignette intended for JOSS, as it was rejected there
 - Remove duplicate ingredient entries for the same substance in the same product (issue #6)
+- `inst/testdata/`: Add the zipped XML from 16 December 2024 for testing purposes and test the resulting `srppp_dm` object for referential integrity
 
 ## version 1.0.1 (CRAN release: 2024-11-01)
 

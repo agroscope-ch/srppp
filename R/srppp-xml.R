@@ -526,7 +526,8 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #'    articles 18a and 18b of the Federal Act on the Protection of Nature and
 #'    Cultural Heritage) to mitigate spray drift in meters
 #'
-#' @inheritParams srppp_xml_get
+#' @param from A specification of the way to retrieve the XML to be passed to
+#' [srppp_xml_get], or an object of the class 'srppp_xml'
 #' @param remove_duplicates Should duplicates based on wNbrs be removed?
 #' @return A [dm::dm] object with tables linked by foreign keys
 #' pointing to primary keys, i.e. with referential integrity.
@@ -587,7 +588,12 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #' }
 srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
 
-  srppp_xml <- srppp_xml_get(from)
+  if (inherits(from, "srppp_xml")) {
+    srppp_xml <- from
+    from <- attr(srppp_xml, "from")
+  } else {
+    srppp_xml <- srppp_xml_get(from)
+  }
 
   # Tables of products and associated information
   # Duplicates were already removed from the XML, if requested
@@ -648,7 +654,7 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE) {
   # (the concentration is 480 g/L) which is unlikely.
   # - Product with P-Number 8755 contains an erroneous duplicated ingredient
   # entry for active ingredient 950 in 2019 and 2020, with an entry "70.9 g / Dose"
-  # in 'ingredients_de'. 
+  # in 'ingredients_de'.
   # - Completely equal lines for P-Numbers 8122 and 3562
 
   ingredients <- ingredients_with_dups |>
