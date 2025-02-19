@@ -2,9 +2,25 @@
 * preparing ‘srppp’:
 * checking DESCRIPTION meta-information ... OK
 * installing the package to build vignettes
-* creating vignettes ... OK
-* checking for LF line-endings in source and make files and shell scripts
-* checking for empty or unneeded directories
-Omitted ‘LazyData’ and ‘LazyDataCompression’ from DESCRIPTION
-* building ‘srppp_1.1.0.tar.gz’
+* creating vignettes ... ERROR
+--- re-building ‘srppp.rmd’ using rmarkdown
+trying URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip'
 
+Quitting from lines 42-45 [unnamed-chunk-1] (srppp.rmd)
+Error: processing vignette 'srppp.rmd' failed with diagnostics:
+cannot open URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip'
+--- failed re-building ‘srppp.rmd’
+
+--- re-building ‘srppp_products_with_MO.rmd’ using rmarkdown
+trying URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip'
+
+Quitting from lines 24-25 [srppp] (srppp_products_with_MO.rmd)
+Error: processing vignette 'srppp_products_with_MO.rmd' failed with diagnostics:
+cannot open URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip'
+--- failed re-building ‘srppp_products_with_MO.rmd’
+
+SUMMARY: processing the following files failed:
+  ‘srppp.rmd’ ‘srppp_products_with_MO.rmd’
+
+Error: Vignette re-building failed.
+Execution halted

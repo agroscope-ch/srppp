@@ -35,7 +35,8 @@
 #'   leaf nodes. This enables precise identification of alternative products at
 #'   the most specific culture level. This resolves the problem that products
 #'   are sometimes authorised for different cultural groups. This means that
-#'   actual "Lückenindikationen" can be identified.
+#'   actual "Lückenindikationen" can be identified. Only supported in German,
+#'   i.e. if `lang = "de"`.
 #'   - If `FALSE`, the function retains the original culture levels without
 #'   hierarchical resolution. This option is useful when the original structure
 #'   of the culture data needs to be preserved.
@@ -110,6 +111,7 @@ alternative_products <- function(srppp, active_ingredients,
     arrange(pick(all_of(selection_criteria)))
 
   if (resolve_cultures == TRUE) {
+    if (lang != "de") stop("Resolving cultures is only supported in German")
     affected_cultures_x_pests <- resolve_cultures(affected_cultures_x_pests, srppp)
     affected_cultures_x_pests <-
       affected_cultures_x_pests |>
