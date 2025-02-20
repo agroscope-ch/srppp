@@ -107,11 +107,15 @@ application_rate_g_per_ha <- function(product_uses,
         if_else(is.na(source), # if no external information, assume l/ha is product
           if_else(is.na(g_per_L), # if g_per_L is not defined
             if (skip_l_per_ha_without_g_per_L) NA # as in the 2023 indicator
-            else rate * dosage * (percent/100), # assume l/ha to be water,
-            # dosage is assumed to be g product per L. This is correct for
-            # Rhodofix 2009 (Grünbuch) and 2012 (XML)
+            else {
+              if_else(is.na(dosage),
+                # If we have no dosage, treat l/ha as kg/ha and use percent to calculate rate_g_per_ha.
+                rate * (percent/100) * 1000, # Correct for Metro 2017
+                # If we have a dosage, the rate in l/ha is assumed to be the application solution
+                rate * dosage * (percent/100)) # Correct for Rhodofix 2009 (Grünbuch) and 2012 (XML)
+            },
             rate * g_per_L), # l/ha is product
-          if (fix_l_per_ha) { # Sometimes we have information that l/ha is water
+          if (fix_l_per_ha) { # Sometimes we have external information that the rate in l/ha is water
             rate * dosage/100 * g_per_L
           } else NA),
       units_de == "kg/ha" ~ rate * (percent * 10), # percent w/w means 10 g/kg
