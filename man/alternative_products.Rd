@@ -44,7 +44,8 @@ relationship dataset derived from a culture tree.
 leaf nodes. This enables precise identification of alternative products at
 the most specific culture level. This resolves the problem that products
 are sometimes authorised for different cultural groups. This means that
-actual "Lückenindikationen" can be identified.
+actual "Lückenindikationen" can be identified. Only supported in German,
+i.e. if \code{lang = "de"}.
 \item If \code{FALSE}, the function retains the original culture levels without
 hierarchical resolution. This option is useful when the original structure
 of the culture data needs to be preserved.
