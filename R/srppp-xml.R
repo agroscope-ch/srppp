@@ -909,6 +909,109 @@ srppp_xml_clean_product_names <- function(names) {
     stringr::str_remove(" \\[Wegen h.ngigem.*\\]$")
 }
 
+#' Check if a product name indicates that its use is not authorized at the time
+#'
+#' In most cases, products are not present in the XML file,
+#' if the "exhaustionDeadline" (German "Aufbrauchsfrist"), i.e. the date until
+#' stocks of the product can still be rightully used is earlier than the date
+#' of the publication.
+#'
+#' However, in some cases, comments are amended to the product name that show
+#' that they are not authorized. This is especially true for the year 2011,
+#' where a number of products contain comments such as
+#'
+#' - (Bew. suspendiert/Aut. suspendue/Aut. sospesa)
+#' - (Bew. beendet/Aut. révoquée/Aut. revocata)
+#'
+#' If such a comment is detected, the function returns TRUE.
+#'
+#' Other comments indicate that authorisation to use the product is not clarified,
+#' such as
+#'
+#' - \[Bewilligung beendet: Wegen hängigem Gerichtsverfahren gilt einstweilen folgende Aufbrauchfrist: 31.05.2022. Verkauf ist einstweilen weiterhin möglich.\]
+#'
+#' In all but one of these cases, the date of the exhaustion deadline in the comment is
+#' later than the date of the publication, therefore the function returns
+#' FALSE. In the specific case of the product Allegro (W-5479) in the year 2022,
+#' the exhaustion deadline given in the comment is before the publication of the
+#' register. However, in that case the exhaustionDeadline in the dedicated
+#' field is 31 August 2022, so it is assumed the use of the product was
+#' authorized at least in a part of 2022.
+#'
+#' Comments indicating that an authorization renewal is still in process are
+#' not considered to indicate that the use was not authorized at the time
+#' of publication. Examples for such comments are
+#'
+#' - \[Erneuerungsgesuch in Bearbeitung\]
+#' - (demande de renouvellement en cours)
+#'
+#' Such comments are frequently found in the registers published in 2016 and 2017,
+#' but also occur in later years.
+#'
+#' Finally, in the register for 2020 there are a number of products where an
+#' exhaustion date of 31 December 2019 is indicated in the comment, and in the
+#' register for 2022, there are two products where an exhaustion date of
+#' 31 December 2021 is indicated. In these cases, the function returns TRUE.
+#'
+#' @param names Character vector of product names that should be checked
+#' @param year The publication years
+#' @param exhaustionDeadline The exhaustion deadlines
+#' @return Boolean (Does a comment in the name indicate that the use of the
+#' product was not authorized at the time of publication of the file?)
+#' @export
+#' @examples
+#' srppp_list[["2011"]]$products |>
+#'   mutate(nonauth = srppp_xml_product_use_not_authorized(name, 2011, exhaustionDeadline)) |>
+#'   select(pNbr:soldoutDeadline, nonauth) |>
+#'   head(20)
+#'
+#' srppp_list[["2016"]]$products |>
+#'   mutate(nonauth = srppp_xml_product_use_not_authorized(name, 2016, exhaustionDeadline)) |>
+#'   select(pNbr:soldoutDeadline, nonauth) |>
+#'   head(20)
+#'
+#' # Special case Allegro: There is a conflict of information
+#' srppp_list[["2022"]]$products |>
+#'   filter(grepl("Allegro", name)) |>
+#'   select(pNbr, wNbr, name, exhaustionDeadline) |>
+#'   as.data.frame()
+#' example_years <- as.character(2019:2022)
+#' names(example_years) <- example_years
+#' lapply(example_years, function(year) {
+#'   sr <- srppp_list[[year]]
+#'   sr$products |>
+#'     mutate(nonauth = srppp_xml_product_use_not_authorized(name, year, exhaustionDeadline)) |>
+#'     select(pNbr:soldoutDeadline, nonauth) |>
+#'     filter(grepl("Allegro", name))
+#'   }) |>
+#'   purrr::list_rbind(names_to = "year")
+#'
+#' lapply(example_years, function(year) {
+#'   sr <- srppp_list[[year]]
+#'   sr$products |>
+#'     mutate(nonauth = srppp_xml_product_use_not_authorized(name, year, exhaustionDeadline)) |>
+#'     select(pNbr:soldoutDeadline, nonauth) |>
+#'     filter(grepl("Aufbrauch", name))
+#'   }) |>
+#'   purrr::list_rbind(names_to = "year") |>
+#'   as.data.frame() |>
+#'   head(2)
+#'
+srppp_xml_product_use_not_authorized <- function(names, year, exhaustionDeadline) {
+  patterns_not_authorized <- c(
+    " \\(Bew. suspendiert.*\\)$",
+    " \\(Bew. beendet.*\\)$",
+    paste0("Aufbrauch.*frist.*", as.numeric(year) - 1, "\\]$") # A number of products in 2020 and 2022
+  )
+  pattern_not_authorized <- paste(patterns_not_authorized, collapse = "|")
+
+  # Except checking for the patterns, we also check if there is an exhaustion deadline that hasn't been reached yet
+  exhaustion_still_authorized <- if_else(exhaustionDeadline == "", FALSE,
+    suppressWarnings(as.numeric(substr(exhaustionDeadline, 1, 4)) >= as.numeric(year)))
+
+  stringr::str_detect(names, pattern_not_authorized) & !exhaustion_still_authorized
+}
+
 #' Get W-Number from parent node
 #' @keywords internal
 get_parent_wNbr <- function(node) {

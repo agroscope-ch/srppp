@@ -1,5 +1,6 @@
 ## version 1.1.0 (in development)
 
+- `srppp_xml_check_products_not_authorized()`: Function to check if the product name indicates via a comment that the use of the product is not authorized in the year of the publication of the srppp. This mainly finds products in 2011 that had no active authorization but were still included.
 - `R/resolve_cultures.R`: Function to expand a dataframe with culture names at the lowest level (leafs) of a culture tree constructed by `srppp_dm`.
 - Add a culture tree as a `Node` object from the `data.tree` package as attribute to `srppp_dm` objects and show it in the main vignette.
 - Remove the vignette intended for JOSS, as it was rejected there
