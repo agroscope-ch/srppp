@@ -1,5 +1,5 @@
-* using log directory ‘/home/agsad.admin.ch/f80868656/projects/srppp/srppp.Rcheck’
-* using R version 4.4.2 (2024-10-31)
+* using log directory ‘/home/agsad.admin.ch/f80835237/projects/srppp/srppp.Rcheck’
+* using R version 4.4.3 (2025-02-28)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
     gcc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0
@@ -11,8 +11,10 @@
 * checking extension type ... Package
 * this is package ‘srppp’ version ‘1.1.0’
 * package encoding: UTF-8
-* checking CRAN incoming feasibility ... Note_to_CRAN_maintainers
+* checking CRAN incoming feasibility ... NOTE
 Maintainer: ‘Johannes Ranke <johannes.ranke@agroscope.admin.ch>’
+
+The Date field is over a month old.
 * checking package namespace information ... OK
 * checking package dependencies ... OK
 * checking if this is a source package ... OK
@@ -24,14 +26,22 @@ Maintainer: ‘Johannes Ranke <johannes.ranke@agroscope.admin.ch>’
 * checking whether package ‘srppp’ can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
-* checking for future file timestamps ... OK
+* checking for future file timestamps ... NOTE
+unable to verify current time
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
 * checking for left-over files ... OK
 * checking index information ... OK
 * checking package subdirectories ... OK
-* checking code files for non-ASCII characters ... OK
+* checking code files for non-ASCII characters ... WARNING
+Found the following file with non-ASCII characters:
+  R/srppp-xml.R
+Portable packages must use only ASCII characters in their R code and
+NAMESPACE directives, except perhaps in comments.
+Use \uxxxx escapes for other characters.
+Function ‘tools::showNonASCIIfile’ can help in finding non-ASCII
+characters in files.
 * checking R files for syntax errors ... OK
 * checking whether the package can be loaded ... OK
 * checking whether the package can be loaded with stated dependencies ... OK
@@ -57,12 +67,12 @@ Maintainer: ‘Johannes Ranke <johannes.ranke@agroscope.admin.ch>’
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
-* checking examples with --run-donttest ... [57s/64s] OK
+* checking examples with --run-donttest ... [55s/58s] OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... SKIPPED
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes ... OK
-* checking re-building of vignette outputs ... [42s/45s] OK
+* checking re-building of vignette outputs ... [41s/37s] OK
 * checking PDF version of manual ... OK
 * checking HTML version of manual ... NOTE
 Skipping checking HTML validation: no command 'tidy' found
@@ -70,8 +80,8 @@ Skipping checking HTML validation: no command 'tidy' found
 * checking for detritus in the temp directory ... OK
 * DONE
 
-Status: 1 NOTE
+Status: 1 WARNING, 3 NOTEs
 See
-  ‘/home/agsad.admin.ch/f80868656/projects/srppp/srppp.Rcheck/00check.log’
+  ‘/home/agsad.admin.ch/f80835237/projects/srppp/srppp.Rcheck/00check.log’
 for details.
 

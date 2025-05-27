@@ -833,6 +833,16 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE, verbose = T
       c(sw_drift_dist, sw_runoff_dist, sw_runoff_points, biotope_drift_dist),
       as.integer))
 
+  obligations_pest_partial_effect <- obligations |>
+    mutate(
+      partial_effect = case_when(
+        grepl("Die Wirkungseffizienz der Nützlinge kann je nach Pflanzenart stark schwanken", obligation_de) ~ "PEST_PARTIAL_EFFECT",
+        grepl("Die Wirkungseffizienz dieses Produkt wurde nicht in allen Kulturen und für alle Applikationen geprüft und kann deshalb je nach Kultur, Substrat oder Applikationsbedingungen stark schwanken.", obligation_de) ~ "PEST_PARTIAL_EFFECT",
+        grepl("Die Wirkungseffizienz dieses Produkts wurde nicht für alle Applikationen geprüft und kann deshalb je nach Substrat oder Applikationsbedingungen stark schwanken.", obligation_de) ~ "PEST_PARTIAL_EFFECT",
+        .default = NA
+      )
+    )
+
   srppp_dm <- dm(products,
     pNbrs,
     categories = product_categories,
@@ -842,7 +852,8 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE, verbose = T
     substances, ingredients,
     uses, application_comments,
     culture_forms, cultures, pests,
-    obligations = obligations_spe3) |>
+    obligations = obligations_spe3,
+    obligations_pest_partial_effect) |>
     dm_add_pk(products, wNbr) |>
     dm_add_pk(pNbrs, pNbr) |>
     dm_add_pk(parallel_imports, id) |>
