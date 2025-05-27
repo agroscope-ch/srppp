@@ -118,7 +118,7 @@ alternative_products <- function(srppp, active_ingredients,
       mutate(!!sym(culture_column) := !!sym(leaf_culture_column)) |>
       select(-all_of(leaf_culture_column), -any_of(paste0(culture_column, "_corrected")))
   }
-  return_columns <- c("pNbr", "wNbr", "use_nr", selection_criteria)
+  return_columns <- c("pNbr", "wNbr", "use_nr", "type", selection_criteria)
 
   # Select products without the active ingredients in question for the same pest(s)
   alternative_product_candidates <- srppp$products |>
