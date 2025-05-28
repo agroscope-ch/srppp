@@ -34,14 +34,7 @@ unable to verify current time
 * checking for left-over files ... OK
 * checking index information ... OK
 * checking package subdirectories ... OK
-* checking code files for non-ASCII characters ... WARNING
-Found the following file with non-ASCII characters:
-  R/srppp-xml.R
-Portable packages must use only ASCII characters in their R code and
-NAMESPACE directives, except perhaps in comments.
-Use \uxxxx escapes for other characters.
-Function ‘tools::showNonASCIIfile’ can help in finding non-ASCII
-characters in files.
+* checking code files for non-ASCII characters ... OK
 * checking R files for syntax errors ... OK
 * checking whether the package can be loaded ... OK
 * checking whether the package can be loaded with stated dependencies ... OK
@@ -67,7 +60,7 @@ characters in files.
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
-* checking examples with --run-donttest ... [54s/59s] OK
+* checking examples with --run-donttest ... [54s/57s] OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... SKIPPED
 * checking for unstated dependencies in vignettes ... OK
@@ -80,7 +73,7 @@ Skipping checking HTML validation: no command 'tidy' found
 * checking for detritus in the temp directory ... OK
 * DONE
 
-Status: 1 WARNING, 3 NOTEs
+Status: 3 NOTEs
 See
   ‘/home/agsad.admin.ch/f80835237/projects/srppp/srppp.Rcheck/00check.log’
 for details.
