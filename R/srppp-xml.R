@@ -692,8 +692,7 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE, verbose = T
       desc_pk = xml_attr(indication_information_nodes, "primaryKey")) |>
         mutate_at(c("use_nr", "desc_pk"), as.integer) |>
         left_join(products[c("wNbr", "pNbr")], by = "wNbr") |>
-        select(pNbr, !c(wNbr, pNbr)) |>
-        arrange(pNbr)
+        select(pNbr, !c(wNbr, pNbr))
 
     if (additional_text) {
       ret$add_txt_pk <- as.integer(xml_attr(indication_information_nodes,
