@@ -782,7 +782,7 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE, verbose = T
     select(-desc_pk) |>
     arrange(pNbr, use_nr)
 
-  obligations_spe3 <- obligations |>
+  obligations_spe3_pest_partial_effect <- obligations |>
     mutate(
       sw_drift_dist = case_when( # Unsprayed buffer towards surface waters
         grepl("Mindestabstand von [0-9]{1,3} m zu einem Oberfl\u00e4chengew\u00e4sser",
@@ -830,9 +830,7 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE, verbose = T
     ) |>
     mutate(across(
       c(sw_drift_dist, sw_runoff_dist, sw_runoff_points, biotope_drift_dist),
-      as.integer))
-
-  obligations_pest_partial_effect <- obligations |>
+      as.integer)) |>
     mutate(
       partial_effect = case_when(
         grepl("Die Wirkungseffizienz der N\u00fctzlinge kann je nach Pflanzenart stark schwanken", obligation_de) ~ "PEST_PARTIAL_EFFECT",
@@ -841,6 +839,8 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE, verbose = T
         .default = NA
       )
     )
+
+
 
   srppp_dm <- dm(products,
     pNbrs,
@@ -851,8 +851,7 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE, verbose = T
     substances, ingredients,
     uses, application_comments,
     culture_forms, cultures, pests,
-    obligations = obligations_spe3,
-    obligations_pest_partial_effect) |>
+    obligations = obligations_spe3_pest_partial_effect) |>
     dm_add_pk(products, wNbr) |>
     dm_add_pk(pNbrs, pNbr) |>
     dm_add_pk(parallel_imports, id) |>
