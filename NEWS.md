@@ -1,5 +1,6 @@
 ## version 1.1.0 (in development)
 
+- Include information on the completeness of the effect against each target organism in the column `type` of the `pests` table of the `srppp_dm` object. Possible types are `PEST_FULL_EFFECT`, `PEST_PARTIAL_EFFECT` and `PEST_SIDE_EFFECT`. In the `obligations` table, include a column `varying_effect`, that contains `TRUE` in case the obligation text indicates that a full effect has not been demonstrated in all cases.
 - `R/resolve_cultures.R`: Function to expand a dataframe with culture names at the lowest level (leafs) of a culture tree constructed by `srppp_dm`.
 - Add a culture tree as a `Node` object from the `data.tree` package as attribute to `srppp_dm` objects and show it in the main vignette.
 - Remove the vignette intended for JOSS, as it was rejected there

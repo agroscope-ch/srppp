@@ -7,6 +7,4 @@
 * checking for empty or unneeded directories
 Omitted ‘LazyData’ and ‘LazyDataCompression’ from DESCRIPTION
 * building ‘srppp_1.1.0.tar.gz’
-Warning: invalid uid value replaced by that for user 'nobody'
-Warning: invalid gid value replaced by that for user 'nobody'
 

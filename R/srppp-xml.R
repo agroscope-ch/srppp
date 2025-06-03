@@ -832,11 +832,11 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE, verbose = T
       c(sw_drift_dist, sw_runoff_dist, sw_runoff_points, biotope_drift_dist),
       as.integer)) |>
     mutate(
-      partial_effect = case_when(
-        grepl("Die Wirkungseffizienz der N\u00fctzlinge kann je nach Pflanzenart stark schwanken", obligation_de) ~ "PEST_PARTIAL_EFFECT",
-        grepl("Die Wirkungseffizienz dieses Produkt wurde nicht in allen Kulturen und f\u00fcr alle Applikationen gepr\u00fcft und kann deshalb je nach Kultur, Substrat oder Applikationsbedingungen stark schwanken.", obligation_de) ~ "PEST_PARTIAL_EFFECT",
-        grepl("Die Wirkungseffizienz dieses Produkts wurde nicht f\u00fcr alle Applikationen gepr\u00fcft und kann deshalb je nach Substrat oder Applikationsbedingungen stark schwanken.", obligation_de) ~ "PEST_PARTIAL_EFFECT",
-        .default = NA
+      varying_effect = case_when(
+        grepl("Die Wirkungseffizienz der N\u00fctzlinge kann je nach Pflanzenart stark schwanken", obligation_de) ~ TRUE,
+        grepl("Die Wirkungseffizienz dieses Produkt wurde nicht in allen Kulturen und f\u00fcr alle Applikationen gepr\u00fcft und kann deshalb je nach Kultur, Substrat oder Applikationsbedingungen stark schwanken.", obligation_de) ~ TRUE,
+        grepl("Die Wirkungseffizienz dieses Produkts wurde nicht f\u00fcr alle Applikationen gepr\u00fcft und kann deshalb je nach Substrat oder Applikationsbedingungen stark schwanken.", obligation_de) ~ TRUE,
+        .default = FALSE
       )
     )
 
