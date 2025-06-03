@@ -588,6 +588,11 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #'   left_join(sr$application_comments, join_by(pNbr, use_nr)) |>
 #'   select(use_nr, application_comment_de)
 #'
+#' # Illustrate 'obligations' indicating varying effects
+#' sr$obligations |>
+#'   filter(varying_effect) |>
+#'   select(pNbr, use_nr, code, obligation_de)
+#'
 #' }
 srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE, verbose = TRUE) {
 

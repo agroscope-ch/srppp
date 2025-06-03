@@ -55,7 +55,7 @@ is not implemented and must be set to \code{FALSE}.
 }}
 }
 \value{
-A \link[tibble:tibble]{tibble::tibble} containing use definitions as defined above, i.e.
+A \link{tibble} containing use definitions as defined above, i.e.
 containing columns with the application area, crop and pathogen. Depending
 on the arguments, columns summarizing or listing the alternative products
 and/or uses are also contained.

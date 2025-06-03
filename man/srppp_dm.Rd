@@ -125,5 +125,10 @@ boxer_uses |>
   left_join(sr$application_comments, join_by(pNbr, use_nr)) |>
   select(use_nr, application_comment_de)
 
+# Illustrate 'obligations' indicating varying effects
+sr$obligations |>
+  filter(varying_effect) |>
+  select(pNbr, use_nr, code, obligation_de)
+
 }
 }
