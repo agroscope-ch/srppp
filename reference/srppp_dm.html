@@ -242,6 +242,25 @@ Cultural Heritage) to mitigate spray drift in meters</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>      1 7 Tage nach dem Pflanzen.</span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Illustrate 'obligations' indicating varying effects</span></span></span>
+<span class="r-in"><span><span class="va">sr</span><span class="op">$</span><span class="va">obligations</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">varying_effect</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">pNbr</span>, <span class="va">use_nr</span>, <span class="va">code</span>, <span class="va">obligation_de</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 199 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     pNbr use_nr code            obligation_de                                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">4</span>683      1 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">4</span>683      2 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">4</span>683      3 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">4</span>685      1 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">4</span>685      2 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">4</span>751      1 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">4</span>751      2 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">4</span>751      3 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">4</span>751      4 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">4</span>751      5 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 189 more rows</span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
