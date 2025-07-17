@@ -38,8 +38,9 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.1.0" id="version-110-in-development">version 1.1.0 (in development)<a class="anchor" aria-label="anchor" href="#version-110-in-development"></a></h2>
-<ul><li>Include information on the completeness of the effect against each target organism in the column <code>type</code> of the <code>pests</code> table of the <code>srppp_dm</code> object. Possible types are <code>PEST_FULL_EFFECT</code>, <code>PEST_PARTIAL_EFFECT</code> and <code>PEST_SIDE_EFFECT</code>. In the <code>obligations</code> table, include a column <code>varying_effect</code>, that contains <code>TRUE</code> in case the obligation text indicates that a full effect has not been demonstrated in all cases.</li>
+<h2 class="pkg-version" data-toc-text="1.1.0" id="version-110">version 1.1.0<a class="anchor" aria-label="anchor" href="#version-110"></a></h2>
+<ul><li>Example code and vignettes: To satisfy CRAN policy, fall back to use the register version distributed as test data with the package (see below) in case downloading or reading from the standard URL fails, instead of throwing an error. This makes the check process on CRAN robust against server outage or a changed URL.</li>
+<li>Include information on the completeness of the effect against each target organism in the column <code>type</code> of the <code>pests</code> table of the <code>srppp_dm</code> object. Possible types are <code>PEST_FULL_EFFECT</code>, <code>PEST_PARTIAL_EFFECT</code> and <code>PEST_SIDE_EFFECT</code>. In the <code>obligations</code> table, include a column <code>varying_effect</code>, that contains <code>TRUE</code> in case the obligation text indicates that a full effect has not been demonstrated in all cases.</li>
 <li>
 <code>R/resolve_cultures.R</code>: Function to expand a dataframe with culture names at the lowest level (leafs) of a culture tree constructed by <code>srppp_dm</code>.</li>
 <li>Add a culture tree as a <code>Node</code> object from the <code>data.tree</code> package as attribute to <code>srppp_dm</code> objects and show it in the main vignette.</li>

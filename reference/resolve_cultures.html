@@ -141,7 +141,14 @@ mapping.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://agroscope-ch.github.io/srppp/">srppp</a></span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">current_register</span> <span class="op">&lt;-</span> <span class="fu"><a href="srppp_dm.html">srppp_dm</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">sr</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="srppp_dm.html">srppp_dm</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits</a></span><span class="op">(</span><span class="va">sr</span>, <span class="st">"try-error"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">sr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"testdata/Daten_Pflanzenschutzmittelverzeichnis_2024-12-16.zip"</span>,</span></span>
+<span class="r-in"><span>      package <span class="op">=</span> <span class="st">"srppp"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="srppp_xml_get.html">srppp_xml_get_from_path</a></span><span class="op">(</span>from <span class="op">=</span> <span class="st">"2024-12-16"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="srppp_dm.html">srppp_dm</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">example_dataset_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  substance_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Spirotetramat"</span>, <span class="st">"Spirotetramat"</span>, <span class="st">"Spirotetramat"</span>, <span class="st">"Spirotetramat"</span><span class="op">)</span>,</span></span>
@@ -160,7 +167,7 @@ mapping.</p>
 <span class="r-in"><span>  culture_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Birne"</span>, <span class="st">"Kirschen"</span>, <span class="st">"Steinobst"</span>, <span class="st">"Kernobst"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  pest_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Birnblattsauger"</span>, <span class="st">"Kirschenfliege"</span>, <span class="st">"Blattläuse (Röhrenläuse)"</span>, <span class="st">"Spinnmilben"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">resolve_cultures</span><span class="op">(</span><span class="va">example_dataset_1</span>, <span class="va">current_register</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">resolve_cultures</span><span class="op">(</span><span class="va">example_dataset_1</span>, <span class="va">sr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     substance_de pNbr use_nr application_area_de culture_de</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  Spirotetramat 7839      5             Obstbau      Birne</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  Spirotetramat 7839      7             Obstbau    Kirsche</span>
@@ -185,7 +192,7 @@ mapping.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10              Spinnmilben                Birne</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Here we get NA for the leaf culture of "Kirschen"</span></span></span>
-<span class="r-in"><span><span class="fu">resolve_cultures</span><span class="op">(</span><span class="va">example_dataset_2</span>, <span class="va">current_register</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">resolve_cultures</span><span class="op">(</span><span class="va">example_dataset_2</span>, <span class="va">sr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     substance_de pNbr use_nr application_area_de culture_de</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  Spirotetramat 7839      5             Obstbau      Birne</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  Spirotetramat 7839      7             Obstbau   Kirschen</span>
@@ -218,7 +225,7 @@ mapping.</p>
 <span class="r-in"><span>  culture_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Getreide"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  pest_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Blattläuse (Röhrenläuse)"</span><span class="op">)</span> <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">resolve_cultures</span><span class="op">(</span><span class="va">example_dataset_3</span>, <span class="va">current_register</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">resolve_cultures</span><span class="op">(</span><span class="va">example_dataset_3</span>, <span class="va">sr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    substance_de pNbr use_nr application_area_de culture_de</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1    Pirimicarb 2210      3             Feldbau   Getreide</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2    Pirimicarb 2210      3             Feldbau   Getreide</span>
@@ -247,7 +254,7 @@ mapping.</p>
 <span class="r-in"><span> pNbr <span class="op">=</span> <span class="fl">6142</span>, use_nr <span class="op">=</span> <span class="fl">1</span>, application_area_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Zierpflanzen"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span> culture_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Zierpflanzen allg."</span><span class="op">)</span>, pest_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ackerschnecken/Deroceras Arten"</span><span class="op">)</span> <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">resolve_cultures</span><span class="op">(</span><span class="va">example_dataset_4</span>, <span class="va">current_register</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">resolve_cultures</span><span class="op">(</span><span class="va">example_dataset_4</span>, <span class="va">sr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    substance_de pNbr use_nr application_area_de         culture_de</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1    Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2    Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen</span>
@@ -317,7 +324,7 @@ mapping.</p>
 <span class="r-in"><span>  pest_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Graufäule (Botrytis cinerea)"</span>,<span class="st">"Wegschnecken/Arion Arten"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"Wegschnecken/Arion Arten"</span>,<span class="st">"Gallmilben"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span> <span class="fu">resolve_cultures</span><span class="op">(</span><span class="va">example_dataset_5</span>, <span class="va">current_register</span>, resolve_culture_allg <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="fu">resolve_cultures</span><span class="op">(</span><span class="va">example_dataset_5</span>, <span class="va">sr</span>, resolve_culture_allg <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              substance_de pNbr use_nr application_area_de culture_de</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 Kupfer (als Oxychlorid)  585     12             Weinbau      allg.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2              Metaldehyd 1090      4             Obstbau      allg.</span>
@@ -328,7 +335,7 @@ mapping.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2     Wegschnecken/Arion Arten            &lt;NA&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3     Wegschnecken/Arion Arten            &lt;NA&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4                   Gallmilben       Brombeere</span>
-<span class="r-in"><span> <span class="fu">resolve_cultures</span><span class="op">(</span><span class="va">example_dataset_5</span>, <span class="va">current_register</span><span class="op">)</span></span></span>
+<span class="r-in"><span> <span class="fu">resolve_cultures</span><span class="op">(</span><span class="va">example_dataset_5</span>, <span class="va">sr</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               substance_de pNbr use_nr application_area_de           culture_de</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1                 Schwefel   38      1           Beerenbau            Brombeere</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2  Kupfer (als Oxychlorid)  585     12             Weinbau            Jungreben</span>
@@ -389,13 +396,13 @@ mapping.</p>
 <span class="r-in"><span>  culture_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Obstbau allg."</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  pest_de <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Wühl- oder Schermaus"</span><span class="op">)</span> <span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span> <span class="fu">resolve_cultures</span><span class="op">(</span><span class="va">example_dataset_6</span>, <span class="va">current_register</span>,</span></span>
+<span class="r-in"><span> <span class="fu">resolve_cultures</span><span class="op">(</span><span class="va">example_dataset_6</span>, <span class="va">sr</span>,</span></span>
 <span class="r-in"><span>   correct_culture_names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   substance_de pNbr use_nr application_area_de    culture_de</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1     Schwefel 3561      4             Obstbau Obstbau allg.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                pest_de leaf_culture_de</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 Wühl- oder Schermaus            &lt;NA&gt;</span>
-<span class="r-in"><span> <span class="fu">resolve_cultures</span><span class="op">(</span><span class="va">example_dataset_6</span>, <span class="va">current_register</span>,</span></span>
+<span class="r-in"><span> <span class="fu">resolve_cultures</span><span class="op">(</span><span class="va">example_dataset_6</span>, <span class="va">sr</span>,</span></span>
 <span class="r-in"><span>   correct_culture_names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    substance_de pNbr use_nr application_area_de    culture_de</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1      Schwefel 3561      4             Obstbau allg. Obstbau</span>
