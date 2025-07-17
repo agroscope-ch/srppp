@@ -76,7 +76,14 @@ The result is an expanded dataset that includes an additional column
 \examples{
 \donttest{
 library(srppp)
-current_register <- srppp_dm()
+sr <- try(srppp_dm())
+
+if (inherits(sr, "try-error")) {
+  sr <- system.file("testdata/Daten_Pflanzenschutzmittelverzeichnis_2024-12-16.zip",
+      package = "srppp") |>
+    srppp_xml_get_from_path(from = "2024-12-16") |>
+    srppp_dm()
+}
 
 example_dataset_1 <- data.frame(
   substance_de = c("Spirotetramat", "Spirotetramat", "Spirotetramat", "Spirotetramat"),
@@ -95,10 +102,10 @@ example_dataset_2 <- data.frame(
   culture_de = c("Birne", "Kirschen", "Steinobst", "Kernobst"),
   pest_de = c("Birnblattsauger", "Kirschenfliege", "Blattläuse (Röhrenläuse)", "Spinnmilben"))
 
-resolve_cultures(example_dataset_1, current_register)
+resolve_cultures(example_dataset_1, sr)
 
 # Here we get NA for the leaf culture of "Kirschen"
-resolve_cultures(example_dataset_2, current_register)
+resolve_cultures(example_dataset_2, sr)
 
 # Example showing how cereals "Getreide" are resolved
 example_dataset_3 <- data.frame(
@@ -109,14 +116,14 @@ example_dataset_3 <- data.frame(
   culture_de = c("Getreide"),
   pest_de = c("Blattläuse (Röhrenläuse)") )
 
-resolve_cultures(example_dataset_3, current_register)
+resolve_cultures(example_dataset_3, sr)
 
 # Example resolving ornamental plants ("Zierpflanzen")
 example_dataset_4 <- data.frame(substance_de = c("Metaldehyd"),
  pNbr = 6142, use_nr = 1, application_area_de = c("Zierpflanzen"),
  culture_de = c("Zierpflanzen allg."), pest_de = c("Ackerschnecken/Deroceras Arten") )
 
-resolve_cultures(example_dataset_4, current_register)
+resolve_cultures(example_dataset_4, sr)
 
 # Illustrate the resolution of the culture "allg."
 example_dataset_5 <- data.frame(
@@ -128,8 +135,8 @@ example_dataset_5 <- data.frame(
   pest_de = c("Graufäule (Botrytis cinerea)","Wegschnecken/Arion Arten",
     "Wegschnecken/Arion Arten","Gallmilben"))
 
- resolve_cultures(example_dataset_5, current_register, resolve_culture_allg = FALSE)
- resolve_cultures(example_dataset_5, current_register)
+ resolve_cultures(example_dataset_5, sr, resolve_culture_allg = FALSE)
+ resolve_cultures(example_dataset_5, sr)
 
 # Illustrate the resolution of "Obstbau allg.", which does not have children in
 # the XML files, but which should have children, because Obstbau allg. is 
@@ -142,9 +149,9 @@ example_dataset_6 <- data.frame(
   culture_de = c("Obstbau allg."),
   pest_de = c("Wühl- oder Schermaus") )
 
- resolve_cultures(example_dataset_6, current_register,
+ resolve_cultures(example_dataset_6, sr,
    correct_culture_names = FALSE)
- resolve_cultures(example_dataset_6, current_register,
+ resolve_cultures(example_dataset_6, sr,
    correct_culture_names = TRUE)
 }
 }

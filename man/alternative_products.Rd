@@ -55,7 +55,7 @@ is not implemented and must be set to \code{FALSE}.
 }}
 }
 \value{
-A \link{tibble} containing use definitions as defined above, i.e.
+A \link[tibble:tibble]{tibble::tibble} containing use definitions as defined above, i.e.
 containing columns with the application area, crop and pathogen. Depending
 on the arguments, columns summarizing or listing the alternative products
 and/or uses are also contained.
@@ -74,7 +74,15 @@ area, crop an pathogen.
 }
 \examples{
 \donttest{
-sr <- srppp_dm()
+sr <- try(srppp_dm())
+
+# Fall back to internal test data if downloading or reading fails
+if (inherits(sr, "try-error")) {
+  sr <- system.file("testdata/Daten_Pflanzenschutzmittelverzeichnis_2024-12-16.zip",
+      package = "srppp") |>
+    srppp_xml_get_from_path(from = "2024-12-16") |>
+    srppp_dm()
+}
 
 # Examples with two active substances
 actives_de <- c("Lambda-Cyhalothrin", "Deltamethrin")

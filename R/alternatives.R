@@ -50,7 +50,15 @@
 #' @export
 #' @examples
 #' \donttest{
-#' sr <- srppp_dm()
+#' sr <- try(srppp_dm())
+#'
+#' # Fall back to internal test data if downloading or reading fails
+#' if (inherits(sr, "try-error")) {
+#'   sr <- system.file("testdata/Daten_Pflanzenschutzmittelverzeichnis_2024-12-16.zip",
+#'       package = "srppp") |>
+#'     srppp_xml_get_from_path(from = "2024-12-16") |>
+#'     srppp_dm()
+#' }
 #'
 #' # Examples with two active substances
 #' actives_de <- c("Lambda-Cyhalothrin", "Deltamethrin")
@@ -76,7 +84,6 @@
 #' # Example in Italian
 #' actives_it <- c("Lambda-Cialotrina", "Deltametrina")
 #' alternative_products(sr, actives_it, lang = "it", resolve_cultures = FALSE)
-
 #' }
 alternative_products <- function(srppp, active_ingredients,
   details = FALSE, missing = FALSE, list = FALSE, lang = c("de", "fr", "it"),

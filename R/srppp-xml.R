@@ -23,9 +23,9 @@ srppp_xml_get <- function(from, ...)
 #' @rdname srppp_xml_get
 #' @export
 #' @examples
-#' # The current SRPPP as available from the FOAG website
+#' # Try to get the current SRPPP as available from the FOAG website
 #' \donttest{
-#' srppp_cur <- srppp_xml_get()
+#' srppp_cur <- try(srppp_xml_get())
 #' }
 srppp_xml_get.NULL <- function(from, ...)
 {
@@ -79,9 +79,9 @@ srppp_xml_get_from_path <- function(path, from) {
 #' or NULL.
 #' @export
 #' @examples
-#' # Get current list of products
+#' # Try to get current list of products
 #' \donttest{
-#' srppp_xml_get_products()
+#' try(srppp_xml_get_products())
 #' }
 srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
   remove_duplicates = TRUE)
@@ -237,9 +237,9 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
 #' in the XML file.
 #' @export
 #' @examples
-#' # Get current list of parallel_imports
+#' # Try to get current list of parallel_imports
 #' \donttest{
-#' srppp_xml_get_parallel_imports()
+#' try(srppp_xml_get_parallel_imports())
 #' }
 srppp_xml_get_parallel_imports <- function(srppp_xml = srppp_xml_get())
 {
@@ -286,7 +286,7 @@ srppp_xml_get_parallel_imports <- function(srppp_xml = srppp_xml_get())
 #' @export
 #' @examples
 #' \donttest{
-#' srppp_xml_get_substances()
+#' try(srppp_xml_get_substances())
 #' }
 srppp_xml_get_substances <- function(srppp_xml = srppp_xml_get()) {
   substance_nodeset <- xml_find_all(srppp_xml, "MetaData[@name='Substance']/Detail")
@@ -314,8 +314,7 @@ srppp_xml_get_substances <- function(srppp_xml = srppp_xml_get()) {
 #' @export
 #' @examples
 #' \donttest{
-#' library(srppp)
-#' srppp_xml_get_ingredients()
+#' try(srppp_xml_get_ingredients())
 #' }
 srppp_xml_get_ingredients <- function(srppp_xml = srppp_xml_get())
 {
@@ -379,7 +378,7 @@ srppp_xml_get_ingredients <- function(srppp_xml = srppp_xml_get())
 #' @export
 #' @examples
 #' \donttest{
-#' srppp_xml_define_use_numbers()
+#' try(srppp_xml_define_use_numbers())
 #' }
 srppp_xml_define_use_numbers <- function(srppp_xml = srppp_xml_get()) {
   use_nodeset <- xml_find_all(srppp_xml, "Products/Product/ProductInformation/Indication")
@@ -401,9 +400,11 @@ srppp_xml_define_use_numbers <- function(srppp_xml = srppp_xml_get()) {
 #' @export
 #' @examples
 #' \donttest{
-#' srppp_xml <- srppp_xml_get()
-#' srppp_xml <- srppp_xml_define_use_numbers(srppp_xml)
-#' srppp_xml_get_uses(srppp_xml)
+#' srppp_xml <- try(srppp_xml_get())
+#' if (!inherits(srppp_xml, "try-error")) {
+#'   srppp_xml <- srppp_xml_define_use_numbers(srppp_xml)
+#'   srppp_xml_get_uses(srppp_xml)
+#' }
 #' }
 srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
   use_nodeset <- xml_find_all(srppp_xml, "Products/Product[not(contains(@wNbr, '-'))]/ProductInformation/Indication")
@@ -542,7 +543,16 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #' library(dplyr, warn.conflicts = FALSE)
 #' library(dm, warn.conflicts = FALSE)
 #'
-#' sr <- srppp_dm()
+#' sr <- try(srppp_dm())
+#'
+#' # Fall back to internal test data if downloading or reading fails
+#' if (inherits(sr, "try-error")) {
+#'   sr <- system.file("testdata/Daten_Pflanzenschutzmittelverzeichnis_2024-12-16.zip",
+#'       package = "srppp") |>
+#'     srppp_xml_get_from_path(from = "2024-12-16") |>
+#'     srppp_dm()
+#' }
+#'
 #' dm_examine_constraints(sr)
 #' dm_draw(sr)
 #'

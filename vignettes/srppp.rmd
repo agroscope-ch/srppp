@@ -1,7 +1,7 @@
 ---
 title: The Swiss Register of Plant Protection Products as a Relational Data Model
 author: Johannes Ranke
-date: 6 November 2024 (rebuilt `r Sys.Date()`)
+date: 17 July 2025 (rebuilt `r Sys.Date()`)
 bibliography: references.bib
 output:
   rmarkdown::html_vignette:
@@ -41,7 +41,18 @@ is as simple as
 ```{r message = FALSE}
 library(srppp)
 library(dplyr)
-current_register <- srppp_dm()
+example_register <- try(srppp_dm())
+```
+In case downloading the current register from the internet fails, we read in the
+version from 16 December 2024 that is distributed with the package.
+
+```{r}
+if (inherits(example_register, "try-error")) {
+  test_data <- system.file("testdata/Daten_Pflanzenschutzmittelverzeichnis_2024-12-16.zip",
+  package = "srppp")
+  test_xml <- srppp_xml_get_from_path(test_data, from = "2024-12-16")
+  example_register <- srppp_dm(test_xml)
+}
 ```
 
 The resulting data object contains a number of related tables with
@@ -60,7 +71,7 @@ an identification number for the authorization holder are shown in light blue.
 #|   Diagram showing the relation between the different tables
 #|   (foreign key relationships)
 library(DiagrammeR)
-dm_draw(current_register)
+dm_draw(example_register)
 ```
 
 # Substances
@@ -69,12 +80,12 @@ At the bottom of the table hierarchy, there is the list of substances.
 For each substance, there is a primary key `pk`, a chemical name based
 on [IUPAC nomenclature](https://iupac.org/what-we-do/nomenclature/), and
 substance names in three of the four official languages of Switzerland. The first 
-four entries out of `r nrow(current_register$substances)` are shown 
+four entries out of `r nrow(example_register$substances)` are shown 
 below.
 
 ```{r}
 library(knitr)
-current_register$substances |> 
+example_register$substances |> 
   select(pk, iupac, substance_de, substance_fr, substance_it) |> 
   head(n = 4L) |> 
   kable()
@@ -102,7 +113,7 @@ the respective additional columns as
 illustrated by the first five rows shown below.
 
 ```{r}
-current_register$ingredients |> 
+example_register$ingredients |> 
   select(pNbr, pk, type, percent, g_per_L, ingredient_de, ingredient_fr) |> 
   head(n = 5L) |> 
   kable()
@@ -114,7 +125,7 @@ is quite different.
 
 ```{r message = FALSE}
 library(dplyr)
-current_register$ingredients |> 
+example_register$ingredients |> 
   select(pk, type) |> 
   unique() |> 
   group_by(type) |> 
@@ -127,8 +138,8 @@ classification and labelling of the product. All substances
 occurring as synergists or safeners are listed below.
 
 ```{r}
-current_register$ingredients |> 
-  left_join(current_register$substances, by = "pk") |>
+example_register$ingredients |> 
+  left_join(example_register$substances, by = "pk") |>
   filter(type %in% c("SYNERGIST", "SAFENER")) |>
   group_by(type, substance_de) |> 
   summarize(n = n(), .groups = "drop_last") |> 
@@ -140,7 +151,7 @@ current_register$ingredients |>
 Note that the first two lines in the code could also be replaced by
 
 ```{r eval = FALSE}
-current_register |> 
+example_register |> 
   dm_flatten_to_tbl(ingredients) |> 
 ```
 
@@ -156,7 +167,7 @@ and W-Numbers is illustrated below by showing the first five entries in the
 `products` table.
 
 ```{r}
-current_register$products |> 
+example_register$products |> 
   select(-terminationReason) |> 
   head() |> 
   kable()
@@ -173,7 +184,7 @@ for selling the product (`soldoutDeadline`) and for use of the product
 (`exhaustionDeadline`) are given in the respective columns.
 
 ```{r}
-current_register$products |>
+example_register$products |>
   filter(exhaustionDeadline != "") |> 
   select(-terminationReason) |> 
   head() |> 
@@ -181,8 +192,8 @@ current_register$products |>
 ```
 
 ```{r echo = FALSE}
-n_pNbrs <- nrow(current_register$pNbrs)
-n_wNbrs <- nrow(current_register$products)
+n_pNbrs <- nrow(example_register$pNbrs)
+n_wNbrs <- nrow(example_register$products)
 ```
 At the build time of this vignette, there were `r n_wNbrs` product registrations
 for `r n_pNbrs` P-Numbers in the Swiss Register of Plant 
@@ -196,10 +207,10 @@ P-Numbers and W-Numbers as well as the product composition can be retrieved by a
 command like the following.
 
 ```{r}
-current_register$products |>
+example_register$products |>
   filter(name == "Plüsstar") |>
-  left_join(current_register$ingredients, by = "pNbr") |>
-  left_join(current_register$substances, by = "pk") |>
+  left_join(example_register$ingredients, by = "pNbr") |>
+  left_join(example_register$substances, by = "pk") |>
   select(pNbr, name, substance_de, percent, g_per_L) |> 
   kable()
 ```
@@ -213,7 +224,7 @@ are generated while reading in the XML file, in order to be able to refer to
 each use by a combination of P-Number (`pNbr`) and use number (`use_nr`).
 
 ```{r}
-current_register$uses |> 
+example_register$uses |> 
   filter(pNbr %in% c(6521L, 7511L) & use_nr < 10) |> 
   select(pNbr, use_nr, ends_with("dosage"), ends_with("rate"), units_de,
     waiting_period, time_units_en, application_area_de) |> 
@@ -243,13 +254,13 @@ the information in the `ingredients` table. The names of the
 active substances can be joined as well.
 
 ```{r}
-example_uses <- current_register$products |> 
+example_uses <- example_register$products |> 
   filter(wNbr == "6168") |>
-  left_join(current_register$uses, by = join_by(pNbr),
+  left_join(example_register$uses, by = join_by(pNbr),
     relationship = "many-to-many") |> 
-  left_join(current_register$ingredients, by = join_by(pNbr),
+  left_join(example_register$ingredients, by = join_by(pNbr),
     relationship = "many-to-many") |>
-  left_join(current_register$substances, by = join_by(pk)) |>
+  left_join(example_register$substances, by = join_by(pk)) |>
   select(pNbr, name, use_nr,
     min_dosage, max_dosage, min_rate, max_rate, units_de,
     application_area_de,
@@ -277,7 +288,7 @@ In the current SRPPP versions, there are only two culture forms, greenhouse
 cultivation and field cultivation.
 
 ```{r}
-current_register$culture_forms |> 
+example_register$culture_forms |> 
   select(starts_with("culture")) |> 
   unique() |> 
   kable()
@@ -291,12 +302,12 @@ culture form and the actual cultures can be joined to the use numbers in
 one step.
 
 ```{r}
-current_register$products |> 
+example_register$products |> 
   filter(wNbr == "4458") |> 
-  left_join(current_register$uses, by = "pNbr") |> 
+  left_join(example_register$uses, by = "pNbr") |> 
   filter(use_nr %in% c(1, 10)) |> 
-  left_join(current_register$culture_forms, by = c("pNbr", "use_nr")) |> 
-  left_join(current_register$cultures, by = c("pNbr", "use_nr")) |> 
+  left_join(example_register$culture_forms, by = c("pNbr", "use_nr")) |> 
+  left_join(example_register$cultures, by = c("pNbr", "use_nr")) |> 
   select(pNbr, use_nr, application_area_de, culture_form_de, culture_de) |> 
   kable()
 ```
@@ -309,8 +320,8 @@ tree. Cultures that are additionally present in another position
 of the tree are marked by appending '[dup]' to their name.
 
 ```{r}
-current_register <- srppp_dm()
-culture_tree <- attr(current_register, "culture_tree")
+example_register <- srppp_dm()
+culture_tree <- attr(example_register, "culture_tree")
 print(culture_tree, limit = 30, "culture_id")
 ```
 
@@ -320,7 +331,7 @@ The target organisms for each use can be found in the table `pests`. Example
 code for retrieving the target organisms for specific uses is given below.
 
 ```{r}
-current_register$pests |> 
+example_register$pests |> 
   filter(pNbr == 7105L, use_nr %in% 1:2) |> 
   select(use_nr, ends_with("de"), ends_with("fr")) |> 
   kable()
@@ -337,10 +348,10 @@ can describe several indications. The relation between uses
 project is illustrated below.
 
 ```{r}
-culture_pest_combinations <- current_register$uses |> 
+culture_pest_combinations <- example_register$uses |> 
   filter(pNbr == 6521L) |> 
-  left_join(current_register$cultures, by = c("pNbr", "use_nr")) |> 
-  left_join(current_register$pests, by = c("pNbr", "use_nr")) |> 
+  left_join(example_register$cultures, by = c("pNbr", "use_nr")) |> 
+  left_join(example_register$pests, by = c("pNbr", "use_nr")) |> 
   select(pNbr, use_nr, application_area_de, culture_de, pest_de)
 
 kable(culture_pest_combinations)
@@ -355,7 +366,7 @@ for the 15 uses.
 Sometimes, use specific comments can be found in the `application_comments` table.
 
 ```{r}
-current_register$application_comments |>
+example_register$application_comments |>
   filter(pNbr == 7105, use_nr %in% 1:2) |> 
   select(pNbr, use_nr, ends_with("de"), ends_with("fr")) |> 
   kable()
@@ -369,7 +380,7 @@ both use authorisations are conditional on risk mitigation for runoff to
 surface water amounting to at least one point.
 
 ```{r}
-current_register$obligations |>
+example_register$obligations |>
   filter(pNbr == 7105, use_nr %in% 1:2) |> 
   select(pNbr, use_nr, code, obligation_de, sw_runoff_points) |> 
   kable()
