@@ -320,7 +320,6 @@ tree. Cultures that are additionally present in another position
 of the tree are marked by appending '[dup]' to their name.
 
 ```{r}
-example_register <- srppp_dm()
 culture_tree <- attr(example_register, "culture_tree")
 print(culture_tree, limit = 30, "culture_id")
 ```

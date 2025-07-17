@@ -49,4 +49,11 @@ test:
 	Rscript -e 'devtools::test()' 2>&1 | tee log/test.log
 	sed -i -e "s/.*\r.*\r//" log/test.log
 
-.PHONY: roxy build install quickinstall check quickcheck pd pd_all
+winbuilder: build
+	date
+	@echo "Uploading to R-release on win-builder"
+	curl -T $(TGZ) ftp://anonymous@win-builder.r-project.org/R-release/
+	@echo "Uploading to R-devel on win-builder"
+	curl -T $(TGZ) ftp://anonymous@win-builder.r-project.org/R-devel/
+
+.PHONY: roxy build install quickinstall check quickcheck pd pd_all winbuilder
