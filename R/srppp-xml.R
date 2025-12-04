@@ -1,6 +1,6 @@
 utils::globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "pNbr", "use_nr",
   "add_txt_pk", "de", "fr", "it", "en", "exhaustionDeadline", "soldoutDeadline",
-  "isSalePermission", "terminationReason",
+  "isSalePermission", "terminationReason", "substance_de",
   "packageInsert", "permission_holder", "producingCountryPrimaryKey",
   "ingredient_de", "ingredient_fr", "ingredient_it", "categories",
   "min_dosage", "max_dosage", "min_rate", "max_rate", "waiting_period",
