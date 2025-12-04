@@ -1,11 +1,80 @@
 ℹ Testing srppp
 ✔ | F W  S  OK | Context
-✔ |          5 | alternative_products [1.3s]
-✔ |          8 | resolve_cultures
-✔ |          2 | srppp_xml [1.9s]
+✔ |          5 | alternative_products
+✖ | 2        6 | resolve_cultures
+────────────────────────────────────────────────────────────────────────────────
+Failure ('test-resolve_cultures.R:13:3'): Resolving cultures to highest detail works
+Expected `result_1$leaf_culture_de` to equal `c(...)`.
+Differences:
+     actual                 | expected                   
+ [3] "Aprikose"             | "Aprikose"             [3] 
+ [4] "Kirsche"              | "Kirsche"              [4] 
+ [5] "Pfirsich / Nektarine" | "Pfirsich / Nektarine" [5] 
+ [6] "Zwetschge"            - "Pflaume"              [6] 
+ [7] "Pflaume"              - "Zwetschge"            [7] 
+ [8] "Apfel"                | "Apfel"                [8] 
+ [9] "Quitte"               | "Quitte"               [9] 
+[10] "Birne"                | "Birne"                [10]
+
+
+Failure ('test-resolve_cultures.R:29:3'): Resolving cultures to highest detail works
+Expected `result_2$leaf_culture_de` to equal `c(...)`.
+Differences:
+     actual                 | expected                   
+ [3] "Aprikose"             | "Aprikose"             [3] 
+ [4] "Kirsche"              | "Kirsche"              [4] 
+ [5] "Pfirsich / Nektarine" | "Pfirsich / Nektarine" [5] 
+ [6] "Zwetschge"            - "Pflaume"              [6] 
+ [7] "Pflaume"              - "Zwetschge"            [7] 
+ [8] "Apfel"                | "Apfel"                [8] 
+ [9] "Quitte"               | "Quitte"               [9] 
+[10] "Birne"                | "Birne"                [10]
+
+────────────────────────────────────────────────────────────────────────────────
+⠏ |          0 | srppp_xml                                                      ! Unsatisfied constraints:
+* Table `pNbrs`: primary key `pNbr`: has 1 missing values
+* Table `ingredients`: foreign key `pk` into table `substances`: values of `ingredients$pk` not in `substances$pk`: 50804ef0-5d85-46cc-b697-17a7bca5f8f0 (1), 738e64d8-6e48-415f-9341-50608bd3273c (1), c1966a3b-0a53-43aa-8abc-c736e118a497 (1)
+* Table `parallel_imports`: foreign key `pNbr` into table `pNbrs`: values of `parallel_imports$pNbr` not in `pNbrs$pNbr`: 7738 (5), 8332 (1), 9033 (1)
+✖ | 1        1 | srppp_xml [2.2s]
+────────────────────────────────────────────────────────────────────────────────
+Failure ('test-srppp_xml.R:3:3'): We get dm objects with relational integrity
+Expected `print(dm::dm_examine_constraints(srppp_cur, .progress = FALSE))` to throw a message.
+────────────────────────────────────────────────────────────────────────────────
 ✔ |          5 | use_rates
 
 ══ Results ═════════════════════════════════════════════════════════════════════
-Duration: 3.4 s
+Duration: 3.5 s
 
-[ FAIL 0 | WARN 0 | SKIP 0 | PASS 20 ]
+── Failed tests ────────────────────────────────────────────────────────────────
+Failure ('test-resolve_cultures.R:13:3'): Resolving cultures to highest detail works
+Expected `result_1$leaf_culture_de` to equal `c(...)`.
+Differences:
+     actual                 | expected                   
+ [3] "Aprikose"             | "Aprikose"             [3] 
+ [4] "Kirsche"              | "Kirsche"              [4] 
+ [5] "Pfirsich / Nektarine" | "Pfirsich / Nektarine" [5] 
+ [6] "Zwetschge"            - "Pflaume"              [6] 
+ [7] "Pflaume"              - "Zwetschge"            [7] 
+ [8] "Apfel"                | "Apfel"                [8] 
+ [9] "Quitte"               | "Quitte"               [9] 
+[10] "Birne"                | "Birne"                [10]
+
+
+Failure ('test-resolve_cultures.R:29:3'): Resolving cultures to highest detail works
+Expected `result_2$leaf_culture_de` to equal `c(...)`.
+Differences:
+     actual                 | expected                   
+ [3] "Aprikose"             | "Aprikose"             [3] 
+ [4] "Kirsche"              | "Kirsche"              [4] 
+ [5] "Pfirsich / Nektarine" | "Pfirsich / Nektarine" [5] 
+ [6] "Zwetschge"            - "Pflaume"              [6] 
+ [7] "Pflaume"              - "Zwetschge"            [7] 
+ [8] "Apfel"                | "Apfel"                [8] 
+ [9] "Quitte"               | "Quitte"               [9] 
+[10] "Birne"                | "Birne"                [10]
+
+
+Failure ('test-srppp_xml.R:3:3'): We get dm objects with relational integrity
+Expected `print(dm::dm_examine_constraints(srppp_cur, .progress = FALSE))` to throw a message.
+
+[ FAIL 3 | WARN 0 | SKIP 0 | PASS 17 ]

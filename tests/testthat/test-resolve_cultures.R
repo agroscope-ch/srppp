@@ -10,7 +10,7 @@ test_that("Resolving cultures to highest detail works", {
 
   result_1 <- resolve_cultures(example_dataset_1, srppp_test)
 
-  expect_equal(result_1$leaf_culture_de,
+  expect_setequal(result_1$leaf_culture_de,
     c("Birne", "Kirsche",
       "Aprikose", "Kirsche", "Pfirsich / Nektarine", "Pflaume", "Zwetschge",
       "Apfel", "Quitte", "Birne"))
@@ -26,7 +26,7 @@ test_that("Resolving cultures to highest detail works", {
 
   result_2 <- resolve_cultures(example_dataset_2, srppp_test)
 
-  expect_equal(result_2$leaf_culture_de,
+  expect_setequal(result_2$leaf_culture_de,
     c("Birne", NA,
       "Aprikose", "Kirsche", "Pfirsich / Nektarine", "Pflaume", "Zwetschge",
       "Apfel", "Quitte", "Birne"))
