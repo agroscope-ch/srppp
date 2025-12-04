@@ -1,0 +1,101 @@
+# srppp - R package to read XML dumps of the Swiss Register of Plant Protection Products
+
+## Description
+
+Functions to generate data objects from XML versions of the Swiss
+Register of Plant Protection Products (SRPPP). An online version of the
+register can be accessed at <https://www.psm.admin.ch/de/produkte>.
+There is no guarantee of correspondence of the data read in using this
+package with that online version, or with the original registration
+documents. Also, the Federal Food Safety and Veterinary Office,
+coordinating the authorisation of plant protection products in
+Switzerland, does not answer requests regarding this package.
+
+## Installation from CRAN
+
+    install.packages("srppp")
+
+## Installation of the latest development code
+
+    install.packages("srppp",
+      repos = c("https://agroscope-ch.r-universe.dev", "https://cran.r-project.org"))
+
+## Documentation
+
+An online version of the documentation of the current development
+version of the package is available [on
+github](https://agroscope-ch.github.io/srppp/).
+
+## See also
+
+You may also be interested in our
+[agroscope-ch/srppphist](https://agroscope-ch.github.io/srppphist/)
+package containing historical registration data starting from 2011.
+
+# Package index
+
+## A simple entity relationship model for the SRPPP
+
+- [`srppp_dm()`](https://agroscope-ch.github.io/srppp/reference/srppp_dm.md)
+  [`print(`*`<srppp_dm>`*`)`](https://agroscope-ch.github.io/srppp/reference/srppp_dm.md)
+  : Create a dm object from an XML version of the Swiss Register of
+  Plant Protection Products
+
+## Functions for working with XML versions of the SRPPP
+
+- [`alternative_products()`](https://agroscope-ch.github.io/srppp/reference/alternative_products.md)
+  : Find alternative products for all products containing certain active
+  substances
+- [`application_rate_g_per_ha()`](https://agroscope-ch.github.io/srppp/reference/application_rate_g_per_ha.md)
+  : Calculate application rates for active ingredients
+- [`resolve_cultures()`](https://agroscope-ch.github.io/srppp/reference/resolve_cultures.md)
+  : Resolve culture specifications to their lowest hierarchical level
+- [`srppp_xml_clean_product_names()`](https://agroscope-ch.github.io/srppp/reference/srppp_xml_clean_product_names.md)
+  : Clean product names
+
+## Data objects for working with XML versions of the SRPPP
+
+- [`srppp_xml_url`](https://agroscope-ch.github.io/srppp/reference/srppp_xml_url.md)
+  : URL of the XML version of the Swiss Register of Plant Protection
+  Products
+- [`units_convertible_to_g_per_ha`](https://agroscope-ch.github.io/srppp/reference/units_convertible_to_g_per_ha.md)
+  : Product application rate units convertible to grams active substance
+  per hectare
+
+## Helper functions mainly used internally
+
+- [`srppp_xml_get()`](https://agroscope-ch.github.io/srppp/reference/srppp_xml_get.md)
+  [`srppp_xml_get_from_path()`](https://agroscope-ch.github.io/srppp/reference/srppp_xml_get.md)
+  : Read an XML version of the Swiss Register of Plant Protection
+  Products
+- [`srppp_xml_get_products()`](https://agroscope-ch.github.io/srppp/reference/srppp_xml_get_products.md)
+  : Get Products from an XML version of the Swiss Register of Plant
+  Protection Products
+- [`srppp_xml_get_substances()`](https://agroscope-ch.github.io/srppp/reference/srppp_xml_get_substances.md)
+  : Get substances from an XML version of the Swiss Register of Plant
+  Protection Products
+- [`srppp_xml_get_ingredients()`](https://agroscope-ch.github.io/srppp/reference/srppp_xml_get_ingredients.md)
+  : Get ingredients for all registered products described in an XML
+  version of the Swiss Register of Plant Protection Products
+- [`srppp_xml_get_uses()`](https://agroscope-ch.github.io/srppp/reference/srppp_xml_get_uses.md)
+  : Get uses ('indications') for all products described in an XML
+  version of the Swiss Register of Plant Protection Products
+- [`srppp_xml_define_use_numbers()`](https://agroscope-ch.github.io/srppp/reference/srppp_xml_define_use_numbers.md)
+  : Define use identification numbers in an SRPPP read in from an XML
+  file
+- [`srppp_xml_get_parallel_imports()`](https://agroscope-ch.github.io/srppp/reference/srppp_xml_get_parallel_imports.md)
+  : Get Parallel Imports from an XML version of the Swiss Register of
+  Plant Protection Products
+- [`l_per_ha_is_water_volume`](https://agroscope-ch.github.io/srppp/reference/l_per_ha_is_water_volume.md)
+  : Use definitions where the rate in l/ha refers to the volume of the
+  spraying solution
+
+# Articles
+
+### All vignettes
+
+- [Statistics on products containing microorganisms in the latest XML
+  dump of the
+  SRPPP](https://agroscope-ch.github.io/srppp/articles/srppp_products_with_MO.md):
+- [The Swiss Register of Plant Protection Products as a Relational Data
+  Model](https://agroscope-ch.github.io/srppp/articles/srppp.md):

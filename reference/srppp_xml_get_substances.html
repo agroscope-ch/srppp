@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">srppp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,7 +34,7 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Get substances from an XML version of the Swiss Register of Plant Protection Products</h1>
-      <small class="dont-index">Source: <a href="https://github.com/agroscope-ch/srppp/blob/v1.1.0/R/srppp-xml.R" class="external-link"><code>R/srppp-xml.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/agroscope-ch/srppp/blob/main/R/srppp-xml.R" class="external-link"><code>R/srppp-xml.R</code></a></small>
       <div class="d-none name"><code>srppp_xml_get_substances.Rd</code></div>
     </div>
 
@@ -65,20 +65,20 @@ German, French and Italian.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">srppp_xml_get_substances</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 450 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       pk iupac  substance_de substance_fr substance_it substance_en substance_lt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     3 1-nap… 1-Naphthyla… 1-naphtyl a… Acido 1-naf… <span style="color: #949494;">""</span>           <span style="color: #949494;">""</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     4 (2,4-… 2,4-D        2,4-D        2,4-D        <span style="color: #949494;">""</span>           <span style="color: #949494;">""</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     8 averm… Abamectin    abamectine   Abamectina   <span style="color: #949494;">""</span>           <span style="color: #949494;">""</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>    13 2-chl… Aclonifen    aclonifène   Aclonifen    <span style="color: #949494;">""</span>           <span style="color: #949494;">""</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>    26 1-(4,… Amidosulfur… amidosulfur… Amidosulfur… <span style="color: #949494;">""</span>           <span style="color: #949494;">""</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>    35 methy… Asulam       asulame      Asulame      <span style="color: #949494;">""</span>           <span style="color: #949494;">""</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>    50 3-iso… Bentazon     bentazone    Bentazone    <span style="color: #949494;">""</span>           <span style="color: #949494;">""</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>    71 5-but… Bupirimate   bupirimate   Bupirimate   <span style="color: #949494;">""</span>           <span style="color: #949494;">""</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>    72 2-ter… Buprofezin   buprofézine  Buprofezin   <span style="color: #949494;">""</span>           <span style="color: #949494;">""</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    79 N-(tr… Captan       captan       Captano      <span style="color: #949494;">""</span>           <span style="color: #949494;">""</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 440 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 443 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    pk                  iupac substance_de substance_fr substance_it substance_en</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 0A7BFE30-AC31-4326… (E)-… (E)-8-Dodec… (E)-8-dodec… (E)-8-dodec… (E)-8-Dodec…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 96054844-EF1E-4817… (E,Z… (E,Z)-2,13-… (E,Z)-2,13-… (E,Z)-2,13-… (E,Z)-2,13-…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> CC42B743-0C24-4493… (E,Z… (E,Z)-3,13-… (E,Z)-3,13-… (E,Z)-3,13-… (E,Z)-3,13-…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 332FDA27-923A-41C7… (7E,… (E,Z)-7,9-D… (E,Z)-7,9-D… (E,Z)-7,9-D… (E,Z)-7,9-d…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 7CC210AC-D72E-4B30… [S-(… (S)-cis-Ver… (S)-cis-Ver… (S)-cis-Ver… (S)-cis-Ver…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> F2EC442B-C581-45A1… (Z)-… (Z)-11-Tetr… (Z)-11-Tetr… (Z)-11-Tetr… (Z)-11-Tetr…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 738E64D8-6E48-415F… (Z)-… (Z)-8-Dodec… (Z)-8-Dodec… (Z)-8-Dodec… (Z)-8-Dodec…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 37FEF947-0B44-4DDF… (Z)-… (Z)-8-dodec… (Z)-8-Dodéc… (Z)-8-dodec… (Z)-8-Dodec…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 028AA985-0DBA-4B99… (9Z)… (Z)-9-Dodec… (Z)-9-Dodec… (Z)-9-Dodec… (Z)-9-Dodec…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1930                <span style="color: #BB0000;">NA</span>    (Z)-9-Octad… (Z)-9-Octad… (Z)-9-Octad… (Z)-9-Octad…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 433 more rows</span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
@@ -91,7 +91,7 @@ German, French and Italian.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
