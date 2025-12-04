@@ -55,8 +55,21 @@ srppp_xml_get_from_path <- function(path, from) {
     zip_contents$Name, value = TRUE)
   xml_con <- unz(path, xml_filename)
   ret <- read_xml(xml_con)
-  class(ret) <- c("srppp_xml", "xml_document", "xml_node")
+
+  # Determine the version of the XML file and attach it to the returned object
+  substance_type_node <- xml_find_first(ret,
+    "Products/Product/ProductInformation/Ingredient/SubstanceType")
+
+  if (is.na(xml_attr(substance_type_node, "SubstanceType"))) {
+    attr(ret, "version") <- 1
+  } else {
+    attr(ret, "version") <- 2
+  }
+
+  # Attach the "from" information as well
   attr(ret, "from") <- as.character(from)
+
+  class(ret) <- c("srppp_xml", "xml_document", "xml_node")
   return(ret)
 }
 
@@ -116,7 +129,7 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
   }))
   colnames(ph_key_matrix) <- c("wNbr", "permission_holder")
   ph_keys <- as_tibble(ph_key_matrix)
-  ph_keys$permission_holder <- as.integer(ph_keys$permission_holder)
+  ph_keys$permission_holder <- ph_keys$permission_holder
 
   # Discard the second permission holder
   # The code was developed for ParallelImports, where this occurred
@@ -252,7 +265,7 @@ srppp_xml_get_parallel_imports <- function(srppp_xml = srppp_xml_get())
       dimnames = list(NULL, pi_attribute_names)) |>
     as_tibble() |>
     rename(pNbr = packageInsert) |>
-    mutate(across(c(producingCountryPrimaryKey, pNbr), as.integer)) |>
+    mutate(pNbr = as.integer(pNbr)) |>
     arrange(wNbr)
 
   ph_nodes <- xml_find_all(srppp_xml,
@@ -265,7 +278,6 @@ srppp_xml_get_parallel_imports <- function(srppp_xml = srppp_xml_get())
   }))
   colnames(ph_key_matrix) <- c("id", "permission_holder")
   ph_keys <- as_tibble(ph_key_matrix)
-  ph_keys$permission_holder <- as.integer(ph_keys$permission_holder)
 
   # Discard the second permission holder
   # For example, in the XML file from 2019-03-05, the Parallelimport F-6146
@@ -292,17 +304,21 @@ srppp_xml_get_substances <- function(srppp_xml = srppp_xml_get()) {
   substance_nodeset <- xml_find_all(srppp_xml, "MetaData[@name='Substance']/Detail")
 
   sub_desc <- t(sapply(substance_nodeset, function(sub_node) {
-    c(xml_attr(sub_node, "primaryKey"),
+    desc_nodes <- xml_children(sub_node)
+
+    substance_info <- trimws(c(
+      xml_attr(sub_node, "primaryKey"),
       xml_attr(sub_node, "iupacName"),
-      xml_attr(xml_children(sub_node), "value")
-    ) |>
-    trimws()
+      xml_attr(desc_nodes, "value")))
+
+    xml_attr(desc_nodes, "language")
+
+    names(substance_info) <- c("pk", "iupac", paste0("substance_", xml_attr(desc_nodes, "language")))
+    return(substance_info[c("pk", "iupac", paste0("substance_", c("de", "fr", "it", "en")))])
   }))
 
-  colnames(sub_desc) <- c("pk", "iupac", "substance_de", "substance_fr", "substance_it", "substance_en", "substance_lt")
   ret <- as_tibble(sub_desc) |>
-    dplyr::mutate(pk = as.integer(pk)) |>
-    dplyr::arrange(pk)
+    dplyr::arrange(substance_de)
 
   return(ret)
 }
@@ -340,9 +356,7 @@ srppp_xml_get_ingredients <- function(srppp_xml = srppp_xml_get())
     mutate(percent = if_else(
       type == "ADDITIVE_TO_DECLARE", "", percent)) |>
     mutate(g_per_L = if_else(
-      type == "ADDITIVE_TO_DECLARE", "", g_per_L)) |>
-    mutate(add_txt_pk = as.integer(add_txt_pk)) |>
-    mutate(pk = as.integer(pk))
+      type == "ADDITIVE_TO_DECLARE", "", g_per_L))
 
   ingredient_descriptions <- srppp_xml |>
     xml_find_all(paste0("MetaData[@name='IngredientAdditionalText']/Detail")) |>
@@ -350,7 +364,6 @@ srppp_xml_get_ingredients <- function(srppp_xml = srppp_xml_get())
     as_tibble() |>
     rename(ingredient_de = de, ingredient_fr = fr) |>
     rename(ingredient_it = it, ingredient_en = en) |>
-    mutate(desc_pk = as.integer(desc_pk)) |>
     rename(ingr_desc_pk = desc_pk) |>
     arrange(ingr_desc_pk)
 
@@ -442,7 +455,6 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
     rename(units_de = de, units_fr = fr) |>
     rename(units_it = it, units_en = en) |>
     rename(units_pk = desc_pk) |>
-    mutate(units_pk = as.integer(units_pk)) |>
     arrange(units_pk)
 
   time_units_nodeset <- xml_find_all(srppp_xml, "Products/Product/ProductInformation/Indication/TimeMeasure")
@@ -456,7 +468,7 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
   }
   time_units <- t(sapply(time_units_nodeset, get_time_units)) |>
     as_tibble() |>
-    mutate_at(c("use_nr", "time_units_pk"), as.integer)
+    mutate(use_nr = as.integer(use_nr))
 
   time_unit_descriptions <- srppp_xml |>
     xml_find_all(paste0("MetaData[@name='TimeMeasure']/Detail")) |>
@@ -465,13 +477,12 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
     rename(time_units_de = de, time_units_fr = fr) |>
     rename(time_units_it = it, time_units_en = en) |>
     rename(time_units_pk = desc_pk) |>
-    mutate(time_units_pk = as.integer(time_units_pk)) |>
     arrange(time_units_pk)
 
   uses <- t(sapply(use_nodeset, get_use)) |>
     as_tibble() |>
     mutate_at(c("min_dosage", "max_dosage", "min_rate", "max_rate"), as.numeric) |>
-    mutate_at(c("waiting_period", "use_nr", "units_pk"), as.integer) |>
+    mutate_at(c("waiting_period", "use_nr"), as.integer) |>
     select(wNbr, use_nr, min_dosage, max_dosage, waiting_period, min_rate, max_rate, units_pk) |>
     left_join(time_units, by = join_by(wNbr, use_nr))
 
@@ -479,8 +490,8 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
     left_join(rate_unit_descriptions, by = "units_pk") |>
     left_join(time_unit_descriptions, by = "time_units_pk") |>
     select(wNbr, use_nr, ends_with("dosage"),
-      ends_with("rate"), starts_with("units"),
-      waiting_period, starts_with("time_units"),
+      ends_with("rate"), starts_with("units"), -units_pk,
+      waiting_period, starts_with("time_units"), -time_units_pk,
       starts_with("application_area")) |>
     arrange(wNbr, use_nr)
 
@@ -633,7 +644,7 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE, verbose = T
 
       ret <- tibble(
           wNbr = sapply(product_information_nodes, get_grandparent_wNbr),
-          desc_pk = as.integer(xml_attr(product_information_nodes, "primaryKey"))
+          desc_pk = xml_attr(product_information_nodes, "primaryKey")
         ) |>
         filter(!grepl("-", wNbr)) |>
         left_join(descriptions, by = "desc_pk") |>
@@ -690,7 +701,6 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE, verbose = T
     stop("Duplicate entries for the same ingredient in the same product")
   }
 
-
   # Define use IDs (attribute 'use_nr' in the XML tree)
   srppp_xml <- srppp_xml_define_use_numbers(srppp_xml)
 
@@ -705,13 +715,13 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE, verbose = T
       wNbr = sapply(indication_information_nodes, get_great_grandparent_wNbr),
       use_nr = sapply(indication_information_nodes, get_use_nr),
       desc_pk = xml_attr(indication_information_nodes, "primaryKey")) |>
-        mutate_at(c("use_nr", "desc_pk"), as.integer) |>
+        mutate(use_nr = as.integer(use_nr)) |>
         left_join(products[c("wNbr", "pNbr")], by = "wNbr") |>
         select(pNbr, !c(wNbr, pNbr))
 
     if (additional_text) {
-      ret$add_txt_pk <- as.integer(xml_attr(indication_information_nodes,
-        "additionalTextPrimaryKey"))
+      ret$add_txt_pk <- xml_attr(indication_information_nodes,
+        "additionalTextPrimaryKey")
     }
 
     if (type) {
@@ -969,7 +979,6 @@ description_table <- function(srppp_xml, tag_name, code = FALSE, latin = FALSE, 
     ret <- nodes |>
       sapply(get_descriptions, code = code, latin = latin, parent_keys = parent_keys) |> t() |>
       as_tibble() |>
-      mutate(desc_pk = as.integer(desc_pk)) |>
       arrange(desc_pk)
   } else {
     ret <- NA
@@ -988,13 +997,14 @@ description_table <- function(srppp_xml, tag_name, code = FALSE, latin = FALSE, 
 get_descriptions <- function(node, code = FALSE, latin = FALSE, parent_keys = FALSE) {
   desc_pk <- xml_attr(node, "primaryKey")
   desc <- trimws(sapply(xml_children(node), xml_attr, "value"))
+  names(desc) <- sapply(xml_children(node), xml_attr, "language")
   if (code) {
     if (xml_length(xml_child(node)) == 1) {
       code <- xml_attr(xml_child(xml_child(node)), "value")
     } else {
       code <- NA
     }
-    ret <- c(desc_pk, code, desc)
+    ret <- c(desc_pk, code, desc[c("de", "fr", "it", "en")])
     names(ret) <- c("desc_pk", "code", "de", "fr", "it", "en")
     return(ret)
   } else {
@@ -1008,15 +1018,16 @@ get_descriptions <- function(node, code = FALSE, latin = FALSE, parent_keys = FA
       if (length(pks) > 0) parent_key_1 <- pks[1]
       if (length(pks) > 1) parent_key_2 <- pks[2]
       if (length(pks) > 2) stop("Assumption of a maximum of two parent primary keys for cultures appears to be wrong")
-      ret <- c(desc_pk, desc, parent_key_1, parent_key_2)
+      ret <- c(desc_pk, desc[c("de", "fr", "it", "en")], parent_key_1, parent_key_2)
       names(ret) <- c("desc_pk", "de", "fr", "it", "en", "prt_1_pk", "prt_2_pk")
       return(ret)
     } else {
-      ret <- c(desc_pk, desc)
 
       if (latin) {
+        ret <- c(desc_pk, desc[c("de", "fr", "it", "en", "lt")])
         names(ret) <- c("desc_pk", "de", "fr", "it", "en", "lt")
       } else {
+        ret <- c(desc_pk, desc[c("de", "fr", "it", "en")])
         names(ret) <- c("desc_pk", "de", "fr", "it", "en")
       }
       return(ret)

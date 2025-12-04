@@ -1,4 +1,8 @@
-## version 1.1.0
+## version 1.2.0
+
+- Adapt to the new format of the XML file.
+
+## version 1.1.0 (CRAN release: 2025-07-07)
 
 - Example code and vignettes: To satisfy CRAN policy, fall back to use the register version distributed as test data with the package (see below) in case downloading  or reading from the standard URL fails, instead of throwing an error. This makes the check process on CRAN robust against server outage or a changed URL.
 - Include information on the completeness of the effect against each target organism in the column `type` of the `pests` table of the `srppp_dm` object. Possible types are `PEST_FULL_EFFECT`, `PEST_PARTIAL_EFFECT` and `PEST_SIDE_EFFECT`. In the `obligations` table, include a column `varying_effect`, that contains `TRUE` in case the obligation text indicates that a full effect has not been demonstrated in all cases.
