@@ -25,6 +25,13 @@ library(dplyr)
 example_register <- try(srppp_dm())
 ```
 
+    ## Warning in download.file(from, path): URL
+    ## 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip':
+    ## status was 'Failure when receiving data from the peer'
+
+    ## Error in download.file(from, path) : 
+    ##   cannot open URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip'
+
 In case downloading the current register from the internet fails, we
 read in the version from 16 December 2024 that is distributed with the
 package.
@@ -60,7 +67,7 @@ At the bottom of the table hierarchy, there is the list of substances.
 For each substance, there is a primary key `pk`, a chemical name based
 on [IUPAC nomenclature](https://iupac.org/what-we-do/nomenclature/), and
 substance names in three of the four official languages of Switzerland.
-The first four entries out of 443 are shown below.
+The first four entries out of 453 are shown below.
 
 ``` r
 library(knitr)
@@ -70,12 +77,12 @@ example_register$substances |>
   kable()
 ```
 
-| pk                                   | iupac                                | substance_de                        | substance_fr                         | substance_it                         |
-|:-------------------------------------|:-------------------------------------|:------------------------------------|:-------------------------------------|:-------------------------------------|
-| 0A7BFE30-AC31-4326-9CF4-8A93ED26D3AB | (E)-8-dodecen-1-yl acetate           | (E)-8-Dodecen-1-yl acetat           | (E)-8-dodecen-1-yl acetate           | (E)-8-dodecen-1-yl acetate           |
-| 96054844-EF1E-4817-BD0D-A196D2CD8A24 | (E,Z)-2,13-octadecadien-1-yl acetate | (E,Z)-2,13-Octadecadien-1-yl acetat | (E,Z)-2,13-Octadecadien-1-yl acétate | (E,Z)-2,13-Octadecadien-1-yl acetato |
-| CC42B743-0C24-4493-AE64-7EAA3BB04EFD | (E,Z)-3,13-octadecadien-1-yl acetate | (E,Z)-3,13-Octadecadien-1-yl acetat | (E,Z)-3,13-Octadecadien-1-yl acétate | (E,Z)-3,13-Octadecadien-1-yl acetato |
-| 332FDA27-923A-41C7-9DE5-2154B959ED7E | (7E,9Z)-dodeca-7,9-dien-1-yl acetate | (E,Z)-7,9-Dodecadien-1-yl acetat    | (E,Z)-7,9-Dodecadien-1-yl acetate    | (E,Z)-7,9-Dodecadien-1-yl acetate    |
+| pk   | iupac                                                                        | substance_de                                               | substance_fr                                               | substance_it                                               |
+|:-----|:-----------------------------------------------------------------------------|:-----------------------------------------------------------|:-----------------------------------------------------------|:-----------------------------------------------------------|
+| 1289 | \[S-(1alpha,2alpha,5alpha)\]-4,6,6-trimethylbicyclo-\[3,1,1\]-hept-3-en-2-ol | (S)-cis-Verbenol                                           | (S)-cis-Verbenol                                           | (S)-cis-Verbenol                                           |
+| 1930 |                                                                              | (Z)-9-Octadecen-1-ol ethoxylated                           | (Z)-9-Octadecen-1-ol ethoxylated                           | (Z)-9-Octadecen-1-ol ethoxylated                           |
+| 1689 | 1,2-Benzisothiazol-3(2H)-on                                                  | 1,2-Benzisothiazol-3(2H)-on                                | 1,2-benzisothiazol-3(2H)-on                                | 1,2-benzisotiazol-3(2H)-on                                 |
+| 1879 |                                                                              | 1,2-benzisothiazol-3(2H)-one; 1,2-benzisothiazolin-1 3-one | 1,2-benzisothiazol-3(2H)-one; 1,2-benzisothiazolin-1 3-one | 1,2-benzisothiazol-3(2H)-one; 1,2-benzisothiazolin-1 3-one |
 
 ## Products
 
@@ -104,13 +111,13 @@ example_register$ingredients |>
   kable()
 ```
 
-| pNbr | pk                                   | type | percent | g_per_L | ingredient_de                    | ingredient_fr                         |
-|-----:|:-------------------------------------|:-----|--------:|--------:|:---------------------------------|:--------------------------------------|
-|   38 | D95F01F3-9ED2-4D08-92FD-A58AF1B5F49F |      |   80.00 |         |                                  |                                       |
-| 1182 | 057FC3E0-B59E-45EB-8CCB-B2EA4527E479 |      |   38.00 |   438.5 | entspricht 34.7 % MCPB (400g/L)  | correspond à 34.7 % de MCPB (400 g/L) |
-| 1192 | 057FC3E0-B59E-45EB-8CCB-B2EA4527E479 |      |   38.00 |   438.5 | entspricht 34.7 % MCPB (400 g/L) | correspond à 34,7 % de MCPB (400 g/L) |
-| 1263 | D95F01F3-9ED2-4D08-92FD-A58AF1B5F49F |      |   80.00 |         |                                  |                                       |
-| 1865 | 1D7FC783-1AA4-47FD-B973-83867751B87B |      |   99.16 |   830.0 |                                  |                                       |
+| pNbr | pk   | type              | percent | g_per_L | ingredient_de                          | ingredient_fr                                        |
+|-----:|:-----|:------------------|--------:|--------:|:---------------------------------------|:-----------------------------------------------------|
+|   38 | 338  | ACTIVE_INGREDIENT |    80.0 |         |                                        |                                                      |
+| 1182 | 1067 | ACTIVE_INGREDIENT |    34.7 |     400 | als 38.0% MCPB-Natrium-Salz (439 g/l)  | sous forme de 38.0 % MCPB de sel de sodium (439 g/L) |
+| 1192 | 1067 | ACTIVE_INGREDIENT |    34.7 |     400 | als 38.0 % MCPB-Natrium-Salz (439 g/L) | sous forme de 38.0 % MCPB de sel de sodium (439 g/L) |
+| 1263 | 338  | ACTIVE_INGREDIENT |    80.0 |         |                                        |                                                      |
+| 1865 | 1027 | ACTIVE_INGREDIENT |    99.1 |     830 |                                        |                                                      |
 
 The frequency of occurrence of the four different ingredient types is
 quite different.
@@ -125,9 +132,12 @@ example_register$ingredients |>
   kable()
 ```
 
-| type |   n |
-|:-----|----:|
-|      | 442 |
+| type                |   n |
+|:--------------------|----:|
+| ACTIVE_INGREDIENT   | 340 |
+| ADDITIVE_TO_DECLARE | 109 |
+| SAFENER             |   5 |
+| SYNERGIST           |   2 |
 
 Additives to declare are additives that have an effect on classification
 and labelling of the product. All substances occurring as synergists or
@@ -144,8 +154,15 @@ example_register$ingredients |>
   kable()
 ```
 
-| type | substance_de | n   |
-|------|--------------|-----|
+| type      | substance_de       |   n |
+|:----------|:-------------------|----:|
+| SAFENER   | Benoxacor          |   1 |
+| SAFENER   | Cloquintocet-mexyl |  15 |
+| SAFENER   | Cyprosulfamid      |   2 |
+| SAFENER   | Isoxadifen-ethyl   |   3 |
+| SAFENER   | Mefenpyr-Diethyl   |  10 |
+| SYNERGIST | Piperonyl butoxid  |   6 |
+| SYNERGIST | Sesamöl raffiniert |   3 |
 
 Note that the first two lines in the code could also be replaced by
 
@@ -171,14 +188,14 @@ example_register$products |>
   kable()
 ```
 
-| pNbr | wNbr | name                       | exhaustionDeadline | soldoutDeadline | isSalePermission | permission_holder                    |
-|-----:|:-----|:---------------------------|:-------------------|:----------------|:-----------------|:-------------------------------------|
-|   38 | 18   | Thiovit Jet                |                    |                 | FALSE            | 018C0DAB-6CB8-4F46-B684-4F59117A4F6A |
-|   38 | 18-3 | Sanoplant Schwefel         |                    |                 | TRUE             | 018C0DAB-6CB8-4F46-B684-4F59117A4F6A |
-|   38 | 18-5 | Gesal Schrotschuss Spezial |                    |                 | TRUE             | A128E9C6-FBC1-4649-8E3C-92073B82925B |
-| 1182 | 923  | Divopan                    |                    |                 | FALSE            | 018C0DAB-6CB8-4F46-B684-4F59117A4F6A |
-| 1192 | 934  | Trifolin                   |                    |                 | FALSE            | 15BAC516-7F05-4353-82D7-A2BA41438215 |
-| 1263 | 986  | Elosal Supra               |                    |                 | FALSE            | 84E721E7-7A4F-4F80-B06A-A49B17EB0311 |
+| pNbr | wNbr | name                   | exhaustionDeadline | soldoutDeadline | isSalePermission | permission_holder |
+|-----:|:-----|:-----------------------|:-------------------|:----------------|:-----------------|:------------------|
+|   38 | 18   | Thiovit Jet            |                    |                 | FALSE            | 10388             |
+|   38 | 18-1 | Sufralo                |                    |                 | TRUE             | 10712             |
+|   38 | 18-2 | Capito Bio-Schwefel    |                    |                 | TRUE             | 10712             |
+|   38 | 18-3 | Sanoplant Schwefel     |                    |                 | TRUE             | 10388             |
+|   38 | 18-4 | Biorga Contra Schwefel |                    |                 | TRUE             | 10388             |
+| 1182 | 923  | Divopan                |                    |                 | FALSE            | 10388             |
 
 As can be seen in these example entries, several registrations
 (W-Numbers) of the same product type (P-Number) can exist. The W-Numbers
@@ -199,17 +216,17 @@ example_register$products |>
   kable()
 ```
 
-| pNbr | wNbr   | name                     | exhaustionDeadline          | soldoutDeadline             | isSalePermission | permission_holder                    |
-|-----:|:-------|:-------------------------|:----------------------------|:----------------------------|:-----------------|:-------------------------------------|
-| 2092 | 1698   | Asulox                   | 2026-07-01 00:00:00.0000000 | 2025-07-01 00:00:00.0000000 | FALSE            | 018C0DAB-6CB8-4F46-B684-4F59117A4F6A |
-| 3948 | 4034   | Asulam                   | 2026-07-01 00:00:00.0000000 | 2025-07-01 00:00:00.0000000 | FALSE            | 5E2915EB-369E-4C9C-B8B7-9FAAABF0E127 |
-| 4163 | 4309   | Volpan                   | 2026-10-31 00:00:00.0000000 | 2025-10-31 00:00:00.0000000 | FALSE            | 018C0DAB-6CB8-4F46-B684-4F59117A4F6A |
-| 4163 | 4309-1 | MIOPLANT Windenvertilger | 2026-10-31 00:00:00.0000000 | 2025-10-31 00:00:00.0000000 | TRUE             | 018C0DAB-6CB8-4F46-B684-4F59117A4F6A |
-| 4251 | 4234   | Capex 2                  | 2026-07-01 00:00:00.0000000 | 2025-07-01 00:00:00.0000000 | FALSE            | F05FD7E3-EA3C-46CE-A537-B40375F273AA |
-| 4426 | 4343   | Cypermethrin             | 2026-06-11 00:00:00.0000000 | 2025-06-11 00:00:00.0000000 | FALSE            | 5E2915EB-369E-4C9C-B8B7-9FAAABF0E127 |
+| pNbr | wNbr   | name                     | exhaustionDeadline | soldoutDeadline | isSalePermission | permission_holder |
+|-----:|:-------|:-------------------------|:-------------------|:----------------|:-----------------|:------------------|
+| 3726 | 2935   | Polyram DF               | 2025-07-01         | 2025-01-01      | FALSE            | 10019             |
+| 3726 | 2935-1 | Metiram WG               | 2025-07-01         | 2025-01-01      | TRUE             | 10213             |
+| 3726 | 2935-2 | Aviso                    | 2025-07-01         | 2025-01-01      | TRUE             | 10050             |
+| 4163 | 4309   | Volpan                   | 2026-10-31         | 2025-10-31      | FALSE            | 10054             |
+| 4163 | 4309-1 | MIOPLANT Windenvertilger | 2026-10-31         | 2025-10-31      | TRUE             | 10388             |
+| 4426 | 4343   | Cypermethrin             | 2026-06-11         | 2025-06-11      | FALSE            | 10079             |
 
-At the build time of this vignette, there were 1740 product
-registrations for 1123 P-Numbers in the Swiss Register of Plant
+At the build time of this vignette, there were 1739 product
+registrations for 1139 P-Numbers in the Swiss Register of Plant
 Protection Products (SRPPP) as published on the website of the Federal
 Food Safety and Veterinary Office.
 
@@ -230,8 +247,8 @@ example_register$products |>
 
 | pNbr | name     | substance_de | percent | g_per_L |
 |-----:|:---------|:-------------|--------:|--------:|
-| 4077 | Plüsstar | 2,4-D        |   14.83 |     170 |
-| 4077 | Plüsstar | Mecoprop-P   |   35.34 |     405 |
+| 4077 | Plüsstar | 2,4-D        |    14.8 |     170 |
+| 4077 | Plüsstar | Mecoprop-P   |    35.3 |     405 |
 
 ## Uses
 
@@ -252,24 +269,24 @@ example_register$uses |>
 
 | pNbr | use_nr | min_dosage | max_dosage | min_rate | max_rate | units_de | waiting_period | time_units_en | application_area_de |
 |-----:|-------:|-----------:|-----------:|---------:|---------:|:---------|---------------:|:--------------|:--------------------|
-| 6521 |      1 |            |            |      1.0 |          | l/ha     |                |               | Feldbau             |
-| 6521 |      2 |            |            |      1.0 |          | l/ha     |                |               | Feldbau             |
-| 6521 |      3 |            |            |      1.5 |          | l/ha     |                |               | Feldbau             |
-| 6521 |      4 |            |            |      1.0 |          | l/ha     |              3 | Week(s)       | Feldbau             |
+| 6521 |      1 |            |            |      1.0 |          | l/ha     |                |               | Gemüsebau           |
+| 6521 |      2 |            |            |      0.5 |        1 | l/ha     |                |               | Feldbau             |
+| 6521 |      3 |            |            |      1.0 |          | l/ha     |                |               | Feldbau             |
+| 6521 |      4 |            |            |      1.0 |          | l/ha     |                |               | Feldbau             |
 | 6521 |      5 |            |            |      1.0 |          | l/ha     |                |               | Feldbau             |
-| 6521 |      6 |            |            |      1.0 |          | l/ha     |              3 | Week(s)       | Feldbau             |
+| 6521 |      6 |            |            |      1.0 |          | l/ha     |                |               | Feldbau             |
 | 6521 |      7 |            |            |      1.0 |          | l/ha     |                |               | Feldbau             |
 | 6521 |      8 |            |            |      1.0 |          | l/ha     |              3 | Week(s)       | Feldbau             |
 | 6521 |      9 |            |            |      1.0 |          | l/ha     |                |               | Feldbau             |
-| 7511 |      1 |        0.3 |            |          |          | kg/ha    |              3 | Days          | Gemüsebau           |
-| 7511 |      2 |            |            |      5.0 |          | kg/ha    |                |               | Obstbau             |
-| 7511 |      3 |        0.3 |            |      4.8 |          | kg/ha    |                |               | Obstbau             |
-| 7511 |      4 |        0.3 |            |      4.8 |          | kg/ha    |              8 | Days          | Obstbau             |
-| 7511 |      5 |            |            |      3.0 |          | kg/ha    |              1 | Days          | Gemüsebau           |
-| 7511 |      6 |        0.3 |            |          |          |          |              3 | Days          | Beerenbau           |
-| 7511 |      7 |            |            |      3.0 |          | kg/ha    |              1 | Days          | Gemüsebau           |
-| 7511 |      8 |            |            |      3.0 |          | kg/ha    |              1 | Days          | Gemüsebau           |
-| 7511 |      9 |            |            |      5.0 |          | kg/ha    |              3 | Days          | Gemüsebau           |
+| 7511 |      1 |        0.4 |            |      4.0 |          | kg/ha    |              3 | Days          | Beerenbau           |
+| 7511 |      2 |        0.2 |            |      3.2 |          | kg/ha    |              3 | Week(s)       | Obstbau             |
+| 7511 |      3 |        0.3 |            |          |          |          |              3 | Days          | Gemüsebau           |
+| 7511 |      4 |        0.3 |            |      3.0 |          | kg/ha    |              3 | Days          | Beerenbau           |
+| 7511 |      5 |        0.2 |            |      3.2 |          | kg/ha    |              2 | Week(s)       | Obstbau             |
+| 7511 |      6 |        0.4 |            |          |          |          |              3 | Days          | Beerenbau           |
+| 7511 |      7 |        0.3 |            |          |          |          |              3 | Days          | Beerenbau           |
+| 7511 |      8 |        0.4 |            |      4.0 |          | kg/ha    |              3 | Days          | Beerenbau           |
+| 7511 |      9 |        0.3 |            |          |          | kg/ha    |              3 | Days          | Gemüsebau           |
 
 The columns `min_dosage` and `max_dosage` contain either a range of
 recommended product concentrations in the spraying solution in percent,
@@ -311,17 +328,17 @@ kable(example_uses)
 
 | pNbr | name  | use_nr | min_dosage | max_dosage | min_rate | max_rate | units_de | application_area_de | substance_de | percent | g_per_L |
 |-----:|:------|-------:|-----------:|-----------:|---------:|---------:|:---------|:--------------------|:-------------|--------:|--------:|
-| 7105 | Boxer |      1 |            |            |      2.5 |        5 | l/ha     | Feldbau             | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |      2 |            |            |      5.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |      3 |            |            |      3.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |      4 |            |            |      5.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |      5 |            |            |      3.0 |        5 | l/ha     | Feldbau             | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |     12 |            |            |      5.0 |          | l/ha     | Feldbau             | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |     13 |            |            |      2.5 |        5 | l/ha     | Feldbau             | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |     14 |            |            |      5.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |     15 |            |            |      4.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |     16 |            |            |      4.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |     17 |            |            |      4.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |   78.43 |     800 |
+| 7105 | Boxer |      1 |            |            |      5.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |    78.4 |     800 |
+| 7105 | Boxer |      2 |            |            |      5.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |    78.4 |     800 |
+| 7105 | Boxer |      3 |            |            |      5.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |    78.4 |     800 |
+| 7105 | Boxer |      4 |            |            |      4.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |    78.4 |     800 |
+| 7105 | Boxer |      5 |            |            |      2.5 |      3.0 | l/ha     | Gemüsebau           | Prosulfocarb |    78.4 |     800 |
+| 7105 | Boxer |     12 |            |            |      3.0 |      4.5 | l/ha     | Feldbau             | Prosulfocarb |    78.4 |     800 |
+| 7105 | Boxer |     13 |            |            |      2.5 |      5.0 | l/ha     | Feldbau             | Prosulfocarb |    78.4 |     800 |
+| 7105 | Boxer |     14 |            |            |      3.0 |      5.0 | l/ha     | Feldbau             | Prosulfocarb |    78.4 |     800 |
+| 7105 | Boxer |     15 |            |            |      5.0 |          | l/ha     | Feldbau             | Prosulfocarb |    78.4 |     800 |
+| 7105 | Boxer |     16 |            |            |      4.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |    78.4 |     800 |
+| 7105 | Boxer |     17 |            |            |      2.5 |      5.0 | l/ha     | Feldbau             | Prosulfocarb |    78.4 |     800 |
 
 Then, the application rates can be calculated for these uses as
 illustrated below.
@@ -336,17 +353,17 @@ application_rate_g_per_ha(example_uses) |>
 
 | ai           | app_area  | min_rate | max_rate | units_de | rate |
 |:-------------|:----------|---------:|---------:|:---------|-----:|
-| Prosulfocarb | Feldbau   |      2.5 |        5 | l/ha     | 4000 |
 | Prosulfocarb | Gemüsebau |      5.0 |          | l/ha     | 4000 |
-| Prosulfocarb | Gemüsebau |      3.0 |          | l/ha     | 2400 |
 | Prosulfocarb | Gemüsebau |      5.0 |          | l/ha     | 4000 |
-| Prosulfocarb | Feldbau   |      3.0 |        5 | l/ha     | 4000 |
+| Prosulfocarb | Gemüsebau |      5.0 |          | l/ha     | 4000 |
+| Prosulfocarb | Gemüsebau |      4.0 |          | l/ha     | 3200 |
+| Prosulfocarb | Gemüsebau |      2.5 |      3.0 | l/ha     | 2400 |
+| Prosulfocarb | Feldbau   |      3.0 |      4.5 | l/ha     | 3600 |
+| Prosulfocarb | Feldbau   |      2.5 |      5.0 | l/ha     | 4000 |
+| Prosulfocarb | Feldbau   |      3.0 |      5.0 | l/ha     | 4000 |
 | Prosulfocarb | Feldbau   |      5.0 |          | l/ha     | 4000 |
-| Prosulfocarb | Feldbau   |      2.5 |        5 | l/ha     | 4000 |
-| Prosulfocarb | Gemüsebau |      5.0 |          | l/ha     | 4000 |
 | Prosulfocarb | Gemüsebau |      4.0 |          | l/ha     | 3200 |
-| Prosulfocarb | Gemüsebau |      4.0 |          | l/ha     | 3200 |
-| Prosulfocarb | Gemüsebau |      4.0 |          | l/ha     | 3200 |
+| Prosulfocarb | Feldbau   |      2.5 |      5.0 | l/ha     | 4000 |
 
 ### Culture forms and cultures
 
@@ -382,10 +399,10 @@ example_register$products |>
   kable()
 ```
 
-| pNbr | use_nr | application_area_de | culture_form_de | culture_de  |
-|-----:|-------:|:--------------------|:----------------|:------------|
-| 4470 |      1 | Beerenbau           |                 | Erdbeere    |
-| 4470 |     10 | Beerenbau           | Freiland        | Rubus Arten |
+| pNbr | use_nr | application_area_de | culture_form_de | culture_de          |
+|-----:|-------:|:--------------------|:----------------|:--------------------|
+| 4470 |      1 | Beerenbau           | Freiland        | Gemeine Felsenbirne |
+| 4470 |     10 | Beerenbau           | Gewächshaus     | Rubus Arten         |
 
 Relations between the cultures are stored as a \[data.tree::Node\]
 object in an attribute named ‘culture_tree’. The first entries from that
@@ -400,68 +417,39 @@ culture_tree <- attr(example_register, "culture_tree")
 print(culture_tree, limit = 30, "culture_id")
 ```
 
-    ##                                              levelName
-    ## 1  Cultures                                           
-    ## 2   ¦--Baby-Leaf                                      
-    ## 3   ¦   ¦--Baby-Leaf (Brassicaceae)                   
-    ## 4   ¦   ¦--Baby-Leaf (Chenopodiaceae)                 
-    ## 5   ¦   °--Baby-Leaf (Asteraceae)                     
-    ## 6   ¦--Hopfen                                         
-    ## 7   ¦--Knoblauch                                      
-    ## 8   ¦--Futter- und Zuckerrüben                        
-    ## 9   ¦   ¦--Zuckerrübe                                 
-    ## 10  ¦   °--Futterrübe                                 
-    ## 11  ¦--Sonnenblume                                    
-    ## 12  ¦--Knollenfenchel                                 
-    ## 13  ¦--Oregano                                        
-    ## 14  ¦--Kernobst                                       
-    ## 15  ¦   ¦--Birne / Nashi                              
-    ## 16  ¦   ¦   °--Birne                                  
-    ## 17  ¦   ¦--Quitte                                     
-    ## 18  ¦   °--Apfel                                      
-    ## 19  ¦--Eberesche                                      
-    ## 20  ¦--Liegendes Rundholz im Wald und auf Lagerplätzen
-    ## 21  ¦--Tabak produzierende Betriebe                   
-    ## 22  ¦--Brunnenkresse                                  
-    ## 23  ¦--Artischocken                                   
-    ## 24  ¦--Wiesen und Weiden                              
-    ## 25  ¦   °--Kleegrasmischung (Kunstwiese)              
-    ## 26  ¦--Stachys                                        
-    ## 27  ¦--Wurzelpetersilie                               
-    ## 28  ¦--Kichererbse                                    
-    ## 29  ¦--Ranunkel                                       
-    ## 30  °--... 128 nodes w/ 139 sub                       
-    ##                              culture_id
-    ## 1                                      
-    ## 2  0106A8DF-6CDF-4E18-8F46-3D9E1D52D0E5
-    ## 3  6C3D663E-442F-4783-87A2-A46806E119E5
-    ## 4  9BD6A435-E370-4DFE-82E5-7E7813B4D193
-    ## 5  DB0DCB7D-CA9F-454A-8398-606F066FBF4F
-    ## 6  01AFF6EB-9C8D-4D0D-B225-0BA07B59A72F
-    ## 7  037E11B2-128A-4194-9A5B-A3E980AE4113
-    ## 8  086E34F3-82E5-4F92-9224-41C9F7529E70
-    ## 9  B542EC7D-B423-43B4-9010-82A6889BB3B4
-    ## 10 C763D817-B4AC-43DB-9C6E-A262CC32F400
-    ## 11 095E9650-A880-4BD2-A1BB-39297582BCE6
-    ## 12 0D20E815-633E-4F38-AC93-7B6578B0483E
-    ## 13 0E2847EB-CEFD-4640-82EB-F09F3F1A5E13
-    ## 14 0F5F1FEE-084C-4961-A76F-82F9B17B2635
-    ## 15 FA0F7C48-BF78-49B0-9046-FBB5ABB4BF75
-    ## 16 42466A90-AFCD-4DA6-8769-99C4BC5BE217
-    ## 17 FD180555-9DEF-42BA-86E0-EBD31AB8FABB
-    ## 18 FD18F42C-C390-4701-B07B-B8108B33320B
-    ## 19 122B909A-CE9C-47BC-B5CA-DCF523646D38
-    ## 20 13BB4B9E-6CEE-4729-AE29-8A4380EB33B0
-    ## 21 17B69B05-E650-4A6F-815A-D6DA55A92CDB
-    ## 22 19C5BA72-A0D5-4409-8D05-0A7C9D821E20
-    ## 23 1BFC9694-C7DC-4D74-84B2-1418AB94A8BA
-    ## 24 1F03DDC0-19CF-48F1-BAB8-61CA4CEF24CF
-    ## 25 4E1ACD79-F162-4EBB-93CB-C6857A811E9C
-    ## 26 1F0B6451-EC2C-4647-A53A-23B0EAE626B1
-    ## 27 21228D46-5B00-4CDD-9C71-48C0A0B21C78
-    ## 28 2260B6A9-FC51-4F50-8E8F-D39BC6D5DA3A
-    ## 29 230F7417-5500-4124-B273-95AA1FFB940B
-    ## 30
+    ##                                               levelName culture_id
+    ## 1  Cultures                                                       
+    ## 2   ¦--allg. Ökologische Ausgleichsflächen (gemäss DZV)      10172
+    ## 3   ¦   °--Offene Ackerfläche                                10227
+    ## 4   ¦--Zierpflanzen allg.                                    10190
+    ## 5   ¦   ¦--Topf- und Kontainerpflanzen                       10021
+    ## 6   ¦   ¦   ¦--Begonia [dup]                                 10040
+    ## 7   ¦   ¦   ¦--Cyclame [dup]                                 10050
+    ## 8   ¦   ¦   ¦--Pelargonien [dup]                             10097
+    ## 9   ¦   ¦   °--Primeln [dup]                                 10098
+    ## 10  ¦   ¦--Blumenknollen                                     10039
+    ## 11  ¦   ¦   °--Dahlien                                       10162
+    ## 12  ¦   ¦--Baumschule                                        10095
+    ## 13  ¦   ¦--Ziergehölze (ausserhalb Forst)                    10101
+    ## 14  ¦   ¦--Rosen                                             10104
+    ## 15  ¦   ¦--Ein- und zweijährige Zierpflanzen                 10176
+    ## 16  ¦   ¦   °--Sommerflor                                     9969
+    ## 17  ¦   ¦--Bäume und Sträucher (ausserhalb Forst)            12096
+    ## 18  ¦   ¦   ¦--Rhododendron                                  10100
+    ## 19  ¦   ¦   ¦   °--Azaleen                                   10099
+    ## 20  ¦   ¦   ¦--Kirschlorbeer                                 10103
+    ## 21  ¦   ¦   ¦--Rosskastanie                                  10109
+    ## 22  ¦   ¦   ¦--Blautanne [dup]                               10110
+    ## 23  ¦   ¦   ¦--Buchsbäume (Buxus)                            10152
+    ## 24  ¦   ¦   °--Weihnachtsbäume [dup]                         10290
+    ## 25  ¦   ¦--Blumenkulturen und Grünpflanzen                   12097
+    ## 26  ¦   ¦   ¦--Iris                                          10004
+    ## 27  ¦   ¦   ¦--Begonia                                       10040
+    ## 28  ¦   ¦   ¦--Cyclame                                       10050
+    ## 29  ¦   ¦   ¦--Hyazinthe                                     10070
+    ## 30  ¦   ¦   °--... 10 nodes w/ 0 sub                              
+    ## 31  ¦   °--... 3 nodes w/ 14 sub                                  
+    ## 32  °--... 52 nodes w/ 258 sub
 
 ### Target organisms
 
@@ -478,10 +466,10 @@ example_register$pests |>
 
 | use_nr | pest_de                               | pest_add_txt_de | pest_fr                   | pest_add_txt_fr |
 |-------:|:--------------------------------------|:----------------|:--------------------------|:----------------|
-|      1 | Einjährige Monocotyledonen (Ungräser) |                 | monocotylédones annuelles |                 |
 |      1 | Einjährige Dicotyledonen (Unkräuter)  |                 | dicotylédones annuelles   |                 |
-|      2 | Einjährige Monocotyledonen (Ungräser) |                 | monocotylédones annuelles |                 |
+|      1 | Einjährige Monocotyledonen (Ungräser) |                 | monocotylédones annuelles |                 |
 |      2 | Einjährige Dicotyledonen (Unkräuter)  |                 | dicotylédones annuelles   |                 |
+|      2 | Einjährige Monocotyledonen (Ungräser) |                 | monocotylédones annuelles |                 |
 
 ### Unique combinations of cultures and target organisms
 
@@ -505,31 +493,31 @@ kable(culture_pest_combinations)
 
 | pNbr | use_nr | application_area_de | culture_de                         | pest_de                             |
 |-----:|-------:|:--------------------|:-----------------------------------|:------------------------------------|
-| 6521 |      1 | Feldbau             | Weizen                             | Septoria-Spelzenbräune (S. nodorum) |
-| 6521 |      2 | Feldbau             | Winterroggen                       | Braunrost                           |
-| 6521 |      3 | Feldbau             | Raps                               | Wurzelhals- und Stengelfäule        |
-| 6521 |      4 | Feldbau             | Lupinen                            | Anthraknose                         |
+| 6521 |      1 | Gemüsebau           | Spargel                            | Spargelrost                         |
+| 6521 |      1 | Gemüsebau           | Spargel                            | Blattschwärze der Spargel           |
+| 6521 |      2 | Feldbau             | Weizen                             | Gelbrost                            |
+| 6521 |      3 | Feldbau             | Weizen                             | Septoria-Spelzenbräune (S. nodorum) |
+| 6521 |      4 | Feldbau             | Weizen                             | Ährenfusariosen                     |
 | 6521 |      5 | Feldbau             | Weizen                             | Echter Mehltau des Getreides        |
-| 6521 |      6 | Feldbau             | Eiweisserbse                       | Graufäule (Botrytis cinerea)        |
-| 6521 |      6 | Feldbau             | Eiweisserbse                       | Rost der Erbse                      |
-| 6521 |      6 | Feldbau             | Eiweisserbse                       | Brennfleckenkrankheit der Erbse     |
-| 6521 |      7 | Feldbau             | Weizen                             | Ährenfusariosen                     |
-| 6521 |      8 | Feldbau             | Ackerbohne                         | Rost der Ackerbohne                 |
-| 6521 |      8 | Feldbau             | Ackerbohne                         | Braunfleckenkrankheit               |
+| 6521 |      6 | Feldbau             | Grasbestände zur Saatgutproduktion | Blattfleckenpilze                   |
+| 6521 |      6 | Feldbau             | Grasbestände zur Saatgutproduktion | Rost der Gräser                     |
+| 6521 |      7 | Feldbau             | Winterroggen                       | Braunrost                           |
+| 6521 |      8 | Feldbau             | Lupinen                            | Anthraknose                         |
 | 6521 |      9 | Feldbau             | Lein                               | Stängelbräune des Leins             |
 | 6521 |      9 | Feldbau             | Lein                               | Pasmokrankheit                      |
 | 6521 |      9 | Feldbau             | Lein                               | Echter Mehltau des Leins            |
-| 6521 |     10 | Gemüsebau           | Spargel                            | Blattschwärze der Spargel           |
-| 6521 |     10 | Gemüsebau           | Spargel                            | Spargelrost                         |
-| 6521 |     11 | Feldbau             | Grasbestände zur Saatgutproduktion | Rost der Gräser                     |
-| 6521 |     11 | Feldbau             | Grasbestände zur Saatgutproduktion | Blattfleckenpilze                   |
-| 6521 |     12 | Gemüsebau           | Erbsen                             | Graufäule (Botrytis cinerea)        |
-| 6521 |     12 | Gemüsebau           | Erbsen                             | Rost der Erbse                      |
+| 6521 |     10 | Feldbau             | Raps                               | Erhöhung der Standfestigkeit        |
+| 6521 |     10 | Feldbau             | Raps                               | Wurzelhals- und Stengelfäule        |
+| 6521 |     11 | Feldbau             | Eiweisserbse                       | Graufäule (Botrytis cinerea)        |
+| 6521 |     11 | Feldbau             | Eiweisserbse                       | Rost der Erbse                      |
+| 6521 |     11 | Feldbau             | Eiweisserbse                       | Brennfleckenkrankheit der Erbse     |
 | 6521 |     12 | Gemüsebau           | Erbsen                             | Brennfleckenkrankheit der Erbse     |
-| 6521 |     13 | Feldbau             | Raps                               | Sclerotinia-Fäule                   |
+| 6521 |     12 | Gemüsebau           | Erbsen                             | Rost der Erbse                      |
+| 6521 |     12 | Gemüsebau           | Erbsen                             | Graufäule (Botrytis cinerea)        |
+| 6521 |     13 | Feldbau             | Ackerbohne                         | Rost der Ackerbohne                 |
+| 6521 |     13 | Feldbau             | Ackerbohne                         | Braunfleckenkrankheit               |
 | 6521 |     14 | Feldbau             | Raps                               | Wurzelhals- und Stengelfäule        |
-| 6521 |     14 | Feldbau             | Raps                               | Erhöhung der Standfestigkeit        |
-| 6521 |     15 | Feldbau             | Weizen                             | Gelbrost                            |
+| 6521 |     15 | Feldbau             | Raps                               | Sclerotinia-Fäule                   |
 
 In this example, there are 25 such “indications” for the 15 uses.
 
@@ -545,10 +533,10 @@ example_register$application_comments |>
   kable()
 ```
 
-| pNbr | use_nr | application_comment_de                            | application_comment_fr                             |
-|-----:|-------:|:--------------------------------------------------|:---------------------------------------------------|
-| 7105 |      1 | Herbst, Frühjahr; Vorauflauf, früher Nachauflauf. | automne, printemps; pré-levée, post-levée précoce. |
-| 7105 |      2 | Nachauflauf, Stadium 12-13.                       | post-levée, stade 12-13.                           |
+| pNbr | use_nr | application_comment_de    | application_comment_fr       |
+|-----:|-------:|:--------------------------|:-----------------------------|
+| 7105 |      1 | 7 Tage nach dem Pflanzen. | 7 jours après la plantation. |
+| 7105 |      2 | 7 Tage nach dem Pflanzen. | 7 jours après la plantation. |
 
 ### Obligations
 
@@ -564,20 +552,24 @@ example_register$obligations |>
   kable()
 ```
 
-| pNbr | use_nr | code | obligation_de                                                                                                                                                                                                                                                                                                                                                                               | sw_runoff_points |
-|-----:|-------:|:-----|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------:|
-| 7105 |      1 |      | Behandlung von im Herbst gesäten Kulturen.                                                                                                                                                                                                                                                                                                                                                  |                  |
-| 7105 |      1 |      | Maximal 1 Behandlung pro Kultur.                                                                                                                                                                                                                                                                                                                                                            |                  |
-| 7105 |      1 |      | SPe 3: Zum Schutz von Gewässerorganismen muss das Abschwemmungsrisiko gemäss den Weisungen der Zulassungsstelle um 1 Punkt reduziert werden.                                                                                                                                                                                                                                                |                1 |
-| 7105 |      1 |      | Niedrige Aufwandmenge nur in Tankmischung gemäss den Angaben der Bewilligungsinhaberin.                                                                                                                                                                                                                                                                                                     |                  |
-| 7105 |      1 |      | Nachfolgearbeiten in behandelten Kulturen: bis 48 Stunden nach Ausbringung des Mittels Schutzhandschuhe + Schutzanzug tragen.                                                                                                                                                                                                                                                               |                  |
-| 7105 |      1 |      | Ansetzen der Spritzbrühe: Schutzhandschuhe tragen. Ausbringen der Spritzbrühe: Schutzhandschuhe + Schutzanzug + Visier + Kopfbedeckung tragen. Technische Schutzvorrichtungen während des Ausbringens (z.B. geschlossene Traktorkabine) können die vorgeschriebene persönliche Schutzausrüstung ersetzen, wenn gewährleistet ist, dass sie einen vergleichbaren oder höheren Schutz bieten. |                  |
-| 7105 |      2 |      | Phytotoxschäden bei empfindlichen Arten oder Sorten möglich; vor allgemeiner Anwendung Versuchspritzung durchführen.                                                                                                                                                                                                                                                                        |                  |
-| 7105 |      2 |      | Maximal 1 Behandlung pro Kultur.                                                                                                                                                                                                                                                                                                                                                            |                  |
-| 7105 |      2 |      | SPe 3: Zum Schutz von Gewässerorganismen muss das Abschwemmungsrisiko gemäss den Weisungen der Zulassungsstelle um 1 Punkt reduziert werden.                                                                                                                                                                                                                                                |                1 |
-| 7105 |      2 |      | Nachbau anderer Kulturen: 16 Wochen Wartefrist.                                                                                                                                                                                                                                                                                                                                             |                  |
-| 7105 |      2 |      | Nachfolgearbeiten in behandelten Kulturen: bis 48 Stunden nach Ausbringung des Mittels Schutzhandschuhe + Schutzanzug tragen.                                                                                                                                                                                                                                                               |                  |
-| 7105 |      2 |      | Ansetzen der Spritzbrühe: Schutzhandschuhe tragen. Ausbringen der Spritzbrühe: Schutzhandschuhe + Schutzanzug + Visier + Kopfbedeckung tragen. Technische Schutzvorrichtungen während des Ausbringens (z.B. geschlossene Traktorkabine) können die vorgeschriebene persönliche Schutzausrüstung ersetzen, wenn gewährleistet ist, dass sie einen vergleichbaren oder höheren Schutz bieten. |                  |
+| pNbr | use_nr | code                                     | obligation_de                                                                                                                                                                                                                                                                                                                                                                               | sw_runoff_points |
+|-----:|-------:|:-----------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------:|
+| 7105 |      1 | obligation 692                           | Nachbau anderer Kulturen: 16 Wochen Wartefrist.                                                                                                                                                                                                                                                                                                                                             |                  |
+| 7105 |      1 | N01: Profi Re-entry                      | Nachfolgearbeiten in behandelten Kulturen: bis 48 Stunden nach Ausbringung des Mittels Schutzhandschuhe + Schutzanzug tragen.                                                                                                                                                                                                                                                               |                  |
+| 7105 |      1 | obligation 1928                          | Maximal 1 Behandlung pro Kultur.                                                                                                                                                                                                                                                                                                                                                            |                  |
+| 7105 |      1 | ML01_A04_T01                             | Ansetzen der Spritzbrühe: Schutzhandschuhe tragen. Ausbringen der Spritzbrühe: Schutzhandschuhe + Schutzanzug + Visier + Kopfbedeckung tragen. Technische Schutzvorrichtungen während des Ausbringens (z.B. geschlossene Traktorkabine) können die vorgeschriebene persönliche Schutzausrüstung ersetzen, wenn gewährleistet ist, dass sie einen vergleichbaren oder höheren Schutz bieten. |                  |
+| 7105 |      1 | Abschwemmung 1 Punkt                     | SPe 3: Zum Schutz von Gewässerorganismen muss das Abschwemmungsrisiko gemäss den Weisungen der Zulassungsstelle um 1 Punkt reduziert werden.                                                                                                                                                                                                                                                |                1 |
+| 7105 |      1 |                                          | Splitbehandlung gemäss den Angaben der Bewilligungsinhaberin (max. 3 l/ha je Split, angegebene Aufwandmenge entspricht total bewilligter Menge).                                                                                                                                                                                                                                            |                  |
+| 7105 |      1 | obligation 2032                          | Phytotoxschäden bei empfindlichen Arten oder Sorten möglich; vor allgemeiner Anwendung Versuchspritzung durchführen.                                                                                                                                                                                                                                                                        |                  |
+| 7105 |      1 | Bewilligt nach Art. 35 PSMV (minor use). | Bewilligt als geringfügige Verwendung nach Art. 35 PSMV (minor use).                                                                                                                                                                                                                                                                                                                        |                  |
+| 7105 |      2 | Abschwemmung 1 Punkt                     | SPe 3: Zum Schutz von Gewässerorganismen muss das Abschwemmungsrisiko gemäss den Weisungen der Zulassungsstelle um 1 Punkt reduziert werden.                                                                                                                                                                                                                                                |                1 |
+| 7105 |      2 | obligation 692                           | Nachbau anderer Kulturen: 16 Wochen Wartefrist.                                                                                                                                                                                                                                                                                                                                             |                  |
+| 7105 |      2 | N01: Profi Re-entry                      | Nachfolgearbeiten in behandelten Kulturen: bis 48 Stunden nach Ausbringung des Mittels Schutzhandschuhe + Schutzanzug tragen.                                                                                                                                                                                                                                                               |                  |
+| 7105 |      2 | ML01_A04_T01                             | Ansetzen der Spritzbrühe: Schutzhandschuhe tragen. Ausbringen der Spritzbrühe: Schutzhandschuhe + Schutzanzug + Visier + Kopfbedeckung tragen. Technische Schutzvorrichtungen während des Ausbringens (z.B. geschlossene Traktorkabine) können die vorgeschriebene persönliche Schutzausrüstung ersetzen, wenn gewährleistet ist, dass sie einen vergleichbaren oder höheren Schutz bieten. |                  |
+| 7105 |      2 | obligation 1928                          | Maximal 1 Behandlung pro Kultur.                                                                                                                                                                                                                                                                                                                                                            |                  |
+| 7105 |      2 | obligation 2032                          | Phytotoxschäden bei empfindlichen Arten oder Sorten möglich; vor allgemeiner Anwendung Versuchspritzung durchführen.                                                                                                                                                                                                                                                                        |                  |
+| 7105 |      2 |                                          | Splitbehandlung gemäss den Angaben der Bewilligungsinhaberin (max. 3 l/ha je Split, angegebene Aufwandmenge entspricht total bewilligter Menge).                                                                                                                                                                                                                                            |                  |
+| 7105 |      2 | Bewilligt nach Art. 35 PSMV (minor use). | Bewilligt als geringfügige Verwendung nach Art. 35 PSMV (minor use).                                                                                                                                                                                                                                                                                                                        |                  |
 
 ## References
 
@@ -605,1189 +597,1361 @@ print(culture_tree, "culture_id", "name_fr", "name_it", limit = 800)
 
     ##                                                                        levelName
     ## 1   Cultures                                                                    
-    ## 2    ¦--Baby-Leaf                                                               
-    ## 3    ¦   ¦--Baby-Leaf (Brassicaceae)                                            
-    ## 4    ¦   ¦--Baby-Leaf (Chenopodiaceae)                                          
-    ## 5    ¦   °--Baby-Leaf (Asteraceae)                                              
-    ## 6    ¦--Hopfen                                                                  
-    ## 7    ¦--Knoblauch                                                               
-    ## 8    ¦--Futter- und Zuckerrüben                                                 
-    ## 9    ¦   ¦--Zuckerrübe                                                          
-    ## 10   ¦   °--Futterrübe                                                          
-    ## 11   ¦--Sonnenblume                                                             
-    ## 12   ¦--Knollenfenchel                                                          
-    ## 13   ¦--Oregano                                                                 
-    ## 14   ¦--Kernobst                                                                
-    ## 15   ¦   ¦--Birne / Nashi                                                       
-    ## 16   ¦   ¦   °--Birne                                                           
-    ## 17   ¦   ¦--Quitte                                                              
-    ## 18   ¦   °--Apfel                                                               
-    ## 19   ¦--Eberesche                                                               
-    ## 20   ¦--Liegendes Rundholz im Wald und auf Lagerplätzen                         
-    ## 21   ¦--Tabak produzierende Betriebe                                            
-    ## 22   ¦--Brunnenkresse                                                           
-    ## 23   ¦--Artischocken                                                            
-    ## 24   ¦--Wiesen und Weiden                                                       
-    ## 25   ¦   °--Kleegrasmischung (Kunstwiese)                                       
-    ## 26   ¦--Stachys                                                                 
-    ## 27   ¦--Wurzelpetersilie                                                        
-    ## 28   ¦--Kichererbse                                                             
-    ## 29   ¦--Ranunkel                                                                
-    ## 30   ¦--Reben                                                                   
-    ## 31   ¦   ¦--Ertragsreben                                                        
-    ## 32   ¦   °--Jungreben                                                           
-    ## 33   ¦--Grünfläche                                                              
-    ## 34   ¦--Spitzwegerich                                                           
-    ## 35   ¦--Rhabarber                                                               
-    ## 36   ¦--Sorghum                                                                 
-    ## 37   ¦--Leere Produktionsräume                                                  
-    ## 38   ¦--Karotten                                                                
-    ## 39   ¦--Rosskastanie                                                            
-    ## 40   ¦--Baldrian                                                                
-    ## 41   ¦--Kardy                                                                   
-    ## 42   ¦--Chrysantheme                                                            
-    ## 43   ¦--Schwarze Apfelbeere                                                     
-    ## 44   ¦--Anemone                                                                 
-    ## 45   ¦--Feldbau allg.                                                           
-    ## 46   ¦   ¦--Kartoffeln                                                          
-    ## 47   ¦   ¦   ¦--Kartoffeln zur Pflanzgutproduktion                              
-    ## 48   ¦   ¦   °--Speise- und Futterkartoffeln                                    
-    ## 49   ¦   °--Hanf                                                                
-    ## 50   ¦--Rhododendron                                                            
-    ## 51   ¦   °--Azaleen                                                             
-    ## 52   ¦--Verarbeitungsräume                                                      
-    ## 53   ¦--Forstwirtschaft allg.                                                   
-    ## 54   ¦   ¦--Wald                                                                
-    ## 55   ¦   °--Forstliche Pflanzgärten                                             
-    ## 56   ¦--Lupinen                                                                 
-    ## 57   ¦--Schwarzer Holunder                                                      
-    ## 58   ¦--Kohlarten                                                               
-    ## 59   ¦   ¦--Blumenkohle                                                         
-    ## 60   ¦   ¦   ¦--Blumenkohl                                                      
-    ## 61   ¦   ¦   ¦--Romanesco                                                       
-    ## 62   ¦   ¦   °--Broccoli                                                        
-    ## 63   ¦   ¦--Blattkohle                                                          
-    ## 64   ¦   ¦   ¦--Pak-Choi                                                        
-    ## 65   ¦   ¦   ¦--Markstammkohl                                                   
-    ## 66   ¦   ¦   ¦--Chinakohl                                                       
-    ## 67   ¦   ¦   °--Federkohl                                                       
-    ## 68   ¦   ¦--Rosenkohl                                                           
-    ## 69   ¦   ¦--Kopfkohle                                                           
-    ## 70   ¦   °--Kohlrabi                                                            
-    ## 71   ¦--Rubus Arten                                                             
-    ## 72   ¦   ¦--Brombeere                                                           
-    ## 73   ¦   °--Himbeere                                                            
-    ## 74   ¦--Einrichtungen und Geräte                                                
-    ## 75   ¦--Nachtschattengewächse (Solanaceae)                                      
-    ## 76   ¦   ¦--Paprika                                                             
-    ## 77   ¦   ¦   ¦--Peperoni                                                        
-    ## 78   ¦   ¦   °--Gemüsepaprika                                                   
-    ## 79   ¦   ¦--Aubergine                                                           
-    ## 80   ¦   ¦--Andenbeere                                                          
-    ## 81   ¦   ¦--Tomaten                                                             
-    ## 82   ¦   ¦   ¦--Tomaten Spezialitäten                                           
-    ## 83   ¦   ¦   ¦--Cherrytomaten                                                   
-    ## 84   ¦   ¦   °--Rispentomaten                                                   
-    ## 85   ¦   °--Pepino                                                              
-    ## 86   ¦--Färberdistel (Saflor)                                                   
-    ## 87   ¦--Chinaschilf                                                             
-    ## 88   ¦--leere Verarbeitungsräume                                                
-    ## 89   ¦--Lorbeer                                                                 
-    ## 90   ¦--Lager- und Produktionsräume allg.                                       
-    ## 91   ¦--Mulchsaaten                                                             
-    ## 92   ¦--Zuckermais                                                              
-    ## 93   ¦--Linse                                                                   
-    ## 94   ¦--Puffbohne                                                               
-    ## 95   ¦--Blautanne                                                               
-    ## 96   ¦--Erbsen                                                                  
-    ## 97   ¦   ¦--Erbsen mit Hülsen                                                   
-    ## 98   ¦   °--Erbsen ohne Hülsen                                                  
-    ## 99   ¦--Klee zur Saatgutproduktion                                              
-    ## 100  ¦--Ackerbohne                                                              
-    ## 101  ¦--Kenaf                                                                   
-    ## 102  ¦--Walnuss                                                                 
-    ## 103  ¦--Hartschalenobst                                                         
-    ## 104  ¦--Majoran                                                                 
-    ## 105  ¦--Kerbelrübe                                                              
-    ## 106  ¦--Holzpaletten, Packholz, Stammholz                                       
-    ## 107  ¦--Weihnachtsbäume                                                         
-    ## 108  ¦--Rande                                                                   
-    ## 109  ¦--Kresse                                                                  
-    ## 110  ¦--leere Lagerräume                                                        
-    ## 111  ¦--Eiweisserbse                                                            
-    ## 112  ¦--Nichtkulturland allg.                                                   
-    ## 113  ¦   ¦--Böschungen und Grünstreifen entlang von Verkehrswegen (gem. ChemRRV)
-    ## 114  ¦   °--Auf und an National- und Kantonsstrassen (gem. ChemRRV)             
-    ## 115  ¦--Tabak                                                                   
-    ## 116  ¦--Kürbisgewächse (Cucurbitaceae)                                          
-    ## 117  ¦   ¦--Wassermelonen                                                       
-    ## 118  ¦   ¦--Gurken                                                              
-    ## 119  ¦   ¦   ¦--Einlegegurken                                                   
-    ## 120  ¦   ¦   ¦--Nostranogurken                                                  
-    ## 121  ¦   ¦   °--Gewächshausgurken                                               
-    ## 122  ¦   ¦--Melonen                                                             
-    ## 123  ¦   ¦--Speisekürbisse (ungeniessbare Schale)                               
-    ## 124  ¦   ¦--Ölkürbisse                                                          
-    ## 125  ¦   °--Kürbisse mit geniessbarer Schale                                    
-    ## 126  ¦       ¦--Patisson                                                        
-    ## 127  ¦       ¦--Zucchetti                                                       
-    ## 128  ¦       °--Rondini                                                         
-    ## 129  ¦--Nelken                                                                  
-    ## 130  ¦--Gewürzfenchel                                                           
-    ## 131  ¦--Zierpflanzen allg.                                                      
-    ## 132  ¦   ¦--Ein- und zweijährige Zierpflanzen                                   
-    ## 133  ¦   ¦   °--Sommerflor                                                      
-    ## 134  ¦   ¦--Topf- und Kontainerpflanzen                                         
-    ## 135  ¦   ¦   ¦--Begonia                                                         
-    ## 136  ¦   ¦   ¦--Cyclame                                                         
-    ## 137  ¦   ¦   ¦--Pelargonien                                                     
-    ## 138  ¦   ¦   °--Primeln                                                         
-    ## 139  ¦   ¦--Baumschule                                                          
-    ## 140  ¦   ¦--Zier- und Sportrasen                                                
-    ## 141  ¦   ¦--Blumenkulturen und Grünpflanzen                                     
-    ## 142  ¦   ¦   ¦--Zierkürbis                                                      
-    ## 143  ¦   ¦   ¦--Hyazinthe                                                       
-    ## 144  ¦   ¦   ¦--Iris                                                            
-    ## 145  ¦   ¦   ¦--Liliengewächse (Zierpflanzen)                                   
-    ## 146  ¦   ¦   °--Tulpe                                                           
-    ## 147  ¦   ¦--Gehölze (ausserhalb Forst)                                          
-    ## 148  ¦   ¦--Rosen                                                               
-    ## 149  ¦   ¦--Bäume und Sträucher (ausserhalb Forst)                              
-    ## 150  ¦   ¦--Ziergehölze (ausserhalb Forst)                                      
-    ## 151  ¦   °--Stauden                                                             
-    ## 152  ¦--Portulak                                                                
-    ## 153  ¦   °--Gemüseportulak                                                      
-    ## 154  ¦--Getreide                                                                
-    ## 155  ¦   ¦--Triticale                                                           
-    ## 156  ¦   ¦   °--Wintertriticale                                                 
-    ## 157  ¦   ¦--Wintergetreide                                                      
-    ## 158  ¦   ¦   ¦--Winterweizen                                                    
-    ## 159  ¦   ¦   ¦--Winterroggen                                                    
-    ## 160  ¦   ¦   ¦--Korn (Dinkel)                                                   
-    ## 161  ¦   ¦   °--Emmer                                                           
-    ## 162  ¦   ¦--Sommergetreide                                                      
-    ## 163  ¦   ¦   ¦--Sommerweizen                                                    
-    ## 164  ¦   ¦   ¦--Sommergerste                                                    
-    ## 165  ¦   ¦   °--Sommerhafer                                                     
-    ## 166  ¦   ¦--Gerste                                                              
-    ## 167  ¦   ¦   °--Wintergerste                                                    
-    ## 168  ¦   ¦--Roggen                                                              
-    ## 169  ¦   ¦--Weizen                                                              
-    ## 170  ¦   ¦   ¦--Hartweizen                                                      
-    ## 171  ¦   ¦   °--Weichweizen                                                     
-    ## 172  ¦   °--Hafer                                                               
-    ## 173  ¦--Offene Ackerfläche                                                      
-    ## 174  ¦--Lauch                                                                   
-    ## 175  ¦--Pflanzen                                                                
-    ## 176  ¦--Radies                                                                  
-    ## 177  ¦--Spinat                                                                  
-    ## 178  ¦--Traubensilberkerze                                                      
-    ## 179  ¦--Trockenreis                                                             
-    ## 180  ¦--Schwarzwurzel                                                           
-    ## 181  ¦--Nüsslisalat                                                             
-    ## 182  ¦--Mohn                                                                    
-    ## 183  ¦--Lein                                                                    
-    ## 184  ¦--Olive                                                                   
-    ## 185  ¦--Gerbera                                                                 
-    ## 186  ¦--Beerenbau allg.                                                         
-    ## 187  ¦--Sojabohne                                                               
-    ## 188  ¦--Blumenzwiebeln und Blumenknollen                                        
-    ## 189  ¦--Speisekohlrüben                                                         
-    ## 190  ¦   °--Brassica rapa-Rüben                                                 
-    ## 191  ¦--Rosenwurz                                                               
-    ## 192  ¦--Kirschlorbeer                                                           
-    ## 193  ¦--Speisepilze                                                             
-    ## 194  ¦--Süssdolde                                                               
-    ## 195  ¦--Gojibeere                                                               
-    ## 196  ¦--Bohnen                                                                  
-    ## 197  ¦   ¦--Bohnen ohne Hülsen                                                  
-    ## 198  ¦   °--Bohnen mit Hülsen                                                   
-    ## 199  ¦       ¦--Stangenbohne                                                    
-    ## 200  ¦       °--Buschbohne                                                      
-    ## 201  ¦--Heidelbeere                                                             
-    ## 202  ¦--Mangold                                                                 
-    ## 203  ¦   ¦--Krautstiel                                                          
-    ## 204  ¦   °--Schnittmangold                                                      
-    ## 205  ¦--Lagerhallen, Mühlen, Silogebäude                                        
-    ## 206  ¦--Brachland                                                               
-    ## 207  ¦--Johanniskraut                                                           
-    ## 208  ¦--Dahlien                                                                 
-    ## 209  ¦--Gemüsebau allg.                                                         
-    ## 210  ¦--Asia-Salate (Brassicaceae)                                              
-    ## 211  ¦--Blaue Heckenkirsche                                                     
-    ## 212  ¦--Barbarakraut                                                            
-    ## 213  ¦--Humusdeponie                                                            
-    ## 214  ¦--Rettich                                                                 
-    ## 215  ¦--Topinambur                                                              
-    ## 216  ¦--Ribes Arten                                                             
-    ## 217  ¦   ¦--Stachelbeere                                                        
-    ## 218  ¦   ¦--Schwarze Johannisbeere                                              
-    ## 219  ¦   ¦--Rote Johannisbeere                                                  
-    ## 220  ¦   °--Jostabeere                                                          
-    ## 221  ¦--Cima di Rapa                                                            
-    ## 222  ¦--Brache                                                                  
-    ## 223  ¦--Spargel                                                                 
-    ## 224  ¦--Steinobst                                                               
-    ## 225  ¦   ¦--Zwetschge / Pflaume                                                 
-    ## 226  ¦   ¦   ¦--Zwetschge                                                       
-    ## 227  ¦   ¦   °--Pflaume                                                         
-    ## 228  ¦   ¦--Pfirsich / Nektarine                                                
-    ## 229  ¦   ¦--Aprikose                                                            
-    ## 230  ¦   °--Kirsche                                                             
-    ## 231  ¦--Mini-Kiwi                                                               
-    ## 232  ¦--Erntegut                                                                
-    ## 233  ¦--Rucola                                                                  
-    ## 234  ¦--Erdbeere                                                                
-    ## 235  ¦--Grasbestände zur Saatgutproduktion                                      
-    ## 236  ¦--Schwarze Maulbeere                                                      
-    ## 237  ¦--Sanddorn                                                                
-    ## 238  ¦--Sellerie                                                                
-    ## 239  ¦   ¦--Suppensellerie                                                      
-    ## 240  ¦   ¦--Stangensellerie                                                     
-    ## 241  ¦   °--Knollensellerie                                                     
-    ## 242  ¦--Luzerne                                                                 
-    ## 243  ¦--Melisse                                                                 
-    ## 244  ¦--Küchenkräuter                                                           
-    ## 245  ¦   ¦--Ysop                                                                
-    ## 246  ¦   ¦--Koriander                                                           
-    ## 247  ¦   ¦--Rosmarin                                                            
-    ## 248  ¦   ¦--Petersilie                                                          
-    ## 249  ¦   ¦--Römische Kamille                                                    
-    ## 250  ¦   ¦--Kerbel                                                              
-    ## 251  ¦   ¦--Minze                                                               
-    ## 252  ¦   ¦--Basilikum                                                           
-    ## 253  ¦   ¦--Bohnenkraut                                                         
-    ## 254  ¦   ¦--Thymian                                                             
-    ## 255  ¦   ¦--Kümmel                                                              
-    ## 256  ¦   ¦--Dill                                                                
-    ## 257  ¦   ¦--Salbei                                                              
-    ## 258  ¦   ¦--Liebstöckel                                                         
-    ## 259  ¦   ¦--Estragon                                                            
-    ## 260  ¦   °--Schnittlauch                                                        
-    ## 261  ¦--Gemeine Felsenbirne                                                     
-    ## 262  ¦--Fichte                                                                  
-    ## 263  ¦--Stielmus                                                                
-    ## 264  ¦--Obstbau allg.                                                           
-    ## 265  ¦--Blaudistel                                                              
-    ## 266  ¦--Zwiebeln                                                                
-    ## 267  ¦   ¦--Gemüsezwiebel                                                       
-    ## 268  ¦   ¦--Bundzwiebeln                                                        
-    ## 269  ¦   °--Speisezwiebel                                                       
-    ## 270  ¦--Buchsbäume (Buxus)                                                      
-    ## 271  ¦--Gladiole                                                                
-    ## 272  ¦--Frässaaten                                                              
-    ## 273  ¦--Raps                                                                    
-    ## 274  ¦   °--Winterraps                                                          
-    ## 275  ¦--Chicorée                                                                
-    ## 276  ¦--Salate (Asteraceae)                                                     
-    ## 277  ¦   ¦--Löwenzahn                                                           
-    ## 278  ¦   ¦--Lactuca-Salate                                                      
-    ## 279  ¦   ¦   ¦--Kopfsalate                                                      
-    ## 280  ¦   ¦   ¦   °--Kopfsalat                                                   
-    ## 281  ¦   ¦   °--Blattsalate (Asteraceae)                                        
-    ## 282  ¦   ¦       °--Schnittsalat                                                
-    ## 283  ¦   °--Endivien und Blattzichorien                                         
-    ## 284  ¦       ¦--Endivien                                                        
-    ## 285  ¦       ¦--Zuckerhut                                                       
-    ## 286  ¦       °--Radicchio- und Cicorino-Typen                                   
-    ## 287  ¦--Medizinalkräuter                                                        
-    ## 288  ¦   °--Wolliger Fingerhut                                                  
-    ## 289  ¦--Meerrettich                                                             
-    ## 290  ¦--Bodenkohlrabi                                                           
-    ## 291  ¦--Hagebutten                                                              
-    ## 292  ¦--Pastinake                                                               
-    ## 293  ¦--Süsskartoffel                                                           
-    ## 294  ¦--Lagerräume                                                              
-    ## 295  ¦--Schalotten                                                              
-    ## 296  °--Mais                                                                    
-    ##                               culture_id
-    ## 1                                       
-    ## 2   0106A8DF-6CDF-4E18-8F46-3D9E1D52D0E5
-    ## 3   6C3D663E-442F-4783-87A2-A46806E119E5
-    ## 4   9BD6A435-E370-4DFE-82E5-7E7813B4D193
-    ## 5   DB0DCB7D-CA9F-454A-8398-606F066FBF4F
-    ## 6   01AFF6EB-9C8D-4D0D-B225-0BA07B59A72F
-    ## 7   037E11B2-128A-4194-9A5B-A3E980AE4113
-    ## 8   086E34F3-82E5-4F92-9224-41C9F7529E70
-    ## 9   B542EC7D-B423-43B4-9010-82A6889BB3B4
-    ## 10  C763D817-B4AC-43DB-9C6E-A262CC32F400
-    ## 11  095E9650-A880-4BD2-A1BB-39297582BCE6
-    ## 12  0D20E815-633E-4F38-AC93-7B6578B0483E
-    ## 13  0E2847EB-CEFD-4640-82EB-F09F3F1A5E13
-    ## 14  0F5F1FEE-084C-4961-A76F-82F9B17B2635
-    ## 15  FA0F7C48-BF78-49B0-9046-FBB5ABB4BF75
-    ## 16  42466A90-AFCD-4DA6-8769-99C4BC5BE217
-    ## 17  FD180555-9DEF-42BA-86E0-EBD31AB8FABB
-    ## 18  FD18F42C-C390-4701-B07B-B8108B33320B
-    ## 19  122B909A-CE9C-47BC-B5CA-DCF523646D38
-    ## 20  13BB4B9E-6CEE-4729-AE29-8A4380EB33B0
-    ## 21  17B69B05-E650-4A6F-815A-D6DA55A92CDB
-    ## 22  19C5BA72-A0D5-4409-8D05-0A7C9D821E20
-    ## 23  1BFC9694-C7DC-4D74-84B2-1418AB94A8BA
-    ## 24  1F03DDC0-19CF-48F1-BAB8-61CA4CEF24CF
-    ## 25  4E1ACD79-F162-4EBB-93CB-C6857A811E9C
-    ## 26  1F0B6451-EC2C-4647-A53A-23B0EAE626B1
-    ## 27  21228D46-5B00-4CDD-9C71-48C0A0B21C78
-    ## 28  2260B6A9-FC51-4F50-8E8F-D39BC6D5DA3A
-    ## 29  230F7417-5500-4124-B273-95AA1FFB940B
-    ## 30  2314EB9F-7207-409F-A0D4-89B6A1177363
-    ## 31  293D431D-8501-4D41-A0E5-F1A5AD59C8B6
-    ## 32  516862FD-DCB0-42BF-8E18-ADA820B1DB90
-    ## 33  24EA0CC6-D1D5-4BB4-981C-A836E3D7125D
-    ## 34  269900C0-F407-4AFA-B3F2-D857EDACB733
-    ## 35  27ACD8EA-49E8-4C99-84D4-53E2E605390E
-    ## 36  27FBFA25-5091-4D7E-9C96-3C0BC05B6474
-    ## 37  28ECDBFE-F44F-44C6-BF06-9B7E6EBFC1F6
-    ## 38  2AB457D1-DB9D-4545-92FF-04A6BD2CEC08
-    ## 39  2F7BD13A-BAA5-4708-83C6-17D44E57EA4D
-    ## 40  309E5D09-3084-40C6-88F2-D4A14345136C
-    ## 41  3346CB25-6DC9-42AF-8BA2-F725BD92304A
-    ## 42  34753E17-C34D-4D0B-88A0-91143DADABB2
-    ## 43  36D9AFE2-7506-48CE-BA39-EFD54535294A
-    ## 44  36EC3084-D6AE-494D-A5B2-EC39DCC4F412
-    ## 45  3783A322-9E9C-44F6-B683-FE35221CA6AC
-    ## 46  B4D50F5E-6028-493D-9B95-85CAE5DADF06
-    ## 47  689F7BE7-DA1E-49B6-95D5-E002E210E7B9
-    ## 48  92CAB39E-ACC3-44DC-9EF3-0D27B8600E83
-    ## 49  EA82A16B-4A8C-4917-A08F-C2AD3B266640
-    ## 50  3A53A166-7559-4E75-BDED-F65CA6FDFDE1
-    ## 51  33097BFE-2487-46DB-85A0-A8A4E06030AF
-    ## 52  3E4AFACC-03CA-4CEC-8392-520B07DDC604
-    ## 53  3FEAB48F-0D66-4814-B3E3-C4BC0AB749B3
-    ## 54  19CC4F57-CB08-4970-BEDB-3DB2B2CB1034
-    ## 55  43FC7C18-BDA5-4364-B4CA-74EA37B7B8DC
-    ## 56  404C1D02-5666-4AA3-8487-65A9EEE0B53D
-    ## 57  42D50BC4-0019-4B55-9CB5-6C3E86C9D112
-    ## 58  4380EC0F-E195-4783-8BB7-F6B0464B37D6
-    ## 59  4A22B9D3-747C-4323-A852-1CB1F6ADB680
-    ## 60  1E129025-DFD8-42D1-8A86-D90485B282A1
-    ## 61  8AFA14F8-CCE3-4012-BD12-9D690EBAE1AD
-    ## 62  B9323B4D-249D-4CF3-A5DF-4FDA2E66532F
-    ## 63  6F26F4E0-401C-4B16-A28B-4CC889907361
-    ## 64  394AE687-29A0-4BA6-B0B9-D7DFB0C08FCE
-    ## 65  80395E92-C39B-45D9-91AC-AB7E6DCAC3DB
-    ## 66  C37A7EE2-D06B-4204-809A-F50A934F79E3
-    ## 67  DF4B3775-8361-41CE-9843-AC953197403D
-    ## 68  7B90BAC4-B80F-4039-ADC3-ADF9225CCBB7
-    ## 69  CA58ABAE-E494-4608-BE51-5FF49D853A03
-    ## 70  D8A50212-BD15-456A-9D2E-2A401C2EF21D
-    ## 71  43F8091A-A333-40F5-8845-FF83398B9AC3
-    ## 72  8621CDCC-EE8A-4188-9F2C-14C9497FBED3
-    ## 73  D63D73AC-87B1-41F7-82AC-D1DFF12F6704
-    ## 74  465E7118-95AB-46A2-9A85-7A0B9070E63A
-    ## 75  46901564-D096-4323-AE81-C93831AFEC64
-    ## 76  096444CD-43E6-41F9-8914-2E7DADA4C801
-    ## 77  46D3C073-CBD8-4B3A-A9AA-21785BA911CA
-    ## 78  68688AEC-44E2-490B-AC80-E8DEDCC82B8F
-    ## 79  6CC3F1FF-84DF-4E4A-A91E-57C5ECB82F61
-    ## 80  74C47437-5700-45F5-86E2-D410DACD39B6
-    ## 81  E9E3C127-33C1-40D9-8552-3CBE45E8E4C4
-    ## 82  07A12E5B-DB0B-4421-A215-E306768AC0BE
-    ## 83  1D9F568C-5170-43A1-86B9-B25808DD6A43
-    ## 84  D100976A-2598-4614-AB7A-61436FF2B053
-    ## 85  F512809F-5CC7-44A2-A378-8FDAFA67CFEA
-    ## 86  49F7DA15-E241-4080-9D42-1523ECA834B5
-    ## 87  4A386AE2-A36F-4A55-8668-7B896A1E8092
-    ## 88  4B6DC713-3B11-42C5-92A8-E504D594E978
-    ## 89  4C8B56DD-9606-453C-9B14-C9C6309E87FA
-    ## 90  4D5AF334-29F4-4854-A14F-4457A8A87D97
-    ## 91  52019F0F-3BAF-4161-A223-62EECBA47871
-    ## 92  5433C814-C0CD-4815-B236-2D02E1C66F3D
-    ## 93  54C75B64-57C4-46E2-BCEA-741EBC10FDDF
-    ## 94  56AF3EA3-01F4-4F10-B240-7EF4BE1C1CCE
-    ## 95  5B651459-FC70-4D22-9469-4991F847EA89
-    ## 96  5DF3AB4D-7CAC-4112-90D9-67BD80EC5E96
-    ## 97  02BF379A-E526-422A-952B-3B0CD995F8C1
-    ## 98  C5188A42-9C79-4110-B1E8-AEE9D6078BEA
-    ## 99  6388D9E7-CD0D-4823-80DD-E6FA472AF12C
-    ## 100 657E4B0A-50BD-424B-9DB4-1B84582AD3D7
-    ## 101 6D06A7F9-DF91-4BB5-84B8-FB877C211E66
-    ## 102 6D45EAF5-D29C-48AB-A212-91C67357E898
-    ## 103 6EDA1989-51C8-490E-90FD-974CE3E8FF03
-    ## 104 710CC0C8-B138-4B31-9975-4DA04AF67792
-    ## 105 71D9FB13-5AE4-42C3-9F84-956B16C379C1
-    ## 106 75047A9C-12E2-4BAC-89D8-B14BC4C6B100
-    ## 107 79C28385-E183-4661-AAC0-80E82C67089C
-    ## 108 7A993953-3C2F-4BC3-98EE-2EE5E83C6E77
-    ## 109 7CE53BA0-097D-44FB-82FF-C30DFD3769DD
-    ## 110 7D23702C-980B-4B90-A86B-70013806D3EA
-    ## 111 7D52C099-7C6F-453C-8513-4BBFB94EE66A
-    ## 112 7F20F06C-C950-49B9-A78F-9E2F696B079E
-    ## 113 A22521E4-7D71-40C2-9FDF-B1230008D934
-    ## 114 C3E12AAE-119E-47CF-9B8A-6F1CA657CF6B
-    ## 115 8262D735-4D45-4499-AE0B-497FF4C0C4AA
-    ## 116 8303C191-3315-4942-91DF-668C019850D7
-    ## 117 09269926-BA07-42DC-BE9D-5B34658BDBF0
-    ## 118 30F9F737-0A18-43EC-AF88-F28940E567F1
-    ## 119 238AB652-AD62-4703-A74B-7550C693ED6E
-    ## 120 AED83C4B-0546-4C91-B370-4AB5B425942F
-    ## 121 CE13A930-22B8-44D6-98E4-97707B0F7F6C
-    ## 122 399AC89E-29BB-44AD-8B1F-0B2F327D5230
-    ## 123 573B50E9-ED1D-4999-B4FD-4537CA2A6306
-    ## 124 BBD16782-6EB3-4923-9DBB-CC7D97EBCB0E
-    ## 125 FE69D926-4BE1-4C67-840E-30C3D299442E
-    ## 126 3447F4C9-2E90-437F-A240-0462AFEDF2B5
-    ## 127 C1A1842A-37E5-46D3-9646-9ECC15BAEE99
-    ## 128 F6A02973-2AF5-47AF-B99D-FFAD9A24BCB4
-    ## 129 83A9CEC5-FC31-421C-A3B8-CA219AF649CF
-    ## 130 8512D352-73CC-4535-9469-965AAF1FD0B1
-    ## 131 890D8A5E-BF86-4B2D-9B98-45B779D80F7F
-    ## 132 00D94F57-BA6F-4BA0-8F68-26D4C497539A
-    ## 133 C69EBD93-43E5-457F-9CBE-EE1C04791274
-    ## 134 2A05DA01-5722-46A2-BCCF-3B75C6D17BB6
-    ## 135 2E38C972-4160-4D2B-8ED2-3B48FC781EF0
-    ## 136 9A9A2586-34FF-4256-8FA4-BA9F2FA38CAE
-    ## 137 B75AC4CC-6BB7-4A99-808A-9F7BDFCF8E6A
-    ## 138 E8B23A5E-B65E-4DC8-977D-BD84F143A442
-    ## 139 3BEFA6F7-0D34-4E29-8207-85E9D5783ECC
-    ## 140 5C610428-6087-4A2E-B977-3E83EDBB19F0
-    ## 141 75317E57-B194-4B3D-8FF2-3489A39AC177
-    ## 142 302E5676-26A3-41EB-980F-2B6BDE117D3A
-    ## 143 61D9C648-0736-43D4-BF04-B8643B1D74E0
-    ## 144 A8647F38-2A16-46AB-8B0E-2257EBF53C63
-    ## 145 B82B5C60-02CB-4B7A-B3D3-A4CA34A809C3
-    ## 146 FF0DF95C-A3A9-47EE-95FA-00FCB428A4ED
-    ## 147 7B3C8CEE-526F-4381-A757-669C1864291A
-    ## 148 A024CDFC-A05D-46B8-B08A-221C26BDF5DE
-    ## 149 D40E1405-757C-4E3D-B26F-07D5F2251565
-    ## 150 F4479311-1516-49F1-95BA-E232030F9AAC
-    ## 151 FCF24426-CAB8-43C8-9E42-B09581420287
-    ## 152 8A00630A-32FC-4B5A-8171-EC0F41D39F48
-    ## 153 77267F83-907F-4537-98A8-7B9C1E4714F0
-    ## 154 8B5A3E2B-2534-4FC0-84C5-685915165A77
-    ## 155 048FDB44-710A-4801-849C-72F1A458DB82
-    ## 156 CEC488FC-D9AD-4515-A28E-DEEC6C807926
-    ## 157 287584B7-E43E-494B-84C2-D13B2C9C3736
-    ## 158 7AB6690B-B2B9-4F12-AFAE-A9B0222C2637
-    ## 159 B74E61A6-30BD-4A63-8A24-94FC0A54D489
-    ## 160 D3D49C53-8EBC-4DAC-9C4C-B988AA162F7D
-    ## 161 F730D531-B0C8-4A20-AC4B-4F86445E2491
-    ## 162 449A5380-96E3-4C3F-AB31-7CB3D0579561
-    ## 163 B6669854-1833-4BBC-A931-E67505848EA7
-    ## 164 C026CB2D-39B4-4FDF-AD04-FBA22AD2B4F1
-    ## 165 C9DB1105-33C7-44E8-92BA-9BBE5BA2BB3F
-    ## 166 625EA905-7C3D-4BCC-8551-BC1CB14FF647
-    ## 167 7D65DFD2-C26E-4CAB-9E2C-66A6C7CBA641
-    ## 168 7D76F5F6-5810-4556-A7D5-84C91FDE3FF2
-    ## 169 82376115-14E2-449A-8DFA-F8119476FE3F
-    ## 170 7870FD70-C44A-4788-ABEA-FB673A5FD106
-    ## 171 D3D90BE6-0924-4844-98FB-52C4D7F21A38
-    ## 172 F8A8C1D8-E2C7-4230-8435-4D5AEE69813E
-    ## 173 8BDDCACC-13C1-4676-9322-402ECF20BE85
-    ## 174 8DFDE2D1-C004-4C25-BF54-21CF7C815232
-    ## 175 8E6C3D3A-6D7A-4D82-94CC-E4F227CC1EB2
-    ## 176 8FF3D364-2BA6-40AA-A370-4B72E3CAC8DF
-    ## 177 93A2DA1B-F920-461B-A9C9-BA9981CDB278
-    ## 178 9650E36A-38F4-4375-9594-25785BACE1DC
-    ## 179 99379C08-8682-4628-BD67-6E566F5130FA
-    ## 180 9A9333CA-AD6C-459D-9AFF-B8E8FB2FF8D4
-    ## 181 9AA59D6B-D6AA-49BE-8BF8-A7A53BE54759
-    ## 182 9B8F475B-C6FA-4642-9CD8-89A98A293D50
-    ## 183 9BA6BDE9-AD45-4F91-A190-708D39AD5B63
-    ## 184 9BCEB85B-1578-4001-839D-68BFB9CE4CD8
-    ## 185 9C6CEE37-8105-4E48-9CA4-11BA3AB556FB
-    ## 186 9DE574C1-EE11-42BC-9C05-930BCAE13A44
-    ## 187 9F6AE17C-0BE1-457A-B780-D408BCD333BF
-    ## 188 A0012475-8478-4CA9-A18A-DC1CB96D788B
-    ## 189 A0C29069-5DBA-4E89-B7F9-4C556C272821
-    ## 190 BFD1B79E-ABD1-4A44-8E61-891FF97960A1
-    ## 191 A1B43C0A-8077-47D4-9171-8E6B2C9A95C4
-    ## 192 A21391C3-A1A3-4472-8AA1-56449FB56B36
-    ## 193 A2D0B83F-9BB5-477C-AD44-24B31F2EF276
-    ## 194 A2D2B4EC-D7D6-4A30-BEE9-0A8F907A874A
-    ## 195 A3E943A5-C6D8-4CB0-A069-85BFC48E8B8A
-    ## 196 A8BAC5BB-239F-4EE0-8CE2-F55590DA3FC0
-    ## 197 102C28F6-4AFB-4079-909B-ACE8E0819A77
-    ## 198 F7BB2F1C-EDE5-4C95-931E-0B2C973F5A29
-    ## 199 4465118D-78E7-4748-A47A-7F39E593771A
-    ## 200 930524FB-BD0A-4CA9-A89D-4FEEE1F9174F
-    ## 201 A9F01BDE-468A-477A-8ED5-704359B663F6
-    ## 202 AB0798FE-64B8-49A2-8E75-14467EB7AB58
-    ## 203 915B2192-1651-4B8A-B2D8-C162A5D27211
-    ## 204 B7DE9539-35FD-4172-B72D-488EA12F2DF7
-    ## 205 AC0240B5-B610-4D7C-8704-AA8E182821AC
-    ## 206 AE465EA2-A950-4661-B631-D5A267B2F076
-    ## 207 AE97719E-9D0F-425C-BCD7-0F5D84092113
-    ## 208 AEC07D17-6D8B-4180-A368-056A187DE2F8
-    ## 209 B4CA8F81-4A66-4880-98AB-C7760AECCDA6
-    ## 210 B5FFA375-D9A5-4FD1-9DCF-76F230FEA725
-    ## 211 B92BA12C-EA9D-4EA8-ADEE-A4547872DD58
-    ## 212 BA2DECCF-5987-4987-B56E-C5EC6E5D19C0
-    ## 213 BAE217C2-8C72-4706-8A0E-911FB18FC723
-    ## 214 BB923645-6E65-48EE-9C64-DA2232EEE7EF
-    ## 215 BDB73EC5-46E5-413B-85B5-78D3801F4E7E
-    ## 216 BE3C6915-B28E-4CC8-980E-7F243F14F519
-    ## 217 3A522DC8-E6D3-426D-AA99-65C148ED1A84
-    ## 218 4E8A4BB8-3B5D-4695-B17C-F4C1202D5138
-    ## 219 91406007-35B9-49E2-A62F-04BDE262366F
-    ## 220 FFDDDA7D-B340-473C-94F4-841272B602FA
-    ## 221 C264982A-CA81-4311-9E38-67D2D956BC78
-    ## 222 C8AB8319-939E-4CF3-B78E-549A85DEF756
-    ## 223 C96EE4F4-12EA-49DE-9BEF-21EA73B52760
-    ## 224 CA722B7E-8F16-4502-8139-C33F749545D4
-    ## 225 24A364B9-6BD7-42A6-A9EC-AB9E94E010FF
-    ## 226 66B27CD1-032A-456E-99C4-28F6E989CC14
-    ## 227 9C38BA77-FDC8-461A-800A-9E2467C52105
-    ## 228 307A62EA-67D6-4D28-9CF7-F1218C9BE2CD
-    ## 229 9BB00FC5-181F-4F3F-94C8-E4141143F44A
-    ## 230 CF9B4B3C-DCDC-4E2E-A613-D784936842D2
-    ## 231 CA9B7EDC-8626-4E01-B979-4856CFA9893E
-    ## 232 CC08E1E6-655D-4FAA-B0E8-AD968A68A536
-    ## 233 CC9D982D-A99F-4143-8298-BC029BD1D1AD
-    ## 234 CCCD6417-ED96-4A46-82EF-2EC848F719A7
-    ## 235 CDF1E5BC-0740-4214-8912-870CC2BB37F4
-    ## 236 D18572C7-A270-4AA7-B766-48D62C5E9AB7
-    ## 237 D1E8D0D6-BD3C-4C47-9017-DBEADC9215A9
-    ## 238 D36B92CB-136F-46C3-8217-10C3F86ECA12
-    ## 239 18C6314C-C067-4E7F-AAB6-2DEF3F01DF9D
-    ## 240 3702313F-95C6-4FE9-8B6B-C7CE3987CD18
-    ## 241 56884AC3-B629-440D-8E82-05075A18697F
-    ## 242 D3CD23DC-4C49-4EE5-8BF8-6B074E74352A
-    ## 243 D51188F1-9F8F-46E6-8F5B-550A7D45A4BE
-    ## 244 D541F2F5-8BA6-4E26-AA66-9CF469648AFF
-    ## 245 0A88EFE2-B85E-4BF7-9C38-AEE8CB2BFE42
-    ## 246 0DAB25B6-C3AA-430B-BF83-05FA66D889A4
-    ## 247 14B19DFD-331F-4C30-8724-8EDDF8E2D0D4
-    ## 248 1A1D511B-4ABD-44F2-8BB5-55192F5310D2
-    ## 249 25DC9B01-CA06-426A-B743-C0D293447898
-    ## 250 2C8A4414-AD7F-4708-9C58-BF1969131693
-    ## 251 37059300-8031-4A64-B75C-7490288E32BA
-    ## 252 3C2F424F-DFA0-4A59-A3DF-6E33A6B0B97E
-    ## 253 4D799EC6-1483-4D65-90EA-8DDB6A4166CA
-    ## 254 730AACDC-B956-493D-8148-7520019CE0BC
-    ## 255 807F5A2C-7904-456D-BBC7-A80A4B207964
-    ## 256 91522E50-F1AC-42B1-870B-68218110C235
-    ## 257 A067CC81-6A5D-4684-BE95-7941A51B9EF2
-    ## 258 A519A894-B754-44D1-A032-155F57B0CBFE
-    ## 259 ABF54D5D-620B-4A08-A37D-416C1AD8D1BF
-    ## 260 FA8C26CF-E3B4-456D-AA4E-94D21AEADA1A
-    ## 261 D605CAA5-9199-4739-8C9C-343C74DABAEB
-    ## 262 D95CD842-A5BC-4DAA-935D-F009DA7BA748
-    ## 263 DA5835F6-C295-4A4F-829D-007B1FA50A6D
-    ## 264 DA71526F-AC1D-40F1-8EF5-109E3F3FFD76
-    ## 265 DAF00AE7-5272-4E07-9A66-E9F9BD8FEE43
-    ## 266 DB98FC8E-5AFA-4434-9478-960124F960CA
-    ## 267 83C510D2-293A-4E1B-B691-06B1F02149B4
-    ## 268 874850AA-2F48-47B6-A789-C67D6DEE97DA
-    ## 269 C883F887-6B72-4917-9385-7A757E5FD8D6
-    ## 270 DF455946-B2AB-45D2-9780-4A45A98D72D6
-    ## 271 E2A335E5-D797-46E7-9CE4-9CB3F301AAA2
-    ## 272 E36FADB4-A022-42A0-81CF-F041CABB93A4
-    ## 273 E58E502E-BECD-44CB-96A2-3A6771D8A7B7
-    ## 274 5755AD92-721E-431E-8473-6FA2F340532F
-    ## 275 E5B9C6F0-5C57-4A12-8ED9-D65B669B8243
-    ## 276 E786D43D-444B-49D6-B0D0-294265F91403
-    ## 277 25DA6F5A-1BD0-4040-A210-BB05CCB66AE4
-    ## 278 33686F38-1E1A-4698-81E4-C40EE4494EF3
-    ## 279 4DD550C5-15BB-4D52-98BD-6770972575F0
-    ## 280 B02E0EFA-B8AF-425A-A779-6A4DFE8D4172
-    ## 281 9CA61204-7EA7-4F2F-BAD3-BD02EDD6A829
-    ## 282 A4BC1F92-959A-4449-A039-B98E3ABCD9B1
-    ## 283 8DB1A579-6BAC-4DCB-8026-E79B65D3BD3A
-    ## 284 62BF86AE-FD69-4F95-A72C-1D57AF1DCD99
-    ## 285 94589F70-1F3A-4AEF-A26A-2267EB5BDA4B
-    ## 286 B535B6DD-517D-4A62-ACC7-2948B15175ED
-    ## 287 E981BFA6-288D-4EA6-B81B-4F610611EB36
-    ## 288 C38D7DE4-C804-4F7C-AA2F-A536D03E0DFC
-    ## 289 EACDD832-D1CD-479C-973F-CD0DB6A9FBC3
-    ## 290 EB820B26-DE4E-4AF4-8BA3-46844F045306
-    ## 291 EC349B29-6A2B-4E43-990F-C553D278DC0E
-    ## 292 EE7EE009-EBD4-471D-AE85-1A98130F6119
-    ## 293 EF29B430-95C5-45D4-A812-DCCE046E1B8E
-    ## 294 F171615D-81A1-4654-BF30-BF51620DFFB9
-    ## 295 F718EA3C-F363-4DB2-BDF6-2D6236706822
-    ## 296 F9426E5C-7D4D-45E5-80DA-64BB12336CA4
+    ## 2    ¦--allg. Ökologische Ausgleichsflächen (gemäss DZV)                        
+    ## 3    ¦   °--Offene Ackerfläche                                                  
+    ## 4    ¦--Zierpflanzen allg.                                                      
+    ## 5    ¦   ¦--Topf- und Kontainerpflanzen                                         
+    ## 6    ¦   ¦   ¦--Begonia [dup]                                                   
+    ## 7    ¦   ¦   ¦--Cyclame [dup]                                                   
+    ## 8    ¦   ¦   ¦--Pelargonien [dup]                                               
+    ## 9    ¦   ¦   °--Primeln [dup]                                                   
+    ## 10   ¦   ¦--Blumenknollen                                                       
+    ## 11   ¦   ¦   °--Dahlien                                                         
+    ## 12   ¦   ¦--Baumschule                                                          
+    ## 13   ¦   ¦--Ziergehölze (ausserhalb Forst)                                      
+    ## 14   ¦   ¦--Rosen                                                               
+    ## 15   ¦   ¦--Ein- und zweijährige Zierpflanzen                                   
+    ## 16   ¦   ¦   °--Sommerflor                                                      
+    ## 17   ¦   ¦--Bäume und Sträucher (ausserhalb Forst)                              
+    ## 18   ¦   ¦   ¦--Rhododendron                                                    
+    ## 19   ¦   ¦   ¦   °--Azaleen                                                     
+    ## 20   ¦   ¦   ¦--Kirschlorbeer                                                   
+    ## 21   ¦   ¦   ¦--Rosskastanie                                                    
+    ## 22   ¦   ¦   ¦--Blautanne [dup]                                                 
+    ## 23   ¦   ¦   ¦--Buchsbäume (Buxus)                                              
+    ## 24   ¦   ¦   °--Weihnachtsbäume [dup]                                           
+    ## 25   ¦   ¦--Blumenkulturen und Grünpflanzen                                     
+    ## 26   ¦   ¦   ¦--Iris                                                            
+    ## 27   ¦   ¦   ¦--Begonia                                                         
+    ## 28   ¦   ¦   ¦--Cyclame                                                         
+    ## 29   ¦   ¦   ¦--Hyazinthe                                                       
+    ## 30   ¦   ¦   ¦--Gladiole                                                        
+    ## 31   ¦   ¦   ¦--Chrysantheme                                                    
+    ## 32   ¦   ¦   ¦--Pelargonien                                                     
+    ## 33   ¦   ¦   ¦--Primeln                                                         
+    ## 34   ¦   ¦   ¦--Blaudistel                                                      
+    ## 35   ¦   ¦   ¦--Gerbera                                                         
+    ## 36   ¦   ¦   ¦--Tulpe                                                           
+    ## 37   ¦   ¦   ¦--Zierkürbis                                                      
+    ## 38   ¦   ¦   ¦--Liliengewächse (Zierpflanzen)                                   
+    ## 39   ¦   ¦   °--Nelken                                                          
+    ## 40   ¦   ¦--Gehölze (ausserhalb Forst)                                          
+    ## 41   ¦   ¦   °--Nadelgehölze (Koniferen)                                        
+    ## 42   ¦   ¦       ¦--Blautanne                                                   
+    ## 43   ¦   ¦       ¦--Fichte                                                      
+    ## 44   ¦   ¦       °--Weihnachtsbäume                                             
+    ## 45   ¦   ¦--Zier- und Sportrasen                                                
+    ## 46   ¦   °--Stauden                                                             
+    ## 47   ¦--allg. Obstbau                                                           
+    ## 48   ¦   ¦--Hartschalenobst                                                     
+    ## 49   ¦   ¦   °--Nüsse                                                           
+    ## 50   ¦   ¦       °--Walnuss                                                     
+    ## 51   ¦   ¦--Olive                                                               
+    ## 52   ¦   ¦--Kernobst                                                            
+    ## 53   ¦   ¦   ¦--Birne / Nashi                                                   
+    ## 54   ¦   ¦   ¦   °--Birne                                                       
+    ## 55   ¦   ¦   ¦--Apfel                                                           
+    ## 56   ¦   ¦   °--Quitte                                                          
+    ## 57   ¦   °--Steinobst                                                           
+    ## 58   ¦       ¦--Zwetschge / Pflaume                                             
+    ## 59   ¦       ¦   ¦--Zwetschge                                                   
+    ## 60   ¦       ¦   °--Pflaume                                                     
+    ## 61   ¦       ¦--Aprikose                                                        
+    ## 62   ¦       ¦--Kirsche                                                         
+    ## 63   ¦       °--Pfirsich / Nektarine                                            
+    ## 64   ¦--allg. Beerenbau                                                         
+    ## 65   ¦   ¦--Ribes Arten                                                         
+    ## 66   ¦   ¦   ¦--Schwarze Johannisbeere                                          
+    ## 67   ¦   ¦   ¦--Stachelbeere                                                    
+    ## 68   ¦   ¦   ¦--Jostabeere                                                      
+    ## 69   ¦   ¦   °--Rote Johannisbeere                                              
+    ## 70   ¦   ¦--Schwarzer Holunder                                                  
+    ## 71   ¦   ¦--Mini-Kiwi                                                           
+    ## 72   ¦   ¦--Rubus Arten                                                         
+    ## 73   ¦   ¦   ¦--Brombeere                                                       
+    ## 74   ¦   ¦   °--Himbeere                                                        
+    ## 75   ¦   ¦--Schwarze Apfelbeere                                                 
+    ## 76   ¦   ¦--Erdbeere                                                            
+    ## 77   ¦   °--Heidelbeere                                                         
+    ## 78   ¦--allg. Weinbau                                                           
+    ## 79   ¦   °--Reben                                                               
+    ## 80   ¦       ¦--Jungreben                                                       
+    ## 81   ¦       °--Ertragsreben                                                    
+    ## 82   ¦--allg. Gemüsebau                                                         
+    ## 83   ¦   ¦--Kürbisgewächse (Cucurbitaceae)                                      
+    ## 84   ¦   ¦   ¦--Gurken                                                          
+    ## 85   ¦   ¦   ¦   °--Einlegegurken                                               
+    ## 86   ¦   ¦   ¦--Melonen                                                         
+    ## 87   ¦   ¦   ¦--Wassermelonen                                                   
+    ## 88   ¦   ¦   ¦--Ölkürbisse                                                      
+    ## 89   ¦   ¦   ¦--Speisekürbisse (ungeniessbare Schale)                           
+    ## 90   ¦   ¦   °--Kürbisse mit geniessbarer Schale                                
+    ## 91   ¦   ¦       ¦--Zucchetti                                                   
+    ## 92   ¦   ¦       ¦--Patisson                                                    
+    ## 93   ¦   ¦       °--Rondini                                                     
+    ## 94   ¦   ¦--Portulakgewächse (Portulacaceae)                                    
+    ## 95   ¦   ¦   °--Portulak                                                        
+    ## 96   ¦   ¦       °--Gemüseportulak                                              
+    ## 97   ¦   ¦--Nachtschattengewächse (Solanaceae)                                  
+    ## 98   ¦   ¦   ¦--Tomaten                                                         
+    ## 99   ¦   ¦   ¦   ¦--Cherrytomaten                                               
+    ## 100  ¦   ¦   ¦   ¦--Rispentomaten                                               
+    ## 101  ¦   ¦   ¦   °--Tomaten Spezialitäten                                       
+    ## 102  ¦   ¦   ¦--Aubergine                                                       
+    ## 103  ¦   ¦   ¦--Paprika                                                         
+    ## 104  ¦   ¦   ¦   ¦--Peperoni                                                    
+    ## 105  ¦   ¦   ¦   °--Gemüsepaprika                                               
+    ## 106  ¦   ¦   ¦--Andenbeere                                                      
+    ## 107  ¦   ¦   °--Pepino                                                          
+    ## 108  ¦   ¦--Speisepilze                                                         
+    ## 109  ¦   ¦--Gänsefussgewächse (Chenopodiaceae)                                  
+    ## 110  ¦   ¦   ¦--Spinat                                                          
+    ## 111  ¦   ¦   ¦--Mangold                                                         
+    ## 112  ¦   ¦   ¦   ¦--Krautstiel                                                  
+    ## 113  ¦   ¦   ¦   °--Schnittmangold                                              
+    ## 114  ¦   ¦   °--Rande                                                           
+    ## 115  ¦   ¦--Gewürz- und Medizinalkräuter                                        
+    ## 116  ¦   ¦   °--Johanniskraut                                                   
+    ## 117  ¦   ¦--Küchenkräuter                                                       
+    ## 118  ¦   ¦   ¦--Schnittlauch                                                    
+    ## 119  ¦   ¦   ¦--Dill                                                            
+    ## 120  ¦   ¦   ¦--Kümmel                                                          
+    ## 121  ¦   ¦   ¦--Minze                                                           
+    ## 122  ¦   ¦   ¦--Rosmarin                                                        
+    ## 123  ¦   ¦   ¦--Basilikum                                                       
+    ## 124  ¦   ¦   ¦--Salbei                                                          
+    ## 125  ¦   ¦   ¦--Bohnenkraut                                                     
+    ## 126  ¦   ¦   ¦--Liebstöckel                                                     
+    ## 127  ¦   ¦   ¦--Estragon                                                        
+    ## 128  ¦   ¦   ¦--Kerbel                                                          
+    ## 129  ¦   ¦   ¦--Thymian                                                         
+    ## 130  ¦   ¦   ¦--Koriander                                                       
+    ## 131  ¦   ¦   ¦--Ysop                                                            
+    ## 132  ¦   ¦   ¦--Römische Kamille                                                
+    ## 133  ¦   ¦   °--Petersilie                                                      
+    ## 134  ¦   ¦--Baldrian                                                            
+    ## 135  ¦   ¦--Spargelgewächse (Asparagaceae)                                      
+    ## 136  ¦   ¦   °--Spargel                                                         
+    ## 137  ¦   ¦--Süssgräser (Poaceae)                                                
+    ## 138  ¦   ¦   °--Zuckermais                                                      
+    ## 139  ¦   ¦--Lippenblütler (Labiatae)                                            
+    ## 140  ¦   ¦   °--Stachys                                                         
+    ## 141  ¦   ¦--Baldriangewächse (Valerianaceae)                                    
+    ## 142  ¦   ¦   °--Nüsslisalat                                                     
+    ## 143  ¦   ¦--Doldenblütler (Apiaceae)                                            
+    ## 144  ¦   ¦   ¦--Pastinake                                                       
+    ## 145  ¦   ¦   ¦--Wurzelpetersilie                                                
+    ## 146  ¦   ¦   ¦--Sellerie                                                        
+    ## 147  ¦   ¦   ¦   ¦--Stangensellerie                                             
+    ## 148  ¦   ¦   ¦   ¦--Suppensellerie                                              
+    ## 149  ¦   ¦   ¦   °--Knollensellerie                                             
+    ## 150  ¦   ¦   ¦--Karotten                                                        
+    ## 151  ¦   ¦   °--Knollenfenchel                                                  
+    ## 152  ¦   ¦--Hülsenfrüchtler (Fabaceae)                                          
+    ## 153  ¦   ¦   ¦--Erbsen                                                          
+    ## 154  ¦   ¦   ¦   ¦--Erbsen ohne Hülsen                                          
+    ## 155  ¦   ¦   ¦   °--Erbsen mit Hülsen                                           
+    ## 156  ¦   ¦   ¦--Bohnen                                                          
+    ## 157  ¦   ¦   ¦   ¦--Bohnen mit Hülsen                                           
+    ## 158  ¦   ¦   ¦   ¦   ¦--Buschbohne                                              
+    ## 159  ¦   ¦   ¦   ¦   °--Stangenbohne                                            
+    ## 160  ¦   ¦   ¦   °--Bohnen ohne Hülsen                                          
+    ## 161  ¦   ¦   ¦--Puffbohne                                                       
+    ## 162  ¦   ¦   °--Linse                                                           
+    ## 163  ¦   ¦--Knöterichgewächse (Polygonaceae)                                    
+    ## 164  ¦   ¦   °--Rhabarber                                                       
+    ## 165  ¦   ¦--Korbblütler (Asteraceae)                                            
+    ## 166  ¦   ¦   ¦--Artischocken                                                    
+    ## 167  ¦   ¦   ¦--Chicorée                                                        
+    ## 168  ¦   ¦   ¦--Schwarzwurzel                                                   
+    ## 169  ¦   ¦   ¦--Topinambur                                                      
+    ## 170  ¦   ¦   ¦--Salate (Asteraceae)                                             
+    ## 171  ¦   ¦   ¦   ¦--Lactuca-Salate                                              
+    ## 172  ¦   ¦   ¦   ¦   ¦--Kopfsalate                                              
+    ## 173  ¦   ¦   ¦   ¦   ¦   °--Kopfsalat                                           
+    ## 174  ¦   ¦   ¦   ¦   °--Blattsalate (Asteraceae)                                
+    ## 175  ¦   ¦   ¦   ¦       °--Schnittsalat                                        
+    ## 176  ¦   ¦   ¦   ¦--Endivien und Blattzichorien                                 
+    ## 177  ¦   ¦   ¦   ¦   ¦--Endivien                                                
+    ## 178  ¦   ¦   ¦   ¦   ¦--Zuckerhut                                               
+    ## 179  ¦   ¦   ¦   ¦   °--Radicchio- und Cicorino-Typen                           
+    ## 180  ¦   ¦   ¦   °--Löwenzahn                                                   
+    ## 181  ¦   ¦   °--Kardy                                                           
+    ## 182  ¦   ¦--Kreuzblütler (Brassicaceae)                                         
+    ## 183  ¦   ¦   ¦--Kohlarten                                                       
+    ## 184  ¦   ¦   ¦   ¦--Rosenkohl                                                   
+    ## 185  ¦   ¦   ¦   ¦--Blattkohle                                                  
+    ## 186  ¦   ¦   ¦   ¦   ¦--Federkohl                                               
+    ## 187  ¦   ¦   ¦   ¦   ¦--Pak-Choi                                                
+    ## 188  ¦   ¦   ¦   ¦   ¦--Stielmus                                                
+    ## 189  ¦   ¦   ¦   ¦   ¦--Markstammkohl                                           
+    ## 190  ¦   ¦   ¦   ¦   °--Chinakohl                                               
+    ## 191  ¦   ¦   ¦   ¦--Blumenkohle                                                 
+    ## 192  ¦   ¦   ¦   ¦   ¦--Romanesco                                               
+    ## 193  ¦   ¦   ¦   ¦   ¦--Blumenkohl                                              
+    ## 194  ¦   ¦   ¦   ¦   °--Broccoli                                                
+    ## 195  ¦   ¦   ¦   ¦--Kopfkohle                                                   
+    ## 196  ¦   ¦   ¦   °--Kohlrabi                                                    
+    ## 197  ¦   ¦   ¦--Kresse                                                          
+    ## 198  ¦   ¦   ¦--Meerrettich                                                     
+    ## 199  ¦   ¦   ¦--Rucola                                                          
+    ## 200  ¦   ¦   ¦--Barbarakraut                                                    
+    ## 201  ¦   ¦   ¦--Speisekohlrüben                                                 
+    ## 202  ¦   ¦   ¦   ¦--Brassica rapa-Rüben                                         
+    ## 203  ¦   ¦   ¦   °--Brassica napus-Rüben                                        
+    ## 204  ¦   ¦   ¦       °--Bodenkohlrabi                                           
+    ## 205  ¦   ¦   ¦--Asia-Salate (Brassicaceae)                                      
+    ## 206  ¦   ¦   ¦--Cima di Rapa                                                    
+    ## 207  ¦   ¦   ¦--Brunnenkresse                                                   
+    ## 208  ¦   ¦   ¦--Radies                                                          
+    ## 209  ¦   ¦   °--Rettich                                                         
+    ## 210  ¦   °--Liliengewächse (Liliaceae)                                          
+    ## 211  ¦       ¦--Schalotten                                                      
+    ## 212  ¦       ¦--Lauch                                                           
+    ## 213  ¦       ¦--Zwiebeln                                                        
+    ## 214  ¦       ¦   ¦--Gemüsezwiebel                                               
+    ## 215  ¦       ¦   ¦--Speisezwiebel                                               
+    ## 216  ¦       ¦   °--Bundzwiebeln                                                
+    ## 217  ¦       °--Knoblauch                                                       
+    ## 218  ¦--allg. Feldbau                                                           
+    ## 219  ¦   ¦--Mais                                                                
+    ## 220  ¦   ¦--Raps                                                                
+    ## 221  ¦   ¦   °--Winterraps                                                      
+    ## 222  ¦   ¦--Chinaschilf                                                         
+    ## 223  ¦   ¦--Futter- und Zuckerrüben                                             
+    ## 224  ¦   ¦   ¦--Futterrübe                                                      
+    ## 225  ¦   ¦   °--Zuckerrübe                                                      
+    ## 226  ¦   ¦--Kenaf                                                               
+    ## 227  ¦   ¦--Tabak                                                               
+    ## 228  ¦   ¦--Sojabohne                                                           
+    ## 229  ¦   ¦--Getreide                                                            
+    ## 230  ¦   ¦   ¦--Weizen                                                          
+    ## 231  ¦   ¦   ¦   ¦--Korn (Dinkel) [dup]                                         
+    ## 232  ¦   ¦   ¦   ¦--Emmer [dup]                                                 
+    ## 233  ¦   ¦   ¦   ¦--Hartweizen                                                  
+    ## 234  ¦   ¦   ¦   °--Weichweizen                                                 
+    ## 235  ¦   ¦   ¦       ¦--Winterweizen [dup]                                      
+    ## 236  ¦   ¦   ¦       °--Sommerweizen [dup]                                      
+    ## 237  ¦   ¦   ¦--Gerste                                                          
+    ## 238  ¦   ¦   ¦   ¦--Sommergerste [dup]                                          
+    ## 239  ¦   ¦   ¦   °--Wintergerste [dup]                                          
+    ## 240  ¦   ¦   ¦--Triticale                                                       
+    ## 241  ¦   ¦   ¦   °--Wintertriticale [dup]                                       
+    ## 242  ¦   ¦   ¦--Roggen                                                          
+    ## 243  ¦   ¦   ¦   °--Winterroggen [dup]                                          
+    ## 244  ¦   ¦   ¦--Hafer                                                           
+    ## 245  ¦   ¦   ¦   °--Sommerhafer [dup]                                           
+    ## 246  ¦   ¦   ¦--Sommergetreide                                                  
+    ## 247  ¦   ¦   ¦   ¦--Sommerweizen                                                
+    ## 248  ¦   ¦   ¦   ¦--Sommergerste                                                
+    ## 249  ¦   ¦   ¦   °--Sommerhafer                                                 
+    ## 250  ¦   ¦   °--Wintergetreide                                                  
+    ## 251  ¦   ¦       ¦--Winterweizen                                                
+    ## 252  ¦   ¦       ¦--Korn (Dinkel)                                               
+    ## 253  ¦   ¦       ¦--Wintertriticale                                             
+    ## 254  ¦   ¦       ¦--Emmer                                                       
+    ## 255  ¦   ¦       ¦--Wintergerste                                                
+    ## 256  ¦   ¦       °--Winterroggen                                                
+    ## 257  ¦   ¦--Kartoffeln                                                          
+    ## 258  ¦   ¦   ¦--Speise- und Futterkartoffeln                                    
+    ## 259  ¦   ¦   °--Kartoffeln zur Pflanzgutproduktion                              
+    ## 260  ¦   ¦--Hopfen                                                              
+    ## 261  ¦   ¦--Ackerbohne                                                          
+    ## 262  ¦   ¦--Eiweisserbse                                                        
+    ## 263  ¦   ¦--Wiesen und Weiden                                                   
+    ## 264  ¦   ¦   °--Kleegrasmischung (Kunstwiese)                                   
+    ## 265  ¦   ¦--Sonnenblume                                                         
+    ## 266  ¦   ¦--Luzerne                                                             
+    ## 267  ¦   ¦--Lupinen                                                             
+    ## 268  ¦   ¦--Anbautechnik                                                        
+    ## 269  ¦   ¦   ¦--Frässaaten                                                      
+    ## 270  ¦   ¦   °--Mulchsaaten                                                     
+    ## 271  ¦   ¦--Lein                                                                
+    ## 272  ¦   ¦--Grasbestände zur Saatgutproduktion                                  
+    ## 273  ¦   ¦--Trockenreis                                                         
+    ## 274  ¦   ¦--Färberdistel (Saflor)                                               
+    ## 275  ¦   ¦--Klee zur Saatgutproduktion                                          
+    ## 276  ¦   °--Sorghum                                                             
+    ## 277  ¦--allg. Forstwirtschaft                                                   
+    ## 278  ¦   °--Liegendes Rundholz im Wald und auf Lagerplätzen                     
+    ## 279  ¦--Allgemein Vorratsschutz                                                 
+    ## 280  ¦   ¦--Lagerhallen, Mühlen, Silogebäude                                    
+    ## 281  ¦   ¦--Einrichtungen und Geräte                                            
+    ## 282  ¦   ¦--Verarbeitungsräume                                                  
+    ## 283  ¦   °--Lagerräume                                                          
+    ## 284  ¦--Grünfläche                                                              
+    ## 285  ¦--Mohn                                                                    
+    ## 286  ¦--Baby-Leaf                                                               
+    ## 287  ¦   ¦--Baby-Leaf (Brassicaceae)                                            
+    ## 288  ¦   ¦--Baby-Leaf (Asteraceae)                                              
+    ## 289  ¦   °--Baby-Leaf (Chenopodiaceae)                                          
+    ## 290  ¦--Medizinalkräuter                                                        
+    ## 291  ¦   °--Wolliger Fingerhut                                                  
+    ## 292  ¦--Holzpaletten, Packholz, Stammholz                                       
+    ## 293  ¦--Melisse                                                                 
+    ## 294  ¦--Brachland                                                               
+    ## 295  ¦--Humusdeponie                                                            
+    ## 296  ¦--Anemone                                                                 
+    ## 297  ¦--Ranunkel                                                                
+    ## 298  ¦--Obstbau allg.                                                           
+    ## 299  ¦--Beerenbau allg.                                                         
+    ## 300  ¦--Gemüsebau allg.                                                         
+    ## 301  ¦--Feldbau allg.                                                           
+    ## 302  ¦   °--Hanf                                                                
+    ## 303  ¦--Blumenzwiebeln und Blumenknollen                                        
+    ## 304  ¦--Nichtkulturland allg.                                                   
+    ## 305  ¦   ¦--Böschungen und Grünstreifen entlang von Verkehrswegen (gem. ChemRRV)
+    ## 306  ¦   °--Auf und an National- und Kantonsstrassen (gem. ChemRRV)             
+    ## 307  ¦--Forstwirtschaft allg.                                                   
+    ## 308  ¦   ¦--Wald                                                                
+    ## 309  ¦   ¦   °--Forstliche Pflanzgärten [dup]                                   
+    ## 310  ¦   °--Forstliche Pflanzgärten                                             
+    ## 311  ¦--Majoran                                                                 
+    ## 312  ¦--Oregano                                                                 
+    ## 313  ¦--Rosenwurz                                                               
+    ## 314  ¦--Traubensilberkerze                                                      
+    ## 315  ¦--Spitzwegerich                                                           
+    ## 316  ¦--Erntegut                                                                
+    ## 317  ¦--Gewürzfenchel                                                           
+    ## 318  ¦--leere Lagerräume                                                        
+    ## 319  ¦--leere Produktionsräume                                                  
+    ## 320  ¦--Tabak produzierende Betriebe                                            
+    ## 321  ¦--leere Verarbeitungsräume                                                
+    ## 322  ¦--Lager- und Produktionsräume allg.                                       
+    ## 323  ¦--Gojibeere                                                               
+    ## 324  ¦--Quinoa                                                                  
+    ## 325  ¦--Blaue Heckenkirsche                                                     
+    ## 326  ¦--Lorbeer                                                                 
+    ## 327  ¦--Hagebutten                                                              
+    ## 328  ¦--Kichererbse                                                             
+    ## 329  ¦--Sanddorn                                                                
+    ## 330  ¦--Schwarze Maulbeere                                                      
+    ## 331  ¦--Eberesche                                                               
+    ## 332  ¦--Gemeine Felsenbirne                                                     
+    ## 333  ¦--Süssdolde                                                               
+    ## 334  ¦--Kerbelrübe                                                              
+    ## 335  ¦--Windengewächse (Convolvulaceae)                                         
+    ## 336  ¦   °--Süsskartoffel                                                       
+    ## 337  ¦--Rispenhirse                                                             
+    ## 338  ¦--Pflanzen                                                                
+    ## 339  °--Brache                                                                  
+    ##     culture_id
+    ## 1             
+    ## 2        10172
+    ## 3        10227
+    ## 4        10190
+    ## 5        10021
+    ## 6        10040
+    ## 7        10050
+    ## 8        10097
+    ## 9        10098
+    ## 10       10039
+    ## 11       10162
+    ## 12       10095
+    ## 13       10101
+    ## 14       10104
+    ## 15       10176
+    ## 16        9969
+    ## 17       12096
+    ## 18       10100
+    ## 19       10099
+    ## 20       10103
+    ## 21       10109
+    ## 22       10110
+    ## 23       10152
+    ## 24       10290
+    ## 25       12097
+    ## 26       10004
+    ## 27       10040
+    ## 28       10050
+    ## 29       10070
+    ## 30       10090
+    ## 31       10096
+    ## 32       10097
+    ## 33       10098
+    ## 34       10136
+    ## 35       10147
+    ## 36       10158
+    ## 37       10256
+    ## 38       11335
+    ## 39        9955
+    ## 40        9952
+    ## 41       10111
+    ## 42       10110
+    ## 43       10157
+    ## 44       10290
+    ## 45        9967
+    ## 46        9968
+    ## 47       10192
+    ## 48       10260
+    ## 49       10117
+    ## 50       10091
+    ## 51       10277
+    ## 52        9959
+    ## 53       10296
+    ## 54        9972
+    ## 55        9970
+    ## 56        9994
+    ## 57        9965
+    ## 58       10011
+    ## 59       10126
+    ## 60        9993
+    ## 61        9971
+    ## 62        9982
+    ## 63        9992
+    ## 64       10193
+    ## 65       10127
+    ## 66       10003
+    ## 67       10007
+    ## 68       10035
+    ## 69        9999
+    ## 70       10218
+    ## 71       10288
+    ## 72       10297
+    ## 73        9975
+    ## 74        9980
+    ## 75       12829
+    ## 76        9978
+    ## 77        9979
+    ## 78       10194
+    ## 79        9953
+    ## 80       10037
+    ## 81       10114
+    ## 82       10195
+    ## 83       10017
+    ## 84       10016
+    ## 85       10258
+    ## 86       10019
+    ## 87       10022
+    ## 88       10188
+    ## 89       10264
+    ## 90       10310
+    ## 91       10018
+    ## 92       10082
+    ## 93       10266
+    ## 94       10025
+    ## 95       10342
+    ## 96       10033
+    ## 97       10026
+    ## 98       10027
+    ## 99       10332
+    ## 100      10333
+    ## 101      10335
+    ## 102      10028
+    ## 103      10029
+    ## 104      10084
+    ## 105      10336
+    ## 106      10285
+    ## 107      10286
+    ## 108      10051
+    ## 109      10068
+    ## 110      10006
+    ## 111      10306
+    ## 112      10328
+    ## 113      10329
+    ## 114       9996
+    ## 115      10159
+    ## 116      10232
+    ## 117      10186
+    ## 118      10002
+    ## 119      10242
+    ## 120      10244
+    ## 121      10270
+    ## 122      10274
+    ## 123      10307
+    ## 124      10308
+    ## 125      10309
+    ## 126      10311
+    ## 127      10312
+    ## 128      11816
+    ## 129      11817
+    ## 130      11819
+    ## 131      11820
+    ## 132      12507
+    ## 133       9991
+    ## 134      10243
+    ## 135      10338
+    ## 136      10005
+    ## 137      10339
+    ## 138      10010
+    ## 139      10340
+    ## 140      10341
+    ## 141       9948
+    ## 142       9990
+    ## 143       9951
+    ## 144      10253
+    ## 145      10281
+    ## 146       9946
+    ## 147      10067
+    ## 148      10171
+    ## 149       9985
+    ## 150       9981
+    ## 151       9984
+    ## 152       9957
+    ## 153      10034
+    ## 154      10294
+    ## 155      10295
+    ## 156      10128
+    ## 157      10292
+    ## 158      10074
+    ## 159      10081
+    ## 160      10293
+    ## 161      10330
+    ## 162      12689
+    ## 163       9960
+    ## 164       9998
+    ## 165       9961
+    ## 166      10053
+    ## 167      10056
+    ## 168      10063
+    ## 169      10064
+    ## 170      10093
+    ## 171      10304
+    ## 172      10320
+    ## 173      10060
+    ## 174       9944
+    ## 175      10323
+    ## 176      10325
+    ## 177      10059
+    ## 178      10065
+    ## 179      10326
+    ## 180      10327
+    ## 181      10272
+    ## 182       9962
+    ## 183      10020
+    ## 184      10047
+    ## 185      10210
+    ## 186      10043
+    ## 187      10315
+    ## 188      10317
+    ## 189      14985
+    ## 190       9977
+    ## 191      10284
+    ## 192      10314
+    ## 193       9973
+    ## 194       9974
+    ## 195      10316
+    ## 196       9986
+    ## 197      10044
+    ## 198      10237
+    ## 199      10245
+    ## 200      10283
+    ## 201      10298
+    ## 202      10299
+    ## 203      10300
+    ## 204      10303
+    ## 205      10305
+    ## 206      10318
+    ## 207      10319
+    ## 208       9995
+    ## 209       9997
+    ## 210       9963
+    ## 211      10001
+    ## 212      10030
+    ## 213      10031
+    ## 214      10075
+    ## 215      10078
+    ## 216      10337
+    ## 217       9983
+    ## 218      10197
+    ## 219      10000
+    ## 220      10008
+    ## 221      10155
+    ## 222      10042
+    ## 223      10046
+    ## 224      10088
+    ## 225      10089
+    ## 226      10048
+    ## 227      10071
+    ## 228      10072
+    ## 229      10080
+    ## 230      10052
+    ## 231      10122
+    ## 232      10271
+    ## 233      11321
+    ## 234      13784
+    ## 235      10094
+    ## 236      10118
+    ## 237      10083
+    ## 238      10143
+    ## 239       9943
+    ## 240      10119
+    ## 241      10180
+    ## 242      10120
+    ## 243       9945
+    ## 244      10121
+    ## 245      10144
+    ## 246      10164
+    ## 247      10118
+    ## 248      10143
+    ## 249      10144
+    ## 250      10167
+    ## 251      10094
+    ## 252      10122
+    ## 253      10180
+    ## 254      10271
+    ## 255       9943
+    ## 256       9945
+    ## 257      10086
+    ## 258      10346
+    ## 259      11326
+    ## 260      10115
+    ## 261      10116
+    ## 262      10124
+    ## 263      10135
+    ## 264      10151
+    ## 265      10137
+    ## 266      10150
+    ## 267      10187
+    ## 268      10198
+    ## 269      10133
+    ## 270      10142
+    ## 271      10225
+    ## 272      10236
+    ## 273      10248
+    ## 274      10252
+    ## 275      11325
+    ## 276      11393
+    ## 277      10202
+    ## 278       9956
+    ## 279      10203
+    ## 280      10038
+    ## 281      10132
+    ## 282      10279
+    ## 283      10280
+    ## 284      10230
+    ## 285      10238
+    ## 286      10251
+    ## 287      14382
+    ## 288      14383
+    ## 289      14384
+    ## 290      10254
+    ## 291      10267
+    ## 292      10261
+    ## 293      10268
+    ## 294      11877
+    ## 295      11878
+    ## 296      11984
+    ## 297      11985
+    ## 298      12066
+    ## 299      12067
+    ## 300      12068
+    ## 301      12069
+    ## 302      14729
+    ## 303      12098
+    ## 304      12147
+    ## 305      10178
+    ## 306      10179
+    ## 307      12465
+    ## 308      12464
+    ## 309       9954
+    ## 310       9954
+    ## 311      12626
+    ## 312      12627
+    ## 313      12628
+    ## 314      12629
+    ## 315      12630
+    ## 316      12891
+    ## 317      12970
+    ## 318      12999
+    ## 319      13000
+    ## 320      13001
+    ## 321      13002
+    ## 322      13238
+    ## 323      13362
+    ## 324      13498
+    ## 325      13785
+    ## 326      13832
+    ## 327      14001
+    ## 328      14273
+    ## 329      14786
+    ## 330      14787
+    ## 331      14799
+    ## 332      14801
+    ## 333      14904
+    ## 334      15269
+    ## 335      15866
+    ## 336      13905
+    ## 337      15872
+    ## 338       9942
+    ## 339       9950
     ##                                                                       name_fr
     ## 1                                                                            
-    ## 2                                                                   Baby-Leaf
-    ## 3                                                    Baby-Leaf (Brassicaceae)
-    ## 4                                                  Baby-Leaf (Chenopodiaceae)
-    ## 5                                                      Baby-Leaf (Asteraceae)
-    ## 6                                                                     Houblon
-    ## 7                                                                         ail
-    ## 8                                            betteraves à sucre et fourragère
-    ## 9                                                           Betterave à sucre
-    ## 10                                                       Betterave fourragère
-    ## 11                                                                  Tournesol
-    ## 12                                                            fenouil bulbeux
-    ## 13                                                                     origan
-    ## 14                                                            fruits à pépins
-    ## 15                                                            poirier / nashi
-    ## 16                                                                    poirier
-    ## 17                                                                 cognassier
-    ## 18                                                                    pommier
-    ## 19                                                      sorbier des oiseleurs
-    ## 20                              grumes en forêt et sur les places de stockage
-    ## 21                                                Les exploitations tabacoles
-    ## 22                                                        cresson de fontaine
-    ## 23                                                                  artichaut
-    ## 24                                                      Prairies et pâturages
-    ## 25                            mélange trèfles-graminées (prairie arificielle)
-    ## 26                                                           crosnes du japon
-    ## 27                                                     persil à grosse racine
-    ## 28                                                                pois chiche
-    ## 29                                                                 ranunculus
-    ## 30                                                                      vigne
-    ## 31                                                        vigne en production
-    ## 32                                                                jeune vigne
-    ## 33                                                        surfaces herbagères
-    ## 34                                                          plantain lancéolé
-    ## 35                                                                   rhubarbe
-    ## 36                                                              Sorgho commun
-    ## 37                                                 Locaux de production vides
-    ## 38                                                                    carotte
-    ## 39                                                          marronnier d'Inde
-    ## 40                                                                  valériane
-    ## 41                                                                     cardon
-    ## 42                                                               chrysanthème
-    ## 43                                                               aronie noire
-    ## 44                                                                    anémone
-    ## 45                                                  grande culture en général
-    ## 46                                                            pommes de terre
-    ## 47                               pommes de terre pour la production de plants
-    ## 48                              pommes de terre de consommation et fourragère
-    ## 49                                                                    Chanvre
-    ## 50                                                               rhododendron
-    ## 51                                                                     azalée
-    ## 52                                                   locaux de transformation
-    ## 53                                                    sylviculture en général
-    ## 54                                                                      forêt
-    ## 55                                                     pépinières forestières
-    ## 56                                                                      Lupin
-    ## 57                                                               grand sureau
-    ## 58                                                                      choux
-    ## 59                                   choux (développement de l'inflorescence)
-    ## 60                                                                 chou-fleur
-    ## 61                                                                  romanesco
-    ## 62                                                                    brocoli
-    ## 63                                                           choux à feuilles
-    ## 64                                                                    pakchoi
-    ## 65                                                              chou moellier
-    ## 66                                                              chou de Chine
-    ## 67                                                       chou frisé non pommé
-    ## 68                                                          chou de Bruxelles
-    ## 69                                                               choux pommés
-    ## 70                                                                    colrave
-    ## 71                                                           espèces de Rubus
-    ## 72                                                                       mûre
-    ## 73                                                                  framboise
-    ## 74                                                    installations et outils
-    ## 75                                                                 solanacées
-    ## 76                                                                    poivron
-    ## 77                                                                    poivron
-    ## 78                                                               poivron doux
-    ## 79                                                                  aubergine
-    ## 80                                                          coqueret du Pérou
-    ## 81                                                                     tomate
-    ## 82                                                       tomates, spécialités
-    ## 83                                                              tomate-cerise
-    ## 84                                                            tomate à grappe
-    ## 85                                                                poire melon
-    ## 86                                                                   Carthame
-    ## 87                                                            Roseau de Chine
-    ## 88                                             Locaux de transformation vides
-    ## 89                                                                    Laurier
-    ## 90                                          Lager- und Produktionsräume allg.
-    ## 91                                                         semis sous litière
-    ## 92                                                                 maïs sucré
-    ## 93                                                                   lentille
-    ## 94                                                                       fève
-    ## 95                                                                 sapin bleu
-    ## 96                                                                       pois
-    ## 97                                                           pois non écossés
-    ## 98                                                               pois écossés
-    ## 99                                     Trèfles pour la production de semences
-    ## 100                                                                  féverole
-    ## 101                                                                     Kenaf
-    ## 102                                                                     noyer
-    ## 103                                                           noix en général
-    ## 104                                                                marjolaine
-    ## 105                                                         Cerfeuil tubéreux
-    ## 106                        Palette en bois, bois d'emballage, bois en général
-    ## 107                                                            arbres de Noël
-    ## 108                                                        betterave à salade
-    ## 109                                                         cresson de jardin
-    ## 110                                                           Êntrepôts vides
-    ## 111                                                         pois protéagineux
-    ## 112                                           domaine non agricole en général
-    ## 113 talus et bandes vertes le long des voies de communication (selon ORRChim)
-    ## 114              le long des routes nationales et cantonales  (selon ORRChim)
-    ## 115                                                                     Tabac
-    ## 116                                                             cucurbitacées
-    ## 117                                                                  pastèque
-    ## 118                                                                 concombre
-    ## 119                                                                cornichons
-    ## 120                                                        concombre nostrano
-    ## 121                                                        concombre de serre
-    ## 122                                                                    melons
-    ## 123                                           courges (écorce non comestible)
-    ## 124                                                      courges oléagineuses
-    ## 125                                                 courges à peau comestible
-    ## 126                                                                  pâtisson
-    ## 127                                                                 courgette
-    ## 128                                                                   rondini
-    ## 129                                                                   oeillet
-    ## 130                                                        fenouil aromatique
-    ## 131                                            culture ornementale en général
-    ## 132                            plantes ornementales annuelles et bisannuelles
-    ## 133                                                          fleurs estivales
-    ## 134                                            plantes en pot et en container
-    ## 135                                                                   bégonia
-    ## 136                                                                  cyclamen
-    ## 137                                                                  géranium
-    ## 138                                                                primevères
-    ## 139                                                                 pépinière
-    ## 140                                     gazon d'ornement et terrains de sport
-    ## 141                                       cultures florales et plantes vertes
-    ## 142                                                         courge d'ornement
-    ## 143                                                                  jacinthe
-    ## 144                                                                      iris
-    ## 145                                          liliacées (plantes ornementales)
-    ## 146                                                                    tulipe
-    ## 147                                            plantes ligneuses (hors forêt)
-    ## 148                                                                    rosier
-    ## 149                                           arbres et arbustes (hors fôret)
-    ## 150                                          arbustes d'ornement (hors forêt)
-    ## 151                                                           plantes vivaces
-    ## 152                                                                  pourpier
-    ## 153                                                           pourpier commun
-    ## 154                                                                  Céréales
-    ## 155                                                                 Triticale
-    ## 156                                                       Triticale d'automne
-    ## 157                                                        Céréales d'automne
-    ## 158                                                             Blé d'automne
-    ## 159                                                          Seigle d'automne
-    ## 160                                                                  Épeautre
-    ## 161                                                                Amidonnier
-    ## 162                                                     Céréales de printemps
-    ## 163                                                          Blé de printemps
-    ## 164                                                         orge de printemps
-    ## 165                                                       Avoine de printemps
-    ## 166                                                                      Orge
-    ## 167                                                            Orge d'automne
-    ## 168                                                                    Seigle
-    ## 169                                                                       Blé
-    ## 170                                                                   Blé dur
-    ## 171                                                                Blé tendre
-    ## 172                                                                    Avoine
-    ## 173                                                           terres ouvertes
-    ## 174                                                                   poireau
-    ## 175                                                                   plantes
-    ## 176                                                    radis de tous les mois
-    ## 177                                                                   épinard
-    ## 178                                                            actée à grappe
-    ## 179                                                 Riz semis sur terrain sec
-    ## 180                                                                scorsonère
-    ## 181                                                             mâche, rampon
-    ## 182                                                                     pavot
-    ## 183                                                                       Lin
-    ## 184                                                                   olivier
-    ## 185                                                                   gerbera
-    ## 186                                              culture des baies en général
-    ## 187                                                                      Soja
-    ## 188                                                        bulbes ornementaux
-    ## 189                                         rave de Brassica rapa et B. napus
-    ## 190                                                     rave de Brassica rapa
-    ## 191                                                                Orpin rose
-    ## 192                                                            laurier-cerise
-    ## 193                                                   champignons comestibles
-    ## 194                                                           Cerfeuil musqué
-    ## 195                                                             Baies de Goji
-    ## 196                                                                  haricots
-    ## 197                                                          haricots écossés
-    ## 198                                                      haricots non écossés
-    ## 199                                                           haricot à rames
-    ## 200                                                              haricot nain
-    ## 201                                                                  myrtille
-    ## 202                                                                     bette
-    ## 203                                                              bette à côte
-    ## 204                                                            bette à tondre
-    ## 205                                                 entrepôts, moulins, silos
-    ## 206                                                                    friche
-    ## 207                                                              millepertuis
-    ## 208                                                                    dahlia
-    ## 209                                             culture maraîchère en général
-    ## 210                                               salades Asia (Brassicaceae)
-    ## 211                                                           camérisier bleu
-    ## 212                                                     Barbarée du printemps
-    ## 213                                                   dépôt de terre végétale
-    ## 214                                                                radis long
-    ## 215                                                               topinambour
-    ## 216                                                          espèces de Ribes
-    ## 217                                                    groseilles à maquereau
-    ## 218                                                                    cassis
-    ## 219                                                      groseilles à grappes
-    ## 220                                                                     josta
-    ## 221                                                              cima di rapa
-    ## 222                                                                   jachère
-    ## 223                                                                   asperge
-    ## 224                                                           fruits à noyaux
-    ## 225                                                   prunier (pruneau/prune)
-    ## 226                                                         prunier (pruneau)
-    ## 227                                                           prunier (prune)
-    ## 228                                                        pêcher / nectarine
-    ## 229                                                                abricotier
-    ## 230                                                                  cerisier
-    ## 231                                                         mini-Kiwi (Kiwaï)
-    ## 232                                                            denrée stockée
-    ## 233                                                                  roquette
-    ## 234                                                                    fraise
-    ## 235                                  Graminées pour la production de semences
-    ## 236                                                               mûrier noir
-    ## 237                                                                 argousier
-    ## 238                                                                    céleri
-    ## 239                                                céleri-pomme pour bouillon
-    ## 240                                                            céleri-branche
-    ## 241                                                              céleri-pomme
-    ## 242                                                                   Luzerne
-    ## 243                                                                   mélisse
-    ## 244                                                              fines herbes
-    ## 245                                                                    Hysope
-    ## 246                                                                 coriandre
-    ## 247                                                                   romarin
-    ## 248                                                                    persil
-    ## 249                                                         Camomille romaine
-    ## 250                                                                  cerfeuil
-    ## 251                                                                    menthe
-    ## 252                                                                   basilic
-    ## 253                                                                 sarriette
-    ## 254                                                                      thym
-    ## 255                                                                     carvi
-    ## 256                                                                     aneth
-    ## 257                                                                     sauge
-    ## 258                                                                   livèche
-    ## 259                                                                  estragon
-    ## 260                                                                ciboulette
-    ## 261                                                          amélavier commun
-    ## 262                                                                    épicéa
-    ## 263                                                            navet à tondre
-    ## 264                                                  arboriculture en général
-    ## 265                                                              chardon bleu
-    ## 266                                                                    oignon
-    ## 267                                                            oignon potager
-    ## 268                                                          oignons en botte
-    ## 269                                                        oignon (condiment)
-    ## 270                                                              buis (Buxus)
-    ## 271                                                                   glaïeul
-    ## 272                                           semis après travail superficiel
-    ## 273                                                                     Colza
-    ## 274                                                           Colza d'automne
-    ## 275                                        chicorée witloof (chicorée-endive)
-    ## 276                                                      salades (Asteraceae)
-    ## 277                                                              dent-de-lion
-    ## 278                                                           salades lactuca
-    ## 279                                                           laitues pommées
-    ## 280                                                             laitue pommée
-    ## 281                                             laitues à tondre (Asteraceae)
-    ## 282                                                           laitue à tondre
-    ## 283                                    chicorée pommée et chicorée à feuilles
-    ## 284                                         chicorée scarole, chicorée frisée
-    ## 285                                                    chicorée pain de sucre
-    ## 286                                   types de radicchio/trévises et cicorino
-    ## 287                                                       plantes médicinales
-    ## 288                                                         digitale lanifère
-    ## 289                                                                   raifort
-    ## 290                                                                  rutabaga
-    ## 291                                                                cynorhodon
-    ## 292                                                                    Panais
-    ## 293                                                              Patate douce
-    ## 294                                                                 entrepôts
-    ## 295                                                                  échalote
-    ## 296                                                                      Maïs
+    ## 2                     domaine surfaces de compensation écologique (selon OPD)
+    ## 3                                                             terres ouvertes
+    ## 4                                              culture ornementale en général
+    ## 5                                              plantes en pot et en container
+    ## 6                                                                     bégonia
+    ## 7                                                                    cyclamen
+    ## 8                                                                    géranium
+    ## 9                                                                  primevères
+    ## 10                                                       tubercules de fleurs
+    ## 11                                                                     dahlia
+    ## 12                                                                  pépinière
+    ## 13                                           arbustes d'ornement (hors forêt)
+    ## 14                                                                     rosier
+    ## 15                             plantes ornementales annuelles et bisannuelles
+    ## 16                                                           fleurs estivales
+    ## 17                                            arbres et arbustes (hors fôret)
+    ## 18                                                               rhododendron
+    ## 19                                                                     azalée
+    ## 20                                                             laurier-cerise
+    ## 21                                                          marronnier d'Inde
+    ## 22                                                                 sapin bleu
+    ## 23                                                               buis (Buxus)
+    ## 24                                                             arbres de Noël
+    ## 25                                        cultures florales et plantes vertes
+    ## 26                                                                       iris
+    ## 27                                                                    bégonia
+    ## 28                                                                   cyclamen
+    ## 29                                                                   jacinthe
+    ## 30                                                                    glaïeul
+    ## 31                                                               chrysanthème
+    ## 32                                                                   géranium
+    ## 33                                                                 primevères
+    ## 34                                                               chardon bleu
+    ## 35                                                                    gerbera
+    ## 36                                                                     tulipe
+    ## 37                                                          courge d'ornement
+    ## 38                                           liliacées (plantes ornementales)
+    ## 39                                                                    oeillet
+    ## 40                                             plantes ligneuses (hors forêt)
+    ## 41                                                                  conifères
+    ## 42                                                                 sapin bleu
+    ## 43                                                                     épicéa
+    ## 44                                                             arbres de Noël
+    ## 45                                      gazon d'ornement et terrains de sport
+    ## 46                                                            plantes vivaces
+    ## 47                                                 domaine app. arboriculture
+    ## 48                                                            noix en général
+    ## 49                                                                       noix
+    ## 50                                                                      noyer
+    ## 51                                                                    olivier
+    ## 52                                                            fruits à pépins
+    ## 53                                                            poirier / nashi
+    ## 54                                                                    poirier
+    ## 55                                                                    pommier
+    ## 56                                                                 cognassier
+    ## 57                                                            fruits à noyaux
+    ## 58                                                    prunier (pruneau/prune)
+    ## 59                                                          prunier (pruneau)
+    ## 60                                                            prunier (prune)
+    ## 61                                                                 abricotier
+    ## 62                                                                   cerisier
+    ## 63                                                         pêcher / nectarine
+    ## 64                                                         domaine app. baies
+    ## 65                                                           espèces de Ribes
+    ## 66                                                                     cassis
+    ## 67                                                     groseilles à maquereau
+    ## 68                                                                      josta
+    ## 69                                                       groseilles à grappes
+    ## 70                                                               grand sureau
+    ## 71                                                          mini-Kiwi (Kiwaï)
+    ## 72                                                           espèces de Rubus
+    ## 73                                                                       mûre
+    ## 74                                                                  framboise
+    ## 75                                                               aronie noire
+    ## 76                                                                     fraise
+    ## 77                                                                   myrtille
+    ## 78                                                        domaine app. vignes
+    ## 79                                                                      vigne
+    ## 80                                                                jeune vigne
+    ## 81                                                        vigne en production
+    ## 82                                                    domaine app. maraîchère
+    ## 83                                                              cucurbitacées
+    ## 84                                                                  concombre
+    ## 85                                                                 cornichons
+    ## 86                                                                     melons
+    ## 87                                                                   pastèque
+    ## 88                                                       courges oléagineuses
+    ## 89                                            courges (écorce non comestible)
+    ## 90                                                  courges à peau comestible
+    ## 91                                                                  courgette
+    ## 92                                                                   pâtisson
+    ## 93                                                                    rondini
+    ## 94                                              portulacacées (Portulacaceae)
+    ## 95                                                                   pourpier
+    ## 96                                                            pourpier commun
+    ## 97                                                                 solanacées
+    ## 98                                                                     tomate
+    ## 99                                                              tomate-cerise
+    ## 100                                                           tomate à grappe
+    ## 101                                                      tomates, spécialités
+    ## 102                                                                 aubergine
+    ## 103                                                                   poivron
+    ## 104                                                                   poivron
+    ## 105                                                              poivron doux
+    ## 106                                                         coqueret du Pérou
+    ## 107                                                               poire melon
+    ## 108                                                   champignons comestibles
+    ## 109                                                            chénopodiacées
+    ## 110                                                                   épinard
+    ## 111                                                                     bette
+    ## 112                                                              bette à côte
+    ## 113                                                            bette à tondre
+    ## 114                                                        betterave à salade
+    ## 115                                         herbes aromatiques et médicinales
+    ## 116                                                              millepertuis
+    ## 117                                                              fines herbes
+    ## 118                                                                ciboulette
+    ## 119                                                                     aneth
+    ## 120                                                                     carvi
+    ## 121                                                                    menthe
+    ## 122                                                                   romarin
+    ## 123                                                                   basilic
+    ## 124                                                                     sauge
+    ## 125                                                                 sarriette
+    ## 126                                                                   livèche
+    ## 127                                                                  estragon
+    ## 128                                                                  cerfeuil
+    ## 129                                                                      thym
+    ## 130                                                                 coriandre
+    ## 131                                                                    Hysope
+    ## 132                                                         Camomille romaine
+    ## 133                                                                    persil
+    ## 134                                                                 valériane
+    ## 135                                               asparagacées (Asparagaceae)
+    ## 136                                                                   asperge
+    ## 137                                                       poacées (Gramineae)
+    ## 138                                                                maïs sucré
+    ## 139                                                      lamiacées (Labiatae)
+    ## 140                                                          crosnes du japon
+    ## 141                                                             valérianacées
+    ## 142                                                             mâche, rampon
+    ## 143                                                   ombellifères (Apiaceae)
+    ## 144                                                                    Panais
+    ## 145                                                    persil à grosse racine
+    ## 146                                                                    céleri
+    ## 147                                                            céleri-branche
+    ## 148                                                céleri-pomme pour bouillon
+    ## 149                                                              céleri-pomme
+    ## 150                                                                   carotte
+    ## 151                                                           fenouil bulbeux
+    ## 152                                                   fabacées (légumineuses)
+    ## 153                                                                      pois
+    ## 154                                                              pois écossés
+    ## 155                                                          pois non écossés
+    ## 156                                                                  haricots
+    ## 157                                                      haricots non écossés
+    ## 158                                                              haricot nain
+    ## 159                                                           haricot à rames
+    ## 160                                                          haricots écossés
+    ## 161                                                                      fève
+    ## 162                                                                  lentille
+    ## 163                                                              polygonacées
+    ## 164                                                                  rhubarbe
+    ## 165                                                     composées (Asteracea)
+    ## 166                                                                 artichaut
+    ## 167                                        chicorée witloof (chicorée-endive)
+    ## 168                                                                scorsonère
+    ## 169                                                               topinambour
+    ## 170                                                      salades (Asteraceae)
+    ## 171                                                           salades lactuca
+    ## 172                                                           laitues pommées
+    ## 173                                                             laitue pommée
+    ## 174                                             laitues à tondre (Asteraceae)
+    ## 175                                                           laitue à tondre
+    ## 176                                    chicorée pommée et chicorée à feuilles
+    ## 177                                         chicorée scarole, chicorée frisée
+    ## 178                                                    chicorée pain de sucre
+    ## 179                                   types de radicchio/trévises et cicorino
+    ## 180                                                              dent-de-lion
+    ## 181                                                                    cardon
+    ## 182                                                 crucifères (Brassicaceae)
+    ## 183                                                                     choux
+    ## 184                                                         chou de Bruxelles
+    ## 185                                                          choux à feuilles
+    ## 186                                                      chou frisé non pommé
+    ## 187                                                                   pakchoi
+    ## 188                                                            navet à tondre
+    ## 189                                                             chou moellier
+    ## 190                                                             chou de Chine
+    ## 191                                  choux (développement de l'inflorescence)
+    ## 192                                                                 romanesco
+    ## 193                                                                chou-fleur
+    ## 194                                                                   brocoli
+    ## 195                                                              choux pommés
+    ## 196                                                                   colrave
+    ## 197                                                         cresson de jardin
+    ## 198                                                                   raifort
+    ## 199                                                                  roquette
+    ## 200                                                     Barbarée du printemps
+    ## 201                                         rave de Brassica rapa et B. napus
+    ## 202                                                     rave de Brassica rapa
+    ## 203                                                    rave de Brassica napus
+    ## 204                                                                  rutabaga
+    ## 205                                               salades Asia (Brassicaceae)
+    ## 206                                                              cima di rapa
+    ## 207                                                       cresson de fontaine
+    ## 208                                                    radis de tous les mois
+    ## 209                                                                radis long
+    ## 210                                                                 liliacées
+    ## 211                                                                  échalote
+    ## 212                                                                   poireau
+    ## 213                                                                    oignon
+    ## 214                                                            oignon potager
+    ## 215                                                        oignon (condiment)
+    ## 216                                                          oignons en botte
+    ## 217                                                                       ail
+    ## 218                                               domaine app. grande culture
+    ## 219                                                                      Maïs
+    ## 220                                                                     Colza
+    ## 221                                                           Colza d'automne
+    ## 222                                                           Roseau de Chine
+    ## 223                                          betteraves à sucre et fourragère
+    ## 224                                                      Betterave fourragère
+    ## 225                                                         Betterave à sucre
+    ## 226                                                                     Kenaf
+    ## 227                                                                     Tabac
+    ## 228                                                                      Soja
+    ## 229                                                                  Céréales
+    ## 230                                                                       Blé
+    ## 231                                                                  Épeautre
+    ## 232                                                                Amidonnier
+    ## 233                                                                   Blé dur
+    ## 234                                                                Blé tendre
+    ## 235                                                             Blé d'automne
+    ## 236                                                          Blé de printemps
+    ## 237                                                                      Orge
+    ## 238                                                         orge de printemps
+    ## 239                                                            Orge d'automne
+    ## 240                                                                 Triticale
+    ## 241                                                       Triticale d'automne
+    ## 242                                                                    Seigle
+    ## 243                                                          Seigle d'automne
+    ## 244                                                                    Avoine
+    ## 245                                                       Avoine de printemps
+    ## 246                                                     Céréales de printemps
+    ## 247                                                          Blé de printemps
+    ## 248                                                         orge de printemps
+    ## 249                                                       Avoine de printemps
+    ## 250                                                        Céréales d'automne
+    ## 251                                                             Blé d'automne
+    ## 252                                                                  Épeautre
+    ## 253                                                       Triticale d'automne
+    ## 254                                                                Amidonnier
+    ## 255                                                            Orge d'automne
+    ## 256                                                          Seigle d'automne
+    ## 257                                                           pommes de terre
+    ## 258                             pommes de terre de consommation et fourragère
+    ## 259                              pommes de terre pour la production de plants
+    ## 260                                                                   Houblon
+    ## 261                                                                  féverole
+    ## 262                                                         pois protéagineux
+    ## 263                                                     Prairies et pâturages
+    ## 264                           mélange trèfles-graminées (prairie arificielle)
+    ## 265                                                                 Tournesol
+    ## 266                                                                   Luzerne
+    ## 267                                                                     Lupin
+    ## 268                                                     techniques culturales
+    ## 269                                           semis après travail superficiel
+    ## 270                                                        semis sous litière
+    ## 271                                                                       Lin
+    ## 272                                  Graminées pour la production de semences
+    ## 273                                                 Riz semis sur terrain sec
+    ## 274                                                                  Carthame
+    ## 275                                    Trèfles pour la production de semences
+    ## 276                                                             Sorgho commun
+    ## 277                                                 domaine app. sylviculture
+    ## 278                             grumes en forêt et sur les places de stockage
+    ## 279                                                   protection des récoltes
+    ## 280                                                 entrepôts, moulins, silos
+    ## 281                                                   installations et outils
+    ## 282                                                  locaux de transformation
+    ## 283                                                                 entrepôts
+    ## 284                                                       surfaces herbagères
+    ## 285                                                                     pavot
+    ## 286                                                                 Baby-Leaf
+    ## 287                                                  Baby-Leaf (Brassicaceae)
+    ## 288                                                    Baby-Leaf (Asteraceae)
+    ## 289                                                Baby-Leaf (Chenopodiaceae)
+    ## 290                                                       plantes médicinales
+    ## 291                                                         digitale lanifère
+    ## 292                        Palette en bois, bois d'emballage, bois en général
+    ## 293                                                                   mélisse
+    ## 294                                                                    friche
+    ## 295                                                   dépôt de terre végétale
+    ## 296                                                                   anémone
+    ## 297                                                                ranunculus
+    ## 298                                                  arboriculture en général
+    ## 299                                              culture des baies en général
+    ## 300                                             culture maraîchère en général
+    ## 301                                                 grande culture en général
+    ## 302                                                                   Chanvre
+    ## 303                                                        bulbes ornementaux
+    ## 304                                           domaine non agricole en général
+    ## 305 talus et bandes vertes le long des voies de communication (selon ORRChim)
+    ## 306              le long des routes nationales et cantonales  (selon ORRChim)
+    ## 307                                                   sylviculture en général
+    ## 308                                                                     forêt
+    ## 309                                                    pépinières forestières
+    ## 310                                                    pépinières forestières
+    ## 311                                                                marjolaine
+    ## 312                                                                    origan
+    ## 313                                                                Orpin rose
+    ## 314                                                            actée à grappe
+    ## 315                                                         plantain lancéolé
+    ## 316                                                            denrée stockée
+    ## 317                                                        fenouil aromatique
+    ## 318                                                           Êntrepôts vides
+    ## 319                                                Locaux de production vides
+    ## 320                                               Les exploitations tabacoles
+    ## 321                                            Locaux de transformation vides
+    ## 322                                         Lager- und Produktionsräume allg.
+    ## 323                                                             Baies de Goji
+    ## 324                                                                    Quinoa
+    ## 325                                                           camérisier bleu
+    ## 326                                                                   Laurier
+    ## 327                                                                cynorhodon
+    ## 328                                                               pois chiche
+    ## 329                                                                 argousier
+    ## 330                                                               mûrier noir
+    ## 331                                                     sorbier des oiseleurs
+    ## 332                                                          amélavier commun
+    ## 333                                                           Cerfeuil musqué
+    ## 334                                                         Cerfeuil tubéreux
+    ## 335                                           convolvulacées (Convolvulaceae)
+    ## 336                                                              Patate douce
+    ## 337                                                                    Millet
+    ## 338                                                                   plantes
+    ## 339                                                                   jachère
     ##                                                                             name_it
     ## 1                                                                                  
-    ## 2                                                                         Baby-Leaf
-    ## 3                                                          Baby-Leaf (Brassicaceae)
-    ## 4                                                        Baby-Leaf (Chenopodiaceae)
-    ## 5                                                            Baby-Leaf (Asteraceae)
-    ## 6                                                                           Luppolo
-    ## 7                                                                             Aglio
-    ## 8                                            Barbabietole da foraggio e da zucchero
-    ## 9                                                          Barbabietola da zucchero
-    ## 10                                                         Barbabietola da foraggio
-    ## 11                                                                         Girasole
-    ## 12                                                                  Finocchio dolce
-    ## 13                                                                          origano
-    ## 14                                                                Frutta a granelli
-    ## 15                                                                     Pero / Nashi
-    ## 16                                                                             Pero
-    ## 17                                                                          Cotogno
-    ## 18                                                                             Melo
-    ## 19                                                           Sorbo degli ucellatori
-    ## 20                    Tronchi abbattuti nella foresta e presso piazzali di deposito
-    ## 21                                                   Aziende produttrici di tabacco
-    ## 22                                                              Crescione acquatico
-    ## 23                                                                         Carciofi
-    ## 24                                                                  Prati e pascoli
-    ## 25                                 Miscela trifoglio-graminacee (prati artificiali)
-    ## 26                                                                         Tuberina
-    ## 27                                                              Prezzemolo tuberoso
-    ## 28                                                                             cece
-    ## 29                                                                        ranuncolo
-    ## 30                                                                             Vite
-    ## 31                                                               Vite in produzione
-    ## 32                                                                    Ceppi giovani
-    ## 33                                                              Superficie inerbita
-    ## 34                                                            piantaggine lanciuola
-    ## 35                                                                        Rabarbaro
-    ## 36                                                                            Sorgo
-    ## 37                                                       Locali di produzione vuoti
-    ## 38                                                                           Carote
-    ## 39                                                                      Ippocastano
-    ## 40                                                                        Valeriana
-    ## 41                                                                            Cardo
-    ## 42                                                                       Crisantemo
-    ## 43                                                                      Aronia nera
-    ## 44                                                                          Anemone
-    ## 45                                                         Campicoltura in generale
-    ## 46                                                                           Patate
-    ## 47                                          Patate per la produzione di tuberi-seme
-    ## 48                                                   Patate da tavola e da foraggio
-    ## 49                                                                           Canapa
-    ## 50                                                                       Rododendro
-    ## 51                                                                           Azalee
-    ## 52                                                        Locali per la lavorazione
-    ## 53                                                         Selvicoltura in generale
-    ## 54                                                                            Bosco
-    ## 55                                                                  Vivai forestali
-    ## 56                                                                           Lupini
-    ## 57                                                                     Sambuco nero
-    ## 58                                                                 Specie di cavoli
-    ## 59                                                           Cavoli a infiorescenza
-    ## 60                                                                       Cavolfiore
-    ## 61                                                                        Romanesco
-    ## 62                                                                         Broccoli
-    ## 63                                                                 Cavoli fogliacei
-    ## 64                                                                         Pak-Choi
-    ## 65                                                                   Cavolo fustoso
-    ## 66                                                                    Cavolo cinese
-    ## 67                                                                     Cavolo piuma
-    ## 68                                                              Cavoli di Bruxelles
-    ## 69                                                                   Cavoli a testa
-    ## 70                                                                      Cavolo rapa
-    ## 71                                                                  Specie di rubus
-    ## 72                                                                             Mora
-    ## 73                                                                          Lampone
-    ## 74                                                       Installazioni e apparecchi
-    ## 75                                                                        Solanacee
-    ## 76                                                                         Peperone
-    ## 77                                                                         Peperone
-    ## 78                                                                   Peperone dolce
-    ## 79                                                                        Melanzana
-    ## 80                                                                     Alchechengio
-    ## 81                                                                         Pomodori
-    ## 82                                                  Varietà particolari di pomodoro
-    ## 83                                                                Pomodoro ciliegia
-    ## 84                                                                  Pomodoro ramato
-    ## 85                                                                           Pepino
-    ## 86                                                                          Cartamo
-    ## 87                                                                         Miscanto
-    ## 88                                                  Locali per la lavorazione vuoti
-    ## 89                                                                           Alloro
-    ## 90                                                Lager- und Produktionsräume allg.
-    ## 91                                                                Semine a lattiera
-    ## 92                                                                       Mais dolce
-    ## 93                                                                       Lenticchia
-    ## 94                                                                             Fave
-    ## 95                                                               Abete del Colorado
-    ## 96                                                                          Piselli
-    ## 97                                                             Piselli con baccello
-    ## 98                                                           Piselli senza baccello
-    ## 99                                           Trifoglio per la produzione di sementi
-    ## 100                                                                            Fava
-    ## 101                                                                           Kenaf
-    ## 102                                                                     Noce comune
-    ## 103                                                               Frutta con guscio
-    ## 104                                                                      maggiorana
-    ## 105                                                               Cerfoglio bulboso
-    ## 106                      Palette in legno, legno da imballaggio, legno non lavorato
-    ## 107                                                                Alberi di Natale
-    ## 108                                                                    Barbabietola
-    ## 109                                                                       Crescione
-    ## 110                                                      Locali di stoccaggio vuoti
-    ## 111                                                                Pisello proteico
-    ## 112                                               Superfici non coltive in generale
-    ## 113 Scarpate e strisce verdi lungo le vie di comunicazione (conformemente ORRPChim)
-    ## 114                  Lungo le strade nazionali e cantonali (conformemente ORRPChim)
-    ## 115                                                                         Tabacco
-    ## 116                                                                    Cucurbitacee
-    ## 117                                                                         Angurie
-    ## 118                                                                        Cetrioli
-    ## 119                                                           cetrioli per conserva
-    ## 120                                                               Cetriolo nostrano
-    ## 121                                                               Cetriolo olandese
-    ## 122                                                                          Meloni
-    ## 123                                                Zucche (buccia non commestibile)
-    ## 124                                                                   Zucca da olio
-    ## 125                                                  Zucche con buccia commestibile
-    ## 126                                                                        Patisson
-    ## 127                                                                        Zucchine
-    ## 128                                                                         Rondini
-    ## 129                                                                        Garofani
-    ## 130                                                             Finocchio aromatico
-    ## 131                                          Coltivazione piante ornam. in generale
-    ## 132                                           Piante ornamentali annuali e biennali
-    ## 133                                                                    Fiori estivi
-    ## 134                                                   Pianta in vaso e in container
-    ## 135                                                                         Begonia
-    ## 136                                                                       Ciclamino
-    ## 137                                                                         Geranio
-    ## 138                                                                         Primule
-    ## 139                                                                          Vivaio
-    ## 140                                               Tappeti erbosi e terreni sportivi
-    ## 141                                                 Colture da fiore e piante verdi
-    ## 142                                                               Zucca ornamentale
-    ## 143                                                                        Giacinto
-    ## 144                                                                            Iris
-    ## 145                                                   Liliacee (pianti ornamentali)
-    ## 146                                                                        Tulipano
-    ## 147                                               Boschetti (al di fuori del bosco)
-    ## 148                                                                            Rose
-    ## 149                                    Alberi e arbusti (al di fuori della foresta)
-    ## 150                                 Arbusti ornamentali (al di fuori della foresta)
-    ## 151                                                                         Arbusti
-    ## 152                                                                       Portulaca
-    ## 153                                                                Portulaca estiva
-    ## 154                                                                         Cereali
-    ## 155                                                                       Triticale
-    ## 156                                                             Triticale autunnale
-    ## 157                                                               Cereali autunnali
-    ## 158                                                              Frumento autunnale
-    ## 159                                                                Segale autunnale
-    ## 160                                                                          Spelta
-    ## 161                                                                           Farro
-    ## 162                                                             Cereali primaverili
-    ## 163                                                            Frumento primaverile
-    ## 164                                                                Orzo primaverile
-    ## 165                                                               Avena primaverile
-    ## 166                                                                            Orzo
-    ## 167                                                                  Orzo autunnale
-    ## 168                                                                          Segale
-    ## 169                                                                        Frumento
-    ## 170                                                                      Grano duro
-    ## 171                                                                    Grano tenero
-    ## 172                                                                           Avena
-    ## 173                                                       Superficie coltiva aperta
-    ## 174                                                                           Porro
-    ## 175                                                                          Piante
-    ## 176                                                                       Ravanello
-    ## 177                                                                         Spinaci
-    ## 178                                                                 actaea racemosa
-    ## 179                                               Riso seminato su terreno asciutto
-    ## 180                                                                      Scorzonera
-    ## 181                                                                    Valerianella
-    ## 182                                                                        Papavero
-    ## 183                                                                            Lino
-    ## 184                                                                           Olivo
-    ## 185                                                                         Gerbera
-    ## 186                                              Coltivazione di bacche in generale
-    ## 187                                                                            Soia
-    ## 188                                                               Bulbi ornamentali
-    ## 189                                                Rapa di Brassica rapa e B. napus
-    ## 190                                                           Rapa di Brassica rapa
-    ## 191                                                                  Rhodiola rosea
-    ## 192                                                                    Lauro ceraso
-    ## 193                                                             Funghi commestibili
-    ## 194                                                                    finocchiella
-    ## 195                                                                  Bacche di Goji
-    ## 196                                                                         Fagioli
-    ## 197                                                          Fagioli senza baccello
-    ## 198                                                            Fagioli con baccello
-    ## 199                                                              Fagiolo rampicante
-    ## 200                                                                    Fagiolo nano
-    ## 201                                                                        Mirtillo
-    ## 202                                                                         Bietola
-    ## 203                                                                           Costa
-    ## 204                                                               Bietola da taglio
-    ## 205                                                          Depositi, mulini, sili
-    ## 206                                                                 Terreno incolto
-    ## 207                                                                         Iperico
-    ## 208                                                                           Dalie
-    ## 209                                                         Orticoltura in generale
-    ## 210                                                Insalate asiatiche (Brassicacee)
-    ## 211                                                            Caprifoglio turchino
-    ## 212                                                   Erba di Santa Barbara vernale
-    ## 213                                                    Deposito di terreno vegetale
-    ## 214                                                                      Ramolaccio
-    ## 215                                                                      Topinambur
-    ## 216                                                                 Specie di ribes
-    ## 217                                                                       Uva spina
-    ## 218                                                                      Ribes nero
-    ## 219                                                                     Ribes rosso
-    ## 220                                                                           Josta
-    ## 221                                                                    Cima di rapa
-    ## 222                                                                         Maggese
-    ## 223                                                                        Asparagi
-    ## 224                                                               Frutta a nocciolo
-    ## 225                                                                   Prugno/Susino
-    ## 226                                                                          Prugno
-    ## 227                                                                        Prugnolo
-    ## 228                                                                Pesco/pesco noce
-    ## 229                                                                       Albicocco
-    ## 230                                                                        Ciliegio
-    ## 231                                                                       Mini-Kiwi
-    ## 232                                                               Raccolto stoccato
-    ## 233                                                                          Rucola
-    ## 234                                                                         Fragola
-    ## 235                                         Graminacee per la produzione di sementi
-    ## 236                                                                       Moro nero
-    ## 237                                                                Olivello spinoso
-    ## 238                                                                          Sedano
-    ## 239                                                            Sedano da condimento
-    ## 240                                                                 Sedano da coste
-    ## 241                                                                     Sedano rapa
-    ## 242                                                                     Erba medica
-    ## 243                                                                         Melissa
-    ## 244                                                               Erbette da cucina
-    ## 245                                                                          Issopo
-    ## 246                                                                      Coriandolo
-    ## 247                                                                       Rosmarino
-    ## 248                                                                      Prezzemolo
-    ## 249                                                                Camomilla romana
-    ## 250                                                                       Cerfoglio
-    ## 251                                                                           Menta
-    ## 252                                                                        Basilico
-    ## 253                                                                     Santoreggia
-    ## 254                                                                            Timo
-    ## 255                                                                           Carvi
-    ## 256                                                                           Aneto
-    ## 257                                                                          Salvia
-    ## 258                                                                       Levistico
-    ## 259                                                                     Dragoncello
-    ## 260                                                                  Erba cipollina
-    ## 261                                                                    Pero corvino
-    ## 262                                                                     Abete rosso
-    ## 263                                                         Cavoli / rape da taglio
-    ## 264                                                       Frutticoltura in generale
-    ## 265                                                                   Cardo azzurro
-    ## 266                                                                         Cipolle
-    ## 267                                                                   Cipolle dolci
-    ## 268                                                              Cipollotti a mazzi
-    ## 269                                                               Cipolle da tavola
-    ## 270                                                                   Bosso (Buxus)
-    ## 271                                                                        Gladiolo
-    ## 272                                                        Semine dopo la fresatura
-    ## 273                                                                           Colza
-    ## 274                                                                 Colza autunnale
-    ## 275                                                                   Cicoria belga
-    ## 276                                                            Insalate (Asteracee)
-    ## 277                                                                  Dente di leone
-    ## 278                                                     Insalate del genere Lactuca
-    ## 279                                                              Insalate cappuccio
-    ## 280                                                               Lattuga cappuccio
-    ## 281                                                   Insalate a foglie (Asteracee)
-    ## 282                                                               Lattuga da taglio
-    ## 283                                                     Indivia e cicoria da foglia
-    ## 284                                                                         Indivia
-    ## 285                                                         Cicoria pan di zucchero
-    ## 286                                                    Tipi di radicchio e cicorino
-    ## 287                                                                 erbe medicinali
-    ## 288                                                                 Digitale lanata
-    ## 289                                                   Rafano rusticana / Ramolaccio
-    ## 290                                                                   Cavolo navone
-    ## 291                                                                     rosa canina
-    ## 292                                                                       Pastinaca
-    ## 293                                                                    Patata dolce
-    ## 294                                                                        Depositi
-    ## 295                                                                        Scalogni
-    ## 296                                                                            Mais
+    ## 2              Superfici di compensazione ecologica in generale (conformemente OPD)
+    ## 3                                                         Superficie coltiva aperta
+    ## 4                                            Coltivazione piante ornam. in generale
+    ## 5                                                     Pianta in vaso e in container
+    ## 6                                                                           Begonia
+    ## 7                                                                         Ciclamino
+    ## 8                                                                           Geranio
+    ## 9                                                                           Primule
+    ## 10                                                         Radici tuberose floreali
+    ## 11                                                                            Dalie
+    ## 12                                                                           Vivaio
+    ## 13                                  Arbusti ornamentali (al di fuori della foresta)
+    ## 14                                                                             Rose
+    ## 15                                            Piante ornamentali annuali e biennali
+    ## 16                                                                     Fiori estivi
+    ## 17                                     Alberi e arbusti (al di fuori della foresta)
+    ## 18                                                                       Rododendro
+    ## 19                                                                           Azalee
+    ## 20                                                                     Lauro ceraso
+    ## 21                                                                      Ippocastano
+    ## 22                                                               Abete del Colorado
+    ## 23                                                                    Bosso (Buxus)
+    ## 24                                                                 Alberi di Natale
+    ## 25                                                  Colture da fiore e piante verdi
+    ## 26                                                                             Iris
+    ## 27                                                                          Begonia
+    ## 28                                                                        Ciclamino
+    ## 29                                                                         Giacinto
+    ## 30                                                                         Gladiolo
+    ## 31                                                                       Crisantemo
+    ## 32                                                                          Geranio
+    ## 33                                                                          Primule
+    ## 34                                                                    Cardo azzurro
+    ## 35                                                                          Gerbera
+    ## 36                                                                         Tulipano
+    ## 37                                                                Zucca ornamentale
+    ## 38                                                    Liliacee (pianti ornamentali)
+    ## 39                                                                         Garofani
+    ## 40                                                Boschetti (al di fuori del bosco)
+    ## 41                                                                         Conifere
+    ## 42                                                               Abete del Colorado
+    ## 43                                                                      Abete rosso
+    ## 44                                                                 Alberi di Natale
+    ## 45                                                Tappeti erbosi e terreni sportivi
+    ## 46                                                                          Arbusti
+    ## 47                                                                                 
+    ## 48                                                                Frutta con guscio
+    ## 49                                                                             Noci
+    ## 50                                                                      Noce comune
+    ## 51                                                                            Olivo
+    ## 52                                                                Frutta a granelli
+    ## 53                                                                     Pero / Nashi
+    ## 54                                                                             Pero
+    ## 55                                                                             Melo
+    ## 56                                                                          Cotogno
+    ## 57                                                                Frutta a nocciolo
+    ## 58                                                                    Prugno/Susino
+    ## 59                                                                           Prugno
+    ## 60                                                                         Prugnolo
+    ## 61                                                                        Albicocco
+    ## 62                                                                         Ciliegio
+    ## 63                                                                 Pesco/pesco noce
+    ## 64                                                                                 
+    ## 65                                                                  Specie di ribes
+    ## 66                                                                       Ribes nero
+    ## 67                                                                        Uva spina
+    ## 68                                                                            Josta
+    ## 69                                                                      Ribes rosso
+    ## 70                                                                     Sambuco nero
+    ## 71                                                                        Mini-Kiwi
+    ## 72                                                                  Specie di rubus
+    ## 73                                                                             Mora
+    ## 74                                                                          Lampone
+    ## 75                                                                      Aronia nera
+    ## 76                                                                          Fragola
+    ## 77                                                                         Mirtillo
+    ## 78                                                                                 
+    ## 79                                                                             Vite
+    ## 80                                                                    Ceppi giovani
+    ## 81                                                               Vite in produzione
+    ## 82                                                                                 
+    ## 83                                                                     Cucurbitacee
+    ## 84                                                                         Cetrioli
+    ## 85                                                            cetrioli per conserva
+    ## 86                                                                           Meloni
+    ## 87                                                                          Angurie
+    ## 88                                                                    Zucca da olio
+    ## 89                                                 Zucche (buccia non commestibile)
+    ## 90                                                   Zucche con buccia commestibile
+    ## 91                                                                         Zucchine
+    ## 92                                                                         Patisson
+    ## 93                                                                          Rondini
+    ## 94                                                       Portulacee (Portulacaceae)
+    ## 95                                                                        Portulaca
+    ## 96                                                                 Portulaca estiva
+    ## 97                                                                        Solanacee
+    ## 98                                                                         Pomodori
+    ## 99                                                                Pomodoro ciliegia
+    ## 100                                                                 Pomodoro ramato
+    ## 101                                                 Varietà particolari di pomodoro
+    ## 102                                                                       Melanzana
+    ## 103                                                                        Peperone
+    ## 104                                                                        Peperone
+    ## 105                                                                  Peperone dolce
+    ## 106                                                                    Alchechengio
+    ## 107                                                                          Pepino
+    ## 108                                                             Funghi commestibili
+    ## 109                                                                   Chenopodiacee
+    ## 110                                                                         Spinaci
+    ## 111                                                                         Bietola
+    ## 112                                                                           Costa
+    ## 113                                                               Bietola da taglio
+    ## 114                                                                    Barbabietola
+    ## 115                                                    Erbe aromatiche e medicinali
+    ## 116                                                                         Iperico
+    ## 117                                                               Erbette da cucina
+    ## 118                                                                  Erba cipollina
+    ## 119                                                                           Aneto
+    ## 120                                                                           Carvi
+    ## 121                                                                           Menta
+    ## 122                                                                       Rosmarino
+    ## 123                                                                        Basilico
+    ## 124                                                                          Salvia
+    ## 125                                                                     Santoreggia
+    ## 126                                                                       Levistico
+    ## 127                                                                     Dragoncello
+    ## 128                                                                       Cerfoglio
+    ## 129                                                                            Timo
+    ## 130                                                                      Coriandolo
+    ## 131                                                                          Issopo
+    ## 132                                                                Camomilla romana
+    ## 133                                                                      Prezzemolo
+    ## 134                                                                       Valeriana
+    ## 135                                                      Asparagacee (Asparagaceae)
+    ## 136                                                                        Asparagi
+    ## 137                                                            Poacee (Graminaceae)
+    ## 138                                                                      Mais dolce
+    ## 139                                                             Lamiacee (Labiatae)
+    ## 140                                                                        Tuberina
+    ## 141                                                                    Valerianacee
+    ## 142                                                                    Valerianella
+    ## 143                                                          Ombrellifere (Apiacee)
+    ## 144                                                                       Pastinaca
+    ## 145                                                             Prezzemolo tuberoso
+    ## 146                                                                          Sedano
+    ## 147                                                                 Sedano da coste
+    ## 148                                                            Sedano da condimento
+    ## 149                                                                     Sedano rapa
+    ## 150                                                                          Carote
+    ## 151                                                                 Finocchio dolce
+    ## 152                                                            Fabacee (Leguminose)
+    ## 153                                                                         Piselli
+    ## 154                                                          Piselli senza baccello
+    ## 155                                                            Piselli con baccello
+    ## 156                                                                         Fagioli
+    ## 157                                                            Fagioli con baccello
+    ## 158                                                                    Fagiolo nano
+    ## 159                                                              Fagiolo rampicante
+    ## 160                                                          Fagioli senza baccello
+    ## 161                                                                            Fave
+    ## 162                                                                      Lenticchia
+    ## 163                                                                     Poligonacee
+    ## 164                                                                       Rabarbaro
+    ## 165                                                           Composite (Asteracee)
+    ## 166                                                                        Carciofi
+    ## 167                                                                   Cicoria belga
+    ## 168                                                                      Scorzonera
+    ## 169                                                                      Topinambur
+    ## 170                                                            Insalate (Asteracee)
+    ## 171                                                     Insalate del genere Lactuca
+    ## 172                                                              Insalate cappuccio
+    ## 173                                                               Lattuga cappuccio
+    ## 174                                                   Insalate a foglie (Asteracee)
+    ## 175                                                               Lattuga da taglio
+    ## 176                                                     Indivia e cicoria da foglia
+    ## 177                                                                         Indivia
+    ## 178                                                         Cicoria pan di zucchero
+    ## 179                                                    Tipi di radicchio e cicorino
+    ## 180                                                                  Dente di leone
+    ## 181                                                                           Cardo
+    ## 182                                                         Crocifere (Brassicacee)
+    ## 183                                                                Specie di cavoli
+    ## 184                                                             Cavoli di Bruxelles
+    ## 185                                                                Cavoli fogliacei
+    ## 186                                                                    Cavolo piuma
+    ## 187                                                                        Pak-Choi
+    ## 188                                                         Cavoli / rape da taglio
+    ## 189                                                                  Cavolo fustoso
+    ## 190                                                                   Cavolo cinese
+    ## 191                                                          Cavoli a infiorescenza
+    ## 192                                                                       Romanesco
+    ## 193                                                                      Cavolfiore
+    ## 194                                                                        Broccoli
+    ## 195                                                                  Cavoli a testa
+    ## 196                                                                     Cavolo rapa
+    ## 197                                                                       Crescione
+    ## 198                                                   Rafano rusticana / Ramolaccio
+    ## 199                                                                          Rucola
+    ## 200                                                   Erba di Santa Barbara vernale
+    ## 201                                                Rapa di Brassica rapa e B. napus
+    ## 202                                                           Rapa di Brassica rapa
+    ## 203                                                          Rapa di Brassica napus
+    ## 204                                                                   Cavolo navone
+    ## 205                                                Insalate asiatiche (Brassicacee)
+    ## 206                                                                    Cima di rapa
+    ## 207                                                             Crescione acquatico
+    ## 208                                                                       Ravanello
+    ## 209                                                                      Ramolaccio
+    ## 210                                                                        Liliacee
+    ## 211                                                                        Scalogni
+    ## 212                                                                           Porro
+    ## 213                                                                         Cipolle
+    ## 214                                                                   Cipolle dolci
+    ## 215                                                               Cipolle da tavola
+    ## 216                                                              Cipollotti a mazzi
+    ## 217                                                                           Aglio
+    ## 218                                                                                
+    ## 219                                                                            Mais
+    ## 220                                                                           Colza
+    ## 221                                                                 Colza autunnale
+    ## 222                                                                        Miscanto
+    ## 223                                          Barbabietole da foraggio e da zucchero
+    ## 224                                                        Barbabietola da foraggio
+    ## 225                                                        Barbabietola da zucchero
+    ## 226                                                                           Kenaf
+    ## 227                                                                         Tabacco
+    ## 228                                                                            Soia
+    ## 229                                                                         Cereali
+    ## 230                                                                        Frumento
+    ## 231                                                                          Spelta
+    ## 232                                                                           Farro
+    ## 233                                                                      Grano duro
+    ## 234                                                                    Grano tenero
+    ## 235                                                              Frumento autunnale
+    ## 236                                                            Frumento primaverile
+    ## 237                                                                            Orzo
+    ## 238                                                                Orzo primaverile
+    ## 239                                                                  Orzo autunnale
+    ## 240                                                                       Triticale
+    ## 241                                                             Triticale autunnale
+    ## 242                                                                          Segale
+    ## 243                                                                Segale autunnale
+    ## 244                                                                           Avena
+    ## 245                                                               Avena primaverile
+    ## 246                                                             Cereali primaverili
+    ## 247                                                            Frumento primaverile
+    ## 248                                                                Orzo primaverile
+    ## 249                                                               Avena primaverile
+    ## 250                                                               Cereali autunnali
+    ## 251                                                              Frumento autunnale
+    ## 252                                                                          Spelta
+    ## 253                                                             Triticale autunnale
+    ## 254                                                                           Farro
+    ## 255                                                                  Orzo autunnale
+    ## 256                                                                Segale autunnale
+    ## 257                                                                          Patate
+    ## 258                                                  Patate da tavola e da foraggio
+    ## 259                                         Patate per la produzione di tuberi-seme
+    ## 260                                                                         Luppolo
+    ## 261                                                                            Fava
+    ## 262                                                                Pisello proteico
+    ## 263                                                                 Prati e pascoli
+    ## 264                                Miscela trifoglio-graminacee (prati artificiali)
+    ## 265                                                                        Girasole
+    ## 266                                                                     Erba medica
+    ## 267                                                                          Lupini
+    ## 268                                                         Tecnica di coltivazione
+    ## 269                                                        Semine dopo la fresatura
+    ## 270                                                               Semine a lattiera
+    ## 271                                                                            Lino
+    ## 272                                         Graminacee per la produzione di sementi
+    ## 273                                               Riso seminato su terreno asciutto
+    ## 274                                                                         Cartamo
+    ## 275                                          Trifoglio per la produzione di sementi
+    ## 276                                                                           Sorgo
+    ## 277                                                                                
+    ## 278                   Tronchi abbattuti nella foresta e presso piazzali di deposito
+    ## 279                                           Protezione delle scorte (in generale)
+    ## 280                                                          Depositi, mulini, sili
+    ## 281                                                      Installazioni e apparecchi
+    ## 282                                                       Locali per la lavorazione
+    ## 283                                                                        Depositi
+    ## 284                                                             Superficie inerbita
+    ## 285                                                                        Papavero
+    ## 286                                                                       Baby-Leaf
+    ## 287                                                        Baby-Leaf (Brassicaceae)
+    ## 288                                                          Baby-Leaf (Asteraceae)
+    ## 289                                                      Baby-Leaf (Chenopodiaceae)
+    ## 290                                                                 erbe medicinali
+    ## 291                                                                 Digitale lanata
+    ## 292                      Palette in legno, legno da imballaggio, legno non lavorato
+    ## 293                                                                         Melissa
+    ## 294                                                                 Terreno incolto
+    ## 295                                                    Deposito di terreno vegetale
+    ## 296                                                                         Anemone
+    ## 297                                                                       ranuncolo
+    ## 298                                                       Frutticoltura in generale
+    ## 299                                              Coltivazione di bacche in generale
+    ## 300                                                         Orticoltura in generale
+    ## 301                                                        Campicoltura in generale
+    ## 302                                                                          Canapa
+    ## 303                                                               Bulbi ornamentali
+    ## 304                                               Superfici non coltive in generale
+    ## 305 Scarpate e strisce verdi lungo le vie di comunicazione (conformemente ORRPChim)
+    ## 306                  Lungo le strade nazionali e cantonali (conformemente ORRPChim)
+    ## 307                                                        Selvicoltura in generale
+    ## 308                                                                           Bosco
+    ## 309                                                                 Vivai forestali
+    ## 310                                                                 Vivai forestali
+    ## 311                                                                      maggiorana
+    ## 312                                                                         origano
+    ## 313                                                                  Rhodiola rosea
+    ## 314                                                                 actaea racemosa
+    ## 315                                                           piantaggine lanciuola
+    ## 316                                                               Raccolto stoccato
+    ## 317                                                             Finocchio aromatico
+    ## 318                                                      Locali di stoccaggio vuoti
+    ## 319                                                      Locali di produzione vuoti
+    ## 320                                                  Aziende produttrici di tabacco
+    ## 321                                                 Locali per la lavorazione vuoti
+    ## 322                                               Lager- und Produktionsräume allg.
+    ## 323                                                                  Bacche di Goji
+    ## 324                                                                          Quinoa
+    ## 325                                                            Caprifoglio turchino
+    ## 326                                                                          Alloro
+    ## 327                                                                     rosa canina
+    ## 328                                                                            cece
+    ## 329                                                                Olivello spinoso
+    ## 330                                                                       Moro nero
+    ## 331                                                          Sorbo degli ucellatori
+    ## 332                                                                    Pero corvino
+    ## 333                                                                    finocchiella
+    ## 334                                                               Cerfoglio bulboso
+    ## 335                                                                  Convolvulaceae
+    ## 336                                                                    Patata dolce
+    ## 337                                                                          Miglio
+    ## 338                                                                          Piante
+    ## 339                                                                         Maggese
