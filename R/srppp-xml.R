@@ -50,11 +50,18 @@ srppp_xml_get.character <- function(from, ...)
 #' @param path A path to a zipped SRPPP XML file
 #' @export
 srppp_xml_get_from_path <- function(path, from) {
-  zip_contents <- utils::unzip(path, list = TRUE)
-  xml_filename <- grep("PublicationData_20.._.._...xml",
-    zip_contents$Name, value = TRUE)
-  xml_con <- unz(path, xml_filename)
-  ret <- read_xml(xml_con)
+  if (grepl("zip$", path)) {
+    zip_contents <- utils::unzip(path, list = TRUE)
+    xml_filename <- grep("PublicationData_20.._.._...xml",
+      zip_contents$Name, value = TRUE)
+    xml_con <- unz(path, xml_filename)
+    ret <- read_xml(xml_con)
+  } else {
+    if (grepl("xz$", path)) {
+      xml_con <- xzfile(path)
+      ret <- read_xml(xml_con)
+    }
+  }
 
   # Determine the version of the XML file and attach it to the returned object
   substance_type_node <- xml_find_first(ret,

@@ -7,6 +7,7 @@ RBIN ?= $(shell dirname "`which R`")
 pkgfiles = \
 	.Rbuildignore \
 	DESCRIPTION \
+	inst/testdata/* \
 	man/* \
 	NAMESPACE \
 	README.md \

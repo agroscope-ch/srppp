@@ -5,7 +5,11 @@ test_that("We get dm objects with relational integrity", {
     "All constraints satisfied")
 
   expect_message(
-    print(dm::dm_examine_constraints(srppp_test, .progress = FALSE)),
+    print(dm::dm_examine_constraints(srppp_test_1, .progress = FALSE)),
+    "All constraints satisfied")
+
+  expect_message(
+    print(dm::dm_examine_constraints(srppp_test_2, .progress = FALSE)),
     "All constraints satisfied")
 
 })
