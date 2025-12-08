@@ -108,21 +108,27 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
 {
   product_nodeset <- xml_find_all(srppp_xml, "Products/Product")
   product_attribute_names <- names(xml_attrs(product_nodeset[[1]]))
+
+  product_pNbrs <- product_nodeset |>
+    xml_attrs() |>
+    unlist() |>
+    matrix(ncol = 7, byrow = TRUE,
+      dimnames = list(NULL, product_attribute_names)) |>
+    as_tibble() |>
+    filter(!grepl("-", wNbr)) |> # remove sales permissions
+    mutate(pNbr = as.integer(id)) |>
+    mutate(wGrp = wNbr) |> # we define a "W-Number group", i.e. the part of the W-Number before the dash
+    select(wGrp, pNbr)
+
   products_no_permission_holders <- product_nodeset |>
     xml_attrs() |>
     unlist() |>
     matrix(ncol = 7, byrow = TRUE,
       dimnames = list(NULL, product_attribute_names)) |>
     as_tibble() |>
-    mutate(wGrp = as.integer(gsub("-.*$", "", wNbr)),
-      .before = wNbr) |>
-    group_by(wGrp) |>
-    mutate(id = as.integer(id)) |>
-    mutate(pNbr = if_else(id < 38, NA, id),
-      .after = id) |>
-    tidyr::fill(pNbr) |>
-    ungroup() |>
+    mutate(wGrp = gsub("-.*$", "", wNbr)) |>
     mutate(isSalePermission = if_else(isSalePermission == "true", TRUE, FALSE)) |>
+    left_join(product_pNbrs, by = "wGrp") |>
     select(wNbr, name, pNbr, exhaustionDeadline, soldoutDeadline,
       isSalePermission, terminationReason)
 
@@ -158,10 +164,16 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
       # Define the reference node (original product)
       ref_node <- xml_child(product_nodeset[[node_numbers[1]]])
       ref_contents <- unlist(strsplit(as.character(ref_node), "\n"))
-      ref_contents_permholder_i <- grep("PermissionHolderKey", ref_contents)
-      ref_contents_clean <- ref_contents[-ref_contents_permholder_i]
 
-      # Loop over sales permissions
+      # In certain cases (2025-12-01, W-Number 7255), there is no permission holder
+      if (any(grepl("PermissionHolderKey", ref_contents))) {
+        ref_contents_permholder_i <- grep("PermissionHolderKey", ref_contents)
+        ref_contents_clean <- ref_contents[-ref_contents_permholder_i]
+      } else {
+        ref_contents_clean <- ref_contents
+      }
+
+      # Loop over products
       for (i in 2:length(node_numbers)) {
         check_node <- xml_child(product_nodeset[[node_numbers[i]]])
         check_contents <- unlist(strsplit(as.character(check_node), "\n"))
