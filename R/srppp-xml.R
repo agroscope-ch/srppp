@@ -358,7 +358,7 @@ srppp_xml_get_ingredients <- function(srppp_xml = srppp_xml_get())
 
   get_ingredient_map <- function(ingredient_node) {
     wNbr <- xml_attr(xml_parent(xml_parent(ingredient_node)), "wNbr")
-    pk <- xml_attr(xml_child(ingredient_node, search = 2), "primaryKey")
+    pk <- toupper(xml_attr(xml_child(ingredient_node, search = 2), "primaryKey")) # In some cases we have lower case UUIDs here
     type <- xml_text(xml_child(ingredient_node, search = 1))
     attributes <- xml_attrs(ingredient_node)
     ret <- c(wNbr, pk, type,
