@@ -51,16 +51,16 @@ try(srppp_xml_get_products())
 #> # A tibble: 1,740 × 8
 #>     pNbr wNbr  name          exhaustionDeadline soldoutDeadline isSalePermission
 #>    <int> <chr> <chr>         <chr>              <chr>           <lgl>           
-#>  1    38 18    "Thiovit Jet" ""                 ""              FALSE           
-#>  2    38 18-3  "Sanoplant S… ""                 ""              TRUE            
-#>  3    38 18-5  "Gesal Schro… ""                 ""              TRUE            
-#>  4  1182 923   "Divopan"     ""                 ""              FALSE           
-#>  5  1192 934   "Trifolin"    ""                 ""              FALSE           
-#>  6  1263 986   "Elosal Supr… ""                 ""              FALSE           
-#>  7  1865 1454  "Misto 12"    ""                 ""              FALSE           
-#>  8  1994 1526  "Zofal D"     ""                 ""              FALSE           
-#>  9  2028 1529  "Oléoc "      ""                 ""              FALSE           
-#> 10  2055 1840  "Misto 20"    ""                 ""              FALSE           
+#>  1    38 18    Thiovit Jet   ""                 ""              FALSE           
+#>  2    38 18-1  Sufralo       ""                 ""              TRUE            
+#>  3    38 18-2  Capito Bio-S… ""                 ""              TRUE            
+#>  4    38 18-3  Sanoplant Sc… ""                 ""              TRUE            
+#>  5    38 18-4  Biorga Contr… ""                 ""              TRUE            
+#>  6    38 18-5  Gesal Schrot… ""                 ""              TRUE            
+#>  7  1182 923   Divopan       ""                 ""              FALSE           
+#>  8  1192 934   Trifolin      ""                 ""              FALSE           
+#>  9  1263 986   Elosal Supra  ""                 ""              FALSE           
+#> 10  1865 1454  Misto 12      ""                 ""              FALSE           
 #> # ℹ 1,730 more rows
 #> # ℹ 2 more variables: terminationReason <chr>, permission_holder <chr>
 # }

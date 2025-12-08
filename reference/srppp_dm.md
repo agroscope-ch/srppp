@@ -110,8 +110,6 @@ if (inherits(sr, "try-error")) {
 
 dm_examine_constraints(sr)
 #> ! Unsatisfied constraints:
-#> • Table `pNbrs`: primary key `pNbr`: has 1 missing values
-#> • Table `ingredients`: foreign key `pk` into table `substances`: values of `ingredients$pk` not in `substances$pk`: 50804ef0-5d85-46cc-b697-17a7bca5f8f0 (1), 738e64d8-6e48-415f-9341-50608bd3273c (1), c1966a3b-0a53-43aa-8abc-c736e118a497 (1)
 #> • Table `parallel_imports`: foreign key `pNbr` into table `pNbrs`: values of `parallel_imports$pNbr` not in `pNbrs$pNbr`: 7738 (5), 8332 (1), 9033 (1)
 dm_draw(sr)
 %0
