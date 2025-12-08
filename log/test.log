@@ -1,48 +1,70 @@
 ℹ Testing srppp
 ✔ | F W  S  OK | Context
-
-⠏ |          0 | alternative_products                                           
-⠋ |          1 | alternative_products                                           
-⠙ |          2 | alternative_products                                           
-✔ |          5 | alternative_products
-
-⠏ |          0 | resolve_cultures                                               
-✔ |          8 | resolve_cultures
-
-⠏ |          0 | srppp_xml                                                      ! Unsatisfied constraints:
-* Table `pNbrs`: primary key `pNbr`: has 1 missing values
-* Table `ingredients`: foreign key `pk` into table `substances`: values of `ingredients$pk` not in `substances$pk`: 50804ef0-5d85-46cc-b697-17a7bca5f8f0 (1), 738e64d8-6e48-415f-9341-50608bd3273c (1), c1966a3b-0a53-43aa-8abc-c736e118a497 (1)
-* Table `parallel_imports`: foreign key `pNbr` into table `pNbrs`: values of `parallel_imports$pNbr` not in `pNbrs$pNbr`: 7738 (5), 8332 (1), 9033 (1)
-
-⠋ | 1        0 | srppp_xml                                                      
-⠙ | 1        1 | srppp_xml                                                      ! Unsatisfied constraints:
-* Table `pNbrs`: primary key `pNbr`: has 1 missing values
-* Table `ingredients`: foreign key `pk` into table `substances`: values of `ingredients$pk` not in `substances$pk`: 50804ef0-5d85-46cc-b697-17a7bca5f8f0 (1), 738e64d8-6e48-415f-9341-50608bd3273c (1), c1966a3b-0a53-43aa-8abc-c736e118a497 (1)
-* Table `parallel_imports`: foreign key `pNbr` into table `pNbrs`: values of `parallel_imports$pNbr` not in `pNbrs$pNbr`: 7738 (5), 8332 (1), 9033 (1)
-
-⠹ | 2        1 | srppp_xml                                                      
-✖ | 2        1 | srppp_xml [1.4s]
+✖ | 2        5 | alternative_products [1.2s]
 ────────────────────────────────────────────────────────────────────────────────
-Failure ('test-srppp_xml.R:3:3'): We get dm objects with relational integrity
-`print(dm::dm_examine_constraints(srppp_cur, .progress = FALSE))` did not throw the expected message.
+Failure ('test-alternative_products.R:9:3'): Alternative products are found
+Expected `nrow(lambda_delta_gaps_2)` to equal 128L.
+Differences:
+  `actual`: 166
+`expected`: 128
 
-Failure ('test-srppp_xml.R:11:3'): We get dm objects with relational integrity
-`print(dm::dm_examine_constraints(srppp_test_2, .progress = FALSE))` did not throw the expected message.
+
+Failure ('test-alternative_products.R:17:3'): Alternative products are found
+Expected `nrow(lambda_delta_gaps_resolved_2)` to equal 110L.
+Differences:
+  `actual`: 165
+`expected`: 110
+
 ────────────────────────────────────────────────────────────────────────────────
+✖ | 2       10 | resolve_cultures
+────────────────────────────────────────────────────────────────────────────────
+Failure ('test-resolve_cultures.R:64:3'): Resolving cultures to highest detail works
+Expected `nrow(result_3.2)` to equal 10.
+Differences:
+  `actual`: 13.0
+`expected`: 10.0
 
-⠏ |          0 | use_rates                                                      
+
+Failure ('test-resolve_cultures.R:78:3'): Resolving cultures to highest detail works
+Expected `nrow(result_4.2)` to equal 28.
+Differences:
+  `actual`: 17.0
+`expected`: 28.0
+
+────────────────────────────────────────────────────────────────────────────────
+✔ |          5 | srppp_xml [2.7s]
 ✔ |          5 | use_rates
 
 ══ Results ═════════════════════════════════════════════════════════════════════
-Duration: 2.0 s
+Duration: 4.2 s
 
 ── Failed tests ────────────────────────────────────────────────────────────────
-Failure ('test-srppp_xml.R:3:3'): We get dm objects with relational integrity
-`print(dm::dm_examine_constraints(srppp_cur, .progress = FALSE))` did not throw the expected message.
+Failure ('test-alternative_products.R:9:3'): Alternative products are found
+Expected `nrow(lambda_delta_gaps_2)` to equal 128L.
+Differences:
+  `actual`: 166
+`expected`: 128
 
-Failure ('test-srppp_xml.R:11:3'): We get dm objects with relational integrity
-`print(dm::dm_examine_constraints(srppp_test_2, .progress = FALSE))` did not throw the expected message.
 
-[ FAIL 2 | WARN 0 | SKIP 0 | PASS 19 ]
+Failure ('test-alternative_products.R:17:3'): Alternative products are found
+Expected `nrow(lambda_delta_gaps_resolved_2)` to equal 110L.
+Differences:
+  `actual`: 165
+`expected`: 110
 
-No one is perfect!
+
+Failure ('test-resolve_cultures.R:64:3'): Resolving cultures to highest detail works
+Expected `nrow(result_3.2)` to equal 10.
+Differences:
+  `actual`: 13.0
+`expected`: 10.0
+
+
+Failure ('test-resolve_cultures.R:78:3'): Resolving cultures to highest detail works
+Expected `nrow(result_4.2)` to equal 28.
+Differences:
+  `actual`: 17.0
+`expected`: 28.0
+
+
+[ FAIL 4 | WARN 0 | SKIP 0 | PASS 25 ]
