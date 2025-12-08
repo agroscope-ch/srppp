@@ -15,6 +15,14 @@ test_that("Resolving cultures to highest detail works", {
       "Aprikose", "Kirsche", "Pfirsich / Nektarine", "Pflaume", "Zwetschge",
       "Apfel", "Quitte", "Birne"))
 
+  # Repeat with test data in the updated format
+  result_1.2 <- resolve_cultures(example_dataset_1, srppp_test_2)
+
+  expect_setequal(result_1.2$leaf_culture_de,
+    c("Birne", "Kirsche",
+      "Aprikose", "Kirsche", "Pfirsich / Nektarine", "Pflaume", "Zwetschge",
+      "Apfel", "Quitte", "Birne"))
+
   # Same as above, but with "Kirschen" instead of "Kirsche"
   example_dataset_2 <- data.frame(
     substance_de = c("Spirotetramat", "Spirotetramat", "Spirotetramat", "Spirotetramat"),
@@ -31,6 +39,14 @@ test_that("Resolving cultures to highest detail works", {
       "Aprikose", "Kirsche", "Pfirsich / Nektarine", "Pflaume", "Zwetschge",
       "Apfel", "Quitte", "Birne"))
 
+  # Repeat with test data in the updated format
+  result_2.2 <- resolve_cultures(example_dataset_2, srppp_test_2)
+
+  expect_setequal(result_2.2$leaf_culture_de,
+    c("Birne", NA,
+      "Aprikose", "Kirsche", "Pfirsich / Nektarine", "Pflaume", "Zwetschge",
+      "Apfel", "Quitte", "Birne"))
+
    # Example showing how cereals "Getreide" are resolved
    example_dataset_3 <- data.frame(
      substance_de = c("Pirimicarb"),
@@ -43,6 +59,12 @@ test_that("Resolving cultures to highest detail works", {
   result_3 <- resolve_cultures(example_dataset_3, srppp_test_1)
   expect_equal(nrow(result_3), 10)
 
+  # Repeat with test data in the updated format
+  result_3.2 <- resolve_cultures(example_dataset_3, srppp_test_2)
+  expect_equal(nrow(result_3.2), 10)
+  # We have three more leaf cultures for "Getreide" in the new format
+  setdiff(result_3.2$leaf_culture_de, result_3$leaf_culture_de)
+
   # Example resolving ornamental plants ("Zierpflanzen")
   example_dataset_4 <- data.frame(substance_de = c("Metaldehyd"),
     pNbr = 6142, use_nr = 1, application_area_de = c("Zierpflanzen"),
@@ -50,6 +72,14 @@ test_that("Resolving cultures to highest detail works", {
 
   result_4 <- resolve_cultures(example_dataset_4, srppp_test_1)
   expect_equal(nrow(result_4), 28)
+
+  # Repeat with test data in the updated format
+  result_4.2 <- resolve_cultures(example_dataset_4, srppp_test_2)
+  expect_equal(nrow(result_4.2), 28)
+
+  setdiff(result_4.2$leaf_culture_de, result_4$leaf_culture_de)
+  # It seems a lot of cultures were removed from the new format:
+  setdiff(result_4$leaf_culture_de, result_4.2$leaf_culture_de)
 
   # Illustrate the resolution of the culture "allg."
   example_dataset_5 <- data.frame(

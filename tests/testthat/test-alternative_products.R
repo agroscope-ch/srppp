@@ -4,9 +4,17 @@ test_that("Alternative products are found", {
     missing = TRUE, resolve_cultures = FALSE)
   expect_equal(nrow(lambda_delta_gaps), 128L)
 
+  lambda_delta_gaps_2 <- alternative_products(srppp_test_2, c("Lambda-Cyhalothrin", "Deltamethrin"),
+    missing = TRUE, resolve_cultures = FALSE)
+  expect_equal(nrow(lambda_delta_gaps_2), 128L)
+
   lambda_delta_gaps_resolved <- alternative_products(srppp_test_1, c("Lambda-Cyhalothrin", "Deltamethrin"),
     missing = TRUE, resolve_cultures = TRUE)
   expect_equal(nrow(lambda_delta_gaps_resolved), 110L)
+
+  lambda_delta_gaps_resolved_2 <- alternative_products(srppp_test_2, c("Lambda-Cyhalothrin", "Deltamethrin"),
+    missing = TRUE, resolve_cultures = TRUE)
+  expect_equal(nrow(lambda_delta_gaps_resolved_2), 110L)
 
   lambda_delta_gaps_it <- alternative_products(srppp_test_1, c("Lambda-Cialotrina", "Deltametrina"),
     missing = TRUE, lang = "it", resolve_cultures = FALSE)
