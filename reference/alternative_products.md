@@ -109,6 +109,8 @@ if (inherits(sr, "try-error")) {
 # Examples with two active substances
 actives_de <- c("Lambda-Cyhalothrin", "Deltamethrin")
 alternative_products(sr, actives_de)
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
 #> # A tibble: 841 × 5
 #>    application_area_de culture_de   pest_de                        n_wNbr n_pNbr
 #>    <chr>               <chr>        <chr>                           <int>  <int>
@@ -139,6 +141,8 @@ alternative_products(sr, actives_de, resolve_cultures = FALSE)
 #> 10 Feldbau             Futter- und Zuckerrüben Erdraupen                6      4
 #> # ℹ 517 more rows
 alternative_products(sr, actives_de, missing = TRUE)
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
 #> # A tibble: 165 × 3
 #>    application_area_de culture_de                       pest_de                 
 #>    <chr>               <chr>                            <chr>                   
@@ -154,6 +158,8 @@ alternative_products(sr, actives_de, missing = TRUE)
 #> 10 Feldbau             Lagerhallen, Mühlen, Silogebäude Vorratsschädlinge       
 #> # ℹ 155 more rows
 alternative_products(sr, actives_de, details = TRUE)
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
 #> # A tibble: 21,889 × 7
 #>    application_area_de culture_de pest_de                pNbr wNbr  use_nr type 
 #>    <chr>               <chr>      <chr>                 <int> <chr>  <int> <chr>
@@ -169,6 +175,8 @@ alternative_products(sr, actives_de, details = TRUE)
 #> 10 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  8800 7106       7 PEST…
 #> # ℹ 21,879 more rows
 alternative_products(sr, actives_de, list = TRUE)
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
 #> $`No alternative`
 #> # A tibble: 165 × 3
 #>    application_area_de culture_de                       pest_de                 
@@ -254,6 +262,8 @@ alternative_products(sr, actives_de, resolve_cultures = FALSE, list = TRUE)
 #> # ℹ 109 more rows
 #> 
 alternative_products(sr, actives_de, resolve_cultures = TRUE, list = TRUE)
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
 #> $`No alternative`
 #> # A tibble: 3 × 3
 #>   application_area_de culture_de pest_de                    
@@ -316,6 +326,8 @@ alternative_products(sr, actives_de, resolve_cultures = FALSE, list = TRUE)
 #> 1 Obstbau             Obstbau allg. Schalenwickler  7545 6362       1 PEST_FULL…
 #> 
 alternative_products(sr, actives_de, resolve_cultures = TRUE, list = TRUE)
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
 #> $`No alternative`
 #> # A tibble: 0 × 3
 #> # ℹ 3 variables: application_area_de <chr>, culture_de <chr>, pest_de <chr>
@@ -380,6 +392,8 @@ alternative_products(sr, actives_de, resolve_cultures = FALSE, list = TRUE)
 #> # ℹ 277 more rows
 #> 
 alternative_products(sr, actives_de, resolve_cultures = TRUE, list = TRUE)
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
 #> $`No alternative`
 #> # A tibble: 3 × 3
 #>   application_area_de culture_de           pest_de                    

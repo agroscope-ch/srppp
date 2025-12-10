@@ -13,7 +13,7 @@ alternatives, or a list containing these three tables."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">srppp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -150,6 +150,8 @@ area, crop an pathogen.</p>
 <span class="r-in"><span><span class="co"># Examples with two active substances</span></span></span>
 <span class="r-in"><span><span class="va">actives_de</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Lambda-Cyhalothrin"</span>, <span class="st">"Deltamethrin"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">sr</span>, <span class="va">actives_de</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 841 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de   pest_de                        n_wNbr n_pNbr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
@@ -180,6 +182,8 @@ area, crop an pathogen.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Feldbau             Futter- und Zuckerrüben Erdraupen                6      4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 517 more rows</span></span>
 <span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">sr</span>, <span class="va">actives_de</span>, missing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 165 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de                       pest_de                 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   </span>
@@ -195,6 +199,8 @@ area, crop an pathogen.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Feldbau             Lagerhallen, Mühlen, Silogebäude Vorratsschädlinge       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 155 more rows</span></span>
 <span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">sr</span>, <span class="va">actives_de</span>, details <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 21,889 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de pest_de                pNbr wNbr  use_nr type </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -210,6 +216,8 @@ area, crop an pathogen.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">8</span>800 7106       7 PEST…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 21,879 more rows</span></span>
 <span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">sr</span>, <span class="va">actives_de</span>, list <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`No alternative`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 165 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de                       pest_de                 </span>
@@ -295,6 +303,8 @@ area, crop an pathogen.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 109 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">sr</span>, <span class="va">actives_de</span>, resolve_cultures <span class="op">=</span> <span class="cn">TRUE</span>, list <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`No alternative`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   application_area_de culture_de pest_de                    </span>
@@ -357,6 +367,8 @@ area, crop an pathogen.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Obstbau             Obstbau allg. Schalenwickler  <span style="text-decoration: underline;">7</span>545 6362       1 PEST_FULL…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">sr</span>, <span class="va">actives_de</span>, resolve_cultures <span class="op">=</span> <span class="cn">TRUE</span>, list <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`No alternative`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 variables: application_area_de &lt;chr&gt;, culture_de &lt;chr&gt;, pest_de &lt;chr&gt;</span></span>
@@ -421,6 +433,8 @@ area, crop an pathogen.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 277 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">sr</span>, <span class="va">actives_de</span>, resolve_cultures <span class="op">=</span> <span class="cn">TRUE</span>, list <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`No alternative`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   application_area_de culture_de           pest_de                    </span>

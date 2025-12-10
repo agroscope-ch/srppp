@@ -39,6 +39,6 @@ An object inheriting from 'srppp_xml', 'xml_document', 'xml_node'
 ``` r
 # Try to get the current SRPPP as available from the FOAG website
 # \donttest{
-srppp_cur <- try(srppp_xml_get())
+srppp_xml_cur <- try(srppp_xml_get())
 # }
 ```

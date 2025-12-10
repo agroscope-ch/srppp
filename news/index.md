@@ -1,8 +1,23 @@
 # Changelog
 
-## version 1.2.0
+## version 2.0.0
 
-- Adapt to the new format of the XML file.
+- Adapt to the new format of the XML file. The changes are explained at
+  <https://www.blv.admin.ch/blv/de/home/zulassung-pflanzenschutzmittel/zugelassene-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis.html>
+- Due to UUIDs being used for cross-referencing instead of integer
+  identifiers, the corresponding identifier columns in several tables in
+  the `srppp_dm` objects have changed their type from integer to
+  character.
+- The culture tree constructed from the new version of the XML has
+  changed, among other changes the cultures `allg. Obstbau`,
+  `allg. Feldbau`, `allg. Gemüsebau` and similar are not defined any
+  more as parent cultures of any of the cultures listed. The
+  functionality of
+  [`resolve_cultures()`](https://agroscope-ch.github.io/srppp/reference/resolve_cultures.md)
+  and
+  [`alternative_products()`](https://agroscope-ch.github.io/srppp/reference/alternative_products.md)
+  is not yet adapted to this new situation and will give a warning when
+  working with a register read in from the new format.
 
 ## version 1.1.0 (CRAN release: 2025-07-07)
 

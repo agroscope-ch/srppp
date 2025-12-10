@@ -123,6 +123,7 @@ example_dataset_2 <- data.frame(
   pest_de = c("Birnblattsauger", "Kirschenfliege", "Blattläuse (Röhrenläuse)", "Spinnmilben"))
 
 resolve_cultures(example_dataset_1, sr)
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
 #>     substance_de pNbr use_nr application_area_de culture_de
 #> 1  Spirotetramat 7839      5             Obstbau      Birne
 #> 2  Spirotetramat 7839      7             Obstbau    Kirsche
@@ -148,6 +149,7 @@ resolve_cultures(example_dataset_1, sr)
 
 # Here we get NA for the leaf culture of "Kirschen"
 resolve_cultures(example_dataset_2, sr)
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
 #>     substance_de pNbr use_nr application_area_de culture_de
 #> 1  Spirotetramat 7839      5             Obstbau      Birne
 #> 2  Spirotetramat 7839      7             Obstbau   Kirschen
@@ -181,6 +183,7 @@ example_dataset_3 <- data.frame(
   pest_de = c("Blattläuse (Röhrenläuse)") )
 
 resolve_cultures(example_dataset_3, sr)
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
 #>    substance_de pNbr use_nr application_area_de culture_de
 #> 1    Pirimicarb 2210      3             Feldbau   Getreide
 #> 2    Pirimicarb 2210      3             Feldbau   Getreide
@@ -216,6 +219,7 @@ example_dataset_4 <- data.frame(substance_de = c("Metaldehyd"),
  culture_de = c("Zierpflanzen allg."), pest_de = c("Ackerschnecken/Deroceras Arten") )
 
 resolve_cultures(example_dataset_4, sr)
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
 #>    substance_de pNbr use_nr application_area_de         culture_de
 #> 1    Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen
 #> 2    Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen
@@ -264,6 +268,7 @@ example_dataset_5 <- data.frame(
     "Wegschnecken/Arion Arten","Gallmilben"))
 
  resolve_cultures(example_dataset_5, sr, resolve_culture_allg = FALSE)
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
 #>              substance_de pNbr use_nr application_area_de culture_de
 #> 1 Kupfer (als Oxychlorid)  585     12             Weinbau      allg.
 #> 2              Metaldehyd 1090      4             Obstbau      allg.
@@ -275,6 +280,7 @@ example_dataset_5 <- data.frame(
 #> 3     Wegschnecken/Arion Arten            <NA>
 #> 4                   Gallmilben       Brombeere
  resolve_cultures(example_dataset_5, sr)
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
 #>                 substance_de pNbr use_nr application_area_de
 #> 1                   Schwefel   38      1           Beerenbau
 #> 2    Kupfer (als Oxychlorid)  585     12             Weinbau
@@ -5049,7 +5055,7 @@ example_dataset_5 <- data.frame(
 #> 1192                                                           Jostabeere
 
 # Illustrate the resolution of "Obstbau allg.", which does not have children in
-# the XML files, but which should have children, because Obstbau allg. is 
+# the XML files, but which should have children, because Obstbau allg. is
 # not a leaf culture.
 example_dataset_6 <- data.frame(
   substance_de = c("Schwefel"),
@@ -5061,12 +5067,14 @@ example_dataset_6 <- data.frame(
 
  resolve_cultures(example_dataset_6, sr,
    correct_culture_names = FALSE)
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
 #>   substance_de pNbr use_nr application_area_de    culture_de
 #> 1     Schwefel 3561      4             Obstbau Obstbau allg.
 #>                pest_de leaf_culture_de
 #> 1 Wühl- oder Schermaus            <NA>
  resolve_cultures(example_dataset_6, sr,
    correct_culture_names = TRUE)
+#> Warning: Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly
 #>   substance_de pNbr use_nr application_area_de    culture_de
 #> 1     Schwefel 3561      4             Obstbau allg. Obstbau
 #>                pest_de leaf_culture_de
