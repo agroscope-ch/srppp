@@ -1,70 +1,11 @@
 ℹ Testing srppp
 ✔ | F W  S  OK | Context
-✖ | 2        5 | alternative_products [1.2s]
-────────────────────────────────────────────────────────────────────────────────
-Failure ('test-alternative_products.R:9:3'): Alternative products are found
-Expected `nrow(lambda_delta_gaps_2)` to equal 128L.
-Differences:
-  `actual`: 166
-`expected`: 128
-
-
-Failure ('test-alternative_products.R:17:3'): Alternative products are found
-Expected `nrow(lambda_delta_gaps_resolved_2)` to equal 110L.
-Differences:
-  `actual`: 165
-`expected`: 110
-
-────────────────────────────────────────────────────────────────────────────────
-✖ | 2       10 | resolve_cultures
-────────────────────────────────────────────────────────────────────────────────
-Failure ('test-resolve_cultures.R:64:3'): Resolving cultures to highest detail works
-Expected `nrow(result_3.2)` to equal 10.
-Differences:
-  `actual`: 13.0
-`expected`: 10.0
-
-
-Failure ('test-resolve_cultures.R:78:3'): Resolving cultures to highest detail works
-Expected `nrow(result_4.2)` to equal 28.
-Differences:
-  `actual`: 17.0
-`expected`: 28.0
-
-────────────────────────────────────────────────────────────────────────────────
+✔ |          9 | alternative_products
+✔ |         18 | resolve_cultures
 ✔ |          5 | srppp_xml [2.7s]
 ✔ |          5 | use_rates
 
 ══ Results ═════════════════════════════════════════════════════════════════════
-Duration: 4.2 s
+Duration: 3.9 s
 
-── Failed tests ────────────────────────────────────────────────────────────────
-Failure ('test-alternative_products.R:9:3'): Alternative products are found
-Expected `nrow(lambda_delta_gaps_2)` to equal 128L.
-Differences:
-  `actual`: 166
-`expected`: 128
-
-
-Failure ('test-alternative_products.R:17:3'): Alternative products are found
-Expected `nrow(lambda_delta_gaps_resolved_2)` to equal 110L.
-Differences:
-  `actual`: 165
-`expected`: 110
-
-
-Failure ('test-resolve_cultures.R:64:3'): Resolving cultures to highest detail works
-Expected `nrow(result_3.2)` to equal 10.
-Differences:
-  `actual`: 13.0
-`expected`: 10.0
-
-
-Failure ('test-resolve_cultures.R:78:3'): Resolving cultures to highest detail works
-Expected `nrow(result_4.2)` to equal 28.
-Differences:
-  `actual`: 17.0
-`expected`: 28.0
-
-
-[ FAIL 4 | WARN 0 | SKIP 0 | PASS 25 ]
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 37 ]

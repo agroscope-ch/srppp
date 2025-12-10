@@ -16,9 +16,11 @@ test_that("Resolving cultures to highest detail works", {
       "Apfel", "Quitte", "Birne"))
 
   # Repeat with test data in the updated format
-  result_1.2 <- resolve_cultures(example_dataset_1, srppp_test_2)
+  expect_warning({
+    result_1_2 <- resolve_cultures(example_dataset_1, srppp_test_2)
+  }, "experimental")
 
-  expect_setequal(result_1.2$leaf_culture_de,
+  expect_setequal(result_1_2$leaf_culture_de,
     c("Birne", "Kirsche",
       "Aprikose", "Kirsche", "Pfirsich / Nektarine", "Pflaume", "Zwetschge",
       "Apfel", "Quitte", "Birne"))
@@ -40,9 +42,11 @@ test_that("Resolving cultures to highest detail works", {
       "Apfel", "Quitte", "Birne"))
 
   # Repeat with test data in the updated format
-  result_2.2 <- resolve_cultures(example_dataset_2, srppp_test_2)
+  expect_warning({
+    result_2_2 <- resolve_cultures(example_dataset_2, srppp_test_2)
+  }, "experimental")
 
-  expect_setequal(result_2.2$leaf_culture_de,
+  expect_setequal(result_2_2$leaf_culture_de,
     c("Birne", NA,
       "Aprikose", "Kirsche", "Pfirsich / Nektarine", "Pflaume", "Zwetschge",
       "Apfel", "Quitte", "Birne"))
@@ -60,10 +64,12 @@ test_that("Resolving cultures to highest detail works", {
   expect_equal(nrow(result_3), 10)
 
   # Repeat with test data in the updated format
-  result_3.2 <- resolve_cultures(example_dataset_3, srppp_test_2)
-  expect_equal(nrow(result_3.2), 10)
+  expect_warning({
+    result_3_2 <- resolve_cultures(example_dataset_3, srppp_test_2)
+  }, "experimental")
+  expect_equal(nrow(result_3_2), 13)
   # We have three more leaf cultures for "Getreide" in the new format
-  setdiff(result_3.2$leaf_culture_de, result_3$leaf_culture_de)
+  #setdiff(result_3_2$leaf_culture_de, result_3$leaf_culture_de)
 
   # Example resolving ornamental plants ("Zierpflanzen")
   example_dataset_4 <- data.frame(substance_de = c("Metaldehyd"),
@@ -74,12 +80,17 @@ test_that("Resolving cultures to highest detail works", {
   expect_equal(nrow(result_4), 28)
 
   # Repeat with test data in the updated format
-  result_4.2 <- resolve_cultures(example_dataset_4, srppp_test_2)
-  expect_equal(nrow(result_4.2), 28)
+  expect_warning({
+    result_4_2 <- resolve_cultures(example_dataset_4, srppp_test_2)
+  }, "experimental")
 
-  setdiff(result_4.2$leaf_culture_de, result_4$leaf_culture_de)
-  # It seems a lot of cultures were removed from the new format:
-  setdiff(result_4$leaf_culture_de, result_4.2$leaf_culture_de)
+  # We have two new leaf cultures for "Zierpflanzen allg."
+  #setdiff(result_4.2$leaf_culture_de, result_4$leaf_culture_de)
+  # The new culture tree does not have the following leaf cultures any more
+  # for "Zierpflanzen allg.":
+  #setdiff(result_4$leaf_culture_de, result_4.2$leaf_culture_de)
+
+  expect_equal(nrow(result_4_2), 17)
 
   # Illustrate the resolution of the culture "allg."
   example_dataset_5 <- data.frame(
@@ -97,6 +108,19 @@ test_that("Resolving cultures to highest detail works", {
   results_5b <- resolve_cultures(example_dataset_5, srppp_test_1,
     resolve_culture_allg = TRUE)
   expect_equal(nrow(results_5b), 23)
+
+  # Repeat with new format
+  expect_warning({
+    results_5a_2 <- resolve_cultures(example_dataset_5, srppp_test_2,
+      resolve_culture_allg = FALSE)
+  }, "experimental")
+  expect_equal(results_5a_2$leaf_culture_de, c(NA, NA, NA, "Brombeere"))
+
+  # The following does not work correctly at the moment, because
+  # the application area is not found in the culture tree
+  #results_5b_2 <- resolve_cultures(example_dataset_5, srppp_test_2,
+  #  resolve_culture_allg = TRUE)
+  #expect_equal(nrow(results_5b_2), 23)
 
   # Illustrate the resolution of "Obstbau allg.", which does not have children in
   # the XML files, but which should have children, because Obstbau allg. is

@@ -25,7 +25,7 @@ srppp_xml_get <- function(from, ...)
 #' @examples
 #' # Try to get the current SRPPP as available from the FOAG website
 #' \donttest{
-#' srppp_cur <- try(srppp_xml_get())
+#' srppp_xml_cur <- try(srppp_xml_get())
 #' }
 srppp_xml_get.NULL <- function(from, ...)
 {
@@ -68,9 +68,9 @@ srppp_xml_get_from_path <- function(path, from) {
     "Products/Product/ProductInformation/Ingredient/SubstanceType")
 
   if (is.na(xml_attr(substance_type_node, "SubstanceType"))) {
-    attr(ret, "version") <- 1
+    attr(ret, "srppp_xml_version") <- 1
   } else {
-    attr(ret, "version") <- 2
+    attr(ret, "srppp_xml_version") <- 2
   }
 
   # Attach the "from" information as well
@@ -925,6 +925,7 @@ srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE, verbose = T
 
     attr(srppp_dm, "from") <- attr(srppp_xml, "from")
     attr(srppp_dm, "culture_tree") <- culture_tree
+    attr(srppp_dm, "srppp_xml_version") <- attr(srppp_xml, "srppp_xml_version")
     class(srppp_dm) <- c("srppp_dm", "dm")
     return(srppp_dm)
 }
