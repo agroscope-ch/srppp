@@ -40,8 +40,5 @@ An object inheriting from 'srppp_xml', 'xml_document', 'xml_node'
 # Try to get the current SRPPP as available from the FOAG website
 # \donttest{
 srppp_xml_cur <- try(srppp_xml_get())
-#> Warning: URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip': status was 'Failure when receiving data from the peer'
-#> Error in download.file(from, path) : 
-#>   cannot open URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip'
 # }
 ```

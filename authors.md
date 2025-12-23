@@ -20,7 +20,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/agroscope-ch/srppp/blob/v2.0.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/agroscope-ch/srppp/blob/main/DESCRIPTION)
 
 Ranke J (2025). *srppp: Read the Swiss Register of Plant Protection
 Products*. R package version 2.0.0,
