@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">srppp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,7 @@
 Ranke</h4>
             
             <h4 data-toc-skip class="date">17 July 2025 (rebuilt
-2025-12-23)</h4>
+2026-01-07)</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agroscope-ch/srppp/blob/main/vignettes/srppp.rmd" class="external-link"><code>vignettes/srppp.rmd</code></a></small>
       <div class="d-none name"><code>srppp.rmd</code></div>
@@ -203,12 +203,12 @@ as illustrated by the first five rows shown below.</p>
 <table class="table">
 <colgroup>
 <col width="3%">
-<col width="27%">
-<col width="3%">
+<col width="25%">
+<col width="12%">
 <col width="5%">
 <col width="5%">
-<col width="24%">
-<col width="28%">
+<col width="22%">
+<col width="25%">
 </colgroup>
 <thead><tr class="header">
 <th align="right">pNbr</th>
@@ -223,7 +223,7 @@ as illustrated by the first five rows shown below.</p>
 <tr class="odd">
 <td align="right">38</td>
 <td align="left">D95F01F3-9ED2-4D08-92FD-A58AF1B5F49F</td>
-<td align="left"></td>
+<td align="left">ACTIVE_INGREDIENT</td>
 <td align="right">80.00</td>
 <td align="right"></td>
 <td align="left"></td>
@@ -232,7 +232,7 @@ as illustrated by the first five rows shown below.</p>
 <tr class="even">
 <td align="right">1182</td>
 <td align="left">057FC3E0-B59E-45EB-8CCB-B2EA4527E479</td>
-<td align="left"></td>
+<td align="left">ACTIVE_INGREDIENT</td>
 <td align="right">38.00</td>
 <td align="right">438.5</td>
 <td align="left">entspricht 34.7 % MCPB (400g/L)</td>
@@ -241,7 +241,7 @@ as illustrated by the first five rows shown below.</p>
 <tr class="odd">
 <td align="right">1192</td>
 <td align="left">057FC3E0-B59E-45EB-8CCB-B2EA4527E479</td>
-<td align="left"></td>
+<td align="left">ACTIVE_INGREDIENT</td>
 <td align="right">38.00</td>
 <td align="right">438.5</td>
 <td align="left">entspricht 34.7 % MCPB (400 g/L)</td>
@@ -250,7 +250,7 @@ as illustrated by the first five rows shown below.</p>
 <tr class="even">
 <td align="right">1263</td>
 <td align="left">D95F01F3-9ED2-4D08-92FD-A58AF1B5F49F</td>
-<td align="left"></td>
+<td align="left">ACTIVE_INGREDIENT</td>
 <td align="right">80.00</td>
 <td align="right"></td>
 <td align="left"></td>
@@ -259,7 +259,7 @@ as illustrated by the first five rows shown below.</p>
 <tr class="odd">
 <td align="right">1865</td>
 <td align="left">1D7FC783-1AA4-47FD-B973-83867751B87B</td>
-<td align="left"></td>
+<td align="left">ACTIVE_INGREDIENT</td>
 <td align="right">99.16</td>
 <td align="right">830.0</td>
 <td align="left"></td>
@@ -282,10 +282,24 @@ quite different.</p>
 <th align="left">type</th>
 <th align="right">n</th>
 </tr></thead>
-<tbody><tr class="odd">
-<td align="left"></td>
-<td align="right">442</td>
-</tr></tbody>
+<tbody>
+<tr class="odd">
+<td align="left">ACTIVE_INGREDIENT</td>
+<td align="right">325</td>
+</tr>
+<tr class="even">
+<td align="left">ADDITIVE_TO_DECLARE</td>
+<td align="right">111</td>
+</tr>
+<tr class="odd">
+<td align="left">SAFENER</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">SYNERGIST</td>
+<td align="right">2</td>
+</tr>
+</tbody>
 </table>
 <p>Additives to declare are additives that have an effect on
 classification and labelling of the product. All substances occurring as
@@ -305,7 +319,38 @@ synergists or safeners are listed below.</p>
 <th align="left">substance_de</th>
 <th align="right">n</th>
 </tr></thead>
-<tbody></tbody>
+<tbody>
+<tr class="odd">
+<td align="left">SAFENER</td>
+<td align="left">Cloquintocet-mexyl</td>
+<td align="right">17</td>
+</tr>
+<tr class="even">
+<td align="left">SAFENER</td>
+<td align="left">Cyprosulfamid</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">SAFENER</td>
+<td align="left">Isoxadifen-ethyl</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">SAFENER</td>
+<td align="left">Mefenpyr-diethyl</td>
+<td align="right">10</td>
+</tr>
+<tr class="odd">
+<td align="left">SYNERGIST</td>
+<td align="left">Piperonyl butoxid</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="left">SYNERGIST</td>
+<td align="left">Sesamöl raffiniert</td>
+<td align="right">1</td>
+</tr>
+</tbody>
 </table>
 <p>Note that the first two lines in the code could also be replaced
 by</p>

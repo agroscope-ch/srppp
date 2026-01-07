@@ -22,14 +22,14 @@
 Source:
 [`DESCRIPTION`](https://github.com/agroscope-ch/srppp/blob/main/DESCRIPTION)
 
-Ranke J (2025). *srppp: Read the Swiss Register of Plant Protection
-Products*. R package version 2.0.0,
+Ranke J (2026). *srppp: Read the Swiss Register of Plant Protection
+Products*. R package version 2.0.1,
 <https://agroscope-ch.github.io/srppp/>.
 
     @Manual{,
       title = {srppp: Read the Swiss Register of Plant Protection Products},
       author = {Johannes Ranke},
-      year = {2025},
-      note = {R package version 2.0.0},
+      year = {2026},
+      note = {R package version 2.0.1},
       url = {https://agroscope-ch.github.io/srppp/},
     }

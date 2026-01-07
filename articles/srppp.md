@@ -104,13 +104,13 @@ example_register$ingredients |>
   kable()
 ```
 
-| pNbr | pk                                   | type | percent | g_per_L | ingredient_de                    | ingredient_fr                         |
-|-----:|:-------------------------------------|:-----|--------:|--------:|:---------------------------------|:--------------------------------------|
-|   38 | D95F01F3-9ED2-4D08-92FD-A58AF1B5F49F |      |   80.00 |         |                                  |                                       |
-| 1182 | 057FC3E0-B59E-45EB-8CCB-B2EA4527E479 |      |   38.00 |   438.5 | entspricht 34.7 % MCPB (400g/L)  | correspond à 34.7 % de MCPB (400 g/L) |
-| 1192 | 057FC3E0-B59E-45EB-8CCB-B2EA4527E479 |      |   38.00 |   438.5 | entspricht 34.7 % MCPB (400 g/L) | correspond à 34,7 % de MCPB (400 g/L) |
-| 1263 | D95F01F3-9ED2-4D08-92FD-A58AF1B5F49F |      |   80.00 |         |                                  |                                       |
-| 1865 | 1D7FC783-1AA4-47FD-B973-83867751B87B |      |   99.16 |   830.0 |                                  |                                       |
+| pNbr | pk                                   | type              | percent | g_per_L | ingredient_de                    | ingredient_fr                         |
+|-----:|:-------------------------------------|:------------------|--------:|--------:|:---------------------------------|:--------------------------------------|
+|   38 | D95F01F3-9ED2-4D08-92FD-A58AF1B5F49F | ACTIVE_INGREDIENT |   80.00 |         |                                  |                                       |
+| 1182 | 057FC3E0-B59E-45EB-8CCB-B2EA4527E479 | ACTIVE_INGREDIENT |   38.00 |   438.5 | entspricht 34.7 % MCPB (400g/L)  | correspond à 34.7 % de MCPB (400 g/L) |
+| 1192 | 057FC3E0-B59E-45EB-8CCB-B2EA4527E479 | ACTIVE_INGREDIENT |   38.00 |   438.5 | entspricht 34.7 % MCPB (400 g/L) | correspond à 34,7 % de MCPB (400 g/L) |
+| 1263 | D95F01F3-9ED2-4D08-92FD-A58AF1B5F49F | ACTIVE_INGREDIENT |   80.00 |         |                                  |                                       |
+| 1865 | 1D7FC783-1AA4-47FD-B973-83867751B87B | ACTIVE_INGREDIENT |   99.16 |   830.0 |                                  |                                       |
 
 The frequency of occurrence of the four different ingredient types is
 quite different.
@@ -125,9 +125,12 @@ example_register$ingredients |>
   kable()
 ```
 
-| type |   n |
-|:-----|----:|
-|      | 442 |
+| type                |   n |
+|:--------------------|----:|
+| ACTIVE_INGREDIENT   | 325 |
+| ADDITIVE_TO_DECLARE | 111 |
+| SAFENER             |   4 |
+| SYNERGIST           |   2 |
 
 Additives to declare are additives that have an effect on classification
 and labelling of the product. All substances occurring as synergists or
@@ -144,8 +147,14 @@ example_register$ingredients |>
   kable()
 ```
 
-| type | substance_de | n   |
-|------|--------------|-----|
+| type      | substance_de       |   n |
+|:----------|:-------------------|----:|
+| SAFENER   | Cloquintocet-mexyl |  17 |
+| SAFENER   | Cyprosulfamid      |   2 |
+| SAFENER   | Isoxadifen-ethyl   |   3 |
+| SAFENER   | Mefenpyr-diethyl   |  10 |
+| SYNERGIST | Piperonyl butoxid  |   6 |
+| SYNERGIST | Sesamöl raffiniert |   1 |
 
 Note that the first two lines in the code could also be replaced by
 
