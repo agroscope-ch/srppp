@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">srppp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,12 +66,12 @@ in the XML file.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Try to get current list of parallel_imports</span></span></span>
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">srppp_xml_get_parallel_imports</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 778 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 770 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    id     wNbr  name   admissionnumber producingCountryPrim…¹ exhaustionDeadline</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> D-7492 1526  Proma… 008719-60       56cce907-f002-4b0c-b9… <span style="color: #949494;">""</span>                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> I-2789 1899  Pirim… 4701            be1d323d-29e4-4570-86… <span style="color: #949494;">""</span>                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> F-7056 1899  Life … 2159999         c3ffe09f-f38f-42b3-86… <span style="color: #949494;">""</span>                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> F-7056 1899  Life … 2159999         c3ffe09f-f38f-42b3-86… <span style="color: #949494;">""</span>                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> I-2789 1899  Pirim… 4701            be1d323d-29e4-4570-86… <span style="color: #949494;">""</span>                </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> F-3632 2054  Basam… 6800403         c3ffe09f-f38f-42b3-86… <span style="color: #949494;">""</span>                </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> B-5440 2054  Basam… 5675P/B         9e495cc6-2d2c-4e76-b1… <span style="color: #949494;">""</span>                </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> I-6151 2054  Basam… 1573            be1d323d-29e4-4570-86… <span style="color: #949494;">""</span>                </span>
@@ -79,7 +79,7 @@ in the XML file.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> F-2010 2671  Fluid… 5100219         c3ffe09f-f38f-42b3-86… <span style="color: #949494;">""</span>                </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> I-5565 3002  Dazid… 012455          be1d323d-29e4-4570-86… <span style="color: #949494;">""</span>                </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> F-7416 3003  Rhodo… 7400755         c3ffe09f-f38f-42b3-86… <span style="color: #949494;">""</span>                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 768 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 760 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ abbreviated name: ¹​producingCountryPrimaryKey</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: soldoutDeadline &lt;chr&gt;, pNbr &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   permission_holder &lt;chr&gt;</span></span>

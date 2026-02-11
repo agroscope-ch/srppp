@@ -25,7 +25,7 @@ containing a line for each ingredient of each W-Number
 ``` r
 # \donttest{
 try(srppp_xml_get_ingredients())
-#> # A tibble: 1,851 × 9
+#> # A tibble: 1,835 × 9
 #>    wNbr  pk      type  percent g_per_L ingredient_de ingredient_fr ingredient_it
 #>    <chr> <chr>   <chr>   <dbl>   <dbl> <chr>         <chr>         <chr>        
 #>  1 1454  1D7FC7… ACTI…    99.2    830  NA            NA            NA           
@@ -38,7 +38,7 @@ try(srppp_xml_get_ingredients())
 #>  8 1899  A2DD53… ACTI…    50       NA  NA            NA            NA           
 #>  9 193   9B6470… ACTI…    84       NA  entspricht 5… correspond à… pari al 50 %…
 #> 10 2008  1D7FC7… ACTI…    99.2    830  NA            NA            NA           
-#> # ℹ 1,841 more rows
+#> # ℹ 1,825 more rows
 #> # ℹ 1 more variable: ingredient_en <chr>
 # }
 ```

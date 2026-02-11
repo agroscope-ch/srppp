@@ -48,7 +48,7 @@ applicable, or NULL.
 # Try to get current list of products
 # \donttest{
 try(srppp_xml_get_products())
-#> # A tibble: 1,740 × 8
+#> # A tibble: 1,731 × 8
 #>     pNbr wNbr  name          exhaustionDeadline soldoutDeadline isSalePermission
 #>    <int> <chr> <chr>         <chr>              <chr>           <lgl>           
 #>  1    38 18    Thiovit Jet   ""                 ""              FALSE           
@@ -61,7 +61,7 @@ try(srppp_xml_get_products())
 #>  8  1192 934   Trifolin      ""                 ""              FALSE           
 #>  9  1263 986   Elosal Supra  ""                 ""              FALSE           
 #> 10  1865 1454  Misto 12      ""                 ""              FALSE           
-#> # ℹ 1,730 more rows
+#> # ℹ 1,721 more rows
 #> # ℹ 2 more variables: terminationReason <chr>, permission_holder <chr>
 # }
 ```

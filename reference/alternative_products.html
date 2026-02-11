@@ -13,7 +13,7 @@ alternatives, or a list containing these three tables."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">srppp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -150,13 +150,11 @@ area, crop an pathogen.</p>
 <span class="r-in"><span><span class="co"># Examples with two active substances</span></span></span>
 <span class="r-in"><span><span class="va">actives_de</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Lambda-Cyhalothrin"</span>, <span class="st">"Deltamethrin"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">sr</span>, <span class="va">actives_de</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 841 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 934 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de   pest_de                        n_wNbr n_pNbr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Beerenbau           Erdbeere     Erdbeer- oder Himbeerblütenst…     17      7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Beerenbau           Erdbeere     Thripse                            33     17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Beerenbau           Erdbeere     Thripse                            38     22</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Beerenbau           Himbeere     Erdbeer- oder Himbeerblütenst…     11      3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Beerenbau           Himbeere     Himbeerkäfer                       11      3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Feldbau             Ackerbohne   Erdraupen                           6      4</span>
@@ -165,7 +163,7 @@ area, crop an pathogen.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Feldbau             Eiweisserbse Erdraupen                           6      4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Feldbau             Emmer        Erdraupen                           6      4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Feldbau             Emmer        Gelbe Getreidehalmfliege            6      4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 831 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 924 more rows</span></span>
 <span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">sr</span>, <span class="va">actives_de</span>, resolve_cultures <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 527 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de              pest_de             n_wNbr n_pNbr</span>
@@ -182,64 +180,58 @@ area, crop an pathogen.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Feldbau             Futter- und Zuckerrüben Erdraupen                6      4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 517 more rows</span></span>
 <span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">sr</span>, <span class="va">actives_de</span>, missing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 165 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de                       pest_de                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Feldbau             Eiweisserbse                     Erbsenblattrandkäfer    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Feldbau             Zuckerrübe                       Rübenfliege             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Feldbau             Futterrübe                       Rübenfliege             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Feldbau             Roggen                           Virusübertragende Blatt…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Feldbau             Winterweizen                     Virusübertragende Blatt…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Feldbau             Emmer                            Virusübertragende Blatt…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Feldbau             Sommerweizen                     Virusübertragende Blatt…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Feldbau             Sommergerste                     Virusübertragende Blatt…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Feldbau             Sommerhafer                      Virusübertragende Blatt…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Feldbau             Lagerhallen, Mühlen, Silogebäude Vorratsschädlinge       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 155 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 110 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de                       pest_de              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Feldbau             Eiweisserbse                     Erbsenblattrandkäfer </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Feldbau             Zuckerrübe                       Rübenfliege          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Feldbau             Futterrübe                       Rübenfliege          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Feldbau             Lagerhallen, Mühlen, Silogebäude Vorratsschädlinge    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Feldbau             Mais                             Fritfliege           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Feldbau             Sojabohne                        Distelfalter         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Gemüsebau           Asia-Salate (Brassicaceae)       Kohldrehherzgallmücke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Gemüsebau           Asia-Salate (Brassicaceae)       Kohlschabe           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Gemüsebau           Baby-Leaf (Asteraceae)           Minierfliegen        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Gemüsebau           Baby-Leaf (Brassicaceae)         Kohldrehherzgallmücke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 100 more rows</span></span>
 <span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">sr</span>, <span class="va">actives_de</span>, details <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 21,889 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 39,728 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de pest_de                pNbr wNbr  use_nr type </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">4</span>426 4343       5 PEST…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">4</span>568 4491      18 PEST…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">4</span>568 4491…     18 PEST…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">4</span>568 4491      12 PEST…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">4</span>568 4491…     12 PEST…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">7</span>036 6020      71 PEST…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">7</span>036 6020…     71 PEST…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">7</span>036 6020…     71 PEST…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">8</span>464 7133      35 PEST…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">8</span>464 7133…     35 PEST…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">8</span>464 7133…     35 PEST…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">8</span>464 7133      30 PEST…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">8</span>464 7133…     30 PEST…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">8</span>464 7133…     30 PEST…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">8</span>800 7106       7 PEST…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 21,879 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 39,718 more rows</span></span>
 <span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">sr</span>, <span class="va">actives_de</span>, list <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`No alternative`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 165 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de                       pest_de                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Feldbau             Eiweisserbse                     Erbsenblattrandkäfer    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Feldbau             Zuckerrübe                       Rübenfliege             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Feldbau             Futterrübe                       Rübenfliege             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Feldbau             Roggen                           Virusübertragende Blatt…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Feldbau             Winterweizen                     Virusübertragende Blatt…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Feldbau             Emmer                            Virusübertragende Blatt…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Feldbau             Sommerweizen                     Virusübertragende Blatt…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Feldbau             Sommergerste                     Virusübertragende Blatt…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Feldbau             Sommerhafer                      Virusübertragende Blatt…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Feldbau             Lagerhallen, Mühlen, Silogebäude Vorratsschädlinge       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 155 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 110 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de                       pest_de              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Feldbau             Eiweisserbse                     Erbsenblattrandkäfer </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Feldbau             Zuckerrübe                       Rübenfliege          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Feldbau             Futterrübe                       Rübenfliege          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Feldbau             Lagerhallen, Mühlen, Silogebäude Vorratsschädlinge    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Feldbau             Mais                             Fritfliege           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Feldbau             Sojabohne                        Distelfalter         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Gemüsebau           Asia-Salate (Brassicaceae)       Kohldrehherzgallmücke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Gemüsebau           Asia-Salate (Brassicaceae)       Kohlschabe           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Gemüsebau           Baby-Leaf (Asteraceae)           Minierfliegen        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Gemüsebau           Baby-Leaf (Brassicaceae)         Kohldrehherzgallmücke</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 100 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`Number of alternatives`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 841 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 934 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de   pest_de                        n_wNbr n_pNbr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Beerenbau           Erdbeere     Erdbeer- oder Himbeerblütenst…     17      7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Beerenbau           Erdbeere     Thripse                            33     17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Beerenbau           Erdbeere     Thripse                            38     22</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Beerenbau           Himbeere     Erdbeer- oder Himbeerblütenst…     11      3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Beerenbau           Himbeere     Himbeerkäfer                       11      3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Feldbau             Ackerbohne   Erdraupen                           6      4</span>
@@ -248,23 +240,23 @@ area, crop an pathogen.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Feldbau             Eiweisserbse Erdraupen                           6      4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Feldbau             Emmer        Erdraupen                           6      4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Feldbau             Emmer        Gelbe Getreidehalmfliege            6      4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 831 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 924 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`Alternative uses`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 21,889 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 39,728 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de pest_de                pNbr wNbr  use_nr type </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">4</span>426 4343       5 PEST…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">4</span>568 4491      18 PEST…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">4</span>568 4491…     18 PEST…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">4</span>568 4491      12 PEST…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">4</span>568 4491…     12 PEST…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">7</span>036 6020      71 PEST…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">7</span>036 6020…     71 PEST…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">7</span>036 6020…     71 PEST…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">8</span>464 7133      35 PEST…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">8</span>464 7133…     35 PEST…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">8</span>464 7133…     35 PEST…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">8</span>464 7133      30 PEST…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">8</span>464 7133…     30 PEST…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">8</span>464 7133…     30 PEST…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Beerenbau           Erdbeere   Erdbeer- oder Himbee…  <span style="text-decoration: underline;">8</span>800 7106       7 PEST…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 21,879 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 39,718 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Examples resolving cultures</span></span></span>
@@ -290,21 +282,19 @@ area, crop an pathogen.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 119 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de    pest_de          pNbr wNbr   use_nr type   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>051 6098        6 PEST_F…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>051 6098-1      6 PEST_F…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>051 6098-2      6 PEST_F…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>051 6098       53 PEST_F…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>051 6098-1     53 PEST_F…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>051 6098-2     53 PEST_F…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>169 6148        1 PEST_P…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>291 6107        4 PEST_F…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>291 6107-1      4 PEST_F…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>291 6107-2      4 PEST_F…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>291 6107-3      4 PEST_F…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>441 6382       10 PEST_F…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>291 6107        6 PEST_F…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>291 6107-1      6 PEST_F…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>291 6107-2      6 PEST_F…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>291 6107-3      6 PEST_F…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>441 6382       11 PEST_F…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Obstbau             Birne / Nashi Birnblattsauger  <span style="text-decoration: underline;">7</span>511 6432        2 PEST_F…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 109 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">sr</span>, <span class="va">actives_de</span>, resolve_cultures <span class="op">=</span> <span class="cn">TRUE</span>, list <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`No alternative`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   application_area_de culture_de pest_de                    </span>
@@ -317,35 +307,35 @@ area, crop an pathogen.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 13 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de pest_de                     n_wNbr n_pNbr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Obstbau             Apfel      Apfelwickler                    27     19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Obstbau             Apfel      Apfelwickler                    39     27</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Obstbau             Apfel      Eulenraupen (blattfressend)      0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Obstbau             Apfel      Frostspanner                    44     18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Obstbau             Apfel      Schalenwickler                  28     12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Obstbau             Birne      Apfelwickler                    26     18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Obstbau             Apfel      Frostspanner                    60     26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Obstbau             Apfel      Schalenwickler                  30     14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Obstbau             Birne      Apfelwickler                    38     26</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Obstbau             Birne      Birnblattsauger                 39     24</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Obstbau             Birne      Eulenraupen (blattfressend)      0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Obstbau             Birne      Frostspanner                    44     18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Obstbau             Birne      Schalenwickler                  28     12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Obstbau             Quitte     Apfelwickler                    18     14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Obstbau             Birne      Frostspanner                    60     26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Obstbau             Birne      Schalenwickler                  30     14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Obstbau             Quitte     Apfelwickler                    30     22</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> Obstbau             Quitte     Eulenraupen (blattfressend)      0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> Obstbau             Quitte     Frostspanner                    38     16</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> Obstbau             Quitte     Schalenwickler                  22     10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> Obstbau             Quitte     Frostspanner                    54     24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> Obstbau             Quitte     Schalenwickler                  24     12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`Alternative uses`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 336 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 426 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de pest_de          pNbr wNbr   use_nr type      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>051 6098        6 PEST_FULL…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>051 6098-1      6 PEST_FULL…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>051 6098-2      6 PEST_FULL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>051 6098       53 PEST_FULL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>051 6098-1     53 PEST_FULL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>051 6098-2     53 PEST_FULL…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>169 6148        1 PEST_PART…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>291 6107        4 PEST_FULL…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>291 6107-1      4 PEST_FULL…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>291 6107-2      4 PEST_FULL…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>291 6107-3      4 PEST_FULL…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>441 6382       10 PEST_FULL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>291 6107        6 PEST_FULL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>291 6107-1      6 PEST_FULL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>291 6107-2      6 PEST_FULL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>291 6107-3      6 PEST_FULL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>441 6382       11 PEST_FULL…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Obstbau             Birne      Birnblattsauger  <span style="text-decoration: underline;">7</span>511 6432        2 PEST_FULL…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 326 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 416 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">actives_de</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Schalenwicklergranulose-Virus"</span><span class="op">)</span></span></span>
@@ -367,23 +357,40 @@ area, crop an pathogen.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Obstbau             Obstbau allg. Schalenwickler  <span style="text-decoration: underline;">7</span>545 6362       1 PEST_FULL…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">sr</span>, <span class="va">actives_de</span>, resolve_cultures <span class="op">=</span> <span class="cn">TRUE</span>, list <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`No alternative`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 variables: application_area_de &lt;chr&gt;, culture_de &lt;chr&gt;, pest_de &lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`Number of alternatives`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   application_area_de culture_de pest_de        n_wNbr n_pNbr</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Obstbau             <span style="color: #BB0000;">NA</span>         Schalenwickler      1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de           pest_de        n_wNbr n_pNbr</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Obstbau             Apfel                Schalenwickler     30     14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Obstbau             Aprikose             Schalenwickler     19     10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Obstbau             Birne                Schalenwickler     30     14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Obstbau             Kirsche              Schalenwickler     25     12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Obstbau             Olive                Schalenwickler      1      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Obstbau             Pfirsich / Nektarine Schalenwickler     19     10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Obstbau             Pflaume              Schalenwickler     25     12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Obstbau             Quitte               Schalenwickler     24     12</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Obstbau             Walnuss              Schalenwickler      3      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Obstbau             Zwetschge            Schalenwickler     25     12</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`Alternative uses`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   application_area_de culture_de pest_de         pNbr wNbr  use_nr type         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Obstbau             <span style="color: #BB0000;">NA</span>         Schalenwickler  <span style="text-decoration: underline;">7</span>545 6362       1 PEST_FULL_EF…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 222 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de pest_de         pNbr wNbr   use_nr type       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Obstbau             Olive      Schalenwickler  <span style="text-decoration: underline;">7</span>545 6362        1 PEST_FULL_…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Obstbau             Quitte     Schalenwickler  <span style="text-decoration: underline;">7</span>074 6144        2 PEST_FULL_…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Obstbau             Quitte     Schalenwickler  <span style="text-decoration: underline;">7</span>545 6362        1 PEST_FULL_…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Obstbau             Quitte     Schalenwickler  <span style="text-decoration: underline;">7</span>808 6748        1 PEST_FULL_…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Obstbau             Quitte     Schalenwickler  <span style="text-decoration: underline;">7</span>808 6748        4 PEST_FULL_…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Obstbau             Quitte     Schalenwickler  <span style="text-decoration: underline;">7</span>808 6748-1      1 PEST_FULL_…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Obstbau             Quitte     Schalenwickler  <span style="text-decoration: underline;">7</span>808 6748-1      4 PEST_FULL_…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Obstbau             Quitte     Schalenwickler  <span style="text-decoration: underline;">7</span>808 6748-2      1 PEST_FULL_…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Obstbau             Quitte     Schalenwickler  <span style="text-decoration: underline;">7</span>808 6748-2      4 PEST_FULL_…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Obstbau             Quitte     Schalenwickler  <span style="text-decoration: underline;">7</span>808 6748-3      1 PEST_FULL_…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 212 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">actives_de</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Emamectinbenzoat"</span><span class="op">)</span></span></span>
@@ -417,24 +424,22 @@ area, crop an pathogen.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 20 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`Alternative uses`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 287 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 288 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de   pest_de        pNbr wNbr   use_nr type      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>051 6098       13 PEST_FULL…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>051 6098-1     13 PEST_FULL…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>051 6098-2     13 PEST_FULL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>051 6098        6 PEST_FULL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>051 6098-1      6 PEST_FULL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>051 6098-2      6 PEST_FULL…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>441 6382        1 PEST_FULL…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>522 6381       16 PEST_FULL…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>522 6381-1     16 PEST_FULL…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">8</span>580 6998       28 PEST_FULL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">8</span>580 6998       27 PEST_FULL…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">8</span>711 7226        8 PEST_FULL…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">9</span>326 7410       14 PEST_FULL…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">9</span>326 7410-1     14 PEST_FULL…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 277 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 278 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">alternative_products</span><span class="op">(</span><span class="va">sr</span>, <span class="va">actives_de</span>, resolve_cultures <span class="op">=</span> <span class="cn">TRUE</span>, list <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Resolving cultures using srppp_dm objects created from version 2 of the XML files is experimental and does not always work correctly</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`No alternative`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   application_area_de culture_de           pest_de                    </span>
@@ -444,36 +449,36 @@ area, crop an pathogen.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Obstbau             Pfirsich / Nektarine Pfirsichmotte              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`Number of alternatives`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 65 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 68 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de    pest_de                     n_wNbr n_pNbr</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Feldbau             Eiweisserbse  Erbsenwickler                   13      7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Feldbau             Eiweisserbse  Eulenraupen (blattfressend)      0      0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Gemüsebau           Blumenkohl    Eulenraupen (blattfressend)     55     27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Gemüsebau           Blumenkohl    Eulenraupen (blattfressend)     57     28</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Gemüsebau           Blumenkohl    Kohlschabe                      49     24</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Gemüsebau           Blumenkohl    Weisslinge                      69     30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Gemüsebau           Broccoli      Eulenraupen (blattfressend)     55     27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Gemüsebau           Broccoli      Eulenraupen (blattfressend)     57     28</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Gemüsebau           Broccoli      Kohlschabe                      49     24</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Gemüsebau           Broccoli      Weisslinge                      69     30</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Gemüsebau           Cherrytomaten Tomatenminiermotte              33     12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Gemüsebau           Chinakohl     Eulenraupen (blattfressend)     55     27</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 55 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Gemüsebau           Cherrytomaten Tomatenminiermotte              34     13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Gemüsebau           Chinakohl     Eulenraupen (blattfressend)     57     28</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 58 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`Alternative uses`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2,194 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2,590 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    application_area_de culture_de   pest_de        pNbr wNbr   use_nr type      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>051 6098       13 PEST_FULL…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>051 6098-1     13 PEST_FULL…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>051 6098-2     13 PEST_FULL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>051 6098        6 PEST_FULL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>051 6098-1      6 PEST_FULL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>051 6098-2      6 PEST_FULL…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>441 6382        1 PEST_FULL…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>522 6381       16 PEST_FULL…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">7</span>522 6381-1     16 PEST_FULL…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">8</span>580 6998       28 PEST_FULL…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">8</span>580 6998       27 PEST_FULL…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">8</span>711 7226        8 PEST_FULL…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">9</span>326 7410       14 PEST_FULL…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Feldbau             Eiweisserbse Erbsenwickler  <span style="text-decoration: underline;">9</span>326 7410-1     14 PEST_FULL…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2,184 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2,580 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Example in Italian</span></span></span>

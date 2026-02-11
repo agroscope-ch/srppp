@@ -38,8 +38,8 @@ srppp$categories |>
 | Andere                                  |   1 |
 | Bakterizid                              |  25 |
 | Desinfektionsmittel                     |   3 |
-| Fungizid                                | 269 |
-| Herbizid                                | 322 |
+| Fungizid                                | 261 |
+| Herbizid                                | 321 |
 | Insektizid                              | 154 |
 | Lebende Organismen (Bakterien)          |   2 |
 | Lebende Organismen (Insekten)           | 115 |
@@ -51,16 +51,16 @@ srppp$categories |>
 | Mittel zum Schutz von Erntegütern       |   5 |
 | Molluskizid                             |  31 |
 | Nematizid                               |   2 |
-| Pheromon                                |  31 |
+| Pheromon                                |  32 |
 | Phytoregulator                          |  72 |
 | Rodentizid                              |   8 |
 | Saatbeizmittel                          |  27 |
-| Stimulator der natürlichen Abwehrkräfte |   5 |
+| Stimulator der natürlichen Abwehrkräfte |   4 |
 | Virizid                                 |   1 |
 | Vorratsschutzmittel                     |  19 |
 | Wildabhaltemittel                       |   5 |
 | Wundverschlussmittel                    |   1 |
-| Zusatzstoffe                            |  35 |
+| Zusatzstoffe                            |  36 |
 
 The resulting product categories containing microorganisms were defined
 as follows:
@@ -245,7 +245,6 @@ srppp$products |>
 | 2-Ethylhexyl-S-Lactat                                                                                          |
 | 2-Ethylhexyllaktat                                                                                             |
 | 2-Methyl-2H-isothiazol-3-on                                                                                    |
-| 2-methylaminoethanol                                                                                           |
 | Alcohols C9-11, ethoxylated propoxylated                                                                       |
 | Alcohols, C12-15, ethoxylated                                                                                  |
 | Alcohols, C9-11, ethoxylated                                                                                   |
@@ -278,7 +277,6 @@ srppp$products |>
 | Decanamide, N, N- dimethyl                                                                                     |
 | Destillate (Erdöl)                                                                                             |
 | Difenoconazol                                                                                                  |
-| Dimethomorph                                                                                                   |
 | Dinatriumphosphonat                                                                                            |
 | Dipenten; Limonen                                                                                              |
 | Disodium maleate                                                                                               |
@@ -315,7 +313,6 @@ srppp$products |>
 | Lösungsmittelnaphtha (Erdöl), leichte aromatische                                                              |
 | Mandipropamid                                                                                                  |
 | Mefentrifluconazol                                                                                             |
-| Mepanipyrim                                                                                                    |
 | Mepiquatchlorid                                                                                                |
 | Metalaxyl-M                                                                                                    |
 | Metconazole                                                                                                    |
@@ -351,6 +348,7 @@ srppp$products |>
 | Schachtelhalmextrakt                                                                                           |
 | Schwefel                                                                                                       |
 | Schwefelkalk (Calciumpolysulfid)                                                                               |
+| Sipernat 50 S                                                                                                  |
 | Solvent Naphtha                                                                                                |
 | Solvent naphtha (petroleum), heavy arom.; Kerosine - unspecified                                               |
 | Spiroxamine                                                                                                    |
@@ -487,7 +485,7 @@ kable(additional_products_containing_microorganisms)
 
 ## Summary
 
-In summary, out of 1740 products, there are 23 in the microorganism
+In summary, out of 1731 products, there are 23 in the microorganism
 categories as shown above, and 51 products in the insecticide and
 fungicide categories which contain an active substance that has a name
 that contains one of the microorganism genus names listed above.

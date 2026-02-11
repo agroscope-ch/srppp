@@ -32,7 +32,7 @@ if (!inherits(srppp_xml, "try-error")) {
   srppp_xml <- srppp_xml_define_use_numbers(srppp_xml)
   srppp_xml_get_uses(srppp_xml)
 }
-#> # A tibble: 7,855 × 15
+#> # A tibble: 7,831 × 15
 #>    wNbr  use_nr min_dosage max_dosage min_rate max_rate units_de units_fr
 #>    <chr>  <int>      <dbl>      <dbl>    <dbl>    <dbl> <chr>    <chr>   
 #>  1 1454       1        3.5         NA       35       NA l/ha     l/ha    
@@ -45,7 +45,7 @@ if (!inherits(srppp_xml, "try-error")) {
 #>  8 1454       8        3.5         NA       35       NA l/ha     l/ha    
 #>  9 1454       9        2           NA       16       NA l/ha     l/ha    
 #> 10 1454      10        2           NA       32       NA l/ha     l/ha    
-#> # ℹ 7,845 more rows
+#> # ℹ 7,821 more rows
 #> # ℹ 7 more variables: units_it <chr>, units_en <chr>, waiting_period <int>,
 #> #   time_units_de <chr>, time_units_fr <chr>, time_units_it <chr>,
 #> #   time_units_en <chr>
