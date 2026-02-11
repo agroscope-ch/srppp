@@ -15,4 +15,5 @@
 ^vignettes/.*_cache$
 ^\.github$
 ^codecov\.yml$
+^publiccode\.yml$
 ^LICENSE\.md$
