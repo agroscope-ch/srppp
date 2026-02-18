@@ -45,7 +45,7 @@ description:
       - Explains the relationship between registered products (W-Numbers) and
         unique products (P-Numbers)
 legal:
-  license: LGPL-3.0-or-later
+  license: GPL-3.0-or-later
 maintenance:
   type: internal
   contacts:
