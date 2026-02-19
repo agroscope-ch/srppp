@@ -12,6 +12,8 @@ pkgfiles = \
 	NAMESPACE \
 	README.md \
 	R/* \
+	tests/testthat.R \
+	tests/testthat/* \
 	vignettes/*.rmd
 
 $(TGZ): $(pkgfiles)

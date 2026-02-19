@@ -1,6 +1,6 @@
 ## version 2.0.3
 
-- Remove comments and reformat code in 'tests/testthat.R', in order to make room for test output in CRAN checks, in case tests should give an error again.
+- Do not download current register from the URL on CRAN, in order to avoid timeouts, which are suspected to cause the check failure on one of the CRAN test systems of version 2.0.2
 
 ## version 2.0.2
 

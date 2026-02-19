@@ -1,13 +1,29 @@
 ℹ Testing srppp
 ✔ | F W  S  OK | Context
-✔ |          7 | alternative_products [1.4s]
+
+⠏ |          0 | alternative_products                                           
+⠋ |          1 | alternative_products                                           
+⠙ |          2 | alternative_products                                           
+⠹ |          3 | alternative_products                                           
+⠸ |          4 | alternative_products                                           
+⠼ |          5 | alternative_products                                           
+✔ |          7 | alternative_products [1.0s]
+
+⠏ |          0 | resolve_cultures                                               
+⠏ |         10 | resolve_cultures                                               
 ✔ |         16 | resolve_cultures
-✔ |          7 | srppp_xml [3.2s]
+
+⠏ |          0 | srppp_xml                                                      
+⠋ |          1 | srppp_xml                                                      
+⠙ |          2 | srppp_xml                                                      
+⠴ |          6 | srppp_xml                                                      
+✔ |          6 | srppp_xml [14.0s]
+
+⠏ |          0 | use_rates                                                      
+⠼ |          5 | use_rates                                                      
 ✔ |          5 | use_rates
 
 ══ Results ═════════════════════════════════════════════════════════════════════
-Duration: 5.1 s
+Duration: 15.3 s
 
-[ FAIL 0 | WARN 0 | SKIP 0 | PASS 35 ]
-
-🎯 Your tests hit the mark 🎯
+[ FAIL 0 | WARN 0 | SKIP 0 | PASS 34 ]
