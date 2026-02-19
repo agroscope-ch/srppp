@@ -1,5 +1,11 @@
 # Changelog
 
+## version 2.0.3
+
+- Remove comments and reformat code in ‘tests/testthat.R’, in order to
+  make room for test output in CRAN checks, in case tests should give an
+  error again.
+
 ## version 2.0.2
 
 - Include the latest XML file published the registration authorities
