@@ -2,10 +2,12 @@
 ✔ | F W  S  OK | Context
 ✔ |          7 | alternative_products [1.4s]
 ✔ |         16 | resolve_cultures
-✔ |          7 | srppp_xml [3.4s]
+✔ |          7 | srppp_xml [3.2s]
 ✔ |          5 | use_rates
 
 ══ Results ═════════════════════════════════════════════════════════════════════
-Duration: 5.3 s
+Duration: 5.1 s
 
 [ FAIL 0 | WARN 0 | SKIP 0 | PASS 35 ]
+
+🎯 Your tests hit the mark 🎯

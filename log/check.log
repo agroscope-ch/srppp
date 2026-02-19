@@ -9,7 +9,7 @@
 * using options ‘--no-tests --as-cran’
 * checking for file ‘srppp/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘srppp’ version ‘2.0.2’
+* this is package ‘srppp’ version ‘2.0.3’
 * package encoding: UTF-8
 * checking CRAN incoming feasibility ... OK
 * checking package namespace information ... OK
@@ -56,12 +56,12 @@
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
-* checking examples with --run-donttest ... [53s/63s] OK
+* checking examples with --run-donttest ... [55s/85s] OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... SKIPPED
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes ... OK
-* checking re-building of vignette outputs ... [26s/25s] OK
+* checking re-building of vignette outputs ... [28s/29s] OK
 * checking PDF version of manual ... OK
 * checking HTML version of manual ... NOTE
 Skipping checking HTML validation: no command 'tidy' found.
