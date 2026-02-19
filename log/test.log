@@ -6,8 +6,8 @@
 ⠙ |          2 | alternative_products                                           
 ⠹ |          3 | alternative_products                                           
 ⠸ |          4 | alternative_products                                           
-⠼ |          5 | alternative_products                                           
-✔ |          7 | alternative_products [1.0s]
+⠴ |          6 | alternative_products                                           
+✔ |          7 | alternative_products [1.1s]
 
 ⠏ |          0 | resolve_cultures                                               
 ⠏ |         10 | resolve_cultures                                               
@@ -17,13 +17,12 @@
 ⠋ |          1 | srppp_xml                                                      
 ⠙ |          2 | srppp_xml                                                      
 ⠴ |          6 | srppp_xml                                                      
-✔ |          6 | srppp_xml [14.0s]
+✔ |          6 | srppp_xml [21.4s]
 
 ⠏ |          0 | use_rates                                                      
-⠼ |          5 | use_rates                                                      
 ✔ |          5 | use_rates
 
 ══ Results ═════════════════════════════════════════════════════════════════════
-Duration: 15.3 s
+Duration: 22.7 s
 
 [ FAIL 0 | WARN 0 | SKIP 0 | PASS 34 ]

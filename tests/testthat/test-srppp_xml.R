@@ -33,15 +33,12 @@ test_that("The substance type of ingredients is correctly obtained", {
 })
 
 test_that("We get dm objects with relational integrity from the srppp URL", {
+  # Skip on CRAN to avoid timeouts. Downloading the file does not have to be 
+  # tested on so many platforms
   skip_on_cran()
+  skip_on_ci()
 
-  # Read in the current SRPPP from the XML URL
-  # Interception of the system message by sink() was taken from https://stackoverflow.com/a/66139071
-  nullcon <- file(nullfile(), open = "wb")
-  sink(nullcon, type = "message")
   srppp_cur <- srppp_dm()
-  sink(type = "message")
-  close(nullcon)
 
   constraints_test_cur <- dm::dm_examine_constraints(srppp_cur, .progress = FALSE)
 

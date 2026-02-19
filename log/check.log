@@ -1,10 +1,10 @@
-* using log directory ‘/home/agsad.admin.ch/f80868656/projects/srppp/srppp.Rcheck’
+* using log directory ‘/home/jranke/git/srppp/srppp.Rcheck’
 * using R version 4.5.2 (2025-10-31)
 * using platform: x86_64-pc-linux-gnu
 * R was compiled by
-    gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-    GNU Fortran (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
-* running under: Ubuntu 24.04.3 LTS
+    gcc (Debian 14.2.0-19) 14.2.0
+    GNU Fortran (Debian 14.2.0-19) 14.2.0
+* running under: Debian GNU/Linux 13 (trixie)
 * using session charset: UTF-8
 * using options ‘--no-tests --as-cran’
 * checking for file ‘srppp/DESCRIPTION’ ... OK
@@ -23,7 +23,8 @@
 * checking whether package ‘srppp’ can be installed ... OK
 * checking installed package size ... OK
 * checking package directory ... OK
-* checking for future file timestamps ... OK
+* checking for future file timestamps ... NOTE
+unable to verify current time
 * checking ‘build’ directory ... OK
 * checking DESCRIPTION meta-information ... OK
 * checking top-level files ... OK
@@ -53,26 +54,25 @@
 * checking Rd \usage sections ... OK
 * checking Rd contents ... OK
 * checking for unstated dependencies in examples ... OK
+ WARNING
+‘qpdf’ is needed for checks on size reduction of PDFs
 * checking installed files from ‘inst/doc’ ... OK
 * checking files in ‘vignettes’ ... OK
 * checking examples ... OK
-* checking examples with --run-donttest ... [55s/85s] OK
+* checking examples with --run-donttest ... [46s/94s] OK
 * checking for unstated dependencies in ‘tests’ ... OK
 * checking tests ... SKIPPED
 * checking for unstated dependencies in vignettes ... OK
 * checking package vignettes ... OK
-* checking re-building of vignette outputs ... [28s/29s] OK
+* checking re-building of vignette outputs ... [21s/27s] OK
 * checking PDF version of manual ... OK
-* checking HTML version of manual ... NOTE
-Skipping checking HTML validation: no command 'tidy' found.
-Please obtain a recent version of HTML Tidy by downloading a binary
-release or compiling the source code from <https://www.html-tidy.org/>.
+* checking HTML version of manual ... OK
 * checking for non-standard things in the check directory ... OK
 * checking for detritus in the temp directory ... OK
 * DONE
 
-Status: 1 NOTE
+Status: 1 WARNING, 1 NOTE
 See
-  ‘/home/agsad.admin.ch/f80868656/projects/srppp/srppp.Rcheck/00check.log’
+  ‘/home/jranke/git/srppp/srppp.Rcheck/00check.log’
 for details.
 
