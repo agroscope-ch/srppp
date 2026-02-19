@@ -1,28 +1,11 @@
 ℹ Testing srppp
 ✔ | F W  S  OK | Context
-
-⠏ |          0 | alternative_products                                           
-⠋ |          1 | alternative_products                                           
-⠙ |          2 | alternative_products                                           
-⠹ |          3 | alternative_products                                           
-⠸ |          4 | alternative_products                                           
-⠴ |          6 | alternative_products                                           
 ✔ |          7 | alternative_products [1.1s]
-
-⠏ |          0 | resolve_cultures                                               
-⠏ |         10 | resolve_cultures                                               
 ✔ |         16 | resolve_cultures
-
-⠏ |          0 | srppp_xml                                                      
-⠋ |          1 | srppp_xml                                                      
-⠙ |          2 | srppp_xml                                                      
-⠴ |          6 | srppp_xml                                                      
-✔ |          6 | srppp_xml [21.4s]
-
-⠏ |          0 | use_rates                                                      
+✔ |          6 | srppp_xml [14.3s]
 ✔ |          5 | use_rates
 
 ══ Results ═════════════════════════════════════════════════════════════════════
-Duration: 22.7 s
+Duration: 15.7 s
 
 [ FAIL 0 | WARN 0 | SKIP 0 | PASS 34 ]
