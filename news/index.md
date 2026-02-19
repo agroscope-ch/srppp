@@ -3,8 +3,8 @@
 ## version 2.0.3
 
 - Do not download current register from the URL on CRAN, in order to
-  avoid timeouts, which are suspected to cause the check failure on one
-  of the CRAN test systems of version 2.0.2
+  reduce testing time and reduce the probability of errors due to
+  download problems
 - Avoid length one LHS argument for `case_when` in `R/use-rates.R`, as
   this is deprecated in dplyr 1.2.0
 
