@@ -1,5 +1,10 @@
 # Changelog
 
+## version 2.0.4
+
+- Avoid a duplication of uses that was introduced with version 2.0.0 and
+  that surfaced when reading in the 2015 register for srppphist.
+
 ## version 2.0.3
 
 - Do not download current register from the URL on CRAN, in order to
