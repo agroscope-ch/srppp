@@ -109,7 +109,7 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
   product_nodeset <- xml_find_all(srppp_xml, "Products/Product")
   product_attribute_names <- names(xml_attrs(product_nodeset[[1]]))
 
-  product_pNbrs <- product_nodeset |>
+  wGrp_pNbrs <- product_nodeset |>
     xml_attrs() |>
     unlist() |>
     matrix(ncol = 7, byrow = TRUE,
@@ -118,7 +118,8 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
     filter(!grepl("-", wNbr)) |> # remove sales permissions
     mutate(pNbr = as.integer(id)) |>
     mutate(wGrp = wNbr) |> # we define a "W-Number group", i.e. the part of the W-Number before the dash
-    select(wGrp, pNbr)
+    select(wGrp, pNbr) |>
+    distinct() # Avoid duplicating entries when using this later
 
   products_no_permission_holders <- product_nodeset |>
     xml_attrs() |>
@@ -128,7 +129,7 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
     as_tibble() |>
     mutate(wGrp = gsub("-.*$", "", wNbr)) |>
     mutate(isSalePermission = if_else(isSalePermission == "true", TRUE, FALSE)) |>
-    left_join(product_pNbrs, by = "wGrp") |>
+    left_join(wGrp_pNbrs, by = "wGrp") |>
     select(wNbr, name, pNbr, exhaustionDeadline, soldoutDeadline,
       isSalePermission, terminationReason)
 
