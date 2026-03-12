@@ -96,19 +96,30 @@ product_rates <- function(product_uses,
       application_area_de %in% c("Weinbau", "Obstbau") ~ 1600,
       .default = NA)) |>
     left_join(l_per_ha_is_water_volume, by = c("pNbr", "use_nr")) |>
-    mutate(
-      prod_rate = case_when(
-        units_de == "l/ha" & !is.na(source) & fix_l_per_ha ~ rate * dosage, # l/ha is water
-        units_de == "l/ha" & !is.na(source) & !fix_l_per_ha ~ NA,
-        units_de == "l/ha" & is.na(source) ~ rate,
-        units_de == "kg/ha" ~ rate,
-        units_de == "g/ha" ~ rate * 1000,
-        units_de == "ml/m\u00B2" ~ (rate/1000) * 10000,
-        units_de == "ml/10m\u00B2" ~ (rate/1000) * 1000,
-        units_de == "ml/ha" ~ (rate/1000),
-        units_de == "ml/a" ~ (rate/1000) * 100,
-        is.na(units_de) ~ ref_volume * dosage/100,
-        .default = NA),
+    mutate(prod_rate = case_when(
+      units_de == "l/ha" ~ # l/ha can refer to product or water volume
+        if_else(is.na(source), # if no external information, assume l/ha is product
+                if_else(is.na(g_per_L) & !is.na(percent), # if g_per_L is not defined and percent is given
+                        if_else(!is.na(dosage) & rate > 100,
+                                # If we have a dosage and the rate is above 100 l/ha, the rate in l/ha is assumed to be the application solution
+                                rate * dosage / 100, # Correct for Rhodofix 2009 (Grünbuch) and 2012 (XML)
+                                # If we have no dosage, treat l/ha as kg/ha product rate
+                                rate # Correct for Metro 2017
+
+                                ),
+                        rate # l/ha is product
+                ),
+                if (fix_l_per_ha) {
+                  rate * dosage / 100 # external info: l/ha for solution, weighted by dosage
+                } else NA),
+      units_de == "kg/ha" ~ rate,                     # product already in kg/ha
+      units_de == "g/ha" ~ rate / 1000,               # convert g/ha → kg/ha
+      units_de == "ml/m\u00B2" ~ rate / 1000 * 10000, # ml/m² → L/ha
+      units_de == "ml/10m\u00B2" ~ rate / 1000 * 1000,# ml/10m² → L/ha
+      units_de == "ml/ha" ~ rate / 1000,              # ml/ha → L/ha
+      units_de == "ml/a" ~ rate / 1000 * 100,         # ml/a → L/ha
+      is.na(units_de) ~ ref_volume * dosage/100,      # dosage in %
+      .default = NA),
       prod_unit = case_when(
         units_de %in% c("l/ha", "ml/m\u00B2", "ml/10m\u00B2", "ml/ha", "ml/a") ~ "l/ha",
         units_de %in% c("kg/ha", "g/ha") ~ "kg/ha",

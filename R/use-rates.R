@@ -83,6 +83,7 @@ application_rate_g_per_ha <- function(product_uses,
                                 fix_l_per_ha) |>
     mutate(rate_g_per_ha = case_when(
       prod_unit == "l/ha" & !is.na(g_per_L) ~ prod_rate * g_per_L,
+      prod_unit == "l/ha" & is.na(g_per_L) & skip_l_per_ha_without_g_per_L ~ NA,
       prod_unit == "l/ha" & is.na(g_per_L) & !skip_l_per_ha_without_g_per_L &
         !is.na(percent) ~ prod_rate * 1000 * percent/100,
       prod_unit == "kg/ha" & !is.na(percent) ~ prod_rate * 1000 * percent/100,
