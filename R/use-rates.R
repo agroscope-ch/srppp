@@ -11,17 +11,13 @@ utils::globalVariables(c("rate_min", "rate_max", "dosage_min", "dosage_max"))
 #' that the "expenditure" is an application volume [l_per_ha_is_water_volume].
 #'
 #' @note A reference application volume is used if there is no 'expenditure'.
-#' It is selected only based on the product application area. This is not correct
-#' if hops ('Hopfen') is the culture, as it has a unique reference application
-#' volume of 3000 L/ha.
+#' It is selected only based on the product application area and culture.
 #'
-#' Applications to hops were excluded for calculating mean use rates in the
-#' indicator project (Korkaric 2023), arguing that it is not grown in large
-#' areas in Switzerland.
 #' @param product_uses A tibble containing the columns 'pNbr', 'use_nr',
 #' 'application_area_de', 'min_dosage', 'max_dosage', 'min_rate', 'max_rate',
 #' from the 'uses' table in a [srppp_dm] object, as well as the columns
-#' 'percent' and 'g_per_L' from the 'ingredients' table in a [srppp_dm] object.
+#' 'percent' and 'g_per_L' from the 'ingredients' table in a [srppp_dm] object and
+#' 'culture_de' from the 'cultures' table in [srppp_dm] object.
 #' @param aggregation How to represent a range if present, e.g. "max" (default)
 #' or "mean".
 #' @param dosage_units If no units are given, or units are "%", then the applied
@@ -59,9 +55,11 @@ utils::globalVariables(c("rate_min", "rate_max", "dosage_min", "dosage_max"))
 #'   left_join(sr$ingredients, by = "pk") |>
 #'   left_join(sr$uses, by = "pNbr") |>
 #'   left_join(sr$products, by = "pNbr") |>
+#'   left_join(sr$cultures, by = c("pNbr", "use_nr"),
+#'             relationship = "many-to-many") |>
 #'   select(pNbr, name, use_nr,
 #'     min_dosage, max_dosage, min_rate, max_rate, units_de,
-#'     application_area_de,
+#'     application_area_de, culture_de,
 #'     substance_de, percent, g_per_L)
 #'
 #' application_rate_g_per_ha(product_uses_with_ingredients) |>
@@ -79,71 +77,18 @@ application_rate_g_per_ha <- function(product_uses,
   fix_l_per_ha = TRUE)
 {
   aggregation = match.arg(aggregation)
-  rates_dosages <- product_uses |> # Rates are called "Expenditures" in the XML
-    mutate( # First we set zeros to NA, as this is what they are
-      min_rate = na_if(min_rate, 0),
-      max_rate = na_if(max_rate, 0),
-      min_dosage = na_if(min_dosage, 0),
-      max_dosage = na_if(max_dosage, 0)) |>
-    mutate( # Then we make ranges, possibly with min equals max
-      rate_min = min_rate, # 'expenditures' are use rates (Aufwandmengen)
-      rate_max = if_else(is.na(max_rate), # if zero, either no range or not given
-        min_rate, max_rate),
-      dosage_min = min_dosage, # 'dosages' are in-use concentrations in percent
-      dosage_max = if_else(is.na(max_dosage),
-        min_dosage, max_dosage)
-      ) |>
-    mutate(
-      rate = if (aggregation == "mean") {
-        (rate_min + rate_max)/2
-      } else if (aggregation == "max") {
-        rate_max
-      } else {
-        rate_min
-      },
-      dosage = if (aggregation == "mean") {
-        (dosage_min + dosage_max)/2
-      } else if (aggregation == "max") {
-        dosage_max
-      } else {
-        dosage_min
-      }
-    )
-
-  active_rates <- rates_dosages |>
-    mutate(ref_volume = case_when(
-      application_area_de %in% c("Feldbau", "Gem\u00FCsebau", "Beerenbau", "Zierpflanzen") ~ 1000,
-      application_area_de %in% c("Weinbau", "Obstbau") ~ 1600,
-      .default = NA)) |>
-    left_join(l_per_ha_is_water_volume, by = c("pNbr", "use_nr")) |>
+  active_rates <- product_rates(product_uses,
+                                aggregation,
+                                dosage_units,
+                                fix_l_per_ha) |>
     mutate(rate_g_per_ha = case_when(
-      units_de == "l/ha" ~ # l/ha can refer to product or water volume
-        if_else(is.na(source), # if no external information, assume l/ha is product
-          if_else(is.na(g_per_L), # if g_per_L is not defined
-            if (skip_l_per_ha_without_g_per_L) NA # as in the 2023 indicator
-            else {
-              if_else(is.na(dosage),
-                # If we have no dosage, treat l/ha as kg/ha and use percent to calculate rate_g_per_ha.
-                rate * (percent/100) * 1000, # Correct for Metro 2017
-                # If we have a dosage, the rate in l/ha is assumed to be the application solution
-                rate * dosage * (percent/100)) # Correct for Rhodofix 2009 (Grünbuch) and 2012 (XML)
-            },
-            rate * g_per_L), # l/ha is product
-          if (fix_l_per_ha) { # Sometimes we have external information that the rate in l/ha is water
-            rate * dosage/100 * g_per_L
-          } else NA),
-      units_de == "kg/ha" ~ rate * (percent * 10), # percent w/w means 10 g/kg
-      units_de == "g/ha" ~ rate * (percent / 100), # percent w/w means 0.01 g/g
-      units_de == "ml/m\u00B2" ~ (rate/1000) * (g_per_L) * 10000,
-      units_de == "ml/10m\u00B2" ~ (rate/1000) * (g_per_L) * 1000,
-      units_de == "ml/ha" ~ (rate/1000) * (g_per_L),
-      units_de == "ml/a" ~ (rate/1000) * (g_per_L) * 100,
-      is.na(units_de) & !is.na(g_per_L) ~ # g_per_L available -> liquid
-        ref_volume * dosage/100 * g_per_L, # dosage assumed to be v/v
-      is.na(units_de) & is.na(g_per_L) ~ # only percent available -> solid
-        ref_volume * 1000 * # 1 L spraying solution equivalent to 1000 g
-        dosage/100 * percent/100, # dosage assumed to be w/w
+      prod_unit == "l/ha" & !is.na(g_per_L) ~ prod_rate * g_per_L,
+      prod_unit == "l/ha" & is.na(g_per_L) & skip_l_per_ha_without_g_per_L ~ NA,
+      prod_unit == "l/ha" & is.na(g_per_L) & !skip_l_per_ha_without_g_per_L &
+        !is.na(percent) ~ prod_rate * 1000 * percent/100,
+      prod_unit == "kg/ha" & !is.na(percent) ~ prod_rate * 1000 * percent/100,
       .default = NA))
+
   ret <- bind_cols(product_uses, active_rates["rate_g_per_ha"])
   return(ret)
 }
@@ -160,17 +105,3 @@ application_rate_g_per_ha <- function(product_uses,
 #' units_convertible_to_g_per_ha
 units_convertible_to_g_per_ha <- c("l/ha", "kg/ha", "g/ha",
   "ml/m\u00B2", "ml/10m\u00B2", "ml/ha", "ml/a")
-
-#' Use definitions where the rate in l/ha refers to the volume of the spraying solution
-#'
-#' @docType data
-#' @export
-#' @seealso [application_rate_g_per_ha]
-#' @examples
-#' library(srppp)
-#' l_per_ha_is_water_volume
-l_per_ha_is_water_volume <- tibble::tribble(
-  ~ pNbr, ~ use_nr, ~ source, ~ url,
-  5151L, 1L, "EFSA conclusion on cyanamide 2010, p. 17",
-  "https://doi.org/10.2903/j.efsa.2010.1873"
-)

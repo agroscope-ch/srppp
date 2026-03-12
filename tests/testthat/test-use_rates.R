@@ -4,6 +4,7 @@ test_that("Use rates are correctly converted to g/ha", {
   use_arable_one_rate_l_ha <- tibble::tibble(
     pNbr = 8550L, use_nr = 1L, substance_de = "Halauxifen-methyl",
     application_area_de = "Feldbau",
+    culture_de = "Gerste",
     min_dosage = NA,
     max_dosage = NA,
     min_rate = 0.75,
@@ -22,6 +23,7 @@ test_that("Use rates are correctly converted to g/ha", {
     pNbr = 7877L,
     use_nr = c(1, 2, 3, 4, 5, 6, 7),
     application_area_de = c("Zierpflanzen", "Weinbau", "Obstbau", "Beerenbau", "Gemüsebau", "Gemüsebau", "Zierpflanzen"),
+    culture_de = c("allg.", "Reben", "Birne", "Erdbeere", "Kopfsalate", "Kürbisgewächse (Cucurbitaceae)", "allg."),
     min_dosage = c(0.5, 0.125, 0.3, 0.75, NA, 0.2, 0.25),
     max_dosage = NA,
     min_rate = c(NA, 2.0, 4.8, 7.5, 2.0, 3.0, NA),
@@ -72,6 +74,8 @@ test_that("Use rates are correctly converted to g/ha", {
                      rep("2-(1-naphthyl) acetic acid", 2)),
     application_area_de = c(rep("Feldbau", 4),
                             rep("Obstbau", 2)),
+    culture_de = c(rep("Triticale", 4),
+                            rep("Apfel", 2)),
     min_dosage = c(rep(NA,4), 1, 2),
     max_dosage = c(rep(NA,4), 1.5, NA),
     min_rate = c(0.6, 1, 0.6, 1, 1000, 1000),
@@ -85,13 +89,38 @@ test_that("Use rates are correctly converted to g/ha", {
     application_rate_g_per_ha(uses_unit_l_ha_no_g_per_L, aggregation = "min",
                               skip_l_per_ha_without_g_per_L = FALSE
                               )$rate_g_per_ha,
-    c(135.6, 226.0, 159.6, 266.0,  10.0,  20.0))
+    c(135.6, 226.0, 159.6, 266.0,  100.0,  200.0))
 
   expect_equal(
     application_rate_g_per_ha(uses_unit_l_ha_no_g_per_L,
                               skip_l_per_ha_without_g_per_L = FALSE
     )$rate_g_per_ha,
-    c(226.0, 271.2, 266.0, 319.2,  45.0,  60.0))
+    c(226.0, 271.2, 266.0, 319.2,  450.0,  600.0))
+
+
+  # Products with and without unit and culture_de = "Hopfen"
+  uses_with_and_without_units <- tibble::tibble(
+    pNbr = c(rep(7522,3), rep(4567,2)),
+    use_nr = c(2,3,29,2,3),
+    substance_de = c(rep("Deltamethrin", 3),
+                     rep("Folpet", 2)),
+    application_area_de = c(rep("Feldbau", 3),
+                            rep("Gemüsebau", 2)),
+    culture_de = c("Zuckerrübe", "Mais", "Hopfen", "Tomaten", "Knollensellerie"),
+    min_dosage = c(rep(NA,2), 0.05, 0.2, NA),
+    max_dosage = c(rep(NA,3), 0.3, NA),
+    min_rate = c(0.5, 0.5, NA, NA, 2.5),
+    max_rate = c(rep(NA,5)),
+    units_de = c("l/ha","l/ha", NA, NA, "l/ha"),
+    percent = c(rep(1.47, 3), rep(21, 2)),
+    g_per_L = c(rep(15, 3), rep(280, 2))
+  )
+
+  expect_equal(
+    application_rate_g_per_ha(uses_with_and_without_units, aggregation = "min",
+                              skip_l_per_ha_without_g_per_L = FALSE
+    )$rate_g_per_ha,
+    c(7.5, 7.5, 22.5, 560.0,  700.0))
 
 })
 

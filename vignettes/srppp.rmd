@@ -258,12 +258,14 @@ example_uses <- example_register$products |>
   filter(wNbr == "6168") |>
   left_join(example_register$uses, by = join_by(pNbr),
     relationship = "many-to-many") |> 
+  left_join(example_register$cultures, by = join_by(pNbr, use_nr),
+    relationship = "many-to-many") |>
   left_join(example_register$ingredients, by = join_by(pNbr),
     relationship = "many-to-many") |>
   left_join(example_register$substances, by = join_by(pk)) |>
   select(pNbr, name, use_nr,
     min_dosage, max_dosage, min_rate, max_rate, units_de,
-    application_area_de,
+    application_area_de, culture_de,
     substance_de, percent, g_per_L) |> 
   filter(use_nr %in% c(1:5, 12:17))
 
