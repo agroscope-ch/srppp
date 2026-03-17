@@ -28,7 +28,7 @@ Description: Generate data objects from XML versions of the Swiss
 Depends: R (>= 4.1.0), dm
 Imports: xml2, tibble, stringr, dplyr, cli, data.tree, rlang
 Suggests: knitr, rmarkdown, here, DiagrammeR, DiagrammeRsvg,
-  testthat (>= 3.0.0), parallel, waldo, srppphist (>= 2.0.2)
+  testthat (>= 3.0.0), parallel, waldo, srppphist
 BugReports: https://github.com/agroscope-ch/srppp/issues
 URL: https://agroscope-ch.github.io/srppp/
 License: GPL (>= 3)
