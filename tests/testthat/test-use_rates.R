@@ -130,7 +130,10 @@ test_that("Use rates are correctly converted to g/ha", {
     )$rate_g_per_ha,
     c(7.5, 7.5, 22.5, 560.0, 700.0))
 
-  skip_on_cran() # We do not have srppphist on CRAN
+  # The following tests rely on srppphist >= 2.0.2, which was generated
+  # using srppp 2.0.5 to address some corner cases checked below
+  skip_if_not_installed("srppphist", minimum_version = "2.0.2")
+
   sr12 <- srppphist::srppp_list[["2012"]]
 
   uses_rate_greater_100_l_ha <- sr12$uses |>
