@@ -12,6 +12,8 @@
 - [`alternative_products()`](https://agroscope-ch.github.io/srppp/reference/alternative_products.md)
   : Find alternative products for all products containing certain active
   substances
+- [`product_rates()`](https://agroscope-ch.github.io/srppp/reference/product_rates.md)
+  : Calculate product application rates
 - [`application_rate_g_per_ha()`](https://agroscope-ch.github.io/srppp/reference/application_rate_g_per_ha.md)
   : Calculate application rates for active ingredients
 - [`resolve_cultures()`](https://agroscope-ch.github.io/srppp/reference/resolve_cultures.md)

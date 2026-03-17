@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">srppp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,6 +37,13 @@
       <small>Source: <a href="https://github.com/agroscope-ch/srppp/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="2.0.5" id="version-205">version 2.0.5<a class="anchor" aria-label="anchor" href="#version-205"></a></h2>
+<ul><li>Add function <code>product_rates</code> to obtain application rates in kg product / ha or l product / ha. This function is now internally used by <code>application_rate_g_per_ha</code>.</li>
+<li>Add corrections of dosage and rate information for Rhodofix and Fruitone in older XML files.</li>
+<li>Remove application rate information for Dirigol-N and Frufix, to avoid erroneous interpretation as product rate.</li>
+<li>Suggest srppphist for testing these corner cases. Skip the tests if version 2.0.2 is not available, which is needed for these cases.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.4" id="version-204">version 2.0.4<a class="anchor" aria-label="anchor" href="#version-204"></a></h2>
 <ul><li>Avoid a duplication of uses that was introduced with version 2.0.0 and that surfaced when reading in the 2015 register for srppphist.</li>

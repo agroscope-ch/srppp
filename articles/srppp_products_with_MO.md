@@ -34,13 +34,13 @@ srppp$categories |>
 
 | category_de                             |   n |
 |:----------------------------------------|----:|
-| Akarizid                                | 120 |
+| Akarizid                                | 119 |
 | Andere                                  |   1 |
 | Bakterizid                              |  25 |
 | Desinfektionsmittel                     |   3 |
-| Fungizid                                | 261 |
-| Herbizid                                | 321 |
-| Insektizid                              | 154 |
+| Fungizid                                | 262 |
+| Herbizid                                | 323 |
+| Insektizid                              | 153 |
 | Lebende Organismen (Bakterien)          |   2 |
 | Lebende Organismen (Insekten)           | 115 |
 | Lebende Organismen (Insektenviren)      |  11 |
@@ -51,7 +51,7 @@ srppp$categories |>
 | Mittel zum Schutz von Erntegütern       |   5 |
 | Molluskizid                             |  31 |
 | Nematizid                               |   2 |
-| Pheromon                                |  32 |
+| Pheromon                                |  33 |
 | Phytoregulator                          |  72 |
 | Rodentizid                              |   8 |
 | Saatbeizmittel                          |  27 |
@@ -142,7 +142,6 @@ srppp$products |>
 | 1,2-Benzisothiazol-3(2H)-on                                                  |
 | 1,2-benzisothiazol-3(2H)-one; 1,2-benzisothiazolin-3-one                     |
 | 3,6-Dimethyl-4-octin-3,6-diol                                                |
-| Abamectin                                                                    |
 | Acequinocyl                                                                  |
 | Acetamiprid                                                                  |
 | Alcohols, C12-15, ethoxylated                                                |
@@ -242,6 +241,7 @@ srppp$products |>
 | 1-Butanol                                                                                                      |
 | 1-Octyl-2-pyrrolidon                                                                                           |
 | 2,2’,2’’-(hexahydro-1,3,5-triazine-1,3,5-triyl)triethanol / 1,3,5-tris(2-hydroxyethyl)hexahydro-1,3,5-triazine |
+| 2-Ethylhexyl (S)-2-hydroxypropionate                                                                           |
 | 2-Ethylhexyl-S-Lactat                                                                                          |
 | 2-Ethylhexyllaktat                                                                                             |
 | 2-Methyl-2H-isothiazol-3-on                                                                                    |
@@ -485,7 +485,7 @@ kable(additional_products_containing_microorganisms)
 
 ## Summary
 
-In summary, out of 1731 products, there are 23 in the microorganism
+In summary, out of 1735 products, there are 23 in the microorganism
 categories as shown above, and 51 products in the insecticide and
 fungicide categories which contain an active substance that has a name
 that contains one of the microorganism genus names listed above.

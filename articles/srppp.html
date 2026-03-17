@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">srppp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,7 +63,7 @@
 Ranke</h4>
             
             <h4 data-toc-skip class="date">17 July 2025 (rebuilt
-2026-03-02)</h4>
+2026-03-17)</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agroscope-ch/srppp/blob/main/vignettes/srppp.rmd" class="external-link"><code>vignettes/srppp.rmd</code></a></small>
       <div class="d-none name"><code>srppp.rmd</code></div>
@@ -119,7 +119,7 @@ number for the authorization holder are shown in light blue.</p>
 substances. For each substance, there is a primary key <code>pk</code>,
 a chemical name based on <a href="https://iupac.org/what-we-do/nomenclature/" class="external-link">IUPAC
 nomenclature</a>, and substance names in three of the four official
-languages of Switzerland. The first four entries out of 442 are shown
+languages of Switzerland. The first four entries out of 443 are shown
 below.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span>
@@ -285,11 +285,11 @@ quite different.</p>
 <tbody>
 <tr class="odd">
 <td align="left">ACTIVE_INGREDIENT</td>
-<td align="right">324</td>
+<td align="right">323</td>
 </tr>
 <tr class="even">
 <td align="left">ADDITIVE_TO_DECLARE</td>
-<td align="right">111</td>
+<td align="right">113</td>
 </tr>
 <tr class="odd">
 <td align="left">SAFENER</td>
@@ -540,8 +540,8 @@ respective columns.</p>
 </tr>
 </tbody>
 </table>
-<p>At the build time of this vignette, there were 1731 product
-registrations for 1114 P-Numbers in the Swiss Register of Plant
+<p>At the build time of this vignette, there were 1735 product
+registrations for 1117 P-Numbers in the Swiss Register of Plant
 Protection Products (SRPPP) as published on the website of the Federal
 Food Safety and Veterinary Office.</p>
 </div>
@@ -633,8 +633,8 @@ order to be able to refer to each use by a combination of P-Number
 <td align="right">1</td>
 <td align="right"></td>
 <td align="right"></td>
-<td align="right">0.5</td>
-<td align="right">1</td>
+<td align="right">1.0</td>
+<td align="right"></td>
 <td align="left">l/ha</td>
 <td align="right"></td>
 <td align="left"></td>
@@ -657,7 +657,7 @@ order to be able to refer to each use by a combination of P-Number
 <td align="right">3</td>
 <td align="right"></td>
 <td align="right"></td>
-<td align="right">1.0</td>
+<td align="right">1.5</td>
 <td align="right"></td>
 <td align="left">l/ha</td>
 <td align="right"></td>
@@ -669,11 +669,11 @@ order to be able to refer to each use by a combination of P-Number
 <td align="right">4</td>
 <td align="right"></td>
 <td align="right"></td>
-<td align="right">1.5</td>
+<td align="right">1.0</td>
 <td align="right"></td>
 <td align="left">l/ha</td>
-<td align="right"></td>
-<td align="left"></td>
+<td align="right">3</td>
+<td align="left">Week(s)</td>
 <td align="left">Feldbau</td>
 </tr>
 <tr class="odd">
@@ -684,8 +684,8 @@ order to be able to refer to each use by a combination of P-Number
 <td align="right">1.0</td>
 <td align="right"></td>
 <td align="left">l/ha</td>
-<td align="right">3</td>
-<td align="left">Week(s)</td>
+<td align="right"></td>
+<td align="left"></td>
 <td align="left">Feldbau</td>
 </tr>
 <tr class="even">
@@ -696,8 +696,8 @@ order to be able to refer to each use by a combination of P-Number
 <td align="right">1.0</td>
 <td align="right"></td>
 <td align="left">l/ha</td>
-<td align="right"></td>
-<td align="left"></td>
+<td align="right">3</td>
+<td align="left">Week(s)</td>
 <td align="left">Feldbau</td>
 </tr>
 <tr class="odd">
@@ -708,8 +708,8 @@ order to be able to refer to each use by a combination of P-Number
 <td align="right">1.0</td>
 <td align="right"></td>
 <td align="left">l/ha</td>
-<td align="right">3</td>
-<td align="left">Week(s)</td>
+<td align="right"></td>
+<td align="left"></td>
 <td align="left">Feldbau</td>
 </tr>
 <tr class="even">
@@ -720,8 +720,8 @@ order to be able to refer to each use by a combination of P-Number
 <td align="right">1.0</td>
 <td align="right"></td>
 <td align="left">l/ha</td>
-<td align="right"></td>
-<td align="left"></td>
+<td align="right">3</td>
+<td align="left">Week(s)</td>
 <td align="left">Feldbau</td>
 </tr>
 <tr class="odd">
@@ -732,37 +732,13 @@ order to be able to refer to each use by a combination of P-Number
 <td align="right">1.0</td>
 <td align="right"></td>
 <td align="left">l/ha</td>
-<td align="right">3</td>
-<td align="left">Week(s)</td>
+<td align="right"></td>
+<td align="left"></td>
 <td align="left">Feldbau</td>
 </tr>
 <tr class="even">
 <td align="right">7511</td>
 <td align="right">1</td>
-<td align="right">0.3</td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="left">kg/ha</td>
-<td align="right">3</td>
-<td align="left">Days</td>
-<td align="left">Gemüsebau</td>
-</tr>
-<tr class="odd">
-<td align="right">7511</td>
-<td align="right">2</td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right">5.0</td>
-<td align="right"></td>
-<td align="left">kg/ha</td>
-<td align="right"></td>
-<td align="left"></td>
-<td align="left">Obstbau</td>
-</tr>
-<tr class="even">
-<td align="right">7511</td>
-<td align="right">3</td>
 <td align="right">0.3</td>
 <td align="right"></td>
 <td align="right">4.8</td>
@@ -774,7 +750,7 @@ order to be able to refer to each use by a combination of P-Number
 </tr>
 <tr class="odd">
 <td align="right">7511</td>
-<td align="right">4</td>
+<td align="right">2</td>
 <td align="right">0.3</td>
 <td align="right"></td>
 <td align="right">4.8</td>
@@ -786,7 +762,7 @@ order to be able to refer to each use by a combination of P-Number
 </tr>
 <tr class="even">
 <td align="right">7511</td>
-<td align="right">5</td>
+<td align="right">3</td>
 <td align="right"></td>
 <td align="right"></td>
 <td align="right">3.0</td>
@@ -798,7 +774,7 @@ order to be able to refer to each use by a combination of P-Number
 </tr>
 <tr class="odd">
 <td align="right">7511</td>
-<td align="right">6</td>
+<td align="right">4</td>
 <td align="right">0.3</td>
 <td align="right"></td>
 <td align="right"></td>
@@ -810,7 +786,7 @@ order to be able to refer to each use by a combination of P-Number
 </tr>
 <tr class="even">
 <td align="right">7511</td>
-<td align="right">7</td>
+<td align="right">5</td>
 <td align="right"></td>
 <td align="right"></td>
 <td align="right">3.0</td>
@@ -822,7 +798,7 @@ order to be able to refer to each use by a combination of P-Number
 </tr>
 <tr class="odd">
 <td align="right">7511</td>
-<td align="right">8</td>
+<td align="right">6</td>
 <td align="right"></td>
 <td align="right"></td>
 <td align="right">3.0</td>
@@ -834,7 +810,7 @@ order to be able to refer to each use by a combination of P-Number
 </tr>
 <tr class="even">
 <td align="right">7511</td>
-<td align="right">9</td>
+<td align="right">7</td>
 <td align="right"></td>
 <td align="right"></td>
 <td align="right">5.0</td>
@@ -843,6 +819,30 @@ order to be able to refer to each use by a combination of P-Number
 <td align="right">3</td>
 <td align="left">Days</td>
 <td align="left">Gemüsebau</td>
+</tr>
+<tr class="odd">
+<td align="right">7511</td>
+<td align="right">8</td>
+<td align="right">0.2</td>
+<td align="right"></td>
+<td align="right">3.2</td>
+<td align="right"></td>
+<td align="left">kg/ha</td>
+<td align="right"></td>
+<td align="left"></td>
+<td align="left">Weinbau</td>
+</tr>
+<tr class="even">
+<td align="right">7511</td>
+<td align="right">9</td>
+<td align="right">0.2</td>
+<td align="right"></td>
+<td align="right">3.2</td>
+<td align="right"></td>
+<td align="left">kg/ha</td>
+<td align="right">2</td>
+<td align="left">Week(s)</td>
+<td align="left">Obstbau</td>
 </tr>
 </tbody>
 </table>
@@ -871,28 +871,31 @@ names of the active substances can be joined as well.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">wNbr</span> <span class="op">==</span> <span class="st">"6168"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">example_register</span><span class="op">$</span><span class="va">uses</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">pNbr</span><span class="op">)</span>,</span>
 <span>    relationship <span class="op">=</span> <span class="st">"many-to-many"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">example_register</span><span class="op">$</span><span class="va">cultures</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">pNbr</span>, <span class="va">use_nr</span><span class="op">)</span>,</span>
+<span>    relationship <span class="op">=</span> <span class="st">"many-to-many"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">example_register</span><span class="op">$</span><span class="va">ingredients</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">pNbr</span><span class="op">)</span>,</span>
 <span>    relationship <span class="op">=</span> <span class="st">"many-to-many"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">example_register</span><span class="op">$</span><span class="va">substances</span>, by <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">pk</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">pNbr</span>, <span class="va">name</span>, <span class="va">use_nr</span>,</span>
 <span>    <span class="va">min_dosage</span>, <span class="va">max_dosage</span>, <span class="va">min_rate</span>, <span class="va">max_rate</span>, <span class="va">units_de</span>,</span>
-<span>    <span class="va">application_area_de</span>,</span>
+<span>    <span class="va">application_area_de</span>, <span class="va">culture_de</span>,</span>
 <span>    <span class="va">substance_de</span>, <span class="va">percent</span>, <span class="va">g_per_L</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">use_nr</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">12</span><span class="op">:</span><span class="fl">17</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">example_uses</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
+<col width="3%">
 <col width="4%">
 <col width="5%">
+<col width="8%">
+<col width="8%">
 <col width="6%">
+<col width="6%">
+<col width="6%">
+<col width="15%">
+<col width="12%">
 <col width="9%">
-<col width="9%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="17%">
-<col width="11%">
 <col width="6%">
 <col width="6%">
 </colgroup>
@@ -906,6 +909,7 @@ names of the active substances can be joined as well.</p>
 <th align="right">max_rate</th>
 <th align="left">units_de</th>
 <th align="left">application_area_de</th>
+<th align="left">culture_de</th>
 <th align="left">substance_de</th>
 <th align="right">percent</th>
 <th align="right">g_per_L</th>
@@ -921,6 +925,37 @@ names of the active substances can be joined as well.</p>
 <td align="right">5</td>
 <td align="left">l/ha</td>
 <td align="left">Feldbau</td>
+<td align="left">Gerste</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="even">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">1</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">5</td>
+<td align="left">l/ha</td>
+<td align="left">Feldbau</td>
+<td align="left">Roggen</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="odd">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">1</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">5</td>
+<td align="left">l/ha</td>
+<td align="left">Feldbau</td>
+<td align="left">Weizen</td>
 <td align="left">Prosulfocarb</td>
 <td align="right">78.43</td>
 <td align="right">800</td>
@@ -935,6 +970,7 @@ names of the active substances can be joined as well.</p>
 <td align="right"></td>
 <td align="left">l/ha</td>
 <td align="left">Gemüsebau</td>
+<td align="left">Karotten</td>
 <td align="left">Prosulfocarb</td>
 <td align="right">78.43</td>
 <td align="right">800</td>
@@ -949,6 +985,7 @@ names of the active substances can be joined as well.</p>
 <td align="right"></td>
 <td align="left">l/ha</td>
 <td align="left">Gemüsebau</td>
+<td align="left">Meerrettich</td>
 <td align="left">Prosulfocarb</td>
 <td align="right">78.43</td>
 <td align="right">800</td>
@@ -963,6 +1000,7 @@ names of the active substances can be joined as well.</p>
 <td align="right"></td>
 <td align="left">l/ha</td>
 <td align="left">Gemüsebau</td>
+<td align="left">Stangensellerie</td>
 <td align="left">Prosulfocarb</td>
 <td align="right">78.43</td>
 <td align="right">800</td>
@@ -977,6 +1015,7 @@ names of the active substances can be joined as well.</p>
 <td align="right">5</td>
 <td align="left">l/ha</td>
 <td align="left">Feldbau</td>
+<td align="left">Kartoffeln</td>
 <td align="left">Prosulfocarb</td>
 <td align="right">78.43</td>
 <td align="right">800</td>
@@ -991,6 +1030,7 @@ names of the active substances can be joined as well.</p>
 <td align="right"></td>
 <td align="left">l/ha</td>
 <td align="left">Feldbau</td>
+<td align="left">Lupinen</td>
 <td align="left">Prosulfocarb</td>
 <td align="right">78.43</td>
 <td align="right">800</td>
@@ -1005,11 +1045,27 @@ names of the active substances can be joined as well.</p>
 <td align="right">5</td>
 <td align="left">l/ha</td>
 <td align="left">Feldbau</td>
+<td align="left">Triticale</td>
 <td align="left">Prosulfocarb</td>
 <td align="right">78.43</td>
 <td align="right">800</td>
 </tr>
 <tr class="even">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">13</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">5</td>
+<td align="left">l/ha</td>
+<td align="left">Feldbau</td>
+<td align="left">Korn (Dinkel)</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="odd">
 <td align="right">7105</td>
 <td align="left">Boxer</td>
 <td align="right">14</td>
@@ -1019,11 +1075,12 @@ names of the active substances can be joined as well.</p>
 <td align="right"></td>
 <td align="left">l/ha</td>
 <td align="left">Gemüsebau</td>
+<td align="left">Knollensellerie</td>
 <td align="left">Prosulfocarb</td>
 <td align="right">78.43</td>
 <td align="right">800</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">7105</td>
 <td align="left">Boxer</td>
 <td align="right">15</td>
@@ -1033,6 +1090,22 @@ names of the active substances can be joined as well.</p>
 <td align="right"></td>
 <td align="left">l/ha</td>
 <td align="left">Gemüsebau</td>
+<td align="left">Schwarzwurzel</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="odd">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">16</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">4.0</td>
+<td align="right"></td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Knoblauch</td>
 <td align="left">Prosulfocarb</td>
 <td align="right">78.43</td>
 <td align="right">800</td>
@@ -1047,6 +1120,7 @@ names of the active substances can be joined as well.</p>
 <td align="right"></td>
 <td align="left">l/ha</td>
 <td align="left">Gemüsebau</td>
+<td align="left">Schalotten</td>
 <td align="left">Prosulfocarb</td>
 <td align="right">78.43</td>
 <td align="right">800</td>
@@ -1061,6 +1135,7 @@ names of the active substances can be joined as well.</p>
 <td align="right"></td>
 <td align="left">l/ha</td>
 <td align="left">Gemüsebau</td>
+<td align="left">Zwiebeln</td>
 <td align="left">Prosulfocarb</td>
 <td align="right">78.43</td>
 <td align="right">800</td>
@@ -1085,6 +1160,22 @@ illustrated below.</p>
 <th align="right">rate</th>
 </tr></thead>
 <tbody>
+<tr class="odd">
+<td align="left">Prosulfocarb</td>
+<td align="left">Feldbau</td>
+<td align="right">2.5</td>
+<td align="right">5</td>
+<td align="left">l/ha</td>
+<td align="right">4000</td>
+</tr>
+<tr class="even">
+<td align="left">Prosulfocarb</td>
+<td align="left">Feldbau</td>
+<td align="right">2.5</td>
+<td align="right">5</td>
+<td align="left">l/ha</td>
+<td align="right">4000</td>
+</tr>
 <tr class="odd">
 <td align="left">Prosulfocarb</td>
 <td align="left">Feldbau</td>
@@ -1143,19 +1234,19 @@ illustrated below.</p>
 </tr>
 <tr class="even">
 <td align="left">Prosulfocarb</td>
-<td align="left">Gemüsebau</td>
-<td align="right">5.0</td>
-<td align="right"></td>
+<td align="left">Feldbau</td>
+<td align="right">2.5</td>
+<td align="right">5</td>
 <td align="left">l/ha</td>
 <td align="right">4000</td>
 </tr>
 <tr class="odd">
 <td align="left">Prosulfocarb</td>
 <td align="left">Gemüsebau</td>
-<td align="right">4.0</td>
+<td align="right">5.0</td>
 <td align="right"></td>
 <td align="left">l/ha</td>
-<td align="right">3200</td>
+<td align="right">4000</td>
 </tr>
 <tr class="even">
 <td align="left">Prosulfocarb</td>
@@ -1166,6 +1257,14 @@ illustrated below.</p>
 <td align="right">3200</td>
 </tr>
 <tr class="odd">
+<td align="left">Prosulfocarb</td>
+<td align="left">Gemüsebau</td>
+<td align="right">4.0</td>
+<td align="right"></td>
+<td align="left">l/ha</td>
+<td align="right">3200</td>
+</tr>
+<tr class="even">
 <td align="left">Prosulfocarb</td>
 <td align="left">Gemüsebau</td>
 <td align="right">4.0</td>
@@ -1290,7 +1389,7 @@ appending ‘[dup]’ to their name.</p>
 <span><span class="co">## 30  ¦   ¦   ¦   °--... 1 nodes w/ 0 sub                   </span></span>
 <span><span class="co">## 31  ¦   ¦   °--... 6 nodes w/ 20 sub                      </span></span>
 <span><span class="co">## 32  ¦   °--... 9 nodes w/ 31 sub                          </span></span>
-<span><span class="co">## 33  °--... 46 nodes w/ 290 sub                            </span></span>
+<span><span class="co">## 33  °--... 46 nodes w/ 289 sub                            </span></span>
 <span><span class="co">##                              culture_id</span></span>
 <span><span class="co">## 1                                      </span></span>
 <span><span class="co">## 2  0106A8DF-6CDF-4E18-8F46-3D9E1D52D0E5</span></span>
@@ -1424,175 +1523,175 @@ the indicator project is illustrated below.</p>
 <td align="right">1</td>
 <td align="left">Feldbau</td>
 <td align="left">Weizen</td>
-<td align="left">Gelbrost</td>
+<td align="left">Septoria-Spelzenbräune (S. nodorum)</td>
 </tr>
 <tr class="even">
 <td align="right">6521</td>
 <td align="right">2</td>
 <td align="left">Feldbau</td>
-<td align="left">Weizen</td>
-<td align="left">Septoria-Spelzenbräune (S. nodorum)</td>
+<td align="left">Winterroggen</td>
+<td align="left">Braunrost</td>
 </tr>
 <tr class="odd">
 <td align="right">6521</td>
 <td align="right">3</td>
 <td align="left">Feldbau</td>
-<td align="left">Winterroggen</td>
-<td align="left">Braunrost</td>
+<td align="left">Raps</td>
+<td align="left">Wurzelhals- und Stengelfäule</td>
 </tr>
 <tr class="even">
 <td align="right">6521</td>
 <td align="right">4</td>
 <td align="left">Feldbau</td>
-<td align="left">Raps</td>
-<td align="left">Wurzelhals- und Stengelfäule</td>
+<td align="left">Lupinen</td>
+<td align="left">Anthraknose</td>
 </tr>
 <tr class="odd">
 <td align="right">6521</td>
 <td align="right">5</td>
 <td align="left">Feldbau</td>
-<td align="left">Lupinen</td>
-<td align="left">Anthraknose</td>
+<td align="left">Weizen</td>
+<td align="left">Echter Mehltau des Getreides</td>
 </tr>
 <tr class="even">
 <td align="right">6521</td>
 <td align="right">6</td>
 <td align="left">Feldbau</td>
-<td align="left">Weizen</td>
-<td align="left">Echter Mehltau des Getreides</td>
-</tr>
-<tr class="odd">
-<td align="right">6521</td>
-<td align="right">7</td>
-<td align="left">Feldbau</td>
 <td align="left">Eiweisserbse</td>
 <td align="left">Graufäule (Botrytis cinerea)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">6521</td>
-<td align="right">7</td>
+<td align="right">6</td>
 <td align="left">Feldbau</td>
 <td align="left">Eiweisserbse</td>
 <td align="left">Rost der Erbse</td>
 </tr>
+<tr class="even">
+<td align="right">6521</td>
+<td align="right">6</td>
+<td align="left">Feldbau</td>
+<td align="left">Eiweisserbse</td>
+<td align="left">Brennfleckenkrankheit der Erbse</td>
+</tr>
 <tr class="odd">
 <td align="right">6521</td>
 <td align="right">7</td>
 <td align="left">Feldbau</td>
-<td align="left">Eiweisserbse</td>
-<td align="left">Brennfleckenkrankheit der Erbse</td>
+<td align="left">Weizen</td>
+<td align="left">Ährenfusariosen</td>
 </tr>
 <tr class="even">
 <td align="right">6521</td>
 <td align="right">8</td>
 <td align="left">Feldbau</td>
-<td align="left">Weizen</td>
-<td align="left">Ährenfusariosen</td>
-</tr>
-<tr class="odd">
-<td align="right">6521</td>
-<td align="right">9</td>
-<td align="left">Feldbau</td>
 <td align="left">Ackerbohne</td>
 <td align="left">Rost der Ackerbohne</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">6521</td>
-<td align="right">9</td>
+<td align="right">8</td>
 <td align="left">Feldbau</td>
 <td align="left">Ackerbohne</td>
 <td align="left">Braunfleckenkrankheit</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">6521</td>
-<td align="right">10</td>
+<td align="right">9</td>
 <td align="left">Feldbau</td>
 <td align="left">Lein</td>
 <td align="left">Stängelbräune des Leins</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">6521</td>
-<td align="right">10</td>
+<td align="right">9</td>
 <td align="left">Feldbau</td>
 <td align="left">Lein</td>
 <td align="left">Pasmokrankheit</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">6521</td>
-<td align="right">10</td>
+<td align="right">9</td>
 <td align="left">Feldbau</td>
 <td align="left">Lein</td>
 <td align="left">Echter Mehltau des Leins</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">6521</td>
-<td align="right">11</td>
+<td align="right">10</td>
 <td align="left">Gemüsebau</td>
 <td align="left">Spargel</td>
 <td align="left">Blattschwärze der Spargel</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">6521</td>
-<td align="right">11</td>
+<td align="right">10</td>
 <td align="left">Gemüsebau</td>
 <td align="left">Spargel</td>
 <td align="left">Spargelrost</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">6521</td>
-<td align="right">12</td>
+<td align="right">11</td>
 <td align="left">Feldbau</td>
 <td align="left">Grasbestände zur Saatgutproduktion</td>
 <td align="left">Rost der Gräser</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">6521</td>
-<td align="right">12</td>
+<td align="right">11</td>
 <td align="left">Feldbau</td>
 <td align="left">Grasbestände zur Saatgutproduktion</td>
 <td align="left">Blattfleckenpilze</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">6521</td>
-<td align="right">13</td>
+<td align="right">12</td>
 <td align="left">Gemüsebau</td>
 <td align="left">Erbsen</td>
 <td align="left">Graufäule (Botrytis cinerea)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">6521</td>
-<td align="right">13</td>
+<td align="right">12</td>
 <td align="left">Gemüsebau</td>
 <td align="left">Erbsen</td>
 <td align="left">Rost der Erbse</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">6521</td>
-<td align="right">13</td>
+<td align="right">12</td>
 <td align="left">Gemüsebau</td>
 <td align="left">Erbsen</td>
 <td align="left">Brennfleckenkrankheit der Erbse</td>
+</tr>
+<tr class="even">
+<td align="right">6521</td>
+<td align="right">13</td>
+<td align="left">Feldbau</td>
+<td align="left">Raps</td>
+<td align="left">Sclerotinia-Fäule</td>
 </tr>
 <tr class="odd">
 <td align="right">6521</td>
 <td align="right">14</td>
 <td align="left">Feldbau</td>
 <td align="left">Raps</td>
-<td align="left">Sclerotinia-Fäule</td>
+<td align="left">Wurzelhals- und Stengelfäule</td>
 </tr>
 <tr class="even">
 <td align="right">6521</td>
-<td align="right">15</td>
+<td align="right">14</td>
 <td align="left">Feldbau</td>
 <td align="left">Raps</td>
-<td align="left">Wurzelhals- und Stengelfäule</td>
+<td align="left">Erhöhung der Standfestigkeit</td>
 </tr>
 <tr class="odd">
 <td align="right">6521</td>
 <td align="right">15</td>
 <td align="left">Feldbau</td>
-<td align="left">Raps</td>
-<td align="left">Erhöhung der Standfestigkeit</td>
+<td align="left">Weizen</td>
+<td align="left">Gelbrost</td>
 </tr>
 </tbody>
 </table>
@@ -2100,75 +2199,74 @@ are marked by appending ‘[dup]’ to their name.</p>
 <span><span class="co">## 294  ¦   ¦       ¦       °--Schnittsalat                                        </span></span>
 <span><span class="co">## 295  ¦   ¦       °--Endivien und Blattzichorien                                 </span></span>
 <span><span class="co">## 296  ¦   ¦           ¦--Endivien                                                </span></span>
-<span><span class="co">## 297  ¦   ¦           ¦--Zuckerhut                                               </span></span>
-<span><span class="co">## 298  ¦   ¦           °--Radicchio- und Cicorino-Typen                           </span></span>
-<span><span class="co">## 299  ¦   ¦--Lippenblütler (Labiatae)                                            </span></span>
-<span><span class="co">## 300  ¦   ¦   °--Stachys                                                         </span></span>
-<span><span class="co">## 301  ¦   ¦--Süssgräser (Poaceae)                                                </span></span>
-<span><span class="co">## 302  ¦   ¦   °--Zuckermais                                                      </span></span>
-<span><span class="co">## 303  ¦   ¦--Kräuter                                                             </span></span>
-<span><span class="co">## 304  ¦   ¦--Küchenkräuter                                                       </span></span>
-<span><span class="co">## 305  ¦   ¦   ¦--Ysop                                                            </span></span>
-<span><span class="co">## 306  ¦   ¦   ¦--Koriander                                                       </span></span>
-<span><span class="co">## 307  ¦   ¦   ¦--Rosmarin                                                        </span></span>
-<span><span class="co">## 308  ¦   ¦   ¦--Petersilie                                                      </span></span>
-<span><span class="co">## 309  ¦   ¦   ¦--Römische Kamille                                                </span></span>
-<span><span class="co">## 310  ¦   ¦   ¦--Kerbel                                                          </span></span>
-<span><span class="co">## 311  ¦   ¦   ¦--Minze                                                           </span></span>
-<span><span class="co">## 312  ¦   ¦   ¦--Basilikum                                                       </span></span>
-<span><span class="co">## 313  ¦   ¦   ¦--Bohnenkraut                                                     </span></span>
-<span><span class="co">## 314  ¦   ¦   ¦--Thymian                                                         </span></span>
-<span><span class="co">## 315  ¦   ¦   ¦--Kümmel                                                          </span></span>
-<span><span class="co">## 316  ¦   ¦   ¦--Dill                                                            </span></span>
-<span><span class="co">## 317  ¦   ¦   ¦--Salbei                                                          </span></span>
-<span><span class="co">## 318  ¦   ¦   ¦--Liebstöckel                                                     </span></span>
-<span><span class="co">## 319  ¦   ¦   ¦--Estragon                                                        </span></span>
-<span><span class="co">## 320  ¦   ¦   °--Schnittlauch                                                    </span></span>
-<span><span class="co">## 321  ¦   ¦--Hülsenfrüchtler (Fabaceae)                                          </span></span>
-<span><span class="co">## 322  ¦   ¦   ¦--Linse                                                           </span></span>
-<span><span class="co">## 323  ¦   ¦   ¦--Puffbohne                                                       </span></span>
-<span><span class="co">## 324  ¦   ¦   ¦--Erbsen                                                          </span></span>
-<span><span class="co">## 325  ¦   ¦   ¦   ¦--Erbsen mit Hülsen                                           </span></span>
-<span><span class="co">## 326  ¦   ¦   ¦   °--Erbsen ohne Hülsen                                          </span></span>
-<span><span class="co">## 327  ¦   ¦   °--Bohnen                                                          </span></span>
-<span><span class="co">## 328  ¦   ¦       ¦--Bohnen ohne Hülsen                                          </span></span>
-<span><span class="co">## 329  ¦   ¦       °--Bohnen mit Hülsen                                           </span></span>
-<span><span class="co">## 330  ¦   ¦           ¦--Stangenbohne                                            </span></span>
-<span><span class="co">## 331  ¦   ¦           °--Buschbohne                                              </span></span>
-<span><span class="co">## 332  ¦   ¦--Kreuzblütler (Brassicaceae)                                         </span></span>
-<span><span class="co">## 333  ¦   ¦   ¦--Brunnenkresse                                                   </span></span>
-<span><span class="co">## 334  ¦   ¦   ¦--Kohlarten                                                       </span></span>
-<span><span class="co">## 335  ¦   ¦   ¦   ¦--Blumenkohle                                                 </span></span>
-<span><span class="co">## 336  ¦   ¦   ¦   ¦   ¦--Blumenkohl                                              </span></span>
-<span><span class="co">## 337  ¦   ¦   ¦   ¦   ¦--Romanesco                                               </span></span>
-<span><span class="co">## 338  ¦   ¦   ¦   ¦   °--Broccoli                                                </span></span>
-<span><span class="co">## 339  ¦   ¦   ¦   ¦--Blattkohle                                                  </span></span>
-<span><span class="co">## 340  ¦   ¦   ¦   ¦   ¦--Pak-Choi                                                </span></span>
-<span><span class="co">## 341  ¦   ¦   ¦   ¦   ¦--Markstammkohl                                           </span></span>
-<span><span class="co">## 342  ¦   ¦   ¦   ¦   ¦--Chinakohl                                               </span></span>
-<span><span class="co">## 343  ¦   ¦   ¦   ¦   ¦--Stielmus                                                </span></span>
-<span><span class="co">## 344  ¦   ¦   ¦   ¦   °--Federkohl                                               </span></span>
-<span><span class="co">## 345  ¦   ¦   ¦   ¦--Rosenkohl                                                   </span></span>
-<span><span class="co">## 346  ¦   ¦   ¦   ¦--Kopfkohle                                                   </span></span>
-<span><span class="co">## 347  ¦   ¦   ¦   °--Kohlrabi                                                    </span></span>
-<span><span class="co">## 348  ¦   ¦   ¦--Kresse                                                          </span></span>
-<span><span class="co">## 349  ¦   ¦   ¦--Blattsalate (Brassicaceae)                                      </span></span>
-<span><span class="co">## 350  ¦   ¦   ¦--Radies                                                          </span></span>
-<span><span class="co">## 351  ¦   ¦   ¦--Speisekohlrüben                                                 </span></span>
-<span><span class="co">## 352  ¦   ¦   ¦   ¦--Brassica napus-Rüben                                        </span></span>
-<span><span class="co">## 353  ¦   ¦   ¦   ¦   °--Bodenkohlrabi                                           </span></span>
-<span><span class="co">## 354  ¦   ¦   ¦   °--Brassica rapa-Rüben                                         </span></span>
-<span><span class="co">## 355  ¦   ¦   ¦--Barbarakraut                                                    </span></span>
-<span><span class="co">## 356  ¦   ¦   ¦--Rettich                                                         </span></span>
-<span><span class="co">## 357  ¦   ¦   ¦--Asia-Salate (Brassicaceae)                                      </span></span>
-<span><span class="co">## 358  ¦   ¦   ¦--Cima di Rapa                                                    </span></span>
-<span><span class="co">## 359  ¦   ¦   ¦--Rucola                                                          </span></span>
-<span><span class="co">## 360  ¦   ¦   °--Meerrettich                                                     </span></span>
-<span><span class="co">## 361  ¦   °--Kohlgemüse                                                          </span></span>
-<span><span class="co">## 362  ¦--Medizinalkräuter                                                        </span></span>
-<span><span class="co">## 363  ¦   °--Wolliger Fingerhut                                                  </span></span>
-<span><span class="co">## 364  ¦--Hagebutten                                                              </span></span>
-<span><span class="co">## 365  °--allg. Wiesen und Weiden                                                 </span></span>
+<span><span class="co">## 297  ¦   ¦           °--Radicchio- und Cicorino-Typen                           </span></span>
+<span><span class="co">## 298  ¦   ¦--Lippenblütler (Labiatae)                                            </span></span>
+<span><span class="co">## 299  ¦   ¦   °--Stachys                                                         </span></span>
+<span><span class="co">## 300  ¦   ¦--Süssgräser (Poaceae)                                                </span></span>
+<span><span class="co">## 301  ¦   ¦   °--Zuckermais                                                      </span></span>
+<span><span class="co">## 302  ¦   ¦--Kräuter                                                             </span></span>
+<span><span class="co">## 303  ¦   ¦--Küchenkräuter                                                       </span></span>
+<span><span class="co">## 304  ¦   ¦   ¦--Ysop                                                            </span></span>
+<span><span class="co">## 305  ¦   ¦   ¦--Koriander                                                       </span></span>
+<span><span class="co">## 306  ¦   ¦   ¦--Rosmarin                                                        </span></span>
+<span><span class="co">## 307  ¦   ¦   ¦--Petersilie                                                      </span></span>
+<span><span class="co">## 308  ¦   ¦   ¦--Römische Kamille                                                </span></span>
+<span><span class="co">## 309  ¦   ¦   ¦--Kerbel                                                          </span></span>
+<span><span class="co">## 310  ¦   ¦   ¦--Minze                                                           </span></span>
+<span><span class="co">## 311  ¦   ¦   ¦--Basilikum                                                       </span></span>
+<span><span class="co">## 312  ¦   ¦   ¦--Bohnenkraut                                                     </span></span>
+<span><span class="co">## 313  ¦   ¦   ¦--Thymian                                                         </span></span>
+<span><span class="co">## 314  ¦   ¦   ¦--Kümmel                                                          </span></span>
+<span><span class="co">## 315  ¦   ¦   ¦--Dill                                                            </span></span>
+<span><span class="co">## 316  ¦   ¦   ¦--Salbei                                                          </span></span>
+<span><span class="co">## 317  ¦   ¦   ¦--Liebstöckel                                                     </span></span>
+<span><span class="co">## 318  ¦   ¦   ¦--Estragon                                                        </span></span>
+<span><span class="co">## 319  ¦   ¦   °--Schnittlauch                                                    </span></span>
+<span><span class="co">## 320  ¦   ¦--Hülsenfrüchtler (Fabaceae)                                          </span></span>
+<span><span class="co">## 321  ¦   ¦   ¦--Linse                                                           </span></span>
+<span><span class="co">## 322  ¦   ¦   ¦--Puffbohne                                                       </span></span>
+<span><span class="co">## 323  ¦   ¦   ¦--Erbsen                                                          </span></span>
+<span><span class="co">## 324  ¦   ¦   ¦   ¦--Erbsen mit Hülsen                                           </span></span>
+<span><span class="co">## 325  ¦   ¦   ¦   °--Erbsen ohne Hülsen                                          </span></span>
+<span><span class="co">## 326  ¦   ¦   °--Bohnen                                                          </span></span>
+<span><span class="co">## 327  ¦   ¦       ¦--Bohnen ohne Hülsen                                          </span></span>
+<span><span class="co">## 328  ¦   ¦       °--Bohnen mit Hülsen                                           </span></span>
+<span><span class="co">## 329  ¦   ¦           ¦--Stangenbohne                                            </span></span>
+<span><span class="co">## 330  ¦   ¦           °--Buschbohne                                              </span></span>
+<span><span class="co">## 331  ¦   ¦--Kreuzblütler (Brassicaceae)                                         </span></span>
+<span><span class="co">## 332  ¦   ¦   ¦--Brunnenkresse                                                   </span></span>
+<span><span class="co">## 333  ¦   ¦   ¦--Kohlarten                                                       </span></span>
+<span><span class="co">## 334  ¦   ¦   ¦   ¦--Blumenkohle                                                 </span></span>
+<span><span class="co">## 335  ¦   ¦   ¦   ¦   ¦--Blumenkohl                                              </span></span>
+<span><span class="co">## 336  ¦   ¦   ¦   ¦   ¦--Romanesco                                               </span></span>
+<span><span class="co">## 337  ¦   ¦   ¦   ¦   °--Broccoli                                                </span></span>
+<span><span class="co">## 338  ¦   ¦   ¦   ¦--Blattkohle                                                  </span></span>
+<span><span class="co">## 339  ¦   ¦   ¦   ¦   ¦--Pak-Choi                                                </span></span>
+<span><span class="co">## 340  ¦   ¦   ¦   ¦   ¦--Markstammkohl                                           </span></span>
+<span><span class="co">## 341  ¦   ¦   ¦   ¦   ¦--Chinakohl                                               </span></span>
+<span><span class="co">## 342  ¦   ¦   ¦   ¦   ¦--Stielmus                                                </span></span>
+<span><span class="co">## 343  ¦   ¦   ¦   ¦   °--Federkohl                                               </span></span>
+<span><span class="co">## 344  ¦   ¦   ¦   ¦--Rosenkohl                                                   </span></span>
+<span><span class="co">## 345  ¦   ¦   ¦   ¦--Kopfkohle                                                   </span></span>
+<span><span class="co">## 346  ¦   ¦   ¦   °--Kohlrabi                                                    </span></span>
+<span><span class="co">## 347  ¦   ¦   ¦--Kresse                                                          </span></span>
+<span><span class="co">## 348  ¦   ¦   ¦--Blattsalate (Brassicaceae)                                      </span></span>
+<span><span class="co">## 349  ¦   ¦   ¦--Radies                                                          </span></span>
+<span><span class="co">## 350  ¦   ¦   ¦--Speisekohlrüben                                                 </span></span>
+<span><span class="co">## 351  ¦   ¦   ¦   ¦--Brassica napus-Rüben                                        </span></span>
+<span><span class="co">## 352  ¦   ¦   ¦   ¦   °--Bodenkohlrabi                                           </span></span>
+<span><span class="co">## 353  ¦   ¦   ¦   °--Brassica rapa-Rüben                                         </span></span>
+<span><span class="co">## 354  ¦   ¦   ¦--Barbarakraut                                                    </span></span>
+<span><span class="co">## 355  ¦   ¦   ¦--Rettich                                                         </span></span>
+<span><span class="co">## 356  ¦   ¦   ¦--Asia-Salate (Brassicaceae)                                      </span></span>
+<span><span class="co">## 357  ¦   ¦   ¦--Cima di Rapa                                                    </span></span>
+<span><span class="co">## 358  ¦   ¦   ¦--Rucola                                                          </span></span>
+<span><span class="co">## 359  ¦   ¦   °--Meerrettich                                                     </span></span>
+<span><span class="co">## 360  ¦   °--Kohlgemüse                                                          </span></span>
+<span><span class="co">## 361  ¦--Medizinalkräuter                                                        </span></span>
+<span><span class="co">## 362  ¦   °--Wolliger Fingerhut                                                  </span></span>
+<span><span class="co">## 363  ¦--Hagebutten                                                              </span></span>
+<span><span class="co">## 364  °--allg. Wiesen und Weiden                                                 </span></span>
 <span><span class="co">##                               culture_id</span></span>
 <span><span class="co">## 1                                       </span></span>
 <span><span class="co">## 2   0106A8DF-6CDF-4E18-8F46-3D9E1D52D0E5</span></span>
@@ -2466,75 +2564,74 @@ are marked by appending ‘[dup]’ to their name.</p>
 <span><span class="co">## 294 A4BC1F92-959A-4449-A039-B98E3ABCD9B1</span></span>
 <span><span class="co">## 295 8DB1A579-6BAC-4DCB-8026-E79B65D3BD3A</span></span>
 <span><span class="co">## 296 62BF86AE-FD69-4F95-A72C-1D57AF1DCD99</span></span>
-<span><span class="co">## 297 94589F70-1F3A-4AEF-A26A-2267EB5BDA4B</span></span>
-<span><span class="co">## 298 B535B6DD-517D-4A62-ACC7-2948B15175ED</span></span>
-<span><span class="co">## 299 BA6FCA8F-68B8-4408-A267-2546B1FA5764</span></span>
-<span><span class="co">## 300 1F0B6451-EC2C-4647-A53A-23B0EAE626B1</span></span>
-<span><span class="co">## 301 BF77A7F8-C4C5-43AF-9BCD-B7F904506E7A</span></span>
-<span><span class="co">## 302 5433C814-C0CD-4815-B236-2D02E1C66F3D</span></span>
-<span><span class="co">## 303 C3F940E4-D07C-4F4D-851C-D1024F8A6A62</span></span>
-<span><span class="co">## 304 D541F2F5-8BA6-4E26-AA66-9CF469648AFF</span></span>
-<span><span class="co">## 305 0A88EFE2-B85E-4BF7-9C38-AEE8CB2BFE42</span></span>
-<span><span class="co">## 306 0DAB25B6-C3AA-430B-BF83-05FA66D889A4</span></span>
-<span><span class="co">## 307 14B19DFD-331F-4C30-8724-8EDDF8E2D0D4</span></span>
-<span><span class="co">## 308 1A1D511B-4ABD-44F2-8BB5-55192F5310D2</span></span>
-<span><span class="co">## 309 25DC9B01-CA06-426A-B743-C0D293447898</span></span>
-<span><span class="co">## 310 2C8A4414-AD7F-4708-9C58-BF1969131693</span></span>
-<span><span class="co">## 311 37059300-8031-4A64-B75C-7490288E32BA</span></span>
-<span><span class="co">## 312 3C2F424F-DFA0-4A59-A3DF-6E33A6B0B97E</span></span>
-<span><span class="co">## 313 4D799EC6-1483-4D65-90EA-8DDB6A4166CA</span></span>
-<span><span class="co">## 314 730AACDC-B956-493D-8148-7520019CE0BC</span></span>
-<span><span class="co">## 315 807F5A2C-7904-456D-BBC7-A80A4B207964</span></span>
-<span><span class="co">## 316 91522E50-F1AC-42B1-870B-68218110C235</span></span>
-<span><span class="co">## 317 A067CC81-6A5D-4684-BE95-7941A51B9EF2</span></span>
-<span><span class="co">## 318 A519A894-B754-44D1-A032-155F57B0CBFE</span></span>
-<span><span class="co">## 319 ABF54D5D-620B-4A08-A37D-416C1AD8D1BF</span></span>
-<span><span class="co">## 320 FA8C26CF-E3B4-456D-AA4E-94D21AEADA1A</span></span>
-<span><span class="co">## 321 DB4E4C8B-016C-4C31-8DC5-587A9F1F8FFD</span></span>
-<span><span class="co">## 322 54C75B64-57C4-46E2-BCEA-741EBC10FDDF</span></span>
-<span><span class="co">## 323 56AF3EA3-01F4-4F10-B240-7EF4BE1C1CCE</span></span>
-<span><span class="co">## 324 5DF3AB4D-7CAC-4112-90D9-67BD80EC5E96</span></span>
-<span><span class="co">## 325 02BF379A-E526-422A-952B-3B0CD995F8C1</span></span>
-<span><span class="co">## 326 C5188A42-9C79-4110-B1E8-AEE9D6078BEA</span></span>
-<span><span class="co">## 327 A8BAC5BB-239F-4EE0-8CE2-F55590DA3FC0</span></span>
-<span><span class="co">## 328 102C28F6-4AFB-4079-909B-ACE8E0819A77</span></span>
-<span><span class="co">## 329 F7BB2F1C-EDE5-4C95-931E-0B2C973F5A29</span></span>
-<span><span class="co">## 330 4465118D-78E7-4748-A47A-7F39E593771A</span></span>
-<span><span class="co">## 331 930524FB-BD0A-4CA9-A89D-4FEEE1F9174F</span></span>
-<span><span class="co">## 332 E55D75D3-B805-4BFD-B2B0-D02368BD32AC</span></span>
-<span><span class="co">## 333 19C5BA72-A0D5-4409-8D05-0A7C9D821E20</span></span>
-<span><span class="co">## 334 4380EC0F-E195-4783-8BB7-F6B0464B37D6</span></span>
-<span><span class="co">## 335 4A22B9D3-747C-4323-A852-1CB1F6ADB680</span></span>
-<span><span class="co">## 336 1E129025-DFD8-42D1-8A86-D90485B282A1</span></span>
-<span><span class="co">## 337 8AFA14F8-CCE3-4012-BD12-9D690EBAE1AD</span></span>
-<span><span class="co">## 338 B9323B4D-249D-4CF3-A5DF-4FDA2E66532F</span></span>
-<span><span class="co">## 339 6F26F4E0-401C-4B16-A28B-4CC889907361</span></span>
-<span><span class="co">## 340 394AE687-29A0-4BA6-B0B9-D7DFB0C08FCE</span></span>
-<span><span class="co">## 341 80395E92-C39B-45D9-91AC-AB7E6DCAC3DB</span></span>
-<span><span class="co">## 342 C37A7EE2-D06B-4204-809A-F50A934F79E3</span></span>
-<span><span class="co">## 343 DA5835F6-C295-4A4F-829D-007B1FA50A6D</span></span>
-<span><span class="co">## 344 DF4B3775-8361-41CE-9843-AC953197403D</span></span>
-<span><span class="co">## 345 7B90BAC4-B80F-4039-ADC3-ADF9225CCBB7</span></span>
-<span><span class="co">## 346 CA58ABAE-E494-4608-BE51-5FF49D853A03</span></span>
-<span><span class="co">## 347 D8A50212-BD15-456A-9D2E-2A401C2EF21D</span></span>
-<span><span class="co">## 348 7CE53BA0-097D-44FB-82FF-C30DFD3769DD</span></span>
-<span><span class="co">## 349 85BB3788-27A8-4E73-800A-0E8F154EC0BE</span></span>
-<span><span class="co">## 350 8FF3D364-2BA6-40AA-A370-4B72E3CAC8DF</span></span>
-<span><span class="co">## 351 A0C29069-5DBA-4E89-B7F9-4C556C272821</span></span>
-<span><span class="co">## 352 1F004DAA-89AD-4A9D-A172-95D24B8A45FA</span></span>
-<span><span class="co">## 353 EB820B26-DE4E-4AF4-8BA3-46844F045306</span></span>
-<span><span class="co">## 354 BFD1B79E-ABD1-4A44-8E61-891FF97960A1</span></span>
-<span><span class="co">## 355 BA2DECCF-5987-4987-B56E-C5EC6E5D19C0</span></span>
-<span><span class="co">## 356 BB923645-6E65-48EE-9C64-DA2232EEE7EF</span></span>
-<span><span class="co">## 357 BFDDCB65-6E46-47E1-90B1-A998D5BD0546</span></span>
-<span><span class="co">## 358 C264982A-CA81-4311-9E38-67D2D956BC78</span></span>
-<span><span class="co">## 359 CC9D982D-A99F-4143-8298-BC029BD1D1AD</span></span>
-<span><span class="co">## 360 EACDD832-D1CD-479C-973F-CD0DB6A9FBC3</span></span>
-<span><span class="co">## 361 EB0C465C-50B7-4DC0-914B-ABE4C284A907</span></span>
-<span><span class="co">## 362 E981BFA6-288D-4EA6-B81B-4F610611EB36</span></span>
-<span><span class="co">## 363 C38D7DE4-C804-4F7C-AA2F-A536D03E0DFC</span></span>
-<span><span class="co">## 364 EC349B29-6A2B-4E43-990F-C553D278DC0E</span></span>
-<span><span class="co">## 365 FD7AB34C-F432-445D-9440-F44FDAB8422C</span></span>
+<span><span class="co">## 297 B535B6DD-517D-4A62-ACC7-2948B15175ED</span></span>
+<span><span class="co">## 298 BA6FCA8F-68B8-4408-A267-2546B1FA5764</span></span>
+<span><span class="co">## 299 1F0B6451-EC2C-4647-A53A-23B0EAE626B1</span></span>
+<span><span class="co">## 300 BF77A7F8-C4C5-43AF-9BCD-B7F904506E7A</span></span>
+<span><span class="co">## 301 5433C814-C0CD-4815-B236-2D02E1C66F3D</span></span>
+<span><span class="co">## 302 C3F940E4-D07C-4F4D-851C-D1024F8A6A62</span></span>
+<span><span class="co">## 303 D541F2F5-8BA6-4E26-AA66-9CF469648AFF</span></span>
+<span><span class="co">## 304 0A88EFE2-B85E-4BF7-9C38-AEE8CB2BFE42</span></span>
+<span><span class="co">## 305 0DAB25B6-C3AA-430B-BF83-05FA66D889A4</span></span>
+<span><span class="co">## 306 14B19DFD-331F-4C30-8724-8EDDF8E2D0D4</span></span>
+<span><span class="co">## 307 1A1D511B-4ABD-44F2-8BB5-55192F5310D2</span></span>
+<span><span class="co">## 308 25DC9B01-CA06-426A-B743-C0D293447898</span></span>
+<span><span class="co">## 309 2C8A4414-AD7F-4708-9C58-BF1969131693</span></span>
+<span><span class="co">## 310 37059300-8031-4A64-B75C-7490288E32BA</span></span>
+<span><span class="co">## 311 3C2F424F-DFA0-4A59-A3DF-6E33A6B0B97E</span></span>
+<span><span class="co">## 312 4D799EC6-1483-4D65-90EA-8DDB6A4166CA</span></span>
+<span><span class="co">## 313 730AACDC-B956-493D-8148-7520019CE0BC</span></span>
+<span><span class="co">## 314 807F5A2C-7904-456D-BBC7-A80A4B207964</span></span>
+<span><span class="co">## 315 91522E50-F1AC-42B1-870B-68218110C235</span></span>
+<span><span class="co">## 316 A067CC81-6A5D-4684-BE95-7941A51B9EF2</span></span>
+<span><span class="co">## 317 A519A894-B754-44D1-A032-155F57B0CBFE</span></span>
+<span><span class="co">## 318 ABF54D5D-620B-4A08-A37D-416C1AD8D1BF</span></span>
+<span><span class="co">## 319 FA8C26CF-E3B4-456D-AA4E-94D21AEADA1A</span></span>
+<span><span class="co">## 320 DB4E4C8B-016C-4C31-8DC5-587A9F1F8FFD</span></span>
+<span><span class="co">## 321 54C75B64-57C4-46E2-BCEA-741EBC10FDDF</span></span>
+<span><span class="co">## 322 56AF3EA3-01F4-4F10-B240-7EF4BE1C1CCE</span></span>
+<span><span class="co">## 323 5DF3AB4D-7CAC-4112-90D9-67BD80EC5E96</span></span>
+<span><span class="co">## 324 02BF379A-E526-422A-952B-3B0CD995F8C1</span></span>
+<span><span class="co">## 325 C5188A42-9C79-4110-B1E8-AEE9D6078BEA</span></span>
+<span><span class="co">## 326 A8BAC5BB-239F-4EE0-8CE2-F55590DA3FC0</span></span>
+<span><span class="co">## 327 102C28F6-4AFB-4079-909B-ACE8E0819A77</span></span>
+<span><span class="co">## 328 F7BB2F1C-EDE5-4C95-931E-0B2C973F5A29</span></span>
+<span><span class="co">## 329 4465118D-78E7-4748-A47A-7F39E593771A</span></span>
+<span><span class="co">## 330 930524FB-BD0A-4CA9-A89D-4FEEE1F9174F</span></span>
+<span><span class="co">## 331 E55D75D3-B805-4BFD-B2B0-D02368BD32AC</span></span>
+<span><span class="co">## 332 19C5BA72-A0D5-4409-8D05-0A7C9D821E20</span></span>
+<span><span class="co">## 333 4380EC0F-E195-4783-8BB7-F6B0464B37D6</span></span>
+<span><span class="co">## 334 4A22B9D3-747C-4323-A852-1CB1F6ADB680</span></span>
+<span><span class="co">## 335 1E129025-DFD8-42D1-8A86-D90485B282A1</span></span>
+<span><span class="co">## 336 8AFA14F8-CCE3-4012-BD12-9D690EBAE1AD</span></span>
+<span><span class="co">## 337 B9323B4D-249D-4CF3-A5DF-4FDA2E66532F</span></span>
+<span><span class="co">## 338 6F26F4E0-401C-4B16-A28B-4CC889907361</span></span>
+<span><span class="co">## 339 394AE687-29A0-4BA6-B0B9-D7DFB0C08FCE</span></span>
+<span><span class="co">## 340 80395E92-C39B-45D9-91AC-AB7E6DCAC3DB</span></span>
+<span><span class="co">## 341 C37A7EE2-D06B-4204-809A-F50A934F79E3</span></span>
+<span><span class="co">## 342 DA5835F6-C295-4A4F-829D-007B1FA50A6D</span></span>
+<span><span class="co">## 343 DF4B3775-8361-41CE-9843-AC953197403D</span></span>
+<span><span class="co">## 344 7B90BAC4-B80F-4039-ADC3-ADF9225CCBB7</span></span>
+<span><span class="co">## 345 CA58ABAE-E494-4608-BE51-5FF49D853A03</span></span>
+<span><span class="co">## 346 D8A50212-BD15-456A-9D2E-2A401C2EF21D</span></span>
+<span><span class="co">## 347 7CE53BA0-097D-44FB-82FF-C30DFD3769DD</span></span>
+<span><span class="co">## 348 85BB3788-27A8-4E73-800A-0E8F154EC0BE</span></span>
+<span><span class="co">## 349 8FF3D364-2BA6-40AA-A370-4B72E3CAC8DF</span></span>
+<span><span class="co">## 350 A0C29069-5DBA-4E89-B7F9-4C556C272821</span></span>
+<span><span class="co">## 351 1F004DAA-89AD-4A9D-A172-95D24B8A45FA</span></span>
+<span><span class="co">## 352 EB820B26-DE4E-4AF4-8BA3-46844F045306</span></span>
+<span><span class="co">## 353 BFD1B79E-ABD1-4A44-8E61-891FF97960A1</span></span>
+<span><span class="co">## 354 BA2DECCF-5987-4987-B56E-C5EC6E5D19C0</span></span>
+<span><span class="co">## 355 BB923645-6E65-48EE-9C64-DA2232EEE7EF</span></span>
+<span><span class="co">## 356 BFDDCB65-6E46-47E1-90B1-A998D5BD0546</span></span>
+<span><span class="co">## 357 C264982A-CA81-4311-9E38-67D2D956BC78</span></span>
+<span><span class="co">## 358 CC9D982D-A99F-4143-8298-BC029BD1D1AD</span></span>
+<span><span class="co">## 359 EACDD832-D1CD-479C-973F-CD0DB6A9FBC3</span></span>
+<span><span class="co">## 360 EB0C465C-50B7-4DC0-914B-ABE4C284A907</span></span>
+<span><span class="co">## 361 E981BFA6-288D-4EA6-B81B-4F610611EB36</span></span>
+<span><span class="co">## 362 C38D7DE4-C804-4F7C-AA2F-A536D03E0DFC</span></span>
+<span><span class="co">## 363 EC349B29-6A2B-4E43-990F-C553D278DC0E</span></span>
+<span><span class="co">## 364 FD7AB34C-F432-445D-9440-F44FDAB8422C</span></span>
 <span><span class="co">##                                                                       name_fr</span></span>
 <span><span class="co">## 1                                                                            </span></span>
 <span><span class="co">## 2                                                                   Baby-Leaf</span></span>
@@ -2832,75 +2929,74 @@ are marked by appending ‘[dup]’ to their name.</p>
 <span><span class="co">## 294                                                           laitue à tondre</span></span>
 <span><span class="co">## 295                                    chicorée pommée et chicorée à feuilles</span></span>
 <span><span class="co">## 296                                         chicorée scarole, chicorée frisée</span></span>
-<span><span class="co">## 297                                                    chicorée pain de sucre</span></span>
-<span><span class="co">## 298                                   types de radicchio/trévises et cicorino</span></span>
-<span><span class="co">## 299                                                      lamiacées (Labiatae)</span></span>
-<span><span class="co">## 300                                                          crosnes du japon</span></span>
-<span><span class="co">## 301                                                       poacées (Gramineae)</span></span>
-<span><span class="co">## 302                                                                maïs sucré</span></span>
-<span><span class="co">## 303                                                                    herbes</span></span>
-<span><span class="co">## 304                                                              fines herbes</span></span>
-<span><span class="co">## 305                                                                    Hysope</span></span>
-<span><span class="co">## 306                                                                 coriandre</span></span>
-<span><span class="co">## 307                                                                   romarin</span></span>
-<span><span class="co">## 308                                                                    persil</span></span>
-<span><span class="co">## 309                                                         Camomille romaine</span></span>
-<span><span class="co">## 310                                                                  cerfeuil</span></span>
-<span><span class="co">## 311                                                                    menthe</span></span>
-<span><span class="co">## 312                                                                   basilic</span></span>
-<span><span class="co">## 313                                                                 sarriette</span></span>
-<span><span class="co">## 314                                                                      thym</span></span>
-<span><span class="co">## 315                                                                     carvi</span></span>
-<span><span class="co">## 316                                                                     aneth</span></span>
-<span><span class="co">## 317                                                                     sauge</span></span>
-<span><span class="co">## 318                                                                   livèche</span></span>
-<span><span class="co">## 319                                                                  estragon</span></span>
-<span><span class="co">## 320                                                                ciboulette</span></span>
-<span><span class="co">## 321                                                   fabacées (légumineuses)</span></span>
-<span><span class="co">## 322                                                                  lentille</span></span>
-<span><span class="co">## 323                                                                      fève</span></span>
-<span><span class="co">## 324                                                                      pois</span></span>
-<span><span class="co">## 325                                                          pois non écossés</span></span>
-<span><span class="co">## 326                                                              pois écossés</span></span>
-<span><span class="co">## 327                                                                  haricots</span></span>
-<span><span class="co">## 328                                                          haricots écossés</span></span>
-<span><span class="co">## 329                                                      haricots non écossés</span></span>
-<span><span class="co">## 330                                                           haricot à rames</span></span>
-<span><span class="co">## 331                                                              haricot nain</span></span>
-<span><span class="co">## 332                                                 crucifères (Brassicaceae)</span></span>
-<span><span class="co">## 333                                                       cresson de fontaine</span></span>
-<span><span class="co">## 334                                                                     choux</span></span>
-<span><span class="co">## 335                                  choux (développement de l'inflorescence)</span></span>
-<span><span class="co">## 336                                                                chou-fleur</span></span>
-<span><span class="co">## 337                                                                 romanesco</span></span>
-<span><span class="co">## 338                                                                   brocoli</span></span>
-<span><span class="co">## 339                                                          choux à feuilles</span></span>
-<span><span class="co">## 340                                                                   pakchoi</span></span>
-<span><span class="co">## 341                                                             chou moellier</span></span>
-<span><span class="co">## 342                                                             chou de Chine</span></span>
-<span><span class="co">## 343                                                            navet à tondre</span></span>
-<span><span class="co">## 344                                                      chou frisé non pommé</span></span>
-<span><span class="co">## 345                                                         chou de Bruxelles</span></span>
-<span><span class="co">## 346                                                              choux pommés</span></span>
-<span><span class="co">## 347                                                                   colrave</span></span>
-<span><span class="co">## 348                                                         cresson de jardin</span></span>
-<span><span class="co">## 349                                          laitues à tondre  (Brassicaceae)</span></span>
-<span><span class="co">## 350                                                    radis de tous les mois</span></span>
-<span><span class="co">## 351                                         rave de Brassica rapa et B. napus</span></span>
-<span><span class="co">## 352                                                    rave de Brassica napus</span></span>
-<span><span class="co">## 353                                                                  rutabaga</span></span>
-<span><span class="co">## 354                                                     rave de Brassica rapa</span></span>
-<span><span class="co">## 355                                                     Barbarée du printemps</span></span>
-<span><span class="co">## 356                                                                radis long</span></span>
-<span><span class="co">## 357                                               salades Asia (Brassicaceae)</span></span>
-<span><span class="co">## 358                                                              cima di rapa</span></span>
-<span><span class="co">## 359                                                                  roquette</span></span>
-<span><span class="co">## 360                                                                   raifort</span></span>
-<span><span class="co">## 361                                                                     choux</span></span>
-<span><span class="co">## 362                                                       plantes médicinales</span></span>
-<span><span class="co">## 363                                                         digitale lanifère</span></span>
-<span><span class="co">## 364                                                                cynorhodon</span></span>
-<span><span class="co">## 365                                        domaine app. prairies et paturages</span></span>
+<span><span class="co">## 297                                   types de radicchio/trévises et cicorino</span></span>
+<span><span class="co">## 298                                                      lamiacées (Labiatae)</span></span>
+<span><span class="co">## 299                                                          crosnes du japon</span></span>
+<span><span class="co">## 300                                                       poacées (Gramineae)</span></span>
+<span><span class="co">## 301                                                                maïs sucré</span></span>
+<span><span class="co">## 302                                                                    herbes</span></span>
+<span><span class="co">## 303                                                              fines herbes</span></span>
+<span><span class="co">## 304                                                                    Hysope</span></span>
+<span><span class="co">## 305                                                                 coriandre</span></span>
+<span><span class="co">## 306                                                                   romarin</span></span>
+<span><span class="co">## 307                                                                    persil</span></span>
+<span><span class="co">## 308                                                         Camomille romaine</span></span>
+<span><span class="co">## 309                                                                  cerfeuil</span></span>
+<span><span class="co">## 310                                                                    menthe</span></span>
+<span><span class="co">## 311                                                                   basilic</span></span>
+<span><span class="co">## 312                                                                 sarriette</span></span>
+<span><span class="co">## 313                                                                      thym</span></span>
+<span><span class="co">## 314                                                                     carvi</span></span>
+<span><span class="co">## 315                                                                     aneth</span></span>
+<span><span class="co">## 316                                                                     sauge</span></span>
+<span><span class="co">## 317                                                                   livèche</span></span>
+<span><span class="co">## 318                                                                  estragon</span></span>
+<span><span class="co">## 319                                                                ciboulette</span></span>
+<span><span class="co">## 320                                                   fabacées (légumineuses)</span></span>
+<span><span class="co">## 321                                                                  lentille</span></span>
+<span><span class="co">## 322                                                                      fève</span></span>
+<span><span class="co">## 323                                                                      pois</span></span>
+<span><span class="co">## 324                                                          pois non écossés</span></span>
+<span><span class="co">## 325                                                              pois écossés</span></span>
+<span><span class="co">## 326                                                                  haricots</span></span>
+<span><span class="co">## 327                                                          haricots écossés</span></span>
+<span><span class="co">## 328                                                      haricots non écossés</span></span>
+<span><span class="co">## 329                                                           haricot à rames</span></span>
+<span><span class="co">## 330                                                              haricot nain</span></span>
+<span><span class="co">## 331                                                 crucifères (Brassicaceae)</span></span>
+<span><span class="co">## 332                                                       cresson de fontaine</span></span>
+<span><span class="co">## 333                                                                     choux</span></span>
+<span><span class="co">## 334                                  choux (développement de l'inflorescence)</span></span>
+<span><span class="co">## 335                                                                chou-fleur</span></span>
+<span><span class="co">## 336                                                                 romanesco</span></span>
+<span><span class="co">## 337                                                                   brocoli</span></span>
+<span><span class="co">## 338                                                          choux à feuilles</span></span>
+<span><span class="co">## 339                                                                   pakchoi</span></span>
+<span><span class="co">## 340                                                             chou moellier</span></span>
+<span><span class="co">## 341                                                             chou de Chine</span></span>
+<span><span class="co">## 342                                                            navet à tondre</span></span>
+<span><span class="co">## 343                                                      chou frisé non pommé</span></span>
+<span><span class="co">## 344                                                         chou de Bruxelles</span></span>
+<span><span class="co">## 345                                                              choux pommés</span></span>
+<span><span class="co">## 346                                                                   colrave</span></span>
+<span><span class="co">## 347                                                         cresson de jardin</span></span>
+<span><span class="co">## 348                                          laitues à tondre  (Brassicaceae)</span></span>
+<span><span class="co">## 349                                                    radis de tous les mois</span></span>
+<span><span class="co">## 350                                         rave de Brassica rapa et B. napus</span></span>
+<span><span class="co">## 351                                                    rave de Brassica napus</span></span>
+<span><span class="co">## 352                                                                  rutabaga</span></span>
+<span><span class="co">## 353                                                     rave de Brassica rapa</span></span>
+<span><span class="co">## 354                                                     Barbarée du printemps</span></span>
+<span><span class="co">## 355                                                                radis long</span></span>
+<span><span class="co">## 356                                               salades Asia (Brassicaceae)</span></span>
+<span><span class="co">## 357                                                              cima di rapa</span></span>
+<span><span class="co">## 358                                                                  roquette</span></span>
+<span><span class="co">## 359                                                                   raifort</span></span>
+<span><span class="co">## 360                                                                     choux</span></span>
+<span><span class="co">## 361                                                       plantes médicinales</span></span>
+<span><span class="co">## 362                                                         digitale lanifère</span></span>
+<span><span class="co">## 363                                                                cynorhodon</span></span>
+<span><span class="co">## 364                                        domaine app. prairies et paturages</span></span>
 <span><span class="co">##                                                                             name_it</span></span>
 <span><span class="co">## 1                                                                                  </span></span>
 <span><span class="co">## 2                                                                         Baby-Leaf</span></span>
@@ -3198,75 +3294,74 @@ are marked by appending ‘[dup]’ to their name.</p>
 <span><span class="co">## 294                                                               Lattuga da taglio</span></span>
 <span><span class="co">## 295                                                     Indivia e cicoria da foglia</span></span>
 <span><span class="co">## 296                                                                         Indivia</span></span>
-<span><span class="co">## 297                                                         Cicoria pan di zucchero</span></span>
-<span><span class="co">## 298                                                    Tipi di radicchio e cicorino</span></span>
-<span><span class="co">## 299                                                             Lamiacee (Labiatae)</span></span>
-<span><span class="co">## 300                                                                        Tuberina</span></span>
-<span><span class="co">## 301                                                            Poacee (Graminaceae)</span></span>
-<span><span class="co">## 302                                                                      Mais dolce</span></span>
-<span><span class="co">## 303                                                                            Erbe</span></span>
-<span><span class="co">## 304                                                               Erbette da cucina</span></span>
-<span><span class="co">## 305                                                                          Issopo</span></span>
-<span><span class="co">## 306                                                                      Coriandolo</span></span>
-<span><span class="co">## 307                                                                       Rosmarino</span></span>
-<span><span class="co">## 308                                                                      Prezzemolo</span></span>
-<span><span class="co">## 309                                                                Camomilla romana</span></span>
-<span><span class="co">## 310                                                                       Cerfoglio</span></span>
-<span><span class="co">## 311                                                                           Menta</span></span>
-<span><span class="co">## 312                                                                        Basilico</span></span>
-<span><span class="co">## 313                                                                     Santoreggia</span></span>
-<span><span class="co">## 314                                                                            Timo</span></span>
-<span><span class="co">## 315                                                                           Carvi</span></span>
-<span><span class="co">## 316                                                                           Aneto</span></span>
-<span><span class="co">## 317                                                                          Salvia</span></span>
-<span><span class="co">## 318                                                                       Levistico</span></span>
-<span><span class="co">## 319                                                                     Dragoncello</span></span>
-<span><span class="co">## 320                                                                  Erba cipollina</span></span>
-<span><span class="co">## 321                                                            Fabacee (Leguminose)</span></span>
-<span><span class="co">## 322                                                                      Lenticchia</span></span>
-<span><span class="co">## 323                                                                            Fave</span></span>
-<span><span class="co">## 324                                                                         Piselli</span></span>
-<span><span class="co">## 325                                                            Piselli con baccello</span></span>
-<span><span class="co">## 326                                                          Piselli senza baccello</span></span>
-<span><span class="co">## 327                                                                         Fagioli</span></span>
-<span><span class="co">## 328                                                          Fagioli senza baccello</span></span>
-<span><span class="co">## 329                                                            Fagioli con baccello</span></span>
-<span><span class="co">## 330                                                              Fagiolo rampicante</span></span>
-<span><span class="co">## 331                                                                    Fagiolo nano</span></span>
-<span><span class="co">## 332                                                         Crocifere (Brassicacee)</span></span>
-<span><span class="co">## 333                                                             Crescione acquatico</span></span>
-<span><span class="co">## 334                                                                Specie di cavoli</span></span>
-<span><span class="co">## 335                                                          Cavoli a infiorescenza</span></span>
-<span><span class="co">## 336                                                                      Cavolfiore</span></span>
-<span><span class="co">## 337                                                                       Romanesco</span></span>
-<span><span class="co">## 338                                                                        Broccoli</span></span>
-<span><span class="co">## 339                                                                Cavoli fogliacei</span></span>
-<span><span class="co">## 340                                                                        Pak-Choi</span></span>
-<span><span class="co">## 341                                                                  Cavolo fustoso</span></span>
-<span><span class="co">## 342                                                                   Cavolo cinese</span></span>
-<span><span class="co">## 343                                                         Cavoli / rape da taglio</span></span>
-<span><span class="co">## 344                                                                    Cavolo piuma</span></span>
-<span><span class="co">## 345                                                             Cavoli di Bruxelles</span></span>
-<span><span class="co">## 346                                                                  Cavoli a testa</span></span>
-<span><span class="co">## 347                                                                     Cavolo rapa</span></span>
-<span><span class="co">## 348                                                                       Crescione</span></span>
-<span><span class="co">## 349                                                 Insalate a foglie (Brassicacee)</span></span>
-<span><span class="co">## 350                                                                       Ravanello</span></span>
-<span><span class="co">## 351                                                Rapa di Brassica rapa e B. napus</span></span>
-<span><span class="co">## 352                                                          Rapa di Brassica napus</span></span>
-<span><span class="co">## 353                                                                   Cavolo navone</span></span>
-<span><span class="co">## 354                                                           Rapa di Brassica rapa</span></span>
-<span><span class="co">## 355                                                   Erba di Santa Barbara vernale</span></span>
-<span><span class="co">## 356                                                                      Ramolaccio</span></span>
-<span><span class="co">## 357                                                Insalate asiatiche (Brassicacee)</span></span>
-<span><span class="co">## 358                                                                    Cima di rapa</span></span>
-<span><span class="co">## 359                                                                          Rucola</span></span>
-<span><span class="co">## 360                                                   Rafano rusticana / Ramolaccio</span></span>
-<span><span class="co">## 361                                                                          Cavoli</span></span>
-<span><span class="co">## 362                                                                 erbe medicinali</span></span>
-<span><span class="co">## 363                                                                 Digitale lanata</span></span>
-<span><span class="co">## 364                                                                     rosa canina</span></span>
-<span><span class="co">## 365</span></span></code></pre>
+<span><span class="co">## 297                                                    Tipi di radicchio e cicorino</span></span>
+<span><span class="co">## 298                                                             Lamiacee (Labiatae)</span></span>
+<span><span class="co">## 299                                                                        Tuberina</span></span>
+<span><span class="co">## 300                                                            Poacee (Graminaceae)</span></span>
+<span><span class="co">## 301                                                                      Mais dolce</span></span>
+<span><span class="co">## 302                                                                            Erbe</span></span>
+<span><span class="co">## 303                                                               Erbette da cucina</span></span>
+<span><span class="co">## 304                                                                          Issopo</span></span>
+<span><span class="co">## 305                                                                      Coriandolo</span></span>
+<span><span class="co">## 306                                                                       Rosmarino</span></span>
+<span><span class="co">## 307                                                                      Prezzemolo</span></span>
+<span><span class="co">## 308                                                                Camomilla romana</span></span>
+<span><span class="co">## 309                                                                       Cerfoglio</span></span>
+<span><span class="co">## 310                                                                           Menta</span></span>
+<span><span class="co">## 311                                                                        Basilico</span></span>
+<span><span class="co">## 312                                                                     Santoreggia</span></span>
+<span><span class="co">## 313                                                                            Timo</span></span>
+<span><span class="co">## 314                                                                           Carvi</span></span>
+<span><span class="co">## 315                                                                           Aneto</span></span>
+<span><span class="co">## 316                                                                          Salvia</span></span>
+<span><span class="co">## 317                                                                       Levistico</span></span>
+<span><span class="co">## 318                                                                     Dragoncello</span></span>
+<span><span class="co">## 319                                                                  Erba cipollina</span></span>
+<span><span class="co">## 320                                                            Fabacee (Leguminose)</span></span>
+<span><span class="co">## 321                                                                      Lenticchia</span></span>
+<span><span class="co">## 322                                                                            Fave</span></span>
+<span><span class="co">## 323                                                                         Piselli</span></span>
+<span><span class="co">## 324                                                            Piselli con baccello</span></span>
+<span><span class="co">## 325                                                          Piselli senza baccello</span></span>
+<span><span class="co">## 326                                                                         Fagioli</span></span>
+<span><span class="co">## 327                                                          Fagioli senza baccello</span></span>
+<span><span class="co">## 328                                                            Fagioli con baccello</span></span>
+<span><span class="co">## 329                                                              Fagiolo rampicante</span></span>
+<span><span class="co">## 330                                                                    Fagiolo nano</span></span>
+<span><span class="co">## 331                                                         Crocifere (Brassicacee)</span></span>
+<span><span class="co">## 332                                                             Crescione acquatico</span></span>
+<span><span class="co">## 333                                                                Specie di cavoli</span></span>
+<span><span class="co">## 334                                                          Cavoli a infiorescenza</span></span>
+<span><span class="co">## 335                                                                      Cavolfiore</span></span>
+<span><span class="co">## 336                                                                       Romanesco</span></span>
+<span><span class="co">## 337                                                                        Broccoli</span></span>
+<span><span class="co">## 338                                                                Cavoli fogliacei</span></span>
+<span><span class="co">## 339                                                                        Pak-Choi</span></span>
+<span><span class="co">## 340                                                                  Cavolo fustoso</span></span>
+<span><span class="co">## 341                                                                   Cavolo cinese</span></span>
+<span><span class="co">## 342                                                         Cavoli / rape da taglio</span></span>
+<span><span class="co">## 343                                                                    Cavolo piuma</span></span>
+<span><span class="co">## 344                                                             Cavoli di Bruxelles</span></span>
+<span><span class="co">## 345                                                                  Cavoli a testa</span></span>
+<span><span class="co">## 346                                                                     Cavolo rapa</span></span>
+<span><span class="co">## 347                                                                       Crescione</span></span>
+<span><span class="co">## 348                                                 Insalate a foglie (Brassicacee)</span></span>
+<span><span class="co">## 349                                                                       Ravanello</span></span>
+<span><span class="co">## 350                                                Rapa di Brassica rapa e B. napus</span></span>
+<span><span class="co">## 351                                                          Rapa di Brassica napus</span></span>
+<span><span class="co">## 352                                                                   Cavolo navone</span></span>
+<span><span class="co">## 353                                                           Rapa di Brassica rapa</span></span>
+<span><span class="co">## 354                                                   Erba di Santa Barbara vernale</span></span>
+<span><span class="co">## 355                                                                      Ramolaccio</span></span>
+<span><span class="co">## 356                                                Insalate asiatiche (Brassicacee)</span></span>
+<span><span class="co">## 357                                                                    Cima di rapa</span></span>
+<span><span class="co">## 358                                                                          Rucola</span></span>
+<span><span class="co">## 359                                                   Rafano rusticana / Ramolaccio</span></span>
+<span><span class="co">## 360                                                                          Cavoli</span></span>
+<span><span class="co">## 361                                                                 erbe medicinali</span></span>
+<span><span class="co">## 362                                                                 Digitale lanata</span></span>
+<span><span class="co">## 363                                                                     rosa canina</span></span>
+<span><span class="co">## 364</span></span></code></pre>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

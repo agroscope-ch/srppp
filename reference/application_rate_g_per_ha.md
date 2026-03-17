@@ -13,7 +13,6 @@ application solution or to the liquid product.
 application_rate_g_per_ha(
   product_uses,
   aggregation = c("max", "mean", "min"),
-  dosage_units = c("percent_ww", "percent_vv", "state_of_matter"),
   skip_l_per_ha_without_g_per_L = TRUE,
   fix_l_per_ha = TRUE
 )
@@ -30,19 +29,13 @@ application_rate_g_per_ha(
   object, as well as the columns 'percent' and 'g_per_L' from the
   'ingredients' table in a
   [srppp_dm](https://agroscope-ch.github.io/srppp/reference/srppp_dm.md)
+  object and 'culture_de' from the 'cultures' table in
+  [srppp_dm](https://agroscope-ch.github.io/srppp/reference/srppp_dm.md)
   object.
 
 - aggregation:
 
   How to represent a range if present, e.g. "max" (default) or "mean".
-
-- dosage_units:
-
-  If no units are given, or units are "%", then the applied amount in
-  g/ha is calculated using a reference application volume and the
-  dosage. As the dosage units are not explicitly given, we can specify
-  our assumptions about these using this argument (currently not
-  implemented, i.e. specifying the argument has no effect).
 
 - skip_l_per_ha_without_g_per_L:
 
@@ -70,13 +63,7 @@ indicating that the "expenditure" is an application volume
 ## Note
 
 A reference application volume is used if there is no 'expenditure'. It
-is selected only based on the product application area. This is not
-correct if hops ('Hopfen') is the culture, as it has a unique reference
-application volume of 3000 L/ha.
-
-Applications to hops were excluded for calculating mean use rates in the
-indicator project (Korkaric 2023), arguing that it is not grown in large
-areas in Switzerland.
+is selected only based on the product application area and culture.
 
 ## Examples
 
@@ -101,9 +88,11 @@ product_uses_with_ingredients <- sr$substances |>
   left_join(sr$ingredients, by = "pk") |>
   left_join(sr$uses, by = "pNbr") |>
   left_join(sr$products, by = "pNbr") |>
+  left_join(sr$cultures, by = c("pNbr", "use_nr"),
+            relationship = "many-to-many") |>
   select(pNbr, name, use_nr,
     min_dosage, max_dosage, min_rate, max_rate, units_de,
-    application_area_de,
+    application_area_de, culture_de,
     substance_de, percent, g_per_L)
 
 application_rate_g_per_ha(product_uses_with_ingredients) |>
@@ -113,13 +102,24 @@ application_rate_g_per_ha(product_uses_with_ingredients) |>
     min_r = min_rate, max_r = max_rate,
     units_de, rate = rate_g_per_ha) |>
   print(n = Inf)
-#> # A tibble: 5 × 8
-#>   ai                app_area min_d max_d min_r max_r units_de  rate
-#>   <chr>             <chr>    <dbl> <dbl> <dbl> <dbl> <chr>    <dbl>
-#> 1 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
-#> 2 Halauxifen-methyl Feldbau     NA    NA  0.75    NA l/ha      4.69
-#> 3 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
-#> 4 Halauxifen-methyl Feldbau     NA    NA  0.5     NA l/ha      6.25
-#> 5 Halauxifen-methyl Feldbau     NA    NA  0.5     NA l/ha      6.25
+#> # A tibble: 16 × 8
+#>    ai                app_area min_d max_d min_r max_r units_de  rate
+#>    <chr>             <chr>    <dbl> <dbl> <dbl> <dbl> <chr>    <dbl>
+#>  1 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
+#>  2 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
+#>  3 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
+#>  4 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
+#>  5 Halauxifen-methyl Feldbau     NA    NA  0.75    NA l/ha      4.69
+#>  6 Halauxifen-methyl Feldbau     NA    NA  0.75    NA l/ha      4.69
+#>  7 Halauxifen-methyl Feldbau     NA    NA  0.75    NA l/ha      4.69
+#>  8 Halauxifen-methyl Feldbau     NA    NA  0.75    NA l/ha      4.69
+#>  9 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
+#> 10 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
+#> 11 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
+#> 12 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
+#> 13 Halauxifen-methyl Feldbau     NA    NA  0.5     NA l/ha      6.25
+#> 14 Halauxifen-methyl Feldbau     NA    NA  0.5     NA l/ha      6.25
+#> 15 Halauxifen-methyl Feldbau     NA    NA  0.5     NA l/ha      6.25
+#> 16 Halauxifen-methyl Feldbau     NA    NA  0.5     NA l/ha      6.25
 # }
 ```

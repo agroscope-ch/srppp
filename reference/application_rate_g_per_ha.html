@@ -15,7 +15,7 @@ to the application solution or to the liquid product.'></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">srppp</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">2.0.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,7 +59,6 @@ to the application solution or to the liquid product.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">application_rate_g_per_ha</span><span class="op">(</span></span>
 <span>  <span class="va">product_uses</span>,</span>
 <span>  aggregation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"max"</span>, <span class="st">"mean"</span>, <span class="st">"min"</span><span class="op">)</span>,</span>
-<span>  dosage_units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"percent_ww"</span>, <span class="st">"percent_vv"</span>, <span class="st">"state_of_matter"</span><span class="op">)</span>,</span>
 <span>  skip_l_per_ha_without_g_per_L <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  fix_l_per_ha <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -73,20 +72,13 @@ to the application solution or to the liquid product.</p>
 <dd><p>A tibble containing the columns 'pNbr', 'use_nr',
 'application_area_de', 'min_dosage', 'max_dosage', 'min_rate', 'max_rate',
 from the 'uses' table in a <a href="srppp_dm.html">srppp_dm</a> object, as well as the columns
-'percent' and 'g_per_L' from the 'ingredients' table in a <a href="srppp_dm.html">srppp_dm</a> object.</p></dd>
+'percent' and 'g_per_L' from the 'ingredients' table in a <a href="srppp_dm.html">srppp_dm</a> object and
+'culture_de' from the 'cultures' table in <a href="srppp_dm.html">srppp_dm</a> object.</p></dd>
 
 
 <dt id="arg-aggregation">aggregation<a class="anchor" aria-label="anchor" href="#arg-aggregation"></a></dt>
 <dd><p>How to represent a range if present, e.g. "max" (default)
 or "mean".</p></dd>
-
-
-<dt id="arg-dosage-units">dosage_units<a class="anchor" aria-label="anchor" href="#arg-dosage-units"></a></dt>
-<dd><p>If no units are given, or units are "%", then the applied
-amount in g/ha is calculated using a reference application volume and the
-dosage. As the dosage units are not explicitly given, we can specify our
-assumptions about these using this argument (currently not implemented, i.e.
-specifying the argument has no effect).</p></dd>
 
 
 <dt id="arg-skip-l-per-ha-without-g-per-l">skip_l_per_ha_without_g_per_L<a class="anchor" aria-label="anchor" href="#arg-skip-l-per-ha-without-g-per-l"></a></dt>
@@ -114,12 +106,7 @@ that the "expenditure" is an application volume <a href="l_per_ha_is_water_volum
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>A reference application volume is used if there is no 'expenditure'.
-It is selected only based on the product application area. This is not correct
-if hops ('Hopfen') is the culture, as it has a unique reference application
-volume of 3000 L/ha.</p>
-<p>Applications to hops were excluded for calculating mean use rates in the
-indicator project (Korkaric 2023), arguing that it is not grown in large
-areas in Switzerland.</p>
+It is selected only based on the product application area and culture.</p>
     </div>
 
     <div class="section level2">
@@ -144,9 +131,11 @@ areas in Switzerland.</p>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">sr</span><span class="op">$</span><span class="va">ingredients</span>, by <span class="op">=</span> <span class="st">"pk"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">sr</span><span class="op">$</span><span class="va">uses</span>, by <span class="op">=</span> <span class="st">"pNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">sr</span><span class="op">$</span><span class="va">products</span>, by <span class="op">=</span> <span class="st">"pNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">sr</span><span class="op">$</span><span class="va">cultures</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pNbr"</span>, <span class="st">"use_nr"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>            relationship <span class="op">=</span> <span class="st">"many-to-many"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">pNbr</span>, <span class="va">name</span>, <span class="va">use_nr</span>,</span></span>
 <span class="r-in"><span>    <span class="va">min_dosage</span>, <span class="va">max_dosage</span>, <span class="va">min_rate</span>, <span class="va">max_rate</span>, <span class="va">units_de</span>,</span></span>
-<span class="r-in"><span>    <span class="va">application_area_de</span>,</span></span>
+<span class="r-in"><span>    <span class="va">application_area_de</span>, <span class="va">culture_de</span>,</span></span>
 <span class="r-in"><span>    <span class="va">substance_de</span>, <span class="va">percent</span>, <span class="va">g_per_L</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">application_rate_g_per_ha</span><span class="op">(</span><span class="va">product_uses_with_ingredients</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
@@ -156,14 +145,25 @@ areas in Switzerland.</p>
 <span class="r-in"><span>    min_r <span class="op">=</span> <span class="va">min_rate</span>, max_r <span class="op">=</span> <span class="va">max_rate</span>,</span></span>
 <span class="r-in"><span>    <span class="va">units_de</span>, rate <span class="op">=</span> <span class="va">rate_g_per_ha</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ai                app_area min_d max_d min_r max_r units_de  rate</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  1       <span style="color: #BB0000;">NA</span> l/ha      6.25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.75    <span style="color: #BB0000;">NA</span> l/ha      4.69</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  1       <span style="color: #BB0000;">NA</span> l/ha      6.25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.5     <span style="color: #BB0000;">NA</span> l/ha      6.25</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.5     <span style="color: #BB0000;">NA</span> l/ha      6.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 16 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    ai                app_area min_d max_d min_r max_r units_de  rate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  1       <span style="color: #BB0000;">NA</span> l/ha      6.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  1       <span style="color: #BB0000;">NA</span> l/ha      6.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  1       <span style="color: #BB0000;">NA</span> l/ha      6.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  1       <span style="color: #BB0000;">NA</span> l/ha      6.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.75    <span style="color: #BB0000;">NA</span> l/ha      4.69</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.75    <span style="color: #BB0000;">NA</span> l/ha      4.69</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.75    <span style="color: #BB0000;">NA</span> l/ha      4.69</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.75    <span style="color: #BB0000;">NA</span> l/ha      4.69</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  1       <span style="color: #BB0000;">NA</span> l/ha      6.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  1       <span style="color: #BB0000;">NA</span> l/ha      6.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  1       <span style="color: #BB0000;">NA</span> l/ha      6.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  1       <span style="color: #BB0000;">NA</span> l/ha      6.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.5     <span style="color: #BB0000;">NA</span> l/ha      6.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.5     <span style="color: #BB0000;">NA</span> l/ha      6.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.5     <span style="color: #BB0000;">NA</span> l/ha      6.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> Halauxifen-methyl Feldbau     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>  0.5     <span style="color: #BB0000;">NA</span> l/ha      6.25</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>

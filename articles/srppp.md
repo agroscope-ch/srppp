@@ -60,7 +60,7 @@ At the bottom of the table hierarchy, there is the list of substances.
 For each substance, there is a primary key `pk`, a chemical name based
 on [IUPAC nomenclature](https://iupac.org/what-we-do/nomenclature/), and
 substance names in three of the four official languages of Switzerland.
-The first four entries out of 442 are shown below.
+The first four entries out of 443 are shown below.
 
 ``` r
 library(knitr)
@@ -127,8 +127,8 @@ example_register$ingredients |>
 
 | type                |   n |
 |:--------------------|----:|
-| ACTIVE_INGREDIENT   | 324 |
-| ADDITIVE_TO_DECLARE | 111 |
+| ACTIVE_INGREDIENT   | 323 |
+| ADDITIVE_TO_DECLARE | 113 |
 | SAFENER             |   4 |
 | SYNERGIST           |   2 |
 
@@ -217,8 +217,8 @@ example_register$products |>
 | 4251 | 4234   | Capex 2                  | 2026-07-01 00:00:00.0000000 | 2025-07-01 00:00:00.0000000 | FALSE            | F05FD7E3-EA3C-46CE-A537-B40375F273AA |
 | 4426 | 4343   | Cypermethrin             | 2026-06-11 00:00:00.0000000 | 2025-06-11 00:00:00.0000000 | FALSE            | 5E2915EB-369E-4C9C-B8B7-9FAAABF0E127 |
 
-At the build time of this vignette, there were 1731 product
-registrations for 1114 P-Numbers in the Swiss Register of Plant
+At the build time of this vignette, there were 1735 product
+registrations for 1117 P-Numbers in the Swiss Register of Plant
 Protection Products (SRPPP) as published on the website of the Federal
 Food Safety and Veterinary Office.
 
@@ -261,24 +261,24 @@ example_register$uses |>
 
 | pNbr | use_nr | min_dosage | max_dosage | min_rate | max_rate | units_de | waiting_period | time_units_en | application_area_de |
 |-----:|-------:|-----------:|-----------:|---------:|---------:|:---------|---------------:|:--------------|:--------------------|
-| 6521 |      1 |            |            |      0.5 |        1 | l/ha     |                |               | Feldbau             |
+| 6521 |      1 |            |            |      1.0 |          | l/ha     |                |               | Feldbau             |
 | 6521 |      2 |            |            |      1.0 |          | l/ha     |                |               | Feldbau             |
-| 6521 |      3 |            |            |      1.0 |          | l/ha     |                |               | Feldbau             |
-| 6521 |      4 |            |            |      1.5 |          | l/ha     |                |               | Feldbau             |
-| 6521 |      5 |            |            |      1.0 |          | l/ha     |              3 | Week(s)       | Feldbau             |
-| 6521 |      6 |            |            |      1.0 |          | l/ha     |                |               | Feldbau             |
-| 6521 |      7 |            |            |      1.0 |          | l/ha     |              3 | Week(s)       | Feldbau             |
-| 6521 |      8 |            |            |      1.0 |          | l/ha     |                |               | Feldbau             |
-| 6521 |      9 |            |            |      1.0 |          | l/ha     |              3 | Week(s)       | Feldbau             |
-| 7511 |      1 |        0.3 |            |          |          | kg/ha    |              3 | Days          | Gemüsebau           |
-| 7511 |      2 |            |            |      5.0 |          | kg/ha    |                |               | Obstbau             |
-| 7511 |      3 |        0.3 |            |      4.8 |          | kg/ha    |                |               | Obstbau             |
-| 7511 |      4 |        0.3 |            |      4.8 |          | kg/ha    |              8 | Days          | Obstbau             |
+| 6521 |      3 |            |            |      1.5 |          | l/ha     |                |               | Feldbau             |
+| 6521 |      4 |            |            |      1.0 |          | l/ha     |              3 | Week(s)       | Feldbau             |
+| 6521 |      5 |            |            |      1.0 |          | l/ha     |                |               | Feldbau             |
+| 6521 |      6 |            |            |      1.0 |          | l/ha     |              3 | Week(s)       | Feldbau             |
+| 6521 |      7 |            |            |      1.0 |          | l/ha     |                |               | Feldbau             |
+| 6521 |      8 |            |            |      1.0 |          | l/ha     |              3 | Week(s)       | Feldbau             |
+| 6521 |      9 |            |            |      1.0 |          | l/ha     |                |               | Feldbau             |
+| 7511 |      1 |        0.3 |            |      4.8 |          | kg/ha    |                |               | Obstbau             |
+| 7511 |      2 |        0.3 |            |      4.8 |          | kg/ha    |              8 | Days          | Obstbau             |
+| 7511 |      3 |            |            |      3.0 |          | kg/ha    |              1 | Days          | Gemüsebau           |
+| 7511 |      4 |        0.3 |            |          |          |          |              3 | Days          | Beerenbau           |
 | 7511 |      5 |            |            |      3.0 |          | kg/ha    |              1 | Days          | Gemüsebau           |
-| 7511 |      6 |        0.3 |            |          |          |          |              3 | Days          | Beerenbau           |
-| 7511 |      7 |            |            |      3.0 |          | kg/ha    |              1 | Days          | Gemüsebau           |
-| 7511 |      8 |            |            |      3.0 |          | kg/ha    |              1 | Days          | Gemüsebau           |
-| 7511 |      9 |            |            |      5.0 |          | kg/ha    |              3 | Days          | Gemüsebau           |
+| 7511 |      6 |            |            |      3.0 |          | kg/ha    |              1 | Days          | Gemüsebau           |
+| 7511 |      7 |            |            |      5.0 |          | kg/ha    |              3 | Days          | Gemüsebau           |
+| 7511 |      8 |        0.2 |            |      3.2 |          | kg/ha    |                |               | Weinbau             |
+| 7511 |      9 |        0.2 |            |      3.2 |          | kg/ha    |              2 | Week(s)       | Obstbau             |
 
 The columns `min_dosage` and `max_dosage` contain either a range of
 recommended product concentrations in the spraying solution in percent,
@@ -306,31 +306,37 @@ example_uses <- example_register$products |>
   filter(wNbr == "6168") |>
   left_join(example_register$uses, by = join_by(pNbr),
     relationship = "many-to-many") |> 
+  left_join(example_register$cultures, by = join_by(pNbr, use_nr),
+    relationship = "many-to-many") |>
   left_join(example_register$ingredients, by = join_by(pNbr),
     relationship = "many-to-many") |>
   left_join(example_register$substances, by = join_by(pk)) |>
   select(pNbr, name, use_nr,
     min_dosage, max_dosage, min_rate, max_rate, units_de,
-    application_area_de,
+    application_area_de, culture_de,
     substance_de, percent, g_per_L) |> 
   filter(use_nr %in% c(1:5, 12:17))
 
 kable(example_uses)
 ```
 
-| pNbr | name  | use_nr | min_dosage | max_dosage | min_rate | max_rate | units_de | application_area_de | substance_de | percent | g_per_L |
-|-----:|:------|-------:|-----------:|-----------:|---------:|---------:|:---------|:--------------------|:-------------|--------:|--------:|
-| 7105 | Boxer |      1 |            |            |      2.5 |        5 | l/ha     | Feldbau             | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |      2 |            |            |      5.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |      3 |            |            |      3.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |      4 |            |            |      5.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |      5 |            |            |      3.0 |        5 | l/ha     | Feldbau             | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |     12 |            |            |      5.0 |          | l/ha     | Feldbau             | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |     13 |            |            |      2.5 |        5 | l/ha     | Feldbau             | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |     14 |            |            |      5.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |     15 |            |            |      4.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |     16 |            |            |      4.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |   78.43 |     800 |
-| 7105 | Boxer |     17 |            |            |      4.0 |          | l/ha     | Gemüsebau           | Prosulfocarb |   78.43 |     800 |
+| pNbr | name  | use_nr | min_dosage | max_dosage | min_rate | max_rate | units_de | application_area_de | culture_de      | substance_de | percent | g_per_L |
+|-----:|:------|-------:|-----------:|-----------:|---------:|---------:|:---------|:--------------------|:----------------|:-------------|--------:|--------:|
+| 7105 | Boxer |      1 |            |            |      2.5 |        5 | l/ha     | Feldbau             | Gerste          | Prosulfocarb |   78.43 |     800 |
+| 7105 | Boxer |      1 |            |            |      2.5 |        5 | l/ha     | Feldbau             | Roggen          | Prosulfocarb |   78.43 |     800 |
+| 7105 | Boxer |      1 |            |            |      2.5 |        5 | l/ha     | Feldbau             | Weizen          | Prosulfocarb |   78.43 |     800 |
+| 7105 | Boxer |      2 |            |            |      5.0 |          | l/ha     | Gemüsebau           | Karotten        | Prosulfocarb |   78.43 |     800 |
+| 7105 | Boxer |      3 |            |            |      3.0 |          | l/ha     | Gemüsebau           | Meerrettich     | Prosulfocarb |   78.43 |     800 |
+| 7105 | Boxer |      4 |            |            |      5.0 |          | l/ha     | Gemüsebau           | Stangensellerie | Prosulfocarb |   78.43 |     800 |
+| 7105 | Boxer |      5 |            |            |      3.0 |        5 | l/ha     | Feldbau             | Kartoffeln      | Prosulfocarb |   78.43 |     800 |
+| 7105 | Boxer |     12 |            |            |      5.0 |          | l/ha     | Feldbau             | Lupinen         | Prosulfocarb |   78.43 |     800 |
+| 7105 | Boxer |     13 |            |            |      2.5 |        5 | l/ha     | Feldbau             | Triticale       | Prosulfocarb |   78.43 |     800 |
+| 7105 | Boxer |     13 |            |            |      2.5 |        5 | l/ha     | Feldbau             | Korn (Dinkel)   | Prosulfocarb |   78.43 |     800 |
+| 7105 | Boxer |     14 |            |            |      5.0 |          | l/ha     | Gemüsebau           | Knollensellerie | Prosulfocarb |   78.43 |     800 |
+| 7105 | Boxer |     15 |            |            |      4.0 |          | l/ha     | Gemüsebau           | Schwarzwurzel   | Prosulfocarb |   78.43 |     800 |
+| 7105 | Boxer |     16 |            |            |      4.0 |          | l/ha     | Gemüsebau           | Knoblauch       | Prosulfocarb |   78.43 |     800 |
+| 7105 | Boxer |     16 |            |            |      4.0 |          | l/ha     | Gemüsebau           | Schalotten      | Prosulfocarb |   78.43 |     800 |
+| 7105 | Boxer |     17 |            |            |      4.0 |          | l/ha     | Gemüsebau           | Zwiebeln        | Prosulfocarb |   78.43 |     800 |
 
 Then, the application rates can be calculated for these uses as
 illustrated below.
@@ -346,11 +352,14 @@ application_rate_g_per_ha(example_uses) |>
 | ai           | app_area  | min_rate | max_rate | units_de | rate |
 |:-------------|:----------|---------:|---------:|:---------|-----:|
 | Prosulfocarb | Feldbau   |      2.5 |        5 | l/ha     | 4000 |
+| Prosulfocarb | Feldbau   |      2.5 |        5 | l/ha     | 4000 |
+| Prosulfocarb | Feldbau   |      2.5 |        5 | l/ha     | 4000 |
 | Prosulfocarb | Gemüsebau |      5.0 |          | l/ha     | 4000 |
 | Prosulfocarb | Gemüsebau |      3.0 |          | l/ha     | 2400 |
 | Prosulfocarb | Gemüsebau |      5.0 |          | l/ha     | 4000 |
 | Prosulfocarb | Feldbau   |      3.0 |        5 | l/ha     | 4000 |
 | Prosulfocarb | Feldbau   |      5.0 |          | l/ha     | 4000 |
+| Prosulfocarb | Feldbau   |      2.5 |        5 | l/ha     | 4000 |
 | Prosulfocarb | Feldbau   |      2.5 |        5 | l/ha     | 4000 |
 | Prosulfocarb | Gemüsebau |      5.0 |          | l/ha     | 4000 |
 | Prosulfocarb | Gemüsebau |      4.0 |          | l/ha     | 3200 |
@@ -442,7 +451,7 @@ print(culture_tree, limit = 30, "culture_id")
     ## 30  ¦   ¦   ¦   °--... 1 nodes w/ 0 sub                   
     ## 31  ¦   ¦   °--... 6 nodes w/ 20 sub                      
     ## 32  ¦   °--... 9 nodes w/ 31 sub                          
-    ## 33  °--... 46 nodes w/ 290 sub                            
+    ## 33  °--... 46 nodes w/ 289 sub                            
     ##                              culture_id
     ## 1                                      
     ## 2  0106A8DF-6CDF-4E18-8F46-3D9E1D52D0E5
@@ -520,31 +529,31 @@ kable(culture_pest_combinations)
 
 | pNbr | use_nr | application_area_de | culture_de                         | pest_de                             |
 |-----:|-------:|:--------------------|:-----------------------------------|:------------------------------------|
-| 6521 |      1 | Feldbau             | Weizen                             | Gelbrost                            |
-| 6521 |      2 | Feldbau             | Weizen                             | Septoria-Spelzenbräune (S. nodorum) |
-| 6521 |      3 | Feldbau             | Winterroggen                       | Braunrost                           |
-| 6521 |      4 | Feldbau             | Raps                               | Wurzelhals- und Stengelfäule        |
-| 6521 |      5 | Feldbau             | Lupinen                            | Anthraknose                         |
-| 6521 |      6 | Feldbau             | Weizen                             | Echter Mehltau des Getreides        |
-| 6521 |      7 | Feldbau             | Eiweisserbse                       | Graufäule (Botrytis cinerea)        |
-| 6521 |      7 | Feldbau             | Eiweisserbse                       | Rost der Erbse                      |
-| 6521 |      7 | Feldbau             | Eiweisserbse                       | Brennfleckenkrankheit der Erbse     |
-| 6521 |      8 | Feldbau             | Weizen                             | Ährenfusariosen                     |
-| 6521 |      9 | Feldbau             | Ackerbohne                         | Rost der Ackerbohne                 |
-| 6521 |      9 | Feldbau             | Ackerbohne                         | Braunfleckenkrankheit               |
-| 6521 |     10 | Feldbau             | Lein                               | Stängelbräune des Leins             |
-| 6521 |     10 | Feldbau             | Lein                               | Pasmokrankheit                      |
-| 6521 |     10 | Feldbau             | Lein                               | Echter Mehltau des Leins            |
-| 6521 |     11 | Gemüsebau           | Spargel                            | Blattschwärze der Spargel           |
-| 6521 |     11 | Gemüsebau           | Spargel                            | Spargelrost                         |
-| 6521 |     12 | Feldbau             | Grasbestände zur Saatgutproduktion | Rost der Gräser                     |
-| 6521 |     12 | Feldbau             | Grasbestände zur Saatgutproduktion | Blattfleckenpilze                   |
-| 6521 |     13 | Gemüsebau           | Erbsen                             | Graufäule (Botrytis cinerea)        |
-| 6521 |     13 | Gemüsebau           | Erbsen                             | Rost der Erbse                      |
-| 6521 |     13 | Gemüsebau           | Erbsen                             | Brennfleckenkrankheit der Erbse     |
-| 6521 |     14 | Feldbau             | Raps                               | Sclerotinia-Fäule                   |
-| 6521 |     15 | Feldbau             | Raps                               | Wurzelhals- und Stengelfäule        |
-| 6521 |     15 | Feldbau             | Raps                               | Erhöhung der Standfestigkeit        |
+| 6521 |      1 | Feldbau             | Weizen                             | Septoria-Spelzenbräune (S. nodorum) |
+| 6521 |      2 | Feldbau             | Winterroggen                       | Braunrost                           |
+| 6521 |      3 | Feldbau             | Raps                               | Wurzelhals- und Stengelfäule        |
+| 6521 |      4 | Feldbau             | Lupinen                            | Anthraknose                         |
+| 6521 |      5 | Feldbau             | Weizen                             | Echter Mehltau des Getreides        |
+| 6521 |      6 | Feldbau             | Eiweisserbse                       | Graufäule (Botrytis cinerea)        |
+| 6521 |      6 | Feldbau             | Eiweisserbse                       | Rost der Erbse                      |
+| 6521 |      6 | Feldbau             | Eiweisserbse                       | Brennfleckenkrankheit der Erbse     |
+| 6521 |      7 | Feldbau             | Weizen                             | Ährenfusariosen                     |
+| 6521 |      8 | Feldbau             | Ackerbohne                         | Rost der Ackerbohne                 |
+| 6521 |      8 | Feldbau             | Ackerbohne                         | Braunfleckenkrankheit               |
+| 6521 |      9 | Feldbau             | Lein                               | Stängelbräune des Leins             |
+| 6521 |      9 | Feldbau             | Lein                               | Pasmokrankheit                      |
+| 6521 |      9 | Feldbau             | Lein                               | Echter Mehltau des Leins            |
+| 6521 |     10 | Gemüsebau           | Spargel                            | Blattschwärze der Spargel           |
+| 6521 |     10 | Gemüsebau           | Spargel                            | Spargelrost                         |
+| 6521 |     11 | Feldbau             | Grasbestände zur Saatgutproduktion | Rost der Gräser                     |
+| 6521 |     11 | Feldbau             | Grasbestände zur Saatgutproduktion | Blattfleckenpilze                   |
+| 6521 |     12 | Gemüsebau           | Erbsen                             | Graufäule (Botrytis cinerea)        |
+| 6521 |     12 | Gemüsebau           | Erbsen                             | Rost der Erbse                      |
+| 6521 |     12 | Gemüsebau           | Erbsen                             | Brennfleckenkrankheit der Erbse     |
+| 6521 |     13 | Feldbau             | Raps                               | Sclerotinia-Fäule                   |
+| 6521 |     14 | Feldbau             | Raps                               | Wurzelhals- und Stengelfäule        |
+| 6521 |     14 | Feldbau             | Raps                               | Erhöhung der Standfestigkeit        |
+| 6521 |     15 | Feldbau             | Weizen                             | Gelbrost                            |
 
 In this example, there are 25 such “indications” for the 15 uses.
 
@@ -915,75 +924,74 @@ print(culture_tree, "culture_id", "name_fr", "name_it", limit = 800)
     ## 294  ¦   ¦       ¦       °--Schnittsalat                                        
     ## 295  ¦   ¦       °--Endivien und Blattzichorien                                 
     ## 296  ¦   ¦           ¦--Endivien                                                
-    ## 297  ¦   ¦           ¦--Zuckerhut                                               
-    ## 298  ¦   ¦           °--Radicchio- und Cicorino-Typen                           
-    ## 299  ¦   ¦--Lippenblütler (Labiatae)                                            
-    ## 300  ¦   ¦   °--Stachys                                                         
-    ## 301  ¦   ¦--Süssgräser (Poaceae)                                                
-    ## 302  ¦   ¦   °--Zuckermais                                                      
-    ## 303  ¦   ¦--Kräuter                                                             
-    ## 304  ¦   ¦--Küchenkräuter                                                       
-    ## 305  ¦   ¦   ¦--Ysop                                                            
-    ## 306  ¦   ¦   ¦--Koriander                                                       
-    ## 307  ¦   ¦   ¦--Rosmarin                                                        
-    ## 308  ¦   ¦   ¦--Petersilie                                                      
-    ## 309  ¦   ¦   ¦--Römische Kamille                                                
-    ## 310  ¦   ¦   ¦--Kerbel                                                          
-    ## 311  ¦   ¦   ¦--Minze                                                           
-    ## 312  ¦   ¦   ¦--Basilikum                                                       
-    ## 313  ¦   ¦   ¦--Bohnenkraut                                                     
-    ## 314  ¦   ¦   ¦--Thymian                                                         
-    ## 315  ¦   ¦   ¦--Kümmel                                                          
-    ## 316  ¦   ¦   ¦--Dill                                                            
-    ## 317  ¦   ¦   ¦--Salbei                                                          
-    ## 318  ¦   ¦   ¦--Liebstöckel                                                     
-    ## 319  ¦   ¦   ¦--Estragon                                                        
-    ## 320  ¦   ¦   °--Schnittlauch                                                    
-    ## 321  ¦   ¦--Hülsenfrüchtler (Fabaceae)                                          
-    ## 322  ¦   ¦   ¦--Linse                                                           
-    ## 323  ¦   ¦   ¦--Puffbohne                                                       
-    ## 324  ¦   ¦   ¦--Erbsen                                                          
-    ## 325  ¦   ¦   ¦   ¦--Erbsen mit Hülsen                                           
-    ## 326  ¦   ¦   ¦   °--Erbsen ohne Hülsen                                          
-    ## 327  ¦   ¦   °--Bohnen                                                          
-    ## 328  ¦   ¦       ¦--Bohnen ohne Hülsen                                          
-    ## 329  ¦   ¦       °--Bohnen mit Hülsen                                           
-    ## 330  ¦   ¦           ¦--Stangenbohne                                            
-    ## 331  ¦   ¦           °--Buschbohne                                              
-    ## 332  ¦   ¦--Kreuzblütler (Brassicaceae)                                         
-    ## 333  ¦   ¦   ¦--Brunnenkresse                                                   
-    ## 334  ¦   ¦   ¦--Kohlarten                                                       
-    ## 335  ¦   ¦   ¦   ¦--Blumenkohle                                                 
-    ## 336  ¦   ¦   ¦   ¦   ¦--Blumenkohl                                              
-    ## 337  ¦   ¦   ¦   ¦   ¦--Romanesco                                               
-    ## 338  ¦   ¦   ¦   ¦   °--Broccoli                                                
-    ## 339  ¦   ¦   ¦   ¦--Blattkohle                                                  
-    ## 340  ¦   ¦   ¦   ¦   ¦--Pak-Choi                                                
-    ## 341  ¦   ¦   ¦   ¦   ¦--Markstammkohl                                           
-    ## 342  ¦   ¦   ¦   ¦   ¦--Chinakohl                                               
-    ## 343  ¦   ¦   ¦   ¦   ¦--Stielmus                                                
-    ## 344  ¦   ¦   ¦   ¦   °--Federkohl                                               
-    ## 345  ¦   ¦   ¦   ¦--Rosenkohl                                                   
-    ## 346  ¦   ¦   ¦   ¦--Kopfkohle                                                   
-    ## 347  ¦   ¦   ¦   °--Kohlrabi                                                    
-    ## 348  ¦   ¦   ¦--Kresse                                                          
-    ## 349  ¦   ¦   ¦--Blattsalate (Brassicaceae)                                      
-    ## 350  ¦   ¦   ¦--Radies                                                          
-    ## 351  ¦   ¦   ¦--Speisekohlrüben                                                 
-    ## 352  ¦   ¦   ¦   ¦--Brassica napus-Rüben                                        
-    ## 353  ¦   ¦   ¦   ¦   °--Bodenkohlrabi                                           
-    ## 354  ¦   ¦   ¦   °--Brassica rapa-Rüben                                         
-    ## 355  ¦   ¦   ¦--Barbarakraut                                                    
-    ## 356  ¦   ¦   ¦--Rettich                                                         
-    ## 357  ¦   ¦   ¦--Asia-Salate (Brassicaceae)                                      
-    ## 358  ¦   ¦   ¦--Cima di Rapa                                                    
-    ## 359  ¦   ¦   ¦--Rucola                                                          
-    ## 360  ¦   ¦   °--Meerrettich                                                     
-    ## 361  ¦   °--Kohlgemüse                                                          
-    ## 362  ¦--Medizinalkräuter                                                        
-    ## 363  ¦   °--Wolliger Fingerhut                                                  
-    ## 364  ¦--Hagebutten                                                              
-    ## 365  °--allg. Wiesen und Weiden                                                 
+    ## 297  ¦   ¦           °--Radicchio- und Cicorino-Typen                           
+    ## 298  ¦   ¦--Lippenblütler (Labiatae)                                            
+    ## 299  ¦   ¦   °--Stachys                                                         
+    ## 300  ¦   ¦--Süssgräser (Poaceae)                                                
+    ## 301  ¦   ¦   °--Zuckermais                                                      
+    ## 302  ¦   ¦--Kräuter                                                             
+    ## 303  ¦   ¦--Küchenkräuter                                                       
+    ## 304  ¦   ¦   ¦--Ysop                                                            
+    ## 305  ¦   ¦   ¦--Koriander                                                       
+    ## 306  ¦   ¦   ¦--Rosmarin                                                        
+    ## 307  ¦   ¦   ¦--Petersilie                                                      
+    ## 308  ¦   ¦   ¦--Römische Kamille                                                
+    ## 309  ¦   ¦   ¦--Kerbel                                                          
+    ## 310  ¦   ¦   ¦--Minze                                                           
+    ## 311  ¦   ¦   ¦--Basilikum                                                       
+    ## 312  ¦   ¦   ¦--Bohnenkraut                                                     
+    ## 313  ¦   ¦   ¦--Thymian                                                         
+    ## 314  ¦   ¦   ¦--Kümmel                                                          
+    ## 315  ¦   ¦   ¦--Dill                                                            
+    ## 316  ¦   ¦   ¦--Salbei                                                          
+    ## 317  ¦   ¦   ¦--Liebstöckel                                                     
+    ## 318  ¦   ¦   ¦--Estragon                                                        
+    ## 319  ¦   ¦   °--Schnittlauch                                                    
+    ## 320  ¦   ¦--Hülsenfrüchtler (Fabaceae)                                          
+    ## 321  ¦   ¦   ¦--Linse                                                           
+    ## 322  ¦   ¦   ¦--Puffbohne                                                       
+    ## 323  ¦   ¦   ¦--Erbsen                                                          
+    ## 324  ¦   ¦   ¦   ¦--Erbsen mit Hülsen                                           
+    ## 325  ¦   ¦   ¦   °--Erbsen ohne Hülsen                                          
+    ## 326  ¦   ¦   °--Bohnen                                                          
+    ## 327  ¦   ¦       ¦--Bohnen ohne Hülsen                                          
+    ## 328  ¦   ¦       °--Bohnen mit Hülsen                                           
+    ## 329  ¦   ¦           ¦--Stangenbohne                                            
+    ## 330  ¦   ¦           °--Buschbohne                                              
+    ## 331  ¦   ¦--Kreuzblütler (Brassicaceae)                                         
+    ## 332  ¦   ¦   ¦--Brunnenkresse                                                   
+    ## 333  ¦   ¦   ¦--Kohlarten                                                       
+    ## 334  ¦   ¦   ¦   ¦--Blumenkohle                                                 
+    ## 335  ¦   ¦   ¦   ¦   ¦--Blumenkohl                                              
+    ## 336  ¦   ¦   ¦   ¦   ¦--Romanesco                                               
+    ## 337  ¦   ¦   ¦   ¦   °--Broccoli                                                
+    ## 338  ¦   ¦   ¦   ¦--Blattkohle                                                  
+    ## 339  ¦   ¦   ¦   ¦   ¦--Pak-Choi                                                
+    ## 340  ¦   ¦   ¦   ¦   ¦--Markstammkohl                                           
+    ## 341  ¦   ¦   ¦   ¦   ¦--Chinakohl                                               
+    ## 342  ¦   ¦   ¦   ¦   ¦--Stielmus                                                
+    ## 343  ¦   ¦   ¦   ¦   °--Federkohl                                               
+    ## 344  ¦   ¦   ¦   ¦--Rosenkohl                                                   
+    ## 345  ¦   ¦   ¦   ¦--Kopfkohle                                                   
+    ## 346  ¦   ¦   ¦   °--Kohlrabi                                                    
+    ## 347  ¦   ¦   ¦--Kresse                                                          
+    ## 348  ¦   ¦   ¦--Blattsalate (Brassicaceae)                                      
+    ## 349  ¦   ¦   ¦--Radies                                                          
+    ## 350  ¦   ¦   ¦--Speisekohlrüben                                                 
+    ## 351  ¦   ¦   ¦   ¦--Brassica napus-Rüben                                        
+    ## 352  ¦   ¦   ¦   ¦   °--Bodenkohlrabi                                           
+    ## 353  ¦   ¦   ¦   °--Brassica rapa-Rüben                                         
+    ## 354  ¦   ¦   ¦--Barbarakraut                                                    
+    ## 355  ¦   ¦   ¦--Rettich                                                         
+    ## 356  ¦   ¦   ¦--Asia-Salate (Brassicaceae)                                      
+    ## 357  ¦   ¦   ¦--Cima di Rapa                                                    
+    ## 358  ¦   ¦   ¦--Rucola                                                          
+    ## 359  ¦   ¦   °--Meerrettich                                                     
+    ## 360  ¦   °--Kohlgemüse                                                          
+    ## 361  ¦--Medizinalkräuter                                                        
+    ## 362  ¦   °--Wolliger Fingerhut                                                  
+    ## 363  ¦--Hagebutten                                                              
+    ## 364  °--allg. Wiesen und Weiden                                                 
     ##                               culture_id
     ## 1                                       
     ## 2   0106A8DF-6CDF-4E18-8F46-3D9E1D52D0E5
@@ -1281,75 +1289,74 @@ print(culture_tree, "culture_id", "name_fr", "name_it", limit = 800)
     ## 294 A4BC1F92-959A-4449-A039-B98E3ABCD9B1
     ## 295 8DB1A579-6BAC-4DCB-8026-E79B65D3BD3A
     ## 296 62BF86AE-FD69-4F95-A72C-1D57AF1DCD99
-    ## 297 94589F70-1F3A-4AEF-A26A-2267EB5BDA4B
-    ## 298 B535B6DD-517D-4A62-ACC7-2948B15175ED
-    ## 299 BA6FCA8F-68B8-4408-A267-2546B1FA5764
-    ## 300 1F0B6451-EC2C-4647-A53A-23B0EAE626B1
-    ## 301 BF77A7F8-C4C5-43AF-9BCD-B7F904506E7A
-    ## 302 5433C814-C0CD-4815-B236-2D02E1C66F3D
-    ## 303 C3F940E4-D07C-4F4D-851C-D1024F8A6A62
-    ## 304 D541F2F5-8BA6-4E26-AA66-9CF469648AFF
-    ## 305 0A88EFE2-B85E-4BF7-9C38-AEE8CB2BFE42
-    ## 306 0DAB25B6-C3AA-430B-BF83-05FA66D889A4
-    ## 307 14B19DFD-331F-4C30-8724-8EDDF8E2D0D4
-    ## 308 1A1D511B-4ABD-44F2-8BB5-55192F5310D2
-    ## 309 25DC9B01-CA06-426A-B743-C0D293447898
-    ## 310 2C8A4414-AD7F-4708-9C58-BF1969131693
-    ## 311 37059300-8031-4A64-B75C-7490288E32BA
-    ## 312 3C2F424F-DFA0-4A59-A3DF-6E33A6B0B97E
-    ## 313 4D799EC6-1483-4D65-90EA-8DDB6A4166CA
-    ## 314 730AACDC-B956-493D-8148-7520019CE0BC
-    ## 315 807F5A2C-7904-456D-BBC7-A80A4B207964
-    ## 316 91522E50-F1AC-42B1-870B-68218110C235
-    ## 317 A067CC81-6A5D-4684-BE95-7941A51B9EF2
-    ## 318 A519A894-B754-44D1-A032-155F57B0CBFE
-    ## 319 ABF54D5D-620B-4A08-A37D-416C1AD8D1BF
-    ## 320 FA8C26CF-E3B4-456D-AA4E-94D21AEADA1A
-    ## 321 DB4E4C8B-016C-4C31-8DC5-587A9F1F8FFD
-    ## 322 54C75B64-57C4-46E2-BCEA-741EBC10FDDF
-    ## 323 56AF3EA3-01F4-4F10-B240-7EF4BE1C1CCE
-    ## 324 5DF3AB4D-7CAC-4112-90D9-67BD80EC5E96
-    ## 325 02BF379A-E526-422A-952B-3B0CD995F8C1
-    ## 326 C5188A42-9C79-4110-B1E8-AEE9D6078BEA
-    ## 327 A8BAC5BB-239F-4EE0-8CE2-F55590DA3FC0
-    ## 328 102C28F6-4AFB-4079-909B-ACE8E0819A77
-    ## 329 F7BB2F1C-EDE5-4C95-931E-0B2C973F5A29
-    ## 330 4465118D-78E7-4748-A47A-7F39E593771A
-    ## 331 930524FB-BD0A-4CA9-A89D-4FEEE1F9174F
-    ## 332 E55D75D3-B805-4BFD-B2B0-D02368BD32AC
-    ## 333 19C5BA72-A0D5-4409-8D05-0A7C9D821E20
-    ## 334 4380EC0F-E195-4783-8BB7-F6B0464B37D6
-    ## 335 4A22B9D3-747C-4323-A852-1CB1F6ADB680
-    ## 336 1E129025-DFD8-42D1-8A86-D90485B282A1
-    ## 337 8AFA14F8-CCE3-4012-BD12-9D690EBAE1AD
-    ## 338 B9323B4D-249D-4CF3-A5DF-4FDA2E66532F
-    ## 339 6F26F4E0-401C-4B16-A28B-4CC889907361
-    ## 340 394AE687-29A0-4BA6-B0B9-D7DFB0C08FCE
-    ## 341 80395E92-C39B-45D9-91AC-AB7E6DCAC3DB
-    ## 342 C37A7EE2-D06B-4204-809A-F50A934F79E3
-    ## 343 DA5835F6-C295-4A4F-829D-007B1FA50A6D
-    ## 344 DF4B3775-8361-41CE-9843-AC953197403D
-    ## 345 7B90BAC4-B80F-4039-ADC3-ADF9225CCBB7
-    ## 346 CA58ABAE-E494-4608-BE51-5FF49D853A03
-    ## 347 D8A50212-BD15-456A-9D2E-2A401C2EF21D
-    ## 348 7CE53BA0-097D-44FB-82FF-C30DFD3769DD
-    ## 349 85BB3788-27A8-4E73-800A-0E8F154EC0BE
-    ## 350 8FF3D364-2BA6-40AA-A370-4B72E3CAC8DF
-    ## 351 A0C29069-5DBA-4E89-B7F9-4C556C272821
-    ## 352 1F004DAA-89AD-4A9D-A172-95D24B8A45FA
-    ## 353 EB820B26-DE4E-4AF4-8BA3-46844F045306
-    ## 354 BFD1B79E-ABD1-4A44-8E61-891FF97960A1
-    ## 355 BA2DECCF-5987-4987-B56E-C5EC6E5D19C0
-    ## 356 BB923645-6E65-48EE-9C64-DA2232EEE7EF
-    ## 357 BFDDCB65-6E46-47E1-90B1-A998D5BD0546
-    ## 358 C264982A-CA81-4311-9E38-67D2D956BC78
-    ## 359 CC9D982D-A99F-4143-8298-BC029BD1D1AD
-    ## 360 EACDD832-D1CD-479C-973F-CD0DB6A9FBC3
-    ## 361 EB0C465C-50B7-4DC0-914B-ABE4C284A907
-    ## 362 E981BFA6-288D-4EA6-B81B-4F610611EB36
-    ## 363 C38D7DE4-C804-4F7C-AA2F-A536D03E0DFC
-    ## 364 EC349B29-6A2B-4E43-990F-C553D278DC0E
-    ## 365 FD7AB34C-F432-445D-9440-F44FDAB8422C
+    ## 297 B535B6DD-517D-4A62-ACC7-2948B15175ED
+    ## 298 BA6FCA8F-68B8-4408-A267-2546B1FA5764
+    ## 299 1F0B6451-EC2C-4647-A53A-23B0EAE626B1
+    ## 300 BF77A7F8-C4C5-43AF-9BCD-B7F904506E7A
+    ## 301 5433C814-C0CD-4815-B236-2D02E1C66F3D
+    ## 302 C3F940E4-D07C-4F4D-851C-D1024F8A6A62
+    ## 303 D541F2F5-8BA6-4E26-AA66-9CF469648AFF
+    ## 304 0A88EFE2-B85E-4BF7-9C38-AEE8CB2BFE42
+    ## 305 0DAB25B6-C3AA-430B-BF83-05FA66D889A4
+    ## 306 14B19DFD-331F-4C30-8724-8EDDF8E2D0D4
+    ## 307 1A1D511B-4ABD-44F2-8BB5-55192F5310D2
+    ## 308 25DC9B01-CA06-426A-B743-C0D293447898
+    ## 309 2C8A4414-AD7F-4708-9C58-BF1969131693
+    ## 310 37059300-8031-4A64-B75C-7490288E32BA
+    ## 311 3C2F424F-DFA0-4A59-A3DF-6E33A6B0B97E
+    ## 312 4D799EC6-1483-4D65-90EA-8DDB6A4166CA
+    ## 313 730AACDC-B956-493D-8148-7520019CE0BC
+    ## 314 807F5A2C-7904-456D-BBC7-A80A4B207964
+    ## 315 91522E50-F1AC-42B1-870B-68218110C235
+    ## 316 A067CC81-6A5D-4684-BE95-7941A51B9EF2
+    ## 317 A519A894-B754-44D1-A032-155F57B0CBFE
+    ## 318 ABF54D5D-620B-4A08-A37D-416C1AD8D1BF
+    ## 319 FA8C26CF-E3B4-456D-AA4E-94D21AEADA1A
+    ## 320 DB4E4C8B-016C-4C31-8DC5-587A9F1F8FFD
+    ## 321 54C75B64-57C4-46E2-BCEA-741EBC10FDDF
+    ## 322 56AF3EA3-01F4-4F10-B240-7EF4BE1C1CCE
+    ## 323 5DF3AB4D-7CAC-4112-90D9-67BD80EC5E96
+    ## 324 02BF379A-E526-422A-952B-3B0CD995F8C1
+    ## 325 C5188A42-9C79-4110-B1E8-AEE9D6078BEA
+    ## 326 A8BAC5BB-239F-4EE0-8CE2-F55590DA3FC0
+    ## 327 102C28F6-4AFB-4079-909B-ACE8E0819A77
+    ## 328 F7BB2F1C-EDE5-4C95-931E-0B2C973F5A29
+    ## 329 4465118D-78E7-4748-A47A-7F39E593771A
+    ## 330 930524FB-BD0A-4CA9-A89D-4FEEE1F9174F
+    ## 331 E55D75D3-B805-4BFD-B2B0-D02368BD32AC
+    ## 332 19C5BA72-A0D5-4409-8D05-0A7C9D821E20
+    ## 333 4380EC0F-E195-4783-8BB7-F6B0464B37D6
+    ## 334 4A22B9D3-747C-4323-A852-1CB1F6ADB680
+    ## 335 1E129025-DFD8-42D1-8A86-D90485B282A1
+    ## 336 8AFA14F8-CCE3-4012-BD12-9D690EBAE1AD
+    ## 337 B9323B4D-249D-4CF3-A5DF-4FDA2E66532F
+    ## 338 6F26F4E0-401C-4B16-A28B-4CC889907361
+    ## 339 394AE687-29A0-4BA6-B0B9-D7DFB0C08FCE
+    ## 340 80395E92-C39B-45D9-91AC-AB7E6DCAC3DB
+    ## 341 C37A7EE2-D06B-4204-809A-F50A934F79E3
+    ## 342 DA5835F6-C295-4A4F-829D-007B1FA50A6D
+    ## 343 DF4B3775-8361-41CE-9843-AC953197403D
+    ## 344 7B90BAC4-B80F-4039-ADC3-ADF9225CCBB7
+    ## 345 CA58ABAE-E494-4608-BE51-5FF49D853A03
+    ## 346 D8A50212-BD15-456A-9D2E-2A401C2EF21D
+    ## 347 7CE53BA0-097D-44FB-82FF-C30DFD3769DD
+    ## 348 85BB3788-27A8-4E73-800A-0E8F154EC0BE
+    ## 349 8FF3D364-2BA6-40AA-A370-4B72E3CAC8DF
+    ## 350 A0C29069-5DBA-4E89-B7F9-4C556C272821
+    ## 351 1F004DAA-89AD-4A9D-A172-95D24B8A45FA
+    ## 352 EB820B26-DE4E-4AF4-8BA3-46844F045306
+    ## 353 BFD1B79E-ABD1-4A44-8E61-891FF97960A1
+    ## 354 BA2DECCF-5987-4987-B56E-C5EC6E5D19C0
+    ## 355 BB923645-6E65-48EE-9C64-DA2232EEE7EF
+    ## 356 BFDDCB65-6E46-47E1-90B1-A998D5BD0546
+    ## 357 C264982A-CA81-4311-9E38-67D2D956BC78
+    ## 358 CC9D982D-A99F-4143-8298-BC029BD1D1AD
+    ## 359 EACDD832-D1CD-479C-973F-CD0DB6A9FBC3
+    ## 360 EB0C465C-50B7-4DC0-914B-ABE4C284A907
+    ## 361 E981BFA6-288D-4EA6-B81B-4F610611EB36
+    ## 362 C38D7DE4-C804-4F7C-AA2F-A536D03E0DFC
+    ## 363 EC349B29-6A2B-4E43-990F-C553D278DC0E
+    ## 364 FD7AB34C-F432-445D-9440-F44FDAB8422C
     ##                                                                       name_fr
     ## 1                                                                            
     ## 2                                                                   Baby-Leaf
@@ -1647,75 +1654,74 @@ print(culture_tree, "culture_id", "name_fr", "name_it", limit = 800)
     ## 294                                                           laitue à tondre
     ## 295                                    chicorée pommée et chicorée à feuilles
     ## 296                                         chicorée scarole, chicorée frisée
-    ## 297                                                    chicorée pain de sucre
-    ## 298                                   types de radicchio/trévises et cicorino
-    ## 299                                                      lamiacées (Labiatae)
-    ## 300                                                          crosnes du japon
-    ## 301                                                       poacées (Gramineae)
-    ## 302                                                                maïs sucré
-    ## 303                                                                    herbes
-    ## 304                                                              fines herbes
-    ## 305                                                                    Hysope
-    ## 306                                                                 coriandre
-    ## 307                                                                   romarin
-    ## 308                                                                    persil
-    ## 309                                                         Camomille romaine
-    ## 310                                                                  cerfeuil
-    ## 311                                                                    menthe
-    ## 312                                                                   basilic
-    ## 313                                                                 sarriette
-    ## 314                                                                      thym
-    ## 315                                                                     carvi
-    ## 316                                                                     aneth
-    ## 317                                                                     sauge
-    ## 318                                                                   livèche
-    ## 319                                                                  estragon
-    ## 320                                                                ciboulette
-    ## 321                                                   fabacées (légumineuses)
-    ## 322                                                                  lentille
-    ## 323                                                                      fève
-    ## 324                                                                      pois
-    ## 325                                                          pois non écossés
-    ## 326                                                              pois écossés
-    ## 327                                                                  haricots
-    ## 328                                                          haricots écossés
-    ## 329                                                      haricots non écossés
-    ## 330                                                           haricot à rames
-    ## 331                                                              haricot nain
-    ## 332                                                 crucifères (Brassicaceae)
-    ## 333                                                       cresson de fontaine
-    ## 334                                                                     choux
-    ## 335                                  choux (développement de l'inflorescence)
-    ## 336                                                                chou-fleur
-    ## 337                                                                 romanesco
-    ## 338                                                                   brocoli
-    ## 339                                                          choux à feuilles
-    ## 340                                                                   pakchoi
-    ## 341                                                             chou moellier
-    ## 342                                                             chou de Chine
-    ## 343                                                            navet à tondre
-    ## 344                                                      chou frisé non pommé
-    ## 345                                                         chou de Bruxelles
-    ## 346                                                              choux pommés
-    ## 347                                                                   colrave
-    ## 348                                                         cresson de jardin
-    ## 349                                          laitues à tondre  (Brassicaceae)
-    ## 350                                                    radis de tous les mois
-    ## 351                                         rave de Brassica rapa et B. napus
-    ## 352                                                    rave de Brassica napus
-    ## 353                                                                  rutabaga
-    ## 354                                                     rave de Brassica rapa
-    ## 355                                                     Barbarée du printemps
-    ## 356                                                                radis long
-    ## 357                                               salades Asia (Brassicaceae)
-    ## 358                                                              cima di rapa
-    ## 359                                                                  roquette
-    ## 360                                                                   raifort
-    ## 361                                                                     choux
-    ## 362                                                       plantes médicinales
-    ## 363                                                         digitale lanifère
-    ## 364                                                                cynorhodon
-    ## 365                                        domaine app. prairies et paturages
+    ## 297                                   types de radicchio/trévises et cicorino
+    ## 298                                                      lamiacées (Labiatae)
+    ## 299                                                          crosnes du japon
+    ## 300                                                       poacées (Gramineae)
+    ## 301                                                                maïs sucré
+    ## 302                                                                    herbes
+    ## 303                                                              fines herbes
+    ## 304                                                                    Hysope
+    ## 305                                                                 coriandre
+    ## 306                                                                   romarin
+    ## 307                                                                    persil
+    ## 308                                                         Camomille romaine
+    ## 309                                                                  cerfeuil
+    ## 310                                                                    menthe
+    ## 311                                                                   basilic
+    ## 312                                                                 sarriette
+    ## 313                                                                      thym
+    ## 314                                                                     carvi
+    ## 315                                                                     aneth
+    ## 316                                                                     sauge
+    ## 317                                                                   livèche
+    ## 318                                                                  estragon
+    ## 319                                                                ciboulette
+    ## 320                                                   fabacées (légumineuses)
+    ## 321                                                                  lentille
+    ## 322                                                                      fève
+    ## 323                                                                      pois
+    ## 324                                                          pois non écossés
+    ## 325                                                              pois écossés
+    ## 326                                                                  haricots
+    ## 327                                                          haricots écossés
+    ## 328                                                      haricots non écossés
+    ## 329                                                           haricot à rames
+    ## 330                                                              haricot nain
+    ## 331                                                 crucifères (Brassicaceae)
+    ## 332                                                       cresson de fontaine
+    ## 333                                                                     choux
+    ## 334                                  choux (développement de l'inflorescence)
+    ## 335                                                                chou-fleur
+    ## 336                                                                 romanesco
+    ## 337                                                                   brocoli
+    ## 338                                                          choux à feuilles
+    ## 339                                                                   pakchoi
+    ## 340                                                             chou moellier
+    ## 341                                                             chou de Chine
+    ## 342                                                            navet à tondre
+    ## 343                                                      chou frisé non pommé
+    ## 344                                                         chou de Bruxelles
+    ## 345                                                              choux pommés
+    ## 346                                                                   colrave
+    ## 347                                                         cresson de jardin
+    ## 348                                          laitues à tondre  (Brassicaceae)
+    ## 349                                                    radis de tous les mois
+    ## 350                                         rave de Brassica rapa et B. napus
+    ## 351                                                    rave de Brassica napus
+    ## 352                                                                  rutabaga
+    ## 353                                                     rave de Brassica rapa
+    ## 354                                                     Barbarée du printemps
+    ## 355                                                                radis long
+    ## 356                                               salades Asia (Brassicaceae)
+    ## 357                                                              cima di rapa
+    ## 358                                                                  roquette
+    ## 359                                                                   raifort
+    ## 360                                                                     choux
+    ## 361                                                       plantes médicinales
+    ## 362                                                         digitale lanifère
+    ## 363                                                                cynorhodon
+    ## 364                                        domaine app. prairies et paturages
     ##                                                                             name_it
     ## 1                                                                                  
     ## 2                                                                         Baby-Leaf
@@ -2013,72 +2019,71 @@ print(culture_tree, "culture_id", "name_fr", "name_it", limit = 800)
     ## 294                                                               Lattuga da taglio
     ## 295                                                     Indivia e cicoria da foglia
     ## 296                                                                         Indivia
-    ## 297                                                         Cicoria pan di zucchero
-    ## 298                                                    Tipi di radicchio e cicorino
-    ## 299                                                             Lamiacee (Labiatae)
-    ## 300                                                                        Tuberina
-    ## 301                                                            Poacee (Graminaceae)
-    ## 302                                                                      Mais dolce
-    ## 303                                                                            Erbe
-    ## 304                                                               Erbette da cucina
-    ## 305                                                                          Issopo
-    ## 306                                                                      Coriandolo
-    ## 307                                                                       Rosmarino
-    ## 308                                                                      Prezzemolo
-    ## 309                                                                Camomilla romana
-    ## 310                                                                       Cerfoglio
-    ## 311                                                                           Menta
-    ## 312                                                                        Basilico
-    ## 313                                                                     Santoreggia
-    ## 314                                                                            Timo
-    ## 315                                                                           Carvi
-    ## 316                                                                           Aneto
-    ## 317                                                                          Salvia
-    ## 318                                                                       Levistico
-    ## 319                                                                     Dragoncello
-    ## 320                                                                  Erba cipollina
-    ## 321                                                            Fabacee (Leguminose)
-    ## 322                                                                      Lenticchia
-    ## 323                                                                            Fave
-    ## 324                                                                         Piselli
-    ## 325                                                            Piselli con baccello
-    ## 326                                                          Piselli senza baccello
-    ## 327                                                                         Fagioli
-    ## 328                                                          Fagioli senza baccello
-    ## 329                                                            Fagioli con baccello
-    ## 330                                                              Fagiolo rampicante
-    ## 331                                                                    Fagiolo nano
-    ## 332                                                         Crocifere (Brassicacee)
-    ## 333                                                             Crescione acquatico
-    ## 334                                                                Specie di cavoli
-    ## 335                                                          Cavoli a infiorescenza
-    ## 336                                                                      Cavolfiore
-    ## 337                                                                       Romanesco
-    ## 338                                                                        Broccoli
-    ## 339                                                                Cavoli fogliacei
-    ## 340                                                                        Pak-Choi
-    ## 341                                                                  Cavolo fustoso
-    ## 342                                                                   Cavolo cinese
-    ## 343                                                         Cavoli / rape da taglio
-    ## 344                                                                    Cavolo piuma
-    ## 345                                                             Cavoli di Bruxelles
-    ## 346                                                                  Cavoli a testa
-    ## 347                                                                     Cavolo rapa
-    ## 348                                                                       Crescione
-    ## 349                                                 Insalate a foglie (Brassicacee)
-    ## 350                                                                       Ravanello
-    ## 351                                                Rapa di Brassica rapa e B. napus
-    ## 352                                                          Rapa di Brassica napus
-    ## 353                                                                   Cavolo navone
-    ## 354                                                           Rapa di Brassica rapa
-    ## 355                                                   Erba di Santa Barbara vernale
-    ## 356                                                                      Ramolaccio
-    ## 357                                                Insalate asiatiche (Brassicacee)
-    ## 358                                                                    Cima di rapa
-    ## 359                                                                          Rucola
-    ## 360                                                   Rafano rusticana / Ramolaccio
-    ## 361                                                                          Cavoli
-    ## 362                                                                 erbe medicinali
-    ## 363                                                                 Digitale lanata
-    ## 364                                                                     rosa canina
-    ## 365
+    ## 297                                                    Tipi di radicchio e cicorino
+    ## 298                                                             Lamiacee (Labiatae)
+    ## 299                                                                        Tuberina
+    ## 300                                                            Poacee (Graminaceae)
+    ## 301                                                                      Mais dolce
+    ## 302                                                                            Erbe
+    ## 303                                                               Erbette da cucina
+    ## 304                                                                          Issopo
+    ## 305                                                                      Coriandolo
+    ## 306                                                                       Rosmarino
+    ## 307                                                                      Prezzemolo
+    ## 308                                                                Camomilla romana
+    ## 309                                                                       Cerfoglio
+    ## 310                                                                           Menta
+    ## 311                                                                        Basilico
+    ## 312                                                                     Santoreggia
+    ## 313                                                                            Timo
+    ## 314                                                                           Carvi
+    ## 315                                                                           Aneto
+    ## 316                                                                          Salvia
+    ## 317                                                                       Levistico
+    ## 318                                                                     Dragoncello
+    ## 319                                                                  Erba cipollina
+    ## 320                                                            Fabacee (Leguminose)
+    ## 321                                                                      Lenticchia
+    ## 322                                                                            Fave
+    ## 323                                                                         Piselli
+    ## 324                                                            Piselli con baccello
+    ## 325                                                          Piselli senza baccello
+    ## 326                                                                         Fagioli
+    ## 327                                                          Fagioli senza baccello
+    ## 328                                                            Fagioli con baccello
+    ## 329                                                              Fagiolo rampicante
+    ## 330                                                                    Fagiolo nano
+    ## 331                                                         Crocifere (Brassicacee)
+    ## 332                                                             Crescione acquatico
+    ## 333                                                                Specie di cavoli
+    ## 334                                                          Cavoli a infiorescenza
+    ## 335                                                                      Cavolfiore
+    ## 336                                                                       Romanesco
+    ## 337                                                                        Broccoli
+    ## 338                                                                Cavoli fogliacei
+    ## 339                                                                        Pak-Choi
+    ## 340                                                                  Cavolo fustoso
+    ## 341                                                                   Cavolo cinese
+    ## 342                                                         Cavoli / rape da taglio
+    ## 343                                                                    Cavolo piuma
+    ## 344                                                             Cavoli di Bruxelles
+    ## 345                                                                  Cavoli a testa
+    ## 346                                                                     Cavolo rapa
+    ## 347                                                                       Crescione
+    ## 348                                                 Insalate a foglie (Brassicacee)
+    ## 349                                                                       Ravanello
+    ## 350                                                Rapa di Brassica rapa e B. napus
+    ## 351                                                          Rapa di Brassica napus
+    ## 352                                                                   Cavolo navone
+    ## 353                                                           Rapa di Brassica rapa
+    ## 354                                                   Erba di Santa Barbara vernale
+    ## 355                                                                      Ramolaccio
+    ## 356                                                Insalate asiatiche (Brassicacee)
+    ## 357                                                                    Cima di rapa
+    ## 358                                                                          Rucola
+    ## 359                                                   Rafano rusticana / Ramolaccio
+    ## 360                                                                          Cavoli
+    ## 361                                                                 erbe medicinali
+    ## 362                                                                 Digitale lanata
+    ## 363                                                                     rosa canina
+    ## 364

@@ -57,6 +57,29 @@ integrity. Since version 1.1, the returned object has an attribute named
   Wädenswil archive by Johannes Ranke and Daniel Baumgartner,
   2024-03-27.
 
+- In the case of two products (Rhodofix and Fruitone), the in-use
+  concentration of the product is erroneous in older XML files: For
+  Rhodofix (P-Nr. 5862, W-3003), the dosage in the XML file e.g. from
+  2012 is 1 to 1.5 for use_nr 1, and 2 for use_nr 2. The Grünbuch from
+  2009 specifies the same values as "Konzentration" in percent, but at
+  the same time it gives values of 100 - 150 g / 100 l as "Anwendung"
+  for use 1, and 200 g / 100 l as "Anwendung" for use 2. For Fruitone
+  (P-Nr. 5841, W-3016), we have the same problem, the "Konzentration" of
+  0.6% does not match the "Anwendung" of 60 g / 100 l. In order to get
+  the rates and the units correct, we substitute the application rates
+  in kg/ha, calculated from the range of "Anwendung" and the range of
+  application volumes.
+
+- In the case of two products, Dirigol - N (P-Nr 5832, W-3004) and
+  Frufix (P-Nr. 5840, W-3005), there is no dosage information. We have
+  some dosage information from the Grünbuch (e.g. 2009), but as it is
+  not completely clear how it is intended to be interpreted (combined
+  with the range of application volumes given, or with the standard
+  application volume), and there are discrepancies with the use rates
+  given in the current register, so we set the rate information to NA
+  for the use definitions of these products to avoid an erroneous
+  interpretation as product rates.
+
 ### Removal of redundant information
 
 - Information on products that has been duplicated across several
