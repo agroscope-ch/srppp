@@ -23,10 +23,13 @@ jobs:
         with:
           use-public-rspm: true
 
-      - name: Add R-universe to pak
+      - name: Install dependencies from R-universe
         run: |
-          Rscript -e "install.packages('pak')" \
-                  -e "pak::repo_add(agroscope = 'https://agroscope-ch.r-universe.dev')"
+          Rscript -e "options(repos = c(
+            myuniverse = 'https://agroscope-ch.r-universe.dev',
+            CRAN = 'https://cloud.r-project.org'
+          ))" \
+                  -e "install.packages('srppphist')"
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
