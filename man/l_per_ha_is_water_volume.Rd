@@ -5,13 +5,20 @@
 \alias{l_per_ha_is_water_volume}
 \title{Use definitions where the rate in l/ha refers to the volume of the spraying solution}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 1 rows and 4 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 2 rows and 5 columns.
 }
 \usage{
 l_per_ha_is_water_volume
 }
 \description{
-Use definitions where the rate in l/ha refers to the volume of the spraying solution
+This information is used in the functions \link{product_rates} and \link{application_rate_g_per_ha}
+in cases where a rate in l/ha exceeds 100 l/ha. It only affects older XML files,
+in current versions of the XML files, rate specifications always refer to
+the product.
+}
+\details{
+Currently, the affected products are Dormex (P-Nr. 5151) and Karate with
+Zeon technology (P-Nr. 3756).
 }
 \examples{
 library(srppp)

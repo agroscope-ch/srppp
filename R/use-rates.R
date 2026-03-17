@@ -20,11 +20,6 @@ utils::globalVariables(c("rate_min", "rate_max", "dosage_min", "dosage_max"))
 #' 'culture_de' from the 'cultures' table in [srppp_dm] object.
 #' @param aggregation How to represent a range if present, e.g. "max" (default)
 #' or "mean".
-#' @param dosage_units If no units are given, or units are "%", then the applied
-#' amount in g/ha is calculated using a reference application volume and the
-#' dosage. As the dosage units are not explicitly given, we can specify our
-#' assumptions about these using this argument (currently not implemented, i.e.
-#' specifying the argument has no effect).
 #' @param skip_l_per_ha_without_g_per_L Per default, uses where the use rate
 #' has units of l/ha are skipped, if there is not product concentration
 #' in g/L. This was also done in the 2023 indicator project.
@@ -72,14 +67,13 @@ utils::globalVariables(c("rate_min", "rate_max", "dosage_min", "dosage_max"))
 #' }
 application_rate_g_per_ha <- function(product_uses,
   aggregation = c("max", "mean", "min"),
-  dosage_units = c("percent_ww", "percent_vv", "state_of_matter"),
   skip_l_per_ha_without_g_per_L = TRUE,
   fix_l_per_ha = TRUE)
 {
   aggregation = match.arg(aggregation)
   active_rates <- product_rates(product_uses,
                                 aggregation,
-                                dosage_units,
+                                skip_l_per_ha_without_g_per_L = skip_l_per_ha_without_g_per_L,
                                 fix_l_per_ha) |>
     mutate(rate_g_per_ha = case_when(
       prod_unit == "l/ha" & !is.na(g_per_L) ~ prod_rate * g_per_L,

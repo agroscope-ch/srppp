@@ -1,3 +1,9 @@
+## version 2.0.5
+
+- Add function `product_rates` to obtain application rates in kg product / ha or l product / ha. This function is now internally used by `application_rate_g_per_ha`.
+- Add corrections of dosage and rate information for Rhodofix and Fruitone in older XML files.
+- Remove application rate information for Dirigol-N and Frufix, to avoid erroneous interpretation as product rate.
+
 ## version 2.0.4
 
 - Avoid a duplication of uses that was introduced with version 2.0.0 and that surfaced when reading in the 2015 register for srppphist.

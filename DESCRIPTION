@@ -1,8 +1,8 @@
 Package: srppp
 Type: Package
 Title: Read the Swiss Register of Plant Protection Products
-Version: 2.0.4
-Date: 2026-03-02
+Version: 2.0.5
+Date: 2026-03-17
 Authors@R: c(
   person("Daniel", "Baumgartner", role = "ctb",
     comment = "Provided feedback, explanations and background information"),
@@ -28,15 +28,16 @@ Description: Generate data objects from XML versions of the Swiss
 Depends: R (>= 4.1.0), dm
 Imports: xml2, tibble, stringr, dplyr, cli, data.tree, rlang
 Suggests: knitr, rmarkdown, here, DiagrammeR, DiagrammeRsvg,
-  testthat (>= 3.0.0), parallel, waldo
+  testthat (>= 3.0.0), parallel, waldo, srppphist (>= 2.0.2)
 BugReports: https://github.com/agroscope-ch/srppp/issues
 URL: https://agroscope-ch.github.io/srppp/
 License: GPL (>= 3)
 LazyData: yes
 LazyDataCompression: xz
-RoxygenNote: 7.3.3
+RoxygenNote: 7.3.3.9000
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-GB
 Config/testthat/edition: 3
+Additional_repositories: https://agroscope-ch.r-universe.dev

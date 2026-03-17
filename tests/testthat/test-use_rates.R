@@ -61,27 +61,30 @@ test_that("Use rates are correctly converted to g/ha", {
     percent = 99.1,
     g_per_L = 830)
 
+ product_rates_Misto_12 <- product_rates(uses_Misto_12)
+
+ expect_equal(
+   product_rates_Misto_12$prod_rate,
+   c(32, 16, 56))
+
   expect_equal(
     application_rate_g_per_ha(uses_Misto_12)$rate_g_per_ha,
     c(32, 16, 56) * 830)
 
-  # Products with units_de = "l/ha" and is.na(g_per_L), e.g. Metro 2017, Rhodofix 2012
+  # Products with units_de = "l/ha" and is.na(g_per_L), e.g. Metro 2017
   uses_unit_l_ha_no_g_per_L <- tibble::tibble(
-    pNbr = c(rep(5068, 4), rep(5862, 2)),
-    use_nr = c(1, 2, 1, 2, 1, 2),
+    pNbr = rep(5068, 4),
+    use_nr = c(1, 2, 1, 2),
     substance_de = c(rep("Ethephon", 2),
-                     rep("Trinexapac-ethyl", 2),
-                     rep("2-(1-naphthyl) acetic acid", 2)),
-    application_area_de = c(rep("Feldbau", 4),
-                            rep("Obstbau", 2)),
-    culture_de = c(rep("Triticale", 4),
-                            rep("Apfel", 2)),
-    min_dosage = c(rep(NA,4), 1, 2),
-    max_dosage = c(rep(NA,4), 1.5, NA),
-    min_rate = c(0.6, 1, 0.6, 1, 1000, 1000),
-    max_rate = c(1, 1.2, 1, 1.2, 3000, 3000),
+                     rep("Trinexapac-ethyl", 2)),
+    application_area_de = rep("Feldbau", 4),
+    culture_de = rep("Triticale", 4),
+    min_dosage = rep(NA,4),
+    max_dosage = rep(NA,4),
+    min_rate = c(0.6, 1, 0.6, 1),
+    max_rate = c(1, 1.2, 1, 1.2),
     units_de = "l/ha",
-    percent = c(rep(22.6, 2), rep(26.6, 2), 1, 1),
+    percent = c(rep(22.6, 2), rep(26.6, 2)),
     g_per_L = NA
   )
 
@@ -89,26 +92,31 @@ test_that("Use rates are correctly converted to g/ha", {
     application_rate_g_per_ha(uses_unit_l_ha_no_g_per_L, aggregation = "min",
                               skip_l_per_ha_without_g_per_L = FALSE
                               )$rate_g_per_ha,
-    c(135.6, 226.0, 159.6, 266.0,  100.0,  200.0))
+    c(135.6, 226.0, 159.6, 266.0))
 
   expect_equal(
     application_rate_g_per_ha(uses_unit_l_ha_no_g_per_L,
                               skip_l_per_ha_without_g_per_L = FALSE
     )$rate_g_per_ha,
-    c(226.0, 271.2, 266.0, 319.2,  450.0,  600.0))
+    c(226.0, 271.2, 266.0, 319.2))
 
+  # Another product with units_de = "l/ha" and is.na(g_per_L) is Rhodofix
+  # For this product, the dosage information was corrected based on the
+  # Grünbuch 2009 and the current register starting from srppp v2.0.5,
+  # used for producing srppphist v2.0.2. This is tested below after
+  # testing uses in hops ("Hopfen")
 
   # Products with and without unit and culture_de = "Hopfen"
   uses_with_and_without_units <- tibble::tibble(
-    pNbr = c(rep(7522,3), rep(4567,2)),
-    use_nr = c(2,3,29,2,3),
+    pNbr = c(rep(7522, 3), rep(4567, 2)),
+    use_nr = c(2, 3, 29, 2, 3),
     substance_de = c(rep("Deltamethrin", 3),
                      rep("Folpet", 2)),
     application_area_de = c(rep("Feldbau", 3),
                             rep("Gemüsebau", 2)),
     culture_de = c("Zuckerrübe", "Mais", "Hopfen", "Tomaten", "Knollensellerie"),
-    min_dosage = c(rep(NA,2), 0.05, 0.2, NA),
-    max_dosage = c(rep(NA,3), 0.3, NA),
+    min_dosage = c(rep(NA, 2), 0.05, 0.2, NA),
+    max_dosage = c(rep(NA, 3), 0.3, NA),
     min_rate = c(0.5, 0.5, NA, NA, 2.5),
     max_rate = c(rep(NA,5)),
     units_de = c("l/ha","l/ha", NA, NA, "l/ha"),
@@ -120,7 +128,31 @@ test_that("Use rates are correctly converted to g/ha", {
     application_rate_g_per_ha(uses_with_and_without_units, aggregation = "min",
                               skip_l_per_ha_without_g_per_L = FALSE
     )$rate_g_per_ha,
-    c(7.5, 7.5, 22.5, 560.0,  700.0))
+    c(7.5, 7.5, 22.5, 560.0, 700.0))
+
+  skip_on_cran() # We do not have srppphist on CRAN
+  sr12 <- srppphist::srppp_list[["2012"]]
+
+  uses_rate_greater_100_l_ha <- sr12$uses |>
+    left_join(sr12$ingredients, by = "pNbr", relationship = "many-to-many") |>
+    filter(units_de == "l/ha" & min_rate > 100) |>
+    left_join(sr12$products, by = "pNbr", relationship = "many-to-many") |>
+    left_join(sr12$cultures, by = c("pNbr", "use_nr"), relationship = "many-to-many") |>
+    select(pNbr, wNbr, name, use_nr, application_area_de, culture_de,
+           min_dosage, max_dosage, min_rate, max_rate, units_de, percent, g_per_L)
+
+  product_rates_for_use_rates_greater_100_l_ha <- product_rates(uses_rate_greater_100_l_ha)
+
+  expect_equal(
+    product_rates_for_use_rates_greater_100_l_ha$prod_rate,
+    c(rep(0.2, 4), 15, rep(166, 4))
+  )
+
+  expect_equal(
+    application_rate_g_per_ha(uses_rate_greater_100_l_ha,
+      skip_l_per_ha_without_g_per_L = FALSE)$rate_g_per_ha,
+    c(10, 10, NA, NA, 7800, rep(31042, 4)))
+
 
 })
 

@@ -7,7 +7,6 @@
 application_rate_g_per_ha(
   product_uses,
   aggregation = c("max", "mean", "min"),
-  dosage_units = c("percent_ww", "percent_vv", "state_of_matter"),
   skip_l_per_ha_without_g_per_L = TRUE,
   fix_l_per_ha = TRUE
 )
@@ -21,12 +20,6 @@ from the 'uses' table in a \link{srppp_dm} object, as well as the columns
 
 \item{aggregation}{How to represent a range if present, e.g. "max" (default)
 or "mean".}
-
-\item{dosage_units}{If no units are given, or units are "\%", then the applied
-amount in g/ha is calculated using a reference application volume and the
-dosage. As the dosage units are not explicitly given, we can specify our
-assumptions about these using this argument (currently not implemented, i.e.
-specifying the argument has no effect).}
 
 \item{skip_l_per_ha_without_g_per_L}{Per default, uses where the use rate
 has units of l/ha are skipped, if there is not product concentration

@@ -6,7 +6,7 @@ utils::globalVariables(c("id", "name", "pk", "wNbr", "wGrp", "pNbr", "use_nr",
   "min_dosage", "max_dosage", "min_rate", "max_rate", "waiting_period",
   "biotope_drift_dist", "sw_drift_dist", "sw_runoff_dist", "sw_runoff_points",
   "desc_pk", "ingr_desc_pk",
-  "units_pk", "time_units_pk",
+  "units_de", "units_pk", "time_units_pk",
   "type", "g_per_L", "percent"))
 
 #' Read an XML version of the Swiss Register of Plant Protection Products
@@ -520,7 +520,67 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
       starts_with("application_area")) |>
     arrange(wNbr, use_nr)
 
-  return(ret)
+  # Correct usage information for products where we have incorrect or incomplete
+  # information in some older XML files, see the documentation to `srppp_dm`
+  ret_corrected <- ret |>
+    mutate(
+
+      # Rhodofix:
+      # Use 1, specify minimum rate in g/ha instead of incorrect minimum dosage
+      # In the "Grünbuch 2009", we have 100-150 g / 100 l in an application volume of 1000 - 3000 l/ha
+      # so we specify a minimum rate of 1 kg/ha product and a maximum rate of 4.5 g/ha product
+      # In the current register, the range is 1 - 3 kg/ha product for this use (Blüten- und Fruchtausdünnung, Apfel)
+      min_rate = if_else(wNbr == "3003" & use_nr == 1 & min_dosage == 1 & min_rate == 1000,
+                         1, min_rate),
+      max_rate = if_else(wNbr == "3003" & use_nr == 1 & max_dosage == 1.5 & max_rate == 3000,
+                         4.5, max_rate),
+      # Adapt the rate units to kg/ha
+      units_de = if_else(wNbr == "3003" & use_nr == 1 & min_dosage == 1,
+                         "kg/ha", units_de),
+      # Set dosage to NA
+      min_dosage = if_else(wNbr == "3003" & use_nr == 1 & min_dosage == 1,
+                           NA, min_dosage),
+      max_dosage = if_else(wNbr == "3003" & use_nr == 1 & max_dosage == 1.5,
+                           NA, max_dosage),
+
+      # Use 2, specify maximum rate in g/ha instead of incorrect maximum dosage
+      # In the "Grünbuch 2009", we have 200 g / 100 l in an application volume of 1000 - 3000 l/ha
+      # so we specify a minimum rate of 2 kg/ha product and a maximum rate of 6 kg/ha product
+      # In the current register, the range is 2 - 4 kg/ha product for this use (Vorzeitiger Fruchtfall, Apfel)
+      min_rate = if_else(wNbr == "3003" & use_nr == 2 & min_dosage == 2 & min_rate == 1000,
+                         2, min_rate),
+      max_rate = if_else(wNbr == "3003" & use_nr == 2 & min_dosage == 2 & max_rate == 3000,
+                         4, max_rate),
+      # Adapt the rate units to kg/ha
+      units_de = if_else(wNbr == "3003" & use_nr == 2 & min_dosage == 2,
+                         "kg/ha", units_de),
+      # Set dosage to NA (max is already NA for this use in this case)
+      min_dosage = if_else(wNbr == "3003" & use_nr == 2 & min_dosage == 2,
+                           NA, min_dosage),
+
+      # Fruitone
+      # In the "Grünbuch 2009", we have 60 g / 100 l in an application volume of 1000 - 2000 l/ha
+      # so we specify a minimum rate of 0.6 kg/ha product and a maximum rate of 1.2 kg/ha product
+      min_rate = if_else(wNbr == "3016" & use_nr == 1 & min_dosage == 0.6 & min_rate == 1000,
+                           0.6, min_rate),
+      max_rate = if_else(wNbr == "3016" & use_nr == 1 & min_dosage == 0.6 & max_rate == 2000,
+                           1.2, max_rate),
+      units_de = if_else(wNbr == "3016" & use_nr == 1 & min_dosage == 0.6,
+                         "kg/ha", units_de),
+      min_dosage = if_else(wNbr == "3015" & use_nr == 1 & min_dosage == 0.6,
+                           NA, min_dosage),
+
+    ) |>
+
+    mutate(
+
+      # Dirigol - N and Frufix
+      min_rate = if_else(wNbr %in% c("3004", "3005") & min_rate == 1000, NA, min_rate),
+      max_rate = if_else(wNbr %in% c("3004", "3005") & max_rate == 2000, NA, max_rate),
+
+    )
+
+  return(ret_corrected)
 }
 
 #' Create a dm object from an XML version of the Swiss Register of Plant Protection Products
@@ -538,6 +598,27 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #' the data: The active substance content of Dormex (W-3066) is not 667 g/L,
 #' but 520 g/L This was confirmed by a visit to the Wädenswil archive by
 #' Johannes Ranke and Daniel Baumgartner, 2024-03-27.
+#'
+#' - In the case of two products (Rhodofix and Fruitone), the in-use concentration
+#' of the product is erroneous in older XML files: For Rhodofix (P-Nr. 5862, W-3003), the dosage
+#' in the XML file e.g. from 2012 is 1 to 1.5 for use_nr 1, and 2 for
+#' use_nr 2. The Grünbuch from 2009 specifies the same values as
+#' "Konzentration" in percent, but at the same time it gives values of 100 - 150 g / 100 l
+#' as "Anwendung" for use 1, and 200 g / 100 l as "Anwendung" for use 2.
+#' For Fruitone (P-Nr. 5841, W-3016), we have the same problem, the "Konzentration" of 0.6%
+#' does not match the "Anwendung" of 60 g / 100 l.
+#' In order to get the rates and the units correct, we substitute the application
+#' rates in kg/ha, calculated from the range of "Anwendung" and the range of application volumes.
+#'
+#' - In the case of two products, Dirigol - N (P-Nr 5832, W-3004) and
+#' Frufix (P-Nr. 5840, W-3005), there is no dosage information. We have some
+#' dosage information from the Grünbuch (e.g. 2009), but as it is not completely clear
+#' how it is intended to be interpreted (combined with the range of application volumes
+#' given, or with the standard application volume), and there are discrepancies
+#' with the use rates given
+#' in the current register, so we set the rate information to NA for
+#' the use definitions of these products to avoid an erroneous interpretation
+#' as product rates.
 #'
 #' ## Removal of redundant information
 #'

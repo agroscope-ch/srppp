@@ -7,7 +7,7 @@
 product_rates(
   product_uses,
   aggregation = c("max", "mean", "min"),
-  dosage_units = c("percent_ww", "percent_vv", "state_of_matter"),
+  skip_l_per_ha_without_g_per_L = FALSE,
   fix_l_per_ha = TRUE
 )
 }
@@ -21,11 +21,8 @@ from the 'uses' table in a \link{srppp_dm} object, as well as the columns
 \item{aggregation}{How to represent a range if present, e.g. "max" (default)
 or "mean".}
 
-\item{dosage_units}{If no units are given, or units are "\%", then the applied
-amount in l/ha or kg/ha is calculated using a reference application volume and
-the dosage. As the dosage units are not explicitly given, we can specify our
-assumptions about these using this argument (currently not implemented, i.e.
-specifying the argument has no effect).}
+\item{skip_l_per_ha_without_g_per_L}{Passed on to \code{application_rate_g_per_ha},
+but here, the default is FALSE, there it is TRUE.}
 
 \item{fix_l_per_ha}{During the review of the 2023 indicator
 project calculations, a number of cases were identified where the unit
