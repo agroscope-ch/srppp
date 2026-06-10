@@ -4,9 +4,6 @@
 \name{units_convertible_to_g_per_ha}
 \alias{units_convertible_to_g_per_ha}
 \title{Product application rate units convertible to grams active substance per hectare}
-\format{
-An object of class \code{character} of length 7.
-}
 \usage{
 units_convertible_to_g_per_ha
 }
@@ -22,4 +19,3 @@ units_convertible_to_g_per_ha
 \seealso{
 \link{application_rate_g_per_ha}
 }
-\keyword{datasets}

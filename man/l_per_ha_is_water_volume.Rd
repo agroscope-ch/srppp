@@ -4,9 +4,6 @@
 \name{l_per_ha_is_water_volume}
 \alias{l_per_ha_is_water_volume}
 \title{Use definitions where the rate in l/ha refers to the volume of the spraying solution}
-\format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 2 rows and 5 columns.
-}
 \usage{
 l_per_ha_is_water_volume
 }
@@ -27,4 +24,3 @@ l_per_ha_is_water_volume
 \seealso{
 \link{product_rates}
 }
-\keyword{datasets}

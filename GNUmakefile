@@ -4,6 +4,9 @@ TGZ     := $(PKGNAME)_$(PKGVERS).tar.gz
 TGZVNR  := $(PKGNAME)_$(PKGVERS)-vignettes-not-rebuilt.tar.gz
 RBIN ?= $(shell dirname "`which R`")
 
+README.md: README.rmd
+	Rscript -e "rmarkdown::render('README.rmd', output_format = 'github_document', output_options = list(html_preview = FALSE))"
+
 pkgfiles = \
 	.Rbuildignore \
 	DESCRIPTION \

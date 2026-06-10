@@ -4,8 +4,6 @@
 ^_pkgdown.yml$
 ^README.html$
 ^README.rmd$
-^TMP.R$
-^Functions.R$
 ^docs
 ^log
 ^GNUmakefile$

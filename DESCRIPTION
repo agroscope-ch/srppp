@@ -2,7 +2,7 @@ Package: srppp
 Type: Package
 Title: Read the Swiss Register of Plant Protection Products
 Version: 2.0.5
-Date: 2026-03-17
+Date: 2026-06-10
 Authors@R: c(
   person("Daniel", "Baumgartner", role = "ctb",
     comment = "Provided feedback, explanations and background information"),
@@ -24,20 +24,32 @@ Description: Generate data objects from XML versions of the Swiss
   online version, or with the original registration documents.  Also, the
   Federal Food Safety and Veterinary Office, coordinating the authorisation of
   plant protection products in Switzerland, does not answer requests regarding
-  this package. 
+  this package. Please refer to the website of the registration authorities
+  for additional information about the data made available via this package.
+  The following important notes published at that website are included here in
+  an inofficial translation for convenience: The register contains all plant
+  protection products registered in Switzerland, independent of their
+  availability on the market; The mentioning of a product does not imply a
+  recommendation; Products with expired authorisation and retracted parallel
+  imports remain in the register until the deadline for the last lawful use
+  ("exhaustionDeadline" in the XML file) has expired; In case of doubt, only
+  the original registration documents apply; When using the data, the BLV
+  (Federal Food Safety and Veterinary Office) has to be mentioned as the data
+  source, and a reference to the official register has to be made; Commercial
+  use of the data without consent of the BLV is prohibited.
 Depends: R (>= 4.1.0), dm
 Imports: xml2, tibble, stringr, dplyr, cli, data.tree, rlang
-Suggests: knitr, rmarkdown, here, DiagrammeR, DiagrammeRsvg,
+Suggests: knitr, rmarkdown, here, DiagrammeR (<= 1.0.11), DiagrammeRsvg,
   testthat (>= 3.0.0), parallel, waldo, srppphist
 BugReports: https://github.com/agroscope-ch/srppp/issues
 URL: https://agroscope-ch.github.io/srppp/
 License: GPL (>= 3)
 LazyData: yes
 LazyDataCompression: xz
-RoxygenNote: 7.3.3
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-GB
 Config/testthat/edition: 3
 Additional_repositories: https://agroscope-ch.r-universe.dev
+Config/roxygen2/version: 8.0.0

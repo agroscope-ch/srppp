@@ -16,4 +16,3 @@ URL of the XML version of the Swiss Register of Plant Protection Products
 \examples{
 print(srppp_xml_url)
 }
-\keyword{datasets}

@@ -6,7 +6,7 @@
 \alias{srppp-package}
 \title{srppp: Read the Swiss Register of Plant Protection Products}
 \description{
-Generate data objects from XML versions of the Swiss Register of Plant Protection Products. An online version of the register can be accessed at \url{https://www.psm.admin.ch/de/produkte}. There is no guarantee of correspondence of the data read in using this package with that online version, or with the original registration documents. Also, the Federal Food Safety and Veterinary Office, coordinating the authorisation of plant protection products in Switzerland, does not answer requests regarding this package.
+Generate data objects from XML versions of the Swiss Register of Plant Protection Products. An online version of the register can be accessed at \url{https://www.psm.admin.ch/de/produkte}. There is no guarantee of correspondence of the data read in using this package with that online version, or with the original registration documents. Also, the Federal Food Safety and Veterinary Office, coordinating the authorisation of plant protection products in Switzerland, does not answer requests regarding this package. Please refer to the website of the registration authorities for additional information about the data made available via this package. The following important notes published at that website are included here in an inofficial translation for convenience: The register contains all plant protection products registered in Switzerland, independent of their availability on the market; The mentioning of a product does not imply a recommendation; Products with expired authorisation and retracted parallel imports remain in the register until the deadline for the last lawful use ("exhaustionDeadline" in the XML file) has expired; In case of doubt, only the original registration documents apply; When using the data, the BLV (Federal Food Safety and Veterinary Office) has to be mentioned as the data source, and a reference to the official register has to be made; Commercial use of the data without consent of the BLV is prohibited.
 }
 \seealso{
 Useful links:
@@ -18,6 +18,11 @@ Useful links:
 }
 \author{
 \strong{Maintainer}: Johannes Ranke \email{johannes.ranke@agroscope.admin.ch} (\href{https://orcid.org/0000-0003-4371-6538}{ORCID})
+
+Authors:
+\itemize{
+  \item Johannes Ranke \email{johannes.ranke@agroscope.admin.ch} (\href{https://orcid.org/0000-0003-4371-6538}{ORCID})
+}
 
 Other contributors:
 \itemize{
