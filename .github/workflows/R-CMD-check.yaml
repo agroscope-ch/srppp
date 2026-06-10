@@ -26,7 +26,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck, agroscope-ch/srppphist
+          extra-packages: any::rcmdcheck, agroscope-ch/srppphist, any::DiagrammeR@1.0.11
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
