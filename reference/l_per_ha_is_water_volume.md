@@ -14,11 +14,6 @@ always refer to the product.
 l_per_ha_is_water_volume
 ```
 
-## Format
-
-An object of class `tbl_df` (inherits from `tbl`, `data.frame`) with 2
-rows and 5 columns.
-
 ## Details
 
 Currently, the affected products are Dormex (P-Nr. 5151) and Karate with

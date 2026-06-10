@@ -97,6 +97,9 @@ level.
 # \donttest{
 library(srppp)
 sr <- try(srppp_dm())
+#> Warning: URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip': Timeout of 60 seconds was reached
+#> Error in download.file(from, path, quiet = TRUE) : 
+#>   cannot open URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip'
 
 if (inherits(sr, "try-error")) {
   sr <- system.file("testdata/Daten_Pflanzenschutzmittelverzeichnis_2024-12-16.zip",
@@ -137,13 +140,13 @@ resolve_cultures(example_dataset_1, sr)
 #>                     pest_de      leaf_culture_de
 #> 1           Birnblattsauger                Birne
 #> 2            Kirschenfliege              Kirsche
-#> 3  Blattläuse (Röhrenläuse) Pfirsich / Nektarine
-#> 4  Blattläuse (Röhrenläuse)             Aprikose
-#> 5  Blattläuse (Röhrenläuse)              Kirsche
+#> 3  Blattläuse (Röhrenläuse)             Aprikose
+#> 4  Blattläuse (Röhrenläuse)              Kirsche
+#> 5  Blattläuse (Röhrenläuse) Pfirsich / Nektarine
 #> 6  Blattläuse (Röhrenläuse)            Zwetschge
 #> 7  Blattläuse (Röhrenläuse)              Pflaume
-#> 8               Spinnmilben               Quitte
-#> 9               Spinnmilben                Apfel
+#> 8               Spinnmilben                Apfel
+#> 9               Spinnmilben               Quitte
 #> 10              Spinnmilben                Birne
 
 # Here we get NA for the leaf culture of "Kirschen"
@@ -162,13 +165,13 @@ resolve_cultures(example_dataset_2, sr)
 #>                     pest_de      leaf_culture_de
 #> 1           Birnblattsauger                Birne
 #> 2            Kirschenfliege                 <NA>
-#> 3  Blattläuse (Röhrenläuse) Pfirsich / Nektarine
-#> 4  Blattläuse (Röhrenläuse)             Aprikose
-#> 5  Blattläuse (Röhrenläuse)              Kirsche
+#> 3  Blattläuse (Röhrenläuse)             Aprikose
+#> 4  Blattläuse (Röhrenläuse)              Kirsche
+#> 5  Blattläuse (Röhrenläuse) Pfirsich / Nektarine
 #> 6  Blattläuse (Röhrenläuse)            Zwetschge
 #> 7  Blattläuse (Röhrenläuse)              Pflaume
-#> 8               Spinnmilben               Quitte
-#> 9               Spinnmilben                Apfel
+#> 8               Spinnmilben                Apfel
+#> 9               Spinnmilben               Quitte
 #> 10              Spinnmilben                Birne
 
 # Example showing how cereals "Getreide" are resolved
@@ -193,16 +196,16 @@ resolve_cultures(example_dataset_3, sr)
 #> 9    Pirimicarb 2210      3             Feldbau   Getreide
 #> 10   Pirimicarb 2210      3             Feldbau   Getreide
 #>                     pest_de leaf_culture_de
-#> 1  Blattläuse (Röhrenläuse) Wintertriticale
-#> 2  Blattläuse (Röhrenläuse)    Winterweizen
-#> 3  Blattläuse (Röhrenläuse)    Wintergerste
-#> 4  Blattläuse (Röhrenläuse)    Winterroggen
-#> 5  Blattläuse (Röhrenläuse)   Korn (Dinkel)
-#> 6  Blattläuse (Röhrenläuse)           Emmer
-#> 7  Blattläuse (Röhrenläuse)    Sommerweizen
-#> 8  Blattläuse (Röhrenläuse)    Sommergerste
-#> 9  Blattläuse (Röhrenläuse)     Sommerhafer
-#> 10 Blattläuse (Röhrenläuse)      Hartweizen
+#> 1  Blattläuse (Röhrenläuse)   Korn (Dinkel)
+#> 2  Blattläuse (Röhrenläuse)           Emmer
+#> 3  Blattläuse (Röhrenläuse)      Hartweizen
+#> 4  Blattläuse (Röhrenläuse)    Sommergerste
+#> 5  Blattläuse (Röhrenläuse)    Wintergerste
+#> 6  Blattläuse (Röhrenläuse) Wintertriticale
+#> 7  Blattläuse (Röhrenläuse)    Winterroggen
+#> 8  Blattläuse (Röhrenläuse)     Sommerhafer
+#> 9  Blattläuse (Röhrenläuse)    Sommerweizen
+#> 10 Blattläuse (Röhrenläuse)    Winterweizen
 
 # Example resolving ornamental plants ("Zierpflanzen")
 example_dataset_4 <- data.frame(substance_de = c("Metaldehyd"),
@@ -239,39 +242,35 @@ resolve_cultures(example_dataset_4, sr)
 #> 26   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen
 #> 27   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen
 #> 28   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen
-#> 29   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen
-#> 30   Metaldehyd 6142      1        Zierpflanzen allg. Zierpflanzen
 #>                           pest_de                leaf_culture_de
 #> 1  Ackerschnecken/Deroceras Arten                     Baumschule
-#> 2  Ackerschnecken/Deroceras Arten           Zier- und Sportrasen
+#> 2  Ackerschnecken/Deroceras Arten Ziergehölze (ausserhalb Forst)
 #> 3  Ackerschnecken/Deroceras Arten                          Rosen
-#> 4  Ackerschnecken/Deroceras Arten                      Euphorbia
-#> 5  Ackerschnecken/Deroceras Arten Ziergehölze (ausserhalb Forst)
-#> 6  Ackerschnecken/Deroceras Arten                        Stauden
-#> 7  Ackerschnecken/Deroceras Arten                     Sommerflor
-#> 8  Ackerschnecken/Deroceras Arten                   Chrysantheme
-#> 9  Ackerschnecken/Deroceras Arten                         Nelken
-#> 10 Ackerschnecken/Deroceras Arten                        Gerbera
-#> 11 Ackerschnecken/Deroceras Arten                     Blaudistel
-#> 12 Ackerschnecken/Deroceras Arten                       Gladiole
-#> 13 Ackerschnecken/Deroceras Arten                        Dahlien
-#> 14 Ackerschnecken/Deroceras Arten                        Begonia
-#> 15 Ackerschnecken/Deroceras Arten                        Cyclame
-#> 16 Ackerschnecken/Deroceras Arten                    Pelargonien
-#> 17 Ackerschnecken/Deroceras Arten                        Primeln
-#> 18 Ackerschnecken/Deroceras Arten                     Zierkürbis
-#> 19 Ackerschnecken/Deroceras Arten                      Hyazinthe
-#> 20 Ackerschnecken/Deroceras Arten                           Iris
-#> 21 Ackerschnecken/Deroceras Arten  Liliengewächse (Zierpflanzen)
-#> 22 Ackerschnecken/Deroceras Arten                          Tulpe
-#> 23 Ackerschnecken/Deroceras Arten                   Rosskastanie
-#> 24 Ackerschnecken/Deroceras Arten                      Blautanne
-#> 25 Ackerschnecken/Deroceras Arten                Weihnachtsbäume
-#> 26 Ackerschnecken/Deroceras Arten                  Kirschlorbeer
-#> 27 Ackerschnecken/Deroceras Arten             Buchsbäume (Buxus)
-#> 28 Ackerschnecken/Deroceras Arten              Zypressengewächse
-#> 29 Ackerschnecken/Deroceras Arten                         Fichte
-#> 30 Ackerschnecken/Deroceras Arten                        Azaleen
+#> 4  Ackerschnecken/Deroceras Arten           Zier- und Sportrasen
+#> 5  Ackerschnecken/Deroceras Arten                        Stauden
+#> 6  Ackerschnecken/Deroceras Arten                        Begonia
+#> 7  Ackerschnecken/Deroceras Arten                        Cyclame
+#> 8  Ackerschnecken/Deroceras Arten                    Pelargonien
+#> 9  Ackerschnecken/Deroceras Arten                        Primeln
+#> 10 Ackerschnecken/Deroceras Arten                        Dahlien
+#> 11 Ackerschnecken/Deroceras Arten                     Sommerflor
+#> 12 Ackerschnecken/Deroceras Arten                  Kirschlorbeer
+#> 13 Ackerschnecken/Deroceras Arten                   Rosskastanie
+#> 14 Ackerschnecken/Deroceras Arten                      Blautanne
+#> 15 Ackerschnecken/Deroceras Arten             Buchsbäume (Buxus)
+#> 16 Ackerschnecken/Deroceras Arten                Weihnachtsbäume
+#> 17 Ackerschnecken/Deroceras Arten                           Iris
+#> 18 Ackerschnecken/Deroceras Arten                      Hyazinthe
+#> 19 Ackerschnecken/Deroceras Arten                       Gladiole
+#> 20 Ackerschnecken/Deroceras Arten                   Chrysantheme
+#> 21 Ackerschnecken/Deroceras Arten                     Blaudistel
+#> 22 Ackerschnecken/Deroceras Arten                        Gerbera
+#> 23 Ackerschnecken/Deroceras Arten                          Tulpe
+#> 24 Ackerschnecken/Deroceras Arten                     Zierkürbis
+#> 25 Ackerschnecken/Deroceras Arten  Liliengewächse (Zierpflanzen)
+#> 26 Ackerschnecken/Deroceras Arten                         Nelken
+#> 27 Ackerschnecken/Deroceras Arten                        Azaleen
+#> 28 Ackerschnecken/Deroceras Arten                         Fichte
 
 # Illustrate the resolution of the culture "allg."
 example_dataset_5 <- data.frame(
@@ -297,50 +296,50 @@ example_dataset_5 <- data.frame(
  resolve_cultures(example_dataset_5, sr)
 #>               substance_de pNbr use_nr application_area_de           culture_de
 #> 1                 Schwefel   38      1           Beerenbau            Brombeere
-#> 2  Kupfer (als Oxychlorid)  585     12             Weinbau         Ertragsreben
-#> 3  Kupfer (als Oxychlorid)  585     12             Weinbau            Jungreben
+#> 2  Kupfer (als Oxychlorid)  585     12             Weinbau            Jungreben
+#> 3  Kupfer (als Oxychlorid)  585     12             Weinbau         Ertragsreben
 #> 4               Metaldehyd 1090      4             Obstbau                Olive
-#> 5               Metaldehyd 1090      4             Obstbau               Quitte
-#> 6               Metaldehyd 1090      4             Obstbau                Apfel
-#> 7               Metaldehyd 1090      4             Obstbau Pfirsich / Nektarine
-#> 8               Metaldehyd 1090      4             Obstbau             Aprikose
-#> 9               Metaldehyd 1090      4             Obstbau              Kirsche
-#> 10              Metaldehyd 1090      4             Obstbau                Birne
-#> 11              Metaldehyd 1090      4             Obstbau              Walnuss
+#> 5               Metaldehyd 1090      4             Obstbau                Apfel
+#> 6               Metaldehyd 1090      4             Obstbau               Quitte
+#> 7               Metaldehyd 1090      4             Obstbau             Aprikose
+#> 8               Metaldehyd 1090      4             Obstbau              Kirsche
+#> 9               Metaldehyd 1090      4             Obstbau Pfirsich / Nektarine
+#> 10              Metaldehyd 1090      4             Obstbau              Walnuss
+#> 11              Metaldehyd 1090      4             Obstbau                Birne
 #> 12              Metaldehyd 1090      4             Obstbau            Zwetschge
 #> 13              Metaldehyd 1090      4             Obstbau              Pflaume
 #> 14              Metaldehyd 1090      4             Obstbau                Olive
-#> 15              Metaldehyd 1090      4             Obstbau               Quitte
-#> 16              Metaldehyd 1090      4             Obstbau                Apfel
-#> 17              Metaldehyd 1090      4             Obstbau Pfirsich / Nektarine
-#> 18              Metaldehyd 1090      4             Obstbau             Aprikose
-#> 19              Metaldehyd 1090      4             Obstbau              Kirsche
-#> 20              Metaldehyd 1090      4             Obstbau                Birne
-#> 21              Metaldehyd 1090      4             Obstbau              Walnuss
+#> 15              Metaldehyd 1090      4             Obstbau                Apfel
+#> 16              Metaldehyd 1090      4             Obstbau               Quitte
+#> 17              Metaldehyd 1090      4             Obstbau             Aprikose
+#> 18              Metaldehyd 1090      4             Obstbau              Kirsche
+#> 19              Metaldehyd 1090      4             Obstbau Pfirsich / Nektarine
+#> 20              Metaldehyd 1090      4             Obstbau              Walnuss
+#> 21              Metaldehyd 1090      4             Obstbau                Birne
 #> 22              Metaldehyd 1090      4             Obstbau            Zwetschge
 #> 23              Metaldehyd 1090      4             Obstbau              Pflaume
 #>                         pest_de      leaf_culture_de
 #> 1                    Gallmilben            Brombeere
-#> 2  Graufäule (Botrytis cinerea)         Ertragsreben
-#> 3  Graufäule (Botrytis cinerea)            Jungreben
+#> 2  Graufäule (Botrytis cinerea)            Jungreben
+#> 3  Graufäule (Botrytis cinerea)         Ertragsreben
 #> 4      Wegschnecken/Arion Arten                Olive
-#> 5      Wegschnecken/Arion Arten               Quitte
-#> 6      Wegschnecken/Arion Arten                Apfel
-#> 7      Wegschnecken/Arion Arten Pfirsich / Nektarine
-#> 8      Wegschnecken/Arion Arten             Aprikose
-#> 9      Wegschnecken/Arion Arten              Kirsche
-#> 10     Wegschnecken/Arion Arten                Birne
-#> 11     Wegschnecken/Arion Arten              Walnuss
+#> 5      Wegschnecken/Arion Arten                Apfel
+#> 6      Wegschnecken/Arion Arten               Quitte
+#> 7      Wegschnecken/Arion Arten             Aprikose
+#> 8      Wegschnecken/Arion Arten              Kirsche
+#> 9      Wegschnecken/Arion Arten Pfirsich / Nektarine
+#> 10     Wegschnecken/Arion Arten              Walnuss
+#> 11     Wegschnecken/Arion Arten                Birne
 #> 12     Wegschnecken/Arion Arten            Zwetschge
 #> 13     Wegschnecken/Arion Arten              Pflaume
 #> 14     Wegschnecken/Arion Arten                Olive
-#> 15     Wegschnecken/Arion Arten               Quitte
-#> 16     Wegschnecken/Arion Arten                Apfel
-#> 17     Wegschnecken/Arion Arten Pfirsich / Nektarine
-#> 18     Wegschnecken/Arion Arten             Aprikose
-#> 19     Wegschnecken/Arion Arten              Kirsche
-#> 20     Wegschnecken/Arion Arten                Birne
-#> 21     Wegschnecken/Arion Arten              Walnuss
+#> 15     Wegschnecken/Arion Arten                Apfel
+#> 16     Wegschnecken/Arion Arten               Quitte
+#> 17     Wegschnecken/Arion Arten             Aprikose
+#> 18     Wegschnecken/Arion Arten              Kirsche
+#> 19     Wegschnecken/Arion Arten Pfirsich / Nektarine
+#> 20     Wegschnecken/Arion Arten              Walnuss
+#> 21     Wegschnecken/Arion Arten                Birne
 #> 22     Wegschnecken/Arion Arten            Zwetschge
 #> 23     Wegschnecken/Arion Arten              Pflaume
 
@@ -376,13 +375,13 @@ example_dataset_6 <- data.frame(
 #> 10     Schwefel 3561      4             Obstbau allg. Obstbau
 #>                 pest_de      leaf_culture_de
 #> 1  Wühl- oder Schermaus                Olive
-#> 2  Wühl- oder Schermaus               Quitte
-#> 3  Wühl- oder Schermaus                Apfel
-#> 4  Wühl- oder Schermaus Pfirsich / Nektarine
-#> 5  Wühl- oder Schermaus             Aprikose
-#> 6  Wühl- oder Schermaus              Kirsche
-#> 7  Wühl- oder Schermaus                Birne
-#> 8  Wühl- oder Schermaus              Walnuss
+#> 2  Wühl- oder Schermaus                Apfel
+#> 3  Wühl- oder Schermaus               Quitte
+#> 4  Wühl- oder Schermaus             Aprikose
+#> 5  Wühl- oder Schermaus              Kirsche
+#> 6  Wühl- oder Schermaus Pfirsich / Nektarine
+#> 7  Wühl- oder Schermaus              Walnuss
+#> 8  Wühl- oder Schermaus                Birne
 #> 9  Wühl- oder Schermaus            Zwetschge
 #> 10 Wühl- oder Schermaus              Pflaume
 # }

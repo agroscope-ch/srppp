@@ -72,6 +72,8 @@ library(srppp)
 library(dplyr, warn.conflicts = FALSE)
 library(dm, warn.conflicts = FALSE)
 sr <- srppp_dm()
+#> Warning: URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip': Timeout of 60 seconds was reached
+#> Error in download.file(from, path, quiet = TRUE): cannot open URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip'
 
 product_uses <- sr$products |>
   filter(name == "BIOHOP AudiENZ") |>
@@ -84,24 +86,12 @@ product_uses <- sr$products |>
   select(name, pNbr, use_nr,
     min_dosage, max_dosage, min_rate, max_rate, units_de,
     application_area_de, culture_de, pk, percent, g_per_L)
+#> Error: object 'sr' not found
 
 product_rates(product_uses, aggregation = "max") |>
   select(pNbr, name, culture_de, application_area_de,
   max_prod_rate=prod_rate, prod_unit) |>
   print(n = 10)
-#> # A tibble: 216 × 6
-#>     pNbr name           culture_de   application_area_de max_prod_rate prod_unit
-#>    <int> <chr>          <chr>        <chr>                       <dbl> <chr>    
-#>  1  7036 BIOHOP AudiENZ Wassermelon… Gemüsebau                 0.2     l/ha     
-#>  2  7036 BIOHOP AudiENZ Wassermelon… Gemüsebau                 0.2     l/ha     
-#>  3  7036 BIOHOP AudiENZ Melonen      Gemüsebau                 0.2     l/ha     
-#>  4  7036 BIOHOP AudiENZ Melonen      Gemüsebau                 0.2     l/ha     
-#>  5  7036 BIOHOP AudiENZ Speisekürbi… Gemüsebau                 0.2     l/ha     
-#>  6  7036 BIOHOP AudiENZ Speisekürbi… Gemüsebau                 0.2     l/ha     
-#>  7  7036 BIOHOP AudiENZ Kohlarten    Gemüsebau                 0.00016 l/ha     
-#>  8  7036 BIOHOP AudiENZ Kohlarten    Gemüsebau                 0.4     l/ha     
-#>  9  7036 BIOHOP AudiENZ Erdbeere     Beerenbau                 0.00004 l/ha     
-#> 10  7036 BIOHOP AudiENZ Erdbeere     Beerenbau                 0.2     l/ha     
-#> # ℹ 206 more rows
+#> Error: object 'product_uses' not found
 # }
 ```

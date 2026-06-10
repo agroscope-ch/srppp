@@ -48,20 +48,8 @@ applicable, or NULL.
 # Try to get current list of products
 # \donttest{
 try(srppp_xml_get_products())
-#> # A tibble: 1,735 × 8
-#>     pNbr wNbr  name          exhaustionDeadline soldoutDeadline isSalePermission
-#>    <int> <chr> <chr>         <chr>              <chr>           <lgl>           
-#>  1    38 18    Thiovit Jet   ""                 ""              FALSE           
-#>  2    38 18-1  Sufralo       ""                 ""              TRUE            
-#>  3    38 18-2  Capito Bio-S… ""                 ""              TRUE            
-#>  4    38 18-3  Sanoplant Sc… ""                 ""              TRUE            
-#>  5    38 18-4  Biorga Contr… ""                 ""              TRUE            
-#>  6    38 18-5  Gesal Schrot… ""                 ""              TRUE            
-#>  7  1182 923   Divopan       ""                 ""              FALSE           
-#>  8  1192 934   Trifolin      ""                 ""              FALSE           
-#>  9  1263 986   Elosal Supra  ""                 ""              FALSE           
-#> 10  1865 1454  Misto 12      ""                 ""              FALSE           
-#> # ℹ 1,725 more rows
-#> # ℹ 2 more variables: terminationReason <chr>, permission_holder <chr>
+#> Warning: URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip': Timeout of 60 seconds was reached
+#> Error in download.file(from, path, quiet = TRUE) : 
+#>   cannot open URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip'
 # }
 ```

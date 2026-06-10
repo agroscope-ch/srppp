@@ -74,6 +74,9 @@ library(dplyr, warn.conflicts = FALSE)
 library(dm, warn.conflicts = FALSE)
 
 sr <- try(srppp_dm())
+#> Warning: URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip': Timeout of 60 seconds was reached
+#> Error in download.file(from, path, quiet = TRUE) : 
+#>   cannot open URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip'
 
 # Fall back to internal test data if downloading or reading fails
 if (inherits(sr, "try-error")) {
@@ -105,18 +108,18 @@ application_rate_g_per_ha(product_uses_with_ingredients) |>
 #> # A tibble: 16 × 8
 #>    ai                app_area min_d max_d min_r max_r units_de  rate
 #>    <chr>             <chr>    <dbl> <dbl> <dbl> <dbl> <chr>    <dbl>
-#>  1 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
-#>  2 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
-#>  3 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
-#>  4 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
-#>  5 Halauxifen-methyl Feldbau     NA    NA  0.75    NA l/ha      4.69
-#>  6 Halauxifen-methyl Feldbau     NA    NA  0.75    NA l/ha      4.69
-#>  7 Halauxifen-methyl Feldbau     NA    NA  0.75    NA l/ha      4.69
-#>  8 Halauxifen-methyl Feldbau     NA    NA  0.75    NA l/ha      4.69
-#>  9 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
-#> 10 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
-#> 11 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
-#> 12 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
+#>  1 Halauxifen-methyl Feldbau     NA    NA  0.75    NA l/ha      4.72
+#>  2 Halauxifen-methyl Feldbau     NA    NA  0.75    NA l/ha      4.72
+#>  3 Halauxifen-methyl Feldbau     NA    NA  0.75    NA l/ha      4.72
+#>  4 Halauxifen-methyl Feldbau     NA    NA  0.75    NA l/ha      4.72
+#>  5 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.3 
+#>  6 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.3 
+#>  7 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.3 
+#>  8 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.3 
+#>  9 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.3 
+#> 10 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.3 
+#> 11 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.3 
+#> 12 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.3 
 #> 13 Halauxifen-methyl Feldbau     NA    NA  0.5     NA l/ha      6.25
 #> 14 Halauxifen-methyl Feldbau     NA    NA  0.5     NA l/ha      6.25
 #> 15 Halauxifen-methyl Feldbau     NA    NA  0.5     NA l/ha      6.25

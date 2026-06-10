@@ -2,6 +2,10 @@
 
 ## version 2.0.5
 
+- Automatically include the description text from `DESCRIPTION` in the
+  `Readme.md` by way of generating it from `Readme.rmd`.
+- Add a translation of the important notes published by the registration
+  authorities along with the XML files.
 - Add function `product_rates` to obtain application rates in kg product
   / ha or l product / ha. This function is now internally used by
   `application_rate_g_per_ha`.
