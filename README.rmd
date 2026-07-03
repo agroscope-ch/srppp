@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 ## Description
 
-```{r, results = "asis"}
+```{r, results = "asis", echo = FALSE}
 read.dcf("DESCRIPTION")[, "Description"] |> cat()
 ```
 
