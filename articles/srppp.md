@@ -26,9 +26,12 @@ library(dplyr)
 example_register <- try(srppp_dm())
 ```
 
-    ## Warning in download.file(from, path, quiet = TRUE): URL
+    ## Warning in download.file(from, path, quiet = TRUE): downloaded length 0 !=
+    ## reported length 16
+
+    ## Warning in download.file(from, path, quiet = TRUE): cannot open URL
     ## 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip':
-    ## Timeout of 60 seconds was reached
+    ## HTTP status was '502 Bad Gateway'
 
     ## Error in download.file(from, path, quiet = TRUE) : 
     ##   cannot open URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip'

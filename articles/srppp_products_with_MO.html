@@ -62,7 +62,7 @@
 Ranke</h4>
             
             <h4 data-toc-skip class="date">Last change 17 July 2025
-(rebuilt 2026-06-10)</h4>
+(rebuilt 2026-07-03)</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agroscope-ch/srppp/blob/main/vignettes/srppp_products_with_MO.rmd" class="external-link"><code>vignettes/srppp_products_with_MO.rmd</code></a></small>
       <div class="d-none name"><code>srppp_products_with_MO.rmd</code></div>
@@ -78,12 +78,14 @@ Ranke</h4>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srppp</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="../reference/srppp_dm.html">srppp_dm</a></span><span class="op">(</span><span class="va">srppp_xml_url</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in download.file(from, path, quiet = TRUE): URL</span></span>
+<pre><code><span><span class="co">## Warning in download.file(from, path, quiet = TRUE): downloaded length 0 !=</span></span>
+<span><span class="co">## reported length 16</span></span></code></pre>
+<pre><code><span><span class="co">## Warning in download.file(from, path, quiet = TRUE): cannot open URL</span></span>
 <span><span class="co">## 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip':</span></span>
-<span><span class="co">## Timeout of 60 seconds was reached</span></span></code></pre>
+<span><span class="co">## HTTP status was '502 Bad Gateway'</span></span></code></pre>
 <pre><code><span><span class="co">## Error in download.file(from, path, quiet = TRUE) : </span></span>
 <span><span class="co">##   cannot open URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip'</span></span></code></pre>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fall back to using the file distributed with the package</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits</a></span><span class="op">(</span><span class="va">srppp</span>, <span class="st">"try-error"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">test_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"testdata/Daten_Pflanzenschutzmittelverzeichnis_2024-12-16.zip"</span>,</span>
@@ -96,7 +98,7 @@ Ranke</h4>
 </h2>
 <p>The following list was used to identify product categories containing
 microorganisms.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srppp</span><span class="op">$</span><span class="va">categories</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">category_de</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -215,7 +217,7 @@ microorganisms.</p>
 </table>
 <p>The resulting product categories containing microorganisms were
 defined as follows:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">microorganism_categories</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Lebende Organismen (Bakterien)"</span>,</span>
 <span>  <span class="st">"Lebende Organismen (Pilze)"</span>,</span>
@@ -238,7 +240,7 @@ defined as follows:</p>
 </tbody>
 </table>
 <p>The corresponding products are shown below.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">products_in_microorganism_categories</span> <span class="op">&lt;-</span> <span class="va">srppp</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">isSalePermission</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">categories</span>, by <span class="op">=</span> <span class="st">"pNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -396,7 +398,7 @@ defined as follows:</p>
 <p>The following lists of active substances in insecticides and
 fungicides were used to establish filter criteria active substances that
 are microorganisms.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srppp</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">isSalePermission</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">categories</span>, by <span class="op">=</span> <span class="st">"pNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -617,7 +619,7 @@ sulfuric acid, sodium salts</td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srppp</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">isSalePermission</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">categories</span>, by <span class="op">=</span> <span class="st">"pNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1034,7 +1036,7 @@ methyl ester</td>
 </tbody>
 </table>
 <p>The following genus names were established as filtering criteria.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">microorganism_genus_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Bacillus"</span>,</span>
 <span>  <span class="st">"Beauveria"</span>,</span>
@@ -1069,7 +1071,7 @@ methyl ester</td>
 </tbody>
 </table>
 <p>This results in the following list of active ingredients.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">microorganism_regexp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">microorganism_genus_names</span>, collapse <span class="op">=</span> <span class="st">"|"</span><span class="op">)</span></span>
 <span><span class="va">microorganism_ingredients</span> <span class="op">&lt;-</span> <span class="va">srppp</span><span class="op">$</span><span class="va">substances</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="va">microorganism_regexp</span>, <span class="va">substance_de</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1136,7 +1138,7 @@ methyl ester</td>
 </tbody>
 </table>
 <p>The following products contain one of these active ingredients.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">additional_products_containing_microorganisms</span> <span class="op">&lt;-</span> <span class="va">srppp</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">isSalePermission</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">ingredients</span>, by <span class="op">=</span> <span class="st">"pNbr"</span>, relationship <span class="op">=</span> <span class="st">"many-to-many"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1459,7 +1461,7 @@ methyl ester</td>
 categories as shown above, and 48 products in the insecticide and
 fungicide categories which contain an active substance that has a name
 that contains one of the microorganism genus names listed above.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">products_containing_microorganisms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span></span>
 <span>  <span class="va">products_in_microorganism_categories</span>, </span>
 <span>  <span class="va">additional_products_containing_microorganisms</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1469,7 +1471,7 @@ that contains one of the microorganism genus names listed above.</p>
 <p>The consolidated list of the 42 unique products identified in this
 way is shown below. Some of these products are listed twice, because
 they were identified via both ways.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">products_containing_microorganisms</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
