@@ -1,7 +1,7 @@
 ---
 title: The Swiss Register of Plant Protection Products as a Relational Data Model
 author: Johannes Ranke
-date: 17 July 2025 (rebuilt `r Sys.Date()`)
+date: 13 July 2026 (rebuilt `r Sys.Date()`)
 bibliography: references.bib
 output:
   rmarkdown::html_vignette:
@@ -35,7 +35,7 @@ these data. This package offers a fresh approach to directly read in the data
 into `R`.
 
 The current download location of the latest published XML version of the SRPPP
-is stored in the package as `srppp::srppp_xml_url`. Reading in the current data
+is obtained by the function `srppp::srppp_xml_url()`. Reading in the current data
 is as simple as
 
 ```{r message = FALSE}
