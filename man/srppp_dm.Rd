@@ -5,7 +5,7 @@
 \alias{print.srppp_dm}
 \title{Create a dm object from an XML version of the Swiss Register of Plant Protection Products}
 \usage{
-srppp_dm(from = srppp_xml_url, remove_duplicates = TRUE, verbose = TRUE)
+srppp_dm(from = srppp_xml_url(), remove_duplicates = TRUE, verbose = TRUE)
 
 \method{print}{srppp_dm}(x, ...)
 }

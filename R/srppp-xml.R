@@ -29,7 +29,7 @@ srppp_xml_get <- function(from, ...)
 #' }
 srppp_xml_get.NULL <- function(from, ...)
 {
-  from <- srppp_xml_url
+  from <- srppp_xml_url()
   path <- tempfile(fileext = "zip")
   download.file(from, path, quiet = TRUE)
 
@@ -721,7 +721,7 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #'   select(pNbr, use_nr, code, obligation_de)
 #'
 #' }
-srppp_dm <- function(from = srppp_xml_url, remove_duplicates = TRUE, verbose = TRUE) {
+srppp_dm <- function(from = srppp_xml_url(), remove_duplicates = TRUE, verbose = TRUE) {
 
   if (inherits(from, "srppp_xml")) {
     srppp_xml <- from

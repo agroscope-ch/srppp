@@ -1,3 +1,11 @@
+## version 2.0.6
+
+- Instead of including the URL to the zipped XML file with the register data in
+  the package, read it from the web page
+  https://www.blv.admin.ch/de/pflanzenschutzmittelverzeichnis, as it has changed
+  and will likely change upon every new release in the future. As a consequence,
+  'srppp_xml_url()' is now a function that returns the current URL.
+
 ## version 2.0.5
 
 - Automatically include the description text from `DESCRIPTION` in the `Readme.md` by way of generating it from `Readme.rmd`.
@@ -82,5 +90,5 @@ is not yet adapted to this new situation and will give a warning when working wi
   by 'pNbr', and the relationship is 'many-to-many', as a 'pNbr' can
   occur more than once in the products table.
 - The grouping of the products table by P-Numbers was removed, as it
-  seemed not to be used anywhere and created spurious messages during 
+  seemed not to be used anywhere and created spurious messages during
   constraint checking.
