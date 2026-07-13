@@ -61,7 +61,7 @@
                         <h4 data-toc-skip class="author">Johannes
 Ranke</h4>
             
-            <h4 data-toc-skip class="date">Last change 17 July 2025
+            <h4 data-toc-skip class="date">Last change 13 July 2026
 (rebuilt 2026-07-13)</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agroscope-ch/srppp/blob/main/vignettes/srppp_products_with_MO.rmd" class="external-link"><code>vignettes/srppp_products_with_MO.rmd</code></a></small>
@@ -77,11 +77,9 @@ Ranke</h4>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">srppp</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="../reference/srppp_dm.html">srppp_dm</a></span><span class="op">(</span><span class="va">srppp_xml_url</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Error in UseMethod("srppp_xml_get") : </span></span>
-<span><span class="co">##   no applicable method for 'srppp_xml_get' applied to an object of class "function"</span></span></code></pre>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Fall back to using the file distributed with the package</span></span>
+<code class="sourceCode R"><span><span class="va">srppp</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu"><a href="../reference/srppp_dm.html">srppp_dm</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Fall back to using the file distributed with the package</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">inherits</a></span><span class="op">(</span><span class="va">srppp</span>, <span class="st">"try-error"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">test_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"testdata/Daten_Pflanzenschutzmittelverzeichnis_2024-12-16.zip"</span>,</span>
 <span>  package <span class="op">=</span> <span class="st">"srppp"</span><span class="op">)</span></span>
@@ -93,7 +91,7 @@ Ranke</h4>
 </h2>
 <p>The following list was used to identify product categories containing
 microorganisms.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srppp</span><span class="op">$</span><span class="va">categories</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">category_de</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -106,63 +104,63 @@ microorganisms.</p>
 <tbody>
 <tr class="odd">
 <td align="left">Akarizid</td>
-<td align="right">63</td>
+<td align="right">119</td>
 </tr>
 <tr class="even">
-<td align="left">Bakterizid</td>
-<td align="right">25</td>
+<td align="left">Andere</td>
+<td align="right">1</td>
 </tr>
 <tr class="odd">
+<td align="left">Bakterizid</td>
+<td align="right">26</td>
+</tr>
+<tr class="even">
 <td align="left">Desinfektionsmittel</td>
 <td align="right">3</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Fungizid</td>
-<td align="right">270</td>
+<td align="right">263</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Herbizid</td>
-<td align="right">333</td>
+<td align="right">323</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Insektizid</td>
-<td align="right">137</td>
-</tr>
-<tr class="odd">
-<td align="left">Insektizid (Insektenlockstoff, Pheromon)</td>
-<td align="right">30</td>
+<td align="right">154</td>
 </tr>
 <tr class="even">
-<td align="left">Insektizid (Seifenpräparat)</td>
-<td align="right">7</td>
-</tr>
-<tr class="odd">
 <td align="left">Lebende Organismen (Bakterien)</td>
 <td align="right">2</td>
 </tr>
-<tr class="even">
-<td align="left">Lebende Organismen (Insekten)</td>
-<td align="right">114</td>
-</tr>
 <tr class="odd">
+<td align="left">Lebende Organismen (Insekten)</td>
+<td align="right">116</td>
+</tr>
+<tr class="even">
 <td align="left">Lebende Organismen (Insektenviren)</td>
 <td align="right">11</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Lebende Organismen (Milben)</td>
-<td align="right">31</td>
+<td align="right">30</td>
+</tr>
+<tr class="even">
+<td align="left">Lebende Organismen (Nematoden)</td>
+<td align="right">23</td>
 </tr>
 <tr class="odd">
-<td align="left">Lebende Organismen (Nematoden)</td>
-<td align="right">24</td>
-</tr>
-<tr class="even">
 <td align="left">Lebende Organismen (Pilze)</td>
 <td align="right">12</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Lebende Organismen (gegen Pilze)</td>
 <td align="right">7</td>
+</tr>
+<tr class="odd">
+<td align="left">Mittel zum Schutz von Erntegütern</td>
+<td align="right">5</td>
 </tr>
 <tr class="even">
 <td align="left">Molluskizid</td>
@@ -173,12 +171,12 @@ microorganisms.</p>
 <td align="right">2</td>
 </tr>
 <tr class="even">
-<td align="left">Netz- und Haftmittel</td>
-<td align="right">36</td>
+<td align="left">Pheromon</td>
+<td align="right">33</td>
 </tr>
 <tr class="odd">
 <td align="left">Phytoregulator</td>
-<td align="right">71</td>
+<td align="right">72</td>
 </tr>
 <tr class="even">
 <td align="left">Rodentizid</td>
@@ -190,11 +188,11 @@ microorganisms.</p>
 </tr>
 <tr class="even">
 <td align="left">Stimulator der natürlichen Abwehrkräfte</td>
-<td align="right">5</td>
+<td align="right">4</td>
 </tr>
 <tr class="odd">
 <td align="left">Virizid</td>
-<td align="right">1</td>
+<td align="right">2</td>
 </tr>
 <tr class="even">
 <td align="left">Vorratsschutzmittel</td>
@@ -202,17 +200,21 @@ microorganisms.</p>
 </tr>
 <tr class="odd">
 <td align="left">Wildabhaltemittel</td>
-<td align="right">4</td>
+<td align="right">5</td>
 </tr>
 <tr class="even">
 <td align="left">Wundverschlussmittel</td>
 <td align="right">1</td>
 </tr>
+<tr class="odd">
+<td align="left">Zusatzstoffe</td>
+<td align="right">36</td>
+</tr>
 </tbody>
 </table>
 <p>The resulting product categories containing microorganisms were
 defined as follows:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">microorganism_categories</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Lebende Organismen (Bakterien)"</span>,</span>
 <span>  <span class="st">"Lebende Organismen (Pilze)"</span>,</span>
@@ -235,7 +237,7 @@ defined as follows:</p>
 </tbody>
 </table>
 <p>The corresponding products are shown below.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">products_in_microorganism_categories</span> <span class="op">&lt;-</span> <span class="va">srppp</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">isSalePermission</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">categories</span>, by <span class="op">=</span> <span class="st">"pNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -258,18 +260,6 @@ defined as follows:</p>
 <th align="left">category_de</th>
 </tr></thead>
 <tbody>
-<tr class="odd">
-<td align="right">4594</td>
-<td align="left">4574</td>
-<td align="left">Beauveria-Schweizer</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="even">
-<td align="right">7650</td>
-<td align="left">6423</td>
-<td align="left">Metarhizium Schweizer</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
 <tr class="odd">
 <td align="right">8025</td>
 <td align="left">6919</td>
@@ -384,6 +374,18 @@ defined as follows:</p>
 <td align="left">Lalguard M52 GR</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
+<tr class="even">
+<td align="right">9698</td>
+<td align="left">7632</td>
+<td align="left">Metapro</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="right">9699</td>
+<td align="left">7633</td>
+<td align="left">Beaupro</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -393,7 +395,7 @@ defined as follows:</p>
 <p>The following lists of active substances in insecticides and
 fungicides were used to establish filter criteria active substances that
 are microorganisms.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srppp</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">isSalePermission</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">categories</span>, by <span class="op">=</span> <span class="st">"pNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -414,44 +416,57 @@ are microorganisms.</p>
 <td align="left">1,2-Benzisothiazol-3(2H)-on</td>
 </tr>
 <tr class="even">
+<td align="left">1,2-benzisothiazol-3(2H)-one;
+1,2-benzisothiazolin-3-one</td>
+</tr>
+<tr class="odd">
 <td align="left">3,6-Dimethyl-4-octin-3,6-diol</td>
 </tr>
-<tr class="odd">
-<td align="left">Abamectin</td>
-</tr>
 <tr class="even">
+<td align="left">Acequinocyl</td>
+</tr>
+<tr class="odd">
 <td align="left">Acetamiprid</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Alcohols, C12-15, ethoxylated</td>
 </tr>
+<tr class="odd">
+<td align="left">Alkane C9-C12-Iso</td>
+</tr>
 <tr class="even">
+<td align="left">Aluminiumphosphid</td>
+</tr>
+<tr class="odd">
 <td align="left">Anastatus bifasciatus</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Azadirachtin A</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Bacillus thuringiensis var. aizawai</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Bacillus thuringiensis var. israeliensis</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Bacillus thuringiensis var. kurstaki</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Bacillus thuringiensis var. tenebrionis</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Beauveria brongniartii</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Benzolsulfonsäure</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Benzolsulfonsäure, Mono-C11-13-verzweigte
 Alkylderivate, Calciumsalze</td>
+</tr>
+<tr class="even">
+<td align="left">Bifenazat</td>
 </tr>
 <tr class="odd">
 <td align="left">Buprofezin</td>
@@ -463,28 +478,35 @@ Alkylderivate, Calciumsalze</td>
 <td align="left">Calcium Dodecylbenzene Sulfonate</td>
 </tr>
 <tr class="even">
-<td align="left">Calciumcarbonat</td>
-</tr>
-<tr class="odd">
 <td align="left">Chlorantraniliprol</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Cypermethrin</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Deltamethrin</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Emamectinbenzoat</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Etofenprox</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Eupeodes corollae</td>
+</tr>
+<tr class="even">
+<td align="left">Fenpyroximate</td>
 </tr>
 <tr class="odd">
 <td align="left">Fettsäuren</td>
+</tr>
+<tr class="even">
+<td align="left">Fettsäuren C7-C18</td>
+</tr>
+<tr class="odd">
+<td align="left">Fettsäuren, C7-C18-und C18 ungesättigt,
+Kaliumsalze</td>
 </tr>
 <tr class="even">
 <td align="left">Flonicamid</td>
@@ -493,10 +515,16 @@ Alkylderivate, Calciumsalze</td>
 <td align="left">Gamma Butyrolacton</td>
 </tr>
 <tr class="even">
-<td align="left">Heterorhabditis bacteriophora</td>
+<td align="left">Glutaraldehyd</td>
 </tr>
 <tr class="odd">
+<td align="left">Heterorhabditis bacteriophora</td>
+</tr>
+<tr class="even">
 <td align="left">Heterorhabditis downesi</td>
+</tr>
+<tr class="odd">
+<td align="left">Hexythiazox</td>
 </tr>
 <tr class="even">
 <td align="left">Hydrocarbons, C10-C13, aromatics, &lt;1%
@@ -506,7 +534,13 @@ naphthalene</td>
 <td align="left">Kaliumhydrogencarbonat</td>
 </tr>
 <tr class="even">
+<td align="left">Kalkstein</td>
+</tr>
+<tr class="odd">
 <td align="left">Kaolin</td>
+</tr>
+<tr class="even">
+<td align="left">Kieselgur (Diatomeenerde)</td>
 </tr>
 <tr class="odd">
 <td align="left">Lambda-Cyhalothrin</td>
@@ -521,65 +555,71 @@ naphthalene</td>
 <td align="left">Metarhizium anisopliae</td>
 </tr>
 <tr class="odd">
+<td align="left">Milbemectin</td>
+</tr>
+<tr class="even">
 <td align="left">Oleylamin ethoxyliert, Dodecylbenzensulfonsalz</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Orangenöl</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Paraffinöl</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Piperonyl butoxid</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Pirimicarb</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Pyrethrine</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Quassiaextrakt</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Rapsöl</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Sesamöl raffiniert</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Solvent Naphtha</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Solvent naphtha (petroleum), heavy arom.; Kerosine -
 unspecified</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Sphaerophoria rueppellii</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Spinetoram</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Spinosad</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Spirotetramat</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Steinernema carpocapsae</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Steinernema carpocapsae all strain</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Steinernema feltiae</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Sulfurylfluorid</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Tebufenozide</td>
+</tr>
+<tr class="even">
+<td align="left">Tebufenpyrad</td>
 </tr>
 <tr class="odd">
 <td align="left">Tefluthrin</td>
@@ -614,7 +654,7 @@ sulfuric acid, sodium salts</td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srppp</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">isSalePermission</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">categories</span>, by <span class="op">=</span> <span class="st">"pNbr"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -646,14 +686,20 @@ sulfuric acid, sodium salts</td>
 1,2-benzisothiazolin-3-one</td>
 </tr>
 <tr class="odd">
-<td align="left">1-Butanol</td>
+<td align="left">1,2-benzothiazol-3(2H)-on</td>
 </tr>
 <tr class="even">
-<td align="left">1-Octyl-2-pyrrolidon</td>
+<td align="left">1-Butanol</td>
 </tr>
 <tr class="odd">
+<td align="left">1-Octyl-2-pyrrolidon</td>
+</tr>
+<tr class="even">
 <td align="left">2,2’,2’’-(hexahydro-1,3,5-triazine-1,3,5-triyl)triethanol /
 1,3,5-tris(2-hydroxyethyl)hexahydro-1,3,5-triazine</td>
+</tr>
+<tr class="odd">
+<td align="left">2-Ethylhexyl (S)-2-hydroxypropionate</td>
 </tr>
 <tr class="even">
 <td align="left">2-Ethylhexyl-S-Lactat</td>
@@ -665,19 +711,19 @@ sulfuric acid, sodium salts</td>
 <td align="left">2-Methyl-2H-isothiazol-3-on</td>
 </tr>
 <tr class="odd">
-<td align="left">2-methylaminoethanol</td>
-</tr>
-<tr class="even">
 <td align="left">Alcohols C9-11, ethoxylated propoxylated</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Alcohols, C12-15, ethoxylated</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Alcohols, C9-11, ethoxylated</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Aluminiumfosetyl (Fosetyl-Al)</td>
+</tr>
+<tr class="odd">
+<td align="left">Aluminiumsulfat</td>
 </tr>
 <tr class="even">
 <td align="left">Ametoctradin</td>
@@ -701,10 +747,10 @@ sulfuric acid, sodium salts</td>
 <td align="left">Bacillus amyloliquefaciens</td>
 </tr>
 <tr class="odd">
-<td align="left">Benalaxyl-M</td>
+<td align="left">Bacillus amyloliquefaciens Stamm MBI 600</td>
 </tr>
 <tr class="even">
-<td align="left">Benthiavalicarb-isopropyl</td>
+<td align="left">Benalaxyl-M</td>
 </tr>
 <tr class="odd">
 <td align="left">Benzolsulfonsäure</td>
@@ -761,29 +807,29 @@ sulfuric acid, sodium salts</td>
 <td align="left">Difenoconazol</td>
 </tr>
 <tr class="odd">
-<td align="left">Dimethomorph</td>
-</tr>
-<tr class="even">
 <td align="left">Dinatriumphosphonat</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Dipenten; Limonen</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Disodium maleate</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Dithianon</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Docusatnatrium</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Dodecylbenzolsulfonsäure, Verbindung mit 2-Aminoethanol
 (1:1)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Dodine</td>
+</tr>
+<tr class="even">
+<td align="left">Dreibasisches Kupfersulfat</td>
 </tr>
 <tr class="odd">
 <td align="left">Estragol</td>
@@ -832,13 +878,19 @@ sulfuric acid, sodium salts</td>
 2-Ethylhexyl-di-D-glucopyranosid</td>
 </tr>
 <tr class="even">
-<td align="left">Imazalil</td>
+<td align="left">Hymexazol</td>
 </tr>
 <tr class="odd">
-<td align="left">Iprovalicarb</td>
+<td align="left">Imazalil</td>
 </tr>
 <tr class="even">
+<td align="left">Iprovalicarb</td>
+</tr>
+<tr class="odd">
 <td align="left">Kaliumhydrogencarbonat</td>
+</tr>
+<tr class="even">
+<td align="left">Kaliumhydroxid</td>
 </tr>
 <tr class="odd">
 <td align="left">Kaliumphosphonat</td>
@@ -847,19 +899,19 @@ sulfuric acid, sodium salts</td>
 <td align="left">Kresoxim-methyl</td>
 </tr>
 <tr class="odd">
-<td align="left">Kupfer (als Hydroxid)</td>
+<td align="left">Kupfer</td>
 </tr>
 <tr class="even">
 <td align="left">Kupfer (als Kalkpräparat, Bordeaux-Brühe)</td>
 </tr>
 <tr class="odd">
-<td align="left">Kupfer (als Octanoat)</td>
+<td align="left">Kupferhydroxid</td>
 </tr>
 <tr class="even">
-<td align="left">Kupfer (als Oxychlorid)</td>
+<td align="left">Kupferoctanoat</td>
 </tr>
 <tr class="odd">
-<td align="left">Kupfer (als Tribasisches Kupfersulfat)</td>
+<td align="left">Kupferoxychlorid</td>
 </tr>
 <tr class="even">
 <td align="left">Lösungsmittelnaphtha (Erdöl), leichte aromatische</td>
@@ -868,25 +920,19 @@ sulfuric acid, sodium salts</td>
 <td align="left">Mandipropamid</td>
 </tr>
 <tr class="even">
-<td align="left">Mefentrifluconazole</td>
+<td align="left">Mefentrifluconazol</td>
 </tr>
 <tr class="odd">
-<td align="left">Mepanipyrim</td>
-</tr>
-<tr class="even">
 <td align="left">Mepiquatchlorid</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Metalaxyl-M</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Metconazole</td>
 </tr>
-<tr class="odd">
-<td align="left">Methenamin; Hexamethylenetetramin</td>
-</tr>
 <tr class="even">
-<td align="left">Metiram</td>
+<td align="left">Methenamin; Hexamethylenetetramin</td>
 </tr>
 <tr class="odd">
 <td align="left">Metrafenone</td>
@@ -895,18 +941,18 @@ sulfuric acid, sodium salts</td>
 <td align="left">N,N-Dimethyloctanamide</td>
 </tr>
 <tr class="odd">
-<td align="left">Naphtalin</td>
+<td align="left">N,N-dimethyldecanamide</td>
 </tr>
 <tr class="even">
+<td align="left">Naphtalin</td>
+</tr>
+<tr class="odd">
 <td align="left">Naphtha (Erdoel), schwere Alkylat- [Enthält weniger als
 0.1 % Benzol]</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Naphthalenesulfonic acid, methyl-, polymer with
 formaldehyde, sodium salt</td>
-</tr>
-<tr class="even">
-<td align="left">Natrium-di-butyl-naphtalinsulfonat</td>
 </tr>
 <tr class="odd">
 <td align="left">Natriumdiisopropylnaphtalinsulfonat</td>
@@ -921,25 +967,31 @@ formaldehyde, sodium salt</td>
 <td align="left">Orangenöl</td>
 </tr>
 <tr class="odd">
+<td align="left">Oxathiapiprolin</td>
+</tr>
+<tr class="even">
 <td align="left">Paclobutrazol</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Penconazole</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Pentanol, verzweigt und linear</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Penthiopyrad</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Phlebia gigantea</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Pin-2(3)-en</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Propamocarb</td>
+</tr>
+<tr class="odd">
+<td align="left">Propamocarb-hydrochlorid</td>
 </tr>
 <tr class="even">
 <td align="left">Propyllaktat</td>
@@ -966,7 +1018,7 @@ formaldehyde, sodium salt</td>
 <td align="left">Quarz</td>
 </tr>
 <tr class="even">
-<td align="left">Saccharomyces cerevisiae</td>
+<td align="left">Saccharomyces cervisiae (inert fraction)</td>
 </tr>
 <tr class="odd">
 <td align="left">Schachtelhalmextrakt</td>
@@ -978,7 +1030,7 @@ formaldehyde, sodium salt</td>
 <td align="left">Schwefelkalk (Calciumpolysulfid)</td>
 </tr>
 <tr class="even">
-<td align="left">Schwefelsaure Tonerde</td>
+<td align="left">Sipernat 50 S</td>
 </tr>
 <tr class="odd">
 <td align="left">Solvent Naphtha</td>
@@ -1031,7 +1083,7 @@ methyl ester</td>
 </tbody>
 </table>
 <p>The following genus names were established as filtering criteria.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">microorganism_genus_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Bacillus"</span>,</span>
 <span>  <span class="st">"Beauveria"</span>,</span>
@@ -1066,74 +1118,82 @@ methyl ester</td>
 </tbody>
 </table>
 <p>This results in the following list of active ingredients.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">microorganism_regexp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">microorganism_genus_names</span>, collapse <span class="op">=</span> <span class="st">"|"</span><span class="op">)</span></span>
 <span><span class="va">microorganism_ingredients</span> <span class="op">&lt;-</span> <span class="va">srppp</span><span class="op">$</span><span class="va">substances</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="va">microorganism_regexp</span>, <span class="va">substance_de</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">pk</span>, <span class="va">substance_de</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">microorganism_ingredients</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
+<colgroup>
+<col width="46%">
+<col width="53%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">pk</th>
 <th align="left">substance_de</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">1939</td>
+<td align="left">FE5D35CF-4666-45ED-8DB0-2A706C16A915</td>
 <td align="left">Bacillus amyloliquefaciens</td>
 </tr>
 <tr class="even">
-<td align="left">1748</td>
+<td align="left">DE9DB824-9848-4F67-863A-57A1CC8093E4</td>
+<td align="left">Bacillus amyloliquefaciens Stamm MBI 600</td>
+</tr>
+<tr class="odd">
+<td align="left">38DDF6FB-43AF-4714-A033-253772A2C0F4</td>
 <td align="left">Bacillus amyloliquefaciens ssp. plantarum</td>
 </tr>
-<tr class="odd">
-<td align="left">937</td>
+<tr class="even">
+<td align="left">158EE23A-D926-49BB-9E5F-D505695F4AC8</td>
 <td align="left">Bacillus thuringiensis var. aizawai</td>
 </tr>
-<tr class="even">
-<td align="left">935</td>
+<tr class="odd">
+<td align="left">1B400D81-EDD0-44E3-BEA9-2FECE7BB084E</td>
 <td align="left">Bacillus thuringiensis var. israeliensis</td>
 </tr>
-<tr class="odd">
-<td align="left">939</td>
+<tr class="even">
+<td align="left">75729E67-9FE2-4211-B86E-5681BBC46822</td>
 <td align="left">Bacillus thuringiensis var. kurstaki</td>
 </tr>
-<tr class="even">
-<td align="left">970</td>
+<tr class="odd">
+<td align="left">3DD73DF0-9DAC-469C-9BFF-5CB56940E1A6</td>
 <td align="left">Bacillus thuringiensis var. tenebrionis</td>
 </tr>
-<tr class="odd">
-<td align="left">972</td>
+<tr class="even">
+<td align="left">526B05DE-13B4-4842-8BEB-4C2292F99370</td>
 <td align="left">Beauveria bassiana</td>
 </tr>
-<tr class="even">
-<td align="left">849</td>
+<tr class="odd">
+<td align="left">56999C96-EA8A-4A86-915C-E3BE21BB4291</td>
 <td align="left">Beauveria brongniartii</td>
 </tr>
-<tr class="odd">
-<td align="left">960</td>
+<tr class="even">
+<td align="left">E5044E08-C281-4072-BB0D-1993562BFEA0</td>
 <td align="left">Metarhizium anisopliae</td>
 </tr>
-<tr class="even">
-<td align="left">984</td>
+<tr class="odd">
+<td align="left">D7339D7B-B8B2-4723-B22C-39847F4C6ACE</td>
 <td align="left">Phlebia gigantea</td>
 </tr>
-<tr class="odd">
-<td align="left">1369</td>
+<tr class="even">
+<td align="left">C9003121-80A4-458B-BC2E-777AEEAFE1FB</td>
 <td align="left">Pseudomonas chlororaphis</td>
 </tr>
-<tr class="even">
-<td align="left">1584</td>
+<tr class="odd">
+<td align="left">BD01EED4-AB21-406A-AE79-0D95F726311B</td>
 <td align="left">Pseudomonas sp. Stamm DSMZ 13134</td>
 </tr>
-<tr class="odd">
-<td align="left">1442</td>
+<tr class="even">
+<td align="left">694D1981-76EF-43D9-9DD4-900855086389</td>
 <td align="left">Xenorhabdus bovienii</td>
 </tr>
 </tbody>
 </table>
 <p>The following products contain one of these active ingredients.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">additional_products_containing_microorganisms</span> <span class="op">&lt;-</span> <span class="va">srppp</span><span class="op">$</span><span class="va">products</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">isSalePermission</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">srppp</span><span class="op">$</span><span class="va">ingredients</span>, by <span class="op">=</span> <span class="st">"pNbr"</span>, relationship <span class="op">=</span> <span class="st">"many-to-many"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1159,10 +1219,10 @@ methyl ester</td>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">4594</td>
-<td align="left">4574</td>
-<td align="left">Beauveria-Schweizer</td>
-<td align="left">Lebende Organismen (Pilze)</td>
+<td align="right">6415</td>
+<td align="left">5277</td>
+<td align="left">Traunem</td>
+<td align="left">Insektizid</td>
 </tr>
 <tr class="even">
 <td align="right">6415</td>
@@ -1171,64 +1231,52 @@ methyl ester</td>
 <td align="left">Lebende Organismen (Nematoden)</td>
 </tr>
 <tr class="odd">
-<td align="right">6415</td>
-<td align="left">5277</td>
-<td align="left">Traunem</td>
-<td align="left">Insektizid</td>
-</tr>
-<tr class="even">
 <td align="right">6427</td>
 <td align="left">5386</td>
 <td align="left">Entonem</td>
 <td align="left">Lebende Organismen (Nematoden)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">6861</td>
 <td align="left">5745</td>
 <td align="left">Solbac-Tabs</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">6862</td>
 <td align="left">5744</td>
 <td align="left">Solbac</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">7023</td>
 <td align="left">5925</td>
 <td align="left">Novodor 3 FC</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">7088</td>
 <td align="left">5978</td>
 <td align="left">Nemaplus</td>
 <td align="left">Lebende Organismen (Nematoden)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">7241</td>
 <td align="left">6081</td>
 <td align="left">Novodor 3 % FC</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">7496</td>
 <td align="left">6449</td>
 <td align="left">Cerall</td>
 <td align="left">Saatbeizmittel</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">7498</td>
 <td align="left">6486</td>
 <td align="left">Cedomon</td>
 <td align="left">Saatbeizmittel</td>
-</tr>
-<tr class="even">
-<td align="right">7650</td>
-<td align="left">6423</td>
-<td align="left">Metarhizium Schweizer</td>
-<td align="left">Lebende Organismen (Pilze)</td>
 </tr>
 <tr class="odd">
 <td align="right">7766</td>
@@ -1240,13 +1288,13 @@ methyl ester</td>
 <td align="right">7773</td>
 <td align="left">6472</td>
 <td align="left">FZB 24 flüssig</td>
-<td align="left">Phytoregulator</td>
+<td align="left">Fungizid</td>
 </tr>
 <tr class="odd">
 <td align="right">7773</td>
 <td align="left">6472</td>
 <td align="left">FZB 24 flüssig</td>
-<td align="left">Fungizid</td>
+<td align="left">Phytoregulator</td>
 </tr>
 <tr class="even">
 <td align="right">7870</td>
@@ -1282,13 +1330,13 @@ methyl ester</td>
 <td align="right">8374</td>
 <td align="left">6912</td>
 <td align="left">Deposan</td>
-<td align="left">Lebende Organismen (Bakterien)</td>
+<td align="left">Fungizid</td>
 </tr>
 <tr class="even">
 <td align="right">8374</td>
 <td align="left">6912</td>
 <td align="left">Deposan</td>
-<td align="left">Fungizid</td>
+<td align="left">Lebende Organismen (Bakterien)</td>
 </tr>
 <tr class="odd">
 <td align="right">8457</td>
@@ -1306,37 +1354,37 @@ methyl ester</td>
 <td align="right">8596</td>
 <td align="left">7253</td>
 <td align="left">Serenade ASO</td>
-<td align="left">Bakterizid</td>
+<td align="left">Fungizid</td>
 </tr>
 <tr class="even">
 <td align="right">8596</td>
 <td align="left">7253</td>
 <td align="left">Serenade ASO</td>
-<td align="left">Fungizid</td>
+<td align="left">Bakterizid</td>
 </tr>
 <tr class="odd">
-<td align="right">8926</td>
-<td align="left">7580</td>
-<td align="left">Wormox</td>
-<td align="left">Lebende Organismen (Bakterien)</td>
-</tr>
-<tr class="even">
 <td align="right">8926</td>
 <td align="left">7580</td>
 <td align="left">Wormox</td>
 <td align="left">Insektizid</td>
 </tr>
+<tr class="even">
+<td align="right">8926</td>
+<td align="left">7580</td>
+<td align="left">Wormox</td>
+<td align="left">Lebende Organismen (Bakterien)</td>
+</tr>
 <tr class="odd">
 <td align="right">8946</td>
 <td align="left">7504</td>
 <td align="left">Taegro</td>
-<td align="left">Lebende Organismen (gegen Pilze)</td>
+<td align="left">Fungizid</td>
 </tr>
 <tr class="even">
 <td align="right">8946</td>
 <td align="left">7504</td>
 <td align="left">Taegro</td>
-<td align="left">Fungizid</td>
+<td align="left">Lebende Organismen (gegen Pilze)</td>
 </tr>
 <tr class="odd">
 <td align="right">9019</td>
@@ -1360,90 +1408,108 @@ methyl ester</td>
 <td align="right">9052</td>
 <td align="left">7324</td>
 <td align="left">Rotstop</td>
-<td align="left">Lebende Organismen (gegen Pilze)</td>
+<td align="left">Fungizid</td>
 </tr>
 <tr class="odd">
 <td align="right">9052</td>
 <td align="left">7324</td>
 <td align="left">Rotstop</td>
-<td align="left">Fungizid</td>
+<td align="left">Lebende Organismen (gegen Pilze)</td>
 </tr>
 <tr class="even">
+<td align="right">9068</td>
+<td align="left">7638</td>
+<td align="left">Serifel</td>
+<td align="left">Fungizid</td>
+</tr>
+<tr class="odd">
 <td align="right">9139</td>
 <td align="left">7574</td>
 <td align="left">Capirel</td>
 <td align="left">Lebende Organismen (Nematoden)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">9173</td>
 <td align="left">7378</td>
 <td align="left">Beauveria-Maschinenring</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">9173</td>
 <td align="left">7378</td>
 <td align="left">Beauveria-Maschinenring</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">9174</td>
 <td align="left">7379</td>
 <td align="left">Metarhizium-Maschinenring</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">9174</td>
 <td align="left">7379</td>
 <td align="left">Metarhizium-Maschinenring</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">9384</td>
 <td align="left">7528</td>
 <td align="left">Beauveria FL-Maschinenring</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">9384</td>
 <td align="left">7528</td>
 <td align="left">Beauveria FL-Maschinenring</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">9385</td>
 <td align="left">7529</td>
 <td align="left">Metarhizium FL-Maschinenring</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">9385</td>
 <td align="left">7529</td>
 <td align="left">Metarhizium FL-Maschinenring</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">9389</td>
 <td align="left">7477</td>
 <td align="left">Melocont GR</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">9390</td>
 <td align="left">7478</td>
 <td align="left">GranMet GR</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">9481</td>
 <td align="left">7500</td>
 <td align="left">Lalguard M52 GR</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">9481</td>
 <td align="left">7500</td>
 <td align="left">Lalguard M52 GR</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="even">
+<td align="right">9698</td>
+<td align="left">7632</td>
+<td align="left">Metapro</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="right">9699</td>
+<td align="left">7633</td>
+<td align="left">Beaupro</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
 </tbody>
@@ -1452,21 +1518,21 @@ methyl ester</td>
 <div class="section level2">
 <h2 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h2>
-<p>In summary, out of 1739 products, there are 21 in the microorganism
-categories as shown above, and 48 products in the insecticide and
+<p>In summary, out of 1740 products, there are 21 in the microorganism
+categories as shown above, and 49 products in the insecticide and
 fungicide categories which contain an active substance that has a name
 that contains one of the microorganism genus names listed above.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">products_containing_microorganisms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span></span>
 <span>  <span class="va">products_in_microorganism_categories</span>, </span>
 <span>  <span class="va">additional_products_containing_microorganisms</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">pNbr</span>, <span class="va">category_de</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">n_unique</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">products_containing_microorganisms</span><span class="op">$</span><span class="va">pNbr</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>The consolidated list of the 42 unique products identified in this
+<p>The consolidated list of the 43 unique products identified in this
 way is shown below. Some of these products are listed twice, because
 they were identified via both ways.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">products_containing_microorganisms</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
@@ -1483,76 +1549,64 @@ they were identified via both ways.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">4594</td>
-<td align="left">4574</td>
-<td align="left">Beauveria-Schweizer</td>
-<td align="left">Lebende Organismen (Pilze)</td>
-</tr>
-<tr class="even">
 <td align="right">6415</td>
 <td align="left">5277</td>
 <td align="left">Traunem</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">6415</td>
 <td align="left">5277</td>
 <td align="left">Traunem</td>
 <td align="left">Lebende Organismen (Nematoden)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">6427</td>
 <td align="left">5386</td>
 <td align="left">Entonem</td>
 <td align="left">Lebende Organismen (Nematoden)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">6861</td>
 <td align="left">5745</td>
 <td align="left">Solbac-Tabs</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">6862</td>
 <td align="left">5744</td>
 <td align="left">Solbac</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">7023</td>
 <td align="left">5925</td>
 <td align="left">Novodor 3 FC</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">7088</td>
 <td align="left">5978</td>
 <td align="left">Nemaplus</td>
 <td align="left">Lebende Organismen (Nematoden)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">7241</td>
 <td align="left">6081</td>
 <td align="left">Novodor 3 % FC</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">7496</td>
 <td align="left">6449</td>
 <td align="left">Cerall</td>
 <td align="left">Saatbeizmittel</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">7498</td>
 <td align="left">6486</td>
 <td align="left">Cedomon</td>
 <td align="left">Saatbeizmittel</td>
-</tr>
-<tr class="even">
-<td align="right">7650</td>
-<td align="left">6423</td>
-<td align="left">Metarhizium Schweizer</td>
-<td align="left">Lebende Organismen (Pilze)</td>
 </tr>
 <tr class="odd">
 <td align="right">7766</td>
@@ -1723,87 +1777,105 @@ they were identified via both ways.</p>
 <td align="left">Lebende Organismen (gegen Pilze)</td>
 </tr>
 <tr class="odd">
+<td align="right">9068</td>
+<td align="left">7638</td>
+<td align="left">Serifel</td>
+<td align="left">Fungizid</td>
+</tr>
+<tr class="even">
 <td align="right">9139</td>
 <td align="left">7574</td>
 <td align="left">Capirel</td>
 <td align="left">Lebende Organismen (Nematoden)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">9173</td>
 <td align="left">7378</td>
 <td align="left">Beauveria-Maschinenring</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">9173</td>
 <td align="left">7378</td>
 <td align="left">Beauveria-Maschinenring</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">9174</td>
 <td align="left">7379</td>
 <td align="left">Metarhizium-Maschinenring</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">9174</td>
 <td align="left">7379</td>
 <td align="left">Metarhizium-Maschinenring</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">9384</td>
 <td align="left">7528</td>
 <td align="left">Beauveria FL-Maschinenring</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">9384</td>
 <td align="left">7528</td>
 <td align="left">Beauveria FL-Maschinenring</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">9385</td>
 <td align="left">7529</td>
 <td align="left">Metarhizium FL-Maschinenring</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">9385</td>
 <td align="left">7529</td>
 <td align="left">Metarhizium FL-Maschinenring</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">9389</td>
 <td align="left">7477</td>
 <td align="left">Melocont GR</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">9390</td>
 <td align="left">7478</td>
 <td align="left">GranMet GR</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">9479</td>
 <td align="left">7498</td>
 <td align="left">Lalstop Contans WG</td>
 <td align="left">Lebende Organismen (gegen Pilze)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">9481</td>
 <td align="left">7500</td>
 <td align="left">Lalguard M52 GR</td>
 <td align="left">Insektizid</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">9481</td>
 <td align="left">7500</td>
 <td align="left">Lalguard M52 GR</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="even">
+<td align="right">9698</td>
+<td align="left">7632</td>
+<td align="left">Metapro</td>
+<td align="left">Lebende Organismen (Pilze)</td>
+</tr>
+<tr class="odd">
+<td align="right">9699</td>
+<td align="left">7633</td>
+<td align="left">Beaupro</td>
 <td align="left">Lebende Organismen (Pilze)</td>
 </tr>
 </tbody>

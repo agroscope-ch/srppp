@@ -15,8 +15,8 @@ use these data. This package offers a fresh approach to directly read in
 the data into `R`.
 
 The current download location of the latest published XML version of the
-SRPPP is stored in the package as
-[`srppp::srppp_xml_url`](https://agroscope-ch.github.io/srppp/reference/srppp_xml_url.md).
+SRPPP is obtained by the function
+[`srppp::srppp_xml_url()`](https://agroscope-ch.github.io/srppp/reference/srppp_xml_url.md).
 Reading in the current data is as simple as
 
 ``` r
