@@ -122,7 +122,6 @@ library(dplyr, warn.conflicts = FALSE)
 library(dm, warn.conflicts = FALSE)
 
 sr <- try(srppp_dm())
-#> Error in read_html(base_url) : could not find function "read_html"
 
 # Fall back to internal test data if downloading or reading fails
 if (inherits(sr, "try-error")) {
@@ -133,7 +132,8 @@ if (inherits(sr, "try-error")) {
 }
 
 dm_examine_constraints(sr)
-#> ℹ All constraints satisfied.
+#> ! Unsatisfied constraints:
+#> • Table `parallel_imports`: foreign key `pNbr` into table `pNbrs`: values of `parallel_imports$pNbr` not in `pNbrs$pNbr`: 7738 (5), 8332 (1)
 dm_draw(sr)
 %0
 
@@ -195,23 +195,23 @@ print(boxer_uses)
 #> # A tibble: 17 × 10
 #>     pNbr use_nr min_dosage max_dosage min_rate max_rate units_de waiting_period
 #>    <int>  <int>      <dbl>      <dbl>    <dbl>    <dbl> <chr>             <int>
-#>  1  7105      1         NA         NA      5       NA   l/ha                100
-#>  2  7105      2         NA         NA      5       NA   l/ha                 60
-#>  3  7105      3         NA         NA      5       NA   l/ha                 90
-#>  4  7105      4         NA         NA      4       NA   l/ha                 80
-#>  5  7105      5         NA         NA      2.5      3   l/ha                 75
-#>  6  7105      6         NA         NA      4       NA   l/ha                 80
+#>  1  7105      1         NA         NA      2.5      5   l/ha                 NA
+#>  2  7105      2         NA         NA      5       NA   l/ha                 90
+#>  3  7105      3         NA         NA      3       NA   l/ha                 80
+#>  4  7105      4         NA         NA      5       NA   l/ha                 60
+#>  5  7105      5         NA         NA      3        5   l/ha                 NA
+#>  6  7105      6         NA         NA      5       NA   l/ha                  0
 #>  7  7105      7         NA         NA      3       NA   l/ha                 80
-#>  8  7105      8         NA         NA      3       NA   l/ha                 80
+#>  8  7105      8         NA         NA      4       NA   l/ha                 80
 #>  9  7105      9         NA         NA      4       NA   l/ha                 80
-#> 10  7105     10         NA         NA      5       NA   l/ha                  0
-#> 11  7105     11         NA         NA      4       NA   l/ha                  0
-#> 12  7105     12         NA         NA      3        4.5 l/ha                  0
+#> 10  7105     10         NA         NA      3        4.5 l/ha                  0
+#> 11  7105     11         NA         NA      2.5      3   l/ha                 75
+#> 12  7105     12         NA         NA      5       NA   l/ha                  0
 #> 13  7105     13         NA         NA      2.5      5   l/ha                 NA
-#> 14  7105     14         NA         NA      3        5   l/ha                 NA
-#> 15  7105     15         NA         NA      5       NA   l/ha                  0
+#> 14  7105     14         NA         NA      5       NA   l/ha                100
+#> 15  7105     15         NA         NA      4       NA   l/ha                 80
 #> 16  7105     16         NA         NA      4       NA   l/ha                 60
-#> 17  7105     17         NA         NA      2.5      5   l/ha                 NA
+#> 17  7105     17         NA         NA      4       NA   l/ha                  0
 #> # ℹ 2 more variables: time_units_de <chr>, application_area_de <chr>
 
 # Show crop for use number 1
@@ -219,10 +219,12 @@ boxer_uses |>
   filter(use_nr == 1) |>
   left_join(sr$cultures, join_by(pNbr, use_nr)) |>
   select(use_nr, culture_de)
-#> # A tibble: 1 × 2
-#>   use_nr culture_de     
-#>    <int> <chr>          
-#> 1      1 Knollensellerie
+#> # A tibble: 3 × 2
+#>   use_nr culture_de
+#>    <int> <chr>     
+#> 1      1 Roggen    
+#> 2      1 Weizen    
+#> 3      1 Gerste    
 
 # Show target pests for use number 1
 boxer_uses |>
@@ -232,8 +234,8 @@ boxer_uses |>
 #> # A tibble: 2 × 2
 #>   use_nr pest_de                              
 #>    <int> <chr>                                
-#> 1      1 Einjährige Dicotyledonen (Unkräuter) 
-#> 2      1 Einjährige Monocotyledonen (Ungräser)
+#> 1      1 Einjährige Monocotyledonen (Ungräser)
+#> 2      1 Einjährige Dicotyledonen (Unkräuter) 
 
 # Show obligations for use number 1
 boxer_uses |>
@@ -246,14 +248,12 @@ boxer_uses |>
 #> 
 #> | use_nr| sw_runoff_points|obligation_de                                                                                                                                                                                                                                                                                                                                                                               |
 #> |------:|----------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-#> |      1|               NA|Nachbau anderer Kulturen: 16 Wochen Wartefrist.                                                                                                                                                                                                                                                                                                                                             |
+#> |      1|               NA|Niedrige Aufwandmenge nur in Tankmischung gemäss den Angaben der Bewilligungsinhaberin.                                                                                                                                                                                                                                                                                                     |
 #> |      1|               NA|Nachfolgearbeiten in behandelten Kulturen: bis 48 Stunden nach Ausbringung des Mittels Schutzhandschuhe + Schutzanzug tragen.                                                                                                                                                                                                                                                               |
-#> |      1|               NA|Maximal 1 Behandlung pro Kultur.                                                                                                                                                                                                                                                                                                                                                            |
 #> |      1|               NA|Ansetzen der Spritzbrühe: Schutzhandschuhe tragen. Ausbringen der Spritzbrühe: Schutzhandschuhe + Schutzanzug + Visier + Kopfbedeckung tragen. Technische Schutzvorrichtungen während des Ausbringens (z.B. geschlossene Traktorkabine) können die vorgeschriebene persönliche Schutzausrüstung ersetzen, wenn gewährleistet ist, dass sie einen vergleichbaren oder höheren Schutz bieten. |
 #> |      1|                1|SPe 3: Zum Schutz von Gewässerorganismen muss das Abschwemmungsrisiko gemäss den Weisungen der Zulassungsstelle um 1 Punkt reduziert werden.                                                                                                                                                                                                                                                |
-#> |      1|               NA|Splitbehandlung gemäss den Angaben der Bewilligungsinhaberin (max. 3 l/ha je Split, angegebene Aufwandmenge entspricht total bewilligter Menge).                                                                                                                                                                                                                                            |
-#> |      1|               NA|Phytotoxschäden bei empfindlichen Arten oder Sorten möglich; vor allgemeiner Anwendung Versuchspritzung durchführen.                                                                                                                                                                                                                                                                        |
-#> |      1|               NA|Bewilligt als geringfügige Verwendung nach Art. 35 PSMV (minor use).                                                                                                                                                                                                                                                                                                                        |
+#> |      1|               NA|Maximal 1 Behandlung pro Kultur.                                                                                                                                                                                                                                                                                                                                                            |
+#> |      1|               NA|Behandlung von im Herbst gesäten Kulturen.                                                                                                                                                                                                                                                                                                                                                  |
 
 # Show application comments for use number 1
 boxer_uses |>
@@ -261,27 +261,27 @@ boxer_uses |>
   left_join(sr$application_comments, join_by(pNbr, use_nr)) |>
   select(use_nr, application_comment_de)
 #> # A tibble: 1 × 2
-#>   use_nr application_comment_de   
-#>    <int> <chr>                    
-#> 1      1 7 Tage nach dem Pflanzen.
+#>   use_nr application_comment_de                           
+#>    <int> <chr>                                            
+#> 1      1 Herbst, Frühjahr; Vorauflauf, früher Nachauflauf.
 
 # Illustrate 'obligations' indicating varying effects
 sr$obligations |>
   filter(varying_effect) |>
   select(pNbr, use_nr, code, obligation_de)
-#> # A tibble: 204 × 4
-#>     pNbr use_nr code            obligation_de                                   
-#>    <int>  <int> <chr>           <chr>                                           
-#>  1  4683      1 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…
-#>  2  4683      2 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…
-#>  3  4683      3 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…
-#>  4  4685      1 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…
-#>  5  4685      2 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…
-#>  6  4751      1 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…
-#>  7  4751      2 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…
-#>  8  4751      3 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…
-#>  9  4751      4 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…
-#> 10  4751      5 obligation 1770 Die Wirkungseffizienz der Nützlinge kann je nac…
-#> # ℹ 194 more rows
+#> # A tibble: 199 × 4
+#>     pNbr use_nr code  obligation_de                                             
+#>    <int>  <int> <chr> <chr>                                                     
+#>  1  4683      1 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…
+#>  2  4683      2 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…
+#>  3  4683      3 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…
+#>  4  4685      1 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…
+#>  5  4685      2 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…
+#>  6  4751      1 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…
+#>  7  4751      2 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…
+#>  8  4751      3 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…
+#>  9  4751      4 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…
+#> 10  4751      5 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…
+#> # ℹ 189 more rows
 
 ```

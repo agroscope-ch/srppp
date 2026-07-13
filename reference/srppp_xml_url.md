@@ -17,5 +17,5 @@ length one character string
 
 ``` r
 srppp_xml_url()
-#> Error in read_html(base_url): could not find function "read_html"
+#> [1] "https://www.blv.admin.ch/dam/de/sd-web/He9bAfs8CmFT/daten-pflanzenschutzmittelverzeichnis-de.zip"
 ```

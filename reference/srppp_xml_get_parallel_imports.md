@@ -26,6 +26,22 @@ with a row for each parallel import section in the XML file.
 # Try to get current list of parallel_imports
 # \donttest{
 try(srppp_xml_get_parallel_imports())
-#> Error in read_html(base_url) : could not find function "read_html"
+#> # A tibble: 643 × 9
+#>    id     wNbr  name   admissionnumber producingCountryPrim…¹ exhaustionDeadline
+#>    <chr>  <chr> <chr>  <chr>           <chr>                  <chr>             
+#>  1 D-7492 1526  Proma… 008719-60       56cce907-f002-4b0c-b9… ""                
+#>  2 F-7056 1899  Life … 2159999         c3ffe09f-f38f-42b3-86… ""                
+#>  3 I-2789 1899  Pirim… 4701            be1d323d-29e4-4570-86… ""                
+#>  4 B-5440 2054  Basam… 5675P/B         9e495cc6-2d2c-4e76-b1… ""                
+#>  5 I-6151 2054  Basam… 1573            be1d323d-29e4-4570-86… ""                
+#>  6 D-7450 2592  Metaza 006179-00/078   56cce907-f002-4b0c-b9… "2026-09-09 00:00…
+#>  7 F-2010 2671  Fluid… 5100219         c3ffe09f-f38f-42b3-86… ""                
+#>  8 I-5565 3002  Dazid… 012455          be1d323d-29e4-4570-86… ""                
+#>  9 F-7416 3003  Rhodo… 7400755         c3ffe09f-f38f-42b3-86… ""                
+#> 10 I-6469 3049  Bonzi  016305          be1d323d-29e4-4570-86… ""                
+#> # ℹ 633 more rows
+#> # ℹ abbreviated name: ¹​producingCountryPrimaryKey
+#> # ℹ 3 more variables: soldoutDeadline <chr>, pNbr <int>,
+#> #   permission_holder <chr>
 # }
 ```

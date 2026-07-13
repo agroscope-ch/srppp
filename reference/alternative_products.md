@@ -97,7 +97,6 @@ crop an pathogen.
 ``` r
 # \donttest{
 sr <- try(srppp_dm())
-#> Error in read_html(base_url) : could not find function "read_html"
 
 # Fall back to internal test data if downloading or reading fails
 if (inherits(sr, "try-error")) {
@@ -110,113 +109,113 @@ if (inherits(sr, "try-error")) {
 # Examples with two active substances
 actives_de <- c("Lambda-Cyhalothrin", "Deltamethrin")
 alternative_products(sr, actives_de)
-#> # A tibble: 924 × 5
+#> # A tibble: 989 × 5
 #>    application_area_de culture_de   pest_de                        n_wNbr n_pNbr
 #>    <chr>               <chr>        <chr>                           <int>  <int>
-#>  1 Beerenbau           Erdbeere     Erdbeer- oder Himbeerblütenst…     18      7
-#>  2 Beerenbau           Erdbeere     Thripse                            38     21
-#>  3 Beerenbau           Himbeere     Erdbeer- oder Himbeerblütenst…     12      3
-#>  4 Beerenbau           Himbeere     Himbeerkäfer                       12      3
+#>  1 Beerenbau           Erdbeere     Erdbeer- oder Himbeerblütenst…     17      7
+#>  2 Beerenbau           Erdbeere     Thripse                            38     22
+#>  3 Beerenbau           Himbeere     Erdbeer- oder Himbeerblütenst…     11      3
+#>  4 Beerenbau           Himbeere     Himbeerkäfer                       11      3
 #>  5 Feldbau             Ackerbohne   Erdraupen                           6      4
 #>  6 Feldbau             Eiweisserbse Erbsenblattrandkäfer                0      0
 #>  7 Feldbau             Eiweisserbse Erbsenwickler                       4      1
 #>  8 Feldbau             Eiweisserbse Erdraupen                           6      4
 #>  9 Feldbau             Emmer        Erdraupen                           6      4
 #> 10 Feldbau             Emmer        Gelbe Getreidehalmfliege            6      4
-#> # ℹ 914 more rows
+#> # ℹ 979 more rows
 alternative_products(sr, actives_de, resolve_cultures = FALSE)
-#> # A tibble: 484 × 5
+#> # A tibble: 527 × 5
 #>    application_area_de culture_de              pest_de             n_wNbr n_pNbr
 #>    <chr>               <chr>                   <chr>                <int>  <int>
-#>  1 Beerenbau           Erdbeere                Erdbeer- oder Himb…     18      7
-#>  2 Beerenbau           Erdbeere                Thripse                 33     16
-#>  3 Beerenbau           Himbeere                Erdbeer- oder Himb…     12      3
-#>  4 Beerenbau           Himbeere                Himbeerkäfer            12      3
+#>  1 Beerenbau           Erdbeere                Erdbeer- oder Himb…     17      7
+#>  2 Beerenbau           Erdbeere                Thripse                 33     17
+#>  3 Beerenbau           Himbeere                Erdbeer- oder Himb…     11      3
+#>  4 Beerenbau           Himbeere                Himbeerkäfer            11      3
 #>  5 Feldbau             Ackerbohne              Erdraupen                6      4
 #>  6 Feldbau             Eiweisserbse            Erbsenblattrandkäf…      0      0
 #>  7 Feldbau             Eiweisserbse            Erbsenwickler            4      1
 #>  8 Feldbau             Eiweisserbse            Erdraupen                6      4
 #>  9 Feldbau             Futter- und Zuckerrüben Blattläuse (Röhren…      6      2
 #> 10 Feldbau             Futter- und Zuckerrüben Erdraupen                6      4
-#> # ℹ 474 more rows
+#> # ℹ 517 more rows
 alternative_products(sr, actives_de, missing = TRUE)
-#> # A tibble: 110 × 3
+#> # A tibble: 123 × 3
 #>    application_area_de culture_de                       pest_de              
 #>    <chr>               <chr>                            <chr>                
 #>  1 Feldbau             Eiweisserbse                     Erbsenblattrandkäfer 
-#>  2 Feldbau             Futterrübe                       Rübenfliege          
-#>  3 Feldbau             Zuckerrübe                       Rübenfliege          
+#>  2 Feldbau             Zuckerrübe                       Rübenfliege          
+#>  3 Feldbau             Futterrübe                       Rübenfliege          
 #>  4 Feldbau             Lagerhallen, Mühlen, Silogebäude Vorratsschädlinge    
 #>  5 Feldbau             Mais                             Fritfliege           
 #>  6 Feldbau             Sojabohne                        Distelfalter         
 #>  7 Gemüsebau           Asia-Salate (Brassicaceae)       Kohldrehherzgallmücke
 #>  8 Gemüsebau           Asia-Salate (Brassicaceae)       Kohlschabe           
-#>  9 Gemüsebau           Baby-Leaf (Asteraceae)           Minierfliegen        
-#> 10 Gemüsebau           Baby-Leaf (Brassicaceae)         Kohldrehherzgallmücke
-#> # ℹ 100 more rows
+#>  9 Gemüsebau           Baby-Leaf (Brassicaceae)         Kohldrehherzgallmücke
+#> 10 Gemüsebau           Baby-Leaf (Brassicaceae)         Kohlschabe           
+#> # ℹ 113 more rows
 alternative_products(sr, actives_de, details = TRUE)
-#> # A tibble: 37,713 × 7
+#> # A tibble: 42,292 × 7
 #>    application_area_de culture_de pest_de                pNbr wNbr  use_nr type 
 #>    <chr>               <chr>      <chr>                 <int> <chr>  <int> <chr>
-#>  1 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  4426 4343      17 PEST…
-#>  2 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  4568 4491      12 PEST…
-#>  3 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  4568 4491…     12 PEST…
-#>  4 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  7036 6020      37 PEST…
-#>  5 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  7036 6020…     37 PEST…
-#>  6 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  7036 6020…     37 PEST…
-#>  7 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  8464 7133       7 PEST…
-#>  8 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  8464 7133…      7 PEST…
-#>  9 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  8464 7133…      7 PEST…
-#> 10 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  8464 7133…      7 PEST…
-#> # ℹ 37,703 more rows
+#>  1 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  4426 4343       5 PEST…
+#>  2 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  4568 4491       1 PEST…
+#>  3 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  4568 4491…      1 PEST…
+#>  4 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  7036 6020      71 PEST…
+#>  5 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  7036 6020…     71 PEST…
+#>  6 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  7036 6020…     71 PEST…
+#>  7 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  8464 7133      16 PEST…
+#>  8 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  8464 7133…     16 PEST…
+#>  9 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  8464 7133…     16 PEST…
+#> 10 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  8800 7106       7 PEST…
+#> # ℹ 42,282 more rows
 alternative_products(sr, actives_de, list = TRUE)
 #> $`No alternative`
-#> # A tibble: 110 × 3
+#> # A tibble: 123 × 3
 #>    application_area_de culture_de                       pest_de              
 #>    <chr>               <chr>                            <chr>                
 #>  1 Feldbau             Eiweisserbse                     Erbsenblattrandkäfer 
-#>  2 Feldbau             Futterrübe                       Rübenfliege          
-#>  3 Feldbau             Zuckerrübe                       Rübenfliege          
+#>  2 Feldbau             Zuckerrübe                       Rübenfliege          
+#>  3 Feldbau             Futterrübe                       Rübenfliege          
 #>  4 Feldbau             Lagerhallen, Mühlen, Silogebäude Vorratsschädlinge    
 #>  5 Feldbau             Mais                             Fritfliege           
 #>  6 Feldbau             Sojabohne                        Distelfalter         
 #>  7 Gemüsebau           Asia-Salate (Brassicaceae)       Kohldrehherzgallmücke
 #>  8 Gemüsebau           Asia-Salate (Brassicaceae)       Kohlschabe           
-#>  9 Gemüsebau           Baby-Leaf (Asteraceae)           Minierfliegen        
-#> 10 Gemüsebau           Baby-Leaf (Brassicaceae)         Kohldrehherzgallmücke
-#> # ℹ 100 more rows
+#>  9 Gemüsebau           Baby-Leaf (Brassicaceae)         Kohldrehherzgallmücke
+#> 10 Gemüsebau           Baby-Leaf (Brassicaceae)         Kohlschabe           
+#> # ℹ 113 more rows
 #> 
 #> $`Number of alternatives`
-#> # A tibble: 924 × 5
+#> # A tibble: 989 × 5
 #>    application_area_de culture_de   pest_de                        n_wNbr n_pNbr
 #>    <chr>               <chr>        <chr>                           <int>  <int>
-#>  1 Beerenbau           Erdbeere     Erdbeer- oder Himbeerblütenst…     18      7
-#>  2 Beerenbau           Erdbeere     Thripse                            38     21
-#>  3 Beerenbau           Himbeere     Erdbeer- oder Himbeerblütenst…     12      3
-#>  4 Beerenbau           Himbeere     Himbeerkäfer                       12      3
+#>  1 Beerenbau           Erdbeere     Erdbeer- oder Himbeerblütenst…     17      7
+#>  2 Beerenbau           Erdbeere     Thripse                            38     22
+#>  3 Beerenbau           Himbeere     Erdbeer- oder Himbeerblütenst…     11      3
+#>  4 Beerenbau           Himbeere     Himbeerkäfer                       11      3
 #>  5 Feldbau             Ackerbohne   Erdraupen                           6      4
 #>  6 Feldbau             Eiweisserbse Erbsenblattrandkäfer                0      0
 #>  7 Feldbau             Eiweisserbse Erbsenwickler                       4      1
 #>  8 Feldbau             Eiweisserbse Erdraupen                           6      4
 #>  9 Feldbau             Emmer        Erdraupen                           6      4
 #> 10 Feldbau             Emmer        Gelbe Getreidehalmfliege            6      4
-#> # ℹ 914 more rows
+#> # ℹ 979 more rows
 #> 
 #> $`Alternative uses`
-#> # A tibble: 37,713 × 7
+#> # A tibble: 42,292 × 7
 #>    application_area_de culture_de pest_de                pNbr wNbr  use_nr type 
 #>    <chr>               <chr>      <chr>                 <int> <chr>  <int> <chr>
-#>  1 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  4426 4343      17 PEST…
-#>  2 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  4568 4491      12 PEST…
-#>  3 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  4568 4491…     12 PEST…
-#>  4 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  7036 6020      37 PEST…
-#>  5 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  7036 6020…     37 PEST…
-#>  6 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  7036 6020…     37 PEST…
-#>  7 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  8464 7133       7 PEST…
-#>  8 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  8464 7133…      7 PEST…
-#>  9 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  8464 7133…      7 PEST…
-#> 10 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  8464 7133…      7 PEST…
-#> # ℹ 37,703 more rows
+#>  1 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  4426 4343       5 PEST…
+#>  2 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  4568 4491       1 PEST…
+#>  3 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  4568 4491…      1 PEST…
+#>  4 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  7036 6020      71 PEST…
+#>  5 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  7036 6020…     71 PEST…
+#>  6 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  7036 6020…     71 PEST…
+#>  7 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  8464 7133      16 PEST…
+#>  8 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  8464 7133…     16 PEST…
+#>  9 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  8464 7133…     16 PEST…
+#> 10 Beerenbau           Erdbeere   Erdbeer- oder Himbee…  8800 7106       7 PEST…
+#> # ℹ 42,282 more rows
 #> 
 
 # Examples resolving cultures
@@ -232,70 +231,70 @@ alternative_products(sr, actives_de, resolve_cultures = FALSE, list = TRUE)
 #> # A tibble: 5 × 5
 #>   application_area_de culture_de    pest_de                     n_wNbr n_pNbr
 #>   <chr>               <chr>         <chr>                        <int>  <int>
-#> 1 Obstbau             Birne / Nashi Birnblattsauger                 35     22
-#> 2 Obstbau             Kernobst      Apfelwickler                    15     12
+#> 1 Obstbau             Birne / Nashi Birnblattsauger                 38     23
+#> 2 Obstbau             Kernobst      Apfelwickler                    16     13
 #> 3 Obstbau             Kernobst      Eulenraupen (blattfressend)      0      0
-#> 4 Obstbau             Kernobst      Frostspanner                    36     16
-#> 5 Obstbau             Kernobst      Schalenwickler                  16      9
+#> 4 Obstbau             Kernobst      Frostspanner                    38     16
+#> 5 Obstbau             Kernobst      Schalenwickler                  22     10
 #> 
 #> $`Alternative uses`
-#> # A tibble: 107 × 7
+#> # A tibble: 119 × 7
 #>    application_area_de culture_de    pest_de          pNbr wNbr   use_nr type   
 #>    <chr>               <chr>         <chr>           <int> <chr>   <int> <chr>  
-#>  1 Obstbau             Birne / Nashi Birnblattsauger  7051 6098       16 PEST_F…
-#>  2 Obstbau             Birne / Nashi Birnblattsauger  7051 6098-1     16 PEST_F…
-#>  3 Obstbau             Birne / Nashi Birnblattsauger  7051 6098-2     16 PEST_F…
+#>  1 Obstbau             Birne / Nashi Birnblattsauger  7051 6098       53 PEST_F…
+#>  2 Obstbau             Birne / Nashi Birnblattsauger  7051 6098-1     53 PEST_F…
+#>  3 Obstbau             Birne / Nashi Birnblattsauger  7051 6098-2     53 PEST_F…
 #>  4 Obstbau             Birne / Nashi Birnblattsauger  7169 6148        1 PEST_P…
-#>  5 Obstbau             Birne / Nashi Birnblattsauger  7291 6107        1 PEST_F…
-#>  6 Obstbau             Birne / Nashi Birnblattsauger  7291 6107-1      1 PEST_F…
-#>  7 Obstbau             Birne / Nashi Birnblattsauger  7291 6107-2      1 PEST_F…
-#>  8 Obstbau             Birne / Nashi Birnblattsauger  7441 6382        5 PEST_F…
-#>  9 Obstbau             Birne / Nashi Birnblattsauger  7511 6432       22 PEST_F…
-#> 10 Obstbau             Birne / Nashi Birnblattsauger  7511 6432-1     22 PEST_F…
-#> # ℹ 97 more rows
+#>  5 Obstbau             Birne / Nashi Birnblattsauger  7291 6107        4 PEST_F…
+#>  6 Obstbau             Birne / Nashi Birnblattsauger  7291 6107-1      4 PEST_F…
+#>  7 Obstbau             Birne / Nashi Birnblattsauger  7291 6107-2      4 PEST_F…
+#>  8 Obstbau             Birne / Nashi Birnblattsauger  7291 6107-3      4 PEST_F…
+#>  9 Obstbau             Birne / Nashi Birnblattsauger  7441 6382       10 PEST_F…
+#> 10 Obstbau             Birne / Nashi Birnblattsauger  7511 6432        2 PEST_F…
+#> # ℹ 109 more rows
 #> 
 alternative_products(sr, actives_de, resolve_cultures = TRUE, list = TRUE)
 #> $`No alternative`
 #> # A tibble: 3 × 3
 #>   application_area_de culture_de pest_de                    
 #>   <chr>               <chr>      <chr>                      
-#> 1 Obstbau             Apfel      Eulenraupen (blattfressend)
-#> 2 Obstbau             Quitte     Eulenraupen (blattfressend)
+#> 1 Obstbau             Quitte     Eulenraupen (blattfressend)
+#> 2 Obstbau             Apfel      Eulenraupen (blattfressend)
 #> 3 Obstbau             Birne      Eulenraupen (blattfressend)
 #> 
 #> $`Number of alternatives`
 #> # A tibble: 13 × 5
 #>    application_area_de culture_de pest_de                     n_wNbr n_pNbr
 #>    <chr>               <chr>      <chr>                        <int>  <int>
-#>  1 Obstbau             Apfel      Apfelwickler                    39     26
+#>  1 Obstbau             Apfel      Apfelwickler                    39     27
 #>  2 Obstbau             Apfel      Eulenraupen (blattfressend)      0      0
 #>  3 Obstbau             Apfel      Frostspanner                    60     26
-#>  4 Obstbau             Apfel      Schalenwickler                  25     13
-#>  5 Obstbau             Birne      Apfelwickler                    38     25
-#>  6 Obstbau             Birne      Birnblattsauger                 36     23
+#>  4 Obstbau             Apfel      Schalenwickler                  30     14
+#>  5 Obstbau             Birne      Apfelwickler                    38     26
+#>  6 Obstbau             Birne      Birnblattsauger                 39     24
 #>  7 Obstbau             Birne      Eulenraupen (blattfressend)      0      0
 #>  8 Obstbau             Birne      Frostspanner                    60     26
-#>  9 Obstbau             Birne      Schalenwickler                  25     13
-#> 10 Obstbau             Quitte     Apfelwickler                    29     21
+#>  9 Obstbau             Birne      Schalenwickler                  30     14
+#> 10 Obstbau             Quitte     Apfelwickler                    30     22
 #> 11 Obstbau             Quitte     Eulenraupen (blattfressend)      0      0
-#> 12 Obstbau             Quitte     Frostspanner                    53     24
-#> 13 Obstbau             Quitte     Schalenwickler                  18     11
+#> 12 Obstbau             Quitte     Frostspanner                    54     24
+#> 13 Obstbau             Quitte     Schalenwickler                  24     12
 #> 
 #> $`Alternative uses`
-#> # A tibble: 405 × 7
+#> # A tibble: 426 × 7
 #>    application_area_de culture_de pest_de          pNbr wNbr   use_nr type      
 #>    <chr>               <chr>      <chr>           <int> <chr>   <int> <chr>     
-#>  1 Obstbau             Birne      Birnblattsauger  7051 6098       16 PEST_FULL…
-#>  2 Obstbau             Birne      Birnblattsauger  7051 6098-1     16 PEST_FULL…
-#>  3 Obstbau             Birne      Birnblattsauger  7051 6098-2     16 PEST_FULL…
+#>  1 Obstbau             Birne      Birnblattsauger  7051 6098       53 PEST_FULL…
+#>  2 Obstbau             Birne      Birnblattsauger  7051 6098-1     53 PEST_FULL…
+#>  3 Obstbau             Birne      Birnblattsauger  7051 6098-2     53 PEST_FULL…
 #>  4 Obstbau             Birne      Birnblattsauger  7169 6148        1 PEST_PART…
-#>  5 Obstbau             Birne      Birnblattsauger  7291 6107        1 PEST_FULL…
-#>  6 Obstbau             Birne      Birnblattsauger  7291 6107-1      1 PEST_FULL…
-#>  7 Obstbau             Birne      Birnblattsauger  7291 6107-2      1 PEST_FULL…
-#>  8 Obstbau             Birne      Birnblattsauger  7441 6382        5 PEST_FULL…
-#>  9 Obstbau             Birne      Birnblattsauger  7511 6432       22 PEST_FULL…
-#> 10 Obstbau             Birne      Birnblattsauger  7511 6432-1     22 PEST_FULL…
-#> # ℹ 395 more rows
+#>  5 Obstbau             Birne      Birnblattsauger  7291 6107        4 PEST_FULL…
+#>  6 Obstbau             Birne      Birnblattsauger  7291 6107-1      4 PEST_FULL…
+#>  7 Obstbau             Birne      Birnblattsauger  7291 6107-2      4 PEST_FULL…
+#>  8 Obstbau             Birne      Birnblattsauger  7291 6107-3      4 PEST_FULL…
+#>  9 Obstbau             Birne      Birnblattsauger  7441 6382       10 PEST_FULL…
+#> 10 Obstbau             Birne      Birnblattsauger  7511 6432        2 PEST_FULL…
+#> # ℹ 416 more rows
 #> 
 
 actives_de <- c("Schalenwicklergranulose-Virus")
@@ -325,44 +324,47 @@ alternative_products(sr, actives_de, resolve_cultures = TRUE, list = TRUE)
 #> # A tibble: 10 × 5
 #>    application_area_de culture_de           pest_de        n_wNbr n_pNbr
 #>    <chr>               <chr>                <chr>           <int>  <int>
-#>  1 Obstbau             Apfel                Schalenwickler     25     13
-#>  2 Obstbau             Aprikose             Schalenwickler     13      9
-#>  3 Obstbau             Birne                Schalenwickler     25     13
-#>  4 Obstbau             Kirsche              Schalenwickler     20     11
+#>  1 Obstbau             Apfel                Schalenwickler     30     14
+#>  2 Obstbau             Aprikose             Schalenwickler     19     10
+#>  3 Obstbau             Birne                Schalenwickler     30     14
+#>  4 Obstbau             Kirsche              Schalenwickler     25     12
 #>  5 Obstbau             Olive                Schalenwickler      1      1
-#>  6 Obstbau             Pfirsich / Nektarine Schalenwickler     13      9
-#>  7 Obstbau             Pflaume              Schalenwickler     20     11
-#>  8 Obstbau             Quitte               Schalenwickler     18     11
+#>  6 Obstbau             Pfirsich / Nektarine Schalenwickler     19     10
+#>  7 Obstbau             Pflaume              Schalenwickler     25     12
+#>  8 Obstbau             Quitte               Schalenwickler     24     12
 #>  9 Obstbau             Walnuss              Schalenwickler      3      3
-#> 10 Obstbau             Zwetschge            Schalenwickler     20     11
+#> 10 Obstbau             Zwetschge            Schalenwickler     25     12
 #> 
 #> $`Alternative uses`
-#> # A tibble: 179 × 7
-#>    application_area_de culture_de pest_de         pNbr wNbr   use_nr type       
-#>    <chr>               <chr>      <chr>          <int> <chr>   <int> <chr>      
-#>  1 Obstbau             Olive      Schalenwickler  7545 6362        1 PEST_FULL_…
-#>  2 Obstbau             Apfel      Schalenwickler  7036 6020       57 PEST_FULL_…
-#>  3 Obstbau             Apfel      Schalenwickler  7036 6020       58 PEST_FULL_…
-#>  4 Obstbau             Apfel      Schalenwickler  7036 6020-1     57 PEST_FULL_…
-#>  5 Obstbau             Apfel      Schalenwickler  7036 6020-1     58 PEST_FULL_…
-#>  6 Obstbau             Apfel      Schalenwickler  7036 6020-2     57 PEST_FULL_…
-#>  7 Obstbau             Apfel      Schalenwickler  7036 6020-2     58 PEST_FULL_…
-#>  8 Obstbau             Apfel      Schalenwickler  7074 6144        2 PEST_FULL_…
-#>  9 Obstbau             Apfel      Schalenwickler  7545 6362        1 PEST_FULL_…
-#> 10 Obstbau             Apfel      Schalenwickler  7808 6748        1 PEST_FULL_…
-#> # ℹ 169 more rows
+#> # A tibble: 222 × 7
+#>    application_area_de culture_de           pest_de      pNbr wNbr  use_nr type 
+#>    <chr>               <chr>                <chr>       <int> <chr>  <int> <chr>
+#>  1 Obstbau             Olive                Schalenwic…  7545 6362       1 PEST…
+#>  2 Obstbau             Pfirsich / Nektarine Schalenwic…  7074 6144       2 PEST…
+#>  3 Obstbau             Pfirsich / Nektarine Schalenwic…  7545 6362       1 PEST…
+#>  4 Obstbau             Pfirsich / Nektarine Schalenwic…  7870 6552      22 PEST…
+#>  5 Obstbau             Pfirsich / Nektarine Schalenwic…  7870 6552…     22 PEST…
+#>  6 Obstbau             Pfirsich / Nektarine Schalenwic…  7870 6552…     22 PEST…
+#>  7 Obstbau             Pfirsich / Nektarine Schalenwic…  7870 6552…     22 PEST…
+#>  8 Obstbau             Pfirsich / Nektarine Schalenwic…  7870 6552…     22 PEST…
+#>  9 Obstbau             Pfirsich / Nektarine Schalenwic…  8040 6777       4 PEST…
+#> 10 Obstbau             Pfirsich / Nektarine Schalenwic…  8259 6954       1 PEST…
+#> # ℹ 212 more rows
 #> 
 
 actives_de <- c("Emamectinbenzoat")
 alternative_products(sr, actives_de, resolve_cultures = FALSE, list = TRUE)
 #> $`No alternative`
-#> # A tibble: 4 × 3
+#> # A tibble: 7 × 3
 #>   application_area_de culture_de           pest_de                    
 #>   <chr>               <chr>                <chr>                      
 #> 1 Feldbau             Eiweisserbse         Eulenraupen (blattfressend)
-#> 2 Obstbau             Aprikose             Pfirsichmotte              
-#> 3 Obstbau             Aprikose             Pfirsichwickler            
-#> 4 Obstbau             Pfirsich / Nektarine Pfirsichmotte              
+#> 2 Gemüsebau           Blattkohle           Eulenraupen (blattfressend)
+#> 3 Gemüsebau           Blattkohle           Kohlschabe                 
+#> 4 Gemüsebau           Blattkohle           Weisslinge                 
+#> 5 Obstbau             Aprikose             Pfirsichmotte              
+#> 6 Obstbau             Aprikose             Pfirsichwickler            
+#> 7 Obstbau             Pfirsich / Nektarine Pfirsichmotte              
 #> 
 #> $`Number of alternatives`
 #> # A tibble: 30 × 5
@@ -370,31 +372,31 @@ alternative_products(sr, actives_de, resolve_cultures = FALSE, list = TRUE)
 #>    <chr>               <chr>        <chr>                        <int>  <int>
 #>  1 Feldbau             Eiweisserbse Erbsenwickler                   13      7
 #>  2 Feldbau             Eiweisserbse Eulenraupen (blattfressend)      0      0
-#>  3 Gemüsebau           Blattkohle   Eulenraupen (blattfressend)      8      6
-#>  4 Gemüsebau           Blattkohle   Kohlschabe                       8      6
-#>  5 Gemüsebau           Blattkohle   Weisslinge                       8      6
+#>  3 Gemüsebau           Blattkohle   Eulenraupen (blattfressend)      0      0
+#>  4 Gemüsebau           Blattkohle   Kohlschabe                       0      0
+#>  5 Gemüsebau           Blattkohle   Weisslinge                       0      0
 #>  6 Gemüsebau           Blumenkohle  Eulenraupen (blattfressend)      8      6
 #>  7 Gemüsebau           Blumenkohle  Kohlschabe                       8      6
 #>  8 Gemüsebau           Blumenkohle  Weisslinge                       8      6
-#>  9 Gemüsebau           Kopfkohle    Eulenraupen (blattfressend)     11      8
-#> 10 Gemüsebau           Kopfkohle    Kohlschabe                      11      8
+#>  9 Gemüsebau           Kopfkohle    Eulenraupen (blattfressend)      9      7
+#> 10 Gemüsebau           Kopfkohle    Kohlschabe                       9      7
 #> # ℹ 20 more rows
 #> 
 #> $`Alternative uses`
-#> # A tibble: 293 × 7
+#> # A tibble: 289 × 7
 #>    application_area_de culture_de   pest_de        pNbr wNbr   use_nr type      
 #>    <chr>               <chr>        <chr>         <int> <chr>   <int> <chr>     
-#>  1 Feldbau             Eiweisserbse Erbsenwickler  7051 6098       42 PEST_FULL…
-#>  2 Feldbau             Eiweisserbse Erbsenwickler  7051 6098-1     42 PEST_FULL…
-#>  3 Feldbau             Eiweisserbse Erbsenwickler  7051 6098-2     42 PEST_FULL…
-#>  4 Feldbau             Eiweisserbse Erbsenwickler  7441 6382       36 PEST_FULL…
-#>  5 Feldbau             Eiweisserbse Erbsenwickler  7522 6381       13 PEST_FULL…
-#>  6 Feldbau             Eiweisserbse Erbsenwickler  7522 6381-1     13 PEST_FULL…
-#>  7 Feldbau             Eiweisserbse Erbsenwickler  8580 6998       30 PEST_FULL…
-#>  8 Feldbau             Eiweisserbse Erbsenwickler  8711 7226        1 PEST_FULL…
-#>  9 Feldbau             Eiweisserbse Erbsenwickler  9326 7410        1 PEST_FULL…
-#> 10 Feldbau             Eiweisserbse Erbsenwickler  9326 7410-1      1 PEST_FULL…
-#> # ℹ 283 more rows
+#>  1 Feldbau             Eiweisserbse Erbsenwickler  7051 6098        6 PEST_FULL…
+#>  2 Feldbau             Eiweisserbse Erbsenwickler  7051 6098-1      6 PEST_FULL…
+#>  3 Feldbau             Eiweisserbse Erbsenwickler  7051 6098-2      6 PEST_FULL…
+#>  4 Feldbau             Eiweisserbse Erbsenwickler  7441 6382        1 PEST_FULL…
+#>  5 Feldbau             Eiweisserbse Erbsenwickler  7522 6381       16 PEST_FULL…
+#>  6 Feldbau             Eiweisserbse Erbsenwickler  7522 6381-1     16 PEST_FULL…
+#>  7 Feldbau             Eiweisserbse Erbsenwickler  8580 6998       27 PEST_FULL…
+#>  8 Feldbau             Eiweisserbse Erbsenwickler  8711 7226       23 PEST_FULL…
+#>  9 Feldbau             Eiweisserbse Erbsenwickler  9326 7410       14 PEST_FULL…
+#> 10 Feldbau             Eiweisserbse Erbsenwickler  9326 7410-1     14 PEST_FULL…
+#> # ℹ 279 more rows
 #> 
 alternative_products(sr, actives_de, resolve_cultures = TRUE, list = TRUE)
 #> $`No alternative`
@@ -406,42 +408,42 @@ alternative_products(sr, actives_de, resolve_cultures = TRUE, list = TRUE)
 #> 3 Obstbau             Pfirsich / Nektarine Pfirsichmotte              
 #> 
 #> $`Number of alternatives`
-#> # A tibble: 66 × 5
+#> # A tibble: 68 × 5
 #>    application_area_de culture_de    pest_de                     n_wNbr n_pNbr
 #>    <chr>               <chr>         <chr>                        <int>  <int>
 #>  1 Feldbau             Eiweisserbse  Erbsenwickler                   13      7
 #>  2 Feldbau             Eiweisserbse  Eulenraupen (blattfressend)      0      0
-#>  3 Gemüsebau           Blumenkohl    Eulenraupen (blattfressend)     56     28
+#>  3 Gemüsebau           Blumenkohl    Eulenraupen (blattfressend)     57     28
 #>  4 Gemüsebau           Blumenkohl    Kohlschabe                      49     24
 #>  5 Gemüsebau           Blumenkohl    Weisslinge                      69     30
-#>  6 Gemüsebau           Broccoli      Eulenraupen (blattfressend)     56     28
+#>  6 Gemüsebau           Broccoli      Eulenraupen (blattfressend)     57     28
 #>  7 Gemüsebau           Broccoli      Kohlschabe                      49     24
 #>  8 Gemüsebau           Broccoli      Weisslinge                      69     30
-#>  9 Gemüsebau           Cherrytomaten Tomatenminiermotte              24     11
-#> 10 Gemüsebau           Chinakohl     Eulenraupen (blattfressend)     56     28
-#> # ℹ 56 more rows
+#>  9 Gemüsebau           Cherrytomaten Tomatenminiermotte              34     13
+#> 10 Gemüsebau           Chinakohl     Eulenraupen (blattfressend)     57     28
+#> # ℹ 58 more rows
 #> 
 #> $`Alternative uses`
-#> # A tibble: 2,486 × 7
+#> # A tibble: 2,591 × 7
 #>    application_area_de culture_de   pest_de        pNbr wNbr   use_nr type      
 #>    <chr>               <chr>        <chr>         <int> <chr>   <int> <chr>     
-#>  1 Feldbau             Eiweisserbse Erbsenwickler  7051 6098       42 PEST_FULL…
-#>  2 Feldbau             Eiweisserbse Erbsenwickler  7051 6098-1     42 PEST_FULL…
-#>  3 Feldbau             Eiweisserbse Erbsenwickler  7051 6098-2     42 PEST_FULL…
-#>  4 Feldbau             Eiweisserbse Erbsenwickler  7441 6382       36 PEST_FULL…
-#>  5 Feldbau             Eiweisserbse Erbsenwickler  7522 6381       13 PEST_FULL…
-#>  6 Feldbau             Eiweisserbse Erbsenwickler  7522 6381-1     13 PEST_FULL…
-#>  7 Feldbau             Eiweisserbse Erbsenwickler  8580 6998       30 PEST_FULL…
-#>  8 Feldbau             Eiweisserbse Erbsenwickler  8711 7226        1 PEST_FULL…
-#>  9 Feldbau             Eiweisserbse Erbsenwickler  9326 7410        1 PEST_FULL…
-#> 10 Feldbau             Eiweisserbse Erbsenwickler  9326 7410-1      1 PEST_FULL…
-#> # ℹ 2,476 more rows
+#>  1 Feldbau             Eiweisserbse Erbsenwickler  7051 6098        6 PEST_FULL…
+#>  2 Feldbau             Eiweisserbse Erbsenwickler  7051 6098-1      6 PEST_FULL…
+#>  3 Feldbau             Eiweisserbse Erbsenwickler  7051 6098-2      6 PEST_FULL…
+#>  4 Feldbau             Eiweisserbse Erbsenwickler  7441 6382        1 PEST_FULL…
+#>  5 Feldbau             Eiweisserbse Erbsenwickler  7522 6381       16 PEST_FULL…
+#>  6 Feldbau             Eiweisserbse Erbsenwickler  7522 6381-1     16 PEST_FULL…
+#>  7 Feldbau             Eiweisserbse Erbsenwickler  8580 6998       27 PEST_FULL…
+#>  8 Feldbau             Eiweisserbse Erbsenwickler  8711 7226       23 PEST_FULL…
+#>  9 Feldbau             Eiweisserbse Erbsenwickler  9326 7410       14 PEST_FULL…
+#> 10 Feldbau             Eiweisserbse Erbsenwickler  9326 7410-1     14 PEST_FULL…
+#> # ℹ 2,581 more rows
 #> 
 
 # Example in Italian
 actives_it <- c("Lambda-Cialotrina", "Deltametrina")
 alternative_products(sr, actives_it, lang = "it", resolve_cultures = FALSE)
-#> # A tibble: 484 × 5
+#> # A tibble: 527 × 5
 #>    application_area_it culture_it                          pest_it n_wNbr n_pNbr
 #>    <chr>               <chr>                               <chr>    <int>  <int>
 #>  1 Campicoltura        Barbabietola da zucchero            Altich…      0      0
@@ -454,6 +456,6 @@ alternative_products(sr, actives_it, lang = "it", resolve_cultures = FALSE)
 #>  8 Campicoltura        Cartamo                             Nottue…      6      4
 #>  9 Campicoltura        Cereali                             Afidi …      0      0
 #> 10 Campicoltura        Cereali                             Clorop…      6      4
-#> # ℹ 474 more rows
+#> # ℹ 517 more rows
 # }
 ```
