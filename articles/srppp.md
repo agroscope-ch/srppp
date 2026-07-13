@@ -26,15 +26,7 @@ library(dplyr)
 example_register <- try(srppp_dm())
 ```
 
-    ## Warning in download.file(from, path, quiet = TRUE): downloaded length 0 !=
-    ## reported length 16
-
-    ## Warning in download.file(from, path, quiet = TRUE): cannot open URL
-    ## 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip':
-    ## HTTP status was '502 Bad Gateway'
-
-    ## Error in download.file(from, path, quiet = TRUE) : 
-    ##   cannot open URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip'
+    ## Error in read_html(base_url) : could not find function "read_html"
 
 In case downloading the current register from the internet fails, we
 read in the version from 16 December 2024 that is distributed with the

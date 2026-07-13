@@ -72,9 +72,7 @@ library(srppp)
 library(dplyr, warn.conflicts = FALSE)
 library(dm, warn.conflicts = FALSE)
 sr <- srppp_dm()
-#> Warning: downloaded length 0 != reported length 16
-#> Warning: cannot open URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip': HTTP status was '502 Bad Gateway'
-#> Error in download.file(from, path, quiet = TRUE): cannot open URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip'
+#> Error in read_html(base_url): could not find function "read_html"
 
 product_uses <- sr$products |>
   filter(name == "BIOHOP AudiENZ") |>

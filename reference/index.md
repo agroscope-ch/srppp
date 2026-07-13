@@ -23,9 +23,9 @@
 
 ## Data objects for working with XML versions of the SRPPP
 
-- [`srppp_xml_url`](https://agroscope-ch.github.io/srppp/reference/srppp_xml_url.md)
-  : URL of the XML version of the Swiss Register of Plant Protection
-  Products
+- [`srppp_xml_url()`](https://agroscope-ch.github.io/srppp/reference/srppp_xml_url.md)
+  : Determine the URL of the XML version of the Swiss Register of Plant
+  Protection Products
 - [`units_convertible_to_g_per_ha`](https://agroscope-ch.github.io/srppp/reference/units_convertible_to_g_per_ha.md)
   : Product application rate units convertible to grams active substance
   per hectare

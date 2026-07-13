@@ -14,15 +14,8 @@ library(knitr)
 srppp <- try(srppp_dm(srppp_xml_url))
 ```
 
-    ## Warning in download.file(from, path, quiet = TRUE): downloaded length 0 !=
-    ## reported length 16
-
-    ## Warning in download.file(from, path, quiet = TRUE): cannot open URL
-    ## 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip':
-    ## HTTP status was '502 Bad Gateway'
-
-    ## Error in download.file(from, path, quiet = TRUE) : 
-    ##   cannot open URL 'https://www.blv.admin.ch/dam/blv/de/dokumente/zulassung-pflanzenschutzmittel/pflanzenschutzmittelverzeichnis/daten-pflanzenschutzmittelverzeichnis.zip.download.zip/Daten%20Pflanzenschutzmittelverzeichnis.zip'
+    ## Error in UseMethod("srppp_xml_get") : 
+    ##   no applicable method for 'srppp_xml_get' applied to an object of class "function"
 
 ``` r
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## version 2.0.6
+
+- Instead of including the URL to the zipped XML file with the register
+  data in the package, read it from the web page
+  <https://www.blv.admin.ch/de/pflanzenschutzmittelverzeichnis>, as it
+  has changed and will likely change upon every new release in the
+  future. As a consequence, ‘srppp_xml_url()’ is now a function that
+  returns the current URL.
+
 ## version 2.0.5
 
 - Automatically include the description text from `DESCRIPTION` in the
