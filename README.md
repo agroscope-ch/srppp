@@ -15,10 +15,6 @@ status](https://agroscope-ch.r-universe.dev/badges/srppp)](https://agroscope-ch.
 
 ## Description
 
-``` r
-read.dcf("DESCRIPTION")[, "Description"] |> cat()
-```
-
 Generate data objects from XML versions of the Swiss Register of Plant
 Protection Products. An online version of the register can be accessed
 at <https://www.psm.admin.ch/de/produkte>. There is no guarantee of
