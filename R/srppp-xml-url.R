@@ -1,6 +1,6 @@
 #' Determine the URL of the XML version of the Swiss Register of Plant Protection Products
 #'
-#' @importFrom rvest html_elements html_attr
+#' @importFrom rvest read_html html_elements html_attr
 #' @return length one character string
 #' @export
 #' @examples
