@@ -177,6 +177,9 @@ resolve_cultures <- function(dataset, srppp,
     }
   }
 
+  # save informationen culture_de is allg. = TRUE, else FALSE
+  dataset[["was_allg"]] <- dataset[[culture_column]] == "allg."
+
   if (resolve_culture_allg) {
     # Identify rows with "allg." in the culture column
     allg_rows <- dataset[[culture_column]] == "allg."
@@ -218,7 +221,16 @@ resolve_cultures <- function(dataset, srppp,
   names(join_spec) <- culture_column
 
   expanded_data <- dataset |>
-    left_join(culture_leaf_df, by = join_spec, relationship = "many-to-many")
+    left_join(culture_leaf_df, by = join_spec, relationship = "many-to-many") |>
+    mutate(
+      !!sym(culture_column) := if_else(
+        .data[["was_allg"]],
+        "allg.",
+        .data[[culture_column]]
+      )
+    ) |>
+    select(-all_of("was_allg"))
+
 
   return(expanded_data)
 }
