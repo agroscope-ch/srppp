@@ -177,7 +177,10 @@ resolve_cultures <- function(dataset, srppp,
     }
   }
 
-  # save informationen culture_de is allg. = TRUE, else FALSE
+  # Save whether the original culture value is exactly "allg." (temporary helper column)
+  if ("was_allg" %in% names(dataset)) {
+    cli::cli_abort("{.var was_allg} is a reserved temporary column name used by {.fn resolve_cultures}; please rename it in {.arg dataset} before calling.")
+  }
   dataset[["was_allg"]] <- dataset[[culture_column]] == "allg."
 
   if (resolve_culture_allg) {
