@@ -38,15 +38,14 @@ srppp$categories |>
 | category_de                             |   n |
 |:----------------------------------------|----:|
 | Akarizid                                | 119 |
-| Andere                                  |   1 |
-| Bakterizid                              |  26 |
+| Bakterizid                              |  25 |
 | Desinfektionsmittel                     |   3 |
-| Fungizid                                | 263 |
-| Herbizid                                | 323 |
-| Insektizid                              | 154 |
+| Fungizid                                | 261 |
+| Herbizid                                | 311 |
+| Insektizid                              | 153 |
 | Lebende Organismen (Bakterien)          |   2 |
 | Lebende Organismen (Insekten)           | 116 |
-| Lebende Organismen (Insektenviren)      |  11 |
+| Lebende Organismen (Insektenviren)      |  10 |
 | Lebende Organismen (Milben)             |  30 |
 | Lebende Organismen (Nematoden)          |  23 |
 | Lebende Organismen (Pilze)              |  12 |
@@ -54,9 +53,9 @@ srppp$categories |>
 | Mittel zum Schutz von Erntegütern       |   5 |
 | Molluskizid                             |  31 |
 | Nematizid                               |   2 |
-| Pheromon                                |  33 |
+| Pheromon                                |  31 |
 | Phytoregulator                          |  72 |
-| Rodentizid                              |   8 |
+| Rodentizid                              |   7 |
 | Saatbeizmittel                          |  27 |
 | Stimulator der natürlichen Abwehrkräfte |   4 |
 | Virizid                                 |   2 |
@@ -493,7 +492,7 @@ kable(additional_products_containing_microorganisms)
 
 ## Summary
 
-In summary, out of 1740 products, there are 21 in the microorganism
+In summary, out of 1712 products, there are 21 in the microorganism
 categories as shown above, and 49 products in the insecticide and
 fungicide categories which contain an active substance that has a name
 that contains one of the microorganism genus names listed above.

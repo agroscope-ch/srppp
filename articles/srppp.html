@@ -63,7 +63,7 @@
 Ranke</h4>
             
             <h4 data-toc-skip class="date">13 July 2026 (rebuilt
-2026-07-13)</h4>
+2026-07-26)</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agroscope-ch/srppp/blob/main/vignettes/srppp.rmd" class="external-link"><code>vignettes/srppp.rmd</code></a></small>
       <div class="d-none name"><code>srppp.rmd</code></div>
@@ -120,7 +120,7 @@ number for the authorization holder are shown in light blue.</p>
 substances. For each substance, there is a primary key <code>pk</code>,
 a chemical name based on <a href="https://iupac.org/what-we-do/nomenclature/" class="external-link">IUPAC
 nomenclature</a>, and substance names in three of the four official
-languages of Switzerland. The first four entries out of 453 are shown
+languages of Switzerland. The first four entries out of 448 are shown
 below.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span>
@@ -286,11 +286,11 @@ quite different.</p>
 <tbody>
 <tr class="odd">
 <td align="left">ACTIVE_INGREDIENT</td>
-<td align="right">333</td>
+<td align="right">327</td>
 </tr>
 <tr class="even">
 <td align="left">ADDITIVE_TO_DECLARE</td>
-<td align="right">114</td>
+<td align="right">115</td>
 </tr>
 <tr class="odd">
 <td align="left">SAFENER</td>
@@ -486,24 +486,6 @@ respective columns.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">2092</td>
-<td align="left">1698</td>
-<td align="left">Asulox</td>
-<td align="left">2026-07-01 00:00:00.0000000</td>
-<td align="left">2025-07-01 00:00:00.0000000</td>
-<td align="left">FALSE</td>
-<td align="left">018C0DAB-6CB8-4F46-B684-4F59117A4F6A</td>
-</tr>
-<tr class="even">
-<td align="right">3948</td>
-<td align="left">4034</td>
-<td align="left">Asulam</td>
-<td align="left">2026-07-01 00:00:00.0000000</td>
-<td align="left">2025-07-01 00:00:00.0000000</td>
-<td align="left">FALSE</td>
-<td align="left">5E2915EB-369E-4C9C-B8B7-9FAAABF0E127</td>
-</tr>
-<tr class="odd">
 <td align="right">4163</td>
 <td align="left">4309</td>
 <td align="left">Volpan</td>
@@ -522,27 +504,45 @@ respective columns.</p>
 <td align="left">018C0DAB-6CB8-4F46-B684-4F59117A4F6A</td>
 </tr>
 <tr class="odd">
-<td align="right">4251</td>
-<td align="left">4234</td>
-<td align="left">Capex 2</td>
-<td align="left">2026-07-01 00:00:00.0000000</td>
-<td align="left">2025-07-01 00:00:00.0000000</td>
+<td align="right">4556</td>
+<td align="left">4479</td>
+<td align="left">Banol M</td>
+<td align="left">2027-06-03 00:00:00.0000000</td>
+<td align="left">2026-06-03 00:00:00.0000000</td>
 <td align="left">FALSE</td>
-<td align="left">F05FD7E3-EA3C-46CE-A537-B40375F273AA</td>
+<td align="left">9B3D97EE-DBF8-4DBD-AE4E-E23726022A85</td>
 </tr>
 <tr class="even">
-<td align="right">4426</td>
-<td align="left">4343</td>
-<td align="left">Cypermethrin</td>
-<td align="left">2026-06-11 00:00:00.0000000</td>
-<td align="left">2025-06-11 00:00:00.0000000</td>
+<td align="right">4556</td>
+<td align="left">4479-1</td>
+<td align="left">Rumex contra</td>
+<td align="left">2027-06-03 00:00:00.0000000</td>
+<td align="left">2026-06-03 00:00:00.0000000</td>
+<td align="left">TRUE</td>
+<td align="left">DCE9B84C-BFF6-40E0-8DED-B0FDAF578D82</td>
+</tr>
+<tr class="odd">
+<td align="right">4556</td>
+<td align="left">4479-2</td>
+<td align="left">Anti-Rumex Red</td>
+<td align="left">2027-06-03 00:00:00.0000000</td>
+<td align="left">2026-06-03 00:00:00.0000000</td>
+<td align="left">TRUE</td>
+<td align="left">17486103-B818-49E6-9667-AF90F13F5CC0</td>
+</tr>
+<tr class="even">
+<td align="right">4557</td>
+<td align="left">4480</td>
+<td align="left">Phenmédiphame</td>
+<td align="left">2027-06-03 00:00:00.0000000</td>
+<td align="left">2026-06-03 00:00:00.0000000</td>
 <td align="left">FALSE</td>
-<td align="left">5E2915EB-369E-4C9C-B8B7-9FAAABF0E127</td>
+<td align="left">9B3D97EE-DBF8-4DBD-AE4E-E23726022A85</td>
 </tr>
 </tbody>
 </table>
-<p>At the build time of this vignette, there were 1740 product
-registrations for 1119 P-Numbers in the Swiss Register of Plant
+<p>At the build time of this vignette, there were 1712 product
+registrations for 1099 P-Numbers in the Swiss Register of Plant
 Protection Products (SRPPP) as published on the website of the Federal
 Food Safety and Veterinary Office.</p>
 </div>
@@ -740,54 +740,6 @@ order to be able to refer to each use by a combination of P-Number
 <tr class="even">
 <td align="right">7511</td>
 <td align="right">1</td>
-<td align="right">0.3</td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="left">kg/ha</td>
-<td align="right">3</td>
-<td align="left">Days</td>
-<td align="left">Gemüsebau</td>
-</tr>
-<tr class="odd">
-<td align="right">7511</td>
-<td align="right">2</td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right">5.0</td>
-<td align="right"></td>
-<td align="left">kg/ha</td>
-<td align="right"></td>
-<td align="left"></td>
-<td align="left">Obstbau</td>
-</tr>
-<tr class="even">
-<td align="right">7511</td>
-<td align="right">3</td>
-<td align="right">0.3</td>
-<td align="right"></td>
-<td align="right">4.8</td>
-<td align="right"></td>
-<td align="left">kg/ha</td>
-<td align="right"></td>
-<td align="left"></td>
-<td align="left">Obstbau</td>
-</tr>
-<tr class="odd">
-<td align="right">7511</td>
-<td align="right">4</td>
-<td align="right">0.3</td>
-<td align="right"></td>
-<td align="right">4.8</td>
-<td align="right"></td>
-<td align="left">kg/ha</td>
-<td align="right">8</td>
-<td align="left">Days</td>
-<td align="left">Obstbau</td>
-</tr>
-<tr class="even">
-<td align="right">7511</td>
-<td align="right">5</td>
 <td align="right"></td>
 <td align="right"></td>
 <td align="right">3.0</td>
@@ -799,7 +751,7 @@ order to be able to refer to each use by a combination of P-Number
 </tr>
 <tr class="odd">
 <td align="right">7511</td>
-<td align="right">6</td>
+<td align="right">2</td>
 <td align="right">0.3</td>
 <td align="right"></td>
 <td align="right"></td>
@@ -811,7 +763,7 @@ order to be able to refer to each use by a combination of P-Number
 </tr>
 <tr class="even">
 <td align="right">7511</td>
-<td align="right">7</td>
+<td align="right">3</td>
 <td align="right"></td>
 <td align="right"></td>
 <td align="right">3.0</td>
@@ -823,7 +775,7 @@ order to be able to refer to each use by a combination of P-Number
 </tr>
 <tr class="odd">
 <td align="right">7511</td>
-<td align="right">8</td>
+<td align="right">4</td>
 <td align="right"></td>
 <td align="right"></td>
 <td align="right">3.0</td>
@@ -835,7 +787,7 @@ order to be able to refer to each use by a combination of P-Number
 </tr>
 <tr class="even">
 <td align="right">7511</td>
-<td align="right">9</td>
+<td align="right">5</td>
 <td align="right"></td>
 <td align="right"></td>
 <td align="right">5.0</td>
@@ -844,6 +796,54 @@ order to be able to refer to each use by a combination of P-Number
 <td align="right">3</td>
 <td align="left">Days</td>
 <td align="left">Gemüsebau</td>
+</tr>
+<tr class="odd">
+<td align="right">7511</td>
+<td align="right">6</td>
+<td align="right">0.2</td>
+<td align="right"></td>
+<td align="right">3.2</td>
+<td align="right"></td>
+<td align="left">kg/ha</td>
+<td align="right"></td>
+<td align="left"></td>
+<td align="left">Weinbau</td>
+</tr>
+<tr class="even">
+<td align="right">7511</td>
+<td align="right">7</td>
+<td align="right">0.2</td>
+<td align="right"></td>
+<td align="right">3.2</td>
+<td align="right"></td>
+<td align="left">kg/ha</td>
+<td align="right">2</td>
+<td align="left">Week(s)</td>
+<td align="left">Obstbau</td>
+</tr>
+<tr class="odd">
+<td align="right">7511</td>
+<td align="right">8</td>
+<td align="right">0.2</td>
+<td align="right"></td>
+<td align="right">3.2</td>
+<td align="right"></td>
+<td align="left">kg/ha</td>
+<td align="right">3</td>
+<td align="left">Week(s)</td>
+<td align="left">Obstbau</td>
+</tr>
+<tr class="even">
+<td align="right">7511</td>
+<td align="right">9</td>
+<td align="right">0.3</td>
+<td align="right"></td>
+<td align="right">3.0</td>
+<td align="right"></td>
+<td align="left">kg/ha</td>
+<td align="right">3</td>
+<td align="left">Days</td>
+<td align="left">Beerenbau</td>
 </tr>
 </tbody>
 </table>

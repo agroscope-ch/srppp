@@ -301,30 +301,30 @@ example_dataset_5 <- data.frame(
 #> 3     Wegschnecken/Arion Arten            <NA>
 #> 4                   Gallmilben       Brombeere
  resolve_cultures(example_dataset_5, sr)
-#>               substance_de pNbr use_nr application_area_de           culture_de
-#> 1                 Schwefel   38      1           Beerenbau            Brombeere
-#> 2  Kupfer (als Oxychlorid)  585     12             Weinbau         Ertragsreben
-#> 3  Kupfer (als Oxychlorid)  585     12             Weinbau            Jungreben
-#> 4               Metaldehyd 1090      4             Obstbau                Olive
-#> 5               Metaldehyd 1090      4             Obstbau Pfirsich / Nektarine
-#> 6               Metaldehyd 1090      4             Obstbau              Kirsche
-#> 7               Metaldehyd 1090      4             Obstbau             Aprikose
-#> 8               Metaldehyd 1090      4             Obstbau               Quitte
-#> 9               Metaldehyd 1090      4             Obstbau                Apfel
-#> 10              Metaldehyd 1090      4             Obstbau            Zwetschge
-#> 11              Metaldehyd 1090      4             Obstbau              Pflaume
-#> 12              Metaldehyd 1090      4             Obstbau                Birne
-#> 13              Metaldehyd 1090      4             Obstbau              Walnuss
-#> 14              Metaldehyd 1090      4             Obstbau                Olive
-#> 15              Metaldehyd 1090      4             Obstbau Pfirsich / Nektarine
-#> 16              Metaldehyd 1090      4             Obstbau              Kirsche
-#> 17              Metaldehyd 1090      4             Obstbau             Aprikose
-#> 18              Metaldehyd 1090      4             Obstbau               Quitte
-#> 19              Metaldehyd 1090      4             Obstbau                Apfel
-#> 20              Metaldehyd 1090      4             Obstbau            Zwetschge
-#> 21              Metaldehyd 1090      4             Obstbau              Pflaume
-#> 22              Metaldehyd 1090      4             Obstbau                Birne
-#> 23              Metaldehyd 1090      4             Obstbau              Walnuss
+#>               substance_de pNbr use_nr application_area_de culture_de
+#> 1                 Schwefel   38      1           Beerenbau  Brombeere
+#> 2  Kupfer (als Oxychlorid)  585     12             Weinbau      allg.
+#> 3  Kupfer (als Oxychlorid)  585     12             Weinbau      allg.
+#> 4               Metaldehyd 1090      4             Obstbau      allg.
+#> 5               Metaldehyd 1090      4             Obstbau      allg.
+#> 6               Metaldehyd 1090      4             Obstbau      allg.
+#> 7               Metaldehyd 1090      4             Obstbau      allg.
+#> 8               Metaldehyd 1090      4             Obstbau      allg.
+#> 9               Metaldehyd 1090      4             Obstbau      allg.
+#> 10              Metaldehyd 1090      4             Obstbau      allg.
+#> 11              Metaldehyd 1090      4             Obstbau      allg.
+#> 12              Metaldehyd 1090      4             Obstbau      allg.
+#> 13              Metaldehyd 1090      4             Obstbau      allg.
+#> 14              Metaldehyd 1090      4             Obstbau      allg.
+#> 15              Metaldehyd 1090      4             Obstbau      allg.
+#> 16              Metaldehyd 1090      4             Obstbau      allg.
+#> 17              Metaldehyd 1090      4             Obstbau      allg.
+#> 18              Metaldehyd 1090      4             Obstbau      allg.
+#> 19              Metaldehyd 1090      4             Obstbau      allg.
+#> 20              Metaldehyd 1090      4             Obstbau      allg.
+#> 21              Metaldehyd 1090      4             Obstbau      allg.
+#> 22              Metaldehyd 1090      4             Obstbau      allg.
+#> 23              Metaldehyd 1090      4             Obstbau      allg.
 #>                         pest_de      leaf_culture_de
 #> 1                    Gallmilben            Brombeere
 #> 2  Graufäule (Botrytis cinerea)         Ertragsreben
