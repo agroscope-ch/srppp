@@ -177,6 +177,12 @@ resolve_cultures <- function(dataset, srppp,
     }
   }
 
+  # Save whether the original culture value is exactly "allg." (temporary helper column)
+  if ("was_allg" %in% names(dataset)) {
+    cli::cli_abort("{.var was_allg} is a reserved temporary column name used by {.fn resolve_cultures}; please rename it in {.arg dataset} before calling.")
+  }
+  dataset[["was_allg"]] <- dataset[[culture_column]] == "allg."
+
   if (resolve_culture_allg) {
     # Identify rows with "allg." in the culture column
     allg_rows <- dataset[[culture_column]] == "allg."
@@ -218,7 +224,16 @@ resolve_cultures <- function(dataset, srppp,
   names(join_spec) <- culture_column
 
   expanded_data <- dataset |>
-    left_join(culture_leaf_df, by = join_spec, relationship = "many-to-many")
+    left_join(culture_leaf_df, by = join_spec, relationship = "many-to-many") |>
+    mutate(
+      !!sym(culture_column) := if_else(
+        .data[["was_allg"]],
+        "allg.",
+        .data[[culture_column]]
+      )
+    ) |>
+    select(-all_of("was_allg"))
+
 
   return(expanded_data)
 }
