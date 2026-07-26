@@ -2,6 +2,9 @@
 
 ## version 2.0.6
 
+- In `resolve_cultures`, return “allg.” in the column `culture_de`
+  designated for the input cultues instead of the cultures it resolves
+  to.
 - Instead of including the URL to the zipped XML file with the register
   data in the package, read it from the web page
   <https://www.blv.admin.ch/de/pflanzenschutzmittelverzeichnis>, as it
