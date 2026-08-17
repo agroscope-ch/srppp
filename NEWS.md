@@ -1,7 +1,7 @@
 ## version 2.0.7
 
 - Correct substance type for 2-hydroxy-4-n-octyloxybenzophenone
-- update pattern for srppp download URL, as the URL on the web page has changed
+- Update pattern for srppp download URL, as the URL on the web page has changed
 
 ## version 2.0.6
 
