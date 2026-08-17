@@ -410,10 +410,12 @@ srppp_xml_get_ingredients <- function(srppp_xml = srppp_xml_get())
   # this substance is classified as ADDITIVE_TO_DECLARE.
     mutate(
       type = if_else(
-        pk == "1846" & type == "ACTIVE_INGREDIENT",
+        wNbr == "7115" & pk == "1846" & type == "ACTIVE_INGREDIENT",
         "ADDITIVE_TO_DECLARE",
         type
-      )
+      ),
+      percent = if_else(type == "ADDITIVE_TO_DECLARE", NA_real_, percent),
+      g_per_L = if_else(type == "ADDITIVE_TO_DECLARE", NA_real_, g_per_L)
     ) |>
     arrange(wNbr, pk, type)
 
