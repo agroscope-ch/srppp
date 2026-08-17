@@ -404,6 +404,17 @@ srppp_xml_get_ingredients <- function(srppp_xml = srppp_xml_get())
     mutate(
       percent = if_else(wNbr == "3066", 49, percent),
       g_per_L = if_else(wNbr == "3066", 520, g_per_L)) |>
+
+  # 2-hydroxy-4-n-octyloxybenzophenone (pk 1846) was classified as an
+  # active ingredient in one product in the 2018 data. In all other records,
+  # this substance is classified as ADDITIVE_TO_DECLARE.
+    mutate(
+      type = if_else(
+        pk == "1846" & type == "ACTIVE_INGREDIENT",
+        "ADDITIVE_TO_DECLARE",
+        type
+      )
+    ) |>
     arrange(wNbr, pk, type)
 
   return(ret_corrected)
@@ -619,6 +630,12 @@ srppp_xml_get_uses <- function(srppp_xml = srppp_xml_get()) {
 #' in the current register, so we set the rate information to NA for
 #' the use definitions of these products to avoid an erroneous interpretation
 #' as product rates.
+#'
+#' - In the 2018 data, 2-hydroxy-4-n-octyloxybenzophenone (pk 1846) was
+#' classified as an active ingredient in one product (Milbeknock pNbr: 8710
+#' wNbr: 7115). In all other records, this substance is classified as
+#' `ADDITIVE_TO_DECLARE`. Therefore, this classification is corrected while
+#' reading in the data.
 #'
 #' ## Removal of redundant information
 #'

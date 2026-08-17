@@ -13,7 +13,7 @@ srppp_xml_url <- function() {
     html_elements("a") |>
     html_attr("href")
 
-  link_index <- which(grepl("daten-pflanzenschutzmittelverzeichnis-de.zip", links))
+  link_index <- which(grepl(".aten.*flanzenschutzmittelverzeichnis.*.zip", links))
 
   n_matching <- length(link_index)
   if (n_matching != 1) stop("Search for URL gave ", n_matching, " results")

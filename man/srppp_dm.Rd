@@ -59,6 +59,11 @@ with the use rates given
 in the current register, so we set the rate information to NA for
 the use definitions of these products to avoid an erroneous interpretation
 as product rates.
+\item In the 2018 data, 2-hydroxy-4-n-octyloxybenzophenone (pk 1846) was
+classified as an active ingredient in one product (Milbeknock pNbr: 8710
+wNbr: 7115). In all other records, this substance is classified as
+\code{ADDITIVE_TO_DECLARE}. Therefore, this classification is corrected while
+reading in the data.
 }
 }
 
