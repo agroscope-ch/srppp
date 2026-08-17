@@ -120,6 +120,11 @@ with the use rates given
 in the current register, so we set the rate information to NA for
 the use definitions of these products to avoid an erroneous interpretation
 as product rates.</p></li>
+<li><p>In the 2018 data, 2-hydroxy-4-n-octyloxybenzophenone (pk 1846) was
+classified as an active ingredient in one product (Milbeknock pNbr: 8710
+wNbr: 7115). In all other records, this substance is classified as
+<code>ADDITIVE_TO_DECLARE</code>. Therefore, this classification is corrected while
+reading in the data.</p></li>
 </ul></div>
 
 <div class="section">
@@ -275,7 +280,7 @@ Cultural Heritage) to mitigate spray drift in meters</p></li>
 <span class="r-in"><span><span class="va">sr</span><span class="op">$</span><span class="va">obligations</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">varying_effect</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">pNbr</span>, <span class="va">use_nr</span>, <span class="va">code</span>, <span class="va">obligation_de</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 199 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 198 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     pNbr use_nr code  obligation_de                                             </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">4</span>683      1 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…</span>
@@ -288,7 +293,7 @@ Cultural Heritage) to mitigate spray drift in meters</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">4</span>751      3 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">4</span>751      4 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">4</span>751      5 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 189 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 188 more rows</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

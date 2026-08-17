@@ -40,11 +40,11 @@ srppp$categories |>
 | Akarizid                                | 119 |
 | Bakterizid                              |  25 |
 | Desinfektionsmittel                     |   3 |
-| Fungizid                                | 261 |
+| Fungizid                                | 260 |
 | Herbizid                                | 311 |
 | Insektizid                              | 153 |
 | Lebende Organismen (Bakterien)          |   2 |
-| Lebende Organismen (Insekten)           | 116 |
+| Lebende Organismen (Insekten)           | 115 |
 | Lebende Organismen (Insektenviren)      |  10 |
 | Lebende Organismen (Milben)             |  30 |
 | Lebende Organismen (Nematoden)          |  23 |
@@ -59,7 +59,7 @@ srppp$categories |>
 | Saatbeizmittel                          |  27 |
 | Stimulator der natürlichen Abwehrkräfte |   4 |
 | Virizid                                 |   2 |
-| Vorratsschutzmittel                     |  19 |
+| Vorratsschutzmittel                     |  18 |
 | Wildabhaltemittel                       |   5 |
 | Wundverschlussmittel                    |   1 |
 | Zusatzstoffe                            |  36 |
@@ -172,7 +172,7 @@ srppp$products |>
 | Fenpyroximate |
 | Fettsäuren |
 | Fettsäuren C7-C18 |
-| Fettsäuren, C7-C18-und C18 ungesättigt, Kaliumsalze |
+| Fettsäuren C7-C18 und ungesättigte C18-Kaliumsalze |
 | Flonicamid |
 | Gamma Butyrolacton |
 | Glutaraldehyd |
@@ -361,6 +361,7 @@ srppp$products |>
 | Tebuconazole |
 | Tetranatriumpyrophosphat |
 | Thiabendazole |
+| Trichoderma atroviride Stamm SC1 |
 | Trifloxystrobin |
 | Valifenalate |
 | Zoxamid |
@@ -492,7 +493,7 @@ kable(additional_products_containing_microorganisms)
 
 ## Summary
 
-In summary, out of 1712 products, there are 21 in the microorganism
+In summary, out of 1710 products, there are 21 in the microorganism
 categories as shown above, and 49 products in the insecticide and
 fungicide categories which contain an active substance that has a name
 that contains one of the microorganism genus names listed above.

@@ -80,6 +80,12 @@ integrity. Since version 1.1, the returned object has an attribute named
   for the use definitions of these products to avoid an erroneous
   interpretation as product rates.
 
+- In the 2018 data, 2-hydroxy-4-n-octyloxybenzophenone (pk 1846) was
+  classified as an active ingredient in one product (Milbeknock pNbr:
+  8710 wNbr: 7115). In all other records, this substance is classified
+  as `ADDITIVE_TO_DECLARE`. Therefore, this classification is corrected
+  while reading in the data.
+
 ### Removal of redundant information
 
 - Information on products that has been duplicated across several
@@ -269,7 +275,7 @@ boxer_uses |>
 sr$obligations |>
   filter(varying_effect) |>
   select(pNbr, use_nr, code, obligation_de)
-#> # A tibble: 199 × 4
+#> # A tibble: 198 × 4
 #>     pNbr use_nr code  obligation_de                                             
 #>    <int>  <int> <chr> <chr>                                                     
 #>  1  4683      1 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…
@@ -282,6 +288,6 @@ sr$obligations |>
 #>  8  4751      3 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…
 #>  9  4751      4 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…
 #> 10  4751      5 9299  Die Wirkungseffizienz der Nützlinge kann je nach Pflanzen…
-#> # ℹ 189 more rows
+#> # ℹ 188 more rows
 
 ```

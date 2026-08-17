@@ -17,5 +17,5 @@ length one character string
 
 ``` r
 srppp_xml_url()
-#> [1] "https://www.blv.admin.ch/dam/de/sd-web/He9bAfs8CmFT/daten-pflanzenschutzmittelverzeichnis-de.zip"
+#> [1] "https://www.blv.admin.ch/dam/de/sd-web/He9bAfs8CmFT/Daten%20Pflanzenschutzmittelverzeichnis.zip"
 ```

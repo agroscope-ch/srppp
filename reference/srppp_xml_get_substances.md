@@ -26,7 +26,7 @@ French and Italian.
 ``` r
 # \donttest{
 try(srppp_xml_get_substances())
-#> # A tibble: 448 × 6
+#> # A tibble: 447 × 6
 #>    pk                  iupac substance_de substance_fr substance_it substance_en
 #>    <chr>               <chr> <chr>        <chr>        <chr>        <chr>       
 #>  1 0A7BFE30-AC31-4326… (E)-… (E)-8-Dodec… (E)-8-dodec… (E)-8-dodec… (E)-8-Dodec…
@@ -39,6 +39,6 @@ try(srppp_xml_get_substances())
 #>  8 738E64D8-6E48-415F… (Z)-… (Z)-8-Dodec… (Z)-8-Dodec… (Z)-8-Dodec… (Z)-8-Dodec…
 #>  9 37FEF947-0B44-4DDF… (Z)-… (Z)-8-dodec… (Z)-8-Dodéc… (Z)-8-dodec… (Z)-8-Dodec…
 #> 10 028AA985-0DBA-4B99… (9Z)… (Z)-9-Dodec… (Z)-9-Dodec… (Z)-9-Dodec… (Z)-9-Dodec…
-#> # ℹ 438 more rows
+#> # ℹ 437 more rows
 # }
 ```

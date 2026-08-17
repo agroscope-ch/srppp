@@ -63,7 +63,7 @@ At the bottom of the table hierarchy, there is the list of substances.
 For each substance, there is a primary key `pk`, a chemical name based
 on [IUPAC nomenclature](https://iupac.org/what-we-do/nomenclature/), and
 substance names in three of the four official languages of Switzerland.
-The first four entries out of 448 are shown below.
+The first four entries out of 447 are shown below.
 
 ``` r
 
@@ -133,8 +133,8 @@ example_register$ingredients |>
 
 | type                |   n |
 |:--------------------|----:|
-| ACTIVE_INGREDIENT   | 327 |
-| ADDITIVE_TO_DECLARE | 115 |
+| ACTIVE_INGREDIENT   | 325 |
+| ADDITIVE_TO_DECLARE | 116 |
 | SAFENER             |   4 |
 | SYNERGIST           |   2 |
 
@@ -226,8 +226,8 @@ example_register$products |>
 | 4556 | 4479-2 | Anti-Rumex Red | 2027-06-03 00:00:00.0000000 | 2026-06-03 00:00:00.0000000 | TRUE | 17486103-B818-49E6-9667-AF90F13F5CC0 |
 | 4557 | 4480 | Phenmédiphame | 2027-06-03 00:00:00.0000000 | 2026-06-03 00:00:00.0000000 | FALSE | 9B3D97EE-DBF8-4DBD-AE4E-E23726022A85 |
 
-At the build time of this vignette, there were 1712 product
-registrations for 1099 P-Numbers in the Swiss Register of Plant
+At the build time of this vignette, there were 1710 product
+registrations for 1097 P-Numbers in the Swiss Register of Plant
 Protection Products (SRPPP) as published on the website of the Federal
 Food Safety and Veterinary Office.
 
@@ -281,15 +281,15 @@ example_register$uses |>
 | 6521 | 7 |  |  | 1.0 |  | l/ha |  |  | Feldbau |
 | 6521 | 8 |  |  | 1.0 |  | l/ha | 3 | Week(s) | Feldbau |
 | 6521 | 9 |  |  | 1.0 |  | l/ha |  |  | Feldbau |
-| 7511 | 1 |  |  | 3.0 |  | kg/ha | 1 | Days | Gemüsebau |
-| 7511 | 2 | 0.3 |  |  |  |  | 3 | Days | Beerenbau |
-| 7511 | 3 |  |  | 3.0 |  | kg/ha | 1 | Days | Gemüsebau |
-| 7511 | 4 |  |  | 3.0 |  | kg/ha | 1 | Days | Gemüsebau |
-| 7511 | 5 |  |  | 5.0 |  | kg/ha | 3 | Days | Gemüsebau |
-| 7511 | 6 | 0.2 |  | 3.2 |  | kg/ha |  |  | Weinbau |
-| 7511 | 7 | 0.2 |  | 3.2 |  | kg/ha | 2 | Week(s) | Obstbau |
-| 7511 | 8 | 0.2 |  | 3.2 |  | kg/ha | 3 | Week(s) | Obstbau |
-| 7511 | 9 | 0.3 |  | 3.0 |  | kg/ha | 3 | Days | Beerenbau |
+| 7511 | 1 | 0.3 |  |  |  | kg/ha | 3 | Days | Gemüsebau |
+| 7511 | 2 |  |  | 5.0 |  | kg/ha |  |  | Obstbau |
+| 7511 | 3 | 0.3 |  | 4.8 |  | kg/ha |  |  | Obstbau |
+| 7511 | 4 | 0.3 |  | 4.8 |  | kg/ha | 8 | Days | Obstbau |
+| 7511 | 5 |  |  | 3.0 |  | kg/ha | 1 | Days | Gemüsebau |
+| 7511 | 6 | 0.3 |  |  |  |  | 3 | Days | Beerenbau |
+| 7511 | 7 |  |  | 3.0 |  | kg/ha | 1 | Days | Gemüsebau |
+| 7511 | 8 |  |  | 3.0 |  | kg/ha | 1 | Days | Gemüsebau |
+| 7511 | 9 |  |  | 5.0 |  | kg/ha | 3 | Days | Gemüsebau |
 
 The columns `min_dosage` and `max_dosage` contain either a range of
 recommended product concentrations in the spraying solution in percent,
