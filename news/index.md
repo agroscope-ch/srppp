@@ -1,13 +1,10 @@
 # Changelog
 
-## version 2.0.7
+## version 2.0.6
 
 - Correct substance type for 2-hydroxy-4-n-octyloxybenzophenone
 - Update pattern for srppp download URL, as the URL on the web page has
   changed
-
-## version 2.0.6
-
 - In `resolve_cultures`, return “allg.” in the column `culture_de`
   designated for the input cultues instead of the cultures it resolves
   to.
