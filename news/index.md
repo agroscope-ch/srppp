@@ -2,6 +2,11 @@
 
 ## version 2.0.6
 
+- Format `exhaustionDeadline` and `soldoutDeadline` for products and
+  parallel imports as date. This was motivated by the fact that in the
+  new XML format, dates are given as YYYY-MM-DD 00:00:00.0000000, so
+  while removing those redundant zeros, it seemed reasonable to also
+  apply the date format.
 - Correct substance type for 2-hydroxy-4-n-octyloxybenzophenone
 - Update pattern for srppp download URL, as the URL on the web page has
   changed

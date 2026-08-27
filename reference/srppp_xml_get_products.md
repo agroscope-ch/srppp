@@ -50,17 +50,17 @@ applicable, or NULL.
 try(srppp_xml_get_products())
 #> # A tibble: 1,710 × 8
 #>     pNbr wNbr  name          exhaustionDeadline soldoutDeadline isSalePermission
-#>    <int> <chr> <chr>         <chr>              <chr>           <lgl>           
-#>  1    38 18    Thiovit Jet   ""                 ""              FALSE           
-#>  2    38 18-1  Sufralo       ""                 ""              TRUE            
-#>  3    38 18-2  Capito Bio-S… ""                 ""              TRUE            
-#>  4    38 18-3  Sanoplant Sc… ""                 ""              TRUE            
-#>  5    38 18-4  Biorga Contr… ""                 ""              TRUE            
-#>  6    38 18-5  Gesal Schrot… ""                 ""              TRUE            
-#>  7  1182 923   Divopan       ""                 ""              FALSE           
-#>  8  1192 934   Trifolin      ""                 ""              FALSE           
-#>  9  1263 986   Elosal Supra  ""                 ""              FALSE           
-#> 10  1865 1454  Misto 12      ""                 ""              FALSE           
+#>    <int> <chr> <chr>         <date>             <date>          <lgl>           
+#>  1    38 18    Thiovit Jet   NA                 NA              FALSE           
+#>  2    38 18-1  Sufralo       NA                 NA              TRUE            
+#>  3    38 18-2  Capito Bio-S… NA                 NA              TRUE            
+#>  4    38 18-3  Sanoplant Sc… NA                 NA              TRUE            
+#>  5    38 18-4  Biorga Contr… NA                 NA              TRUE            
+#>  6    38 18-5  Gesal Schrot… NA                 NA              TRUE            
+#>  7  1182 923   Divopan       NA                 NA              FALSE           
+#>  8  1192 934   Trifolin      NA                 NA              FALSE           
+#>  9  1263 986   Elosal Supra  NA                 NA              FALSE           
+#> 10  1865 1454  Misto 12      NA                 NA              FALSE           
 #> # ℹ 1,700 more rows
 #> # ℹ 2 more variables: terminationReason <chr>, permission_holder <chr>
 # }
