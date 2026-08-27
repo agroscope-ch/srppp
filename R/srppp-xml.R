@@ -130,8 +130,8 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
     mutate(
       wGrp = gsub("-.*$", "", wNbr),
       isSalePermission = if_else(isSalePermission == "true", TRUE, FALSE),
-      exhaustionDeadline = as.Date(substr(exhaustionDeadline, 1, 10)),
-      soldoutDeadline = as.Date(substr(soldoutDeadline, 1, 10))
+      exhaustionDeadline = substr(exhaustionDeadline, 1, 10),
+      soldoutDeadline = substr(soldoutDeadline, 1, 10)
     ) |>
     left_join(wGrp_pNbrs, by = "wGrp") |>
     select(wNbr, name, pNbr, exhaustionDeadline, soldoutDeadline,
@@ -228,7 +228,7 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
     for (dup_wNbr in dup_wNbrs) {
       if (dup_wNbr %in% known_duplicates_expired_and_renewed) {
 
-        i_expired <- which(products$wNbr == dup_wNbr & !is.na(products$exhaustionDeadline))
+        i_expired <- which(products$wNbr == dup_wNbr & products$exhaustionDeadline != "")
         if (verbose) {
           cli::cli_alert_warning(
             paste("Removing entry with expiration date for duplicated W-Number:", dup_wNbr))
@@ -288,8 +288,8 @@ srppp_xml_get_parallel_imports <- function(srppp_xml = srppp_xml_get())
     rename(pNbr = packageInsert) |>
     mutate(
       pNbr = as.integer(pNbr),
-      exhaustionDeadline = as.Date(substr(exhaustionDeadline, 1, 10)),
-      soldoutDeadline = as.Date(substr(soldoutDeadline, 1, 10))
+      exhaustionDeadline = substr(exhaustionDeadline, 1, 10),
+      soldoutDeadline = substr(soldoutDeadline, 1, 10)
     ) |>
     arrange(wNbr)
 
