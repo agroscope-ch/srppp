@@ -70,8 +70,7 @@ an identification number for the authorization holder are shown in light blue.
 #| fig.alt: >
 #|   Diagram showing the relation between the different tables
 #|   (foreign key relationships)
-library(DiagrammeR)
-dm_draw(example_register)
+dm::dm_draw(example_register)
 ```
 
 # Substances

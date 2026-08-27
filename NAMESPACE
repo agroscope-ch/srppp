@@ -21,55 +21,69 @@ export(srppp_xml_get_uses)
 export(srppp_xml_url)
 export(units_convertible_to_g_per_ha)
 importFrom(data.tree,Node)
-importFrom(dm,dm)
-importFrom(dm,dm_add_fk)
-importFrom(dm,dm_add_pk)
-importFrom(dm,dm_filter)
-importFrom(dm,dm_set_colors)
-importFrom(dplyr,across)
-importFrom(dplyr,all_of)
-importFrom(dplyr,any_of)
-importFrom(dplyr,arrange)
-importFrom(dplyr,bind_cols)
-importFrom(dplyr,case_when)
-importFrom(dplyr,distinct)
-importFrom(dplyr,ends_with)
-importFrom(dplyr,filter)
-importFrom(dplyr,group_by)
-importFrom(dplyr,if_else)
-importFrom(dplyr,join_by)
-importFrom(dplyr,last)
-importFrom(dplyr,left_join)
-importFrom(dplyr,mutate)
-importFrom(dplyr,mutate_at)
-importFrom(dplyr,n)
-importFrom(dplyr,na_if)
-importFrom(dplyr,pick)
-importFrom(dplyr,rename)
-importFrom(dplyr,rename_with)
-importFrom(dplyr,select)
-importFrom(dplyr,starts_with)
-importFrom(dplyr,summarise)
-importFrom(dplyr,ungroup)
-importFrom(rlang,":=")
-importFrom(rlang,sym)
-importFrom(rvest,html_attr)
-importFrom(rvest,html_elements)
-importFrom(rvest,read_html)
-importFrom(stringr,str_detect)
-importFrom(stringr,str_replace)
-importFrom(tibble,as_tibble)
-importFrom(tibble,tibble)
+importFrom(dm,
+  dm,
+  dm_add_fk,
+  dm_add_pk,
+  dm_filter,
+  dm_set_colors
+)
+importFrom(dplyr,
+  across,
+  all_of,
+  any_of,
+  arrange,
+  bind_cols,
+  case_when,
+  distinct,
+  ends_with,
+  filter,
+  group_by,
+  if_else,
+  join_by,
+  last,
+  left_join,
+  mutate,
+  mutate_at,
+  n,
+  na_if,
+  pick,
+  rename,
+  rename_with,
+  select,
+  starts_with,
+  summarise,
+  ungroup
+)
+importFrom(rlang,
+  ":=",
+  sym
+)
+importFrom(rvest,
+  html_attr,
+  html_elements,
+  read_html
+)
+importFrom(stringr,
+  str_detect,
+  str_replace
+)
+importFrom(tibble,
+  as_tibble,
+  tibble
+)
 importFrom(utils,download.file)
-importFrom(xml2,"xml_attr<-")
-importFrom(xml2,read_xml)
-importFrom(xml2,xml_attr)
-importFrom(xml2,xml_attrs)
-importFrom(xml2,xml_child)
-importFrom(xml2,xml_children)
-importFrom(xml2,xml_find_all)
-importFrom(xml2,xml_find_first)
-importFrom(xml2,xml_length)
-importFrom(xml2,xml_parent)
-importFrom(xml2,xml_remove)
-importFrom(xml2,xml_text)
+importFrom(xml2,
+  "xml_attr<-",
+  read_xml,
+  xml_attr,
+  xml_attrs,
+  xml_child,
+  xml_children,
+  xml_find_all,
+  xml_find_first,
+  xml_length,
+  xml_parent,
+  xml_remove,
+  xml_text
+)

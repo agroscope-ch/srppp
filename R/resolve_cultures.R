@@ -1,3 +1,4 @@
+utils::globalVariables(".data") # Avoid R CMD check note about `.data` from rlang
 #' Resolve culture specifications to their lowest hierarchical level
 #'
 #' Resolves culture levels in a dataset to their lowest hierarchical level (leaf
