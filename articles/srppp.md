@@ -210,7 +210,7 @@ for selling the product (`soldoutDeadline`) and for use of the product
 ``` r
 
 example_register$products |>
-  filter(!is.na(exhaustionDeadline)) |> 
+  filter(exhaustionDeadline != "") |> 
   select(-terminationReason) |> 
   head() |> 
   kable()
