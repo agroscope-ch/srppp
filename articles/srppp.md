@@ -53,8 +53,7 @@ authorization holder are shown in light blue.
 
 ``` r
 
-library(DiagrammeR)
-dm_draw(example_register)
+dm::dm_draw(example_register)
 ```
 
 ## Substances
