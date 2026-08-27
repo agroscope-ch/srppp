@@ -210,14 +210,20 @@ for selling the product (`soldoutDeadline`) and for use of the product
 ``` r
 
 example_register$products |>
-  filter(exhaustionDeadline != "") |> 
+  filter(!is.na(exhaustionDeadline)) |> 
   select(-terminationReason) |> 
   head() |> 
   kable()
 ```
 
 | pNbr | wNbr | name | exhaustionDeadline | soldoutDeadline | isSalePermission | permission_holder |
-|----|----|----|----|----|----|----|
+|---:|:---|:---|:---|:---|:---|:---|
+| 4163 | 4309 | Volpan | 2026-10-31 | 2025-10-31 | FALSE | 018C0DAB-6CB8-4F46-B684-4F59117A4F6A |
+| 4163 | 4309-1 | MIOPLANT Windenvertilger | 2026-10-31 | 2025-10-31 | TRUE | 018C0DAB-6CB8-4F46-B684-4F59117A4F6A |
+| 4556 | 4479 | Banol M | 2027-06-03 | 2026-06-03 | FALSE | 9B3D97EE-DBF8-4DBD-AE4E-E23726022A85 |
+| 4556 | 4479-1 | Rumex contra | 2027-06-03 | 2026-06-03 | TRUE | DCE9B84C-BFF6-40E0-8DED-B0FDAF578D82 |
+| 4556 | 4479-2 | Anti-Rumex Red | 2027-06-03 | 2026-06-03 | TRUE | 17486103-B818-49E6-9667-AF90F13F5CC0 |
+| 4557 | 4480 | Phenmédiphame | 2027-06-03 | 2026-06-03 | FALSE | 9B3D97EE-DBF8-4DBD-AE4E-E23726022A85 |
 
 At the build time of this vignette, there were 1710 product
 registrations for 1097 P-Numbers in the Swiss Register of Plant
