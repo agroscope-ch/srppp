@@ -23,7 +23,7 @@
 
 - Avoid a duplication of uses that was introduced with version 2.0.0 and that surfaced when reading in the 2015 register for srppphist.
 
-## version 2.0.3
+## version 2.0.3 (2026-02-19)
 
 - Do not download current register from the URL on CRAN, in order to reduce testing time and reduce the probability of errors due to download problems
 - Avoid length one LHS argument for `case_when` in `R/use-rates.R`, as this is deprecated in dplyr 1.2.0
