@@ -227,11 +227,8 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
     i_products_to_remove <- NULL
     for (dup_wNbr in dup_wNbrs) {
       if (dup_wNbr %in% known_duplicates_expired_and_renewed) {
-        which(products$wNbr == dup_wNbr)
-        length(products$exhaustionDeadline != "")
-        length(products$wNbr == dup_wNbr)
 
-        i_expired <- which(products$wNbr == dup_wNbr & products$exhaustionDeadline != "")
+        i_expired <- which(products$wNbr == dup_wNbr & !is.na(products$exhaustionDeadline))
         if (verbose) {
           cli::cli_alert_warning(
             paste("Removing entry with expiration date for duplicated W-Number:", dup_wNbr))
