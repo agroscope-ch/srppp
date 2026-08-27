@@ -127,8 +127,12 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
     matrix(ncol = 7, byrow = TRUE,
       dimnames = list(NULL, product_attribute_names)) |>
     as_tibble() |>
-    mutate(wGrp = gsub("-.*$", "", wNbr)) |>
-    mutate(isSalePermission = if_else(isSalePermission == "true", TRUE, FALSE)) |>
+    mutate(
+      wGrp = gsub("-.*$", "", wNbr),
+      isSalePermission = if_else(isSalePermission == "true", TRUE, FALSE),
+      exhaustionDeadline = as.Date(substr(exhaustionDeadline, 1, 10)),
+      soldoutDeadline = as.Date(substr(soldoutDeadline, 1, 10))
+    ) |>
     left_join(wGrp_pNbrs, by = "wGrp") |>
     select(wNbr, name, pNbr, exhaustionDeadline, soldoutDeadline,
       isSalePermission, terminationReason)
@@ -285,7 +289,11 @@ srppp_xml_get_parallel_imports <- function(srppp_xml = srppp_xml_get())
       dimnames = list(NULL, pi_attribute_names)) |>
     as_tibble() |>
     rename(pNbr = packageInsert) |>
-    mutate(pNbr = as.integer(pNbr)) |>
+    mutate(
+      pNbr = as.integer(pNbr),
+      exhaustionDeadline = as.Date(substr(exhaustionDeadline, 1, 10)),
+      soldoutDeadline = as.Date(substr(soldoutDeadline, 1, 10))
+    ) |>
     arrange(wNbr)
 
   ph_nodes <- xml_find_all(srppp_xml,
