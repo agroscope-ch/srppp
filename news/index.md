@@ -2,6 +2,10 @@
 
 ## version 2.0.6
 
+- Fix the removal of ingredient entries for the same substance in the
+  same product (issue
+  [\#6](https://github.com/agroscope-ch/srppp/issues/6)) to not remove
+  the specified entries if they are not duplicated.
 - Only import from the `dm` package instead of depending on it to reduce
   startup noise. Functions like `dm_draw` are therefore not
   automatically available any more when loading srppp.
