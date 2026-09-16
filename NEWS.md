@@ -1,5 +1,8 @@
 ## version 2.0.6
 
+- Fix the removal of ingredient entries for the same substance in the same
+  product (issue #6) to not remove the specified entries if they are not
+  duplicated.
 - Remove redundant zeros from `exhaustionDeadline` and `soldoutDeadline` for
   products and parallel imports. This was done because in the new XML format,
   dates are given as YYYY-MM-DD 00:00:00.0000000.

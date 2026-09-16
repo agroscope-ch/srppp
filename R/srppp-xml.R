@@ -803,6 +803,9 @@ srppp_dm <- function(from = srppp_xml_url(), remove_duplicates = TRUE, verbose =
   ingredients_with_dups <- ingredients_no_pNbr |>
     left_join(products[c("wNbr", "pNbr")], by = "wNbr") |>
     select(pNbr, pk, type, percent, g_per_L, ingredient_de, ingredient_fr, ingredient_it) |>
+    group_by(pNbr, pk) |> 
+    mutate(n = n()) |>
+    ungroup() |> 
     arrange(pNbr, pk, type)
 
   # Several duplicate entries for ingredients are removed below (see github issue #6)
@@ -818,10 +821,11 @@ srppp_dm <- function(from = srppp_xml_url(), remove_duplicates = TRUE, verbose =
   # - Completely equal lines for P-Numbers 8122 and 3562
 
   ingredients <- ingredients_with_dups |>
-    filter(!(pNbr == 4711 & pk == 276 & percent == 48)) |>
-    filter(!(pNbr == 8755 & pk == 950 & ingredient_de == "70.9 g / Dose")) |>
+    filter(!(pNbr == 4711 & pk == 276 & percent == 48 & n == 2)) |>
+    filter(!(pNbr == 8755 & pk == 950 & ingredient_de == "70.9 g / Dose" & n == 2)) |>
     unique() # for P-Numbers 8122 and 3562
 
+  # Check for remaining duplicates
   ingredient_dups <- ingredients |>
     group_by(pNbr, pk) |>
     summarise(n = n(), .groups = "drop") |>
