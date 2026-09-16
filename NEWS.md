@@ -3,6 +3,9 @@
 - Fix the removal of ingredient entries for the same substance in the same
   product (issue #6) to not remove the specified entries if they are not
   duplicated.
+- Only import from the `dm` package instead of depending on it to reduce
+  startup noise. Functions like `dm_draw` are therefore not automatically
+  available any more when loading srppp.
 - Remove redundant zeros from `exhaustionDeadline` and `soldoutDeadline` for
   products and parallel imports. This was done because in the new XML format,
   dates are given as YYYY-MM-DD 00:00:00.0000000.
