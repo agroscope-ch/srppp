@@ -39,7 +39,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="2.0.6" id="version-206">version 2.0.6<a class="anchor" aria-label="anchor" href="#version-206"></a></h2>
-<ul><li>Fix the removal of ingredient entries for the same substance in the same product (issue <a href="https://github.com/agroscope-ch/srppp/issues/6" class="external-link">#6</a>) to not remove the specified entries if they are not duplicated.</li>
+<ul><li>Trim trailing (and leading, if any) whitespace from product names</li>
+<li>Fix the removal of ingredient entries for the same substance in the same product (issue <a href="https://github.com/agroscope-ch/srppp/issues/6" class="external-link">#6</a>) to not remove the specified entries if they are not duplicated.</li>
 <li>Only import from the <code>dm</code> package instead of depending on it to reduce startup noise. Functions like <code>dm_draw</code> are therefore not automatically available any more when loading srppp.</li>
 <li>Remove redundant zeros from <code>exhaustionDeadline</code> and <code>soldoutDeadline</code> for products and parallel imports. This was done because in the new XML format, dates are given as YYYY-MM-DD 00:00:00.0000000.</li>
 <li>Correct substance type for 2-hydroxy-4-n-octyloxybenzophenone</li>
