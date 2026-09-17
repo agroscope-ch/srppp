@@ -1,5 +1,6 @@
 ## version 2.0.6
 
+- Trim trailing (and leading, if any) whitespace from product names
 - Fix the removal of ingredient entries for the same substance in the same
   product (issue #6) to not remove the specified entries if they are not
   duplicated.

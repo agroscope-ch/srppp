@@ -116,8 +116,9 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
       dimnames = list(NULL, product_attribute_names)) |>
     as_tibble() |>
     filter(!grepl("-", wNbr)) |> # remove sales permissions
-    mutate(pNbr = as.integer(id)) |>
-    mutate(wGrp = wNbr) |> # we define a "W-Number group", i.e. the part of the W-Number before the dash
+    mutate(
+      pNbr = as.integer(id),
+      wGrp = wNbr)  |>  # we define a "W-Number group", i.e. the part of the W-Number before the dash
     select(wGrp, pNbr) |>
     distinct() # Avoid duplicating entries when using this later
 
@@ -129,6 +130,7 @@ srppp_xml_get_products <- function(srppp_xml = srppp_xml_get(), verbose = TRUE,
     as_tibble() |>
     mutate(
       wGrp = gsub("-.*$", "", wNbr),
+      name = trimws(name), # Some names have an irritating trailing whitespace, i.e. "Fruitone "
       isSalePermission = if_else(isSalePermission == "true", TRUE, FALSE),
       exhaustionDeadline = substr(exhaustionDeadline, 1, 10),
       soldoutDeadline = substr(soldoutDeadline, 1, 10)
@@ -288,6 +290,7 @@ srppp_xml_get_parallel_imports <- function(srppp_xml = srppp_xml_get())
     rename(pNbr = packageInsert) |>
     mutate(
       pNbr = as.integer(pNbr),
+      name = trimws(name),
       exhaustionDeadline = substr(exhaustionDeadline, 1, 10),
       soldoutDeadline = substr(soldoutDeadline, 1, 10)
     ) |>
