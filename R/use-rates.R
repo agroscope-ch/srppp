@@ -49,11 +49,12 @@ utils::globalVariables(c("rate_min", "rate_max", "dosage_min", "dosage_max"))
 #'   filter(
 #'     grepl("Halauxifen-methyl", substance_de) |
 #'     grepl("Kupfer.*Bordeaux", substance_de))  |> 
-#'   left_join(sr$ingredients, by = "pk") |>
-#'   left_join(sr$uses, by = "pNbr") |>
-#'   left_join(sr$products, by = "pNbr") |>
+#'   left_join(sr$ingredients, by = "pk") |> # Add P-numbers
+#'   left_join(sr$products, by = "pNbr") |>  # Add product names (may multiply P-numbers)
+#'   left_join(sr$uses, by = "pNbr",       # Add use definitions
+#'     relationship = "many-to-many") |>
 #'   left_join(sr$cultures, by = c("pNbr", "use_nr"),
-#'             relationship = "many-to-many") |>
+#'     relationship = "many-to-many") |> 
 #'   select(pNbr, name, use_nr,
 #'     min_dosage, max_dosage, min_rate, max_rate, units_de,
 #'     application_area_de, culture_de,
