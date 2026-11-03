@@ -65,7 +65,9 @@ if (inherits(sr, "try-error")) {
 }
 
 product_uses_with_ingredients <- sr$substances |>
-  filter(substance_de \%in\% c("Halauxifen-methyl", "Kupfer (als Kalkpr\u00E4parat)")) |>
+  filter(
+    grepl("Halauxifen-methyl", substance_de) |
+    grepl("Kupfer.*Bordeaux", substance_de))  |> 
   left_join(sr$ingredients, by = "pk") |>
   left_join(sr$uses, by = "pNbr") |>
   left_join(sr$products, by = "pNbr") |>
@@ -76,12 +78,16 @@ product_uses_with_ingredients <- sr$substances |>
     application_area_de, culture_de,
     substance_de, percent, g_per_L)
 
+# Note that since 2026, active ingredients containing copper
+# are not expressed in terms of copper any more, but in terms
+# of the salt, respectively in terms of the Bordeaux mixture
 application_rate_g_per_ha(product_uses_with_ingredients) |>
   filter(name \%in\% c("Cerelex", "Pixxaro EC", "Bordeaux S")) |>
   select(ai = substance_de, app_area = application_area_de,
     min_d = min_dosage,  max_d = max_dosage,
     min_r = min_rate, max_r = max_rate,
     units_de, rate = rate_g_per_ha) |>
+  distinct() |> 
   print(n = Inf)
 }
 }
