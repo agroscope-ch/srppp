@@ -87,20 +87,16 @@ product_uses_with_ingredients <- sr$substances |>
   filter(
     grepl("Halauxifen-methyl", substance_de) |
     grepl("Kupfer.*Bordeaux", substance_de))  |> 
-  left_join(sr$ingredients, by = "pk") |>
-  left_join(sr$uses, by = "pNbr") |>
-  left_join(sr$products, by = "pNbr") |>
+  left_join(sr$ingredients, by = "pk") |> # Add P-numbers
+  left_join(sr$products, by = "pNbr") |>  # Add product names (may multiply P-numbers)
+  left_join(sr$uses, by = "pNbr",       # Add use definitions
+    relationship = "many-to-many") |>
   left_join(sr$cultures, by = c("pNbr", "use_nr"),
-            relationship = "many-to-many") |>
+    relationship = "many-to-many") |> 
   select(pNbr, name, use_nr,
     min_dosage, max_dosage, min_rate, max_rate, units_de,
     application_area_de, culture_de,
     substance_de, percent, g_per_L)
-#> Warning: Detected an unexpected many-to-many relationship between `x` and `y`.
-#> ℹ Row 9 of `x` matches multiple rows in `y`.
-#> ℹ Row 1110 of `y` matches multiple rows in `x`.
-#> ℹ If a many-to-many relationship is expected, set `relationship =
-#>   "many-to-many"` to silence this warning.
 
 # Note that since 2026, active ingredients containing copper
 # are not expressed in terms of copper any more, but in terms
