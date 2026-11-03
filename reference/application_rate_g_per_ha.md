@@ -84,7 +84,9 @@ if (inherits(sr, "try-error")) {
 }
 
 product_uses_with_ingredients <- sr$substances |>
-  filter(substance_de %in% c("Halauxifen-methyl", "Kupfer (als Kalkpr\u00E4parat)")) |>
+  filter(
+    grepl("Halauxifen-methyl", substance_de) |
+    grepl("Kupfer.*Bordeaux", substance_de))  |> 
   left_join(sr$ingredients, by = "pk") |>
   left_join(sr$uses, by = "pNbr") |>
   left_join(sr$products, by = "pNbr") |>
@@ -94,32 +96,42 @@ product_uses_with_ingredients <- sr$substances |>
     min_dosage, max_dosage, min_rate, max_rate, units_de,
     application_area_de, culture_de,
     substance_de, percent, g_per_L)
+#> Warning: Detected an unexpected many-to-many relationship between `x` and `y`.
+#> ℹ Row 9 of `x` matches multiple rows in `y`.
+#> ℹ Row 1110 of `y` matches multiple rows in `x`.
+#> ℹ If a many-to-many relationship is expected, set `relationship =
+#>   "many-to-many"` to silence this warning.
 
+# Note that since 2026, active ingredients containing copper
+# are not expressed in terms of copper any more, but in terms
+# of the salt, respectively in terms of the Bordeaux mixture
 application_rate_g_per_ha(product_uses_with_ingredients) |>
   filter(name %in% c("Cerelex", "Pixxaro EC", "Bordeaux S")) |>
   select(ai = substance_de, app_area = application_area_de,
     min_d = min_dosage,  max_d = max_dosage,
     min_r = min_rate, max_r = max_rate,
     units_de, rate = rate_g_per_ha) |>
+  distinct() |> 
   print(n = Inf)
-#> # A tibble: 16 × 8
-#>    ai                app_area min_d max_d min_r max_r units_de  rate
-#>    <chr>             <chr>    <dbl> <dbl> <dbl> <dbl> <chr>    <dbl>
-#>  1 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
-#>  2 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
-#>  3 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
-#>  4 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
-#>  5 Halauxifen-methyl Feldbau     NA    NA  0.75    NA l/ha      4.69
-#>  6 Halauxifen-methyl Feldbau     NA    NA  0.75    NA l/ha      4.69
-#>  7 Halauxifen-methyl Feldbau     NA    NA  0.75    NA l/ha      4.69
-#>  8 Halauxifen-methyl Feldbau     NA    NA  0.75    NA l/ha      4.69
-#>  9 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
-#> 10 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
-#> 11 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
-#> 12 Halauxifen-methyl Feldbau     NA    NA  1       NA l/ha      6.25
-#> 13 Halauxifen-methyl Feldbau     NA    NA  0.5     NA l/ha      6.25
-#> 14 Halauxifen-methyl Feldbau     NA    NA  0.5     NA l/ha      6.25
-#> 15 Halauxifen-methyl Feldbau     NA    NA  0.5     NA l/ha      6.25
-#> 16 Halauxifen-methyl Feldbau     NA    NA  0.5     NA l/ha      6.25
+#> # A tibble: 17 × 8
+#>    ai                          app_area  min_d max_d min_r max_r units_de   rate
+#>    <chr>                       <chr>     <dbl> <dbl> <dbl> <dbl> <chr>     <dbl>
+#>  1 Halauxifen-methyl           Feldbau  NA     NA     1     NA   l/ha     6.25e0
+#>  2 Halauxifen-methyl           Feldbau  NA     NA     0.75  NA   l/ha     4.69e0
+#>  3 Halauxifen-methyl           Feldbau  NA     NA     0.5   NA   l/ha     6.25e0
+#>  4 Kupfer (als Kalkpräparat, … Weinbau   0.25  NA     4     NA   kg/ha    2.91e3
+#>  5 Kupfer (als Kalkpräparat, … Obstbau   0.125  0.25  2      4   kg/ha    2.91e3
+#>  6 Kupfer (als Kalkpräparat, … Obstbau   0.5    0.75  8     12   kg/ha    8.72e3
+#>  7 Kupfer (als Kalkpräparat, … Gemüseb… NA     NA    13     18   kg/ha    1.31e4
+#>  8 Kupfer (als Kalkpräparat, … Weinbau   0.75  NA    12     NA   kg/ha    8.72e3
+#>  9 Kupfer (als Kalkpräparat, … Beerenb…  0.25   0.75  2.5    7.5 kg/ha    5.45e3
+#> 10 Kupfer (als Kalkpräparat, … Feldbau  NA     NA     4     NA   kg/ha    2.91e3
+#> 11 Kupfer (als Kalkpräparat, … Gemüseb…  1.3    1.8  NA     NA   NA       1.31e4
+#> 12 Kupfer (als Kalkpräparat, … Gemüseb…  0.5   NA     5     NA   kg/ha    3.63e3
+#> 13 Kupfer (als Kalkpräparat, … Gemüseb… NA     NA    13     NA   kg/ha    9.45e3
+#> 14 Kupfer (als Kalkpräparat, … Obstbau   0.25   0.5   4      8   kg/ha    5.82e3
+#> 15 Kupfer (als Kalkpräparat, … Gemüseb… NA     NA     5     NA   kg/ha    3.63e3
+#> 16 Kupfer (als Kalkpräparat, … Beerenb…  0.5    1.3   5     13   kg/ha    9.45e3
+#> 17 Kupfer (als Kalkpräparat, … Feldbau  NA     NA    17.5   NA   kg/ha    1.27e4
 # }
 ```
