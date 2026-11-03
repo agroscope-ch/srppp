@@ -201,23 +201,23 @@ print(boxer_uses)
 #> # A tibble: 17 × 10
 #>     pNbr use_nr min_dosage max_dosage min_rate max_rate units_de waiting_period
 #>    <int>  <int>      <dbl>      <dbl>    <dbl>    <dbl> <chr>             <int>
-#>  1  7105      1         NA         NA      2.5      5   l/ha                 NA
-#>  2  7105      2         NA         NA      5       NA   l/ha                 90
-#>  3  7105      3         NA         NA      3       NA   l/ha                 80
-#>  4  7105      4         NA         NA      5       NA   l/ha                 60
-#>  5  7105      5         NA         NA      3        5   l/ha                 NA
-#>  6  7105      6         NA         NA      5       NA   l/ha                  0
-#>  7  7105      7         NA         NA      3       NA   l/ha                 80
-#>  8  7105      8         NA         NA      4       NA   l/ha                 80
-#>  9  7105      9         NA         NA      4       NA   l/ha                 80
-#> 10  7105     10         NA         NA      3        4.5 l/ha                  0
-#> 11  7105     11         NA         NA      2.5      3   l/ha                 75
-#> 12  7105     12         NA         NA      5       NA   l/ha                  0
-#> 13  7105     13         NA         NA      2.5      5   l/ha                 NA
+#>  1  7105      1         NA         NA      5       NA   l/ha                 90
+#>  2  7105      2         NA         NA      3        5   l/ha                 NA
+#>  3  7105      3         NA         NA      5       NA   l/ha                 60
+#>  4  7105      4         NA         NA      4       NA   l/ha                 80
+#>  5  7105      5         NA         NA      4       NA   l/ha                 NA
+#>  6  7105      6         NA         NA      2.5      5   l/ha                 NA
+#>  7  7105      7         NA         NA      2.5      5   l/ha                 NA
+#>  8  7105      8         NA         NA      3       NA   l/ha                 80
+#>  9  7105      9         NA         NA      3        4.5 l/ha                 NA
+#> 10  7105     10         NA         NA      4       NA   l/ha                 80
+#> 11  7105     11         NA         NA      4       NA   l/ha                 80
+#> 12  7105     12         NA         NA      3       NA   l/ha                 80
+#> 13  7105     13         NA         NA      5       NA   l/ha                 NA
 #> 14  7105     14         NA         NA      5       NA   l/ha                100
-#> 15  7105     15         NA         NA      4       NA   l/ha                 80
+#> 15  7105     15         NA         NA      2.5      3   l/ha                 75
 #> 16  7105     16         NA         NA      4       NA   l/ha                 60
-#> 17  7105     17         NA         NA      4       NA   l/ha                  0
+#> 17  7105     17         NA         NA      5       NA   l/ha                 NA
 #> # ℹ 2 more variables: time_units_de <chr>, application_area_de <chr>
 
 # Show crop for use number 1
@@ -225,12 +225,10 @@ boxer_uses |>
   filter(use_nr == 1) |>
   left_join(sr$cultures, join_by(pNbr, use_nr)) |>
   select(use_nr, culture_de)
-#> # A tibble: 3 × 2
+#> # A tibble: 1 × 2
 #>   use_nr culture_de
 #>    <int> <chr>     
-#> 1      1 Roggen    
-#> 2      1 Weizen    
-#> 3      1 Gerste    
+#> 1      1 Karotten  
 
 # Show target pests for use number 1
 boxer_uses |>
@@ -252,14 +250,14 @@ boxer_uses |>
   print()
 #> 
 #> 
-#> | use_nr| sw_runoff_points|obligation_de                                                                                                                                                                                                                                                                                                                                                                               |
-#> |------:|----------------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-#> |      1|               NA|Niedrige Aufwandmenge nur in Tankmischung gemäss den Angaben der Bewilligungsinhaberin.                                                                                                                                                                                                                                                                                                     |
-#> |      1|               NA|Nachfolgearbeiten in behandelten Kulturen: bis 48 Stunden nach Ausbringung des Mittels Schutzhandschuhe + Schutzanzug tragen.                                                                                                                                                                                                                                                               |
-#> |      1|               NA|Ansetzen der Spritzbrühe: Schutzhandschuhe tragen. Ausbringen der Spritzbrühe: Schutzhandschuhe + Schutzanzug + Visier + Kopfbedeckung tragen. Technische Schutzvorrichtungen während des Ausbringens (z.B. geschlossene Traktorkabine) können die vorgeschriebene persönliche Schutzausrüstung ersetzen, wenn gewährleistet ist, dass sie einen vergleichbaren oder höheren Schutz bieten. |
-#> |      1|                1|SPe 3: Zum Schutz von Gewässerorganismen muss das Abschwemmungsrisiko gemäss den Weisungen der Zulassungsstelle um 1 Punkt reduziert werden.                                                                                                                                                                                                                                                |
-#> |      1|               NA|Maximal 1 Behandlung pro Kultur.                                                                                                                                                                                                                                                                                                                                                            |
-#> |      1|               NA|Behandlung von im Herbst gesäten Kulturen.                                                                                                                                                                                                                                                                                                                                                  |
+#> | use_nr| sw_runoff_points|obligation_de                                                                                                                                                                                                                                                                                                                                                                                                                        |
+#> |------:|----------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+#> |      1|               NA|Nachbau anderer Kulturen: 16 Wochen Wartefrist.                                                                                                                                                                                                                                                                                                                                                                                      |
+#> |      1|               NA|Nachfolgearbeiten (inkl. Erntearbeiten) nach Anwendung im Nachauflauf: Schutzhandschuhe + Arbeitskleidung (mindestens langärmliges Hemd + lange Hose) tragen.                                                                                                                                                                                                                                                                        |
+#> |      1|               NA|Ansetzen der Spritzbrühe: Schutzhandschuhe + Schutzanzug + Schutzbrille oder Visier tragen. Ausbringen der Spritzbrühe: Schutzhandschuhe + Schutzanzug + Visier + Kopfbedeckung tragen. Technische Schutzvorrichtungen während des Ausbringens (z.B. geschlossene Traktorkabine) können die vorgeschriebene persönliche Schutzausrüstung ersetzen, wenn gewährleistet ist, dass sie einen vergleichbaren oder höheren Schutz bieten. |
+#> |      1|               NA|Phytotoxschäden bei empfindlichen Arten oder Sorten möglich; vor allgemeiner Anwendung Versuchspritzung durchführen.                                                                                                                                                                                                                                                                                                                 |
+#> |      1|                1|SPe 3: Zum Schutz von Gewässerorganismen muss das Abschwemmungsrisiko gemäss den Weisungen der Zulassungsstelle um 1 Punkt reduziert werden.                                                                                                                                                                                                                                                                                         |
+#> |      1|               NA|Maximal 1 Behandlung pro Kultur.                                                                                                                                                                                                                                                                                                                                                                                                     |
 
 # Show application comments for use number 1
 boxer_uses |>
@@ -267,9 +265,9 @@ boxer_uses |>
   left_join(sr$application_comments, join_by(pNbr, use_nr)) |>
   select(use_nr, application_comment_de)
 #> # A tibble: 1 × 2
-#>   use_nr application_comment_de                           
-#>    <int> <chr>                                            
-#> 1      1 Herbst, Frühjahr; Vorauflauf, früher Nachauflauf.
+#>   use_nr application_comment_de     
+#>    <int> <chr>                      
+#> 1      1 Nachauflauf, Stadium 12-13.
 
 # Illustrate 'obligations' indicating varying effects
 sr$obligations |>

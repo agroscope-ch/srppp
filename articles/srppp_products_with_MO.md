@@ -38,11 +38,11 @@ srppp$categories |>
 | category_de                             |   n |
 |:----------------------------------------|----:|
 | Akarizid                                | 119 |
-| Bakterizid                              |  25 |
+| Bakterizid                              |  26 |
 | Desinfektionsmittel                     |   3 |
-| Fungizid                                | 260 |
-| Herbizid                                | 311 |
-| Insektizid                              | 153 |
+| Fungizid                                | 263 |
+| Herbizid                                | 316 |
+| Insektizid                              | 154 |
 | Lebende Organismen (Bakterien)          |   2 |
 | Lebende Organismen (Insekten)           | 115 |
 | Lebende Organismen (Insektenviren)      |  10 |
@@ -53,16 +53,16 @@ srppp$categories |>
 | Mittel zum Schutz von Erntegütern       |   5 |
 | Molluskizid                             |  31 |
 | Nematizid                               |   2 |
-| Pheromon                                |  31 |
+| Pheromon                                |  30 |
 | Phytoregulator                          |  72 |
-| Rodentizid                              |   7 |
+| Rodentizid                              |   9 |
 | Saatbeizmittel                          |  27 |
 | Stimulator der natürlichen Abwehrkräfte |   4 |
 | Virizid                                 |   2 |
-| Vorratsschutzmittel                     |  18 |
+| Vorratsschutzmittel                     |  19 |
 | Wildabhaltemittel                       |   5 |
 | Wundverschlussmittel                    |   1 |
-| Zusatzstoffe                            |  36 |
+| Zusatzstoffe                            |  39 |
 
 The resulting product categories containing microorganisms were defined
 as follows:
@@ -152,6 +152,7 @@ srppp$products |>
 | Aluminiumphosphid |
 | Anastatus bifasciatus |
 | Azadirachtin A |
+| Bacillus thuringiensis subsp. Kurstaki Stamm EG2348 |
 | Bacillus thuringiensis var. aizawai |
 | Bacillus thuringiensis var. israeliensis |
 | Bacillus thuringiensis var. kurstaki |
@@ -184,6 +185,7 @@ srppp$products |>
 | Kalkstein |
 | Kaolin |
 | Kieselgur (Diatomeenerde) |
+| Kohlendioxid |
 | Lambda-Cyhalothrin |
 | Lösungsmittelnaphtha (Erdöl), leichte aromatische |
 | Maltodextrin |
@@ -411,6 +413,7 @@ kable(microorganism_ingredients)
 | FE5D35CF-4666-45ED-8DB0-2A706C16A915 | Bacillus amyloliquefaciens |
 | DE9DB824-9848-4F67-863A-57A1CC8093E4 | Bacillus amyloliquefaciens Stamm MBI 600 |
 | 38DDF6FB-43AF-4714-A033-253772A2C0F4 | Bacillus amyloliquefaciens ssp. plantarum |
+| 81B16349-4F96-475A-9727-5201CB70BD7D | Bacillus thuringiensis subsp. Kurstaki Stamm EG2348 |
 | 158EE23A-D926-49BB-9E5F-D505695F4AC8 | Bacillus thuringiensis var. aizawai |
 | 1B400D81-EDD0-44E3-BEA9-2FECE7BB084E | Bacillus thuringiensis var. israeliensis |
 | 75729E67-9FE2-4211-B86E-5681BBC46822 | Bacillus thuringiensis var. kurstaki |
@@ -493,7 +496,7 @@ kable(additional_products_containing_microorganisms)
 
 ## Summary
 
-In summary, out of 1710 products, there are 21 in the microorganism
+In summary, out of 1739 products, there are 21 in the microorganism
 categories as shown above, and 49 products in the insecticide and
 fungicide categories which contain an active substance that has a name
 that contains one of the microorganism genus names listed above.

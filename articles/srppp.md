@@ -62,7 +62,7 @@ At the bottom of the table hierarchy, there is the list of substances.
 For each substance, there is a primary key `pk`, a chemical name based
 on [IUPAC nomenclature](https://iupac.org/what-we-do/nomenclature/), and
 substance names in three of the four official languages of Switzerland.
-The first four entries out of 447 are shown below.
+The first four entries out of 452 are shown below.
 
 ``` r
 
@@ -132,9 +132,9 @@ example_register$ingredients |>
 
 | type                |   n |
 |:--------------------|----:|
-| ACTIVE_INGREDIENT   | 325 |
-| ADDITIVE_TO_DECLARE | 116 |
-| SAFENER             |   4 |
+| ACTIVE_INGREDIENT   | 326 |
+| ADDITIVE_TO_DECLARE | 119 |
+| SAFENER             |   5 |
 | SYNERGIST           |   2 |
 
 Additives to declare are additives that have an effect on classification
@@ -153,14 +153,15 @@ example_register$ingredients |>
   kable()
 ```
 
-| type      | substance_de       |   n |
-|:----------|:-------------------|----:|
-| SAFENER   | Cloquintocet-mexyl |  17 |
-| SAFENER   | Cyprosulfamid      |   2 |
-| SAFENER   | Isoxadifen-ethyl   |   3 |
-| SAFENER   | Mefenpyr-diethyl   |  10 |
-| SYNERGIST | Piperonyl butoxid  |   6 |
-| SYNERGIST | Sesamöl raffiniert |   3 |
+| type      | substance_de             |   n |
+|:----------|:-------------------------|----:|
+| SAFENER   | Cloquintocet (free acid) |   1 |
+| SAFENER   | Cloquintocet-mexyl       |  17 |
+| SAFENER   | Cyprosulfamid            |   2 |
+| SAFENER   | Isoxadifen-ethyl         |   3 |
+| SAFENER   | Mefenpyr-diethyl         |  10 |
+| SYNERGIST | Piperonyl butoxid        |   6 |
+| SYNERGIST | Sesamöl raffiniert       |   3 |
 
 Note that the first two lines in the code could also be replaced by
 
@@ -218,15 +219,15 @@ example_register$products |>
 
 | pNbr | wNbr | name | exhaustionDeadline | soldoutDeadline | isSalePermission | permission_holder |
 |---:|:---|:---|:---|:---|:---|:---|
+| 2055 | 1840 | Misto 20 | 2028-02-10 | 2027-02-10 | FALSE | CB0F961F-AEC2-4327-94E5-07ACBFFA38AF |
 | 4163 | 4309 | Volpan | 2026-10-31 | 2025-10-31 | FALSE | 018C0DAB-6CB8-4F46-B684-4F59117A4F6A |
 | 4163 | 4309-1 | MIOPLANT Windenvertilger | 2026-10-31 | 2025-10-31 | TRUE | 018C0DAB-6CB8-4F46-B684-4F59117A4F6A |
 | 4556 | 4479 | Banol M | 2027-06-03 | 2026-06-03 | FALSE | 9B3D97EE-DBF8-4DBD-AE4E-E23726022A85 |
 | 4556 | 4479-1 | Rumex contra | 2027-06-03 | 2026-06-03 | TRUE | DCE9B84C-BFF6-40E0-8DED-B0FDAF578D82 |
 | 4556 | 4479-2 | Anti-Rumex Red | 2027-06-03 | 2026-06-03 | TRUE | 17486103-B818-49E6-9667-AF90F13F5CC0 |
-| 4557 | 4480 | Phenmédiphame | 2027-06-03 | 2026-06-03 | FALSE | 9B3D97EE-DBF8-4DBD-AE4E-E23726022A85 |
 
-At the build time of this vignette, there were 1710 product
-registrations for 1097 P-Numbers in the Swiss Register of Plant
+At the build time of this vignette, there were 1739 product
+registrations for 1110 P-Numbers in the Swiss Register of Plant
 Protection Products (SRPPP) as published on the website of the Federal
 Food Safety and Veterinary Office.
 
@@ -333,21 +334,36 @@ kable(example_uses)
 
 | pNbr | name | use_nr | min_dosage | max_dosage | min_rate | max_rate | units_de | application_area_de | culture_de | substance_de | percent | g_per_L |
 |---:|:---|---:|---:|---:|---:|---:|:---|:---|:---|:---|---:|---:|
-| 7105 | Boxer | 1 |  |  | 2.5 | 5 | l/ha | Feldbau | Roggen | Prosulfocarb | 78.43 | 800 |
-| 7105 | Boxer | 1 |  |  | 2.5 | 5 | l/ha | Feldbau | Weizen | Prosulfocarb | 78.43 | 800 |
-| 7105 | Boxer | 1 |  |  | 2.5 | 5 | l/ha | Feldbau | Gerste | Prosulfocarb | 78.43 | 800 |
-| 7105 | Boxer | 2 |  |  | 5.0 |  | l/ha | Gemüsebau | Karotten | Prosulfocarb | 78.43 | 800 |
-| 7105 | Boxer | 3 |  |  | 3.0 |  | l/ha | Gemüsebau | Meerrettich | Prosulfocarb | 78.43 | 800 |
-| 7105 | Boxer | 4 |  |  | 5.0 |  | l/ha | Gemüsebau | Stangensellerie | Prosulfocarb | 78.43 | 800 |
-| 7105 | Boxer | 5 |  |  | 3.0 | 5 | l/ha | Feldbau | Kartoffeln | Prosulfocarb | 78.43 | 800 |
-| 7105 | Boxer | 12 |  |  | 5.0 |  | l/ha | Feldbau | Lupinen | Prosulfocarb | 78.43 | 800 |
-| 7105 | Boxer | 13 |  |  | 2.5 | 5 | l/ha | Feldbau | Triticale | Prosulfocarb | 78.43 | 800 |
-| 7105 | Boxer | 13 |  |  | 2.5 | 5 | l/ha | Feldbau | Korn (Dinkel) | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 1 |  |  | 5.0 |  | l/ha | Gemüsebau | Karotten | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 2 |  |  | 3.0 | 5 | l/ha | Feldbau | Kartoffeln | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 3 |  |  | 5.0 |  | l/ha | Gemüsebau | Stangensellerie | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 4 |  |  | 4.0 |  | l/ha | Gemüsebau | Lauch | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 5 |  |  | 4.0 |  | l/ha | Gemüsebau | Zwiebeln | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 12 |  |  | 3.0 |  | l/ha | Gemüsebau | Wurzelpetersilie | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 13 |  |  | 5.0 |  | l/ha | Feldbau | Lupinen | Prosulfocarb | 78.43 | 800 |
 | 7105 | Boxer | 14 |  |  | 5.0 |  | l/ha | Gemüsebau | Knollensellerie | Prosulfocarb | 78.43 | 800 |
-| 7105 | Boxer | 15 |  |  | 4.0 |  | l/ha | Gemüsebau | Schwarzwurzel | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Liebstöckel | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Ysop | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Koriander | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Oregano | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Rosmarin | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Kerbel | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Minze | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Basilikum | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Bohnenkraut | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Majoran | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Thymian | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Kümmel | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Dill | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Salbei | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Süssdolde | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Lorbeer | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Estragon | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Melisse | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 15 |  |  | 2.5 | 3 | l/ha | Gemüsebau | Schnittlauch | Prosulfocarb | 78.43 | 800 |
 | 7105 | Boxer | 16 |  |  | 4.0 |  | l/ha | Gemüsebau | Knoblauch | Prosulfocarb | 78.43 | 800 |
 | 7105 | Boxer | 16 |  |  | 4.0 |  | l/ha | Gemüsebau | Schalotten | Prosulfocarb | 78.43 | 800 |
-| 7105 | Boxer | 17 |  |  | 4.0 |  | l/ha | Gemüsebau | Zwiebeln | Prosulfocarb | 78.43 | 800 |
+| 7105 | Boxer | 17 |  |  | 5.0 |  | l/ha | Gemüsebau | Schnittlauch | Prosulfocarb | 78.43 | 800 |
 
 Then, the application rates can be calculated for these uses as
 illustrated below.
@@ -363,20 +379,20 @@ application_rate_g_per_ha(example_uses) |>
 
 | ai           | app_area  | min_rate | max_rate | units_de | rate |
 |:-------------|:----------|---------:|---------:|:---------|-----:|
-| Prosulfocarb | Feldbau   |      2.5 |        5 | l/ha     | 4000 |
-| Prosulfocarb | Feldbau   |      2.5 |        5 | l/ha     | 4000 |
-| Prosulfocarb | Feldbau   |      2.5 |        5 | l/ha     | 4000 |
-| Prosulfocarb | Gemüsebau |      5.0 |          | l/ha     | 4000 |
-| Prosulfocarb | Gemüsebau |      3.0 |          | l/ha     | 2400 |
 | Prosulfocarb | Gemüsebau |      5.0 |          | l/ha     | 4000 |
 | Prosulfocarb | Feldbau   |      3.0 |        5 | l/ha     | 4000 |
-| Prosulfocarb | Feldbau   |      5.0 |          | l/ha     | 4000 |
-| Prosulfocarb | Feldbau   |      2.5 |        5 | l/ha     | 4000 |
-| Prosulfocarb | Feldbau   |      2.5 |        5 | l/ha     | 4000 |
 | Prosulfocarb | Gemüsebau |      5.0 |          | l/ha     | 4000 |
 | Prosulfocarb | Gemüsebau |      4.0 |          | l/ha     | 3200 |
 | Prosulfocarb | Gemüsebau |      4.0 |          | l/ha     | 3200 |
-| Prosulfocarb | Gemüsebau |      4.0 |          | l/ha     | 3200 |
+| Prosulfocarb | Gemüsebau |      3.0 |          | l/ha     | 2400 |
+| Prosulfocarb | Feldbau   |      5.0 |          | l/ha     | 4000 |
+| Prosulfocarb | Gemüsebau |      5.0 |          | l/ha     | 4000 |
+| Prosulfocarb | Gemüsebau |      2.5 |        3 | l/ha     | 2400 |
+| Prosulfocarb | Gemüsebau |      2.5 |        3 | l/ha     | 2400 |
+| Prosulfocarb | Gemüsebau |      2.5 |        3 | l/ha     | 2400 |
+| Prosulfocarb | Gemüsebau |      2.5 |        3 | l/ha     | 2400 |
+| Prosulfocarb | Gemüsebau |      2.5 |        3 | l/ha     | 2400 |
+| Prosulfocarb | Gemüsebau |      2.5 |        3 | l/ha     | 2400 |
 
 ### Culture forms and cultures
 
@@ -587,10 +603,10 @@ example_register$application_comments |>
   kable()
 ```
 
-| pNbr | use_nr | application_comment_de | application_comment_fr |
-|---:|---:|:---|:---|
-| 7105 | 1 | Herbst, Frühjahr; Vorauflauf, früher Nachauflauf. | automne, printemps; pré-levée, post-levée précoce. |
-| 7105 | 2 | Nachauflauf, Stadium 12-13. | post-levée, stade 12-13. |
+| pNbr | use_nr | application_comment_de      | application_comment_fr   |
+|-----:|-------:|:----------------------------|:-------------------------|
+| 7105 |      1 | Nachauflauf, Stadium 12-13. | post-levée, stade 12-13. |
+| 7105 |      2 | Vorauflauf.                 | pré-levée.               |
 
 ### Obligations
 
@@ -609,16 +625,14 @@ example_register$obligations |>
 
 | pNbr | use_nr | code | obligation_de | sw_runoff_points |
 |---:|---:|:---|:---|---:|
-| 7105 | 1 | 9824 | Niedrige Aufwandmenge nur in Tankmischung gemäss den Angaben der Bewilligungsinhaberin. |  |
-| 7105 | 1 | 11380 | Nachfolgearbeiten in behandelten Kulturen: bis 48 Stunden nach Ausbringung des Mittels Schutzhandschuhe + Schutzanzug tragen. |  |
-| 7105 | 1 | 12827 | Ansetzen der Spritzbrühe: Schutzhandschuhe tragen. Ausbringen der Spritzbrühe: Schutzhandschuhe + Schutzanzug + Visier + Kopfbedeckung tragen. Technische Schutzvorrichtungen während des Ausbringens (z.B. geschlossene Traktorkabine) können die vorgeschriebene persönliche Schutzausrüstung ersetzen, wenn gewährleistet ist, dass sie einen vergleichbaren oder höheren Schutz bieten. |  |
+| 7105 | 1 | 8614 | Nachbau anderer Kulturen: 16 Wochen Wartefrist. |  |
+| 7105 | 1 | 15995 | Nachfolgearbeiten (inkl. Erntearbeiten) nach Anwendung im Nachauflauf: Schutzhandschuhe + Arbeitskleidung (mindestens langärmliges Hemd + lange Hose) tragen. |  |
+| 7105 | 1 | 12805 | Ansetzen der Spritzbrühe: Schutzhandschuhe + Schutzanzug + Schutzbrille oder Visier tragen. Ausbringen der Spritzbrühe: Schutzhandschuhe + Schutzanzug + Visier + Kopfbedeckung tragen. Technische Schutzvorrichtungen während des Ausbringens (z.B. geschlossene Traktorkabine) können die vorgeschriebene persönliche Schutzausrüstung ersetzen, wenn gewährleistet ist, dass sie einen vergleichbaren oder höheren Schutz bieten. |  |
+| 7105 | 1 | 9561 | Phytotoxschäden bei empfindlichen Arten oder Sorten möglich; vor allgemeiner Anwendung Versuchspritzung durchführen. |  |
 | 7105 | 1 | 14120 | SPe 3: Zum Schutz von Gewässerorganismen muss das Abschwemmungsrisiko gemäss den Weisungen der Zulassungsstelle um 1 Punkt reduziert werden. | 1 |
 | 7105 | 1 | 9457 | Maximal 1 Behandlung pro Kultur. |  |
-| 7105 | 1 | 13804 | Behandlung von im Herbst gesäten Kulturen. |  |
-| 7105 | 2 | 11380 | Nachfolgearbeiten in behandelten Kulturen: bis 48 Stunden nach Ausbringung des Mittels Schutzhandschuhe + Schutzanzug tragen. |  |
-| 7105 | 2 | 8614 | Nachbau anderer Kulturen: 16 Wochen Wartefrist. |  |
-| 7105 | 2 | 12827 | Ansetzen der Spritzbrühe: Schutzhandschuhe tragen. Ausbringen der Spritzbrühe: Schutzhandschuhe + Schutzanzug + Visier + Kopfbedeckung tragen. Technische Schutzvorrichtungen während des Ausbringens (z.B. geschlossene Traktorkabine) können die vorgeschriebene persönliche Schutzausrüstung ersetzen, wenn gewährleistet ist, dass sie einen vergleichbaren oder höheren Schutz bieten. |  |
-| 7105 | 2 | 9561 | Phytotoxschäden bei empfindlichen Arten oder Sorten möglich; vor allgemeiner Anwendung Versuchspritzung durchführen. |  |
+| 7105 | 2 | 15995 | Nachfolgearbeiten (inkl. Erntearbeiten) nach Anwendung im Nachauflauf: Schutzhandschuhe + Arbeitskleidung (mindestens langärmliges Hemd + lange Hose) tragen. |  |
+| 7105 | 2 | 12805 | Ansetzen der Spritzbrühe: Schutzhandschuhe + Schutzanzug + Schutzbrille oder Visier tragen. Ausbringen der Spritzbrühe: Schutzhandschuhe + Schutzanzug + Visier + Kopfbedeckung tragen. Technische Schutzvorrichtungen während des Ausbringens (z.B. geschlossene Traktorkabine) können die vorgeschriebene persönliche Schutzausrüstung ersetzen, wenn gewährleistet ist, dass sie einen vergleichbaren oder höheren Schutz bieten. |  |
 | 7105 | 2 | 14120 | SPe 3: Zum Schutz von Gewässerorganismen muss das Abschwemmungsrisiko gemäss den Weisungen der Zulassungsstelle um 1 Punkt reduziert werden. | 1 |
 | 7105 | 2 | 9457 | Maximal 1 Behandlung pro Kultur. |  |
 

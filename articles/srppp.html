@@ -63,7 +63,7 @@
 Ranke</h4>
             
             <h4 data-toc-skip class="date">27 August 2026 (rebuilt
-2026-09-17)</h4>
+2026-11-03)</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/agroscope-ch/srppp/blob/main/vignettes/srppp.rmd" class="external-link"><code>vignettes/srppp.rmd</code></a></small>
       <div class="d-none name"><code>srppp.rmd</code></div>
@@ -119,7 +119,7 @@ number for the authorization holder are shown in light blue.</p>
 substances. For each substance, there is a primary key <code>pk</code>,
 a chemical name based on <a href="https://iupac.org/what-we-do/nomenclature/" class="external-link">IUPAC
 nomenclature</a>, and substance names in three of the four official
-languages of Switzerland. The first four entries out of 447 are shown
+languages of Switzerland. The first four entries out of 452 are shown
 below.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span>
@@ -285,15 +285,15 @@ quite different.</p>
 <tbody>
 <tr class="odd">
 <td align="left">ACTIVE_INGREDIENT</td>
-<td align="right">325</td>
+<td align="right">326</td>
 </tr>
 <tr class="even">
 <td align="left">ADDITIVE_TO_DECLARE</td>
-<td align="right">116</td>
+<td align="right">119</td>
 </tr>
 <tr class="odd">
 <td align="left">SAFENER</td>
-<td align="right">4</td>
+<td align="right">5</td>
 </tr>
 <tr class="even">
 <td align="left">SYNERGIST</td>
@@ -322,30 +322,35 @@ synergists or safeners are listed below.</p>
 <tbody>
 <tr class="odd">
 <td align="left">SAFENER</td>
+<td align="left">Cloquintocet (free acid)</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">SAFENER</td>
 <td align="left">Cloquintocet-mexyl</td>
 <td align="right">17</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">SAFENER</td>
 <td align="left">Cyprosulfamid</td>
 <td align="right">2</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">SAFENER</td>
 <td align="left">Isoxadifen-ethyl</td>
 <td align="right">3</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">SAFENER</td>
 <td align="left">Mefenpyr-diethyl</td>
 <td align="right">10</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">SYNERGIST</td>
 <td align="left">Piperonyl butoxid</td>
 <td align="right">6</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">SYNERGIST</td>
 <td align="left">Sesamöl raffiniert</td>
 <td align="right">3</td>
@@ -485,6 +490,15 @@ respective columns.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="right">2055</td>
+<td align="left">1840</td>
+<td align="left">Misto 20</td>
+<td align="left">2028-02-10</td>
+<td align="left">2027-02-10</td>
+<td align="left">FALSE</td>
+<td align="left">CB0F961F-AEC2-4327-94E5-07ACBFFA38AF</td>
+</tr>
+<tr class="even">
 <td align="right">4163</td>
 <td align="left">4309</td>
 <td align="left">Volpan</td>
@@ -493,7 +507,7 @@ respective columns.</p>
 <td align="left">FALSE</td>
 <td align="left">018C0DAB-6CB8-4F46-B684-4F59117A4F6A</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">4163</td>
 <td align="left">4309-1</td>
 <td align="left">MIOPLANT Windenvertilger</td>
@@ -502,7 +516,7 @@ respective columns.</p>
 <td align="left">TRUE</td>
 <td align="left">018C0DAB-6CB8-4F46-B684-4F59117A4F6A</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">4556</td>
 <td align="left">4479</td>
 <td align="left">Banol M</td>
@@ -511,7 +525,7 @@ respective columns.</p>
 <td align="left">FALSE</td>
 <td align="left">9B3D97EE-DBF8-4DBD-AE4E-E23726022A85</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">4556</td>
 <td align="left">4479-1</td>
 <td align="left">Rumex contra</td>
@@ -520,7 +534,7 @@ respective columns.</p>
 <td align="left">TRUE</td>
 <td align="left">DCE9B84C-BFF6-40E0-8DED-B0FDAF578D82</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">4556</td>
 <td align="left">4479-2</td>
 <td align="left">Anti-Rumex Red</td>
@@ -529,19 +543,10 @@ respective columns.</p>
 <td align="left">TRUE</td>
 <td align="left">17486103-B818-49E6-9667-AF90F13F5CC0</td>
 </tr>
-<tr class="even">
-<td align="right">4557</td>
-<td align="left">4480</td>
-<td align="left">Phenmédiphame</td>
-<td align="left">2027-06-03</td>
-<td align="left">2026-06-03</td>
-<td align="left">FALSE</td>
-<td align="left">9B3D97EE-DBF8-4DBD-AE4E-E23726022A85</td>
-</tr>
 </tbody>
 </table>
-<p>At the build time of this vignette, there were 1710 product
-registrations for 1097 P-Numbers in the Swiss Register of Plant
+<p>At the build time of this vignette, there were 1739 product
+registrations for 1110 P-Numbers in the Swiss Register of Plant
 Protection Products (SRPPP) as published on the website of the Federal
 Food Safety and Veterinary Office.</p>
 </div>
@@ -921,51 +926,6 @@ names of the active substances can be joined as well.</p>
 <td align="right">1</td>
 <td align="right"></td>
 <td align="right"></td>
-<td align="right">2.5</td>
-<td align="right">5</td>
-<td align="left">l/ha</td>
-<td align="left">Feldbau</td>
-<td align="left">Roggen</td>
-<td align="left">Prosulfocarb</td>
-<td align="right">78.43</td>
-<td align="right">800</td>
-</tr>
-<tr class="even">
-<td align="right">7105</td>
-<td align="left">Boxer</td>
-<td align="right">1</td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right">2.5</td>
-<td align="right">5</td>
-<td align="left">l/ha</td>
-<td align="left">Feldbau</td>
-<td align="left">Weizen</td>
-<td align="left">Prosulfocarb</td>
-<td align="right">78.43</td>
-<td align="right">800</td>
-</tr>
-<tr class="odd">
-<td align="right">7105</td>
-<td align="left">Boxer</td>
-<td align="right">1</td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right">2.5</td>
-<td align="right">5</td>
-<td align="left">l/ha</td>
-<td align="left">Feldbau</td>
-<td align="left">Gerste</td>
-<td align="left">Prosulfocarb</td>
-<td align="right">78.43</td>
-<td align="right">800</td>
-</tr>
-<tr class="even">
-<td align="right">7105</td>
-<td align="left">Boxer</td>
-<td align="right">2</td>
-<td align="right"></td>
-<td align="right"></td>
 <td align="right">5.0</td>
 <td align="right"></td>
 <td align="left">l/ha</td>
@@ -975,40 +935,10 @@ names of the active substances can be joined as well.</p>
 <td align="right">78.43</td>
 <td align="right">800</td>
 </tr>
-<tr class="odd">
-<td align="right">7105</td>
-<td align="left">Boxer</td>
-<td align="right">3</td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right">3.0</td>
-<td align="right"></td>
-<td align="left">l/ha</td>
-<td align="left">Gemüsebau</td>
-<td align="left">Meerrettich</td>
-<td align="left">Prosulfocarb</td>
-<td align="right">78.43</td>
-<td align="right">800</td>
-</tr>
 <tr class="even">
 <td align="right">7105</td>
 <td align="left">Boxer</td>
-<td align="right">4</td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right">5.0</td>
-<td align="right"></td>
-<td align="left">l/ha</td>
-<td align="left">Gemüsebau</td>
-<td align="left">Stangensellerie</td>
-<td align="left">Prosulfocarb</td>
-<td align="right">78.43</td>
-<td align="right">800</td>
-</tr>
-<tr class="odd">
-<td align="right">7105</td>
-<td align="left">Boxer</td>
-<td align="right">5</td>
+<td align="right">2</td>
 <td align="right"></td>
 <td align="right"></td>
 <td align="right">3.0</td>
@@ -1020,10 +950,70 @@ names of the active substances can be joined as well.</p>
 <td align="right">78.43</td>
 <td align="right">800</td>
 </tr>
+<tr class="odd">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">3</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">5.0</td>
+<td align="right"></td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Stangensellerie</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="even">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">4</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">4.0</td>
+<td align="right"></td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Lauch</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="odd">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">5</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">4.0</td>
+<td align="right"></td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Zwiebeln</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
 <tr class="even">
 <td align="right">7105</td>
 <td align="left">Boxer</td>
 <td align="right">12</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">3.0</td>
+<td align="right"></td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Wurzelpetersilie</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="odd">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">13</td>
 <td align="right"></td>
 <td align="right"></td>
 <td align="right">5.0</td>
@@ -1035,37 +1025,7 @@ names of the active substances can be joined as well.</p>
 <td align="right">78.43</td>
 <td align="right">800</td>
 </tr>
-<tr class="odd">
-<td align="right">7105</td>
-<td align="left">Boxer</td>
-<td align="right">13</td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right">2.5</td>
-<td align="right">5</td>
-<td align="left">l/ha</td>
-<td align="left">Feldbau</td>
-<td align="left">Triticale</td>
-<td align="left">Prosulfocarb</td>
-<td align="right">78.43</td>
-<td align="right">800</td>
-</tr>
 <tr class="even">
-<td align="right">7105</td>
-<td align="left">Boxer</td>
-<td align="right">13</td>
-<td align="right"></td>
-<td align="right"></td>
-<td align="right">2.5</td>
-<td align="right">5</td>
-<td align="left">l/ha</td>
-<td align="left">Feldbau</td>
-<td align="left">Korn (Dinkel)</td>
-<td align="left">Prosulfocarb</td>
-<td align="right">78.43</td>
-<td align="right">800</td>
-</tr>
-<tr class="odd">
 <td align="right">7105</td>
 <td align="left">Boxer</td>
 <td align="right">14</td>
@@ -1080,22 +1040,292 @@ names of the active substances can be joined as well.</p>
 <td align="right">78.43</td>
 <td align="right">800</td>
 </tr>
+<tr class="odd">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Liebstöckel</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
 <tr class="even">
 <td align="right">7105</td>
 <td align="left">Boxer</td>
 <td align="right">15</td>
 <td align="right"></td>
 <td align="right"></td>
-<td align="right">4.0</td>
-<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
 <td align="left">l/ha</td>
 <td align="left">Gemüsebau</td>
-<td align="left">Schwarzwurzel</td>
+<td align="left">Ysop</td>
 <td align="left">Prosulfocarb</td>
 <td align="right">78.43</td>
 <td align="right">800</td>
 </tr>
 <tr class="odd">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Koriander</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="even">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Oregano</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="odd">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Rosmarin</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="even">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Kerbel</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="odd">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Minze</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="even">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Basilikum</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="odd">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Bohnenkraut</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="even">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Majoran</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="odd">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Thymian</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="even">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Kümmel</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="odd">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Dill</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="even">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Salbei</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="odd">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Süssdolde</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="even">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Lorbeer</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="odd">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Estragon</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="even">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Melisse</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="odd">
+<td align="right">7105</td>
+<td align="left">Boxer</td>
+<td align="right">15</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
+<td align="left">l/ha</td>
+<td align="left">Gemüsebau</td>
+<td align="left">Schnittlauch</td>
+<td align="left">Prosulfocarb</td>
+<td align="right">78.43</td>
+<td align="right">800</td>
+</tr>
+<tr class="even">
 <td align="right">7105</td>
 <td align="left">Boxer</td>
 <td align="right">16</td>
@@ -1110,7 +1340,7 @@ names of the active substances can be joined as well.</p>
 <td align="right">78.43</td>
 <td align="right">800</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="right">7105</td>
 <td align="left">Boxer</td>
 <td align="right">16</td>
@@ -1125,17 +1355,17 @@ names of the active substances can be joined as well.</p>
 <td align="right">78.43</td>
 <td align="right">800</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">7105</td>
 <td align="left">Boxer</td>
 <td align="right">17</td>
 <td align="right"></td>
 <td align="right"></td>
-<td align="right">4.0</td>
+<td align="right">5.0</td>
 <td align="right"></td>
 <td align="left">l/ha</td>
 <td align="left">Gemüsebau</td>
-<td align="left">Zwiebeln</td>
+<td align="left">Schnittlauch</td>
 <td align="left">Prosulfocarb</td>
 <td align="right">78.43</td>
 <td align="right">800</td>
@@ -1162,29 +1392,21 @@ illustrated below.</p>
 <tbody>
 <tr class="odd">
 <td align="left">Prosulfocarb</td>
-<td align="left">Feldbau</td>
-<td align="right">2.5</td>
-<td align="right">5</td>
+<td align="left">Gemüsebau</td>
+<td align="right">5.0</td>
+<td align="right"></td>
 <td align="left">l/ha</td>
 <td align="right">4000</td>
 </tr>
 <tr class="even">
 <td align="left">Prosulfocarb</td>
 <td align="left">Feldbau</td>
-<td align="right">2.5</td>
+<td align="right">3.0</td>
 <td align="right">5</td>
 <td align="left">l/ha</td>
 <td align="right">4000</td>
 </tr>
 <tr class="odd">
-<td align="left">Prosulfocarb</td>
-<td align="left">Feldbau</td>
-<td align="right">2.5</td>
-<td align="right">5</td>
-<td align="left">l/ha</td>
-<td align="right">4000</td>
-</tr>
-<tr class="even">
 <td align="left">Prosulfocarb</td>
 <td align="left">Gemüsebau</td>
 <td align="right">5.0</td>
@@ -1192,7 +1414,23 @@ illustrated below.</p>
 <td align="left">l/ha</td>
 <td align="right">4000</td>
 </tr>
+<tr class="even">
+<td align="left">Prosulfocarb</td>
+<td align="left">Gemüsebau</td>
+<td align="right">4.0</td>
+<td align="right"></td>
+<td align="left">l/ha</td>
+<td align="right">3200</td>
+</tr>
 <tr class="odd">
+<td align="left">Prosulfocarb</td>
+<td align="left">Gemüsebau</td>
+<td align="right">4.0</td>
+<td align="right"></td>
+<td align="left">l/ha</td>
+<td align="right">3200</td>
+</tr>
+<tr class="even">
 <td align="left">Prosulfocarb</td>
 <td align="left">Gemüsebau</td>
 <td align="right">3.0</td>
@@ -1200,6 +1438,14 @@ illustrated below.</p>
 <td align="left">l/ha</td>
 <td align="right">2400</td>
 </tr>
+<tr class="odd">
+<td align="left">Prosulfocarb</td>
+<td align="left">Feldbau</td>
+<td align="right">5.0</td>
+<td align="right"></td>
+<td align="left">l/ha</td>
+<td align="right">4000</td>
+</tr>
 <tr class="even">
 <td align="left">Prosulfocarb</td>
 <td align="left">Gemüsebau</td>
@@ -1210,67 +1456,51 @@ illustrated below.</p>
 </tr>
 <tr class="odd">
 <td align="left">Prosulfocarb</td>
-<td align="left">Feldbau</td>
-<td align="right">3.0</td>
-<td align="right">5</td>
-<td align="left">l/ha</td>
-<td align="right">4000</td>
-</tr>
-<tr class="even">
-<td align="left">Prosulfocarb</td>
-<td align="left">Feldbau</td>
-<td align="right">5.0</td>
-<td align="right"></td>
-<td align="left">l/ha</td>
-<td align="right">4000</td>
-</tr>
-<tr class="odd">
-<td align="left">Prosulfocarb</td>
-<td align="left">Feldbau</td>
+<td align="left">Gemüsebau</td>
 <td align="right">2.5</td>
-<td align="right">5</td>
+<td align="right">3</td>
 <td align="left">l/ha</td>
-<td align="right">4000</td>
+<td align="right">2400</td>
 </tr>
 <tr class="even">
 <td align="left">Prosulfocarb</td>
-<td align="left">Feldbau</td>
+<td align="left">Gemüsebau</td>
 <td align="right">2.5</td>
-<td align="right">5</td>
+<td align="right">3</td>
 <td align="left">l/ha</td>
-<td align="right">4000</td>
+<td align="right">2400</td>
 </tr>
 <tr class="odd">
 <td align="left">Prosulfocarb</td>
 <td align="left">Gemüsebau</td>
-<td align="right">5.0</td>
-<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
 <td align="left">l/ha</td>
-<td align="right">4000</td>
+<td align="right">2400</td>
 </tr>
 <tr class="even">
 <td align="left">Prosulfocarb</td>
 <td align="left">Gemüsebau</td>
-<td align="right">4.0</td>
-<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
 <td align="left">l/ha</td>
-<td align="right">3200</td>
+<td align="right">2400</td>
 </tr>
 <tr class="odd">
 <td align="left">Prosulfocarb</td>
 <td align="left">Gemüsebau</td>
-<td align="right">4.0</td>
-<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
 <td align="left">l/ha</td>
-<td align="right">3200</td>
+<td align="right">2400</td>
 </tr>
 <tr class="even">
 <td align="left">Prosulfocarb</td>
 <td align="left">Gemüsebau</td>
-<td align="right">4.0</td>
-<td align="right"></td>
+<td align="right">2.5</td>
+<td align="right">3</td>
 <td align="left">l/ha</td>
-<td align="right">3200</td>
+<td align="right">2400</td>
 </tr>
 </tbody>
 </table>
@@ -1708,12 +1938,6 @@ the indicator project is illustrated below.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">pNbr</span>, <span class="va">use_nr</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">ends_with</a></span><span class="op">(</span><span class="st">"de"</span><span class="op">)</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">ends_with</a></span><span class="op">(</span><span class="st">"fr"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
-<colgroup>
-<col width="4%">
-<col width="6%">
-<col width="44%">
-<col width="45%">
-</colgroup>
 <thead><tr class="header">
 <th align="right">pNbr</th>
 <th align="right">use_nr</th>
@@ -1724,14 +1948,14 @@ the indicator project is illustrated below.</p>
 <tr class="odd">
 <td align="right">7105</td>
 <td align="right">1</td>
-<td align="left">Herbst, Frühjahr; Vorauflauf, früher Nachauflauf.</td>
-<td align="left">automne, printemps; pré-levée, post-levée précoce.</td>
+<td align="left">Nachauflauf, Stadium 12-13.</td>
+<td align="left">post-levée, stade 12-13.</td>
 </tr>
 <tr class="even">
 <td align="right">7105</td>
 <td align="right">2</td>
-<td align="left">Nachauflauf, Stadium 12-13.</td>
-<td align="left">post-levée, stade 12-13.</td>
+<td align="left">Vorauflauf.</td>
+<td align="left">pré-levée.</td>
 </tr>
 </tbody>
 </table>
@@ -1754,8 +1978,8 @@ water amounting to at least one point.</p>
 <col width="1%">
 <col width="1%">
 <col width="1%">
-<col width="91%">
-<col width="4%">
+<col width="92%">
+<col width="3%">
 </colgroup>
 <thead><tr class="header">
 <th align="right">pNbr</th>
@@ -1768,33 +1992,41 @@ water amounting to at least one point.</p>
 <tr class="odd">
 <td align="right">7105</td>
 <td align="right">1</td>
-<td align="left">9824</td>
-<td align="left">Niedrige Aufwandmenge nur in Tankmischung gemäss den
-Angaben der Bewilligungsinhaberin.</td>
+<td align="left">8614</td>
+<td align="left">Nachbau anderer Kulturen: 16 Wochen Wartefrist.</td>
 <td align="right"></td>
 </tr>
 <tr class="even">
 <td align="right">7105</td>
 <td align="right">1</td>
-<td align="left">11380</td>
-<td align="left">Nachfolgearbeiten in behandelten Kulturen: bis 48
-Stunden nach Ausbringung des Mittels Schutzhandschuhe + Schutzanzug
-tragen.</td>
+<td align="left">15995</td>
+<td align="left">Nachfolgearbeiten (inkl. Erntearbeiten) nach Anwendung
+im Nachauflauf: Schutzhandschuhe + Arbeitskleidung (mindestens
+langärmliges Hemd + lange Hose) tragen.</td>
 <td align="right"></td>
 </tr>
 <tr class="odd">
 <td align="right">7105</td>
 <td align="right">1</td>
-<td align="left">12827</td>
-<td align="left">Ansetzen der Spritzbrühe: Schutzhandschuhe tragen.
-Ausbringen der Spritzbrühe: Schutzhandschuhe + Schutzanzug + Visier +
-Kopfbedeckung tragen. Technische Schutzvorrichtungen während des
-Ausbringens (z.B. geschlossene Traktorkabine) können die vorgeschriebene
-persönliche Schutzausrüstung ersetzen, wenn gewährleistet ist, dass sie
-einen vergleichbaren oder höheren Schutz bieten.</td>
+<td align="left">12805</td>
+<td align="left">Ansetzen der Spritzbrühe: Schutzhandschuhe +
+Schutzanzug + Schutzbrille oder Visier tragen. Ausbringen der
+Spritzbrühe: Schutzhandschuhe + Schutzanzug + Visier + Kopfbedeckung
+tragen. Technische Schutzvorrichtungen während des Ausbringens (z.B.
+geschlossene Traktorkabine) können die vorgeschriebene persönliche
+Schutzausrüstung ersetzen, wenn gewährleistet ist, dass sie einen
+vergleichbaren oder höheren Schutz bieten.</td>
 <td align="right"></td>
 </tr>
 <tr class="even">
+<td align="right">7105</td>
+<td align="right">1</td>
+<td align="left">9561</td>
+<td align="left">Phytotoxschäden bei empfindlichen Arten oder Sorten
+möglich; vor allgemeiner Anwendung Versuchspritzung durchführen.</td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
 <td align="right">7105</td>
 <td align="right">1</td>
 <td align="left">14120</td>
@@ -1803,54 +2035,33 @@ Abschwemmungsrisiko gemäss den Weisungen der Zulassungsstelle um 1 Punkt
 reduziert werden.</td>
 <td align="right">1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">7105</td>
 <td align="right">1</td>
 <td align="left">9457</td>
 <td align="left">Maximal 1 Behandlung pro Kultur.</td>
 <td align="right"></td>
 </tr>
-<tr class="even">
-<td align="right">7105</td>
-<td align="right">1</td>
-<td align="left">13804</td>
-<td align="left">Behandlung von im Herbst gesäten Kulturen.</td>
-<td align="right"></td>
-</tr>
 <tr class="odd">
 <td align="right">7105</td>
 <td align="right">2</td>
-<td align="left">11380</td>
-<td align="left">Nachfolgearbeiten in behandelten Kulturen: bis 48
-Stunden nach Ausbringung des Mittels Schutzhandschuhe + Schutzanzug
-tragen.</td>
+<td align="left">15995</td>
+<td align="left">Nachfolgearbeiten (inkl. Erntearbeiten) nach Anwendung
+im Nachauflauf: Schutzhandschuhe + Arbeitskleidung (mindestens
+langärmliges Hemd + lange Hose) tragen.</td>
 <td align="right"></td>
 </tr>
 <tr class="even">
 <td align="right">7105</td>
 <td align="right">2</td>
-<td align="left">8614</td>
-<td align="left">Nachbau anderer Kulturen: 16 Wochen Wartefrist.</td>
-<td align="right"></td>
-</tr>
-<tr class="odd">
-<td align="right">7105</td>
-<td align="right">2</td>
-<td align="left">12827</td>
-<td align="left">Ansetzen der Spritzbrühe: Schutzhandschuhe tragen.
-Ausbringen der Spritzbrühe: Schutzhandschuhe + Schutzanzug + Visier +
-Kopfbedeckung tragen. Technische Schutzvorrichtungen während des
-Ausbringens (z.B. geschlossene Traktorkabine) können die vorgeschriebene
-persönliche Schutzausrüstung ersetzen, wenn gewährleistet ist, dass sie
-einen vergleichbaren oder höheren Schutz bieten.</td>
-<td align="right"></td>
-</tr>
-<tr class="even">
-<td align="right">7105</td>
-<td align="right">2</td>
-<td align="left">9561</td>
-<td align="left">Phytotoxschäden bei empfindlichen Arten oder Sorten
-möglich; vor allgemeiner Anwendung Versuchspritzung durchführen.</td>
+<td align="left">12805</td>
+<td align="left">Ansetzen der Spritzbrühe: Schutzhandschuhe +
+Schutzanzug + Schutzbrille oder Visier tragen. Ausbringen der
+Spritzbrühe: Schutzhandschuhe + Schutzanzug + Visier + Kopfbedeckung
+tragen. Technische Schutzvorrichtungen während des Ausbringens (z.B.
+geschlossene Traktorkabine) können die vorgeschriebene persönliche
+Schutzausrüstung ersetzen, wenn gewährleistet ist, dass sie einen
+vergleichbaren oder höheren Schutz bieten.</td>
 <td align="right"></td>
 </tr>
 <tr class="odd">
